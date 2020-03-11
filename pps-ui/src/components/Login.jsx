@@ -42,14 +42,20 @@ class Login extends Component {
           style={{ minHeight: "100vh" }}
         >
           <Grid item xs={3}>
-          <div className="" style={{alignContent:"center"}}>
-        <Avatar className="{classes.avatar}">
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        </div>
+            <Box diasplay="flex" flexDirection="row" justifyContent="center">
+              <Box  p={1}>
+                <Avatar
+                  className="{classes.avatar}"
+                  style={{ color: "#3F51B5" }}
+                >
+                  <LockOutlinedIcon />
+                </Avatar>
+              </Box>
+
+              <Typography component="h1" variant="h5">
+                Sign in
+              </Typography>
+            </Box>
             <form className="{classes.form}" noValidate>
               <TextField
                 variant="outlined"
