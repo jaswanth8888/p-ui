@@ -26,14 +26,14 @@ function HeaderLinks(props) {
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <Button
-          href="#"
+          href="/"
           color="transparent"
           className={classes.navLink}
         >
           Login
         </Button>
         <Button
-          href="#"
+          href="/"
           color="transparent"
           className={classes.navLink}
           // onClick={() => {

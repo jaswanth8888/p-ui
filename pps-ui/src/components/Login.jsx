@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Grid, TextField,Avatar,Typography,Box} from "@material-ui/core";
+import { Grid, TextField, Avatar, Typography, Box } from "@material-ui/core";
 import Button from "./atoms/Button";
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { connect } from 'react-redux';
-import { login } from '../redux/actions/userActions';
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { connect } from "react-redux";
+import { login } from "../redux/actions/userActions";
 
 class Login extends Component {
   constructor(props) {
@@ -11,23 +11,23 @@ class Login extends Component {
 
     this.state = {
       username: "",
-      password: "",
+      password: ""
     };
-
+    this.submitted = false;
+    this.errorMsg = "";
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
-    // console.log("changeeeeeeeee");
     const { name, value } = e.target;
     this.setState({ [name]: value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    this.submitted = true;
     this.props.login({ ...this.state }); // thunk action
-    this.props.history.push('/welcome');
   }
 
   render() {
@@ -43,7 +43,7 @@ class Login extends Component {
         >
           <Grid item xs={3}>
             <Box diasplay="flex" flexDirection="row" justifyContent="center">
-              <Box  p={1}>
+              <Box p={1}>
                 <Avatar
                   className="{classes.avatar}"
                   style={{ color: "#3F51B5" }}
@@ -55,6 +55,10 @@ class Login extends Component {
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
+              <Typography component="span" color="error" variant="h5">
+                {this.props.login_status.errorMsg}
+              </Typography>
+              {/* {this.props.login_status['errorMsg']} */}
             </Box>
             <form className="{classes.form}" noValidate>
               <TextField
@@ -94,10 +98,25 @@ class Login extends Component {
             </form>
           </Grid>
         </Grid>
-
       </div>
     );
   }
 }
 
-export default connect(null, { login })(Login);
+// const stateAsProps = store => ({
+//   login_status: store.RetailerReducer.login_status
+// });
+
+const stateAsProps = function(store) {
+  if("login_status" in store.RetailerReducer) {
+    console.log("hi");
+    return {
+      login_status: store.RetailerReducer.login_status
+    };
+    
+  }else {
+    return {login_status :{errorMsg:''}};    
+  }
+};
+
+export default connect(stateAsProps, { login })(Login);

@@ -3,6 +3,7 @@ import connect from 'react-redux/es/connect/connect'
 import { Grid} from "@material-ui/core";
 import Button from "../atoms/Button";
 import {fetchUserDetails} from '../../redux/actions/userActions'
+import SideBar from './SideBar'
 // import {store} from '../App'
 class Welcome extends Component {
     constructor(props) {
@@ -19,10 +20,11 @@ class Welcome extends Component {
                 <br/><br/><br/><br/>
                 <p>Welcome {this.state.username}</p>
                 {console.log(this.props)}
+                <SideBar />
                 <Grid
                 container
                 spacing={0}
-                direction="column"
+                direction="row"
                 alignItems="center"
                 justify="center"
                 style={{ minHeight: "100vh" }}

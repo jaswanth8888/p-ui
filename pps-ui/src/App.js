@@ -5,7 +5,7 @@ import Login from './components/Login.jsx'
 import rootReducer from './redux/reducers/rootReducer.js';
 import { createStore, applyMiddleware } from'redux';
 import { Provider } from'react-redux';
-// import { composeWithDevTools} from'redux-devtools-extension';
+import { composeWithDevTools} from'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { HashRouter as Router, Route, Switch, BrowserRouter } from 'react-router-dom';
 import Welcome from './components/retailer/Welcome.jsx';
@@ -21,11 +21,11 @@ let store = null;
 if (state) { 
     store = createStore
     store = createStore(rootReducer, state,
-        applyMiddleware(thunk));
+      composeWithDevTools(applyMiddleware(thunk)));
 }
 else {
     store = createStore(rootReducer,
-        applyMiddleware(thunk));
+      composeWithDevTools(applyMiddleware(thunk)));
 }
 
 // the callback to subscribe is executed everytime the state changes

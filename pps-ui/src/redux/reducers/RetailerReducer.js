@@ -1,17 +1,19 @@
-import { LOGIN_USER, LOGOUT, WELCOME_USER} from "../actions/types";
+import { LOGIN_USER, LOGOUT, WELCOME_USER, LOGIN_FAILURE} from "../actions/types";
 
 const initialState = {
     loggedInUser: null
 };
-export default (state = initialState, action = {}) => {
+export default (state = initialState,action={}) => {
 
     switch (action.type) {
         case LOGIN_USER:
-            return { ...state, loggedInUser: action.userInfo };
+            return { ...state, login_status: action.login_status };
         case LOGOUT:
             return { ...state, loggedInUser: null }
         case WELCOME_USER:
-            return {...state, userInfo:action.userInfo}
+            return {...state}
+        case LOGIN_FAILURE:
+            return {...state,login_status:action.login_status}
         default:
     }
     return { ...state }
