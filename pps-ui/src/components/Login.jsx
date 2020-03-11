@@ -1,25 +1,16 @@
 import React, { Component } from "react";
-import {
-  Grid,
-  Paper,
-  Box,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Button,
-  Link,
-  Avatar,
-  Typography
-} from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-export default class Login extends Component {
+import { Grid, TextField,Button,Avatar,Typography} from "@material-ui/core";
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { connect } from 'react-redux';
+import { login } from '../redux/actions/userActions';
+
+class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       username: "",
       password: "",
-      submitted: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,18 +18,21 @@ export default class Login extends Component {
   }
 
   handleChange(e) {
+    // console.log("changeeeeeeeee");
     const { name, value } = e.target;
     this.setState({ [name]: value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-
-    this.setState({ submitted: true });
-    const { username, password } = this.state;
-    if (username && password) {
-      this.props.login(username, password);
-    }
+    // console.log("submitttttttttt");
+    this.props.login({ ...this.state }); // thunk action
+    this.props.history.push('/welcome');
+    // this.setState({ submitted: true });
+    // const { username, password } = this.state;
+    // if (username && password) {
+    //   this.props.login(username, password);
+    // }
   }
 
   render() {
@@ -73,10 +67,11 @@ export default class Login extends Component {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="User Name"
+                name="username"
+                autoComplete="username"
+                onChange={this.handleChange}
                 autoFocus
               />
               <TextField
@@ -88,37 +83,26 @@ export default class Login extends Component {
                 label="Password"
                 type="password"
                 id="password"
+                onChange={this.handleChange}
                 autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
               <Button
-                type="submit"
+                type="button"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className="{classes.submit}"
+                onClick={this.handleSubmit}
               >
                 Sign In
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
             </form>
           </Grid>
         </Grid>
+
       </div>
     );
   }
 }
+
+export default connect(null, { login })(Login);
