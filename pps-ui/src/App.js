@@ -8,7 +8,7 @@ import { Provider } from'react-redux';
 // import { composeWithDevTools} from'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { HashRouter as Router, Route, Switch, BrowserRouter } from 'react-router-dom';
-import Welcome from './components/Welcome.jsx';
+import Welcome from './components/retailer/Welcome.jsx';
 
 
 let state = window.sessionStorage.reduxstate;
@@ -41,13 +41,13 @@ export default class App extends Component {
     return (
     
       <Provider store={store}>
-                {/* <BrowserRouter >
+                <BrowserRouter >
                   <Switch>
                     <Route exact={true} path="/" component={Login} />
                     <Route exact={true} path="/welcome" component={Welcome} />               
                   </Switch>
-                </BrowserRouter> */}
-                <Router>
+                </BrowserRouter>
+                {/* <Router>
                     <div className="container">
                         <Route exact={true} path="/"
                             component={Login} />
@@ -56,7 +56,7 @@ export default class App extends Component {
 
 
                  
-                </Router> 
+                </Router>  */}
                 <div>
                     <Header
                     absolute

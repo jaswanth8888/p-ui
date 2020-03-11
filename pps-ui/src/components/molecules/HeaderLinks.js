@@ -28,7 +28,6 @@ function HeaderLinks(props) {
         <Button
           href="#"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           Login
@@ -36,7 +35,6 @@ function HeaderLinks(props) {
         <Button
           href="#"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
           // onClick={() => {
           //   console.log(this.props);
