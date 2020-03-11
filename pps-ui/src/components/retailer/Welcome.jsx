@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import connect from 'react-redux/es/connect/connect'
 import { Grid} from "@material-ui/core";
-import Button from "./atoms/Button";
-import {fetchUserDetails} from '../redux/actions/userActions'
+import Button from "../atoms/Button";
+import {fetchUserDetails} from '../../redux/actions/userActions'
 // import {store} from '../App'
 class Welcome extends Component {
     constructor(props) {
@@ -16,8 +16,8 @@ class Welcome extends Component {
     render() {
         return (
             <div>
-                <br/><br/><br/><br/>
-                <p>Welcome {this.state.username}</p>
+                {/* <br/><br/><br/><br/>
+                <p>Welcome {this.state.username}</p> */}
                 {console.log(this.props)}
                 <Grid
                 container
