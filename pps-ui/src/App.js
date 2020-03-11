@@ -10,8 +10,32 @@ import thunk from 'redux-thunk';
 import { HashRouter as Router, Route, Switch, BrowserRouter } from 'react-router-dom';
 import Welcome from './components/Welcome.jsx';
 
-export const store = createStore(rootReducer,applyMiddleware(thunk));
-console.log(store)
+
+let state = window.sessionStorage.reduxstate;
+if (state) {
+    state = JSON.parse(state);
+}
+
+ 
+let store = null;
+if (state) { 
+    store = createStore
+    store = createStore(rootReducer, state,
+        applyMiddleware(thunk));
+}
+else {
+    store = createStore(rootReducer,
+        applyMiddleware(thunk));
+}
+
+// the callback to subscribe is executed everytime the state changes
+// in the store
+store.subscribe(() => {
+    window.sessionStorage['reduxstate'] = JSON.stringify(store.getState());
+});
+
+// export const store = createStore(rootReducer,applyMiddleware(thunk));
+// console.log(store)
 export default class App extends Component {
   render() {
     return (

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Grid, TextField,Button,Avatar,Typography} from "@material-ui/core";
+import { Grid, TextField,Avatar,Typography} from "@material-ui/core";
+import Button from "./atoms/Button";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { connect } from 'react-redux';
 import { login } from '../redux/actions/userActions';
@@ -25,14 +26,8 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // console.log("submitttttttttt");
     this.props.login({ ...this.state }); // thunk action
     this.props.history.push('/welcome');
-    // this.setState({ submitted: true });
-    // const { username, password } = this.state;
-    // if (username && password) {
-    //   this.props.login(username, password);
-    // }
   }
 
   render() {
