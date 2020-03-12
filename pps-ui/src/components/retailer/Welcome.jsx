@@ -2,23 +2,23 @@ import React, { Component } from 'react'
 import connect from 'react-redux/es/connect/connect'
 import { Grid} from "@material-ui/core";
 import Button from "../atoms/Button";
-import {fetchUserDetails} from '../../redux/actions/userActions'
+import {fetchUserDetails} from '../../redux/actions/RetailerActions'
+import {Link} from 'react-router-dom'
+import Message from './Message.jsx'
 // import {store} from '../App'
 class Welcome extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
-             username:this.props.loggedInUser.username
+            
+            //  username:this.props.loggedInUser.username
         }
     }
     
     render() {
         return (
             <div>
-                {/* <br/><br/><br/><br/>
-                <p>Welcome {this.state.username}</p> */}
-                {console.log(this.props)}
                 <Grid
                 container
                 spacing={0}
@@ -30,6 +30,7 @@ class Welcome extends Component {
                 <Grid item xs={3}>
                 <div className="" style={{alignContent:"center"}}>
                 </div>
+                <Message />
                     <form className="{classes.form}" noValidate>
                     <Button
                         type="button"
@@ -41,6 +42,7 @@ class Welcome extends Component {
                     >
                         CREATE ZONE
                     </Button>
+                    
                     <Button
                         type="button"
                         fullWidth
@@ -51,6 +53,7 @@ class Welcome extends Component {
                     >
                         CREATE CLUSTER
                     </Button>
+                    <Link to='/store'>
                     <Button
                         type="button"
                         fullWidth
@@ -61,6 +64,7 @@ class Welcome extends Component {
                     >
                         CREATE STORE
                     </Button>
+                    </Link>
                     </form>
                 </Grid>
                 </Grid>

@@ -3,7 +3,7 @@ import { Grid, TextField,Avatar,Typography,Box} from "@material-ui/core";
 import Button from "./atoms/Button";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { connect } from 'react-redux';
-import { login } from '../redux/actions/userActions';
+import { login } from '../redux/actions/RetailerActions';
 
 class Login extends Component {
   constructor(props) {
@@ -13,7 +13,8 @@ class Login extends Component {
       username: "",
       password: "",
     };
-
+    this.submitted = false;
+    this.errorMsg = "";
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -26,6 +27,7 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.submitted = true;
     this.props.login({ ...this.state }); // thunk action
     this.props.history.push('/welcome');
   }
@@ -55,6 +57,10 @@ class Login extends Component {
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
+              <Typography component="span" color="error" variant="h5">
+                {this.props.login_status.errorMsg}
+              </Typography>
+              {/* {this.props.login_status['errorMsg']} */}
             </Box>
             <form className="{classes.form}" noValidate>
               <TextField
@@ -100,4 +106,16 @@ class Login extends Component {
   }
 }
 
-export default connect(null, { login })(Login);
+const stateAsProps = function(store) {
+  if("login_status" in store.RetailerReducer) {
+    console.log("hi");
+    return {
+      login_status: store.RetailerReducer.login_status
+    };
+    
+  }else {
+    return {login_status :{errorMsg:''}};    
+  }
+};
+
+export default connect(stateAsProps, { login })(Login);

@@ -5,10 +5,11 @@ import Login from './components/Login.jsx'
 import rootReducer from './redux/reducers/rootReducer.js';
 import { createStore, applyMiddleware } from'redux';
 import { Provider } from'react-redux';
-// import { composeWithDevTools} from'redux-devtools-extension';
+import { composeWithDevTools} from'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { HashRouter as Router, Route, Switch, BrowserRouter } from 'react-router-dom';
+import { HashRouter as Router,Route, Switch, BrowserRouter } from 'react-router-dom';
 import Welcome from './components/retailer/Welcome.jsx';
+import StoreForm from './components/retailer/StoreForm.jsx';
 
 
 let state = window.sessionStorage.reduxstate;
@@ -21,11 +22,11 @@ let store = null;
 if (state) { 
     store = createStore
     store = createStore(rootReducer, state,
-        applyMiddleware(thunk));
+        composeWithDevTools(applyMiddleware(thunk)));
 }
 else {
     store = createStore(rootReducer,
-        applyMiddleware(thunk));
+        composeWithDevTools(applyMiddleware(thunk)));
 }
 
 // the callback to subscribe is executed everytime the state changes
@@ -45,6 +46,7 @@ export default class App extends Component {
                   <Switch>
                     <Route exact={true} path="/" component={Login} />
                     <Route exact={true} path="/welcome" component={Welcome} />               
+                    <Route exact={true} path="/store" component={StoreForm} />               
                   </Switch>
                 </BrowserRouter>
                 {/* <Router>
@@ -53,9 +55,6 @@ export default class App extends Component {
                             component={Login} />
                         <Route exact path="/welcome" component={Welcome}/>
                     </div>
-
-
-                 
                 </Router>  */}
                 <div>
                     <Header

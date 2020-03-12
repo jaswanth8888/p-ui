@@ -3,7 +3,7 @@ import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import { connect } from 'react-redux';
-import { logout } from '../../redux/actions/userActions';
+import { logout } from '../../redux/actions/RetailerActions';
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
 
@@ -21,26 +21,26 @@ const useStyles = makeStyles(styles);
 
 function HeaderLinks(props) {
   const classes = useStyles();
-  // {console.log(this.props)}
+  {console.log(props)}
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <Button
-          href="#"
+          href="/"
           color="transparent"
           className={classes.navLink}
         >
           Login
         </Button>
         <Button
-          href="#"
+          // href="/"
           color="transparent"
           className={classes.navLink}
-          // onClick={() => {
-          //   console.log(this.props);
-          //   logout();
-          //   props.history.push('/login');
-        // }}
+          onClick={() => {
+            console.log(props);
+            logout();
+            // props.history.push('/');
+        }}
         >
           Logout
         </Button>
@@ -49,11 +49,11 @@ function HeaderLinks(props) {
   );
 }
 
-// const stateAsProps = (store) => ({
-//   loggedInUser: store.RetailerReducer.loggedInUser
-// });
-// const actionsAsProps = {
-//   logout: logout
-// };
-// export default connect(stateAsProps, actionsAsProps)(HeaderLinks);
-export default HeaderLinks;
+const stateAsProps = (store) => ({
+  loggedInUser: store.RetailerReducer.loggedInUser
+});
+const actionsAsProps = {
+  logout: logout
+};
+export default connect(stateAsProps, actionsAsProps)(HeaderLinks);
+// export default HeaderLinks;
