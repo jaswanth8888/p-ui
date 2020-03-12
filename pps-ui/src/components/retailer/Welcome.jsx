@@ -13,14 +13,19 @@ class Welcome extends Component {
         this.state = {
         }
     }
+    isAuthenticated() {
+        var token = sessionStorage.getItem("token");
+        return token && token.length > 10;
+      }
     
     render() {
+        // const isAlreayAuthenticated = this.isAuthenticated();
         return (
             <div>
                 <Grid
                 container
                 spacing={0}
-                direction="column"
+                direction="row"
                 alignItems="center"
                 justify="center"
                 style={{ minHeight: "100vh" }}
@@ -87,7 +92,8 @@ class Welcome extends Component {
 }
 
 const stateAsProps = (store) => ({
-    loggedInUser: store.RetailerReducer.loggedInUser
+    loggedInUser: store.RetailerReducer.loggedInUser,
+    login_status:store.RetailerReducer.login_status
 });
 const actionsAsProps = {
     getUserDetails: fetchUserDetails

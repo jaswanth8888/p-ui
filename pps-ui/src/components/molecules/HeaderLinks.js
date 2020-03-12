@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { connect } from 'react-redux';
 import { logout } from '../../redux/actions/RetailerActions';
 // react components for routing our app without refresh
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -33,7 +33,6 @@ function HeaderLinks(props) {
           Login
         </Button>
         <Button
-          // href="/"
           color="transparent"
           className={classes.navLink}
           onClick={() => {

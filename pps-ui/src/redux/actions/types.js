@@ -1,4 +1,4 @@
-// these are simple constants that are used by 
+// these are simple constants that are used by
 // actions and reducers to avoid spell mistakes.
 
 export const LOGIN_USER = "LOGIN_USER";

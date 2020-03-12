@@ -4,10 +4,6 @@ import Button from "./atoms/Button";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { connect } from "react-redux";
 import { login } from "../redux/actions/RetailerActions";
-import {
-  Redirect
-} from "react-router-dom";
-
 
 class Login extends Component {
   constructor(props) {
@@ -36,6 +32,7 @@ class Login extends Component {
   }
 
   render() {
+    // const isAlreayAuthenticated = this.isAuthenticated();
     return (
       
       <div>
@@ -65,7 +62,7 @@ class Login extends Component {
               <Typography component="span" color="error" variant="h5">
                 {this.props.login_status.errorMsg}
               </Typography>
-              {this.props.login_status['errorMsg']}
+              {/* {this.props.login_status['errorMsg']} */}
             </Box>
             <form className="{classes.form}" noValidate>
               <TextField
