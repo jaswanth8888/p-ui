@@ -32,7 +32,11 @@ class ZoneForm extends Component {
                 liquorPricePerUnit:this.state.liquorPricePerUnit
     }
     console.log(zone);
-    if(this.state.zoneName>5){
+    // this.props.postZone(zone)
+    console.log(this.state.zoneName);
+    console.log(this.state.zoneName.length);
+    if(this.state.zoneName.length>5){
+      console.log("ksdh");
       this.props.postZone(zone)
     }
     this.setState({isSubmit:true})

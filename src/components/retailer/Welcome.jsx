@@ -71,18 +71,7 @@ class Welcome extends Component {
                         CREATE STORE
                     </Button>
                     </Link>
-                    <Link to='/view'>
-                    <Button
-                        type="button"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className="{classes.submit}"
-                        onClick={this.handleSubmit}
-                    >
-                        CREATE STORE
-                    </Button>
-                    </Link>
+                
                     </form>
                 </Grid>
                 </Grid>

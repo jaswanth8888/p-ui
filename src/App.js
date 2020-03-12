@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from'redux';
 import { Provider } from'react-redux';
 import { composeWithDevTools} from'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { HashRouter as Route, Switch, BrowserRouter } from 'react-router-dom';
+import { HashRouter as Router,Route, Switch, BrowserRouter,Redirect } from 'react-router-dom';
 import Welcome from './components/retailer/Welcome.jsx';
 import StoreForm from './components/retailer/StoreForm.jsx';
 import ZoneForm from './components/retailer/ZoneForm';
@@ -16,45 +16,43 @@ import ClusterForm from './components/retailer/ClusterForm.jsx';
 
 let state = window.sessionStorage.reduxstate;
 if (state) {
-  state = JSON.parse(state);
+    state = JSON.parse(state);
 }
-let loggedIn= sessionStorage.getItem('token') && sessionStorage.getItem('token').length >10;
+
+ 
 let store = null;
-if (state) {
-  store = createStore;
-  store = createStore(
-    rootReducer,
-    state,
-    composeWithDevTools(applyMiddleware(thunk))
-  );
-} else {
-  store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+if (state) { 
+    store = createStore
+    store = createStore(rootReducer, state,
+        composeWithDevTools(applyMiddleware(thunk)));
+}
+else {
+    store = createStore(rootReducer,
+        composeWithDevTools(applyMiddleware(thunk)));
 }
 
-
+// the callback to subscribe is executed everytime the state changes
+// in the store
 store.subscribe(() => {
-  window.sessionStorage["reduxstate"] = JSON.stringify(store.getState());
+    window.sessionStorage['reduxstate'] = JSON.stringify(store.getState());
 });
 
-class App extends Component {
-  isAuthenticated () {
-    var token = sessionStorage.getItem("token");
-    return token && token.length > 10;
-  }
-  render() {    
-    console.log(store.getState());
-    
-    
+// export const store = createStore(rootReducer,applyMiddleware(thunk));
+// console.log(store)
+export default class App extends Component {
+  render() {
     const isLoggedIn=sessionStorage.getItem("token") &&sessionStorage.getItem("token").length>10
+    
     return (
+    
       <Provider store={store}>
                 <BrowserRouter >
                   <Switch>
                     <Route exact={true} path="/" component={Login} />
-                    <Route exact={true} path="/welcome" component={Welcome} />               
-                    <Route exact={true} path="/store" component={StoreForm} />               
-                    <Route exact={true} path="/zonepage" component={ZoneForm} />               
-                    <Route exact={true} path="/cluster" component={ClusterForm} />               
+                    <Route exact={true} path="/welcome">{isLoggedIn?<Welcome/>:<Redirect to="/"/>}</Route>               
+                    <Route exact={true} path="/store">{isLoggedIn?<StoreForm/>:<Redirect to="/"/>}</Route>               
+                    <Route exact={true} path="/zonepage">{isLoggedIn?<ZoneForm/>:<Redirect to="/"/>}</Route>               
+                    <Route exact={true} path="/cluster">{isLoggedIn?<ClusterForm/>:<Redirect to="/"/>}</Route>               
                   </Switch>
                 </BrowserRouter>
                 {/* <Router>
@@ -73,8 +71,6 @@ class App extends Component {
                   />
                 </div>
       </Provider>
-    );
+    )
   }
 }
-
-export default App;
