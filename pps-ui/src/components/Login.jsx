@@ -4,6 +4,10 @@ import Button from "./atoms/Button";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { connect } from "react-redux";
 import { login } from "../redux/actions/userActions";
+import {
+  Redirect
+} from "react-router-dom";
+
 
 class Login extends Component {
   constructor(props) {
@@ -13,8 +17,6 @@ class Login extends Component {
       username: "",
       password: ""
     };
-    this.submitted = false;
-    this.errorMsg = "";
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -26,14 +28,20 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.submitted = true;
     this.props.login({ ...this.state }); // thunk action
+  }
+  isAuthenticated() {
+    var token = sessionStorage.getItem("token");
+    return token && token.length > 10;
   }
 
   render() {
+    const isAlreayAuthenticated = this.isAuthenticated();
     return (
+      
       <div>
-        <Grid
+       {this.props.login_status.success ? ( window.location.href="/welcome"):
+        (<Grid
           container
           spacing={0}
           direction="column"
@@ -97,7 +105,8 @@ class Login extends Component {
               </Button>
             </form>
           </Grid>
-        </Grid>
+        </Grid>)
+         }
       </div>
     );
   }

@@ -6,9 +6,8 @@ import axios from 'axios'
 export const login = (loginDetails) => async (dispatch) => {
     await axios.post(RETAILER_BASE_URL + '/retailer/authenticate', loginDetails).then(
         (res)=>{
-            console.log(res);
-            
-            dispatch({ type: LOGIN_USER,login_status:{success:true,errorMsg:'',data:res.data}})
+            sessionStorage.setItem("token",res.data['jwt'])
+            dispatch({ type: LOGIN_USER,login_status:{success:true,errorMsg:'',data:res.data},userInfo:loginDetails})
         }
     ).catch((res)=>{
         dispatch({type:LOGIN_FAILURE,login_status:{success:false,errorMsg:"Invalid Username/password"}})
@@ -25,5 +24,6 @@ export const fetchUserDetails = () => async (dispatch) => {
 }
 
 export const logout = () => (dispatch) => {
+    sessionStorage.removeItem("token");
     dispatch({ type: LOGOUT });
 }

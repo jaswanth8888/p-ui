@@ -4,22 +4,30 @@ import { Grid} from "@material-ui/core";
 import Button from "../atoms/Button";
 import {fetchUserDetails} from '../../redux/actions/userActions'
 import SideBar from './SideBar'
-// import {store} from '../App'
+import {
+    Redirect
+  } from "react-router-dom";
+
+
 class Welcome extends Component {
     constructor(props) {
         super(props)
     
-        this.state = {
-             username:this.props.loggedInUser.username
-        }
+        
     }
+    isAuthenticated() {
+        var token = sessionStorage.getItem("token");
+        return token && token.length > 10;
+      }
     
     render() {
+        // const isAlreayAuthenticated = this.isAuthenticated();
         return (
             <div>
+               
+                    <div>
                 <br/><br/><br/><br/>
-                <p>Welcome {this.state.username}</p>
-                {console.log(this.props)}
+                <p>Welcome {this.props.loggedInUser.username}</p>
                 <SideBar />
                 <Grid
                 container
@@ -66,6 +74,8 @@ class Welcome extends Component {
                     </form>
                 </Grid>
                 </Grid>
+                </div>
+                
             </div>
         )
     }
@@ -78,7 +88,8 @@ class Welcome extends Component {
 //     }
 // }
 const stateAsProps = (store) => ({
-    loggedInUser: store.RetailerReducer.loggedInUser
+    loggedInUser: store.RetailerReducer.loggedInUser,
+    login_status:store.RetailerReducer.login_status
 });
 const actionsAsProps = {
     getUserDetails: fetchUserDetails
