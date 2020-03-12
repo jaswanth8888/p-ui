@@ -14,7 +14,7 @@ class Message extends Component {
     componentDidMount(){
         setTimeout(()=>{
             this.props.messageSetNull()
-        },5000)
+        },2000)
     }
 
     render() {

@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import { Grid, TextField,Avatar,Typography,Box} from "@material-ui/core";
+import { Grid, TextField, Avatar, Typography, Box } from "@material-ui/core";
 import Button from "./atoms/Button";
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { connect } from 'react-redux';
-import { login } from '../redux/actions/RetailerActions';
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { connect } from "react-redux";
+import { login } from "../redux/actions/RetailerActions";
+import {
+  Redirect
+} from "react-router-dom";
+
 
 class Login extends Component {
   constructor(props) {
@@ -11,31 +15,32 @@ class Login extends Component {
 
     this.state = {
       username: "",
-      password: "",
+      password: ""
     };
-    this.submitted = false;
-    this.errorMsg = "";
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
-    // console.log("changeeeeeeeee");
     const { name, value } = e.target;
     this.setState({ [name]: value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.submitted = true;
     this.props.login({ ...this.state }); // thunk action
-    this.props.history.push('/welcome');
+  }
+  isAuthenticated() {
+    var token = sessionStorage.getItem("token");
+    return token && token.length > 10;
   }
 
   render() {
     return (
+      
       <div>
-        <Grid
+       {this.props.login_status.success ? ( window.location.href="/welcome"):
+        (<Grid
           container
           spacing={0}
           direction="column"
@@ -45,7 +50,7 @@ class Login extends Component {
         >
           <Grid item xs={3}>
             <Box diasplay="flex" flexDirection="row" justifyContent="center">
-              <Box  p={1}>
+              <Box p={1}>
                 <Avatar
                   className="{classes.avatar}"
                   style={{ color: "#3F51B5" }}
@@ -60,7 +65,7 @@ class Login extends Component {
               <Typography component="span" color="error" variant="h5">
                 {this.props.login_status.errorMsg}
               </Typography>
-              {/* {this.props.login_status['errorMsg']} */}
+              {this.props.login_status['errorMsg']}
             </Box>
             <form className="{classes.form}" noValidate>
               <TextField
@@ -99,8 +104,8 @@ class Login extends Component {
               </Button>
             </form>
           </Grid>
-        </Grid>
-
+        </Grid>)
+         }
       </div>
     );
   }

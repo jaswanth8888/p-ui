@@ -10,6 +10,8 @@ import thunk from 'redux-thunk';
 import { HashRouter as Router,Route, Switch, BrowserRouter } from 'react-router-dom';
 import Welcome from './components/retailer/Welcome.jsx';
 import StoreForm from './components/retailer/StoreForm.jsx';
+import ZoneForm from './components/retailer/ZoneForm';
+import ClusterForm from './components/retailer/ClusterForm.jsx';
 
 
 let state = window.sessionStorage.reduxstate;
@@ -47,6 +49,8 @@ export default class App extends Component {
                     <Route exact={true} path="/" component={Login} />
                     <Route exact={true} path="/welcome" component={Welcome} />               
                     <Route exact={true} path="/store" component={StoreForm} />               
+                    <Route exact={true} path="/zonepage" component={ZoneForm} />               
+                    <Route exact={true} path="/cluster" component={ClusterForm} />               
                   </Switch>
                 </BrowserRouter>
                 {/* <Router>

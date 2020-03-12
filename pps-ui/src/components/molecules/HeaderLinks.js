@@ -37,9 +37,9 @@ function HeaderLinks(props) {
           color="transparent"
           className={classes.navLink}
           onClick={() => {
-            console.log(props);
-            logout();
-            // props.history.push('/');
+            sessionStorage.removeItem("token");
+            sessionStorage.removeItem("reduxstate");
+            window.location.href="/"           
         }}
         >
           Logout
@@ -50,7 +50,8 @@ function HeaderLinks(props) {
 }
 
 const stateAsProps = (store) => ({
-  loggedInUser: store.RetailerReducer.loggedInUser
+  loggedInUser: store.RetailerReducer.loggedInUser,
+  login_status:store.RetailerReducer.login_status
 });
 const actionsAsProps = {
   logout: logout

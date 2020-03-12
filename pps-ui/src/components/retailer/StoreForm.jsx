@@ -47,13 +47,6 @@ class StoreForm extends Component {
       
     }
 
-    // handleChangeStore(e) {
-    //   let store = this.state.store;
-    //   store[e.target.name]=e.target.value;
-    //   console.log(store);
-    //   this.setState({store})
-    // }
-  
     handleSubmit(e) {
       e.preventDefault();
       console.log("in submit");
@@ -202,7 +195,7 @@ class StoreForm extends Component {
                 className="{classes.submit}"
                 onClick={this.handleSubmit}
               >
-                Submit
+                Save
               </Button>
             </form>
           </Grid>
