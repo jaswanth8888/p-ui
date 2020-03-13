@@ -12,9 +12,7 @@ class Message extends Component {
     }
 
     componentDidMount(){
-        console.log("message");
         
-        console.log(this.props.msg);
         
         setTimeout(()=>{
             this.props.messageSetNull()

@@ -27,36 +27,24 @@ class StoreForm extends Component {
     }
 
     componentDidMount(){
-      console.log(this.props);
       this.props.getAllZones();
     }
     
     handleChange(e) {
       const { name, value } = e.target;
-      // console.log(name,value);
       
       this.setState({[name]:value});
       
     }
 
     handleChangeZone(e) {
-      console.log("in change zone");
-      // console.log(e.target.value);
       this.setState({zone:e.target.value})
       this.props.getAllClusters(e.target.value);
       
     }
-
-    // handleChangeStore(e) {
-    //   let store = this.state.store;
-    //   store[e.target.name]=e.target.value;
-    //   console.log(store);
-    //   this.setState({store})
-    // }
   
     handleSubmit(e) {
       e.preventDefault();
-      console.log("in submit");
         let streetName = this.state.streetName;
         let city = this.state.city;
         let pin = this.state.pin;
@@ -67,8 +55,6 @@ class StoreForm extends Component {
         let store = {storeName, address}
         this.props.postStore(store,this.state.zone,this.state.cluster);
         this.setState({isSubmitted:true})
-      // this.props.login({ ...this.state }); // thunk action
-      // this.props.history.push('/welcome');
     }
 
     render(){
@@ -108,6 +94,7 @@ class StoreForm extends Component {
                     id: 'zone',
                 }}
                 >
+                  <option value="">--Select Zone--</option>
                 {this.props.zones.map((zone, index)=>{
                   return <option value={zone} key={index}>{zone}</option>
                 })}
@@ -129,7 +116,7 @@ class StoreForm extends Component {
                     id: 'cluster',
                 }}
                 >
-                {/* <option value=""></option> */}
+                <option value="">--Select cluster--</option>
                 {this.props.clusters.map((cluster, index)=>{
                   return <option value={cluster} key={index}>{cluster}</option>
                 })}

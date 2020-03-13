@@ -1,4 +1,4 @@
-import { LOGIN_USER, CREATE_CLUSTER,CREATE_ZONE, TOKEN,LOGIN_FAILURE,LOGOUT, WELCOME_USER, ZONE_GET_REQUEST, RETAILER_BASE_URL, CLUSTER_GET_REQUEST, STORE_POST_REQUEST,FAILURE, MESSAGE_SET_NULL} from './types';
+import { LOGIN_USER, CREATE_CLUSTER,CREATE_ZONE, CLUSTERLIST_GET_REQUEST,TOKEN,LOGIN_FAILURE,LOGOUT, WELCOME_USER, ZONE_GET_REQUEST, ZONELIST_GET_REQUEST,RETAILER_BASE_URL, CLUSTER_GET_REQUEST, STORE_POST_REQUEST,FAILURE, MESSAGE_SET_NULL} from './types';
 import axios from "axios";
 
 
@@ -19,10 +19,7 @@ export const fetchUserDetails = (loginDetails) => async (dispatch) => {
 
 }
 export const postZone = (zoneDetails) =>async (dispatch) => {
-    console.log(zoneDetails);
-    console.log(TOKEN);
     await axios.post(RETAILER_BASE_URL + '/location-management/zone', zoneDetails, {headers: { "Authorization":TOKEN}}).then((res) => {
-        console.log(res);
         dispatch({type:CREATE_ZONE, msg:"Zone Created Succesfully"}) 
     }).catch((err)=>{
         dispatch({type:CREATE_ZONE, msg:"Sorry Zone already exists"}) 
@@ -31,7 +28,6 @@ export const postZone = (zoneDetails) =>async (dispatch) => {
 }
 
 export const postCluster = (cluster,zone) => async(dispatch)=>{
-    console.log(cluster,zone);
     await axios.put(RETAILER_BASE_URL+'/location-management/'+zone+'/addcluster',cluster,{ headers: {"Authorization" : TOKEN} }).then((res)=>{
         dispatch({type:CREATE_CLUSTER,msg:"Cluster for Zone "+ zone+ " is Created Successfully"})
     }).catch((err)=>{
@@ -54,11 +50,9 @@ export const getClusters= (zone) => async(dispatch) => {
     }).catch((err)=>{
         dispatch({type:FAILURE})
     });  
-    console.log(zone);
 }
 
 export const postStore = (store,zone,cluster) => async(dispatch) => {
-    
     await axios.put(RETAILER_BASE_URL+'/location-management/'+zone+'/'+cluster+'/addstore',store,{ headers: {"Authorization" : TOKEN} }).then((res)=>{
         dispatch({type:STORE_POST_REQUEST, msg:"Store Created Succesfully"})
     }).catch((err)=>{
@@ -72,4 +66,17 @@ export const logout = () => (dispatch) => {
 
 export const messageSetNull=() =>(dispatch) =>{
     dispatch({type:MESSAGE_SET_NULL})
+}
+export const getZoneList = () => async (dispatch) => {
+    await axios.get(RETAILER_BASE_URL + '/location-management/zonelist',{ headers: {"Authorization" : TOKEN} }).then((res)=>{
+        
+        dispatch({type:ZONELIST_GET_REQUEST, zoneList:res.data})
+    });
+}
+
+export const getClusterList = () => async (dispatch) => {
+    await axios.get(RETAILER_BASE_URL + '/location-management/clusterlist',{ headers: {"Authorization" : TOKEN} }).then((res)=>{
+        
+        dispatch({type:CLUSTERLIST_GET_REQUEST, clusterList:res.data})
+    });
 }

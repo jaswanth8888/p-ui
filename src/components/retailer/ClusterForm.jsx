@@ -20,7 +20,6 @@ class ClusterForm extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props);
         this.props.getAllZones();
     }
         
@@ -33,7 +32,6 @@ class ClusterForm extends Component {
     handleSubmit(e){
         e.preventDefault();
         let cluster={clusterName:this.state.clusterName, taxRate:this.state.taxRate}
-        console.log(cluster);
         this.setState({isSubmitted:true})
         if(this.state.clusterName.length>6){
             this.props.postCluster(cluster,this.state.zone)
@@ -78,6 +76,7 @@ class ClusterForm extends Component {
                         id: 'zone',
                     }}
                     >
+                      <option value="">--Select Zone--</option>
                     {this.props.zones.map((zone, index)=>{
                       return <option value={zone} key={index}>{zone}</option>
                     })}
@@ -103,6 +102,8 @@ class ClusterForm extends Component {
                     fullWidth
                     id="taxRate"
                     label="Tax Rate"
+                    type="number"
+                    step="0.01"
                     name="taxRate"
                     autoComplete="taxRate"
                     onChange={this.handleChange}
