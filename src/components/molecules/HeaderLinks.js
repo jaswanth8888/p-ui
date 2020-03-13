@@ -21,7 +21,6 @@ const useStyles = makeStyles(styles);
 
 function HeaderLinks(props) {
   const classes = useStyles();
-  {console.log(props)}
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>

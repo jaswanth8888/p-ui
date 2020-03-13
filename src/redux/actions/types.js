@@ -13,8 +13,13 @@ export const FAILURE = "FAILURE";
 // export const RETAILER_BASE_URL = "http://10.150.223.216:8765";
 //export const RETAILER_BASE_URL = "http://10.150.179.184:8765";
 export const RETAILER_BASE_URL = "http://localhost:8765";
+
 export const RETAILER_URL = "http://10.150.223.216:9300";
 export const MESSAGE_SET_NULL="MESSAGE_SET_NULL";
 export const CREATE_ZONE="CREATE_ZONE";
 export const CREATE_CLUSTER="CREATE_CLUSTER";
+
+export const ZONELIST_GET_REQUEST="ZONELIST_GET_REQUEST";
+export const CLUSTERLIST_GET_REQUEST="CLUSTERLIST_GET_REQUEST";
+
 export const TOKEN='BearerR '+sessionStorage.getItem("token");

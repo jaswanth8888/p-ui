@@ -12,6 +12,8 @@ import Welcome from './components/retailer/Welcome.jsx';
 import StoreForm from './components/retailer/StoreForm.jsx';
 import ZoneForm from './components/retailer/ZoneForm';
 import ClusterForm from './components/retailer/ClusterForm.jsx';
+import ViewZones from './components/retailer/ViewZones.jsx';
+import ViewClusters from './components/retailer/ViewClusters.jsx';
 
 
 let state = window.sessionStorage.reduxstate;
@@ -37,8 +39,6 @@ store.subscribe(() => {
     window.sessionStorage['reduxstate'] = JSON.stringify(store.getState());
 });
 
-// export const store = createStore(rootReducer,applyMiddleware(thunk));
-// console.log(store)
 export default class App extends Component {
   render() {
     const isLoggedIn=sessionStorage.getItem("token") &&sessionStorage.getItem("token").length>10
@@ -52,7 +52,9 @@ export default class App extends Component {
                     <Route exact={true} path="/welcome">{isLoggedIn?<Welcome/>:<Redirect to="/"/>}</Route>               
                     <Route exact={true} path="/store">{isLoggedIn?<StoreForm/>:<Redirect to="/"/>}</Route>               
                     <Route exact={true} path="/zonepage">{isLoggedIn?<ZoneForm/>:<Redirect to="/"/>}</Route>               
-                    <Route exact={true} path="/cluster">{isLoggedIn?<ClusterForm/>:<Redirect to="/"/>}</Route>               
+                    <Route exact={true} path="/cluster">{isLoggedIn?<ClusterForm/>:<Redirect to="/"/>}</Route>  
+                    <Route exact={true} path="/viewzones">{isLoggedIn?<ViewZones/>:<Redirect to="/"/>}</Route>               
+                    <Route exact={true} path="/viewclusters">{isLoggedIn?<ViewClusters/>:<Redirect to="/"/>}</Route>               
                   </Switch>
                 </BrowserRouter>
                 {/* <Router>

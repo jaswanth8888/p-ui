@@ -27,24 +27,26 @@ class ZoneForm extends Component {
   }
 
   handleSubmit(e) {
+
     e.preventDefault();
     let zone = {zoneName:this.state.zoneName,
                 liquorPricePerUnit:this.state.liquorPricePerUnit
     }
-    console.log(zone);
     // this.props.postZone(zone)
-    console.log(this.state.zoneName);
-    console.log(this.state.zoneName.length);
+
     if(this.state.zoneName.length>5){
-      console.log("ksdh");
       this.props.postZone(zone)
+      this.setState({isSubmit:true})
     }
-    this.setState({isSubmit:true})
+    else{
+      this.setState({isSubmit:false})
+    }
+    
    }
 
   render() {
 
-    if(this.state.isSubmit && this.state.zoneName && this.state.liquorPricePerUnit)
+    if(this.state.isSubmit && this.state.zoneName.length>5 && this.state.liquorPricePerUnit)
     {
       return <Redirect to="/welcome" />
     }
@@ -70,8 +72,9 @@ class ZoneForm extends Component {
             
             <form className="{classes.form}" noValidate>
             <div>
-              {this.state.isSubmit && !this.state.zoneName && <div className="help-block">Please enter zone name</div>}
-              {this.state.isSubmit && this.state.zoneName && this.state.zoneName.length<5 && <div className="help-block">Please enter minimum 6 characters</div>}
+              { !this.state.zoneName && <div className="help-block">Please enter zone name</div>}
+              {/* { !this.state.liquorPricePerUnit && <div className="help-block">Please enter Price per unit</div>} */}
+              {this.state.zoneName && this.state.zoneName.length<6 && <div className="help-block">Please enter minimum 6 characters</div>}
             </div>
               <TextField
                 variant="outlined"
@@ -90,6 +93,8 @@ class ZoneForm extends Component {
                 margin="normal"
                 required
                 fullWidth
+                type="number"
+                step="0.01"
                 id="liquorPricePerUnit"
                 label="Price Per Unit"
                 name="liquorPricePerUnit"

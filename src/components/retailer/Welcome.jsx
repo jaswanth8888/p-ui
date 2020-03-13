@@ -71,7 +71,30 @@ class Welcome extends Component {
                         CREATE STORE
                     </Button>
                     </Link>
-                
+                    <Link to='/viewzones'>
+                    <Button
+                        type="button"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className="{classes.submit}"
+                        //onClick={this.handleSubmit}
+                    >
+                        VIEW ZONES
+                    </Button>
+                    </Link>
+                    <Link to='/viewclusters'>
+                    <Button
+                        type="button"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className="{classes.submit}"
+                        //onClick={this.handleSubmit}
+                    >
+                        VIEW CLUSTERS
+                    </Button>
+                    </Link>
                     </form>
                 </Grid>
                 </Grid>

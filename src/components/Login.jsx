@@ -110,7 +110,6 @@ class Login extends Component {
 
 const stateAsProps = function(store) {
   if("login_status" in store.RetailerReducer) {
-    console.log("hi");
     return {
       login_status: store.RetailerReducer.login_status
     };

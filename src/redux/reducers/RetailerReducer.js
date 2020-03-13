@@ -1,4 +1,4 @@
-import { LOGIN_USER, MESSAGE_SET_NULL,LOGIN_FAILURE,CREATE_CLUSTER,CREATE_ZONE, LOGOUT, FAILURE,WELCOME_USER, ZONE_GET_REQUEST, CLUSTER_GET_REQUEST,STORE_POST_REQUEST} from "../actions/types";
+import { LOGIN_USER, MESSAGE_SET_NULL,LOGIN_FAILURE,CREATE_CLUSTER,CREATE_ZONE, LOGOUT, FAILURE,CLUSTERLIST_GET_REQUEST,ZONELIST_GET_REQUEST,WELCOME_USER, ZONE_GET_REQUEST, CLUSTER_GET_REQUEST,STORE_POST_REQUEST} from "../actions/types";
 
 const initialState = {
     loggedInUser: null,
@@ -7,7 +7,9 @@ const initialState = {
     msg:'',
     login_status:{
         success:false
-    }
+    },
+    zoneList:{},
+    clusterList:{}
 };
 export default (state = initialState, action = {}) => {
 
@@ -35,7 +37,12 @@ export default (state = initialState, action = {}) => {
             return { ...state, msg:action.msg}
         case CREATE_CLUSTER:
             return {...state, msg:action.msg}
+        case ZONELIST_GET_REQUEST:
+            return {...state, zoneList:action.zoneList}
+        case CLUSTERLIST_GET_REQUEST:
+            return {...state, clusterList:action.clusterList}
         default:
+            return { ...state }
     }
-    return { ...state }
+    
 };
