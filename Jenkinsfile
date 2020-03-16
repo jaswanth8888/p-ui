@@ -6,22 +6,21 @@ node{
             
             '''
             }
-            catch(e){
-                sh "echo no containers"
-            }
-            try{
-                
-            sh '''
-            docker rm  react-ui
-            
-            '''
-            }
-            catch(e){
-                sh "echo no containers"
-            }
-            
-            
+        catch(e){
+            sh "echo no containers"
         }
+        try{
+            
+        sh '''
+        docker rm  react-ui
+        
+        '''
+        }
+        catch(e){
+            sh "echo no containers"
+        }
+            
+            
 }
 node{
         checkout scm
