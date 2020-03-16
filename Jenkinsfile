@@ -1,14 +1,31 @@
 node{
-        stage('Cloning Location') {
+        try{
+                
             sh '''
             docker kill react-ui
-            docker rm react-ui
+            
             '''
+            }
+            catch(e){
+                sh "echo no containers"
+            }
+            try{
+                
+            sh '''
+            docker rm  react-ui
+            
+            '''
+            }
+            catch(e){
+                sh "echo no containers"
+            }
+            
+            
         }
 }
 node{
         checkout scm
-        
+
         stage ('Building React container') {
                 sh '''
                 docker build -t react/ui .
