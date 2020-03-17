@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Header from './components/organisms/header/Header.js'
+import Header from './components/organisms/header/Header'
 import HeaderLinks from './components/molecules/HeaderLinks'
 import Login from './components/Login.jsx'
-import rootReducer from './redux/reducers/rootReducer.js';
+import rootReducer from './redux/reducers/rootReducer';
 import { createStore, applyMiddleware } from'redux';
 import { Provider } from'react-redux';
 import { composeWithDevTools} from'redux-devtools-extension';
