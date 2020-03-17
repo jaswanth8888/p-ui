@@ -3,7 +3,7 @@ import { Grid, TextField, Avatar, Typography, Box } from "@material-ui/core";
 import Button from "./atoms/Button";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { connect } from "react-redux";
-import { login } from "../redux/actions/RetailerActions";
+import { login } from "../redux/actions/RetailerActions.jsx";
 
 class Login extends Component {
   constructor(props) {

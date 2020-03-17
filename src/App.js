@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Header from './components/organisms/header/Header.js'
+import Header from './components/organisms/header/Header'
 import HeaderLinks from './components/molecules/HeaderLinks'
 import Login from './components/Login.jsx'
-import rootReducer from './redux/reducers/rootReducer.js';
+import rootReducer from './redux/reducers/rootReducer';
 import { createStore, applyMiddleware } from'redux';
 import { Provider } from'react-redux';
 import { composeWithDevTools} from'redux-devtools-extension';
@@ -14,6 +14,7 @@ import ZoneForm from './components/retailer/ZoneForm';
 import ClusterForm from './components/retailer/ClusterForm.jsx';
 import ViewZones from './components/retailer/ViewZones.jsx';
 import ViewClusters from './components/retailer/ViewClusters.jsx';
+import PrivateRoute from './components/utils/privateRoute'
 
 
 let state = window.sessionStorage.reduxstate;
@@ -49,12 +50,13 @@ export default class App extends Component {
                 <BrowserRouter >
                   <Switch>
                     <Route exact={true} path="/" component={Login} />
-                    <Route exact={true} path="/welcome">{isLoggedIn?<Welcome/>:<Redirect to="/"/>}</Route>               
-                    <Route exact={true} path="/store">{isLoggedIn?<StoreForm/>:<Redirect to="/"/>}</Route>               
-                    <Route exact={true} path="/zonepage">{isLoggedIn?<ZoneForm/>:<Redirect to="/"/>}</Route>               
-                    <Route exact={true} path="/cluster">{isLoggedIn?<ClusterForm/>:<Redirect to="/"/>}</Route>  
-                    <Route exact={true} path="/viewzones">{isLoggedIn?<ViewZones/>:<Redirect to="/"/>}</Route>               
-                    <Route exact={true} path="/viewclusters">{isLoggedIn?<ViewClusters/>:<Redirect to="/"/>}</Route>               
+                    <PrivateRoute exact path="/welcome" component={Welcome}/>               
+                    <PrivateRoute exact={true} path="/store" component={StoreForm}/>               
+                    <PrivateRoute exact={true} path="/zonepage" component={ZoneForm}/>               
+                    <PrivateRoute exact={true} path="/cluster" component={ClusterForm} />
+                    <PrivateRoute exact={true} path="/viewzones" component={ViewZones}/>
+                    <PrivateRoute exact={true} path="/viewclusters" component={ViewClusters} />
+                    {/* <Route path="*" >404 Not Found</Route>  // need to create component for 404 */}
                   </Switch>
                 </BrowserRouter>
                 {/* <Router>
