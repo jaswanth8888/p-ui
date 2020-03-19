@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from'redux';
 import { Provider } from'react-redux';
 import { composeWithDevTools} from'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { HashRouter as Router,Route, Switch, BrowserRouter,Redirect } from 'react-router-dom';
+import { BrowserRouter as Router,Route, Switch} from 'react-router-dom';
 import Welcome from './components/retailer/Welcome.jsx';
 import StoreForm from './components/retailer/StoreForm.jsx';
 import ZoneForm from './components/retailer/ZoneForm';
@@ -42,12 +42,9 @@ store.subscribe(() => {
 
 export default class App extends Component {
   render() {
-    const isLoggedIn=sessionStorage.getItem("token") &&sessionStorage.getItem("token").length>10
-    
     return (
-    
       <Provider store={store}>
-                <BrowserRouter >
+                <Router >
                   <Switch>
                     <Route exact={true} path="/" component={Login} />
                     <PrivateRoute exact path="/welcome" component={Welcome}/>               
@@ -56,9 +53,9 @@ export default class App extends Component {
                     <PrivateRoute exact={true} path="/cluster" component={ClusterForm} />
                     <PrivateRoute exact={true} path="/viewzones" component={ViewZones}/>
                     <PrivateRoute exact={true} path="/viewclusters" component={ViewClusters} />
-                    {/* <Route path="*" >404 Not Found</Route>  // need to create component for 404 */}
+                    {/* <Route path="*" >404 Not Found</Route>  // need to create component for 4040 */}
                   </Switch>
-                </BrowserRouter>
+                </Router>
                 {/* <Router>
                     <div className="container">
                         <Route exact={true} path="/"

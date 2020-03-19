@@ -35,7 +35,7 @@ class Login extends Component {
     console.log('entered valid username')
     let username=this.state.user_crendentials.username
     let error=this.state.error
-    if(username==''){
+    if(username===''){
       error.usernameError=true;
       error.usernameErrorMsg='please fill username'
       this.setState({error})
@@ -51,7 +51,7 @@ class Login extends Component {
   is_validPassword=()=>{
     let password=this.state.user_crendentials.password
     let error=this.state.error
-    if(password==''){
+    if(password===''){
       error.passwordError=true;
       error.passwordErrorMsg='please fill password'
       this.setState({error})

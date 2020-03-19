@@ -32,7 +32,7 @@ class ZoneForm extends Component {
     let zone = {zoneName:this.state.zoneName,
                 liquorPricePerUnit:this.state.liquorPricePerUnit
     }
-    // this.props.postZone(zone)
+    
 
     if(this.state.zoneName.length>5){
       this.props.postZone(zone)
