@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid, TextField,Typography,Box} from "@material-ui/core";
-import Button from "../atoms/Button";
+import Button from '@material-ui/core/Button';
 import PublicIcon from '@material-ui/icons/Public';
 import { connect } from 'react-redux';
 import { postZone } from '../../redux/actions/RetailerActions';

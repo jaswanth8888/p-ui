@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid, TextField, Avatar, Typography, Box } from "@material-ui/core";
-import Button from "./atoms/Button";
+import Button from '@material-ui/core/Button';
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { connect } from "react-redux";
 import { login } from "../redux/actions/RetailerActions.jsx";

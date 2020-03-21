@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, TextField, Typography, Select,InputLabel,NativeSelect} from "@material-ui/core";
-import Button from "../atoms/Button";
+import Button from '@material-ui/core/Button';
 import {getZones, getClusters, postStore} from '../../redux/actions/RetailerActions'
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom'
