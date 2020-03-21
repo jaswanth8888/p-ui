@@ -1,9 +1,13 @@
-import React, { Component } from "react";
-import { Grid, TextField, Avatar, Typography, Box } from "@material-ui/core";
+import { Avatar, Box, Grid, TextField, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Lock from '@material-ui/icons/Lock';
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import PersonIcon from '@material-ui/icons/Person';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { login } from "../redux/actions/RetailerActions.jsx";
+import { spacing } from '@material-ui/system';
 
 class Login extends Component {
   constructor(props) {
@@ -91,26 +95,49 @@ class Login extends Component {
             justify="center"
             style={{ minHeight: "100vh" }}
           >
-            <Grid item xs={3}>
-              <Box diasplay="flex" flexDirection="row" justifyContent="center">
+            <Grid item xs={3} 
+            style={{
+              border:"1px solid rgba(0,0,0,0.2)",
+              borderLeft:"5px solid #C60078",
+              borderRadius:"4px",
+              boxShadow:"0px 10px 17px 6px rgba(0,0,0,0.24)"
+            }}>
+              <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center"
+              style={{
+                fontWeight:300,
+                BorderRadius:"4px",
+                marginLeft:"-40px",
+                position:"relative"
+              }} 
+
+                pt={4}>
+                  
                 <Box p={1}>
-                  <Avatar
-                    className="{classes.avatar}"
-                    style={{ color: "#3F51B5" }}
-                  >
-                    <LockOutlinedIcon />
+                  <Avatar style={{
+                      background:"#C60078",
+                      marginLeft:"10px",
+                      padding:"30px",
+                      position:"absolute",
+                      top:"-40px",
+                      left:"-25px",
+                      right:"0px",
+                      marginRight:"auto",
+                      
+                    }}>
+                    <LockOutlinedIcon color="white" style={{
+                      fontSize:"48px"
+                    }} />
                   </Avatar>
                 </Box>
-
-                <Typography component="h1" variant="h5">
-                  Sign in
+                <Typography color="primary" component="h1" variant="h4" style={{marginLeft:"20px",fontFamily : "font-family: 'Open Sans', sans-serif;"}}>
+                  Login
                 </Typography>
                 <Typography component="span" color="error" variant="h5">
                   {this.props.login_status.errorMsg}
                 </Typography>
                 {/* {this.props.login_status['errorMsg']} */}
               </Box>
-              <form className="{classes.form}" noValidate>
+              <form className="{classes.form}" noValidate style={{padding:"40px"}}>
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -124,6 +151,13 @@ class Login extends Component {
                   autoComplete="username"
                   onChange={this.handleChange}
                   autoFocus
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <PersonIcon color="primary" borderColor="primary.main"  borderRight={1} />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <TextField
                   variant="outlined"
@@ -138,6 +172,14 @@ class Login extends Component {
                   id="password"
                   onChange={this.handleChange}
                   autoComplete="current-password"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start" >
+                        <Lock color="primary" borderColor="primary.main"  borderRight={1} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  
                 />
                 <Button
                   type="button"
@@ -146,8 +188,9 @@ class Login extends Component {
                   color="primary"
                   className="{classes.submit}"
                   onClick={this.handleSubmit}
+                  style = {{marginTop:"30px"}}
                 >
-                  Sign In
+                  Login
                 </Button>
               </form>
             </Grid>

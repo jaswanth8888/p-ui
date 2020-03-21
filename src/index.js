@@ -1,10 +1,8 @@
+import { createMuiTheme, MuiThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createMuiTheme, MuiThemeProvider,responsiveFontSizes  } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
-import blue from '@material-ui/core/colors/blue';
 
 let theme = createMuiTheme({
     palette: {
