@@ -15,6 +15,7 @@ import ClusterForm from './components/retailer/ClusterForm.jsx';
 import ViewZones from './components/retailer/ViewZones.jsx';
 import ViewClusters from './components/retailer/ViewClusters.jsx';
 import PrivateRoute from './components/utils/privateRoute'
+import AddGroup from './components/retailer/AddGroup';
 
 
 let state = window.sessionStorage.reduxstate;
@@ -53,6 +54,7 @@ export default class App extends Component {
                     <PrivateRoute exact={true} path="/cluster" component={ClusterForm} />
                     <PrivateRoute exact={true} path="/viewzones" component={ViewZones}/>
                     <PrivateRoute exact={true} path="/viewclusters" component={ViewClusters} />
+                    <PrivateRoute exact={true} path="/add-group" component={AddGroup} />
                     {/* <Route path="*" >404 Not Found</Route>  // need to create component for 4040 */}
                   </Switch>
                 </Router>
