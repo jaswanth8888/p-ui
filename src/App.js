@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import Navbar from './components/organisms/Navbar';
 import rootReducer from './redux/reducers/rootReducer';
 
+
 let state = window.sessionStorage.reduxstate;
 if (state) {
     state = JSON.parse(state);

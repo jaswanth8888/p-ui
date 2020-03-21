@@ -1,6 +1,6 @@
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, responsiveFontSizes } from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
@@ -45,15 +45,14 @@ function a11yProps(index) {
     };
 }
 
-const useStyles = makeStyles(theme => ({
+const StyledTab = withStyles({
     root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
+        fontFamily : "'Open Sans Condensed', sans-serif",
+        fontSize : "18px"
     },
-}));
+})(Tab);
 
 function Navbar() {
-    const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -62,16 +61,15 @@ function Navbar() {
 
     return (
         <Router >
-            <div className={classes.root}>
+            <div>
                 <AppBar position="static">
                     <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                        <Tab label="Home" {...a11yProps(0)} component={Link} to="/welcome" />
-                        <Tab label="Item Two" {...a11yProps(1)} />
-                        <Tab label="Logout" {...a11yProps(2)} component={Link} to="/"
+                        <StyledTab label="Home" {...a11yProps(0)} component={Link} to="/welcome" />
+                        <StyledTab label="Item Two" {...a11yProps(1)} />
+                        <StyledTab style = {{marginLeft : "auto"}} label="Logout" {...a11yProps(2)} component={Link} to="/"
                             onClick={() => {
                                 sessionStorage.removeItem("token");
                                 sessionStorage.removeItem("reduxstate");
-                                window.location.href = "/"
                             }}
                         />
 
