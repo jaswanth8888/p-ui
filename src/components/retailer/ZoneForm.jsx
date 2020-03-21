@@ -60,7 +60,7 @@ class ZoneForm extends Component {
           justify="center"
           style={{ minHeight: "100vh", marginTop: "-100px" }}
         >
-          <Grid item xs={3} style={{
+          <Grid item xs={6} style={{
             borderRadius: "4px",
             boxShadow: "0px 10px 17px 6px rgba(0,0,0,0.24)",
             padding: "40px",

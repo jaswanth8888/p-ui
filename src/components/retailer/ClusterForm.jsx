@@ -21,10 +21,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 class ClusterForm extends Component {
-  
+
   constructor(props) {
     super(props)
-    
+
     this.state = {
       zone: "",
       clusterName: "",
@@ -33,12 +33,12 @@ class ClusterForm extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    
+
   }
 
 
   componentDidMount() {
-    
+
     this.props.getAllZones();
   }
 
@@ -58,7 +58,7 @@ class ClusterForm extends Component {
   }
 
   render() {
-    
+
     if (this.state.isSubmitted && this.state.zone && this.state.clusterName) {
       return <Redirect to='/welcome' />
     }
@@ -96,6 +96,9 @@ class ClusterForm extends Component {
               </Avatar>
             </Box>
             <form className="{classes.form}">
+              <Typography color="primary" component="h1" variant="h4" style={{ fontFamily: "font-family: 'Open Sans', sans-serif;" }}>
+                Create a cluster
+                </Typography>
               <Typography component="div" color="error" variant="p">
                 {this.state.isSubmitted && !this.state.clusterName &&
                   <div className="help-block">Sorry please enter the details in the form</div>}
@@ -132,8 +135,8 @@ class ClusterForm extends Component {
                 autoComplete="clusterName"
                 onChange={this.handleChange}
                 value={this.state.clusterName}
-                style = {{
-                  marginTop : "24px"
+                style={{
+                  marginTop: "24px"
                 }}
                 autoFocus
               />
