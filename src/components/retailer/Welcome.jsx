@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
-import connect from 'react-redux/es/connect/connect';
-import { fetchUserDetails } from '../../redux/actions/RetailerActions';
-import SubNavbar from '../organisms/SubNavbar.jsx';
+import React, { Component } from 'react'
+import connect from 'react-redux/es/connect/connect'
+import { Grid} from "@material-ui/core";
+import Button from '@material-ui/core/Button';
+import {fetchUserDetails} from '../../redux/actions/RetailerActions'
+import {Link} from 'react-router-dom'
+import Message from './Message.jsx'
+import SubNavbar from '../organisms/SubNavbar.jsx'
 
 class Welcome extends Component {
     constructor(props) {
