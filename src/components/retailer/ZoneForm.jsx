@@ -1,11 +1,14 @@
 import { Avatar, Box, Grid, TextField, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
-import PublicIcon from '@material-ui/icons/Public';
-import React, { Component } from "react";
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import { postZone } from '../../redux/actions/RetailerActions';
 // import { Alert } from 'react-alert'
+import './ZoneForm.css'
+
 
 class ZoneForm extends Component {
   constructor(props) {
@@ -51,43 +54,26 @@ class ZoneForm extends Component {
       return <Redirect to="/welcome" />
     }
     return (
-      <div>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: "100vh", marginTop: "-100px" }}
-        >
-          <Grid item xs={6} style={{
-            borderRadius: "4px",
-            boxShadow: "0px 10px 17px 6px rgba(0,0,0,0.24)",
-            padding: "40px",
-            position: "relative"
-          }} >
-
-            <Box p={1}>
-              <Avatar style={{
-                background: "#C60078",
-                marginLeft: "10px",
-                padding: "30px",
-                position: "absolute",
-                top: "-50px",
-                left: "-50px",
-                right: "0px",
-                marginRight: "auto",
-
-              }}>
-                <PublicIcon color="white" style={{
-                  fontSize: "48px"
-                }} />
-              </Avatar>
-            </Box>
-
+      <div className="box-container">
+        <div className="joint-form">
+          <div className="validation-half" style={{ background: "#673ab7" }}>
+            <div className="validations">
+              <h3 style={{ textAlign: "center" }}>Requirements</h3>
+              {this.state.zoneName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Zone has to be greater than 5 letters
+                </Typography></div>}
+              {this.state.zoneName.length > 5 &&
+                <div style={{ display: "flex"  ,color : "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Zone has to be greater than 5 letters
+                </Typography></div>}
+            </div>
+          </div>
+          <div className="form-half">
             <form className="{classes.form}" noValidate >
               <div>
-                {!this.state.zoneName && <div className="help-block">
+                <div className="help-block">
                   <Typography
                     color="primary"
                     component="h1"
@@ -98,9 +84,7 @@ class ZoneForm extends Component {
                     }}>
                     Create a Zone
                   </Typography>
-                </div>}
-                {/* { !this.state.liquorPricePerUnit && <div className="help-block">Please enter Price per unit</div>} */}
-                {this.state.zoneName && this.state.zoneName.length < 6 && <div className="help-block">Please enter minimum 6 characters</div>}
+                </div>
               </div>
               <TextField
                 variant="outlined"
@@ -140,9 +124,8 @@ class ZoneForm extends Component {
                 Save
               </Button>
             </form>
-          </Grid>
-        </Grid>
-
+          </div>
+        </div>
       </div>
     );
   }

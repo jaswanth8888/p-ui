@@ -6,6 +6,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { getClusters, getZones, postStore } from '../../redux/actions/RetailerActions';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import "./StoreForm.css"
 
 class StoreForm extends Component {
 
@@ -65,49 +68,29 @@ class StoreForm extends Component {
       return <Redirect to='/welcome' />
     }
     return (
-      <div>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: "110vh", marginTop: "-80px" }}
+      <div className="box-container">
 
-        >
-
-          <Grid item xs={6} style={{
-            borderRadius: "4px",
-            boxShadow: "0px 10px 17px 6px rgba(0,0,0,0.24)",
-            padding: "40px",
-            position: "relative"
-          }}>
-            <Box p={1}>
-              <Avatar style={{
-                background: "#C60078",
-                marginLeft: "10px",
-                padding: "30px",
-                position: "absolute",
-                top: "-50px",
-                left: "-50px",
-                right: "0px",
-                marginRight: "auto",
-
-              }}>
-                <ShoppingCartIcon color="white" style={{
-                  fontSize: "48px"
-                }} />
-              </Avatar>
-            </Box>
-            <Typography component="h1" variant="h4" color="primary">
-                  Zone and Cluster 
+        <div className="joint-form" style={{ width: "850px" }}>
+          <Typography
+            color="primary"
+            component="h1"
+            variant="h4"
+            style=
+            {{
+              fontFamily: "font-family: 'Open Sans', sans-serif;",
+              position: "absolute",
+              top: "30px",
+              left: "30px"
+            }}>
+            Create a cluster
                 </Typography>
-            <form className="{classes.form}">
-              <Typography component="div" color="error" variant="p">
-                {this.state.isSubmitted && !this.state.storeName && !this.state.zone && !this.state.cluster && !this.state.streetName && !this.state.city && !this.state.pin &&
-                  <div className="help-block">Sorry please enter the details in the form</div>}
-                <br />
-              </Typography>
+          {/* <div className="validation-half" style={{ background: "#673ab7" }}>
+            <div className="validations">
+
+            </div>
+          </div> */}
+          <div className="form-first-half">
+            <form className="{classes.form}" noValidate >
               <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-age-native-simple">Enter Zone</InputLabel>
                 <Select
@@ -129,8 +112,8 @@ class StoreForm extends Component {
                 </Select>
               </FormControl>
               <br /><br />
-              
-              <FormControl variant="outlined" fullWidth style = {{marginBottom : "10px"}}>
+
+              <FormControl variant="outlined" fullWidth style={{ marginBottom: "10px" }}>
                 <InputLabel htmlFor="outlined-age-native-simple">Enter Cluster</InputLabel>
                 <Select
                   ref="cluster"
@@ -164,70 +147,97 @@ class StoreForm extends Component {
                 value={this.state.storeName}
                 autoFocus
               />
-              <hr style = {{
-                margin : "10px 0px",
-                borderColor : "white"
-              }}></hr>
-              <Grid>
-                <Typography component="h1" variant="h4" color="primary">
-                  Address 
-                </Typography>
-                <TextField
-                  ref="streetName"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="streetName"
-                  label="Street name"
-                  autoComplete="streetName"
-                  id="streetName"
-                  onChange={this.handleChange}
-                  value={this.state.streetName}
-                />
-                <TextField
-                  ref="city"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="city"
-                  label="City"
-                  id="city"
-                  onChange={this.handleChange}
-                  autoComplete="city"
-                  value={this.state.city}
-                />
-                <TextField
-                  ref="pin"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="pin"
-                  label="Pin-code"
-                  type="number"
-                  id="pin"
-                  onChange={this.handleChange}
-                  autoComplete="pin"
-                  value={this.state.pin}
-                />
-              </Grid>
               <Button
                 type="button"
                 fullWidth
                 variant="contained"
                 color="primary"
-                style={{ marginTop: "30px" }}
                 className="{classes.submit}"
-                onClick={this.handleSubmit}
-              >
-                Submit
-              </Button>
+                style={{ marginTop: "30px", pointerEvents: "none", opacity: "0" }}
+                onClick={this.handleSubmit}>
+                Save
+            </Button>
             </form>
-          </Grid>
-        </Grid>
-
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className="{classes.submit}"
+              id="store-submit-btn"
+              style={{ marginTop: "30px" }}
+              onClick={this.handleSubmit}
+            >
+              Save
+              </Button>
+          </div>
+          <div className="form-second-half">
+            <form className="{classes.form}" noValidate >
+              <TextField
+                ref="streetName"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="streetName"
+                label="Street name"
+                autoComplete="streetName"
+                id="streetName"
+                onChange={this.handleChange}
+                value={this.state.streetName}
+              />
+              <TextField
+                ref="city"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="city"
+                label="City"
+                id="city"
+                onChange={this.handleChange}
+                autoComplete="city"
+                value={this.state.city}
+              />
+              <TextField
+                ref="pin"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="pin"
+                label="Pin-code"
+                type="number"
+                id="pin"
+                onChange={this.handleChange}
+                autoComplete="pin"
+                value={this.state.pin}
+              />
+              <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className="{classes.submit}"
+                style={{ marginTop: "30px", pointerEvents: "none", opacity: "0" }}
+                onClick={this.handleSubmit}>
+                Save
+            </Button>
+            </form>
+          </div>
+          <div className="store-requirement">
+            <h3 style={{ textAlign: "center" }}>Requirements</h3>
+            {this.state && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <Typography variant="subtitle2" gutterBottom>
+                Cluster has to be greater than 5 letters
+              </Typography></div>}
+            {this.state &&
+              <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Cluster has to be greater than 5 letters
+              </Typography></div>}
+          </div>
+        </div>
       </div>
     )
   }

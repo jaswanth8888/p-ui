@@ -26,7 +26,7 @@ class ViewZones extends Component {
                     direction="column"
                     alignItems="center"
                     justify="center"
-                    style={{ minHeight: "110vh", marginTop: "-400px" }}
+                    style={{ minHeight: "110vh", marginTop: "-200px" }}
 
                 >
 

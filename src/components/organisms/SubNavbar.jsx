@@ -1,23 +1,62 @@
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
 import React from 'react';
-import { BrowserRouter as Router, Link, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import PrivateRoute from '../utils/privateRoute';
+import Welcome from '../retailer/Welcome.jsx';
 import ClusterForm from '../retailer/ClusterForm.jsx';
 import StoreForm from '../retailer/StoreForm.jsx';
 import ViewClusters from '../retailer/ViewClusters.jsx';
 import ViewZones from '../retailer/ViewZones.jsx';
-import ZoneForm from '../retailer/ZoneForm';
-import PrivateRoute from '../utils/privateRoute';
+import ZoneForm from '../retailer/ZoneForm.jsx';
 
-const useStyles = makeStyles({
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <Typography
+            component="div"
+            role="tabpanel"
+            hidden={value !== index}
+            id={`vertical-tabpanel-${index}`}
+            aria-labelledby={`vertical-tab-${index}`}
+            {...other}
+        >
+            {value === index && <Box p={3}>{children}</Box>}
+        </Typography>
+    );
+}
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+    return {
+        id: `vertical-tab-${index}`,
+        'aria-controls': `vertical-tabpanel-${index}`,
+    };
+}
+
+const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
+        backgroundColor: theme.palette.background.paper,
+        display: 'flex',
+        height: 224,
     },
-});
+    tabs: {
+        borderRight: `1px solid ${theme.palette.divider}`,
+    },
+}));
 
-export default function SubNavbar() {
+export default function VerticalTabs() {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -26,33 +65,50 @@ export default function SubNavbar() {
     };
 
     return (
-        <Router>
-            <Paper className={classes.root}>
-                <Tabs
-                    fullwidth
-                    value={value}
-                    onChange={handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    centered
-                >
-                    <Tab  component={Link} label="Create Zone" to="/zonepage"  />
-                    <Tab  component={Link} label="Create Cluster" to="/cluster"  />
-                    <Tab  component={Link} label="Create Store" to="/store"  />
-                    <Tab  component={Link} label="View Zones" to="/viewzones"  />
-                    <Tab  component={Link} label="View Clusters" to="/viewclusters"  />
-
-                </Tabs>
-            </Paper>
-            <Switch>
+        <div className={classes.root} style = {{
+            height:"100%",
+            position : "relative",
+            zIndex : "100",
+            height:"100vh"
+        }}>
+            <Tabs
+                orientation="vertical"
+                variant="scrollable"
+                value={value}
+                onChange={handleChange}
+                aria-label="Vertical tabs example"
+                className={classes.tabs}
                 
+            >
+                <Tab   label="Create Zone" />
+                <Tab  label="Create Cluster" />
+                <Tab label="Create Store"  />
+                <Tab  label="View Zones" />
+                <Tab  label="View Clusters"  />
+            </Tabs>
+            <TabPanel value={value} index={0}>
+                <ZoneForm />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <ClusterForm />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                <StoreForm />
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                <ViewZones />
+            </TabPanel>
+            <TabPanel value={value} index={4}>
+                <ViewClusters />
+            </TabPanel>
+            {/* <Switch>
+
                 <PrivateRoute exact={true} path="/zonepage" component={ZoneForm} />
                 <PrivateRoute exact={true} path="/cluster" component={ClusterForm} />
-                <PrivateRoute exact={true} path="/store" component={StoreForm}/>  
+                <PrivateRoute exact={true} path="/store" component={StoreForm} />
                 <PrivateRoute exact={true} path="/viewzones" component={ViewZones} />
                 <PrivateRoute exact={true} path="/viewclusters" component={ViewClusters} />
-                {/* <Route path="*" >404 Not Found</Route>  // need to create component for 4040 */}
-            </Switch>
-        </Router>
+            </Switch> */}
+        </div>
     );
 }

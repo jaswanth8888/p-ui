@@ -9,6 +9,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -63,48 +65,41 @@ class ClusterForm extends Component {
       return <Redirect to='/welcome' />
     }
     return (
-      <div>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: "110vh", marginTop: "-150px" }}
-        >
-          <Grid item xs={6} style={{
-            borderRadius: "4px",
-            boxShadow: "0px 10px 17px 6px rgba(0,0,0,0.24)",
-            padding: "40px",
-            position: "relative"
-          }} >
-            <Box p={1}>
-              <Avatar style={{
-                background: "#C60078",
-                marginLeft: "10px",
-                padding: "30px",
-                position: "absolute",
-                top: "-50px",
-                left: "-50px",
-                right: "0px",
-                marginRight: "auto",
 
-              }}>
-                <StoreIcon color="white" style={{
-                  fontSize: "48px"
-                }} />
-              </Avatar>
-            </Box>
-            <form className="{classes.form}">
-              <Typography color="primary" component="h1" variant="h4" style={{ fontFamily: "font-family: 'Open Sans', sans-serif;" }}>
-                Create a cluster
+      <div className="box-container">
+        <div className="joint-form">
+          <div className="validation-half" style={{ background: "#673ab7" }}>
+            <div className="validations">
+              <h3 style={{ textAlign: "center" }}>Requirements</h3>
+              {this.state.clusterName.length <= 5  && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Cluster has to be greater than 5 letters
+              </Typography></div>}
+              {this.state.clusterName.length > 5 &&
+                <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                  <Typography variant="subtitle2" gutterBottom>
+                  Cluster has to be greater than 5 letters
+              </Typography></div>}
+            </div>
+          </div>
+          <div className="form-half">
+            <form className="{classes.form}" noValidate >
+              <div>
+                <div className="help-block">
+                  <Typography
+                    color="primary"
+                    component="h1"
+                    variant="h4"
+                    style=
+                    {{
+                      fontFamily: "font-family: 'Open Sans', sans-serif;",
+                      position : "relative",
+                      top:"-20px"
+                    }}>
+                    Create a cluster
                 </Typography>
-              <Typography component="div" color="error" variant="p">
-                {this.state.isSubmitted && !this.state.clusterName &&
-                  <div className="help-block">Sorry please enter the details in the form</div>}
-                {this.state.isSubmitted && this.state.clusterName && this.state.clusterName.length < 5 && <div className="help-block">Please enter minimum 6 characters</div>}
-                <br />
-              </Typography>
+                </div>
+              </div>
               <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-age-native-simple">Zone</InputLabel>
                 <Select
@@ -155,6 +150,7 @@ class ClusterForm extends Component {
                 value={this.state.taxRate}
                 autoFocus
               />
+
               <Button
                 type="button"
                 fullWidth
@@ -162,14 +158,12 @@ class ClusterForm extends Component {
                 color="primary"
                 className="{classes.submit}"
                 style={{ marginTop: "30px" }}
-                onClick={this.handleSubmit}
-              >
+                onClick={this.handleSubmit}>
                 Save
-              </Button>
+            </Button>
             </form>
-          </Grid>
-        </Grid>
-
+          </div>
+        </div>
       </div>
     )
   }
