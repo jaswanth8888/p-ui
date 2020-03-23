@@ -42,7 +42,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    top:-50px;
+    top:130px;
     left:10px;
     bottom:0px;
     right:50px;
@@ -55,7 +55,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    top:-658px;
+    top:-478px;
     left:410px;
     bottom:0px;
     right:50px;
@@ -73,7 +73,7 @@
 
 .store-requirement{
     position: absolute;
-    top:430px;
+    top:0px;
     left:0px;
     width:850px;
     bottom:0px;

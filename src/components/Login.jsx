@@ -98,7 +98,7 @@ class Login extends Component {
             <Grid item xs={3} 
             style={{
               border:"1px solid rgba(0,0,0,0.2)",
-              borderLeft:"5px solid #C60078",
+              borderLeft:"5px solid #673ab7",
               borderRadius:"4px",
               boxShadow:"0px 10px 17px 6px rgba(0,0,0,0.24)"
             }}>
@@ -114,7 +114,7 @@ class Login extends Component {
                   
                 <Box p={1}>
                   <Avatar style={{
-                      background:"#C60078",
+                      background:"#673ab7",
                       marginLeft:"10px",
                       padding:"30px",
                       position:"absolute",

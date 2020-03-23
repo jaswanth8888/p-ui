@@ -79,7 +79,7 @@ class StoreForm extends Component {
             {{
               fontFamily: "font-family: 'Open Sans', sans-serif;",
               position: "absolute",
-              top: "30px",
+              top: "210px",
               left: "30px"
             }}>
             Create a cluster
@@ -227,14 +227,14 @@ class StoreForm extends Component {
           </div>
           <div className="store-requirement">
             <h3 style={{ textAlign: "center" }}>Requirements</h3>
-            {this.state && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+            {this.state.storeName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
               <Typography variant="subtitle2" gutterBottom>
-                Cluster has to be greater than 5 letters
+                Store name has to be greater than 5 letters
               </Typography></div>}
-            {this.state &&
+            {this.state.storeName.length > 5  &&
               <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
-                  Cluster has to be greater than 5 letters
+                Store name has to be greater than 5 letters
               </Typography></div>}
           </div>
         </div>
