@@ -3,10 +3,12 @@ import { Grid, TextField, Avatar, Typography, Box ,Icon} from "@material-ui/core
 import Button from "../atoms/Button";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { connect } from "react-redux";
+import { postGroup } from "../../redux/actions/RetailerActions.jsx";
 
 
 
-export default class AddGroup extends Component {
+
+class AddGroup extends Component {
     constructor(props) {
         super(props)
     
@@ -52,7 +54,9 @@ export default class AddGroup extends Component {
     handleSubmit(e) {
         e.preventDefault();
         if (this.is_validGroupName()) {
-        //   this.props.login({ ...this.state.user_crendentials }); // thunk action
+          this.props.postGroup({ ...this.state.group }); // thunk action
+          this.props.history.push('/welcome');
+
         }
       }
     
@@ -80,9 +84,7 @@ export default class AddGroup extends Component {
                 <Typography component="h1" variant="h5">
                   Add group
                 </Typography>
-                <Typography component="span" color="error" variant="h5">
-                  {/* {this.props.login_status.errorMsg} */}
-                </Typography>
+                
               </Box>
               <form className="{classes.form}" noValidate>
                 <TextField
@@ -114,3 +116,8 @@ export default class AddGroup extends Component {
             )
     }
 }
+
+const actionAsProps={
+  postGroup : postGroup
+}
+export default connect(null, actionAsProps)(AddGroup);
