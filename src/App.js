@@ -58,19 +58,11 @@ export default class App extends Component {
                     {/* <Route path="*" >404 Not Found</Route>  // need to create component for 4040 */}
                   </Switch>
                 </Router>
-                {/* <Router>
-                    <div className="container">
-                        <Route exact={true} path="/"
-                            component={Login} />
-                        <Route exact path="/welcome" component={Welcome}/>
-                    </div>
-                </Router>  */}
                 <div>
                     <Header
                     absolute
                     brand="Retail Application"
                     rightLinks={<HeaderLinks/>}
-                    // {...rest}
                   />
                 </div>
       </Provider>
