@@ -1,0 +1,64 @@
+{
+  "header": {
+    "logIn": "Log in",
+    "logOut": "Log out",
+    "title":"Retail Application"
+  },
+  "login":{
+    "signIn": "Einloggen",
+    "userName": "Nutzername",
+    "password": "Passwort",
+    "invalidCredentials": "Benutzername / Kennwort ungültig"
+  },
+  "welcome":{
+    "createZone": "CREATE ZONE",
+    "createCluster": "CREATE CLUSTER",
+    "createStore": "CREATE STORE",
+    "viewZones": "VIEW ZONES",
+    "viewClusters": "VIEW CLUSTERS"
+  },
+  "zoneForm":{
+    "createZone":"Create a zone",
+    "zoneName":"Zone name",
+    "pricePerUnit":"Price per unit",
+    "save":"Save",
+    "noZoneMsg":"Please enter zone name"
+  },
+  "clusterForm":{
+    "enterZone": "Enter zone",
+    "selectZone": "Select zone",
+    "clusterName":"Cluster name",
+    "taxRate": "Tax rate",
+    "save":"Save"
+  },
+  "storeForm":{
+    "enterZone": "Enter zone",
+    "selectZone": "Select zone",
+    "enterCluster": "Enter cluster",
+    "selectCluster": "Select cluster",
+    "storeName": "Store name",
+    "address": "Address",
+    "streetName": "Street name",
+    "city": "City",
+    "pinCode": "Pin-code",
+    "submit": "Submit"
+  },
+  "zoneList":{
+    "zoneName":"Zone name",
+    "numberOfClusters": "Number of clusters"
+  },
+  "clusterList":{
+    "clusterName":"Cluster name",
+    "numberOfStores":"Number of stores"
+  },
+  "message":{
+  "zoneSuccess": "Zone created successfully",
+  "emptyForm":"Sorry please enter the details in the form",
+  "lengthTooShort":"Please enter minimum 6 characters",
+  "zoneExists":"Sorry Zone already exists",
+  "clusterSuccess1":"Cluster für Zone",
+  "clusterSuccess2":"wird erfolgreich erstellt",
+  "clusterExists":"Sorry Cluster already exists",
+  "storeSuccess": "Store Created Succesfully"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "LOGIN": {
+    "1": "Accesso"
+  },
+  "LOGOUT": {
+    "1": "Disconnettersi"
+  },
+  "SIGNIN": {
+    "1": "Registrati"
+  },
+  "USERNAME": {
+    "1": "Nome Utente"
+  },
+  "PASSWORD": {
+    "1": "Parola d'ordine"
+  },
+  "Invalid Username/password": {
+    "1": "Nome utente / password non valido"
+  },
+  "CREATE ZONE": {
+    "1": "CRÉER UNE ZONE"
+  },
+  "CREATE CLUSTER": {
+    "1": "CREA CLUSTER"
+  },
+  "CREATE STORE": {
+    "1": "CREA NEGOZIO"
+  },
+  "VIEW ZONES": {
+    "1": "VISUALIZZA ZONE"
+  },
+  "VIEW CLUSTERS": {
+    "1": "VISUALIZZA I CLUSTER"
+  },
+  "Zone Name": {
+    "1": "Nome zona"
+  },
+  "Number of Clusters": {
+    "1": "Numero di cluster"
+  },
+  "Cluster Name": {
+    "1": "Nome del cluster"
+  },
+  "Number of Stores": {
+    "1": "Numero di negozi"
+  },
+  "Zone Created Succesfully": {
+    "1": "Zona creata con successo"
+  }
+}

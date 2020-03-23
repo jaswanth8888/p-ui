@@ -4,6 +4,7 @@ import Button from "./atoms/Button";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { connect } from "react-redux";
 import { login } from "../redux/actions/RetailerActions";
+import { withTranslation } from "react-i18next";
 
 class Login extends Component {
   constructor(props) {
@@ -28,95 +29,102 @@ class Login extends Component {
   }
   isAuthenticated() {
     var token = sessionStorage.getItem("token");
+    console.log(token);
     return token && token.length > 10;
   }
 
   render() {
-    // const isAlreayAuthenticated = this.isAuthenticated();
-    return (
-      
-      <div>
-       {this.props.login_status.success ? ( window.location.href="/welcome"):
-        (<Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: "100vh" }}
-        >
-          <Grid item xs={3}>
-            <Box diasplay="flex" flexDirection="row" justifyContent="center">
-              <Box p={1}>
-                <Avatar
-                  className="{classes.avatar}"
-                  style={{ color: "#3F51B5" }}
-                >
-                  <LockOutlinedIcon />
-                </Avatar>
-              </Box>
 
-              <Typography component="h1" variant="h5">
-                Sign in
-              </Typography>
-              <Typography component="span" color="error" variant="h5">
-                {this.props.login_status.errorMsg}
-              </Typography>
-              {/* {this.props.login_status['errorMsg']} */}
-            </Box>
-            <form className="{classes.form}" noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="username"
-                label="User Name"
-                name="username"
-                autoComplete="username"
-                onChange={this.handleChange}
-                autoFocus
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                onChange={this.handleChange}
-                autoComplete="current-password"
-              />
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className="{classes.submit}"
-                onClick={this.handleSubmit}
-              >
-                Sign In
-              </Button>
-            </form>
+    const { t, i18n } = this.props;
+
+    return (
+      <div>
+        {this.props.login_status.success ? (
+          (window.location.href = "/welcome")
+        ) : (
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: "100vh" }}
+          >
+            <Grid item xs={3}>
+              <Box diasplay="flex" flexDirection="row" justifyContent="center">
+                <Box p={1}>
+                  <Avatar
+                    className="{classes.avatar}"
+                    style={{ color: "#3F51B5" }}
+                  >
+                    <LockOutlinedIcon />
+                  </Avatar>
+                </Box>
+
+                <Typography component="h1" variant="h5">
+                  {t("login.signIn")}
+                </Typography>
+                <Typography component="span" color="error" variant="h5">
+                  {this.props.login_status.errorMsg ? (
+                    <div ref="errMsg">{t("login.invalidCredentials")}</div>
+                  ) : (
+                    ""
+                  )}
+                </Typography>
+                {/* {this.props.login_status['errorMsg']} */}
+              </Box>
+              <form className="{classes.form}" noValidate>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label={t("login.userName")}
+                  name="username"
+                  autoComplete="username"
+                  onChange={this.handleChange}
+                  autoFocus
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label={t("login.password")}
+                  type="password"
+                  id="password"
+                  onChange={this.handleChange}
+                  autoComplete="current-password"
+                />
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit}"
+                  onClick={this.handleSubmit}
+                >
+                  {t("login.signIn")}
+                </Button>
+              </form>
+            </Grid>
           </Grid>
-        </Grid>)
-         }
+        )}
       </div>
     );
   }
 }
 
 const stateAsProps = function(store) {
-  if("login_status" in store.RetailerReducer) {
+  if ("login_status" in store.RetailerReducer) {
     return {
       login_status: store.RetailerReducer.login_status
     };
-    
-  }else {
-    return {login_status :{errorMsg:''}};    
+  } else {
+    return { login_status: { errorMsg: "" } };
   }
 };
 
-export default connect(stateAsProps, { login })(Login);
+export default connect(stateAsProps, { login })(withTranslation()(Login));

@@ -5,7 +5,8 @@ import PublicIcon from '@material-ui/icons/Public';
 import { connect } from 'react-redux';
 import { postZone } from '../../redux/actions/RetailerActions';
 import { Redirect } from "react-router-dom";
-// import { Alert } from 'react-alert'
+import { withTranslation } from "react-i18next";
+
 
 class ZoneForm extends Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class ZoneForm extends Component {
    }
 
   render() {
+    const { t, i18n } = this.props;
 
     if(this.state.isSubmit && this.state.zoneName.length>5 && this.state.liquorPricePerUnit)
     {
@@ -66,15 +68,15 @@ class ZoneForm extends Component {
               </Box>
               <PublicIcon/>
               <Typography component="h2" variant="h5">
-                Create a Zone
+                {t("zoneForm.createZone")}
               </Typography>
             </Box>
             
             <form className="{classes.form}" noValidate>
             <div>
-              { !this.state.zoneName && <div className="help-block">Please enter zone name</div>}
+              { !this.state.zoneName && <div className="help-block">{t("zoneForm.noZoneMsg")}</div>}
               {/* { !this.state.liquorPricePerUnit && <div className="help-block">Please enter Price per unit</div>} */}
-              {this.state.zoneName && this.state.zoneName.length<6 && <div className="help-block">Please enter minimum 6 characters</div>}
+              {this.state.zoneName && this.state.zoneName.length<6 && <div className="help-block">{t("message.lengthTooShort")}</div>}
             </div>
               <TextField
                 variant="outlined"
@@ -82,7 +84,7 @@ class ZoneForm extends Component {
                 required
                 fullWidth
                 id="zoneName"
-                label="Zone Name"
+                label={t("zoneForm.zoneName")}
                 name="zoneName"
                 autoComplete="zoneName"
                 onChange={this.handleChange}
@@ -96,7 +98,7 @@ class ZoneForm extends Component {
                 type="number"
                 step="0.01"
                 id="liquorPricePerUnit"
-                label="Price Per Unit"
+                label={t("zoneForm.pricePerUnit")}
                 name="liquorPricePerUnit"
                 autoComplete="pricePerUnit"
                 onChange={this.handleChange}
@@ -110,7 +112,7 @@ class ZoneForm extends Component {
                 color="primary"
                 className="{classes.submit}"
                 onClick={this.handleSubmit}>
-                Save
+                {t("zoneForm.save")}
               </Button>
             </form>
           </Grid>
@@ -124,4 +126,4 @@ class ZoneForm extends Component {
 const actionAsProps={
   postZone : postZone
 }
-export default connect(null, actionAsProps)(ZoneForm);
+export default connect(null, actionAsProps)(withTranslation()(ZoneForm));
