@@ -11,6 +11,8 @@ import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -61,9 +63,6 @@ class ClusterForm extends Component {
 
   render() {
 
-    if (this.state.isSubmitted && this.state.zone && this.state.clusterName) {
-      return <Redirect to='/welcome' />
-    }
     return (
 
       <div className="box-container">
@@ -164,6 +163,16 @@ class ClusterForm extends Component {
             </form>
           </div>
         </div>
+        {(this.state.isSubmitted && this.state.zone && this.state.clusterName) ? (
+          <div>
+            <Snackbar open="true" autoHideDuration={2000}>
+              <MuiAlert elevation={6} variant="filled"> 
+                Store created successfully! 
+              </MuiAlert>
+            </Snackbar>
+          </div>
+        ) : (<div />)
+        }
       </div>
     )
   }

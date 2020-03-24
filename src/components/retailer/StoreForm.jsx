@@ -9,6 +9,8 @@ import { getClusters, getZones, postStore } from '../../redux/actions/RetailerAc
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import "./StoreForm.css"
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 class StoreForm extends Component {
 
@@ -64,9 +66,6 @@ class StoreForm extends Component {
   }
 
   render() {
-    if (this.state.isSubmitted && this.state.storeName && this.state.zone && this.state.cluster && this.state.streetName && this.state.city && this.state.pin) {
-      return <Redirect to='/welcome' />
-    }
     return (
       <div className="box-container store-form">
 
@@ -231,13 +230,24 @@ class StoreForm extends Component {
               <Typography variant="subtitle2" gutterBottom>
                 Store name has to be greater than 5 letters
               </Typography></div>}
-            {this.state.storeName.length > 5  &&
+            {this.state.storeName.length > 5 &&
               <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
-                Store name has to be greater than 5 letters
+                  Store name has to be greater than 5 letters
               </Typography></div>}
+              
           </div>
         </div>
+        {(this.state.isSubmitted && this.state.storeName && this.state.zone && this.state.cluster && this.state.streetName && this.state.city && this.state.pin) ? (
+          <div>
+            <Snackbar open="true" autoHideDuration={2000}>
+              <MuiAlert elevation={6} variant="filled">
+                Cluster created successfully!
+              </MuiAlert>
+            </Snackbar>
+          </div>
+        ) : (<div />)
+        }
       </div>
     )
   }

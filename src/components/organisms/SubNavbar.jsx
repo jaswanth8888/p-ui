@@ -65,11 +65,11 @@ export default function VerticalTabs() {
     };
 
     return (
-        <div className={classes.root} style = {{
-            height:"100%",
-            position : "relative",
-            zIndex : "100",
-            height:"100vh"
+        <div className={classes.root} style={{
+            height: "100%",
+            position: "relative",
+            zIndex: "100",
+            height: "100vh"
         }}>
             <Tabs
                 orientation="vertical"
@@ -78,13 +78,12 @@ export default function VerticalTabs() {
                 onChange={handleChange}
                 aria-label="Vertical tabs example"
                 className={classes.tabs}
-                
             >
-                <Tab   label="Create Zone" />
-                <Tab  label="Create Cluster" />
-                <Tab label="Create Store"  />
-                <Tab  label="View Zones" />
-                <Tab  label="View Clusters"  />
+                <Tab label="Create Zone" />
+                <Tab label="Create Cluster" />
+                <Tab label="Create Store" />
+                <Tab label="View Zones" />
+                <Tab label="View Clusters" />
             </Tabs>
             <TabPanel value={value} index={0}>
                 <ZoneForm />

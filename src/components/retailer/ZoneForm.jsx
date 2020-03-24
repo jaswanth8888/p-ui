@@ -8,6 +8,9 @@ import { Redirect } from "react-router-dom";
 import { postZone } from '../../redux/actions/RetailerActions';
 // import { Alert } from 'react-alert'
 import './ZoneForm.css'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 
 
 class ZoneForm extends Component {
@@ -50,9 +53,6 @@ class ZoneForm extends Component {
 
   render() {
 
-    if (this.state.isSubmit && this.state.zoneName.length > 5 && this.state.liquorPricePerUnit) {
-      return <Redirect to="/welcome" />
-    }
     return (
       <div className="box-container">
         <div className="joint-form">
@@ -64,7 +64,7 @@ class ZoneForm extends Component {
                   Zone has to be greater than 5 letters
                 </Typography></div>}
               {this.state.zoneName.length > 5 &&
-                <div style={{ display: "flex"  ,color : "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                   <Typography variant="subtitle2" gutterBottom>
                     Zone has to be greater than 5 letters
                 </Typography></div>}
@@ -126,6 +126,16 @@ class ZoneForm extends Component {
             </form>
           </div>
         </div>
+        {(this.state.isSubmit && this.state.zoneName.length > 5 && this.state.liquorPricePerUnit) ? (
+          <div>
+            <Snackbar open="true" autoHideDuration={2000}>
+              <MuiAlert elevation={6} variant="filled"> 
+                Zone created successfully! 
+              </MuiAlert>
+            </Snackbar>
+          </div>
+        ) : (<div />)
+        }
       </div>
     );
   }
