@@ -1,19 +1,30 @@
 node{
-        stage('Cloning Location') {
+        try{
+                
             sh '''
             docker kill react-ui
-            docker rm react-ui
+            
             '''
+            }
+        catch(e){
+            sh "echo no containers"
         }
+        try{
+            
+        sh '''
+        docker rm  react-ui
+        
+        '''
+        }
+        catch(e){
+            sh "echo no containers"
+        }
+            
+            
 }
 node{
-        stage('Cloning Location') {
-            // Get some code from a GitHub repository
-            git(url:'https://del.tools.publicis.sapient.com/bitbucket/scm/psijsibb/pps-ui.git',
-                credentialsId:'1564c89e-0dee-47ec-93f6-e89e75b7cfd8',
-                branch:'master')
-           
-        }
+        checkout scm
+
         stage ('Building React container') {
                 sh '''
                 docker build -t react/ui .

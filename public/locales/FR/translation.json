@@ -2,36 +2,43 @@
   "header": {
     "logIn": "s'identifier",
     "logOut": "Se déconnecter",
-    "title":"Application au détail"
+    "title": "Application au détail",
+    "home": "Accueil"
   },
-  "login":{
+  "login": {
     "signIn": "Se connecter",
     "userName": "Nom d'utilisateur",
     "password": "Mot de passe",
     "invalidCredentials": "Nom d'utilisateur / mot de passe invalide"
   },
-  "welcome":{
+  "welcome": {
     "createZone": "CRÉER UNE ZONE",
     "createCluster": "CRÉER UN CLUSTER",
     "createStore": "CRÉER UN MAGASIN",
     "viewZones": "VOIR LES ZONES",
     "viewClusters": "VOIR LES CLUSTERS"
   },
-  "zoneForm":{
-    "createZone":"Créer une zone",
-    "zoneName":"Nom de zone",
-    "pricePerUnit":"Prix par unité",
-    "save":"Enregistrer",
-    "noZoneMsg":"Veuillez entrer le nom de la zone"
+  "zoneForm": {
+    "lengthTooShort": "La zone doit être supérieure à 5 lettres",
+    "requirements": "Exigences",
+    "createZone": "Créer une zone",
+    "zoneName": "Nom de zone",
+    "pricePerUnit": "Prix par unité",
+    "save": "Enregistrer",
+    "noZoneMsg": "Veuillez entrer le nom de la zone"
   },
-  "clusterForm":{
+  "clusterForm": {
+    "lengthTooShort": "Le cluster doit être supérieur à 5 lettres",
+    "requirements": "Exigences",
     "enterZone": "Entrer dans la zone",
     "selectZone": "Sélectionnez une zone",
-    "clusterName":"Clustername",
+    "clusterName": "Clustername",
     "taxRate": "Taux d'imposition",
-    "save":"sauvegarder"
+    "save": "sauvegarder"
   },
-  "storeForm":{
+  "storeForm": {
+    "lengthTooShort": "Le nom du magasin doit être supérieur à 5 lettres",
+    "requirements": "Exigences",
     "enterZone": "Entrer dans la zone",
     "selectZone": "Sélectionnez une zone",
     "enterCluster": "Entrer dans le cluster",
@@ -43,22 +50,22 @@
     "pinCode": "Code PIN",
     "submit": "Soumettre"
   },
-  "zoneList":{
+  "zoneList": {
     "zoneName": "Nom de zone",
     "numberofClusters": "Nombre de grappes"
   },
-  "clusterList":{
+  "clusterList": {
     "clusterName": "Nom du cluster",
     "numberOfStores": "Nombre de magasins"
   },
-  "message":{
+  "message": {
     "zoneSuccess": "Zone créée avec succès",
-    "emptyForm":"Bitte geben Sie die Details in das Formular ein",
-    "lengthTooShort":"Bitte geben sie mindestens 6 zeichen ein",
-    "zoneExists":"Désolé, la zone existe déjà",
-    "clusterSuccess1":"Cluster für Zone",
-    "clusterSuccess2":"wird erfolgreich erstellt",
-    "clusterExists":"Désolé le cluster existe déjà",
+    "emptyForm": "Bitte geben Sie die Details in das Formular ein",
+    "lengthTooShort": "Bitte geben sie mindestens 6 zeichen ein",
+    "zoneExists": "Désolé, la zone existe déjà",
+    "clusterSuccess1": "Cluster für Zone",
+    "clusterSuccess2": "wird erfolgreich erstellt",
+    "clusterExists": "Désolé le cluster existe déjà",
     "storeSuccess": "Boutique créée avec succès"
-    }
+  }
 }

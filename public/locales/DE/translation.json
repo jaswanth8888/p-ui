@@ -2,36 +2,43 @@
   "header": {
     "logIn": "Anmeldung",
     "logOut": "Ausloggen",
-    "title":"Einzelhandelsanwendung"
+    "title": "Einzelhandelsanwendung",
+    "home": "Accueil"
   },
-  "login":{
+  "login": {
     "signIn": "Einloggen",
     "userName": "Nutzername",
     "password": "Passwort",
     "invalidCredentials": "Benutzername / Kennwort ungültig"
   },
-  "welcome":{
+  "welcome": {
     "createZone": "ZONE ERSTELLEN",
     "createCluster": "CLUSTER ERSTELLEN",
     "createStore": "STORE ERSTELLEN",
     "viewZones": "ZONEN ANZEIGEN",
     "viewClusters": "CLUSTER ANZEIGEN"
   },
-  "zoneForm":{
-    "createZone":"Erstellen sie eine zone",
-    "zoneName":"Zonenname",
-    "pricePerUnit":"Preis pro einheit",
-    "save":"Speichern",
-    "noZoneMsg":"Bitte geben sie den zonennamen ein"
+  "zoneForm": {
+    "lengthTooShort": "Die Zone muss größer als 5 Buchstaben sein",
+    "requirements": "Bedarf",
+    "createZone": "Erstellen sie eine zone",
+    "zoneName": "Zonenname",
+    "pricePerUnit": "Preis pro einheit",
+    "save": "Speichern",
+    "noZoneMsg": "Bitte geben sie den zonennamen ein"
   },
-  "clusterForm":{
+  "clusterForm": {
+    "lengthTooShort": "Der Cluster muss größer als 5 Buchstaben sein",
+    "requirements": "Bedarf",
     "enterZone": "Zone eingeben",
     "selectZone": "Wählen sie zone",
-    "clusterName":"Clustername",
+    "clusterName": "Clustername",
     "taxRate": "Steuersatz",
-    "save":"Speichern"
+    "save": "Speichern"
   },
-  "storeForm":{
+  "storeForm": {
+    "lengthTooShort": "Der Name des Geschäfts muss aus mehr als 5 Buchstaben bestehen",
+    "requirements": "Bedarf",
     "enterZone": "Zone eingeben",
     "selectZone": "Wählen Sie zone",
     "enterCluster": "Cluster eingeben",
@@ -43,24 +50,22 @@
     "pinCode": "Geheimzahl",
     "submit": "einreichen"
   },
-  "zoneList":{
-    "zoneName":"Zonenname",
+  "zoneList": {
+    "zoneName": "Zonenname",
     "numberOfClusters": "Anzahl der cluster"
   },
-  "clusterList":{
-    "clusterName":"Clustername",
-    "numberOfStores":"Anzahl der geschäfte"
+  "clusterList": {
+    "clusterName": "Clustername",
+    "numberOfStores": "Anzahl der geschäfte"
   },
-
-  "message":{
+  "message": {
     "zoneSuccess": "Zone erfolgreich erstellt",
-    "emptyForm":"Bitte geben Sie die Details in das Formular ein",
-    "lengthTooShort":"Bitte geben sie mindestens 6 zeichen ein",
-    "zoneExists":"Sorry Zone existiert bereits",
-    "clusterSuccess1":"Cluster für Zone",
-    "clusterSuccess2":"wird erfolgreich erstellt",
-    "clusterExists":"Entschuldigung, Cluster existiert bereits",
+    "emptyForm": "Bitte geben Sie die Details in das Formular ein",
+    "lengthTooShort": "Bitte geben sie mindestens 6 zeichen ein",
+    "zoneExists": "Sorry Zone existiert bereits",
+    "clusterSuccess1": "Cluster für Zone",
+    "clusterSuccess2": "wird erfolgreich erstellt",
+    "clusterExists": "Entschuldigung, Cluster existiert bereits",
     "storeSuccess": "Store Erfolgreich erstellt"
-    }
-  
+  }
 }

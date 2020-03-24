@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getClusterList } from "../../redux/actions/RetailerActions";
-import { Table } from "@material-ui/core";
-import TableBody from "@material-ui/core/TableBody";
+import { Avatar, Box, Grid, Table } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
@@ -20,27 +19,48 @@ class ViewClusters extends Component {
   render() {
     const { t, i18n } = this.props;
     return (
-      <div className="container">
-        <br />
-        <br />
-        <br />
-        <br />
-        <TableContainer component={Paper}>
+      <div
+        className="box-container"
+        style={{ alignItems: "flex-start", marginTop: "150px" }}
+      >
+        <TableContainer component={Paper} style={{ width: "500px" }}>
           <Table size="small" aria-label="a dense table">
-            <TableHead>
+            <TableHead style={{ backgroundColor: "#673ab7" }}>
               <TableRow>
-                <TableCell>{t("clusterList.clusterName")}</TableCell>
-                <TableCell>{t("clusterList.numberOfStores")}</TableCell>
+                <TableCell
+                  style={{
+                    color: "#FFF",
+                    width: "250px",
+                    textAlign: "center"
+                  }}
+                >
+                  {t("clusterList.clusterName")}
+                </TableCell>
+                <TableCell
+                  style={{
+                    color: "#FFF",
+                    width: "250px",
+                    textAlign: "center"
+                  }}
+                >
+                  {t("clusterList.numberOfStores")}
+                </TableCell>
               </TableRow>
             </TableHead>
             <tbody>
               {Object.keys(this.props.clusterList).map(i => {
                 return (
                   <TableRow>
-                    <TableCell key={i} value={i}>
+                    <TableCell
+                      key={i}
+                      value={i}
+                      style={{ textAlign: "center" }}
+                    >
                       {i}
                     </TableCell>
-                    <TableCell>{this.props.clusterList[i]}</TableCell>
+                    <TableCell style={{ textAlign: "center" }}>
+                      {this.props.clusterList[i]}
+                    </TableCell>
                   </TableRow>
                 );
               })}

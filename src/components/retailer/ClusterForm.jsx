@@ -1,16 +1,35 @@
 import React, { Component } from "react";
 import {
+  Avatar,
+  Box,
   Grid,
   TextField,
   Typography,
   InputLabel,
   NativeSelect
 } from "@material-ui/core";
-import Button from "../atoms/Button";
 import { getZones, postCluster } from "../../redux/actions/RetailerActions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import StoreIcon from "@material-ui/icons/Store";
+import Button from "@material-ui/core/Button";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { makeStyles } from "@material-ui/core/styles";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
 import { withTranslation } from "react-i18next";
+
+const useStyles = makeStyles(theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2)
+  }
+}));
 
 class ClusterForm extends Component {
   constructor(props) {
@@ -51,63 +70,80 @@ class ClusterForm extends Component {
     if (this.state.isSubmitted && this.state.zone && this.state.clusterName) {
       return <Redirect to="/welcome" />;
     }
-
     const { t, i18n } = this.props;
-
     return (
-      <div>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: "110vh" }}
-        >
-          <Grid item xs={6}>
-            <form className="{classes.form}">
-              <Typography component="div" color="error" variant="p">
-                {this.state.isSubmitted && !this.state.clusterName && (
-                  <div className="help-block">
-                    {t("message.emptyForm")}
-                  </div>
-                )}
-                {this.state.isSubmitted &&
-                  this.state.clusterName &&
-                  this.state.clusterName.length < 5 && (
-                    <div className="help-block">
-                      {t("message.lengthtTooShort")}
-                    </div>
-                  )}
-                <br />
-              </Typography>
-              <InputLabel shrink htmlFor="zone">
-                {t("clusterForm.enterZone")}
-              </InputLabel>
-              <NativeSelect
-                ref="zone"
-                fullWidth
-                native
-                variant="outlined"
-                label={t("clusterForm.enterZone")}
-                value={this.state.zone}
-                onChange={this.handleChange}
-                inputProps={{
-                  name: "zone",
-                  id: "zone"
-                }}
-              >
-                <option value="">--{t("clusterForm.selectZone")}--</option>
-                {this.props.zones.map((zone, index) => {
-                  return (
-                    <option value={zone} key={index}>
-                      {zone}
-                    </option>
-                  );
-                })}
-              </NativeSelect>
-              <br />
-              <br />
+      <div className="box-container">
+        <div className="joint-form">
+          <div className="validation-half" style={{ background: "#673ab7" }}>
+            <div className="validations">
+              <h3 style={{ textAlign: "center" }}>
+                {t("clusterForm.requirements")}
+              </h3>
+              {this.state.clusterName.length <= 5 && (
+                <div style={{ display: "flex" }}>
+                  <ClearIcon
+                    style={{ paddingRight: "5px", marginTop: "-2px" }}
+                  />
+                  <Typography variant="subtitle2" gutterBottom>
+                    {t("clusterForm.lengthTooShort")}
+                  </Typography>
+                </div>
+              )}
+              {this.state.clusterName.length > 5 && (
+                <div style={{ display: "flex", color: "#ffc107" }}>
+                  <CheckIcon
+                    style={{ paddingRight: "5px", marginTop: "-2px" }}
+                  />
+                  <Typography variant="subtitle2" gutterBottom>
+                    {t("clusterForm.lengthTooShort")}
+                  </Typography>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="form-half">
+            <form className="{classes.form}" noValidate>
+              <div>
+                <div className="help-block">
+                  <Typography
+                    color="primary"
+                    component="h1"
+                    variant="h4"
+                    style={{
+                      fontFamily: "font-family: 'Open Sans', sans-serif;",
+                      position: "relative",
+                      top: "-20px"
+                    }}
+                  >
+                    {t("welcome.createCluster")}
+                  </Typography>
+                </div>
+              </div>
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel htmlFor="outlined-age-native-simple">
+                  {t("clusterForm.enterZone")}
+                </InputLabel>
+                <Select
+                  fullWidth
+                  native
+                  value={this.state.zone}
+                  onChange={this.handleChange}
+                  label="Zone"
+                  inputProps={{
+                    name: "zone",
+                    id: "zone"
+                  }}
+                >
+                  <option aria-label="None" value="" />
+                  {this.props.zones.map((zone, index) => {
+                    return (
+                      <option value={zone} key={index}>
+                        {zone}
+                      </option>
+                    );
+                  })}
+                </Select>
+              </FormControl>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -119,6 +155,9 @@ class ClusterForm extends Component {
                 autoComplete="clusterName"
                 onChange={this.handleChange}
                 value={this.state.clusterName}
+                style={{
+                  marginTop: "24px"
+                }}
                 autoFocus
               />
               <TextField
@@ -136,19 +175,21 @@ class ClusterForm extends Component {
                 value={this.state.taxRate}
                 autoFocus
               />
+
               <Button
                 type="button"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className="{classes.submit}"
+                style={{ marginTop: "30px" }}
                 onClick={this.handleSubmit}
               >
                 {t("clusterForm.save")}
               </Button>
             </form>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
       </div>
     );
   }

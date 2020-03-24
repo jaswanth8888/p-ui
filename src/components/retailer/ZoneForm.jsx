@@ -1,12 +1,14 @@
-import React, { Component } from "react";
-import { Grid, TextField,Typography,Box} from "@material-ui/core";
-import Button from "../atoms/Button";
-import PublicIcon from '@material-ui/icons/Public';
-import { connect } from 'react-redux';
-import { postZone } from '../../redux/actions/RetailerActions';
+import { Avatar, Box, Grid, TextField, Typography } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { postZone } from "../../redux/actions/RetailerActions";
+// import { Alert } from 'react-alert'
+import "./ZoneForm.css";
 import { withTranslation } from "react-i18next";
-
 
 class ZoneForm extends Component {
   constructor(props) {
@@ -14,8 +16,8 @@ class ZoneForm extends Component {
 
     this.state = {
       zoneName: "",
-      liquorPricePerUnit:"",
-      isSubmit:false
+      liquorPricePerUnit: "",
+      isSubmit: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,56 +30,76 @@ class ZoneForm extends Component {
   }
 
   handleSubmit(e) {
-
     e.preventDefault();
-    let zone = {zoneName:this.state.zoneName,
-                liquorPricePerUnit:this.state.liquorPricePerUnit
-    }
-    // this.props.postZone(zone)
+    let zone = {
+      zoneName: this.state.zoneName,
+      liquorPricePerUnit: this.state.liquorPricePerUnit
+    };
 
-    if(this.state.zoneName.length>5){
-      this.props.postZone(zone)
-      this.setState({isSubmit:true})
+    if (this.state.zoneName.length > 5) {
+      this.props.postZone(zone);
+      this.setState({ isSubmit: true });
+    } else {
+      this.setState({ isSubmit: false });
     }
-    else{
-      this.setState({isSubmit:false})
-    }
-    
-   }
+  }
 
   render() {
+    if (
+      this.state.isSubmit &&
+      this.state.zoneName.length > 5 &&
+      this.state.liquorPricePerUnit
+    ) {
+      return <Redirect to="/welcome" />;
+    }
     const { t, i18n } = this.props;
 
-    if(this.state.isSubmit && this.state.zoneName.length>5 && this.state.liquorPricePerUnit)
-    {
-      return <Redirect to="/welcome" />
-    }
     return (
-      <div>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: "100vh" }}
-        >
-          <Grid item xs={3}>
-            <Box diasplay="flex" flexDirection="row" justifyContent="center">
-              <Box  p={1}>
-              </Box>
-              <PublicIcon/>
-              <Typography component="h2" variant="h5">
-                {t("zoneForm.createZone")}
-              </Typography>
-            </Box>
-            
-            <form className="{classes.form}" noValidate>
-            <div>
-              { !this.state.zoneName && <div className="help-block">{t("zoneForm.noZoneMsg")}</div>}
-              {/* { !this.state.liquorPricePerUnit && <div className="help-block">Please enter Price per unit</div>} */}
-              {this.state.zoneName && this.state.zoneName.length<6 && <div className="help-block">{t("message.lengthTooShort")}</div>}
+      <div className="box-container">
+        <div className="joint-form">
+          <div className="validation-half" style={{ background: "#673ab7" }}>
+            <div className="validations">
+              <h3 style={{ textAlign: "center" }}>
+                {t("zoneForm.requirements")}
+              </h3>
+              {this.state.zoneName.length <= 5 && (
+                <div style={{ display: "flex" }}>
+                  <ClearIcon
+                    style={{ paddingRight: "5px", marginTop: "-2px" }}
+                  />
+                  <Typography variant="subtitle2" gutterBottom>
+                    {t("zoneForm.lengthTooShort")}
+                  </Typography>
+                </div>
+              )}
+              {this.state.zoneName.length > 5 && (
+                <div style={{ display: "flex", color: "#ffc107" }}>
+                  <CheckIcon
+                    style={{ paddingRight: "5px", marginTop: "-2px" }}
+                  />
+                  <Typography variant="subtitle2" gutterBottom>
+                    {t("zoneForm.lengthTooShort")}
+                  </Typography>
+                </div>
+              )}
             </div>
+          </div>
+          <div className="form-half">
+            <form className="{classes.form}" noValidate>
+              <div>
+                <div className="help-block">
+                  <Typography
+                    color="primary"
+                    component="h1"
+                    variant="h4"
+                    style={{
+                      fontFamily: "font-family: 'Open Sans', sans-serif;"
+                    }}
+                  >
+                    {t("zoneForm.createZone")}
+                  </Typography>
+                </div>
+              </div>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -111,19 +133,20 @@ class ZoneForm extends Component {
                 variant="contained"
                 color="primary"
                 className="{classes.submit}"
-                onClick={this.handleSubmit}>
+                style={{ marginTop: "30px" }}
+                onClick={this.handleSubmit}
+              >
                 {t("zoneForm.save")}
               </Button>
             </form>
-          </Grid>
-        </Grid>
-
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-const actionAsProps={
-  postZone : postZone
-}
+const actionAsProps = {
+  postZone: postZone
+};
 export default connect(null, actionAsProps)(withTranslation()(ZoneForm));

@@ -1,21 +1,28 @@
-import React, { Component } from "react";
 import {
+  Avatar,
+  Box,
   Grid,
-  TextField,
-  Typography,
-  Select,
   InputLabel,
-  NativeSelect
+  Select,
+  TextField,
+  Typography
 } from "@material-ui/core";
-import Button from "../atoms/Button";
-import {
-  getZones,
-  getClusters,
-  postStore
-} from "../../redux/actions/RetailerActions";
+import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import {
+  getClusters,
+  getZones,
+  postStore
+} from "../../redux/actions/RetailerActions";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
+import "./StoreForm.css";
 import { withTranslation } from "react-i18next";
+
 class StoreForm extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +75,6 @@ class StoreForm extends Component {
   }
 
   render() {
-    const { t, i18n } = this.props;
     if (
       this.state.isSubmitted &&
       this.state.storeName &&
@@ -80,84 +86,89 @@ class StoreForm extends Component {
     ) {
       return <Redirect to="/welcome" />;
     }
+    const { t, i18n } = this.props;
     return (
-      <div>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: "110vh" }}
-        >
-          <Grid item xs={6}>
-            <form className="{classes.form}">
-              <Typography component="div" color="error" variant="p">
-                {this.state.isSubmitted &&
-                  !this.state.storeName &&
-                  !this.state.zone &&
-                  !this.state.cluster &&
-                  !this.state.streetName &&
-                  !this.state.city &&
-                  !this.state.pin && (
-                    <div className="help-block">
-                      {t("message.emptyForm")}
-                    </div>
-                  )}
-                <br />
-              </Typography>
-              <InputLabel shrink htmlFor="zone">
-                {t("storeForm.enterZone")}
-              </InputLabel>
-              <NativeSelect
-                ref="zone"
-                fullWidth
-                native
+      <div className="box-container store-form">
+        <div className="joint-form" style={{ width: "850px" }}>
+          <Typography
+            color="primary"
+            component="h1"
+            variant="h4"
+            style={{
+              fontFamily: "font-family: 'Open Sans', sans-serif;",
+              position: "absolute",
+              top: "210px",
+              left: "30px"
+            }}
+          >
+            {t("welcome.createStore")}
+          </Typography>
+          {/* <div className="validation-half" style={{ background: "#673ab7" }}>
+            <div className="validations">
+
+            </div>
+          </div> */}
+          <div className="form-first-half">
+            <form className="{classes.form}" noValidate>
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel htmlFor="outlined-age-native-simple">
+                  {t("storeForm.enterZone")}
+                </InputLabel>
+                <Select
+                  ref="zone"
+                  fullWidth
+                  native
+                  value={this.state.zone}
+                  onChange={this.handleChangeZone}
+                  label="Enter Zone"
+                  inputProps={{
+                    name: "zone",
+                    id: "zone"
+                  }}
+                >
+                  <option aria-label="None" value="" />
+                  {this.props.zones.map((zone, index) => {
+                    return (
+                      <option value={zone} key={index}>
+                        {zone}
+                      </option>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+              <br />
+              <br />
+
+              <FormControl
                 variant="outlined"
-                label={t("storeForm.enterZone")}
-                value={this.state.zone}
-                onChange={this.handleChangeZone}
-                inputProps={{
-                  name: "zone",
-                  id: "zone"
-                }}
-              >
-                <option value="">--{t("storeForm.selectZone")}--</option>
-                {this.props.zones.map((zone, index) => {
-                  return (
-                    <option value={zone} key={index}>
-                      {zone}
-                    </option>
-                  );
-                })}
-              </NativeSelect>
-              <br />
-              <br />
-              <InputLabel shrink htmlFor="cluster">
-                {t("storeForm.enterCluster")}
-              </InputLabel>
-              <Select
-                ref="cluster"
                 fullWidth
-                native
-                label={t("storeForm.enterCluster")}
-                value={this.state.cluster}
-                onChange={this.handleChange}
-                // name="cluster"
-                inputProps={{
-                  name: "cluster",
-                  id: "cluster"
-                }}
+                style={{ marginBottom: "10px" }}
               >
-                <option value="">--{t("storeForm.selectCluster")}--</option>
-                {this.props.clusters.map((cluster, index) => {
-                  return (
-                    <option value={cluster} key={index}>
-                      {cluster}
-                    </option>
-                  );
-                })}
-              </Select>
+                <InputLabel htmlFor="outlined-age-native-simple">
+                  {t("storeForm.enterCluster")}
+                </InputLabel>
+                <Select
+                  ref="cluster"
+                  fullWidth
+                  native
+                  value={this.state.cluster}
+                  onChange={this.handleChange}
+                  label="Enter Cluster"
+                  inputProps={{
+                    name: "cluster",
+                    id: "cluster"
+                  }}
+                >
+                  <option aria-label="None" value="" />
+                  {this.props.clusters.map((cluster, index) => {
+                    return (
+                      <option value={cluster} key={index}>
+                        {cluster}
+                      </option>
+                    );
+                  })}
+                </Select>
+              </FormControl>
               <TextField
                 ref="storeName"
                 variant="outlined"
@@ -172,64 +183,116 @@ class StoreForm extends Component {
                 value={this.state.storeName}
                 autoFocus
               />
-              <Grid>
-                <Typography component="h3" variant="h5">
-                  {t("storeForm.address")}:
-                </Typography>
-                <TextField
-                  ref="streetName"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="streetName"
-                  label={t("storeForm.streetName")}
-                  autoComplete="streetName"
-                  id="streetName"
-                  onChange={this.handleChange}
-                  value={this.state.streetName}
-                />
-                <TextField
-                  ref="city"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="city"
-                  label={t("storeForm.city")}
-                  id="city"
-                  onChange={this.handleChange}
-                  autoComplete="city"
-                  value={this.state.city}
-                />
-                <TextField
-                  ref="pin"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="pin"
-                  label={t("storeForm.pinCode")}
-                  type="number"
-                  id="pin"
-                  onChange={this.handleChange}
-                  autoComplete="pin"
-                  value={this.state.pin}
-                />
-              </Grid>
               <Button
                 type="button"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className="{classes.submit}"
+                style={{
+                  marginTop: "30px",
+                  pointerEvents: "none",
+                  opacity: "0"
+                }}
                 onClick={this.handleSubmit}
               >
-                {t("storeForm.submit")}
+                Save
               </Button>
             </form>
-          </Grid>
-        </Grid>
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className="{classes.submit}"
+              id="store-submit-btn"
+              style={{ marginTop: "30px" }}
+              onClick={this.handleSubmit}
+            >
+              {t("storeForm.submit")}
+            </Button>
+          </div>
+          <div className="form-second-half">
+            <form className="{classes.form}" noValidate>
+              <TextField
+                ref="streetName"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="streetName"
+                label={t("storeForm.streetName")}
+                autoComplete="streetName"
+                id="streetName"
+                onChange={this.handleChange}
+                value={this.state.streetName}
+              />
+              <TextField
+                ref="city"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="city"
+                label={t("storeForm.city")}
+                id="city"
+                onChange={this.handleChange}
+                autoComplete="city"
+                value={this.state.city}
+              />
+              <TextField
+                ref="pin"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="pin"
+                label={t("storeForm.pinCode")}
+                type="number"
+                id="pin"
+                onChange={this.handleChange}
+                autoComplete="pin"
+                value={this.state.pin}
+              />
+              <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className="{classes.submit}"
+                style={{
+                  marginTop: "30px",
+                  pointerEvents: "none",
+                  opacity: "0"
+                }}
+                onClick={this.handleSubmit}
+              >
+                Save
+              </Button>
+            </form>
+          </div>
+          <div className="store-requirement">
+            <h3 style={{ textAlign: "center" }}>
+              {t("storeForm.requirements")}
+            </h3>
+            {this.state.storeName.length <= 5 && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  {t("storeForm.lengthTooShort")}
+                </Typography>
+              </div>
+            )}
+            {this.state.storeName.length > 5 && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  {t("storeForm.lengthTooShort")}
+                </Typography>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     );
   }

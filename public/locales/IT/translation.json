@@ -46,5 +46,56 @@
   },
   "Zone Created Succesfully": {
     "1": "Zona creata con successo"
+  },
+  "Sorry please enter the details in the form": {
+    "1": "Spiacenti, inserisci i dettagli nel modulo"
+  },
+  "Enter Zone": {
+    "1": "Entra nella zona"
+  },
+  "Select Zone": {
+    "1": "Seleziona la zona"
+  },
+  "Enter Cluster": {
+    "1": "Immettere il cluster"
+  },
+  "Select cluster": {
+    "1": "Seleziona il cluster"
+  },
+  "Store Name": {
+    "1": "Nome del negozio"
+  },
+  "Address": {
+    "1": "Indirizzo"
+  },
+  "Street name": {
+    "1": "nome della strada"
+  },
+  "City": {
+    "1": "Città"
+  },
+  "Pin-code": {
+    "1": "Codice PIN"
+  },
+  "Submit": {
+    "1": "Invia"
+  },
+  "Tax Rate": {
+    "1": "Aliquota fiscale"
+  },
+  "Save": {
+    "1": "Salva"
+  },
+  "Price Per Unit": {
+    "1": "Prezzo per unità"
+  },
+  "Create a Zone": {
+    "1": "Crea una zona"
+  },
+  "Please enter zone name": {
+    "1": "Inserisci il nome della zona"
+  },
+  "Please enter minimum 6 characters": {
+    "1": "Inserisci almeno 6 caratteri"
   }
 }
