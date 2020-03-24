@@ -68,7 +68,7 @@ class StoreForm extends Component {
       return <Redirect to='/welcome' />
     }
     return (
-      <div className="box-container">
+      <div className="box-container store-form">
 
         <div className="joint-form" style={{ width: "850px" }}>
           <Typography
@@ -82,7 +82,7 @@ class StoreForm extends Component {
               top: "210px",
               left: "30px"
             }}>
-            Create a cluster
+            Create Store
                 </Typography>
           {/* <div className="validation-half" style={{ background: "#673ab7" }}>
             <div className="validations">

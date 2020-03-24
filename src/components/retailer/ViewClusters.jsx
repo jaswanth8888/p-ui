@@ -19,43 +19,25 @@ class ViewClusters extends Component {
     render() {
 
         return (
-
-            <div className="container">
-                <Grid
-                    container
-                    spacing={0}
-                    direction="column"
-                    alignItems="center"
-                    justify="center"
-                    style={{ minHeight: "110vh", marginTop: "-200px" }}
-
-                >
-
-                    <Grid item xs={3} style={{
-                        borderRadius: "4px",
-                        padding: "40px",
-                        position: "relative"
-                    }}>
-                        <TableContainer component={Paper}>
-                            <Table size="small" aria-label="a dense table">
-                                <TableHead style = {{ backgroundColor : "#C60078"}}>
-                                    <TableRow>
-                                        <TableCell style={{color:"#FFF"}}>Cluster Name</TableCell>
-                                        <TableCell style={{color:"#FFF"}}>Number of Stores</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <tbody>
-                                    {Object.keys(this.props.clusterList).map((i) => {
-                                        return <TableRow>
-                                            <TableCell key={i} value={i}>{i}</TableCell>
-                                            <TableCell>{this.props.clusterList[i]}</TableCell>
-                                        </TableRow>
-                                    })}
-                                </tbody>
-                            </Table>
-                        </TableContainer>
-                    </Grid>
-                </Grid>
+            <div className="box-container" style = {{alignItems : "flex-start" , marginTop : "150px"}}>
+                <TableContainer component={Paper} style = {{width:"500px"}}>
+                    <Table size="small" aria-label="a dense table">
+                        <TableHead style={{ backgroundColor: "#673ab7" }}>
+                            <TableRow>
+                                <TableCell style={{ color: "#FFF", width:"250px", textAlign : "center" }}>Cluster Name</TableCell>
+                                <TableCell style={{ color: "#FFF", width:"250px", textAlign : "center"}}>Number of Stores</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <tbody>
+                            {Object.keys(this.props.clusterList).map((i) => {
+                                return <TableRow>
+                                    <TableCell key={i} value={i} style = {{ textAlign : "center"}}>{i}</TableCell>
+                                    <TableCell style = {{ textAlign : "center"}}>{this.props.clusterList[i]}</TableCell>
+                                </TableRow>
+                            })}
+                        </tbody>
+                    </Table>
+                </TableContainer>
             </div>
         )
     }

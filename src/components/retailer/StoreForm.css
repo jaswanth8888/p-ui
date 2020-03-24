@@ -89,3 +89,7 @@
 p{
     font-size: 15px;
 }
+
+.store-form input{
+    width: 130px !important
+}
