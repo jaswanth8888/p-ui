@@ -10,9 +10,9 @@ export const ZONE_GET_REQUEST = "ZONE_GET_REQUEST";
 export const CLUSTER_GET_REQUEST = "CLUSTER_GET_REQUEST";
 export const STORE_POST_REQUEST = "STORE_POST_REQUEST";
 export const FAILURE = "FAILURE";
-// export const RETAILER_BASE_URL = "http://10.150.223.216:8765";
+export const RETAILER_BASE_URL = "http://10.150.222.113:8765";
 // export const RETAILER_BASE_URL = "http://10.102.134.68:8765";
-export const RETAILER_BASE_URL = "http://localhost:8765";
+// export const RETAILER_BASE_URL = "http://localhost:8765";
 
 //export const RETAILER_URL = "http://10.150.223.216:9300";
 export const RETAILER_URL = "http://localhost:9300";

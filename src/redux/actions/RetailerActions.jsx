@@ -75,7 +75,7 @@ export const getZoneList = () => async (dispatch) => {
 }
 
 export const getClusterList = () => async (dispatch) => {
-    await axios.get(RETAILER_BASE_URL + '/location-management/cluster',{ headers: {"Authorization" : TOKEN} }).then((res)=>{
+    await axios.get(RETAILER_BASE_URL + '/location-management/cluster-map',{ headers: {"Authorization" : TOKEN} }).then((res)=>{
         
         dispatch({type:CLUSTERLIST_GET_REQUEST, clusterList:res.data})
     });
