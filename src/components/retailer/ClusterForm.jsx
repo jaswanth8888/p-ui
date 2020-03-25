@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component , Fragment} from 'react'
 import { Avatar, Box, Grid, TextField, Typography, InputLabel, NativeSelect } from "@material-ui/core";
 import { getZones, postCluster } from '../../redux/actions/RetailerActions'
 import { connect } from 'react-redux';
@@ -33,7 +33,8 @@ class ClusterForm extends Component {
       zone: "",
       clusterName: "",
       taxRate: "",
-      isSubmitted: false
+      isSubmitted: false,
+      status : 0
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -58,6 +59,10 @@ class ClusterForm extends Component {
     this.setState({ isSubmitted: true })
     if (this.state.clusterName.length > 6) {
       this.props.postCluster(cluster, this.state.zone)
+      this.setState({ status : 1 })
+    }
+    else{
+      this.setState({  status : -1 })
     }
   }
 
@@ -70,14 +75,14 @@ class ClusterForm extends Component {
           <div className="validation-half" style={{ background: "#673ab7" }}>
             <div className="validations">
               <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {this.state.clusterName.length <= 5  && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              {this.state.clusterName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
                   Cluster has to be greater than 5 letters
               </Typography></div>}
               {this.state.clusterName.length > 5 &&
                 <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                   <Typography variant="subtitle2" gutterBottom>
-                  Cluster has to be greater than 5 letters
+                    Cluster has to be greater than 5 letters
               </Typography></div>}
             </div>
           </div>
@@ -92,8 +97,8 @@ class ClusterForm extends Component {
                     style=
                     {{
                       fontFamily: "font-family: 'Open Sans', sans-serif;",
-                      position : "relative",
-                      top:"-20px"
+                      position: "relative",
+                      top: "-20px"
                     }}>
                     Create a cluster
                 </Typography>
@@ -163,16 +168,31 @@ class ClusterForm extends Component {
             </form>
           </div>
         </div>
-        {(this.state.isSubmitted && this.state.zone && this.state.clusterName) ? (
-          <div>
-            <Snackbar open="true" autoHideDuration={2000}>
-              <MuiAlert elevation={6} variant="filled"> 
-                Store created successfully! 
-              </MuiAlert>
-            </Snackbar>
-          </div>
-        ) : (<div />)
-        }
+        <Fragment>
+
+          {(this.state.status === 1) ? (
+            <div>
+              <Snackbar open="true" autoHideDuration={2000}>
+                <MuiAlert elevation={6} variant="filled">
+                  Zone created successfully!
+            </MuiAlert>
+              </Snackbar>
+            </div>
+          ) : (<div />)}
+        </Fragment>
+        <Fragment>
+          {(this.state.status === -1) ? (
+            <div>
+              <Snackbar open="true" autoHideDuration={2000}>
+                <MuiAlert severity="error" elevation={6} variant="filled">
+                  Zone creation failed. Please match the requirements
+                </MuiAlert>
+              </Snackbar>
+            </div>) : (<div />)
+          }
+        </Fragment>
+
+
       </div>
     )
   }

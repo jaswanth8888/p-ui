@@ -20,7 +20,8 @@ class ZoneForm extends Component {
     this.state = {
       zoneName: "",
       liquorPricePerUnit: "",
-      isSubmit: false
+      isSubmit: false,
+      status : 0
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -43,10 +44,10 @@ class ZoneForm extends Component {
 
     if (this.state.zoneName.length > 5) {
       this.props.postZone(zone)
-      this.setState({ isSubmit: true })
+      this.setState({ isSubmit: true ,status : 1})
     }
     else {
-      this.setState({ isSubmit: false })
+      this.setState({ isSubmit: false, status : -1 })
     }
 
   }
@@ -126,16 +127,29 @@ class ZoneForm extends Component {
             </form>
           </div>
         </div>
-        {(this.state.isSubmit && this.state.zoneName.length > 5 && this.state.liquorPricePerUnit) ? (
-          <div>
-            <Snackbar open="true" autoHideDuration={2000}>
-              <MuiAlert elevation={6} variant="filled"> 
-                Zone created successfully! 
-              </MuiAlert>
-            </Snackbar>
-          </div>
-        ) : (<div />)
-        }
+        <Fragment>
+
+          {(this.state.status === 1) ? (
+            <div>
+              <Snackbar open="true" autoHideDuration={2000}>
+                <MuiAlert elevation={6} variant="filled">
+                  Zone created successfully!
+            </MuiAlert>
+              </Snackbar>
+            </div>
+          ) : (<div />)}
+        </Fragment>
+        <Fragment>
+          {(this.state.status === -1) ? (
+            <div>
+              <Snackbar open="true" autoHideDuration={2000}>
+                <MuiAlert severity="error" elevation={6} variant="filled"> 
+                  Zone creation failed. Please match the requirements
+                </MuiAlert>
+              </Snackbar>
+            </div>) : (<div />)
+          }
+        </Fragment>
       </div>
     );
   }

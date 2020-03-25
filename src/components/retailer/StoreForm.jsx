@@ -2,7 +2,7 @@ import { Avatar, Box, Grid, InputLabel, Select, TextField, Typography } from "@m
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import React, { Component } from 'react';
+import React, { Component , Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { getClusters, getZones, postStore } from '../../redux/actions/RetailerActions';
@@ -24,8 +24,8 @@ class StoreForm extends Component {
       storeName: "",
       city: "",
       streetName: "",
-      pin: ""
-
+      pin: "",
+      status : 0
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -62,7 +62,8 @@ class StoreForm extends Component {
     let storeName = this.state.storeName;
     let store = { storeName, address }
     this.props.postStore(store, this.state.zone, this.state.cluster);
-    this.setState({ isSubmitted: true })
+    this.setState({ isSubmitted: true ,  status : 1 })
+
   }
 
   render() {
@@ -238,16 +239,30 @@ class StoreForm extends Component {
               
           </div>
         </div>
-        {(this.state.isSubmitted && this.state.storeName && this.state.zone && this.state.cluster && this.state.streetName && this.state.city && this.state.pin) ? (
-          <div>
-            <Snackbar open="true" autoHideDuration={2000}>
-              <MuiAlert elevation={6} variant="filled">
-                Cluster created successfully!
-              </MuiAlert>
-            </Snackbar>
-          </div>
-        ) : (<div />)
-        }
+        <Fragment>
+
+          {(this.state.status === 1) ? (
+            <div>
+              <Snackbar open="true" autoHideDuration={2000}>
+                <MuiAlert elevation={6} variant="filled">
+                  Zone created successfully!
+            </MuiAlert>
+              </Snackbar>
+            </div>
+          ) : (<div />)}
+        </Fragment>
+        <Fragment>
+          {(this.state.status === -1) ? (
+            <div>
+              <Snackbar open="true" autoHideDuration={2000}>
+                <MuiAlert severity="error" elevation={6} variant="filled">
+                  Zone creation failed. Please match the requirements
+                </MuiAlert>
+              </Snackbar>
+            </div>) : (<div />)
+          }
+        </Fragment>
+
       </div>
     )
   }
