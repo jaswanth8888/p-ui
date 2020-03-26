@@ -35,9 +35,11 @@ class AddGroup extends Component {
   is_validGroupName = () => {
     if (this.state.group.groupName.length > 0) {
       this.setState({ status: 1 })
+      
     }
     else {
       this.setState({ status: -1 })
+      return false
     }
 
     return true
