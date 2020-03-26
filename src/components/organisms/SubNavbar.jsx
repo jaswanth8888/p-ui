@@ -1,13 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import PrivateRoute from '../utils/privateRoute';
-import Welcome from '../retailer/Welcome.jsx';
+import { makeStyles } from '@material-ui/core/styles';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
+import React from 'react';
+import AddGroup from '../retailer/AddGroup.jsx';
 import ClusterForm from '../retailer/ClusterForm.jsx';
 import StoreForm from '../retailer/StoreForm.jsx';
 import ViewClusters from '../retailer/ViewClusters.jsx';
@@ -37,13 +35,6 @@ TabPanel.propTypes = {
     value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-    return {
-        id: `vertical-tab-${index}`,
-        'aria-controls': `vertical-tabpanel-${index}`,
-    };
-}
-
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -66,7 +57,6 @@ export default function VerticalTabs() {
 
     return (
         <div className={classes.root} style={{
-            height: "100%",
             position: "relative",
             zIndex: "100",
             height: "100vh"
@@ -79,27 +69,33 @@ export default function VerticalTabs() {
                 aria-label="Vertical tabs example"
                 className={classes.tabs}
             >
+                <Tab label = "Add Group" />
                 <Tab label="Create Zone" />
                 <Tab label="Create Cluster" />
                 <Tab label="Create Store" />
                 <Tab label="View Zones" />
                 <Tab label="View Clusters" />
+                
             </Tabs>
             <TabPanel value={value} index={0}>
-                <ZoneForm />
+                <AddGroup />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <ClusterForm />
+                <ZoneForm />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <StoreForm />
+                <ClusterForm />
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <ViewZones />
+                <StoreForm />
             </TabPanel>
             <TabPanel value={value} index={4}>
+                <ViewZones />
+            </TabPanel>
+            <TabPanel value={value} index={5}>
                 <ViewClusters />
             </TabPanel>
+            
             {/* <Switch>
 
                 <PrivateRoute exact={true} path="/zonepage" component={ZoneForm} />

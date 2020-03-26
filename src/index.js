@@ -2,7 +2,6 @@ import { createMuiTheme, MuiThemeProvider, responsiveFontSizes } from '@material
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import amber from '@material-ui/core/colors/amber';
 
@@ -26,4 +25,3 @@ ReactDOM.render(
 
 );
 
-serviceWorker.unregister();

@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { getZoneList } from '../../redux/actions/RetailerActions'
-import { Avatar, Box, Grid, Table } from '@material-ui/core';
+import { Table } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getZoneList } from '../../redux/actions/RetailerActions';
 
 class ViewZones extends Component {
     constructor(props) {
