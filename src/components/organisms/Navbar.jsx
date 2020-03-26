@@ -1,17 +1,18 @@
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
-import { withStyles, responsiveFontSizes } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { logout } from "../../redux/actions/RetailerActions";
+import Login from "../Login";
 import Welcome from "../retailer/Welcome.jsx";
 import PrivateRoute from "../utils/privateRoute";
-import Login from "../Login";
+
 import ReactFlagsSelect from "react-flags-select";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
@@ -59,7 +60,7 @@ const StyledTab = withStyles({
   }
 })(Tab);
 
-function Navbar() {
+function Navbar(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -88,11 +89,10 @@ function Navbar() {
               style={{ marginLeft: "auto" }}
               label={t("header.logOut")}
               {...a11yProps(2)}
-              component={Link}
-              to="/"
               onClick={() => {
                 sessionStorage.removeItem("token");
                 sessionStorage.removeItem("reduxstate");
+                props.logout();
               }}
             />
           </Tabs>

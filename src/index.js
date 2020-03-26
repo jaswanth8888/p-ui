@@ -6,7 +6,6 @@ import {
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 import deepPurple from "@material-ui/core/colors/deepPurple";
 import amber from "@material-ui/core/colors/amber";
 import "./i18n";
@@ -31,5 +30,3 @@ ReactDOM.render(
   </Suspense>,
   document.getElementById("root")
 );
-
-serviceWorker.unregister();

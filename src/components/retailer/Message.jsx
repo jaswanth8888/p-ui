@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import connect from 'react-redux/es/connect/connect'
 import {messageSetNull} from '../../redux/actions/RetailerActions'
-import { /* Grid, TextField,Avatar, */Typography} from "@material-ui/core";
+import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+
+
 class Message extends Component {
     constructor(props) {
         super(props)
@@ -11,27 +14,30 @@ class Message extends Component {
         }
     }
 
-    componentDidMount(){
-        
-        
-        setTimeout(()=>{
+    closeAlert=()=>{
             this.props.messageSetNull()
-        },5000)
     }
 
     render() {
         return (
-            <div>
-                <Typography component="div" color="primary" variant="h6">
-                {this.props.msg}
-              </Typography>
-            </div>
+            <>
+                {this.props.msg!=='' ?
+              (<Snackbar open="true" onClose={this.closeAlert} autoHideDuration={6000}
+              anchorOrigin={{ vertical:'top', horizontal:'right' }}
+               >
+                <MuiAlert severity={this.props.msgSeverity} elevation={6} variant="filled" onClose={this.closeAlert} >
+                  {this.props.msg}
+                </MuiAlert>
+              </Snackbar>): ''
+    }
+            </>
         )
     }
 }
 
 const stateAsProps = (store) => ({
-    msg: store.RetailerReducer.msg
+    msg: store.RetailerReducer.msg,
+    msgSeverity: store.RetailerReducer.msgSeverity
 });
 const actionsAsProps = {
     messageSetNull: messageSetNull

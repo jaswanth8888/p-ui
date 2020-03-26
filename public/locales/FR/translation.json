@@ -1,4 +1,6 @@
 {
+  "please fill username": "veuillez remplir le nom d'utilisateur",
+  "please fill password": "veuillez remplir le mot de passe",
   "header": {
     "logIn": "s'identifier",
     "logOut": "Se déconnecter",
@@ -16,7 +18,9 @@
     "createCluster": "CRÉER UN CLUSTER",
     "createStore": "CRÉER UN MAGASIN",
     "viewZones": "VOIR LES ZONES",
-    "viewClusters": "VOIR LES CLUSTERS"
+    "viewClusters": "VOIR LES CLUSTERS",
+    "addGroup": "Ajouter un groupe",
+    "addProducttoStore": "Ajouter un produit au magasin"
   },
   "zoneForm": {
     "lengthTooShort": "La zone doit être supérieure à 5 lettres",

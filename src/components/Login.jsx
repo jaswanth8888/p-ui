@@ -7,8 +7,9 @@ import PersonIcon from "@material-ui/icons/Person";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { login } from "../redux/actions/RetailerActions.jsx";
-import { spacing } from "@material-ui/system";
+import md5 from "md5";
 import { withTranslation } from "react-i18next";
+import i18n from "i18next";
 
 class Login extends Component {
   constructor(props) {
@@ -37,12 +38,11 @@ class Login extends Component {
     this.setState({ user_crendentials });
   }
   is_validUsername = () => {
-    console.log("entered valid username");
     let username = this.state.user_crendentials.username;
     let error = this.state.error;
     if (username === "") {
       error.usernameError = true;
-      error.usernameErrorMsg = "please fill username";
+      error.usernameErrorMsg = i18n.t("please fill username");
       this.setState({ error });
       return false;
     }
@@ -57,26 +57,24 @@ class Login extends Component {
     let error = this.state.error;
     if (password === "") {
       error.passwordError = true;
-      error.passwordErrorMsg = "please fill password";
+      error.passwordErrorMsg = i18n.t("please fill password");
       this.setState({ error });
       return false;
     }
     error.passwordError = false;
     error.passwordErrorMsg = "";
     this.setState({ error });
-
     return true;
   };
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(
-      "handle submit",
-      this.is_validPassword(),
-      this.is_validUsername()
-    );
-    if (this.is_validUsername() && this.is_validPassword()) {
-      this.props.login({ ...this.state.user_crendentials }); // thunk action
+    let u = this.is_validUsername();
+    let p = this.is_validPassword();
+    if (u && p) {
+      let user_crendentials = { ...this.state.user_crendentials };
+      user_crendentials.password = md5(user_crendentials.password);
+      this.props.login({ ...user_crendentials }); // thunk action
     }
   }
   isAuthenticated() {
@@ -87,9 +85,9 @@ class Login extends Component {
   render() {
     const { t, i18n } = this.props;
     return (
-      <div>
+      <React.Fragment>
         {this.props.login_status.success ? (
-          (window.location.href = "/welcome")
+          this.props.history.push("/welcome")
         ) : (
           <Grid
             container
@@ -152,12 +150,11 @@ class Login extends Component {
                     fontFamily: "font-family: 'Open Sans', sans-serif;"
                   }}
                 >
-                  {t("header.logOut")}
+                  {t("header.logIn")}
                 </Typography>
                 <Typography component="span" color="error" variant="h5">
                   {this.props.login_status.errorMsg}
                 </Typography>
-                {/* {this.props.login_status['errorMsg']} */}
               </Box>
               <form
                 className="{classes.form}"
@@ -223,13 +220,13 @@ class Login extends Component {
                   onClick={this.handleSubmit}
                   style={{ marginTop: "30px" }}
                 >
-                  {t("login.signIn")}
+                  {t("header.logIn")}
                 </Button>
               </form>
             </Grid>
           </Grid>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }

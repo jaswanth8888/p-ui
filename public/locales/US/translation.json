@@ -1,22 +1,26 @@
 {
+  "please fill username": "please fill username",
+  "please fill password": "please fill password",
   "header": {
-    "logIn": "Log in",
+    "logIn": "Login",
     "logOut": "Log out",
     "title": "Retail Application",
     "home": "HOME"
   },
   "login": {
-    "signIn": "Einloggen",
-    "userName": "Nutzername",
-    "password": "Passwort",
-    "invalidCredentials": "Benutzername / Kennwort ungültig"
+    "signIn": "Sign In",
+    "userName": "User Name",
+    "password": "Password",
+    "invalidCredentials": "Invalid username/Password"
   },
   "welcome": {
     "createZone": "CREATE ZONE",
     "createCluster": "CREATE CLUSTER",
     "createStore": "CREATE STORE",
     "viewZones": "VIEW ZONES",
-    "viewClusters": "VIEW CLUSTERS"
+    "viewClusters": "VIEW CLUSTERS",
+    "addGroup": "Add Group",
+    "addProducttoStore": "Add Product to Store"
   },
   "zoneForm": {
     "lengthTooShort": "Zone has to be greater than 5 letters",
