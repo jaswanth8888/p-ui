@@ -7,6 +7,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import { postGroup } from "../../redux/actions/RetailerActions.jsx";
+import Message from "./Message"
 
 
 class AddGroup extends Component {
@@ -26,7 +27,6 @@ class AddGroup extends Component {
   handleChange(e) {
     const { name, value } = e.target;
     let group = this.state.group;
-    console.log(group, name, value)
     group[name] = value;
     this.setState({ group });
   }
@@ -111,18 +111,7 @@ class AddGroup extends Component {
             </form>
           </div>
         </div>
-        <Fragment>
 
-          {(this.state.status === 1) ? (
-            <div>
-              <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert elevation={6} variant="filled">
-                  Group created successfully!
-                </MuiAlert>
-              </Snackbar>
-            </div>
-          ) : (<div />)}
-        </Fragment>
         <Fragment>
           {(this.state.status === -1) ? (
             <div>
@@ -134,8 +123,7 @@ class AddGroup extends Component {
             </div>) : (<div />)
           }
         </Fragment>
-
-
+        <Message/> 
       </div>
     )
   }

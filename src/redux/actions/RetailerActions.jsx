@@ -86,9 +86,9 @@ export const getClusterList = () => async (dispatch) => {
 
 export const postGroup = (groupDetails) =>async (dispatch) => {
     await axios.post(RETAILER_BASE_URL + '/group-management/group', groupDetails, {headers: { "Authorization":TOKEN}}).then((res) => {
-        dispatch({type:CREATE_ZONE, msg:"Group Created Succesfully"}) 
+        dispatch({type:CREATE_ZONE, msg:"Group Created Succesfully",msgSeverity:"success"}) 
     }).catch((err)=>{
-        dispatch({type:CREATE_ZONE, msg:"Sorry Group already exists"}) 
+        dispatch({type:CREATE_ZONE, msg:"Sorry Group already exists",msgSeverity:"error"}) 
     });
     
 }

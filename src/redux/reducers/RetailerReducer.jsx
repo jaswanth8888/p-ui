@@ -5,6 +5,7 @@ const initialState = {
     zones:[],
     clusters:[],
     msg:'',
+    msgSeverity:'',
     login_status:{
         success:false
     },
@@ -30,11 +31,11 @@ export default (state = initialState, action = {}) => {
         case FAILURE:
             return {...state,login_status:action.login_status}
         case MESSAGE_SET_NULL:
-            return {...state,msg:''}
+            return {...state,msg:'',msgSeverity:''}
         case LOGIN_FAILURE:
             return {...state,login_status:action.login_status}
         case CREATE_ZONE:
-            return { ...state, msg:action.msg}
+            return { ...state, msg:action.msg,msgSeverity:action.msgSeverity}
         case CREATE_CLUSTER:
             return {...state, msg:action.msg}
         case ZONELIST_GET_REQUEST:
