@@ -85,7 +85,7 @@ class Login extends Component {
     return (
       <div>
         {this.props.login_status.success ? (
-          (window.location.href = "/welcome")
+          (this.props.history.push("/welcome"))
         ) : (
           <Grid
             container
