@@ -1,5 +1,6 @@
-import { InputLabel, Select, Table } from "@material-ui/core";
+import { InputLabel, Select, Table, TextField, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
@@ -82,8 +83,8 @@ class AddProducts extends Component {
                     //pValue.quantityAssigned=quantity;
                     // this.setState({ object: { productName: pValue.productName } })
                     // this.setState({ object: { quantityAssigned: quantity } })
-                    this.state.object.productName=pValue.productName;
-                    this.state.object.quantityAssigned=quantity;
+                    this.state.object.productName = pValue.productName;
+                    this.state.object.quantityAssigned = quantity;
 
 
                     //console.log(this.state.object)
@@ -97,8 +98,8 @@ class AddProducts extends Component {
     render() {
         return (
 
-            <div className="box-container" style={{ justifyContent: 'flex-start' , flexDirection : "column" }}>
-                <div className="product-form-header" style={{ width: "95%", margin: "40px" , marginBottom : "0px" }}>
+            <div className="box-container" style={{ justifyContent: 'flex-start', flexDirection: "column" }}>
+                <div className="product-form-header" style={{ width: "95%", margin: "40px", marginBottom: "0px" }}>
                     <FormControl variant="outlined" fullWidth>
                         <InputLabel htmlFor="category">
                             Enter Category
@@ -123,18 +124,19 @@ class AddProducts extends Component {
                         </Select>
                     </FormControl>
                 </div>
-                <div className="product-form-body" style={{ width: "95%", margin: "40px" , marginBottom : "0px" }}>
+                <div className="product-form-body" style={{ width: "95%", margin: "40px", marginBottom: "0px" }}>
                     <form id="productform">
                         <TableContainer component={Paper}>
-                            <Table  aria-label="a dense table">
-                                <TableHead style={{ backgroundColor: "#673ab7" ,color:"white"}}>
+                            <Table  size="small" aria-label="a dense table">
+                                <TableHead style={{ backgroundColor: "#673ab7", color: "white" }}>
                                     <TableRow>
                                         {/* <TableCell>CheckBox</TableCell> */}
-                                        <TableCell style = {{color:"White"}}>Product Name</TableCell>
-                                        <TableCell style = {{color:"White"}}>Price</TableCell>
-                                        <TableCell style = {{color:"White"}}>Vendor Name</TableCell>
-                                        <TableCell style = {{color:"White"}}>Quantity Available</TableCell>
-                                        <TableCell style = {{color:"White"}}>Quantity Required</TableCell>
+                                        <TableCell style={{ color: "White" }}>Select</TableCell>
+                                        <TableCell style={{ color: "White" }}>Product Name</TableCell>
+                                        <TableCell style={{ color: "White" }}>Price</TableCell>
+                                        <TableCell style={{ color: "White" }}>Vendor Name</TableCell>
+                                        <TableCell style={{ color: "White" }}>Quantity Available</TableCell>
+                                        <TableCell style={{ color: "White" }}>Quantity Required</TableCell>
                                     </TableRow>
                                 </TableHead>
 
@@ -142,16 +144,89 @@ class AddProducts extends Component {
                                     {this.props.products.map((product) => {
                                         return <TableRow key={product.id}>
                                             <TableCell>
-                                                <FormControlLabel
+                                                {(product.remainingQuantity > 0) ? (
+                                                    <FormControlLabel
 
-                                                    control={<input type="checkbox" id={product.id} color="primary" value={JSON.stringify(product)}
-                                                    />}
-                                                />{product.productName}</TableCell>
-                                            <TableCell>{product.productBasePrice}</TableCell>
-                                            <TableCell>{product.companyName}</TableCell>
-                                            <TableCell>{product.remainingQuantity}</TableCell>
+                                                        // control={<input type="checkbox" id={product.id} color="primary" value={JSON.stringify(product)}
+                                                        // />}
+                                                        control={
+                                                            <Checkbox
+                                                                id={product.id}
+                                                                name="checkedB"
+                                                                color="primary"
+                                                                value={JSON.stringify(product)}
+                                                                style={{ marginTop: "-2px" }}
+                                                            />
+                                                        }
+                                                    />
+                                                ) : (
+                                                        <FormControlLabel
+
+                                                            // control={<input type="checkbox" id={product.id} color="primary" value={JSON.stringify(product)}
+                                                            // />}
+                                                            control={
+                                                                <Checkbox
+                                                                    id={product.id}
+                                                                    name="checkedB"
+                                                                    color="primary"
+                                                                    value={JSON.stringify(product)}
+                                                                    style={{ marginTop: "-2px" }}
+                                                                    disabled
+                                                                />
+                                                            }
+                                                        />
+                                                    )}
+                                            </TableCell>
                                             <TableCell>
-                                                <input type="number" id={product.id} value={this.state.numberBoxInputValue[product.id]} pattern="[0-9]*" min="0" max={product.remainingQuantity} step="1" onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} placeholder="To be less than Quantity Available" onChange={this.updateInputValue} ></input>
+                                            {(product.remainingQuantity > 0) ? (
+                                                    <Typography variant="subtitle1" gutterBottom>
+                                                        {product.productName}
+                                                    </Typography>
+                                                ) : (
+                                                    <Typography variant="subtitle1" style =  {{color:"grey"}} gutterBottom>
+                                                        {product.productName}
+                                                    </Typography>
+                                                )}
+                                            </TableCell>
+                                            <TableCell>
+                                            {(product.remainingQuantity > 0) ? (
+                                                    <Typography variant="subtitle1" gutterBottom>
+                                                        {product.productBasePrice}
+                                                    </Typography>
+                                                ) : (
+                                                    <Typography variant="subtitle1" style =  {{color:"grey"}}  gutterBottom>
+                                                        {product.productBasePrice}
+                                                    </Typography>
+                                                )}
+                                            </TableCell>
+                                            <TableCell>
+                                            {(product.remainingQuantity > 0) ? (
+                                                    <Typography variant="subtitle1" gutterBottom>
+                                                        {product.companyName}
+                                                    </Typography>
+                                                ) : (
+                                                    <Typography variant="subtitle1" style =  {{color:"grey"}}  gutterBottom>
+                                                        {product.companyName}
+                                                    </Typography>
+                                                )}
+                                            </TableCell>
+                                            <TableCell>
+                                            {(product.remainingQuantity > 0) ? (
+                                                    <Typography variant="subtitle1" gutterBottom>
+                                                        {product.remainingQuantity}
+                                                    </Typography>
+                                                ) : (
+                                                    <Typography variant="subtitle1" style =  {{color:"grey"}}  gutterBottom>
+                                                        {product.remainingQuantity}
+                                                    </Typography>
+                                                )}
+                                            </TableCell>
+                                            <TableCell>
+                                                {(product.remainingQuantity > 0) ? (
+                                                    <TextField fullWidth type="number" id={product.id} value={this.state.numberBoxInputValue[product.id]} pattern="[0-9]*" min="0" max={product.remainingQuantity} step="1" onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={this.updateInputValue} label="Quantity" variant="outlined" style = {{ padding:"9px 7px !important" }} />
+                                                ) : (
+                                                    <TextField fullWidth type="number" id={product.id} value={this.state.numberBoxInputValue[product.id]} pattern="[0-9]*" min="0" max={product.remainingQuantity} step="1" onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={this.updateInputValue} label="Quantity" variant="outlined" disabled  style = {{  padding:"9px 7px !important"  }} />
+                                                    )}
                                             </TableCell>
                                         </TableRow>
                                     })}
@@ -160,7 +235,7 @@ class AddProducts extends Component {
                         </TableContainer>
                         {this.state.quantityCheck &&
 
-                            <Link to="/addproductstostore" style = {{textDecoration : "none"}}>
+                            <Link to="/addproductstostore" style={{ textDecoration: "none" }}>
                                 <Button
                                     type="button"
                                     fullWidth
@@ -168,7 +243,7 @@ class AddProducts extends Component {
                                     color="primary"
                                     className="{classes.submit}"
                                     onClick={this.loopForm}
-                                    
+
                                 >
                                     ADD PRODUCTS
                                         </Button>

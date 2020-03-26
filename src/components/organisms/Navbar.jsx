@@ -65,7 +65,6 @@ function Navbar(props) {
                 <AppBar position="static">
                     <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
                         <StyledTab label="Home" {...a11yProps(0)} component={Link} to="/welcome" />
-                        <StyledTab label="Item Two" {...a11yProps(1)} />
                         <StyledTab style = {{marginLeft : "auto"}} label="Logout" {...a11yProps(2)} 
                             onClick={() => {
                                 sessionStorage.removeItem("token");
