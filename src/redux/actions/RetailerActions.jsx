@@ -1,11 +1,12 @@
-import { LOGIN_USER, CREATE_CLUSTER,CREATE_ZONE, CLUSTERLIST_GET_REQUEST,TOKEN,LOGIN_FAILURE,LOGOUT, WELCOME_USER, ZONE_GET_REQUEST, ZONELIST_GET_REQUEST,RETAILER_BASE_URL, CLUSTER_GET_REQUEST, STORE_POST_REQUEST,FAILURE, MESSAGE_SET_NULL} from './types';
+import { LOGIN_USER, CREATE_CLUSTER,CREATE_ZONE, CLUSTERLIST_GET_REQUEST,LOGIN_FAILURE,LOGOUT, WELCOME_USER, ZONE_GET_REQUEST, ZONELIST_GET_REQUEST,RETAILER_BASE_URL, CLUSTER_GET_REQUEST, STORE_POST_REQUEST,FAILURE, MESSAGE_SET_NULL} from './types';
 import axios from "axios";
 
-
+let TOKEN='';
 export const login = (loginDetails) => async (dispatch) => {
     await axios.post(RETAILER_BASE_URL + '/retailer/authenticate', loginDetails).then(
         (res)=>{
             sessionStorage.setItem("token",res.data['jwt'])
+            TOKEN='BearerR '+res.data['jwt']
             dispatch({ type: LOGIN_USER,login_status:{success:true,errorMsg:'',data:res.data},userInfo:loginDetails})
         }
     ).catch((res)=>{
