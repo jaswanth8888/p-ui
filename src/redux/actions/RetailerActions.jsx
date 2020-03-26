@@ -1,4 +1,4 @@
-import { LOGIN_USER, CREATE_CLUSTER,CREATE_ZONE, CLUSTERLIST_GET_REQUEST,LOGIN_FAILURE,LOGOUT, WELCOME_USER, ZONE_GET_REQUEST, ZONELIST_GET_REQUEST,RETAILER_BASE_URL, CLUSTER_GET_REQUEST, STORE_POST_REQUEST,FAILURE, MESSAGE_SET_NULL} from './types';
+import { STORELIST_GET_REQUEST ,CATEGORIES_GET_REQUEST ,PRODUCTS_GET_REQUEST ,ZONE_SAVE_VALUE ,CLUSTER_SAVE_VALUE ,STORE_SAVE_VALUE ,PRODUCTTOSTORE_POST_REQUEST ,STORE_GET_REQUEST, LOGIN_USER, CREATE_CLUSTER,CREATE_ZONE, CLUSTERLIST_GET_REQUEST,LOGIN_FAILURE,LOGOUT, WELCOME_USER, ZONE_GET_REQUEST, ZONELIST_GET_REQUEST,RETAILER_BASE_URL, CLUSTER_GET_REQUEST, STORE_POST_REQUEST,FAILURE, MESSAGE_SET_NULL} from './types';
 import axios from "axios";
 
 let TOKEN='';
@@ -91,4 +91,54 @@ export const postGroup = (groupDetails) =>async (dispatch) => {
         dispatch({type:CREATE_ZONE, msg:"Sorry Group already exists"}) 
     });
     
+}
+
+export const getStoreList =() => async (dispatch) =>{
+    await axios.get(RETAILER_BASE_URL + '/location-management/store',{ headers:{"Authorization" :TOKEN}}).then((res)=>{
+        dispatch({type:STORELIST_GET_REQUEST,storeList:res.data})
+    });
+}
+
+export const getCategories=()=>async(dispatch)=>{
+    await axios.get(RETAILER_BASE_URL+'/product-management/categories',{headers:{"Authorization":TOKEN}}).then((res)=>{
+        dispatch({type:CATEGORIES_GET_REQUEST,categories:res.data})
+    }).catch((err)=>{
+        dispatch({type:FAILURE})
+    })
+}
+
+export const getProducts=(category)=>async(dispatch)=>{
+    await axios.get(RETAILER_BASE_URL+'/product-management/'+category+'/products',{headers:{'Authorization':TOKEN}}).then((res)=>{
+        dispatch({type:PRODUCTS_GET_REQUEST,products:res.data})
+    }).catch((err)=>{
+        dispatch({type:FAILURE})
+    })
+}
+
+export const saveZoneValue = (zoneValue) => (dispatch) => {
+    dispatch({ type: ZONE_SAVE_VALUE, zone:zoneValue });
+}
+
+export const saveClusterValue = (clusterValue) => (dispatch) => {
+    dispatch({ type: CLUSTER_SAVE_VALUE, cluster:clusterValue });
+}
+
+export const saveStoreValue = (storeValue) => (dispatch) => {
+    dispatch({ type: STORE_SAVE_VALUE, store:storeValue });
+}
+
+export const postProductToStore = (zone,cluster,store,products) =>async (dispatch) => {
+    await axios.put(RETAILER_BASE_URL + '/product-management/'+zone+'/'+cluster+'/'+store+'/product',products, {headers: { "Authorization":TOKEN}}).then((res) => {
+        dispatch({type:PRODUCTTOSTORE_POST_REQUEST, msg:"Product Added to Store Succesfully"}) 
+    }).catch((err)=>{
+        dispatch({type:PRODUCTTOSTORE_POST_REQUEST, msg:"Sorry Products already exists in Store"}) 
+    });   
+}
+
+export const getStores=(zone,cluster) => async(dispatch) => {
+    await axios.get(RETAILER_BASE_URL+'/location-management/'+zone+'/'+cluster+'/stores',{headers:{"Authorization" : TOKEN}}).then((res)=>{
+        dispatch({type:STORE_GET_REQUEST,stores:res.data})
+    }).catch((err)=>{
+        dispatch({type:FAILURE})
+    });
 }
