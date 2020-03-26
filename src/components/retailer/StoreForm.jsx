@@ -1,16 +1,14 @@
-import { Avatar, Box, Grid, InputLabel, Select, TextField, Typography } from "@material-ui/core";
+import { InputLabel, Select, TextField, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import React, { Component , Fragment } from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { getClusters, getZones, postStore } from '../../redux/actions/RetailerActions';
+import Snackbar from '@material-ui/core/Snackbar';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import "./StoreForm.css"
-import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { getClusters, getZones, postStore } from '../../redux/actions/RetailerActions';
+import "./StoreForm.css";
 
 class StoreForm extends Component {
 
@@ -62,7 +60,12 @@ class StoreForm extends Component {
     let storeName = this.state.storeName;
     let store = { storeName, address }
     this.props.postStore(store, this.state.zone, this.state.cluster);
-    this.setState({ isSubmitted: true ,  status : 1 })
+    if (this.state.storeName.length > 6) {
+      this.setState({ status : 1 })
+    }
+    else{
+      this.setState({  status : -1 })
+    }
 
   }
 

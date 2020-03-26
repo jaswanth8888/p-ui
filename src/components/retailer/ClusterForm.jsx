@@ -1,28 +1,14 @@
-import React, { Component , Fragment} from 'react'
-import { Avatar, Box, Grid, TextField, Typography, InputLabel, NativeSelect } from "@material-ui/core";
-import { getZones, postCluster } from '../../redux/actions/RetailerActions'
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom'
-import StoreIcon from '@material-ui/icons/Store';
+import { InputLabel, TextField, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { makeStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { getZones, postCluster } from '../../redux/actions/RetailerActions';
 
 class ClusterForm extends Component {
 

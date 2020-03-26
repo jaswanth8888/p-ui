@@ -7,7 +7,6 @@ import PersonIcon from '@material-ui/icons/Person';
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { login } from "../redux/actions/RetailerActions.jsx";
-import { spacing } from '@material-ui/system';
 
 class Login extends Component {
   constructor(props) {
