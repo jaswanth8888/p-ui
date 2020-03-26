@@ -18,7 +18,7 @@ export default (state = initialState, action = {}) => {
             // return { ...state, loggedInUser: action.userInfo };
             return { ...state, login_status: action.login_status };
         case LOGOUT:
-            return { ...state, loggedInUser: null }
+            return { ...initialState }
         case WELCOME_USER:
             return {...state, userInfo:action.userInfo}
         case ZONE_GET_REQUEST:

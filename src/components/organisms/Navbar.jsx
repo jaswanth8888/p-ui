@@ -52,7 +52,7 @@ const StyledTab = withStyles({
     },
 })(Tab);
 
-function Navbar() {
+function Navbar(props) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -70,7 +70,7 @@ function Navbar() {
                             onClick={() => {
                                 sessionStorage.removeItem("token");
                                 sessionStorage.removeItem("reduxstate");
-                                window.location.href="/"
+                                props.logout();
                             }}
                         />
 
