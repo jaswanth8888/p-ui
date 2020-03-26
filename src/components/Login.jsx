@@ -7,6 +7,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { login } from "../redux/actions/RetailerActions.jsx";
+import md5 from 'md5'
 
 class Login extends Component {
   constructor(props) {
@@ -63,7 +64,6 @@ class Login extends Component {
     error.passwordError=false;
     error.passwordErrorMsg=''
     this.setState({error})
-
     return true
 
   }
@@ -72,7 +72,9 @@ class Login extends Component {
     e.preventDefault();
     console.log('handle submit',this.is_validPassword(),this.is_validUsername())
     if (this.is_validUsername() && this.is_validPassword()) {
-      this.props.login({ ...this.state.user_crendentials }); // thunk action
+      let user_crendentials={...this.state.user_crendentials};
+      user_crendentials.password=md5(user_crendentials.password);
+      this.props.login({ ...user_crendentials}); // thunk action
     }
   }
   isAuthenticated() {
