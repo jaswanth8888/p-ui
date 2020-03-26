@@ -21,9 +21,9 @@ export const fetchUserDetails = (loginDetails) => async (dispatch) => {
 }
 export const postZone = (zoneDetails) =>async (dispatch) => {
     await axios.post(RETAILER_BASE_URL + '/location-management/zone', zoneDetails, {headers: { "Authorization":TOKEN}}).then((res) => {
-        dispatch({type:CREATE_ZONE, msg:"Zone Created Succesfully"}) 
+        dispatch({type:CREATE_ZONE, msg:"Zone Created Succesfully",msgSeverity:"success"}) 
     }).catch((err)=>{
-        dispatch({type:CREATE_ZONE, msg:"Sorry Zone already exists"}) 
+        dispatch({type:CREATE_ZONE, msg:"Sorry Zone already exists",msgSeverity:"error"}) 
     });
     
 }

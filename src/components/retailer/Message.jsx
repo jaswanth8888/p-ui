@@ -25,7 +25,7 @@ class Message extends Component {
               (<Snackbar open="true" onClose={this.closeAlert} autoHideDuration={6000}
               anchorOrigin={{ vertical:'top', horizontal:'right' }}
                >
-                <MuiAlert severity={this.props.msgSeverity} elevation={6} variant="filled" >
+                <MuiAlert severity={this.props.msgSeverity} elevation={6} variant="filled" onClose={this.closeAlert} >
                   {this.props.msg}
                 </MuiAlert>
               </Snackbar>): ''

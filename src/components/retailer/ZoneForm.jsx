@@ -7,8 +7,9 @@ import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux';
 import { postZone } from '../../redux/actions/RetailerActions';
-// import { Alert } from 'react-alert'
 import './ZoneForm.css';
+import Message from "./Message"
+
 
 
 class ZoneForm extends Component {
@@ -126,28 +127,17 @@ class ZoneForm extends Component {
           </div>
         </div>
         <Fragment>
-
-          {(this.state.status === 1) ? (
-            <div>
-              <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert elevation={6} variant="filled">
-                  Zone created successfully!
-            </MuiAlert>
-              </Snackbar>
-            </div>
-          ) : (<div />)}
-        </Fragment>
-        <Fragment>
           {(this.state.status === -1) ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert severity="error" elevation={6} variant="filled"> 
+                <MuiAlert severity="error" elevation={6} variant="filled" > 
                   Zone creation failed. Please match the requirements
                 </MuiAlert>
               </Snackbar>
             </div>) : (<div />)
           }
         </Fragment>
+        <Message />
       </div>
     );
   }
