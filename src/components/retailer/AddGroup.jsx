@@ -31,20 +31,16 @@ class AddGroup extends Component {
     this.setState({ group });
   }
 
-
   is_validGroupName = () => {
     if (this.state.group.groupName.length > 0) {
-      this.setState({ status: 1 })
-      
+      this.setState({ status: 1 })    
     }
     else {
       this.setState({ status: -1 })
       return false
     }
-
     return true
-
-  }
+ }
 
   handleSubmit(e) {
     e.preventDefault();
