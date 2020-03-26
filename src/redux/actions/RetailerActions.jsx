@@ -104,6 +104,9 @@ export const postGroup = (groupDetails) =>async (dispatch) => {
         else if(response.status===403){
             dispatch({type:CREATE_ZONE, msg:"Something went wrong ,please logout and try again",msgSeverity:"warning"})
         }
+        else{
+            dispatch({type:CREATE_ZONE, msg:"Something went wrong ,please  try again",msgSeverity:"warning"})
+        }
     });
     
 }
