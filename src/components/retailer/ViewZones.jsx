@@ -21,7 +21,7 @@ class ViewZones extends Component {
 
             <div className="box-container" style={{ alignItems: "flex-start", marginTop: "150px" }}>
                 <TableContainer component={Paper} style={{ width: "500px", textAlign : "center" }}>
-                    <Table size="small" aria-label="a dense table">
+                    <Table  aria-label="a dense table">
                         <TableHead style={{ backgroundColor: "#673ab7" }}>
                             <TableRow>
                                 <TableCell style={{ color: "#FFF", width: "250px" , textAlign : "center"}}>Zone Name</TableCell>

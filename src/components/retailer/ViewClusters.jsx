@@ -21,7 +21,7 @@ class ViewClusters extends Component {
         return (
             <div className="box-container" style = {{alignItems : "flex-start" , marginTop : "150px"}}>
                 <TableContainer component={Paper} style = {{width:"500px"}}>
-                    <Table size="small" aria-label="a dense table">
+                    <Table  aria-label="a dense table">
                         <TableHead style={{ backgroundColor: "#673ab7" }}>
                             <TableRow>
                                 <TableCell style={{ color: "#FFF", width:"250px", textAlign : "center" }}>Cluster Name</TableCell>

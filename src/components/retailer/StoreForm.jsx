@@ -248,7 +248,7 @@ class StoreForm extends Component {
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert elevation={6} variant="filled">
-                  Zone created successfully!
+                  Store created successfully!
             </MuiAlert>
               </Snackbar>
             </div>
@@ -259,7 +259,7 @@ class StoreForm extends Component {
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
-                  Zone creation failed. Please match the requirements
+                  Store creation failed. Please match the requirements
                 </MuiAlert>
               </Snackbar>
             </div>) : (<div />)

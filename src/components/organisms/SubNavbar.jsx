@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import AddGroup from '../retailer/AddGroup.jsx';
 import ClusterForm from '../retailer/ClusterForm.jsx';
+import ProductRouter from '../retailer/ProductRouter.jsx';
 import StoreForm from '../retailer/StoreForm.jsx';
 import ViewClusters from '../retailer/ViewClusters.jsx';
 import ViewZones from '../retailer/ViewZones.jsx';
@@ -70,6 +71,7 @@ export default function VerticalTabs() {
                 className={classes.tabs}
             >
                 <Tab label = "Add Group" />
+                <Tab label = "Add Product to Store" />
                 <Tab label="Create Zone" />
                 <Tab label="Create Cluster" />
                 <Tab label="Create Store" />
@@ -80,30 +82,24 @@ export default function VerticalTabs() {
             <TabPanel value={value} index={0}>
                 <AddGroup />
             </TabPanel>
-            <TabPanel value={value} index={1}>
-                <ZoneForm />
+            <TabPanel value={value} index={1} to="/addproductstostore">
+                <ProductRouter />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <ClusterForm />
+                <ZoneForm />
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <StoreForm />
+                <ClusterForm />
             </TabPanel>
             <TabPanel value={value} index={4}>
-                <ViewZones />
+                <StoreForm />
             </TabPanel>
             <TabPanel value={value} index={5}>
+                <ViewZones />
+            </TabPanel>
+            <TabPanel value={value} index={6}>
                 <ViewClusters />
             </TabPanel>
-            
-            {/* <Switch>
-
-                <PrivateRoute exact={true} path="/zonepage" component={ZoneForm} />
-                <PrivateRoute exact={true} path="/cluster" component={ClusterForm} />
-                <PrivateRoute exact={true} path="/store" component={StoreForm} />
-                <PrivateRoute exact={true} path="/viewzones" component={ViewZones} />
-                <PrivateRoute exact={true} path="/viewclusters" component={ViewClusters} />
-            </Switch> */}
         </div>
     );
 }
