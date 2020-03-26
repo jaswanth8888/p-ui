@@ -23,7 +23,13 @@ export const postZone = (zoneDetails) =>async (dispatch) => {
     await axios.post(RETAILER_BASE_URL + '/location-management/zone', zoneDetails, {headers: { "Authorization":TOKEN}}).then((res) => {
         dispatch({type:CREATE_ZONE, msg:"Zone Created Succesfully",msgSeverity:"success"}) 
     }).catch((err)=>{
+        let response=err.response;
+        if(response.status===400){
         dispatch({type:CREATE_ZONE, msg:"Sorry Zone already exists",msgSeverity:"error"}) 
+        }
+        else if(response.status===403){
+            dispatch({type:CREATE_ZONE, msg:"Something went wrong ,please logout and try again",msgSeverity:"warning"})
+        }
     });
     
 }
@@ -88,7 +94,13 @@ export const postGroup = (groupDetails) =>async (dispatch) => {
     await axios.post(RETAILER_BASE_URL + '/group-management/group', groupDetails, {headers: { "Authorization":TOKEN}}).then((res) => {
         dispatch({type:CREATE_ZONE, msg:"Group Created Succesfully",msgSeverity:"success"}) 
     }).catch((err)=>{
+        let response=err.response;
+        if(response.status===400){
         dispatch({type:CREATE_ZONE, msg:"Sorry Group already exists",msgSeverity:"error"}) 
+        }
+        else if(response.status===403){
+            dispatch({type:CREATE_ZONE, msg:"Something went wrong ,please logout and try again",msgSeverity:"warning"})
+        }
     });
     
 }
