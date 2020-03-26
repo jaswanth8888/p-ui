@@ -36,7 +36,6 @@ class Login extends Component {
     this.setState({ user_crendentials });
   }
   is_validUsername=()=>{
-    console.log('entered valid username')
     let username=this.state.user_crendentials.username
     let error=this.state.error
     if(username===''){
@@ -70,8 +69,9 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('handle submit',this.is_validPassword(),this.is_validUsername())
-    if (this.is_validUsername() && this.is_validPassword()) {
+    let u=this.is_validUsername()
+    let p=this.is_validPassword()
+    if (u && p) {
       let user_crendentials={...this.state.user_crendentials};
       user_crendentials.password=md5(user_crendentials.password);
       this.props.login({ ...user_crendentials}); // thunk action
@@ -136,7 +136,6 @@ class Login extends Component {
                 <Typography component="span" color="error" variant="h5">
                   {this.props.login_status.errorMsg}
                 </Typography>
-                {/* {this.props.login_status['errorMsg']} */}
               </Box>
               <form className="{classes.form}" noValidate style={{padding:"40px"}}>
                 <TextField
