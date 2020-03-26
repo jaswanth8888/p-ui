@@ -84,7 +84,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         {this.props.login_status.success ? (
           (this.props.history.push("/welcome"))
         ) : (
@@ -197,7 +197,7 @@ class Login extends Component {
             </Grid>
           </Grid>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }

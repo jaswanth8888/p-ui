@@ -62,7 +62,6 @@ export const postStore = (store,zone,cluster) => async(dispatch) => {
 }
 
 export const logout = () => (dispatch) => {
-    // console.log("enetered logout")
     dispatch({ type: LOGOUT });
 }
 
