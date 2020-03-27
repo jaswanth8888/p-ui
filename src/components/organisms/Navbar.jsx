@@ -84,7 +84,7 @@ function Navbar(props) {
               component={Link}
               to="/welcome"
             />
-            <StyledTab label="Item Two" {...a11yProps(1)} />
+
             <StyledTab
               style={{ marginLeft: "auto" }}
               label={t("header.logOut")}
