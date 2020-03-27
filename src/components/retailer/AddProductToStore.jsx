@@ -157,7 +157,7 @@ class AddProductToStore extends Component {
                                 </Select>
                             </FormControl>
                             {( this.state.cluster !== "" && this.props.stores.length <= 0) &&
-                                <Link to='/store'  style = {{textDecoration : "none"}}>
+                                <Link to='/addproducttostore'  style = {{textDecoration : "none"}}>
                                     <Button
                                         type="button"
                                         fullWidth
@@ -184,7 +184,7 @@ class AddProductToStore extends Component {
                                         Add Products
                                     </Button>
                                 </Link>) : (
-                                <Link to='/addproducts' style = {{textDecoration : "none" , opacity : 0}}>
+                                <Link to='/addproducts' style = {{textDecoration : "none" , opacity : 0,pointerEvents:"none"}}>
                                     <Button
                                         type="button"
                                         fullWidth

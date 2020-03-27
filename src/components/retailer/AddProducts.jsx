@@ -71,34 +71,19 @@ class AddProducts extends Component {
   }
 
   loopForm() {
-    let productform = document.getElementById("productform");
-    for (var i = 0; i < productform.elements.length; i++) {
-      if (productform.elements[i].type === "checkbox") {
-        if (productform.elements[i].checked === true) {
-          let pValue = JSON.parse(productform.elements[i].value);
-          let id = pValue.id;
-          //console.log("id="+id);
-          let quantity = 40;
-          for (var j = 0; j < productform.elements.length; j++) {
-            if (productform.elements[j].type === "number") {
-              if (productform.elements[j].id === JSON.stringify(id)) {
-                //console.log("id="+id)
-                quantity = productform.elements[j].value;
-                //console.log(quantity)
-              }
-            }
-          }
-          //pValue.quantityAssigned=quantity;
-          // this.setState({ object: { productName: pValue.productName } })
-          // this.setState({ object: { quantityAssigned: quantity } })
-          this.state.object.productName = pValue.productName;
-          this.state.object.quantityAssigned = quantity;
-
-          //console.log(this.state.object)
-          this.state.productList.push(this.state.object);
-        }
+    let tabledata = document.querySelectorAll("tr");
+ 
+    tabledata.forEach((ele,ind) => {
+      if(ind && ele.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].checked){
+        this.state.object.productName = ele.childNodes[1].childNodes[0].textContent;
+        this.state.object.quantityAssigned = parseInt(ele.childNodes[5].childNodes[0].childNodes[1].childNodes[0].value)
+        this.state.productList.push(this.state.object);
       }
-    }
+      
+    })
+ 
+    
+    
     this.props.postProductToStore(
       this.props.zone,
       this.props.cluster,
@@ -280,7 +265,7 @@ class AddProducts extends Component {
                               max={product.remainingQuantity}
                               step="1"
                               onKeyDown={evt =>
-                                evt.key === "e" && evt.preventDefault()
+                                evt.key === "." && evt.preventDefault()
                               }
                               onChange={this.updateInputValue}
                               label="Quantity"

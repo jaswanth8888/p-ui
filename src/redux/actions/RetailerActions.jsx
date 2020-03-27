@@ -97,12 +97,33 @@ export const postCluster = (cluster, zone) => async dispatch => {
     .then(res => {
       dispatch({
         type: CREATE_CLUSTER,
-        msg: "Cluster for Zone " + zone + " is Created Successfully"
+        msg: "Cluster for Zone " + zone + " is Created Successfully",
+	msgSeverity: "success"
       });
     })
-    .catch(err => {
-      dispatch({ type: CREATE_CLUSTER, msg: "Sorry Cluster already exists" });
+	.catch(err => {
+      let response = err.response;
+      if (response.status === 400) {
+        dispatch({
+          type: CREATE_CLUSTER,
+          msg: "Sorry Cluster already exists",
+          msgSeverity: "error"
+        });
+      } else if (response.status === 403) {
+        dispatch({
+          type: CREATE_CLUSTER,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning"
+        });
+      } else {
+        dispatch({
+          type: CREATE_CLUSTER,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning"
+        });
+      }
     });
+      
 };
 
 export const getZones = () => async dispatch => {

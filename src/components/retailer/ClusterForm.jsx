@@ -9,6 +9,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getZones, postCluster } from '../../redux/actions/RetailerActions';
+import Message from "./Message"
 
 class ClusterForm extends Component {
 
@@ -154,24 +155,14 @@ class ClusterForm extends Component {
             </form>
           </div>
         </div>
-        <Fragment>
+        <Message />
 
-          {(this.state.status === 1) ? (
-            <div>
-              <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert elevation={6} variant="filled">
-                  Zone created successfully!
-            </MuiAlert>
-              </Snackbar>
-            </div>
-          ) : (<div />)}
-        </Fragment>
         <Fragment>
           {(this.state.status === -1) ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
-                  Zone creation failed. Please match the requirements
+                  Cluster creation failed. Please match the requirements
                 </MuiAlert>
               </Snackbar>
             </div>) : (<div />)

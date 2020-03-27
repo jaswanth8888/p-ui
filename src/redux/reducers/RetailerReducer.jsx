@@ -45,7 +45,7 @@ export default (state = initialState, action = {}) => {
         case CREATE_ZONE:
             return { ...state, msg:action.msg,msgSeverity:action.msgSeverity}
         case CREATE_CLUSTER:
-            return {...state, msg:action.msg}
+            return {...state, msg:action.msg,msgSeverity:action.msgSeverity}
         case ZONELIST_GET_REQUEST:
             return {...state, zoneList:action.zoneList}
         case CLUSTERLIST_GET_REQUEST:
