@@ -44,13 +44,14 @@ store.subscribe(() => {
          onClick={event =>  window.location.href='/reg'}>
           vendor Registration
         </Button>
-         <Navbar />
-         </div>
-      <div>
-      <Button
+        <Button
          onClick={event =>  window.location.href='/'}>
            Retailer login
         </Button>
+         <Navbar />
+         </div>
+      <div>
+      
           <Router >
                     <Switch>
                       <Route exact={true} path="/vendor" component={VendorLogin} />
