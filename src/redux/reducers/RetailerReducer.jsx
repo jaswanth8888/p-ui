@@ -15,6 +15,7 @@ const initialState = {
     login_status:{
         success:false
     },
+    isvendor:false,
     zoneList:{},
     clusterList:{},
 };

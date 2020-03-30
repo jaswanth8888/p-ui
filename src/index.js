@@ -23,12 +23,10 @@ let theme = createMuiTheme({
 });
 
 theme = responsiveFontSizes(theme);
-let isvendor=false
 ReactDOM.render(
   <Suspense fallback={<div>Loading</div>}>
     <MuiThemeProvider theme={theme}>
     <App></App>
-
     </MuiThemeProvider>
   </Suspense>,
   
