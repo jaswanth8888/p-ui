@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import {getZoneList} from '../../redux/actions/RetailerActions'
 import { Table } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getZoneList } from '../../redux/actions/RetailerActions';
 
 class ViewZones extends Component {
     constructor(props) {
@@ -14,42 +14,40 @@ class ViewZones extends Component {
         this.props.getZoneList();
     }
 
-    
-    render() {
-    
-        return (
-            
-          <div className="container">
-              <br/><br/><br/><br/>
-          <TableContainer component={Paper}>
-              <Table size="small" aria-label="a dense table">
 
-                  <TableHead>
-                      <TableRow>
-                          <TableCell>Zone Name</TableCell>
-                          <TableCell>Number of Clusters</TableCell>
-                      </TableRow>
-                  </TableHead>
-                  <tbody>
-                      {Object.keys(this.props.zoneList).map((i)=>{
-                          return <TableRow>
-                            <TableCell key={i} value={i}>{i}</TableCell>
-                            <TableCell>{this.props.zoneList[i]}</TableCell>
-                          </TableRow>
-                      })}
-                  </tbody>
-              </Table>
-              </TableContainer>
-          </div> 
+    render() {
+
+        return (
+
+            <div className="box-container" style={{ alignItems: "flex-start", marginTop: "150px" }}>
+                <TableContainer component={Paper} style={{ width: "500px", textAlign : "center" }}>
+                    <Table  aria-label="a dense table">
+                        <TableHead style={{ backgroundColor: "#673ab7" }}>
+                            <TableRow>
+                                <TableCell style={{ color: "#FFF", width: "250px" , textAlign : "center"}}>Zone Name</TableCell>
+                                <TableCell style={{ color: "#FFF", width: "250px", textAlign : "center" }}>Number of Stores</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <tbody>
+                            {Object.keys(this.props.zoneList).map((i) => {
+                                return <TableRow>
+                                    <TableCell key={i} value={i} style = {{ textAlign : "center"}}>{i}</TableCell>
+                                    <TableCell style = {{ textAlign : "center"}}>{this.props.zoneList[i]}</TableCell>
+                                </TableRow>
+                            })}
+                        </tbody>
+                    </Table>
+                </TableContainer>
+            </div>
         )
-        }
+    }
 }
 
 const stateAsProps = (store) => ({
     zoneList: store.RetailerReducer.zoneList
-  });
-  const actionAsProps = {
+});
+const actionAsProps = {
     getZoneList: getZoneList
-    
-  }
-  export default connect(stateAsProps,actionAsProps)(ViewZones);
+
+}
+export default connect(stateAsProps, actionAsProps)(ViewZones);

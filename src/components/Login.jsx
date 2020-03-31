@@ -1,9 +1,15 @@
-import React, { Component } from "react";
-import { Grid, TextField, Avatar, Typography, Box } from "@material-ui/core";
-import Button from "./atoms/Button";
+import { Avatar, Box, Grid, TextField, Typography } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Lock from "@material-ui/icons/Lock";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import PersonIcon from "@material-ui/icons/Person";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { login } from "../redux/actions/RetailerActions.jsx";
+import md5 from "md5";
+import { withTranslation } from "react-i18next";
+import i18n from "i18next";
 
 class Login extends Component {
   constructor(props) {
@@ -31,45 +37,44 @@ class Login extends Component {
     user_crendentials[name] = value;
     this.setState({ user_crendentials });
   }
-  is_validUsername=()=>{
-    console.log('entered valid username')
-    let username=this.state.user_crendentials.username
-    let error=this.state.error
-    if(username===''){
-      error.usernameError=true;
-      error.usernameErrorMsg='please fill username'
-      this.setState({error})
-      return false
+  is_validUsername = () => {
+    let username = this.state.user_crendentials.username;
+    let error = this.state.error;
+    if (username === "") {
+      error.usernameError = true;
+      error.usernameErrorMsg = i18n.t("please fill username");
+      this.setState({ error });
+      return false;
     }
-    error.usernameError=false;
-    error.usernameErrorMsg=''
-    this.setState({error})
+    error.usernameError = false;
+    error.usernameErrorMsg = "";
+    this.setState({ error });
 
-    return true
-
-  }
-  is_validPassword=()=>{
-    let password=this.state.user_crendentials.password
-    let error=this.state.error
-    if(password===''){
-      error.passwordError=true;
-      error.passwordErrorMsg='please fill password'
-      this.setState({error})
-      return false
+    return true;
+  };
+  is_validPassword = () => {
+    let password = this.state.user_crendentials.password;
+    let error = this.state.error;
+    if (password === "") {
+      error.passwordError = true;
+      error.passwordErrorMsg = i18n.t("please fill password");
+      this.setState({ error });
+      return false;
     }
-    error.passwordError=false;
-    error.passwordErrorMsg=''
-    this.setState({error})
-
-    return true
-
-  }
+    error.passwordError = false;
+    error.passwordErrorMsg = "";
+    this.setState({ error });
+    return true;
+  };
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('handle submit',this.is_validPassword(),this.is_validUsername())
-    if (this.is_validUsername() && this.is_validPassword()) {
-      this.props.login({ ...this.state.user_crendentials }); // thunk action
+    let u = this.is_validUsername();
+    let p = this.is_validPassword();
+    if (u && p) {
+      let user_crendentials = { ...this.state.user_crendentials };
+      user_crendentials.password = md5(user_crendentials.password);
+      this.props.login({ ...user_crendentials }); // thunk action
     }
   }
   isAuthenticated() {
@@ -78,10 +83,11 @@ class Login extends Component {
   }
 
   render() {
+    const { t, i18n } = this.props;
     return (
-      <div>
+      <React.Fragment>
         {this.props.login_status.success ? (
-          (window.location.href = "/welcome")
+          this.props.history.push("/welcome")
         ) : (
           <Grid
             container
@@ -91,26 +97,70 @@ class Login extends Component {
             justify="center"
             style={{ minHeight: "100vh" }}
           >
-            <Grid item xs={3}>
-              <Box diasplay="flex" flexDirection="row" justifyContent="center">
+            <Grid
+              item
+              xs={3}
+              style={{
+                border: "1px solid rgba(0,0,0,0.2)",
+                borderLeft: "5px solid #673ab7",
+                borderRadius: "4px",
+                boxShadow: "0px 10px 17px 6px rgba(0,0,0,0.24)"
+              }}
+            >
+              <Box
+                display="flex"
+                flexDirection="row"
+                justifyContent="center"
+                alignItems="center"
+                style={{
+                  fontWeight: 300,
+                  BorderRadius: "4px",
+                  marginLeft: "-40px",
+                  position: "relative"
+                }}
+                pt={4}
+              >
                 <Box p={1}>
                   <Avatar
-                    className="{classes.avatar}"
-                    style={{ color: "#3F51B5" }}
+                    style={{
+                      background: "#673ab7",
+                      marginLeft: "10px",
+                      padding: "30px",
+                      position: "absolute",
+                      top: "-40px",
+                      left: "-25px",
+                      right: "0px",
+                      marginRight: "auto"
+                    }}
                   >
-                    <LockOutlinedIcon />
+                    <LockOutlinedIcon
+                      color="white"
+                      style={{
+                        fontSize: "48px"
+                      }}
+                    />
                   </Avatar>
                 </Box>
-
-                <Typography component="h1" variant="h5">
-                  Sign in
+                <Typography
+                  color="primary"
+                  component="h1"
+                  variant="h4"
+                  style={{
+                    marginLeft: "20px",
+                    fontFamily: "font-family: 'Open Sans', sans-serif;"
+                  }}
+                >
+                  {t("header.logIn")}
                 </Typography>
                 <Typography component="span" color="error" variant="h5">
                   {this.props.login_status.errorMsg}
                 </Typography>
-                {/* {this.props.login_status['errorMsg']} */}
               </Box>
-              <form className="{classes.form}" noValidate>
+              <form
+                className="{classes.form}"
+                noValidate
+                style={{ padding: "40px" }}
+              >
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -119,11 +169,22 @@ class Login extends Component {
                   error={this.state.error.usernameError}
                   helperText={this.state.error.usernameErrorMsg}
                   id="username"
-                  label="User Name"
+                  label={t("login.userName")}
                   name="username"
                   autoComplete="username"
                   onChange={this.handleChange}
                   autoFocus
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <PersonIcon
+                          color="primary"
+                          borderColor="primary.main"
+                          borderRight={1}
+                        />
+                      </InputAdornment>
+                    )
+                  }}
                 />
                 <TextField
                   variant="outlined"
@@ -133,11 +194,22 @@ class Login extends Component {
                   error={this.state.error.passwordError}
                   helperText={this.state.error.passwordErrorMsg}
                   name="password"
-                  label="Password"
+                  label={t("login.password")}
                   type="password"
                   id="password"
                   onChange={this.handleChange}
                   autoComplete="current-password"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Lock
+                          color="primary"
+                          borderColor="primary.main"
+                          borderRight={1}
+                        />
+                      </InputAdornment>
+                    )
+                  }}
                 />
                 <Button
                   type="button"
@@ -146,14 +218,15 @@ class Login extends Component {
                   color="primary"
                   className="{classes.submit}"
                   onClick={this.handleSubmit}
+                  style={{ marginTop: "30px" }}
                 >
-                  Sign In
+                  {t("header.logIn")}
                 </Button>
               </form>
             </Grid>
           </Grid>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -168,4 +241,4 @@ const stateAsProps = function(store) {
   }
 };
 
-export default connect(stateAsProps, { login })(Login);
+export default connect(stateAsProps, { login })(withTranslation()(Login));
