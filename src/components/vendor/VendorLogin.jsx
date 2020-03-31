@@ -69,7 +69,7 @@ import md5 from 'md5'
         if (this.is_validusername() && this.is_validPassword()) {
           this.props.vendorlogin({ ...this.state.user_crendentials }); // thunk action
           if(this.isAuthenticated()){
-          window.location.href = "/home"
+          window.location.href = "/vendor/home"
           }
         }
       }

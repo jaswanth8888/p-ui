@@ -80,7 +80,7 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
     render() {
       if(sessionStorage.getItem("token")!=null){
         if( this.state.isPosted){
-            return <Redirect to="/home"/>
+            return <Redirect to="/vendor/home"/>
         }
         return (
             <div  className="box-container">   
