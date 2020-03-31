@@ -9,7 +9,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getZones, postCluster } from '../../redux/actions/RetailerActions';
-import Message from "./Message"
+import Message from "../utils/Message"
 
 class ClusterForm extends Component {
 

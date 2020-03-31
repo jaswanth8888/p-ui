@@ -8,7 +8,6 @@ import PersonIcon from '@material-ui/icons/Person';
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import {vendorlogin} from "../../redux/actions/VendorActions"
-import Message from './Message';
 import md5 from 'md5'
 
  class  VenderLogin extends Component {

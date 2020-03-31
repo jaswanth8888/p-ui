@@ -7,7 +7,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import { postGroup } from "../../redux/actions/RetailerActions.jsx";
-import Message from "./Message"
+import Message from "../utils/Message"
 
 
 class AddGroup extends Component {

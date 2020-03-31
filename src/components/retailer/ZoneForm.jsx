@@ -8,7 +8,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux';
 import { postZone } from '../../redux/actions/RetailerActions';
 import './ZoneForm.css';
-import Message from "./Message"
+import Message from "../utils/Message"
 
 
 
