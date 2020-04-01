@@ -24,7 +24,8 @@ import {
   PRODUCTLIST_GET_REQUEST,
   PRODUCT_SAVE_VALUE,
   PRODUCT_GET_REQUEST,
-  ZONECLUSTER_GET_REQUEST
+  ZONECLUSTER_GET_REQUEST,
+  ASSIGN_TO_CLUSTER
 } from "./types";
 import axios from "axios";
 import i18n from "i18next";
@@ -343,7 +344,7 @@ export const getStores = (zone, cluster) => async dispatch => {
 
 export const getProductList = () => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/product-management/productNames", {
+    .get(RETAILER_BASE_URL + "/product-management/product-names", {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
@@ -357,7 +358,7 @@ export const saveProductValue = productValue => dispatch => {
 
 export const getProductDetails = productName => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/product-management/" + productName , {
+    .get(RETAILER_BASE_URL + "/product-management/product-details/" + productName , {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
@@ -365,12 +366,32 @@ export const getProductDetails = productName => async dispatch => {
     });
 };
 
-export const getZoneClusterNames = () => async dispatch => {
+export const getZoneClusterNames = (clusterPattern) => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/product-management" , {
+    .get(RETAILER_BASE_URL + "/product-management/clusters/regex/"+clusterPattern , {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
       dispatch({ type: ZONECLUSTER_GET_REQUEST, zoneclusternames: res.data });
+    });
+};
+
+export const assignToCluster = (clusterDetails,zoneName, clusterName,productName) => async dispatch => {
+  await axios
+    .put(
+      RETAILER_BASE_URL +/product-management/+productName+"/"+zoneName+"/"+clusterName+"/products",clusterDetails,
+      { headers: { Authorization: TOKEN } }
+    )
+    .then(res => {
+      dispatch({
+        type: ASSIGN_TO_CLUSTER,
+        msg: "Product Asigned to Cluster Succesfully"
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: ASSIGN_TO_CLUSTER,
+        msg: ""
+      });
     });
 };
