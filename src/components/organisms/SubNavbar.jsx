@@ -14,6 +14,7 @@ import ViewZones from "../retailer/ViewZones.jsx";
 import ZoneForm from "../retailer/ZoneForm.jsx";
 import QueryOnDateRange from "../retailer/QueryOnDateRange.jsx"
 import { useTranslation } from "react-i18next";
+import QueryOnDateRouter from "../retailer/QueryOnDateRouter.jsx";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -83,7 +84,7 @@ export default function VerticalTabs() {
         <Tab label={t("welcome.createStore")} />
         <Tab label={t("welcome.viewZones")} />
         <Tab label={t("welcome.viewClusters")} />
-        <Tab label={t("queryOnDateRange")} />
+        <Tab label={t("welcome.queryOnDateRange")} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <AddGroup />
@@ -106,8 +107,8 @@ export default function VerticalTabs() {
       <TabPanel value={value} index={6}>
         <ViewClusters />
       </TabPanel>
-      <TabPanel value={value} index={7}>
-        <QueryOnDateRange/>
+      <TabPanel value={value} index={7} to ="/queryondaterange">
+        <QueryOnDateRouter/>
       </TabPanel>
     </div>
   );

@@ -20,7 +20,8 @@
     "viewZones": "VOIR LES ZONES",
     "viewClusters": "VOIR LES CLUSTERS",
     "addGroup": "Ajouter un groupe",
-    "addProducttoStore": "Ajouter un produit au magasin"
+    "addProducttoStore": "Ajouter un produit au magasin",
+    "queryOnDateRange":"requête sur la plage de dates"
   },
   "zoneForm": {
     "lengthTooShort": "La zone doit être supérieure à 5 lettres",

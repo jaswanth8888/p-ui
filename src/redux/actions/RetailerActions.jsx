@@ -20,7 +20,9 @@ import {
   CLUSTER_GET_REQUEST,
   STORE_POST_REQUEST,
   FAILURE,
-  MESSAGE_SET_NULL
+  MESSAGE_SET_NULL,
+  PRODUCT_GET_BYRANGE
+  
 } from "./types";
 import axios from "axios";
 import i18n from "i18next";
@@ -273,23 +275,8 @@ export const getProducts = category => async dispatch => {
       dispatch({ type: FAILURE });
     });
 };
-export const getProductsInRange = (fromDate,toDate,) => async dispatch => {
-  await axios
-   .get("http://10.102.136.199:9500/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D", {
-      headers: { Authorization: TOKEN }
-    })
-    .then(res => {
-      console.log(res.data)
-      console.log("http://10.102.136.199:9500/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D")
-      alert("sucess")
-      dispatch({ type: PRODUCTS_GET_REQUEST, products: res.data });
-    })
-    .catch(err => {
-      console.log("http://10.102.133.228:9500/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D")
-      alert(err)
-      dispatch({ type: FAILURE });
-    });
-};
+
+
 export const saveZoneValue = zoneValue => dispatch => {
   dispatch({ type: ZONE_SAVE_VALUE, zone: zoneValue });
 };
@@ -350,6 +337,24 @@ export const getStores = (zone, cluster) => async dispatch => {
       dispatch({ type: STORE_GET_REQUEST, stores: res.data });
     })
     .catch(err => {
+      dispatch({ type: FAILURE });
+    });
+};
+export const getProductsInRange = (fromDate,toDate,) => async dispatch => {
+  await axios
+   .get( "http://10.150.222.113:9500/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D", {
+      headers: { Authorization: TOKEN }
+    })
+    .then(res => {
+      console.log(res.data)
+      console.log("http://10.102.136.199:9500/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D")
+      alert("getbyrange")
+      dispatch({ type: PRODUCT_GET_BYRANGE, products: res.data });
+    })
+    .catch(err => {
+      console.log("http://10.102.136.199:9500/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D")
+     // alert(err)
+     alert("fail")
       dispatch({ type: FAILURE });
     });
 };

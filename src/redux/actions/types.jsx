@@ -44,5 +44,6 @@ export const STORE_SAVE_VALUE="STORE_SAVE_VALUE";
 
 export const CATEGORIES_GET_REQUEST="CATEGORIES_GET_REQUEST";
 export const PRODUCTS_GET_REQUEST="PRODUCTS_GET_REQUEST"
+export const PRODUCT_GET_BYRANGE="PRODUCT_GET_BYRANGE"
 
 export const TOKEN='BearerR '+sessionStorage.getItem("token");

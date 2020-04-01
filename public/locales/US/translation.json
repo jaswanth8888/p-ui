@@ -20,7 +20,8 @@
     "viewZones": "VIEW ZONES",
     "viewClusters": "VIEW CLUSTERS",
     "addGroup": "Add Group",
-    "addProducttoStore": "Add Product to Store"
+    "addProducttoStore": "Add Product to Store",
+    "queryOnDateRange":"Query On Date Range"
   },
   "zoneForm": {
     "lengthTooShort": "Zone has to be greater than 5 letters",
