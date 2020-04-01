@@ -119,7 +119,6 @@ function Navbar(props) {
     </Router>
   );
 }
-
 const stateAsProps = store => ({
   loggedInUser: store.RetailerReducer.loggedInUser,
   login_status: store.RetailerReducer.login_status

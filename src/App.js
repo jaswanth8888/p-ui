@@ -25,7 +25,6 @@ else {
     store = createStore(rootReducer,
         composeWithDevTools(applyMiddleware(thunk)));
 }
-
 // the callback to subscribe is executed everytime the state changes
 // in the store
 store.subscribe(() => {
@@ -51,7 +50,6 @@ store.subscribe(() => {
          <Navbar />
          </div>
       <div>
-      
           <Router >
                     <Switch>
                       <Route exact={true} path="/vendor" component={VendorLogin} />

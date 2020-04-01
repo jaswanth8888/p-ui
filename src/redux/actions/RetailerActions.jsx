@@ -247,10 +247,11 @@ export const getStoreList = () => async dispatch => {
     });
 };
 
-export const getCategories = () => async dispatch => {
+export const getCategories=() => async dispatch => {
   await axios
     .get(RETAILER_BASE_URL + "/product-management/categories", {
       headers: { Authorization: TOKEN }
+
     })
     .then(res => {
       dispatch({ type: CATEGORIES_GET_REQUEST, categories: res.data });
@@ -262,7 +263,7 @@ export const getCategories = () => async dispatch => {
 
 export const getProducts = category => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/product-management/" + category + "/products", {
+    .get(RETAILER_BASE_URL+"/product-management/"+ category + "/products", {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
@@ -272,7 +273,23 @@ export const getProducts = category => async dispatch => {
       dispatch({ type: FAILURE });
     });
 };
-
+export const getProductsInRange = (fromDate,toDate,) => async dispatch => {
+  await axios
+   .get("http://10.102.136.199:9500/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D", {
+      headers: { Authorization: TOKEN }
+    })
+    .then(res => {
+      console.log(res.data)
+      console.log("http://10.102.136.199:9500/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D")
+      alert("sucess")
+      dispatch({ type: PRODUCTS_GET_REQUEST, products: res.data });
+    })
+    .catch(err => {
+      console.log("http://10.102.133.228:9500/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D")
+      alert(err)
+      dispatch({ type: FAILURE });
+    });
+};
 export const saveZoneValue = zoneValue => dispatch => {
   dispatch({ type: ZONE_SAVE_VALUE, zone: zoneValue });
 };

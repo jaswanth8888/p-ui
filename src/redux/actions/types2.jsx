@@ -4,8 +4,9 @@ export const VENDOR_LOGOUT = "VENDOR_LOGOUT";
 export const VENDOR_FAILURE = "VENDOR-FAILURE";
 //1.
 
+export const RETAILER_BASE_URL = "http://10.150.222.113:8765"
 // export const RETAILER_BASE_URL = "http://localhost:3000/";
-export const RETAILER_BASE_URL = "http://localhost:8765";
+//export const RETAILER_BASE_URL = "http://localhost:8765";
 export const MESSAGE_SET_NULL="MESSAGE_SET_NULL";
 //2.
 

@@ -9,8 +9,6 @@ export const registration=(registrationdetails)=>async(dispatch)=>{
             dispatch({type:registerconstants.REGISTER_SUCCESS,register_status:{registered:true,msg:""}})
 
         }
-
-
     ).catch((res)=>{
         console.log("failed Registration");
         dispatch({type:registerconstants.REGISTER_FAILURE,register_status:{registered:false,error:true,msg:"Registration Failed"}})

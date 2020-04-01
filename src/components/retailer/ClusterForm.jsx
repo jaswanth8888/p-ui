@@ -15,7 +15,6 @@ class ClusterForm extends Component {
 
   constructor(props) {
     super(props)
-
     this.state = {
       zone: "",
       clusterName: "",
@@ -27,19 +26,14 @@ class ClusterForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
-
-
   componentDidMount() {
-
     this.props.getAllZones();
   }
-
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
 
   }
-
   handleSubmit(e) {
     e.preventDefault();
     let cluster = { clusterName: this.state.clusterName, taxRate: this.state.taxRate }
@@ -108,6 +102,7 @@ class ClusterForm extends Component {
                   {this.props.zones.map((zone, index) => {
                     return <option value={zone} key={index}>{zone}</option>
                   })}
+
                 </Select>
               </FormControl>
               <TextField
@@ -141,7 +136,6 @@ class ClusterForm extends Component {
                 value={this.state.taxRate}
                 autoFocus
               />
-
               <Button
                 type="button"
                 fullWidth
@@ -174,7 +168,6 @@ class ClusterForm extends Component {
     )
   }
 }
-
 const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
 });

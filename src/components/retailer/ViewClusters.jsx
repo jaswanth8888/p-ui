@@ -11,13 +11,9 @@ import { getClusterList } from '../../redux/actions/RetailerActions';
 class ViewClusters extends Component {
     constructor(props) {
         super(props)
-
         this.props.getClusterList();
     }
-
-
     render() {
-
         return (
             <div className="box-container" style = {{alignItems : "flex-start" , marginTop : "150px"}}>
                 <TableContainer component={Paper} style = {{width:"500px"}}>

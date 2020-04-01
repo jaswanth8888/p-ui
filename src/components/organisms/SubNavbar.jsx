@@ -12,6 +12,7 @@ import StoreForm from "../retailer/StoreForm.jsx";
 import ViewClusters from "../retailer/ViewClusters.jsx";
 import ViewZones from "../retailer/ViewZones.jsx";
 import ZoneForm from "../retailer/ZoneForm.jsx";
+import QueryOnDateRange from "../retailer/QueryOnDateRange.jsx"
 import { useTranslation } from "react-i18next";
 
 function TabPanel(props) {
@@ -74,6 +75,7 @@ export default function VerticalTabs() {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
+
         <Tab label={t("welcome.addGroup")} />
         <Tab label={t("welcome.addProducttoStore")} />
         <Tab label={t("welcome.createZone")} />
@@ -81,12 +83,13 @@ export default function VerticalTabs() {
         <Tab label={t("welcome.createStore")} />
         <Tab label={t("welcome.viewZones")} />
         <Tab label={t("welcome.viewClusters")} />
+        <Tab label={t("queryOnDateRange")} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <AddGroup />
       </TabPanel>
       <TabPanel value={value} index={1} to="/addproductstostore">
-        <ProductRouter />
+        <ProductRouter/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <ZoneForm />
@@ -102,6 +105,9 @@ export default function VerticalTabs() {
       </TabPanel>
       <TabPanel value={value} index={6}>
         <ViewClusters />
+      </TabPanel>
+      <TabPanel value={value} index={7}>
+        <QueryOnDateRange/>
       </TabPanel>
     </div>
   );
