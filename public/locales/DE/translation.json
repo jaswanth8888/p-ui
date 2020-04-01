@@ -20,7 +20,14 @@
     "viewZones": "ZONEN ANZEIGEN",
     "viewClusters": "CLUSTER ANZEIGEN",
     "addGroup": "Gruppe hinzufügen",
-    "addProducttoStore": "Produkt zum Store hinzufügen"
+    "addProducttoStore": "Produkt zum Store hinzufügen",
+    "createGroup": "Erstellen Sie eine Gruppe"
+  },
+  "groupForm": {
+    "groupName": "Gruppenname",
+    "save": "Speichern",
+    "lengthTooShort": "Die Gruppe muss größer als 5 Buchstaben sein",
+    "requirements": "Bedarf"
   },
   "zoneForm": {
     "lengthTooShort": "Die Zone muss größer als 5 Buchstaben sein",
