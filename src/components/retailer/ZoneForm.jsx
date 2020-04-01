@@ -7,7 +7,6 @@ import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux';
 import { postZone } from '../../redux/actions/RetailerActions';
-import './ZoneForm.css';
 import Message from "../utils/Message"
 
 
@@ -59,12 +58,12 @@ class ZoneForm extends Component {
           <div className="validation-half" style={{ background: "#673ab7" }}>
             <div className="validations">
               <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {this.state.zoneName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              {this.state.zoneName.length <= 5 && <div className="typo-div"><ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Zone has to be greater than 5 letters
                 </Typography></div>}
               {this.state.zoneName.length > 5 &&
-                <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <div className="approved-text"><CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Zone has to be greater than 5 letters
                 </Typography></div>}
@@ -78,10 +77,8 @@ class ZoneForm extends Component {
                     color="primary"
                     component="h1"
                     variant="h4"
-                    style=
-                    {{
-                      fontFamily: "font-family: 'Open Sans', sans-serif;"
-                    }}>
+                    className="help-block-h4"
+                    >
                     Create a Zone
                   </Typography>
                 </div>
@@ -118,8 +115,7 @@ class ZoneForm extends Component {
                 fullWidth
                 variant="contained"
                 color="primary"
-                className="{classes.submit}"
-                style={{ marginTop: "30px" }}
+                className="{classes.submit} submit-pad"
                 onClick={this.handleSubmit}>
                 Save
               </Button>

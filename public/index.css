@@ -1,0 +1,302 @@
+.form-full-center{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:700px;
+    left: 0;
+    right: 0;
+    width:100%;
+    height:auto;
+}
+
+.box-container-start{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:40px;
+}
+
+.joint-form-assign{
+    position: relative;
+    box-shadow: 0px 10px 17px 6px rgba(0,0,0,0.24);
+    width:850px;
+    display: flex;
+    justify-content: center;
+}
+
+.product-details{
+    position: absolute;
+    top:250px;
+    left: 15;
+    right: 15;
+    width:805px;
+    height:100%;
+    margin-left: auto;
+}
+
+.box-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:40px;
+    width:100%;
+    height:100%;
+}
+
+
+.validation-half{
+    flex:0.4;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height:100%;
+    color:white;
+    background-color: #673ab7;
+}
+
+.validations{
+    padding:20px;
+}
+
+.flex-column{
+    flex-direction: column-reverse;
+}
+
+p{
+    font-size: 15px;
+}
+
+
+#store-submit-btn{
+    width: 90%;
+    margin-left:40px;
+    margin-bottom:40px;
+}
+
+.store-requirement{
+    width:100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height:170px;
+    color:white;
+    background-color: #673ab7;
+}
+
+p{
+    font-size: 15px;
+}
+
+
+.joint-form{
+    height:600px;
+    width: 850px;
+    display: flex;
+    box-shadow: 0px 10px 17px 6px rgba(0,0,0,0.24);
+}
+
+
+
+.form-half{
+    flex:0.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:40px;
+}
+
+.flex-grid{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.2);
+    padding:20px;
+    border-radius: 4px;
+}
+
+.top-desc{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.middle-desc{
+    display: flex;
+    justify-content: space-between;
+    height:200px;
+}
+/* 
+.image-half{
+    height:100%;
+    width:100%;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+} */
+
+.image-half img{
+    height:200px;
+    width:200px;
+}
+
+.data-half{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:100%;
+}
+
+.data-half-upper , .data-half-lower{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+}
+
+.bottom-desc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-space{
+    padding:20px;
+}
+
+.add-prods{
+    justify-content: flex-start;
+    flex-direction: column
+}
+
+.product-form-header{
+    width: 95%;
+    margin: 40px;
+    margin-bottom: 0px
+}
+
+.product-form-body{
+    width: 95%;
+    margin: 40px;
+    margin-bottom: 0px
+}
+
+th{
+    background-color: #673ab7 !important;
+    color: white !important;
+    
+}
+
+td,th{
+    text-align:center !important;
+}
+
+input[type=checkbox]{
+    margin-top:-2px;
+}
+
+.disabled{
+    color:grey
+}
+
+a{
+    text-decoration: none
+}
+
+.icon-style{
+    padding-right: 5px;
+    margin-top: -2px
+}
+
+.typo-div{
+    display: flex;
+}
+
+.approved-text{
+    display: flex;
+    color: #ffc107
+}
+
+.help-block-h4{
+
+    font-family: 'Open Sans', sans-serif;
+    position: relative;
+    top: -20px
+                    
+}
+
+.submit-pad{
+    margin-top:30px !important;
+}
+
+.center-h3{
+    text-align: center;
+}
+
+.joint-form-store-style{
+
+    font-family: 'Open Sans', sans-serif;
+    position: absolute;
+    top: 210px;
+    left: 40px;
+
+}
+
+.empty-submit{
+    margin-top: 30px;
+    pointer-events: none !important;
+    opacity: 0 
+}
+
+#top-desc-h5{
+    padding:20px 0px;
+}
+
+.space-margin-top{
+    margin-top:30px !important;
+}
+
+#special-href{
+    text-decoration : "none";
+    opacity : 0;
+    pointer-events:"none"
+}
+
+.advanced-form-container{
+    display: flex;
+    justify-content: space-between;
+    padding:20px 40px;
+}
+
+.form-first-half{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex:0.47;
+
+}
+
+.form-second-half{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex:0.47;
+}
+
+.special-store-help{
+    margin-left:40px !important;
+    margin-top:20px !important;
+}
+
+#special-add-prods-help{
+    margin-top:60px !important;
+}
+
+.expanded-form{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

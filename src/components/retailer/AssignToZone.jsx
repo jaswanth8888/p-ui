@@ -16,12 +16,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
-import "./AddProducts.css";
-import "./Table.css";
 import ProductDetails from "../utils/ProductDetails";
-
-import "./StoreForm.css";
 
 class AssignToZone extends Component {
   constructor(props) {
@@ -36,22 +31,17 @@ class AssignToZone extends Component {
   render() {
     return (
       <div className="box-container store-form">
-        <div className="joint-form" style={{ width: "850px" }}>
+        <div className="joint-form">
           <Typography
             color="primary"
             component="h1"
             variant="h4"
-            style=
-            {{
-              fontFamily: "font-family: 'Open Sans', sans-serif;",
-              position: "absolute",
-              top: "210px",
-              left: "40px"
-            }}>
+            className= "joint-form-store-style"
+            >
             Assign to Zone
         </Typography>
           <div className="store-requirement">
-            <h3 style={{ textAlign: "center" }}>Requirements</h3>
+            <h3 className = "center-h3">Requirements</h3>
           </div>
         </div>
 

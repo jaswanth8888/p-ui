@@ -8,7 +8,6 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { Component, default as React, Fragment } from "react";
 import { connect } from "react-redux";
 import { getZoneClusterNames } from "../../redux/actions/RetailerActions";
-import './AssignToCluster.css'
 import ProductDetails from "../utils/ProductDetails";
 
 class AssignToCluster extends Component {
@@ -60,7 +59,7 @@ class AssignToCluster extends Component {
           </div>
           <div className="form-full-center">
 
-            <form className="{classes.form}" noValidate style = {{width:"95%"}} >
+            <form className="{classes.form}" noValidate >
 
               <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-age-native-simple">Enter Cluster</InputLabel>
@@ -116,9 +115,8 @@ class AssignToCluster extends Component {
                 type="button"
                 variant="contained"
                 color="primary"
-                className="{classes.submit}"
+                className="{classes.submit} submit-pad"
                 onClick={this.handleSubmit}
-                style = {{marginTop : "10px"}}
               >
                 Save
               </Button>

@@ -180,9 +180,8 @@ import md5 from 'md5'
                   fullWidth
                   variant="contained"
                   color="primary"
-                  className="{classes.submit}"
+                  className="{classes.submit} submit-pad"
                   onClick={this.handleSubmit}
-                  style = {{marginTop:"30px"}}
                 >
                   Login
                 </Button>
