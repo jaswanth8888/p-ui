@@ -52,6 +52,15 @@ class SelectProduct extends Component {
                     <div className="validation-half" style={{ background: "#673ab7" }}>
                         <div className="validations">
                             <h3 style={{ textAlign: "center" }}>Requirements</h3>
+                            {this.state.productName.length === "" && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Please provide a product name
+                </Typography></div>}
+                {this.state.productName.length > 0 &&
+                <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Please provide a product name
+                  </Typography></div>}
                         </div>
                     </div>
                     <div className="form-half">

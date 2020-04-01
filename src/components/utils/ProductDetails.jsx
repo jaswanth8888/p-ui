@@ -55,7 +55,7 @@ class ProductDetails extends Component {
                             <br></br>
  
                         </Grid>
-                        <Grid item xs={12} align="center" style={{background:"lightcyan"}}>
+                        <Grid item xs={12} align="center" >
                             <Paper>
                             <Typography >
                                 Description : {this.props.productDetails.desc}

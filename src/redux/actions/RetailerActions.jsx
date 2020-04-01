@@ -23,7 +23,8 @@ import {
   MESSAGE_SET_NULL,
   PRODUCTLIST_GET_REQUEST,
   PRODUCT_SAVE_VALUE,
-  PRODUCT_GET_REQUEST
+  PRODUCT_GET_REQUEST,
+  ZONECLUSTER_GET_REQUEST
 } from "./types";
 import axios from "axios";
 import i18n from "i18next";
@@ -361,5 +362,15 @@ export const getProductDetails = productName => async dispatch => {
     })
     .then(res => {
       dispatch({ type: PRODUCT_GET_REQUEST, productDetails: res.data });
+    });
+};
+
+export const getZoneClusterNames = () => async dispatch => {
+  await axios
+    .get(RETAILER_BASE_URL + "/product-management" , {
+      headers: { Authorization: TOKEN }
+    })
+    .then(res => {
+      dispatch({ type: ZONECLUSTER_GET_REQUEST, zoneclusternames: res.data });
     });
 };

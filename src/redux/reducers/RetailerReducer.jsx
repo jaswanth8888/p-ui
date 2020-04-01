@@ -4,7 +4,7 @@ import { LOGIN_USER, MESSAGE_SET_NULL, LOGIN_FAILURE,
     ZONE_GET_REQUEST, CLUSTER_GET_REQUEST, STORE_POST_REQUEST, 
     STORE_GET_REQUEST, STORELIST_GET_REQUEST, CATEGORIES_GET_REQUEST, 
     PRODUCTS_GET_REQUEST, ZONE_SAVE_VALUE, CLUSTER_SAVE_VALUE, 
-    STORE_SAVE_VALUE, PRODUCTLIST_GET_REQUEST, PRODUCT_SAVE_VALUE,PRODUCT_GET_REQUEST } from "../actions/types";
+    STORE_SAVE_VALUE, PRODUCTLIST_GET_REQUEST, PRODUCT_SAVE_VALUE,PRODUCT_GET_REQUEST, ZONECLUSTER_GET_REQUEST } from "../actions/types";
 
 const initialState = {
     loggedInUser: null,
@@ -26,7 +26,8 @@ const initialState = {
     clusterList: {},
     productList: ["shampoo", "grapes", "apple", "banana", "carrot", "shampooBottle"],
     product: "",
-    productDetails:{productName:"shampoo", vendor:"Nidhi", base:"100", quantity:"3",category:"alcohol",desc:"Fresh and subtle fruit notes, a delicate malt sweetness and balanced bitterness for a clean, snappy finish. Budweiser is a medium-bodied, flavorful, crisp and pure beer with blended layers of premium American and European hop aromas, brewed for the perfect balance of flavor and refreshment"}
+    productDetails:{productName:"shampoo", vendor:"Nidhi", base:"100", quantity:"3",category:"alcohol",desc:"Fresh and subtle fruit notes, a delicate malt sweetness and balanced bitterness for a clean, snappy finish. Budweiser is a medium-bodied, flavorful, crisp and pure beer with blended layers of premium American and European hop aromas, brewed for the perfect balance of flavor and refreshment"},
+    zoneclusternames:["India-Bangalore","India-Chennai"]
 };
 export default (state = initialState, action = {}) => {
 
@@ -80,6 +81,8 @@ export default (state = initialState, action = {}) => {
             return { ...state, product: action.product }
         case PRODUCT_GET_REQUEST:
             return { ...state, productDetails: action.productDetails }
+        case ZONECLUSTER_GET_REQUEST:
+            return { ...state, zoneclusternames: action.zoneclusternames }
         default:
             return { ...state }
     }
