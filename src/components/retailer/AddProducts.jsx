@@ -93,6 +93,7 @@ class AddProducts extends Component {
   }
 
   render() {
+    const tableCellData = ['Select', 'Product Name', 'Vendor Name','Quantity Available','Quantity Required']
     return (
       <div
         className="box-container"
@@ -139,21 +140,10 @@ class AddProducts extends Component {
                   style={{ backgroundColor: "#673ab7", color: "white" }}
                 >
                   <TableRow>
-                    {/* <TableCell>CheckBox</TableCell> */}
-                    <TableCell style={{ color: "White" }}>Select</TableCell>
-                    <TableCell style={{ color: "White" }}>
-                      Product Name
-                    </TableCell>
-                    <TableCell style={{ color: "White" }}>Price</TableCell>
-                    <TableCell style={{ color: "White" }}>
-                      Vendor Name
-                    </TableCell>
-                    <TableCell style={{ color: "White" }}>
-                      Quantity Available
-                    </TableCell>
-                    <TableCell style={{ color: "White" }}>
-                      Quantity Required
-                    </TableCell>
+                    {tableCellData.map(value=>
+                      (<TableCell style={{ color: "White" }}>
+                      {value}
+                    </TableCell>))}
                   </TableRow>
                 </TableHead>
 
