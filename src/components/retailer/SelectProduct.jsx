@@ -49,15 +49,15 @@ class SelectProduct extends Component {
 
             <div className="box-container">
                 <div className="joint-form">
-                    <div className="validation-half" style={{ background: "#673ab7" }}>
+                    <div className="validation-half">
                         <div className="validations">
-                            <h3 style={{ textAlign: "center" }}>Requirements</h3>
-                            {this.state.productName.length === "" && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                            <h3 className="center-h3">Requirements</h3>
+                            {this.state.productName.length === "" && <div className="typo-div"><ClearIcon  className = "icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Please provide a product name
                 </Typography></div>}
                 {this.state.productName.length > 0 &&
-                <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <div className="approved-text"><CheckIcon className = "icon-style"/>
                   <Typography variant="subtitle2" gutterBottom>
                     Please provide a product name
                   </Typography></div>}
@@ -71,14 +71,10 @@ class SelectProduct extends Component {
                                         color="primary"
                                         component="h1"
                                         variant="h4"
-                                        style=
-                                        {{
-                                            fontFamily: "font-family: 'Open Sans', sans-serif;",
-                                            position: "relative",
-                                            top: "-20px"
-                                        }}>
+                                        className = "help-block-h4"
+                                        >
                                         Select a Product
-                </Typography>
+                                    </Typography>
                                 </div>
                             </div>
                             <FormControl variant="outlined" fullWidth>
@@ -92,30 +88,31 @@ class SelectProduct extends Component {
                                     name="productName"
                                 />
                             </FormControl>
-                            {( this.state.productName == "") &&
-                                <Link to='/selectproduct'  style = {{textDecoration : "none"}}>
+                            {( this.state.productName === "") &&
+                                <Link to='/selectproduct'>
                                 </Link>}
 
-                            <Link to='/assigntocluster' style={{ textDecoration: "none" }}>
+                            <Link to='/assigntocluster'>
                                 <Button
                                     type="button"
                                     fullWidth
                                     variant="contained"
                                     color="primary"
-                                    className="{classes.submit}"
-                                    style={{ marginTop: "30px" }}>
+                                    className="{classes.submit} submit-pad"
+                                >
                                     Assign Price and Cluster
+                                
                                     </Button>
                             </Link>
 
-                            <Link to='/assigntozone' style={{ textDecoration: "none" }}>
+                            <Link to='/assigntozone'>
                                 <Button
                                     type="button"
                                     fullWidth
                                     variant="contained"
                                     color="primary"
-                                    className="{classes.submit}"
-                                    style={{ marginTop: "30px" }}>
+                                    className="{classes.submit} submit-pad"
+                                    >
                                     Assign Price and Zone
                                     </Button>
                             </Link>

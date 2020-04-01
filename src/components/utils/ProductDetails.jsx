@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react'
 import connect from 'react-redux/es/connect/connect'
 import { getProductDetails } from "../../redux/actions/RetailerActions";
 import { Grid, Typography, Paper } from "@material-ui/core";
-import "./ProductDetails.css"
 
 
 
@@ -25,7 +24,7 @@ class ProductDetails extends Component {
         return (
             <div className="flex-grid">
                 <div className="top-desc">
-                    <Typography variant="h5" gutterBottom style={{ padding: "20px 0px" }}>
+                    <Typography variant="h5" gutterBottom id="top-desc-h5">
                         Name : {this.props.productDetails.productName}
                     </Typography>
                 </div>
@@ -62,7 +61,7 @@ class ProductDetails extends Component {
                     </div>
                 </div>
                 <div className="bottom-desc">
-                    <Typography  variant="body2" style={{ padding: "20px 0px" }}>
+                    <Typography  variant="body2">
                         Description : {this.props.productDetails.desc}
                     </Typography>
                 </div>

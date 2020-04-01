@@ -8,7 +8,6 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { Component, default as React, Fragment } from "react";
 import { connect } from "react-redux";
 import { getZones, assignToZone } from "../../redux/actions/RetailerActions";
-import './AssignToZone.css'
 import ProductDetails from "../utils/ProductDetails";
 
 class AssignToZone extends Component {
