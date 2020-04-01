@@ -345,7 +345,7 @@ export const getStores = (zone, cluster) => async dispatch => {
 
 export const getProductList = () => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/product-management/product-names", {
+    .get(RETAILER_BASE_URL + "/product-management/products/names", {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
@@ -369,7 +369,7 @@ export const getProductDetails = productName => async dispatch => {
 
 export const getZoneClusterNames = (clusterPattern) => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/product-management/clusters/regex/"+clusterPattern , {
+    .get(RETAILER_BASE_URL + "/location-management/clusters/regex/"+clusterPattern , {
       headers: { Authorization: TOKEN }
     })
     .then(res => {

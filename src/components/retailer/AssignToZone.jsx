@@ -91,7 +91,7 @@ class AssignToZone extends Component {
                   ref="zone"
                   fullWidth
                   native
-                  value={this.state.zoneNam}
+                  //value={this.state.zoneName}
                   onChange={this.handleChangeZoneName}
                   label="Enter zone"
                   inputProps={{
