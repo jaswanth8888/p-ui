@@ -6,43 +6,45 @@ import ClearIcon from "@material-ui/icons/Clear";
 import MuiAlert from "@material-ui/lab/Alert";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { postZone } from "../../redux/actions/RetailerActions.js";
-import "./ZoneForm.css";
+import { postGroup } from "../../redux/actions/RetailerActions.js";
 import Message from "../utils/Message";
 import { withTranslation } from "react-i18next";
 
-class ZoneForm extends Component {
+class AddGroup extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      zoneName: "",
-      liquorPricePerUnit: "",
-      isSubmit: false,
+      group: {
+        groupName: ""
+      },
       status: 0
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    let group = this.state.group;
+    group[name] = value;
+    this.setState({ group });
   }
+
+  is_validGroupName = () => {
+    if (this.state.group.groupName.length > 0) {
+      this.setState({ status: 1 });
+    } else {
+      this.setState({ status: -1 });
+      return false;
+    }
+    return true;
+  };
 
   handleSubmit(e) {
     e.preventDefault();
-    let zone = {
-      zoneName: this.state.zoneName,
-      liquorPricePerUnit: this.state.liquorPricePerUnit
-    };
-
-    if (this.state.zoneName.length > 5) {
-      this.props.postZone(zone);
-      this.setState({ isSubmit: true, status: 1 });
-    } else {
-      this.setState({ isSubmit: false, status: -1 });
+    if (this.is_validGroupName()) {
+      this.props.postGroup({ ...this.state.group }); // thunk action
     }
   }
 
@@ -54,26 +56,25 @@ class ZoneForm extends Component {
           <div className="validation-half" style={{ background: "#673ab7" }}>
             <div className="validations">
               <h3 style={{ textAlign: "center" }}>
-                {" "}
-                {t("zoneForm.requirements")}
+                {t("groupForm.requirements")}
               </h3>
-              {this.state.zoneName.length <= 5 && (
+              {this.state.group.groupName.length <= 0 && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
                   />
                   <Typography variant="subtitle2" gutterBottom>
-                    {t("zoneForm.lengthTooShort")}
+                    {t("groupForm.lengthTooShort")}
                   </Typography>
                 </div>
               )}
-              {this.state.zoneName.length > 5 && (
+              {this.state.group.groupName.length > 0 && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
                   />
                   <Typography variant="subtitle2" gutterBottom>
-                    {t("zoneForm.lengthTooShort")}
+                    {t("welcome.createGroup")}
                   </Typography>
                 </div>
               )}
@@ -88,10 +89,12 @@ class ZoneForm extends Component {
                     component="h1"
                     variant="h4"
                     style={{
-                      fontFamily: "font-family: 'Open Sans', sans-serif;"
+                      fontFamily: "font-family: 'Open Sans', sans-serif;",
+                      position: "relative",
+                      top: "-20px"
                     }}
                   >
-                    {t("zoneForm.createZone")}
+                    {t("welcome.createGroup")}
                   </Typography>
                 </div>
               </div>
@@ -100,28 +103,12 @@ class ZoneForm extends Component {
                 margin="normal"
                 required
                 fullWidth
-                id="zoneName"
-                label={t("zoneForm.zoneName")}
-                name="zoneName"
-                autoComplete="zoneName"
+                id="groupName"
+                label={t("groupForm.groupName")}
+                name="groupName"
                 onChange={this.handleChange}
                 autoFocus
               />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                type="number"
-                step="0.01"
-                id="liquorPricePerUnit"
-                label={t("zoneForm.pricePerUnit")}
-                name="liquorPricePerUnit"
-                autoComplete="pricePerUnit"
-                onChange={this.handleChange}
-                autoFocus
-              />
-
               <Button
                 type="button"
                 fullWidth
@@ -131,17 +118,18 @@ class ZoneForm extends Component {
                 style={{ marginTop: "30px" }}
                 onClick={this.handleSubmit}
               >
-                {t("zoneForm.save")}
+                {t("groupForm.save")}
               </Button>
             </form>
           </div>
         </div>
+
         <Fragment>
           {this.state.status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
-                  Zone creation failed. Please match the requirements
+                  Group creation failed. Please match the requirements
                 </MuiAlert>
               </Snackbar>
             </div>
@@ -156,6 +144,6 @@ class ZoneForm extends Component {
 }
 
 const actionAsProps = {
-  postZone: postZone
+  postGroup: postGroup
 };
-export default connect(null, actionAsProps)(withTranslation()(ZoneForm));
+export default connect(null, actionAsProps)(withTranslation()(AddGroup));

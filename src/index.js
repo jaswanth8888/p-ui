@@ -1,10 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+  responsiveFontSizes
+} from "@material-ui/core/styles";
+import Button from '@material-ui/core/Button';
+import React, { Suspense } from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
 
+import deepPurple from "@material-ui/core/colors/deepPurple";
+import amber from "@material-ui/core/colors/amber";
+import "./i18n";
 
+let theme = createMuiTheme({
+  palette: {
+    primary: deepPurple,
+    secondary: amber
+  }
+});
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-serviceWorker.unregister();
+theme = responsiveFontSizes(theme);
+ReactDOM.render(
+  <Suspense fallback={<div>Loading</div>}>
+    <MuiThemeProvider theme={theme}>
+    <App />
+    </MuiThemeProvider>
+  </Suspense>,
+  
+  document.getElementById("root")
+);

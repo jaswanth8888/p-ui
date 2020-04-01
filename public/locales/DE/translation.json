@@ -1,0 +1,82 @@
+{
+  "please fill username": "Bitte geben Sie den Benutzernamen ein",
+  "please fill password": "Bitte Passwort eingeben",
+  "header": {
+    "logIn": "Anmeldung",
+    "logOut": "Ausloggen",
+    "title": "Einzelhandelsanwendung",
+    "home": "Accueil"
+  },
+  "login": {
+    "signIn": "Einloggen",
+    "userName": "Nutzername",
+    "password": "Passwort",
+    "invalidCredentials": "Benutzername / Kennwort ungültig"
+  },
+  "welcome": {
+    "createZone": "ZONE ERSTELLEN",
+    "createCluster": "CLUSTER ERSTELLEN",
+    "createStore": "STORE ERSTELLEN",
+    "viewZones": "ZONEN ANZEIGEN",
+    "viewClusters": "CLUSTER ANZEIGEN",
+    "addGroup": "Gruppe hinzufügen",
+    "addProducttoStore": "Produkt zum Store hinzufügen",
+    "createGroup": "Erstellen Sie eine Gruppe"
+  },
+  "groupForm": {
+    "groupName": "Gruppenname",
+    "save": "Speichern",
+    "lengthTooShort": "Die Gruppe muss größer als 5 Buchstaben sein",
+    "requirements": "Bedarf"
+  },
+  "zoneForm": {
+    "lengthTooShort": "Die Zone muss größer als 5 Buchstaben sein",
+    "requirements": "Bedarf",
+    "createZone": "Erstellen sie eine zone",
+    "zoneName": "Zonenname",
+    "pricePerUnit": "Preis pro einheit",
+    "save": "Speichern",
+    "noZoneMsg": "Bitte geben sie den zonennamen ein"
+  },
+  "clusterForm": {
+    "lengthTooShort": "Der Cluster muss größer als 5 Buchstaben sein",
+    "requirements": "Bedarf",
+    "enterZone": "Zone eingeben",
+    "selectZone": "Wählen sie zone",
+    "clusterName": "Clustername",
+    "taxRate": "Steuersatz",
+    "save": "Speichern"
+  },
+  "storeForm": {
+    "lengthTooShort": "Der Name des Geschäfts muss aus mehr als 5 Buchstaben bestehen",
+    "requirements": "Bedarf",
+    "enterZone": "Zone eingeben",
+    "selectZone": "Wählen Sie zone",
+    "enterCluster": "Cluster eingeben",
+    "selectCluster": "Cluster auswählen",
+    "storeName": "Geschäftsname",
+    "address": "Adresse",
+    "streetName": "Straßenname",
+    "city": "Stadt",
+    "pinCode": "Geheimzahl",
+    "submit": "einreichen"
+  },
+  "zoneList": {
+    "zoneName": "Zonenname",
+    "numberOfClusters": "Anzahl der cluster"
+  },
+  "clusterList": {
+    "clusterName": "Clustername",
+    "numberOfStores": "Anzahl der geschäfte"
+  },
+  "message": {
+    "zoneSuccess": "Zone erfolgreich erstellt",
+    "emptyForm": "Bitte geben Sie die Details in das Formular ein",
+    "lengthTooShort": "Bitte geben sie mindestens 6 zeichen ein",
+    "zoneExists": "Sorry Zone existiert bereits",
+    "clusterSuccess1": "Cluster für Zone",
+    "clusterSuccess2": "wird erfolgreich erstellt",
+    "clusterExists": "Entschuldigung, Cluster existiert bereits",
+    "storeSuccess": "Store Erfolgreich erstellt"
+  }
+}
