@@ -36,12 +36,12 @@ class ProductDetails extends Component {
                         <div className="data-half-upper">
                             <div className="text-space">
                                 <Typography  variant="h6">
-                                    Base Price :  {this.props.productDetails.base}
+                                    Base Price :  {this.props.productDetails.basePrice}
                                 </Typography>
                             </div>
                             <div className="text-space">
                                 <Typography  variant="h6">
-                                    Vendor :  {this.props.productDetails.vendor}
+                                    Vendor :  {this.props.productDetails.vendorName}
                                 </Typography>
                             </div>
 
@@ -49,7 +49,7 @@ class ProductDetails extends Component {
                         <div className="data-half-lower">
                             <div className="text-space">
                                 <Typography variant="h6">
-                                    Quantity : {this.props.productDetails.quantity}
+                                    Quantity : {this.props.productDetails.quantityAvailable}
                                 </Typography>
                             </div>
                             <div className="text-space">

@@ -7,7 +7,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import MuiAlert from '@material-ui/lab/Alert';
 import { Component, default as React, Fragment } from "react";
 import { connect } from "react-redux";
-import { getZoneClusterNames } from "../../redux/actions/RetailerActions";
+import { getZoneClusterNames, assignToCluster } from "../../redux/actions/RetailerActions";
 import ProductDetails from "../utils/ProductDetails";
 
 class AssignToCluster extends Component {
@@ -64,9 +64,9 @@ class AssignToCluster extends Component {
 
       <div className="box-container-start store-form">
         {console.log(this.state.clusterDetails)}
-      {console.log(this.state.zoneName)}
-      {console.log(this.state.clusterName)}
-      {console.log(this.props.productName)}
+    {console.log(this.state.zoneName)}
+    {console.log(this.state.clusterName)}
+    {console.log(this.props.productName)}
         <div className="joint-form-assign">
         <Typography
             color="primary"

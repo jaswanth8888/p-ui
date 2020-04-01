@@ -32,9 +32,9 @@ class SelectProduct extends Component {
     handleChangeProduct = (e, value) => {
         console.log(value);
         let productName = value;
-        this.setState({ productName });
+        //this.setState({ productName });
         //console.log(this.state.productName)
-        this.props.saveProductValue(value);
+        this.props.saveProductValue(productName);
     }
 
 
@@ -77,7 +77,6 @@ class SelectProduct extends Component {
                                     </Typography>
                                 </div>
                             </div>
-                            {console.log(this.props.product)}
                             <FormControl variant="outlined" fullWidth>
                                 <Autocomplete
                                     id="product-list"
@@ -128,8 +127,7 @@ class SelectProduct extends Component {
 }
 
 const stateAsProps = (store) => ({
-    products: store.RetailerReducer.productList,
-    product: store.RetailerReducer.product
+    products: store.RetailerReducer.productList
 });
 const actionAsProps = {
     getProductList: getProductList,
