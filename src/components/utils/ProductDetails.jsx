@@ -1,7 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import connect from 'react-redux/es/connect/connect'
 import { getProductDetails } from "../../redux/actions/RetailerActions";
 import { Grid, Typography, Paper } from "@material-ui/core";
+import "./ProductDetails.css"
+
 
 
 
@@ -21,52 +23,52 @@ class ProductDetails extends Component {
     render() {
 
         return (
-                <div >
-                    <Grid container spacing={3} >
-                        <Grid item xs={12} align="center">
-                            <Typography >
-                                Name : {this.props.productDetails.productName}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                        <img src= "https://bit.ly/3ay4Y03" style={{ width:'40vh'}} alt="pic" />
-                        </Grid>
-                        <Grid item xs={6} md={3}>
-                            <Typography >
-                                Base Price :  {this.props.productDetails.base} 
-                            </Typography>
-                            <br></br>
-                            <Typography >
-                                Vendor :  {this.props.productDetails.vendor} 
-                            </Typography>
-                            <br></br>
-                            </Grid>
-                            <Grid>
-                            <br></br>
-                            <Typography >
-                                Quantity : {this.props.productDetails.quantity}
-                            </Typography>
-                            <br></br>
-                            <Typography >
-                                Category :  {this.props.productDetails.category}
-                            </Typography>
-                            <br></br>
- 
-                        </Grid>
-                        <Grid item xs={12} align="center" >
-                            <Paper>
-                            <Typography >
-                                Description : {this.props.productDetails.desc}
-                            </Typography>
-                            <br></br>
-                            </Paper>
-                            </Grid>
-                    </Grid>
- 
+            <div className="flex-grid">
+                <div className="top-desc">
+                    <Typography variant="h5" gutterBottom style={{ padding: "20px 0px" }}>
+                        Name : {this.props.productDetails.productName}
+                    </Typography>
                 </div>
-        
+                <div className="middle-desc">
+                    <div className="image-half">
+                        <img src="https://bit.ly/3ay4Y03" />
+                    </div>
+                    <div className="data-half">
+                        <div className="data-half-upper">
+                            <div className="text-space">
+                                <Typography  variant="h6">
+                                    Base Price :  {this.props.productDetails.base}
+                                </Typography>
+                            </div>
+                            <div className="text-space">
+                                <Typography  variant="h6">
+                                    Vendor :  {this.props.productDetails.vendor}
+                                </Typography>
+                            </div>
+
+                        </div>
+                        <div className="data-half-lower">
+                            <div className="text-space">
+                                <Typography variant="h6">
+                                    Quantity : {this.props.productDetails.quantity}
+                                </Typography>
+                            </div>
+                            <div className="text-space">
+                                <Typography  variant="h6">
+                                    Category :  {this.props.productDetails.category}
+                                </Typography>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="bottom-desc">
+                    <Typography  variant="body2" style={{ padding: "20px 0px" }}>
+                        Description : {this.props.productDetails.desc}
+                    </Typography>
+                </div>
+            </div>
+
+
         )
     }
 }

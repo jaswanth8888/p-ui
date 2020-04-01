@@ -7,6 +7,7 @@ import TableRow from '@material-ui/core/TableRow';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getZoneList } from '../../redux/actions/RetailerActions';
+import ProductDetails from "../utils/ProductDetails";
 
 class ViewZones extends Component {
     constructor(props) {
@@ -18,8 +19,11 @@ class ViewZones extends Component {
     render() {
 
         return (
-
+            
             <div className="box-container" style={{ alignItems: "flex-start", marginTop: "150px" }}>
+                {/* <div className="">
+                    <ProductDetails></ProductDetails>
+                </div> */}
                 <TableContainer component={Paper} style={{ width: "500px", textAlign : "center" }}>
                     <Table  aria-label="a dense table">
                         <TableHead style={{ backgroundColor: "#673ab7" }}>

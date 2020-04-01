@@ -65,7 +65,7 @@ export default function VerticalTabs() {
       style={{
         position: "relative",
         zIndex: "100",
-        height: "100vh"
+        height: "100vh",
       }}
     >
       <Tabs

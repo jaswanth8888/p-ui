@@ -1,28 +1,15 @@
-import {
-  InputLabel,
-  Select,
-  Table,
-  TextField,
-  Typography
-} from "@material-ui/core";
+import { InputLabel, Select, TextField, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Paper from "@material-ui/core/Paper";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import MenuItem from '@material-ui/core/MenuItem';
-import "./AddProducts.css";
-import "./Table.css";
-import ProductDetails from "../utils/ProductDetails";
+import Snackbar from '@material-ui/core/Snackbar';
 import CheckIcon from '@material-ui/icons/Check';
-import "./StoreForm.css";
+import ClearIcon from '@material-ui/icons/Clear';
+import MuiAlert from '@material-ui/lab/Alert';
+import { Component, default as React, Fragment } from "react";
+import { connect } from "react-redux";
 import { getZoneClusterNames } from "../../redux/actions/RetailerActions";
+import './AssignToCluster.css'
+import ProductDetails from "../utils/ProductDetails";
 
 class AssignToCluster extends Component {
   constructor(props) {
@@ -30,8 +17,8 @@ class AssignToCluster extends Component {
 
     this.state = {
       zoneclustername: "",
-      quantity:"",
-      percentage:""
+      quantity: "",
+      percentage: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -41,16 +28,19 @@ class AssignToCluster extends Component {
   handleChange(e) {
     console.log(this.state.zoneclustername)
     this.setState({ zoneclustername: e.target.value })
-}
+  }
   componentDidMount() {
     this.props.getZoneClusterNames()
   }
 
   render() {
     return (
-      <div className="box-container store-form">
-        <div className="joint-form" style={{ width: "850px" }}>
-          <Typography
+
+
+      <div className="box-container-start store-form">
+
+        <div className="joint-form-assign">
+        <Typography
             color="primary"
             component="h1"
             variant="h4"
@@ -58,90 +48,122 @@ class AssignToCluster extends Component {
             {{
               fontFamily: "font-family: 'Open Sans', sans-serif;",
               position: "absolute",
-              top: "200px",
-              left: "250px"
+              top: "190px",
+              left: "25px",
+              width:"100%",
+              marginLeft:"auto"
             }}>
             Assign Product to Cluster
-                  </Typography>
+          </Typography>
+          <div className="product-details">
+            <ProductDetails></ProductDetails>
+          </div>
+          <div className="form-full-center">
 
-                  <ProductDetails></ProductDetails>
-          <form className="{classes.form}" noValidate >
+            <form className="{classes.form}" noValidate style = {{width:"95%"}} >
 
-            <FormControl style={{ top: 265, alignSelf: 'center' }}>
-              <InputLabel id="demo-simple-select-label" style={{ left: 250 }}>Cluster Name</InputLabel>
-              <Select
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel htmlFor="outlined-age-native-simple">Enter Cluster</InputLabel>
+                <Select
+                  ref="cluster"
+                  fullWidth
+                  native
+                  value={this.state.zoneclustername}
+                  onChange={this.handleChange}
+                  label="Enter Cluster"
+                  inputProps={{
+                    name: 'cluster',
+                    id: 'cluster',
+                  }}
+                >
+                  <option aria-label="None" value="" />
+                  {this.props.zoneclusternames.map((zoneclustername, index) => {
+                    return <option value={zoneclustername} key={index}>{zoneclustername}</option>
+                  })}
+                </Select>
+              </FormControl>
 
-                style={{ width: "350px", left: 250 }}
-                value={this.state.zoneclustername}
-                onChange={this.handleChange}
-                label="Cluster"
-                inputProps={{
-                  name: 'cluster',
-                  id: 'cluster',
-                }}
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="clusterQuantity"
+                label="ClusterQuantity"
+                name="clusterQuantity"
+                type="number"
+                onChange={this.handleChangeQuantity}
+                value={this.state.quantity}
+                autoFocus
+              />
+
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="clusterProfitPercentage"
+                label="ClusterProfitPercentage"
+                name="clusterProfitPercentage"
+                type="number"
+                onChange={this.handleChangePercentage}
+                value={this.state.AssignedClusterProfitPercentage}
+                autoFocus
+              />
+
+              <Button
+                fullWidth
+                type="button"
+                variant="contained"
+                color="primary"
+                className="{classes.submit}"
+                onClick={this.handleSubmit}
+                style = {{marginTop : "10px"}}
               >
-                <option aria-label="None" value="" />
-                {this.props.zoneclusternames.map((zoneclustername, index) => {
-                  return <option value={zoneclustername} key={index}>{zoneclustername}</option>
-                })}
-              </Select>
-            </FormControl>
+                Save
+              </Button>
+            </form>
 
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="clusterQuantity"
-              label="ClusterQuantity"
-              name="clusterQuantity"
-              style={{ top: 425, width: 350, right: 100 }}
-              type="number"
-              onChange={this.handleChangeQuantity}
-              value={this.state.quantity}
-              autoFocus
-            />
-
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="clusterProfitPercentage"
-              label="ClusterProfitPercentage"
-              name="clusterProfitPercentage"
-              style={{ top: 250, width: 350, left: 250 }}
-              type="number"
-              onChange={this.handleChangePercentage}
-              value={this.state.AssignedClusterProfitPercentage}
-              autoFocus
-            />
-            <Button
-              type="button"
-              variant="contained"
-              color="primary"
-              className="{classes.submit}"
-              id="store-submit-btn"
-              style={{ marginTop: "30px", width: 30, top: 500 }}
-              onClick={this.handleSubmit}
-            >
-              Save
-                </Button>
-          </form>
+          </div>
           <div className="store-requirement">
             <h3 style={{ textAlign: "center" }}>Requirements</h3>
-            {this.state.AssignedClusterQuantity >= this.state.productQuantity &&
+            {this.state.zoneclustername.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <Typography variant="subtitle2" gutterBottom>
+                Store name has to be greater than 5 letters
+              </Typography></div>}
+            {this.state.zoneclustername.length > 5 &&
               <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
-                  Assigned quantity for the cluster should be less than the quantity available
-                </Typography></div>}
+                  Store name has to be greater than 5 letters
+              </Typography></div>}
 
           </div>
         </div>
+        <Fragment>
 
+          {(this.state.status === 1) ? (
+            <div>
+              <Snackbar open="true" autoHideDuration={2000}>
+                <MuiAlert elevation={6} variant="filled">
+                  Store created successfully!
+            </MuiAlert>
+              </Snackbar>
+            </div>
+          ) : (<div />)}
+        </Fragment>
+        <Fragment>
+          {(this.state.status === -1) ? (
+            <div>
+              <Snackbar open="true" autoHideDuration={2000}>
+                <MuiAlert severity="error" elevation={6} variant="filled">
+                  Store creation failed. Please match the requirements
+                </MuiAlert>
+              </Snackbar>
+            </div>) : (<div />)
+          }
+        </Fragment>
 
       </div>
-
     );
   }
 }
