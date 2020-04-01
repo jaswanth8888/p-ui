@@ -16,20 +16,46 @@ class AssignToCluster extends Component {
 
     this.state = {
       zoneclustername: "",
-      quantity: "",
-      percentage: ""
+      // quantity: "",
+      // percentage: "",
+      isSubmitted: false,
+      clusterName:"",
+      zoneName:"",
+      clusterDetails:{}
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeClusterName = this.handleChangeClusterName.bind(this);
+    this.handleChangeProfitPecentage=this.handleChangeProfitPecentage.bind(this);
+    this.handleChangeQuantity=this.handleChangeQuantity.bind(this);
 
   }
 
-  handleChange(e) {
-    console.log(this.state.zoneclustername)
+  handleChangeClusterName(e) {
     this.setState({ zoneclustername: e.target.value })
+    
+  }
+  handleChangeQuantity(e) {
+    let dquantity=e.target.value
+    //this.setState({ quantity: e.target.value })
+    this.state.clusterDetails.quantity=dquantity
+    console.log(this.state.quantity)
+  }
+  handleChangeProfitPecentage(e) {
+    let dpercentage=e.target.value
+    this.state.clusterDetails.percentage=dpercentage
+    //this.setState({ percentage: e.target.value })
   }
   componentDidMount() {
     this.props.getZoneClusterNames()
+  }
+
+  handleSubmit(e){
+    e.preventDefault();
+    // this.state.clusterDetails.quantity =this.state.quantity
+    // this.state.clusterDetails.percentage=this.state.percentage
+    //this.setState({isSubmitted: true })
+    console.log(this.state.clusterDetails)
+    this.props.assignToCluster(this.state.clusterDetails,this.state.zoneName, this.state.clusterName,this.props.productName)
   }
 
   render() {
@@ -37,7 +63,10 @@ class AssignToCluster extends Component {
 
 
       <div className="box-container-start store-form">
-
+        {console.log(this.state.clusterDetails)}
+      {console.log(this.state.zoneName)}
+      {console.log(this.state.clusterName)}
+      {console.log(this.props.productName)}
         <div className="joint-form-assign">
         <Typography
             color="primary"
@@ -68,7 +97,7 @@ class AssignToCluster extends Component {
                   fullWidth
                   native
                   value={this.state.zoneclustername}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeClusterName}
                   label="Enter Cluster"
                   inputProps={{
                     name: 'cluster',
@@ -105,11 +134,11 @@ class AssignToCluster extends Component {
                 label="ClusterProfitPercentage"
                 name="clusterProfitPercentage"
                 type="number"
-                onChange={this.handleChangePercentage}
-                value={this.state.AssignedClusterProfitPercentage}
+                onChange={this.handleChangeProfitPecentage}
+                value={this.state.percentage}
                 autoFocus
               />
-
+            
               <Button
                 fullWidth
                 type="button"
@@ -120,6 +149,7 @@ class AssignToCluster extends Component {
               >
                 Save
               </Button>
+              
             </form>
 
           </div>
@@ -127,12 +157,12 @@ class AssignToCluster extends Component {
             <h3 style={{ textAlign: "center" }}>Requirements</h3>
             {this.state.zoneclustername.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
               <Typography variant="subtitle2" gutterBottom>
-                Store name has to be greater than 5 letters
+                Zone name has to be greater than 5 letters
               </Typography></div>}
             {this.state.zoneclustername.length > 5 &&
               <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
-                  Store name has to be greater than 5 letters
+                  Zone name has to be greater than 5 letters
               </Typography></div>}
 
           </div>
@@ -143,7 +173,7 @@ class AssignToCluster extends Component {
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert elevation={6} variant="filled">
-                  Store created successfully!
+                  Price Assigned Successfully!
             </MuiAlert>
               </Snackbar>
             </div>
@@ -154,7 +184,7 @@ class AssignToCluster extends Component {
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
-                  Store creation failed. Please match the requirements
+                  Price assign failed. Please match the requirements
                 </MuiAlert>
               </Snackbar>
             </div>) : (<div />)
@@ -167,11 +197,13 @@ class AssignToCluster extends Component {
 }
 
 const stateAsProps = store => ({
-  zoneclusternames: store.RetailerReducer.zoneclusternames
+  zoneclusternames: store.RetailerReducer.zoneclusternames,
+  productName:store.RetailerReducer.productName
 });
 
 const actionAsProps = {
-  getZoneClusterNames: getZoneClusterNames
+  getZoneClusterNames: getZoneClusterNames,
+  assignToCluster: assignToCluster
 };
 
 export default connect(stateAsProps, actionAsProps)(AssignToCluster);
