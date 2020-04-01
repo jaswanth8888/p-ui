@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
 import Navbar from './components/organisms/Navbar';
-import rootReducer from './redux/reducers/rootReducer';
 import VendorLogin from './components/vendor/VendorLogin';
 import Registration from './components/vendor/Registration'
 import Home from './components/vendor/Home';
 import Addproduct from './components/vendor/AddProduct';
 import { BrowserRouter as Router,Route, Switch} from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 import store from './redux/store'
 
 // the callback to subscribe is executed everytime the state changes

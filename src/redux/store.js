@@ -4,7 +4,6 @@ import thunk from 'redux-thunk'
 import rootReducer from './reducers/rootReducer';
 
 
-
 let state = window.sessionStorage.reduxstate;
 if (state) {
     state = JSON.parse(state);
