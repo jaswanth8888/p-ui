@@ -65,7 +65,7 @@ class AddProductToStore extends Component {
         // }
         return (
             
-        <Fragment>
+
             <div className="box-container">
                 <div className="joint-form">
                     <div className="validation-half" style={{ background: "#673ab7" }}>
@@ -219,8 +219,6 @@ class AddProductToStore extends Component {
                     }
                 </Fragment>
             </div>
-            
-        </Fragment>
         )
     }
 }

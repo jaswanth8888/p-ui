@@ -21,13 +21,16 @@ class ClusterForm extends Component {
       clusterName: "",
       taxRate: "",
       isSubmitted: false,
-      status : 0
+      status: 0
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
 
+  componentWillMount() {
+    this.props.history.push("/cluster")
+  }
 
   componentDidMount() {
 
@@ -46,10 +49,10 @@ class ClusterForm extends Component {
     this.setState({ isSubmitted: true })
     if (this.state.clusterName.length > 6) {
       this.props.postCluster(cluster, this.state.zone)
-      this.setState({ status : 1 })
+      this.setState({ status: 1 })
     }
-    else{
-      this.setState({  status : -1 })
+    else {
+      this.setState({ status: -1 })
     }
   }
 
@@ -61,13 +64,13 @@ class ClusterForm extends Component {
         <div className="joint-form">
           <div className="validation-half" style={{ background: "#673ab7" }}>
             <div className="validations">
-              <h3 className = "center-h3">Requirements</h3>
-              {this.state.clusterName.length <= 5 && <div className="typo-div"><ClearIcon className = "icon-style" />
+              <h3 className="center-h3">Requirements</h3>
+              {this.state.clusterName.length <= 5 && <div className="typo-div"><ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Cluster has to be greater than 5 letters
               </Typography></div>}
               {this.state.clusterName.length > 5 &&
-                <div className="approved-text"><CheckIcon className = "icon-style" />
+                <div className="approved-text"><CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Cluster has to be greater than 5 letters
               </Typography></div>}
@@ -81,8 +84,8 @@ class ClusterForm extends Component {
                     color="primary"
                     component="h1"
                     variant="h4"
-                    className = "help-block-h4"
-                    >
+                    className="help-block-h4"
+                  >
                     Create a cluster
                 </Typography>
                 </div>

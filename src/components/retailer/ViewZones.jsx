@@ -15,6 +15,9 @@ class ViewZones extends Component {
         this.props.getZoneList();
     }
 
+    componentWillMount() {
+        this.props.history.push("/view/zones")
+    }
 
     render() {
 

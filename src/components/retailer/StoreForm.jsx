@@ -31,6 +31,10 @@ class StoreForm extends Component {
     this.handleChangeZone = this.handleChangeZone.bind(this);
   }
 
+  componentWillMount() {
+    this.props.history.push("/store")
+  }
+
   componentDidMount() {
     this.props.getAllZones();
   }

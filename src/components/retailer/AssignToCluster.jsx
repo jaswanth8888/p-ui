@@ -63,10 +63,6 @@ class AssignToCluster extends Component {
 
 
       <div className="box-container-start store-form">
-        {console.log(this.state.clusterDetails)}
-    {console.log(this.state.zoneName)}
-    {console.log(this.state.clusterName)}
-    {console.log(this.props.productName)}
         <div className="joint-form-assign">
         <Typography
             color="primary"

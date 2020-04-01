@@ -26,6 +26,10 @@ class ZoneForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillMount(){
+    this.props.history.push("/zone")
+  }
+
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
