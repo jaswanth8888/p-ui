@@ -8,10 +8,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 class Message extends Component {
     constructor(props) {
         super(props)
-    
-        this.state = {
-             
-        }
+        this.closeAlert = this.closeAlert.bind(this);
     }
 
     closeAlert=()=>{
