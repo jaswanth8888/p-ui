@@ -4,19 +4,7 @@ import { fetchUserDetails } from '../../redux/actions/RetailerActions.js';
 import SubNavbar from '../organisms/SubNavbar.jsx';
 
 class Welcome extends Component {
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-        }
-    }
-    isAuthenticated() {
-        var token = sessionStorage.getItem("token");
-        return token && token.length > 10;
-      }
-    
     render() {
-        // const isAlreayAuthenticated = this.isAuthenticated();
         return (
             <SubNavbar/>
         )
