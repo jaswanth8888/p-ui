@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import Navbar from './components/organisms/Navbar';
 import VendorLogin from './components/vendor/VendorLogin';
 import Registration from './components/vendor/Registration'
-import Home from './components/vendor/Home';
-import Addproduct from './components/vendor/AddProduct';
+import Home from './components/vendor/Home.jsx';
+import Addproduct from './components/vendor/AddProduct.jsx';
 import { BrowserRouter as Router,Route, Switch} from 'react-router-dom';
 import store from './redux/store'
 
@@ -17,7 +17,7 @@ store.subscribe(() => {
   render() {
     return (
       <Provider store={store}>
-      <div>
+      <React.Fragment>
           <Router >
                     <Switch>
                       <Route exact={true} path="/" component={Navbar} />
@@ -27,7 +27,7 @@ store.subscribe(() => {
                       <Route exact={true} path="/vendor/addproduct" component={Addproduct}/>  
                       </Switch>
                   </Router>
-        </div>
+        </React.Fragment>
          
       </Provider>
     )
