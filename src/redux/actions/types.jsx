@@ -47,6 +47,7 @@ export const PRODUCT_SAVE_VALUE="PRODUCT_SAVE_VALUE";
 export const PRODUCT_GET_REQUEST="PRODUCT_GET_REQUEST";
 export const ZONECLUSTER_GET_REQUEST="ZONECLUSTER_GET_REQUEST";
 export const ASSIGN_TO_CLUSTER="ASSIGN_TO_CLUSTER";
+export const ASSIGN_TO_ZONE="ASSIGN_TO_ZONE";
 
 
 export const TOKEN='BearerR '+sessionStorage.getItem("token");

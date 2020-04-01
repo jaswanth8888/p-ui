@@ -25,7 +25,8 @@ import {
   PRODUCT_SAVE_VALUE,
   PRODUCT_GET_REQUEST,
   ZONECLUSTER_GET_REQUEST,
-  ASSIGN_TO_CLUSTER
+  ASSIGN_TO_CLUSTER,
+  ASSIGN_TO_ZONE
 } from "./types";
 import axios from "axios";
 import i18n from "i18next";
@@ -353,7 +354,7 @@ export const getProductList = () => async dispatch => {
 };
 
 export const saveProductValue = productValue => dispatch => {
-  dispatch({ type: PRODUCT_SAVE_VALUE, product: productValue });
+  dispatch({ type: PRODUCT_SAVE_VALUE, productName: productValue });
 };
 
 export const getProductDetails = productName => async dispatch => {
@@ -391,6 +392,26 @@ export const assignToCluster = (clusterDetails,zoneName, clusterName,productName
     .catch(err => {
       dispatch({
         type: ASSIGN_TO_CLUSTER,
+        msg: ""
+      });
+    });
+};
+
+export const assignToZone = (zoneDetails,zoneName,productName) => async dispatch => {
+  await axios
+    .put(
+      RETAILER_BASE_URL +/product-management/+zoneName+"/"+productName+"/productAssigned",zoneDetails,
+      { headers: { Authorization: TOKEN } }
+    )
+    .then(res => {
+      dispatch({
+        type: ASSIGN_TO_ZONE,
+        msg: "Product Asigned to Zone Succesfully"
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: ASSIGN_TO_ZONE,
         msg: ""
       });
     });
