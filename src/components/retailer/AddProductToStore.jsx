@@ -21,7 +21,6 @@ class AddProductToStore extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeZone = this.handleChangeZone.bind(this);
         this.handleChangeCluster = this.handleChangeCluster.bind(this);
         this.handleChangeStore = this.handleChangeStore.bind(this);
@@ -50,19 +49,11 @@ class AddProductToStore extends Component {
 
     handleChangeStore(e) {
         this.setState({ store: e.target.value })
-        //this.props.setState({store:this.state.store})
         this.props.saveStoreValue(e.target.value)
     }
 
-    // handleSubmit(e) {
-    //   e.preventDefault();
-    //   this.setState({isSubmitted:true})
-    // }
-
     render() {
-        //   if(this.state.isSubmitted && this.state.cluster && this.state.zone && this.state.store){
-        //   return <Redirect to='/welcome'/>
-        // }
+
         return (
             
         <Fragment>
@@ -71,15 +62,6 @@ class AddProductToStore extends Component {
                     <div className="validation-half" style={{ background: "#673ab7" }}>
                         <div className="validations">
                             <h3 style={{ textAlign: "center" }}>Requirements</h3>
-                            {/* {this.state.zoneName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
-                <Typography variant="subtitle2" gutterBottom>
-                  Zone has to be greater than 5 letters
-                </Typography></div>}
-              {this.state.zoneName.length > 5 &&
-                <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
-                  <Typography variant="subtitle2" gutterBottom>
-                    Zone has to be greater than 5 letters
-                </Typography></div>} */}
                         </div>
                     </div>
                     <div className="form-half">
@@ -165,7 +147,6 @@ class AddProductToStore extends Component {
                                         color="primary"
                                         className="{classes.submit}"
                                         style={{ marginTop: "30px" }}
-                                    // onClick={this.handleSubmit}
                                     >
                                         Add Store
                                     </Button>
@@ -179,7 +160,6 @@ class AddProductToStore extends Component {
                                         color="primary"
                                         className="{classes.submit}"
                                         style={{ marginTop: "30px" }}
-                                    //onClick={this.handleSubmit}
                                     >
                                         Add Products
                                     </Button>
@@ -192,7 +172,6 @@ class AddProductToStore extends Component {
                                         color="primary"
                                         className="{classes.submit}"
                                         style={{ marginTop: "30px" }}
-                                    //onClick={this.handleSubmit}
                                     >
                                         Add Products
                                     </Button>
