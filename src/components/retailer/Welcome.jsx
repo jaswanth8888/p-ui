@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import connect from 'react-redux/es/connect/connect';
-import { fetchUserDetails } from '../../redux/actions/RetailerActions';
+import { fetchUserDetails } from '../../redux/actions/RetailerActions.js';
 import SubNavbar from '../organisms/SubNavbar.jsx';
 
 class Welcome extends Component {

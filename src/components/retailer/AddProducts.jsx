@@ -21,7 +21,7 @@ import {
   getCategories,
   getProducts,
   postProductToStore
-} from "../../redux/actions/RetailerActions";
+} from "../../redux/actions/RetailerActions.js";
 import "./AddProducts.css";
 import "./Table.css";
 

@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import { logout } from "../../redux/actions/RetailerActions";
+import { logout } from "../../redux/actions/RetailerActions.js";
 import Login from "../Login";
 import Welcome from "../retailer/Welcome.jsx";
 import PrivateRoute from "../utils/privateRoute";

@@ -11,20 +11,7 @@ import Home from './components/vendor/Home';
 import Addproduct from './components/vendor/AddProduct';
 import { BrowserRouter as Router,Route, Switch} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-let state = window.sessionStorage.reduxstate;
-if (state) {
-    state = JSON.parse(state);
-}
-let store = null;
-if (state) {
-    store = createStore
-    store = createStore(rootReducer, state,
-        composeWithDevTools(applyMiddleware(thunk)));
-}
-else {
-    store = createStore(rootReducer,
-        composeWithDevTools(applyMiddleware(thunk)));
-}
+import store from './redux/store'
 
 // the callback to subscribe is executed everytime the state changes
 // in the store

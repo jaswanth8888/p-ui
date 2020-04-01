@@ -6,7 +6,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux';
-import { postZone } from '../../redux/actions/RetailerActions';
+import { postZone } from '../../redux/actions/RetailerActions.js';
 import './ZoneForm.css';
 import Message from "../utils/Message"
 

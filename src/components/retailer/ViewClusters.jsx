@@ -6,7 +6,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getClusterList } from '../../redux/actions/RetailerActions';
+import { getClusterList } from '../../redux/actions/RetailerActions.js';
 
 class ViewClusters extends Component {
     constructor(props) {

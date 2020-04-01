@@ -6,7 +6,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getZoneList } from '../../redux/actions/RetailerActions';
+import { getZoneList } from '../../redux/actions/RetailerActions.js';
 
 class ViewZones extends Component {
     constructor(props) {

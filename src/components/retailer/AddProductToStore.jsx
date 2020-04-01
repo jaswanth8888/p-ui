@@ -6,7 +6,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getClusters, getStores, getZones, saveClusterValue, saveStoreValue, saveZoneValue } from '../../redux/actions/RetailerActions';
+import { getClusters, getStores, getZones, saveClusterValue, saveStoreValue, saveZoneValue } from '../../redux/actions/RetailerActions.js';
 
 class AddProductToStore extends Component {
 

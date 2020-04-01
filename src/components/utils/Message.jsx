@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import connect from 'react-redux/es/connect/connect'
-import {messageSetNull} from '../../redux/actions/RetailerActions'
+import {messageSetNull} from '../../redux/actions/RetailerActions.js'
 import MuiAlert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 

@@ -6,7 +6,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
-import { postGroup } from "../../redux/actions/RetailerActions.jsx";
+import { postGroup } from "../../redux/actions/RetailerActions.js";
 import Message from "../utils/Message"
 
 
