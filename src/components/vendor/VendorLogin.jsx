@@ -9,7 +9,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import {vendorlogin} from "../../redux/actions/VendorActions"
 import md5 from 'md5'
-
+import Message from "./Message"
  class  VenderLogin extends Component {
     constructor(props) {
         super(props);
@@ -189,6 +189,7 @@ import md5 from 'md5'
                 </form>
                 </Grid>
           </Grid>
+          <Message/>
             </div>
           )
     }

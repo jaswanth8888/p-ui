@@ -19,9 +19,6 @@ export const postProduct = (productDetails) =>async (dispatch) => {
         alert("added sucessfuly")
         dispatch({type:CREATE_PRODUCT, msg:"Product Added Succesfully"}) 
     }).catch((err)=>{
-        console.log(productDetails)
-        alert(err)
-        console.log(productDetails)
         dispatch({type:CREATE_PRODUCT, msg:"Sorry try again"}) 
     });
 }
@@ -29,18 +26,15 @@ export const vendorlogin = (loginDetails) => async (dispatch) => {
         await axios.post(RETAILER_BASE_URL+'/vendor/authenticate',loginDetails).then(
         (res)=>{
             sessionStorage.setItem("token",res.data['jwt'])
-            dispatch({ type: VENDOR_LOGIN_USER,login_status:{success:true,errorMsg:'',data:res.data},userInfo:loginDetails})
+            dispatch({ type: VENDOR_LOGIN_USER,login_status:{success:true,msg:'',data:res.data},userInfo:loginDetails})
         }
     ).catch((res)=>{
-            console.log(loginDetails,res)
-            alert("invalid ")
-        dispatch({type:VENDOR_LOGIN_FAILURE,login_status:{success:false,errorMsg:"Invalid Username/password"}}) 
+        dispatch({type:VENDOR_LOGIN_FAILURE,login_status:{success:false,msg:"Invalid Username/password",msgSeverity:"error"},msg:"Invalid Username/password",msgSeverity:"error"}) 
     }); 
 }
 export const vendorlogout = () => (dispatch) => {
     dispatch({ type: VENDOR_LOGOUT });
 }
-export const vendormessageSetNull=() =>(dispatch) =>{
-    dispatch({type:MESSAGE_SET_NULL})
-}
-
+export const messageSetNull = () => dispatch => {
+    dispatch({ type: MESSAGE_SET_NULL });
+  };
