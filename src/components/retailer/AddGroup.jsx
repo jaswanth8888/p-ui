@@ -24,6 +24,10 @@ class AddGroup extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillMount() {
+    this.props.history.push("/group")
+  }
+
   handleChange(e) {
     const { name, value } = e.target;
     let group = this.state.group;
@@ -33,14 +37,14 @@ class AddGroup extends Component {
 
   is_validGroupName = () => {
     if (this.state.group.groupName.length > 0) {
-      this.setState({ status: 1 })    
+      this.setState({ status: 1 })
     }
     else {
       this.setState({ status: -1 })
       return false
     }
     return true
- }
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -77,8 +81,8 @@ class AddGroup extends Component {
                     color="primary"
                     component="h1"
                     variant="h4"
-                    className = "help-block-h4"
-                    >
+                    className="help-block-h4"
+                  >
                     Create a Group
                   </Typography>
                 </div>
@@ -96,15 +100,15 @@ class AddGroup extends Component {
                 autoFocus
               />
 
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className="{classes.submit} submit-pad"
-              onClick={this.handleSubmit}
-            >
-              Save
+              <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className="{classes.submit} submit-pad"
+                onClick={this.handleSubmit}
+              >
+                Save
             </Button>
             </form>
           </div>
@@ -121,7 +125,7 @@ class AddGroup extends Component {
             </div>) : (<div />)
           }
         </Fragment>
-        <Message/> 
+        <Message />
       </div>
     )
   }

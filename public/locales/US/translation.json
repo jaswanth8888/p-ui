@@ -14,12 +14,12 @@
     "invalidCredentials": "Invalid username/Password"
   },
   "welcome": {
-    "createZone": "CREATE ZONE",
-    "createCluster": "CREATE CLUSTER",
-    "createStore": "CREATE STORE",
-    "viewZones": "VIEW ZONES",
-    "viewClusters": "VIEW CLUSTERS",
-    "addGroup": "Add Group",
+    "createZone": "Create Zone",
+    "createCluster": "Create Cluster",
+    "createStore": "Create Store",
+    "viewZones": "View Zones",
+    "viewClusters": "View Clusters",
+    "addGroup": "Create Group",
     "addProducttoStore": "Add Product to Store",
     "assignProductToClusterZone": "Assign Product to Cluster / Zone"
   },

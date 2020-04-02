@@ -72,7 +72,7 @@ function Navbar(props) {
   return (
     <Router>
       <div>
-        <AppBar position="static">
+        <AppBar position="absolute" style = {{zIndex:1300}}>
           <Tabs
             value={value}
             onChange={handleChange}

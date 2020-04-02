@@ -15,6 +15,9 @@ class ViewClusters extends Component {
         this.props.getClusterList();
     }
 
+    componentWillMount() {
+        this.props.history.push("/view/clusters")
+    }
 
     render() {
 

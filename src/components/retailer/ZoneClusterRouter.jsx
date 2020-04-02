@@ -7,6 +7,10 @@ import AssignToCluster from './AssignToCluster';
 
 export default class ProductRouter extends Component {
     
+    componentWillMount(){
+        this.props.history.push("/products/assign")
+    }
+
     render() {
         return (
             <div>
