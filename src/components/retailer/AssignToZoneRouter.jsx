@@ -10,17 +10,17 @@ export default class AssignToZoneRouter extends Component {
 
     render() {
         return (
-            <div>
-                <Router>
-                    <Redirect to='/selectproduct' />
-                    <Switch>
-                        <Route exact={true} path="/selectproduct" component={SelectProduct} />
-                        <Route exact={true} path="/assigntozone" component={AssignToZone} />
-                        
-                        <Route exact path="/viewassignedzones" component={ViewAssignedZones}></Route>
-                    </Switch>
-                </Router>
-            </div>
+
+            <Router>
+                <Redirect to='/selectproduct' />
+                <Switch>
+                    <Route exact={true} path="/selectproduct" component={SelectProduct} />
+                    <Route exact={true} path="/assigntozone" component={AssignToZone} />
+                    
+                    <Route exact path="/viewassignedzones" component={ViewAssignedZones}></Route>
+                </Switch>
+            </Router>
+
         )
     }
 }
