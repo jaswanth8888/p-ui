@@ -1,35 +1,12 @@
-import {
-  InputLabel,
-  Select,
-  Table,
-  TextField,
-  Typography
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Paper from "@material-ui/core/Paper";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import MenuItem from "@material-ui/core/MenuItem";
-import React, { Component, Fragment } from "react";
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import React, { Component } from "react";
+import "react-datepicker/dist/react-datepicker.css";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { getProducts, postPromotion } from "../../redux/actions/RetailerActions";
 import ProductDetails from "../utils/ProductDetails";
-import "./StoreForm.css";
-import "./AddProducts.css";
-import "./Table.css";
-import Dummy from "./Dummy";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import "./Promotion.css";
 import Message from "../utils/Message"
+
 class Promotion extends Component {
   constructor(props) {
     super(props);
@@ -68,12 +45,11 @@ class Promotion extends Component {
 
   render() {
     return (
-      <div className="box-container store-form">
-        <div className="joint-form" style={{ width: "850px" }}>
+      <div className="box-container">
+        <div className="joint-form">
           <ProductDetails />
           <div
             className="product-form-body"
-            style={{ width: "95%", margin: "40px", marginBottom: "0px" }}
           >
 
             <form id="productform">
@@ -126,6 +102,7 @@ class Promotion extends Component {
               <div>
                 {/* <Link to="/selectproduct" style={{ textDecoration: "none" }}> */}
                 <Button
+                  fullWidth
                   type="button"
                   // fullWidth="50px"
                   variant="contained"
@@ -142,7 +119,7 @@ class Promotion extends Component {
 
           </div>
         </div>
-
+        <Message />
 
       </div>
     );

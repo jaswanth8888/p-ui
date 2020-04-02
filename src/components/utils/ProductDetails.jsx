@@ -22,51 +22,53 @@ class ProductDetails extends Component {
     render() {
 
         return (
+            // <div className="flex-grid">
+            //     <div className="top-desc">
+            //         <Typography variant="h5" gutterBottom id="top-desc-h5">
+            //             Name : {this.props.productDetails.productName}
+            //         </Typography>
+            //     </div>
+            //     <div className="middle-desc">
+            //         <div className="image-half">
+            //             <img src= {this.props.productDetails.productImagePath}/>
+            //         </div>
+            //         <div className="data-half">
+            //             <div className="data-half-upper">
+            //                 <div className="text-space">
+            //                     <Typography  variant="h6">
+            //                         Base Price :  {this.props.productDetails.productBasePrice}
+            //                     </Typography>
+            //                 </div>
+            //                 <div className="text-space">
+            //                     <Typography  variant="h6">
+            //                         Vendor :  {this.props.productDetails.companyName}
+            //                     </Typography>
+            //                 </div>
+
+            //             </div>
+            //             <div className="data-half-lower">
+            //                 <div className="text-space">
+            //                     <Typography variant="h6">
+            //                         Quantity : {this.props.productDetails.remainingQuantity}
+            //                     </Typography>
+            //                 </div>
+            //                 <div className="text-space">
+            //                     <Typography  variant="h6">
+            //                         Category :  {this.props.productDetails.productCategory}
+            //                     </Typography>
+            //                 </div>
+            //             </div>
+            //         </div>
+            //     </div>
+            //     <div className="bottom-desc">
+            //         <Typography  variant="body2">
+            //             Description : {this.props.productDetails.productDescription}
+            //         </Typography>
+            //     </div>
+            // </div>
             <div className="flex-grid">
-                <div className="top-desc">
-                    <Typography variant="h5" gutterBottom id="top-desc-h5">
-                        Name : {this.props.productDetails.productName}
-                    </Typography>
-                </div>
-                <div className="middle-desc">
-                    <div className="image-half">
-                        <img src= {this.props.productDetails.productImagePath}/>
-                    </div>
-                    <div className="data-half">
-                        <div className="data-half-upper">
-                            <div className="text-space">
-                                <Typography  variant="h6">
-                                    Base Price :  {this.props.productDetails.productBasePrice}
-                                </Typography>
-                            </div>
-                            <div className="text-space">
-                                <Typography  variant="h6">
-                                    Vendor :  {this.props.productDetails.companyName}
-                                </Typography>
-                            </div>
-
-                        </div>
-                        <div className="data-half-lower">
-                            <div className="text-space">
-                                <Typography variant="h6">
-                                    Quantity : {this.props.productDetails.remainingQuantity}
-                                </Typography>
-                            </div>
-                            <div className="text-space">
-                                <Typography  variant="h6">
-                                    Category :  {this.props.productDetails.productCategory}
-                                </Typography>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="bottom-desc">
-                    <Typography  variant="body2">
-                        Description : {this.props.productDetails.productDescription}
-                    </Typography>
-                </div>
+                
             </div>
-
 
         )
     }

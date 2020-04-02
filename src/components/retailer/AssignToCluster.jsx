@@ -7,7 +7,7 @@ import { Component, default as React, Fragment } from "react";
 import { connect } from "react-redux";
 import { assignToCluster, getZoneClusterNames } from "../../redux/actions/RetailerActions";
 import ProductDetails from "../utils/ProductDetails";
-
+import Message from "../utils/Message"
 
 
 class AssignToCluster extends Component {
@@ -178,29 +178,7 @@ class AssignToCluster extends Component {
         </div>
       </div>
 
-      <Fragment>
-
-        {(this.state.status === 1) ? (
-          <div>
-            <Snackbar open="true" autoHideDuration={2000}>
-              <MuiAlert elevation={6} variant="filled">
-                Price Assigned Successfully!
-            </MuiAlert>
-            </Snackbar>
-          </div>
-        ) : (<div />)}
-      </Fragment>
-      <Fragment>
-        {(this.state.status === -1) ? (
-          <div>
-            <Snackbar open="true" autoHideDuration={2000}>
-              <MuiAlert severity="error" elevation={6} variant="filled">
-                Price assign failed. Please match the requirements
-                </MuiAlert>
-            </Snackbar>
-          </div>) : (<div />)
-        }
-      </Fragment>
+        <Message />
         </div >
     );
   }

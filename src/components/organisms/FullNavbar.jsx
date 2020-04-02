@@ -31,6 +31,7 @@ import StoreForm from "../retailer/StoreForm.jsx";
 import ViewClusters from "../retailer/ViewClusters.jsx";
 import ViewZones from "../retailer/ViewZones.jsx";
 import ZoneClusterRouter from "../retailer/ZoneClusterRouter.jsx";
+import PromotionRouter from "../retailer/PromotionRouter.jsx";
 import QueryOnDateRouter from "../retailer/QueryOnDateRouter.jsx";
 import ZoneForm from "../retailer/ZoneForm.jsx";
 import { connect } from "react-redux";
@@ -384,7 +385,7 @@ function FullNavbar(props) {
                     </ListItem>
                   </Tooltip>
                 </Link>
-                <Link to="queryondaterange">
+                <Link to="/queryondaterange">
                   <Tooltip
                     title="Query on Date Range"
                     placement="right"
@@ -400,9 +401,9 @@ function FullNavbar(props) {
                     </ListItem>
                   </Tooltip>
                 </Link>
-                <Link to="/view/assigned/clusters">
+                <Link to="/selectproductname">
                   <Tooltip
-                    title="View Assigned Clusters"
+                    title="Price on Date"
                     placement="right"
                   >
                     <ListItem button>
@@ -411,23 +412,7 @@ function FullNavbar(props) {
                       </ListItemIcon>
                       <ListItemText
                         className="list-item-text"
-                        primary={"View Assigned Clusters"}
-                      />
-                    </ListItem>
-                  </Tooltip>
-                </Link>
-                <Link to="/view/assigned/zones">
-                  <Tooltip
-                    title="View Assigned Zones"
-                    placement="right"
-                  >
-                    <ListItem button>
-                      <ListItemIcon>
-                        <ViewListIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        className="list-item-text"
-                        primary={"View Assigned Zones"}
+                        primary={"Price on Date"}
                       />
                     </ListItem>
                   </Tooltip>
@@ -492,13 +477,13 @@ function FullNavbar(props) {
           />
           <Route
             exact
-            path="/view/assigned/clusters"
-            render={props => <ViewAssignedClusters {...props} />}
+            path="/queryondaterange"
+            render={props => <QueryOnDateRouter {...props} />}
           />
           <Route
             exact
-            path="/view/assigned/zones"
-            render={props => <ViewAssignedZones {...props} />}
+            path="/selectproductname"
+            render={props => <PromotionRouter {...props} />}
           />
         </Switch>
       </Router>

@@ -493,15 +493,15 @@ export const assignToZone = (zoneDetails,zoneName,productName) => async dispatch
 export const postPromotion = (productName, promotionDetails) => async dispatch => {
   dispatch({ type: MESSAGE_SET_NULL });
   await axios
-    .put("http://10.150.222.113:9500/product/promotion/" + productName, promotionDetails, {
+    .put(RETAILER_BASE_URL+"/product-management/product/promotion/" + productName, promotionDetails, {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
-      alert("Success")
+      console.log(res)
+      console.log(res.data.status)
       if (res.data.status) {
         dispatch({
           type: PROMOTION_POST_REQUEST,
-          promotionDetails: { data: res.data },
           msg: "promotion applied Succesfully",
           msgSeverity: "success"
         });
@@ -509,7 +509,6 @@ export const postPromotion = (productName, promotionDetails) => async dispatch =
         dispatch({
  
           type: PROMOTION_POST_REQUEST,
-          promotionDetails: { data: res.data },
           msg: "promotion cannot not applied",
           msgSeverity: "error"
         });
@@ -545,6 +544,7 @@ export const getPricesInRange = (startDate,endDate,currentDate) => async dispatc
       headers: { Authorization: TOKEN }
     })
     .then(res => {
+      console.log(RETAILER_BASE_URL + "/product-management/products/data?filter=%7B%22startDate%22:%22"+startDate+"%22,%22endDate%22:%22"+endDate+"%22,%22currentDate%22:%22"+currentDate+"%22%7D",res.data)
       dispatch({ type: PRODUCTS_GET_REQUEST, products: res.data });
     })
     .catch(err => {
