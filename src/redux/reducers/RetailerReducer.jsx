@@ -49,10 +49,11 @@ const initialState = {
     zoneList: {},
     clusterList: {},
     productList: ["BabyOil"],
-    product: "",
+    productName: "",
     updatedPrice: "",
     productDetails:{},
-    promotionDetails:{}
+    promotionDetails:{},
+    zoneclusternames:[]
 };
 export default (state = initialState, action = {}) => {
 
@@ -104,7 +105,7 @@ export default (state = initialState, action = {}) => {
         case PRODUCTLIST_GET_REQUEST:
             return { ...state, productList: action.productList }
         case PRODUCT_SAVE_VALUE:
-            return { ...state, product: action.product }
+            return { ...state, productName: action.productName }
         case PRODUCT_GET_REQUEST:
             return { ...state, productDetails: action.productDetails }
         case PROMOTION_POST_REQUEST:

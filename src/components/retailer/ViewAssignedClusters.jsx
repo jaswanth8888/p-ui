@@ -122,4 +122,4 @@ const actionAsProps = {
 
 }
 
-export default connect(stateAsProps, actionAsProps)(ViewAssignClusters);
+export default connect(stateAsProps, actionAsProps)(ViewAssignedClusters);

@@ -179,19 +179,6 @@ class AssignToCluster extends Component {
               </Link>
             </form>
         </div>
-        <div className="store-requirement">
-          <h3 style={{ textAlign: "center" }}>Requirements</h3>
-          {this.state.zoneName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
-            <Typography variant="subtitle2" gutterBottom>
-              Zone name has to be greater than 5 letters
-              </Typography></div>}
-          {this.state.zoneName.length > 5 &&
-            <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
-              <Typography variant="subtitle2" gutterBottom>
-                Zone name has to be greater than 5 letters
-              </Typography></div>}
-
-        </div>
       </div>
 
       <Fragment>
