@@ -24,7 +24,7 @@ class SelectProduct extends Component {
     }
 
 
-    componentDidMount() {
+    componentWillMount() {
 
         this.props.getProductList();
     }

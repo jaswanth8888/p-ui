@@ -7,6 +7,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import MuiAlert from '@material-ui/lab/Alert';
 import { Component, default as React, Fragment } from "react";
 import { connect } from "react-redux";
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import { getZoneClusterNames, assignToCluster } from "../../redux/actions/RetailerActions";
 import ProductDetails from "../utils/ProductDetails";
 
@@ -19,43 +20,62 @@ class AssignToCluster extends Component {
       // quantity: "",
       // percentage: "",
       isSubmitted: false,
-      clusterName:"",
-      zoneName:"",
-      clusterDetails:{}
+      clusterName: "",
+      zoneName: "",
+      clusterDetails: {}
     };
 
     this.handleChangeClusterName = this.handleChangeClusterName.bind(this);
-    this.handleChangeProfitPecentage=this.handleChangeProfitPecentage.bind(this);
-    this.handleChangeQuantity=this.handleChangeQuantity.bind(this);
+    this.handleChangeProfitPecentage = this.handleChangeProfitPecentage.bind(this);
+    this.handleChangeQuantity = this.handleChangeQuantity.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
   }
 
-  handleChangeClusterName(e) {
-    this.setState({ zoneclustername: e.target.value })
-    
+  handleChangeClusterName(e,value) {
+
+    console.log(value);
+    console.log("Hi")
+    this.setState({ zoneclustername: value })
+    console.log(this.state.zoneclustername)
+    let names = String(this.state.zoneclustername).split("/");
+    console.log(names)
+    console.log(names[0])
+
+    this.setState({ zoneName: names[0] })
+    this.setState({ clusterName: names[1] })
   }
+
+//   handleChangeProduct = (e, value) => {
+//     console.log(value);
+//     let productName = value;
+//     //this.setState({ productName });
+//     //console.log(this.state.productName)
+//     this.props.saveProductValue(productName);
+// }
+
   handleChangeQuantity(e) {
-    let dquantity=e.target.value
+    let dquantity = e.target.value
     //this.setState({ quantity: e.target.value })
-    this.state.clusterDetails.quantity=dquantity
+    this.state.clusterDetails.quantity = dquantity
     console.log(this.state.quantity)
   }
   handleChangeProfitPecentage(e) {
-    let dpercentage=e.target.value
-    this.state.clusterDetails.percentage=dpercentage
+    let dpercentage = e.target.value
+    this.state.clusterDetails.percentage = dpercentage
     //this.setState({ percentage: e.target.value })
   }
-  componentDidMount() {
+  componentWillMount() {
     this.props.getZoneClusterNames()
   }
 
-  handleSubmit(e){
+  handleSubmit(e) {
     e.preventDefault();
     // this.state.clusterDetails.quantity =this.state.quantity
     // this.state.clusterDetails.percentage=this.state.percentage
     //this.setState({isSubmitted: true })
     console.log(this.state.clusterDetails)
-    this.props.assignToCluster(this.state.clusterDetails,this.state.zoneName, this.state.clusterName,this.props.productName)
+    this.props.assignToCluster(this.state.clusterDetails, this.state.zoneName, this.state.clusterName, this.props.productName)
   }
 
   render() {
@@ -63,8 +83,12 @@ class AssignToCluster extends Component {
 
 
       <div className="box-container-start store-form">
+        {console.log(this.state.clusterDetails)}
+        {console.log(this.state.zoneName)}
+        {console.log(this.state.clusterName)}
+        {console.log(this.props.productName)}
         <div className="joint-form-assign">
-        <Typography
+          <Typography
             color="primary"
             component="h1"
             variant="h4"
@@ -74,8 +98,8 @@ class AssignToCluster extends Component {
               position: "absolute",
               top: "190px",
               left: "25px",
-              width:"100%",
-              marginLeft:"auto"
+              width: "100%",
+              marginLeft: "auto"
             }}>
             Assign Product to Cluster
           </Typography>
@@ -88,11 +112,11 @@ class AssignToCluster extends Component {
 
               <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-age-native-simple">Enter Cluster</InputLabel>
-                <Select
+                {/* <Select
                   ref="cluster"
                   fullWidth
                   native
-                  value={this.state.zoneclustername}
+                  // value={this.state.zoneclustername}
                   onChange={this.handleChangeClusterName}
                   label="Enter Cluster"
                   inputProps={{
@@ -101,10 +125,22 @@ class AssignToCluster extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.zoneclusternames.map((zoneclustername, index) => {
-                    return <option value={zoneclustername} key={index}>{zoneclustername}</option>
+                  {this.props.zoneclusternames.map((zonecluster, index) => {
+                    return <option value={zonecluster} key={index}>{zonecluster}</option>
                   })}
-                </Select>
+                </Select> */}
+
+                <Autocomplete
+                  id="cluster-list"
+                  fullWidth
+                  options={this.props.zoneclusternames}
+                  getOptionLabel={(option) => option}
+                  renderInput={(params) => <TextField {...params} label="Cluster Name" variant="outlined" />}
+                  value={this.state.zoneclustername}
+                  onChange={this.handleChangeClusterName}
+                  name="zoneclustername"
+                />
+
               </FormControl>
 
               <TextField
@@ -117,7 +153,7 @@ class AssignToCluster extends Component {
                 name="clusterQuantity"
                 type="number"
                 onChange={this.handleChangeQuantity}
-                value={this.state.quantity}
+                value={this.state.clusterDetails.quantity}
                 autoFocus
               />
 
@@ -131,10 +167,10 @@ class AssignToCluster extends Component {
                 name="clusterProfitPercentage"
                 type="number"
                 onChange={this.handleChangeProfitPecentage}
-                value={this.state.percentage}
+                value={this.state.clusterDetails.percentage}
                 autoFocus
               />
-            
+
               <Button
                 fullWidth
                 type="button"
@@ -145,7 +181,7 @@ class AssignToCluster extends Component {
               >
                 Save
               </Button>
-              
+
             </form>
 
           </div>
@@ -194,7 +230,7 @@ class AssignToCluster extends Component {
 
 const stateAsProps = store => ({
   zoneclusternames: store.RetailerReducer.zoneclusternames,
-  productName:store.RetailerReducer.productName
+  productName: store.RetailerReducer.productName
 });
 
 const actionAsProps = {
