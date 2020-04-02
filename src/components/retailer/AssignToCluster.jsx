@@ -75,10 +75,11 @@ class AssignToCluster extends Component {
     this.props.getZoneClusterNames()
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) =>{
     e.preventDefault();
     console.log(this.state.clusterDetails)
     this.props.assignToCluster(this.state.clusterDetails, this.state.zoneName, this.state.clusterName, this.props.productName)
+    this.props.history.push("/view/assigned/clusters")
   }
 
   render() {
@@ -165,7 +166,7 @@ class AssignToCluster extends Component {
                 value={this.state.clusterDetails.profitPercentage}
                 autoFocus
               />
-              <Link to='/view/assigned/zones'>
+              
                 <Button
                   fullWidth
                   type="button"
@@ -176,7 +177,7 @@ class AssignToCluster extends Component {
                 >
                   Save
               </Button>
-              </Link>
+
             </form>
         </div>
       </div>

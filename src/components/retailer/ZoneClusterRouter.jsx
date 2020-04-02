@@ -5,6 +5,7 @@ import SelectProduct from './SelectProduct';
 import AssignToZone from './AssignToZone';
 import AssignToCluster from './AssignToCluster';
 import ViewAssignedZones from './ViewAssignedZones';
+import ViewAssignedClusters from './ViewAssignedClusters';
 
 export default class ZoneClusterRouter extends Component {
     
@@ -22,6 +23,7 @@ export default class ZoneClusterRouter extends Component {
                     <PrivateRoute exact={true} path="/assigntocluster" component={AssignToCluster} />
                     <PrivateRoute exact={true} path="/assigntozone" component={AssignToZone} />
                     <PrivateRoute exact={true} path="/view/assigned/zones" component={ViewAssignedZones} />
+                    <PrivateRoute exact={true} path="/view/assigned/clusters" component={ViewAssignedClusters} />
                 </Switch>
             </Router>
 
