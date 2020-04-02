@@ -49,7 +49,7 @@ const initialState = {
     isvendor: false,
     zoneList: {},
     clusterList: {},
-    productList: ["BabyOil"],
+    productList: [],
     productName: "",
     updatedPrice: "",
     productDetails: {},

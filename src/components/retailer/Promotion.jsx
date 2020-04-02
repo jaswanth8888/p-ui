@@ -1,35 +1,15 @@
-import {
-  InputLabel,
-  Select,
-  Table,
-  TextField,
-  Typography
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { TextField } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Paper from "@material-ui/core/Paper";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import MenuItem from "@material-ui/core/MenuItem";
-import React, { Component, Fragment } from "react";
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { getProducts, postPromotion } from "../../redux/actions/RetailerActions";
+import {
+  getProducts,
+  postPromotion
+} from "../../redux/actions/RetailerActions";
 import ProductDetails from "../utils/ProductDetails";
-import "./StoreForm.css";
-import "./AddProducts.css";
-import "./Table.css";
-import Dummy from "./Dummy";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import "./Promotion.css";
-import Message from "../utils/Message"
+import Message from "../utils/Message";
+
 class Promotion extends Component {
   constructor(props) {
     super(props);
@@ -38,9 +18,9 @@ class Promotion extends Component {
       promotionDetails: {
         startDate: "",
         endDate: "",
-        effectivePercentage: "",
+        effectivePercentage: ""
       },
-      productName: "",
+      productName: ""
       // isSubmit: false,
       // status: 0
     };
@@ -53,35 +33,34 @@ class Promotion extends Component {
     let promotionDetails = this.state.promotionDetails;
     promotionDetails[name] = value;
     this.setState({ promotionDetails });
-
   }
-
 
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state.productName);
     // console.log(this.state);
 
-    this.props.postPromotion(this.props.productDetails.productName, this.state.promotionDetails)
-
+    this.props.postPromotion(
+      this.props.productDetails.productName,
+      this.state.promotionDetails
+    );
   }
 
   render() {
     return (
-      <div className="box-container store-form">
-        <div className="joint-form" style={{ width: "850px" }}>
+      <div className="box-container">
+        <div className="joint-form-large">
           <ProductDetails />
-          <div
-            className="product-form-body"
-            style={{ width: "95%", margin: "40px", marginBottom: "0px" }}
-          >
-
-            <form id="productform">
+          <div className="product-form-body">
+            <Typography className="card-header" variant="h4">
+              Create a Promotion
+            </Typography>
+            <form className="{classes.form}" noValidate>
               <TextField
                 id="startDate"
                 name="startDate"
                 // label="startDate"
-                // fullWidth
+                fullWidth
                 value={this.state.startDate}
                 type="date"
                 variant="outlined"
@@ -92,27 +71,26 @@ class Promotion extends Component {
                 autoFocus
               />
 
-              <div>
-                <TextField
-                  id="endDate"
-                  name="endDate"
-                  // label="endDate"
-                  // fullWidth
-                  value={this.state.endDate}
-                  type="date"
-                  variant="outlined"
-                  margin="normal"
-                  autoComplete="startDate"
-                  required
-                  onChange={this.handleChange}
-                  autoFocus
-                />
-              </div>
+              <TextField
+                id="endDate"
+                name="endDate"
+                // label="endDate"
+                fullWidth
+                value={this.state.endDate}
+                type="date"
+                variant="outlined"
+                margin="normal"
+                autoComplete="startDate"
+                required
+                onChange={this.handleChange}
+                autoFocus
+              />
+
               <TextField
                 variant="outlined"
                 margin="normal"
                 required
-                // fullWidth
+                fullWidth
                 type="number"
                 step="0.01"
                 id="effectivePercentage"
@@ -123,27 +101,20 @@ class Promotion extends Component {
                 autoFocus
               />
 
-              <div>
-                {/* <Link to="/selectproduct" style={{ textDecoration: "none" }}> */}
-                <Button
-                  type="button"
-                  // fullWidth="50px"
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit}"
-                  style={{ marginTop: "30px" }}
-                  onClick={this.handleSubmit}
-                >
-                  SAVE
-                  </Button>
-                {/* </Link> */}
-              </div>
+              <Button
+                fullWidth
+                type="button"
+                variant="contained"
+                color="primary"
+                className="{classes.submit} submit-pad"
+                onClick={this.handleSubmit}
+              >
+                SAVE
+              </Button>
             </form>
-
           </div>
         </div>
-
-
+        <Message />
       </div>
     );
   }
