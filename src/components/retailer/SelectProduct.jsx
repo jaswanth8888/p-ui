@@ -49,7 +49,7 @@ class SelectProduct extends Component {
         this.props.saveProductValue(productName);
         this.props.getProductDetails(value);
         //this.productNameNotSelected();
-        console.log(this.state.status);
+        // console.log(this.state.status);
         
     }
 
@@ -141,7 +141,7 @@ class SelectProduct extends Component {
                         </form>
                     </div>
                 </div>
-                <Fragment>
+                {/* <Fragment>
                     {(this.state.status === -1) ? (
                     <div>
                     <Snackbar open="true" autoHideDuration={2000}>
@@ -151,7 +151,7 @@ class SelectProduct extends Component {
                     </Snackbar>
                     </div>) : (<div />)
                     }
-                </Fragment>
+                </Fragment> */}
             </div>
         )
     }

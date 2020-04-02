@@ -63,6 +63,8 @@ class ViewAssignedClusters extends Component {
                                                                     {clusterObject.clusterName}<br />
                                                                     <Typography variant="subtitle1" style={{ color: "grey" }} gutterBottom>
                                                                         {zone.zoneName}
+                                                                        {console.log(zone.zoneName)
+                                                                        }
                                                                         
                                                                     </Typography>
                                                                 </Typography>
