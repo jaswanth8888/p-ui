@@ -28,6 +28,7 @@ import ViewAssignedZones from "../retailer/ViewAssignedZones.jsx";
 import ViewAssignedClusters from "../retailer/ViewAssignedClusters.jsx";
 import SelectProduct from "../retailer/SelectProduct.jsx";
 import { createBrowserHistory } from "history";
+import Tooltip from '@material-ui/core/Tooltip';
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -74,10 +75,12 @@ export default function SubNavbar() {
           <List>
 
             <Link to="/group">
+            <Tooltip title="Add" placement="right">
               <ListItem button>
                 <ListItemIcon><InboxIcon /></ListItemIcon>
                 <ListItemText className="list-item-text" primary={t("welcome.addGroup")} />
               </ListItem>
+            </Tooltip>
             </Link>
             <Link to="/products/store">
               <ListItem button>

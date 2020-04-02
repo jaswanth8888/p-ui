@@ -1,23 +1,29 @@
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import MenuIcon from '@material-ui/icons/Menu';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import clsx from 'clsx';
-import { default as React, Fragment } from 'react';
+import AppBar from "@material-ui/core/AppBar";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import MenuIcon from "@material-ui/icons/Menu";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import clsx from "clsx";
+import { default as React, Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { BrowserRouter as Router, Link, Route, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 import AddGroup from "../retailer/AddGroup.jsx";
 import ClusterForm from "../retailer/ClusterForm.jsx";
 import ProductRouter from "../retailer/ProductRouter.jsx";
@@ -33,13 +39,14 @@ import Tab from "@material-ui/core/Tab";
 import Login from "../Login";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import ViewListIcon from '@material-ui/icons/ViewList';
-import GroupIcon from '@material-ui/icons/Group';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import PublicIcon from '@material-ui/icons/Public';
-import LocalBarIcon from '@material-ui/icons/LocalBar';
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import ViewListIcon from "@material-ui/icons/ViewList";
+import GroupIcon from "@material-ui/icons/Group";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
+import PublicIcon from "@material-ui/icons/Public";
+import LocalBarIcon from "@material-ui/icons/LocalBar";
+import Tooltip from "@material-ui/core/Tooltip";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -66,66 +73,66 @@ TabPanel.propTypes = {
 
 const drawerWidth = 250;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    display: "flex"
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+      duration: theme.transitions.duration.leavingScreen
+    })
   },
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 36
   },
   hide: {
-    display: 'none',
+    display: "none"
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: 'nowrap',
+    whiteSpace: "nowrap"
   },
   drawerOpen: {
     width: drawerWidth,
-    transition: theme.transitions.create('width', {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
   drawerClose: {
-    transition: theme.transitions.create('width', {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
-    overflowX: 'hidden',
+    overflowX: "hidden",
     width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
+    [theme.breakpoints.up("sm")]: {
+      width: theme.spacing(9) + 1
+    }
   },
   toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
+    ...theme.mixins.toolbar
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
-  },
+    padding: theme.spacing(3)
+  }
 }));
 
 const StyledTab = withStyles({
@@ -142,14 +149,11 @@ function a11yProps(index) {
   };
 }
 
-
-
 function FullNavbar(props) {
   const classes = useStyles();
   const { t, i18n } = useTranslation();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -166,7 +170,7 @@ function FullNavbar(props) {
         <AppBar
           position="fixed"
           className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
+            [classes.appBarShift]: open
           })}
         >
           <Toolbar>
@@ -176,7 +180,7 @@ function FullNavbar(props) {
               onClick={handleDrawerOpen}
               edge="start"
               className={clsx(classes.menuButton, {
-                [classes.hide]: open,
+                [classes.hide]: open
               })}
             >
               <MenuIcon />
@@ -189,9 +193,7 @@ function FullNavbar(props) {
             />
 
             <Link to="/" style={{ marginLeft: "auto", color: "white" }}>
-
               <StyledTab
-
                 label={t("header.logOut")}
                 {...a11yProps(2)}
                 onClick={() => {
@@ -199,95 +201,200 @@ function FullNavbar(props) {
                   sessionStorage.removeItem("reduxstate");
                   props.logout();
                 }}
-              >
-              </StyledTab>
+              ></StyledTab>
             </Link>
           </Toolbar>
         </AppBar>
-        {(sessionStorage.getItem("token") && sessionStorage.getItem("token").length > 10) ? (
-
+        {sessionStorage.getItem("token") &&
+        sessionStorage.getItem("token").length > 10 ? (
           <Fragment>
             <Drawer
               variant="permanent"
               className={clsx(classes.drawer, {
                 [classes.drawerOpen]: open,
-                [classes.drawerClose]: !open,
+                [classes.drawerClose]: !open
               })}
               classes={{
                 paper: clsx({
                   [classes.drawerOpen]: open,
-                  [classes.drawerClose]: !open,
-                }),
+                  [classes.drawerClose]: !open
+                })
               }}
             >
               <div className={classes.toolbar}>
                 <IconButton onClick={handleDrawerClose}>
-                  {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                  {theme.direction === "rtl" ? (
+                    <ChevronRightIcon />
+                  ) : (
+                    <ChevronLeftIcon />
+                  )}
                 </IconButton>
               </div>
               <Divider />
               <List>
                 <Link to="/products/assign">
-                  <ListItem button>
-                    <ListItemIcon><LocalBarIcon /></ListItemIcon>
-                    <ListItemText className="list-item-text" primary={t("welcome.assignProductToClusterZone")} />
-                  </ListItem>
+                  <Tooltip
+                    title="Add Products to Clusters or Zones"
+                    placement="right"
+                  >
+                    <ListItem button>
+                      <ListItemIcon>
+                        <LocalBarIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={t("welcome.assignProductToClusterZone")}
+                      />
+                    </ListItem>
+                  </Tooltip>
                 </Link>
+
                 <Link to="/products/store">
-                  <ListItem button>
-                    <ListItemIcon><LocalBarIcon /></ListItemIcon>
-                    <ListItemText className="list-item-text" primary={t("welcome.addProducttoStore")} />
-                  </ListItem>
+                  <Tooltip
+                    title="Add Products to Store"
+                    placement="right"
+                  >
+                    <ListItem button>
+                      <ListItemIcon>
+                        <LocalBarIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={t("welcome.addProducttoStore")}
+                      />
+                    </ListItem>
+                  </Tooltip>
                 </Link>
+
                 <Divider />
                 <Link to="/group">
-                  <ListItem button>
-                    <ListItemIcon><GroupIcon /></ListItemIcon>
-                    <ListItemText className="list-item-text" primary={t("welcome.addGroup")} />
-                  </ListItem>
+                  <Tooltip
+                    title="Create a Group"
+                    placement="right"
+                  >
+                    <ListItem button>
+                      <ListItemIcon>
+                        <GroupIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={t("welcome.addGroup")}
+                      />
+                    </ListItem>
+                  </Tooltip>
                 </Link>
                 <Link to="/zone">
-                  <ListItem button >
-                    <ListItemIcon><PublicIcon /></ListItemIcon>
-                    <ListItemText className="list-item-text" primary={t("welcome.createZone")} />
-                  </ListItem>
+                  <Tooltip
+                    title="Create a Zone"
+                    placement="right"
+                  >
+                    <ListItem button>
+                      <ListItemIcon>
+                        <PublicIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={t("welcome.createZone")}
+                      />
+                    </ListItem>
+                  </Tooltip>
                 </Link>
                 <Link to="/cluster">
-                  <ListItem button >
-                    <ListItemIcon><PublicIcon /></ListItemIcon>
-                    <ListItemText className="list-item-text" primary={t("welcome.createCluster")} />
-                  </ListItem>
+                  <Tooltip
+                    title="Create a Cluster"
+                    placement="right"
+                  >
+                    <ListItem button>
+                      <ListItemIcon>
+                        <PublicIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={t("welcome.createCluster")}
+                      />
+                    </ListItem>
+                  </Tooltip>
                 </Link>
                 <Link to="/store">
-                  <ListItem button >
-                    <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
-                    <ListItemText className="list-item-text" primary={t("welcome.createStore")} />
-                  </ListItem>
+                  <Tooltip
+                    title="Create a Store"
+                    placement="right"
+                  >
+                    <ListItem button>
+                      <ListItemIcon>
+                        <ShoppingCartIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={t("welcome.createStore")}
+                      />
+                    </ListItem>
+                  </Tooltip>
                 </Link>
                 <Divider />
                 <Link to="/view/zones">
-                  <ListItem button>
-                    <ListItemIcon><ViewListIcon /></ListItemIcon>
-                    <ListItemText className="list-item-text" primary={t("welcome.viewZones")} />
-                  </ListItem>
+                  <Tooltip
+                    title="View Zones"
+                    placement="right"
+                  >
+                    <ListItem button>
+                      <ListItemIcon>
+                        <ViewListIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={t("welcome.viewZones")}
+                      />
+                    </ListItem>
+                  </Tooltip>
                 </Link>
                 <Link to="/view/clusters">
-                  <ListItem button>
-                    <ListItemIcon><ViewListIcon /></ListItemIcon>
-                    <ListItemText className="list-item-text" primary={t("welcome.viewClusters")} />
-                  </ListItem>
+                  <Tooltip
+                    title="View Clusters"
+                    placement="right"
+                  >
+                    <ListItem button>
+                      <ListItemIcon>
+                        <ViewListIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={t("welcome.viewClusters")}
+                      />
+                    </ListItem>
+                  </Tooltip>
                 </Link>
                 <Link to="/view/assigned/zones">
-                  <ListItem button>
-                    <ListItemIcon><ViewListIcon /></ListItemIcon>
-                    <ListItemText className="list-item-text" primary={"View assigned zones"} />
-                  </ListItem>
+                  <Tooltip
+                    title="View Assigned Zones"
+                    placement="right"
+                  >
+                    <ListItem button>
+                      <ListItemIcon>
+                        <ViewListIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={"View Assigned Zones"}
+                      />
+                    </ListItem>
+                  </Tooltip>
                 </Link>
                 <Link to="/view/assigned/clusters">
-                  <ListItem button>
-                    <ListItemIcon><ViewListIcon /></ListItemIcon>
-                    <ListItemText className="list-item-text" primary={"View assigned clusters"} />
-                  </ListItem>
+                  <Tooltip
+                    title="View Assigned Clusters"
+                    placement="right"
+                  >
+                    <ListItem button>
+                      <ListItemIcon>
+                        <ViewListIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={"View Assigned Clusters"}
+                      />
+                    </ListItem>
+                  </Tooltip>
                 </Link>
               </List>
               {/* <Divider />
@@ -299,21 +406,50 @@ function FullNavbar(props) {
             </ListItem>
           ))}
         </List> */}
-
             </Drawer>
-
           </Fragment>
-        ) : (<Fragment />)}
+        ) : (
+          <Fragment />
+        )}
         <Switch>
           <Route exact={true} path="/" component={Login} />
-          <Route exact path="/group" render={props => <AddGroup {...props} />} />
-          <Route exact path="/products/store" render={props => <ProductRouter {...props} />} />
+          <Route
+            exact
+            path="/group"
+            render={props => <AddGroup {...props} />}
+          />
+          <Route
+            exact
+            path="/products/store"
+            render={props => <ProductRouter {...props} />}
+          />
           <Route exact path="/zone" render={props => <ZoneForm {...props} />} />
-          <Route exact path="/cluster" render={props => <ClusterForm {...props} />} />
-          <Route exact path="/store" render={props => <StoreForm {...props} />} />
-          <Route exact path="/view/zones" render={props => <ViewZones {...props} />} />
-          <Route exact path="/view/clusters" render={props => <ViewClusters {...props} />} />
-          <Route exact path="/products/assign" render={props => <ZoneClusterRouter {...props} />} />
+          <Route
+            exact
+            path="/cluster"
+            render={props => <ClusterForm {...props} />}
+          />
+          <Route
+            exact
+            path="/store"
+            render={props => <StoreForm {...props} />}
+          />
+          <Route
+            exact
+            path="/view/zones"
+            render={props => <ViewZones {...props} />}
+          />
+          <Route
+            exact
+            path="/view/clusters"
+            render={props => <ViewClusters {...props} />}
+          />
+          <Route
+            exact
+            path="/products/assign"
+            render={props => <ZoneClusterRouter {...props} />}
+          />
+          
         </Switch>
       </Router>
     </div>
