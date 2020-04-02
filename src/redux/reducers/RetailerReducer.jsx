@@ -22,7 +22,11 @@ import {
     PRODUCTLIST_GET_REQUEST,
     PRODUCT_SAVE_VALUE,
     PRODUCT_GET_REQUEST,
-    PROMOTION_POST_REQUEST
+    PROMOTION_POST_REQUEST,
+    ZONECLUSTER_GET_REQUEST,
+    ASSIGN_TO_CLUSTER,
+    ASSIGN_TO_ZONE
+
 } from "../actions/types";
 
 const initialState = {
@@ -86,7 +90,6 @@ export default (state = initialState, action = {}) => {
             return { ...state, categories: action.categories }
         case PRODUCTS_GET_REQUEST:
             return { ...state, products: action.products }
-
         case ZONE_SAVE_VALUE:
             return { ...state, zone: action.zone }
         case CLUSTER_SAVE_VALUE:
@@ -95,7 +98,6 @@ export default (state = initialState, action = {}) => {
             return { ...state, store: action.store }
         case PRODUCTTOSTORE_POST_REQUEST:
             return { ...state, msg: action.msg }
-
         case PRODUCTLIST_GET_REQUEST:
             return { ...state, productList: action.productList }
         case PRODUCT_SAVE_VALUE:
@@ -105,7 +107,12 @@ export default (state = initialState, action = {}) => {
         case PROMOTION_POST_REQUEST:
             return { ...state, promotionDetails: action.promotionDetails,
                  msg: action.msg, msgSeverity: action.msgSeverity }
-
+        case ZONECLUSTER_GET_REQUEST:
+            return { ...state, zoneclusternames: action.zoneclusternames }
+        case ASSIGN_TO_CLUSTER:
+            return { ...state, msg:action.msg, msgSeverity: action.msgSeverity  }
+        case ASSIGN_TO_ZONE:
+            return { ...state, msg:action.msg, msgSeverity: action.msgSeverity  }
         default:
             return { ...state }
     }

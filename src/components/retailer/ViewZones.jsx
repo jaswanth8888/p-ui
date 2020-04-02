@@ -14,25 +14,31 @@ class ViewZones extends Component {
         this.props.getZoneList();
     }
 
+    componentWillMount() {
+        this.props.history.push("/view/zones")
+    }
 
     render() {
 
         return (
-
-            <div className="box-container" style={{ alignItems: "flex-start", marginTop: "150px" }}>
-                <TableContainer component={Paper} style={{ width: "500px", textAlign : "center" }}>
+            
+            <div className="box-container-start">
+                {/* <div className="">
+                    <ProductDetails></ProductDetails>
+                </div> */}
+                <TableContainer component={Paper}>
                     <Table  aria-label="a dense table">
-                        <TableHead style={{ backgroundColor: "#673ab7" }}>
+                        <TableHead>
                             <TableRow>
-                                <TableCell style={{ color: "#FFF", width: "250px" , textAlign : "center"}}>Zone Name</TableCell>
-                                <TableCell style={{ color: "#FFF", width: "250px", textAlign : "center" }}>Number of Stores</TableCell>
+                                <TableCell>Zone Name</TableCell>
+                                <TableCell>Number of Stores</TableCell>
                             </TableRow>
                         </TableHead>
                         <tbody>
                             {Object.keys(this.props.zoneList).map((i) => {
                                 return <TableRow>
-                                    <TableCell key={i} value={i} style = {{ textAlign : "center"}}>{i}</TableCell>
-                                    <TableCell style = {{ textAlign : "center"}}>{this.props.zoneList[i]}</TableCell>
+                                    <TableCell key={i} value={i}>{i}</TableCell>
+                                    <TableCell >{this.props.zoneList[i]}</TableCell>
                                 </TableRow>
                             })}
                         </tbody>

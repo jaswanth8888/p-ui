@@ -24,6 +24,10 @@ class AddGroup extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillMount() {
+    this.props.history.push("/group")
+  }
+
   handleChange(e) {
     const { name, value } = e.target;
     let group = this.state.group;
@@ -33,14 +37,14 @@ class AddGroup extends Component {
 
   is_validGroupName = () => {
     if (this.state.group.groupName.length > 0) {
-      this.setState({ status: 1 })    
+      this.setState({ status: 1 })
     }
     else {
       this.setState({ status: -1 })
       return false
     }
     return true
- }
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -55,34 +59,30 @@ class AddGroup extends Component {
 
       <div className="box-container">
         <div className="joint-form">
-          <div className="validation-half" style={{ background: "#673ab7" }}>
+          <div className="validation-half">
             <div className="validations">
               <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {this.state.group.groupName.length <= 0 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              {this.state.group.groupName.length <= 0 && <div className="typo-div"><ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Please provide a group name
                 </Typography></div>}
               {this.state.group.groupName.length > 0 &&
-                <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <div className="approved-div"><CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Please provide a group name
                   </Typography></div>}
             </div>
           </div>
           <div className="form-half">
-            <form className="{classes.form}" noValidate >
+            <form className="{classes.form} expanded-form" noValidate >
               <div>
                 <div className="help-block">
                   <Typography
                     color="primary"
                     component="h1"
                     variant="h4"
-                    style=
-                    {{
-                      fontFamily: "font-family: 'Open Sans', sans-serif;",
-                      position: "relative",
-                      top: "-20px"
-                    }}>
+                    className="help-block-h4"
+                  >
                     Create a Group
                   </Typography>
                 </div>
@@ -92,20 +92,23 @@ class AddGroup extends Component {
                 margin="normal"
                 required
                 fullWidth
-                id="groupName"
+                id="group-input"
                 label="Group Name"
                 name="groupName"
                 onChange={this.handleChange}
+                autoComplete="zoneName"
                 autoFocus
               />
+
               <Button
                 type="button"
                 fullWidth
                 variant="contained"
                 color="primary"
-                className="{classes.submit}"
-                style={{ marginTop: "30px" }}
-                onClick={this.handleSubmit}>
+                className="{classes.submit} submit-pad"
+                onClick={this.handleSubmit}
+                id="group-submit"
+              >
                 Save
             </Button>
             </form>
@@ -123,7 +126,7 @@ class AddGroup extends Component {
             </div>) : (<div />)
           }
         </Fragment>
-        <Message/> 
+        <Message />
       </div>
     )
   }

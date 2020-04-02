@@ -3,13 +3,12 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import Navbar from './components/organisms/Navbar';
+import FullNavbar from './components/organisms/FullNavbar';
 import rootReducer from './redux/reducers/rootReducer';
 import VendorLogin from './components/vendor/VendorLogin';
 import Registration from './components/vendor/Registration'
 import Home from './components/vendor/Home';
 import Addproduct from './components/vendor/AddProduct';
-import Promotion from './components/retailer/Promotion';
 import { BrowserRouter as Router,Route, Switch} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 let state = window.sessionStorage.reduxstate;
@@ -39,12 +38,11 @@ store.subscribe(() => {
       <div>
           <Router >
                     <Switch>
-                      <Route exact={true} path="/" component={Navbar} />
+                      <Route exact={true} path="/" component={FullNavbar} />
                       <Route exact={true} path="/vendor" component={VendorLogin} />
                       <Route exact={true} path="/vendor/reg" component={Registration} />  
                       <Route exact path="/vendor/home" component={Home}/> 
-                      <Route exact={true} path="/vendor/addproduct" component={Addproduct}/> 
-                      {/* <Route exact path="/addpromotion" component={Promotion}/> */}
+                      <Route exact={true} path="/vendor/addproduct" component={Addproduct}/>  
                       </Switch>
                   </Router>
         </div>

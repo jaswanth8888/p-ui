@@ -22,8 +22,6 @@ import {
   getProducts,
   postProductToStore
 } from "../../redux/actions/RetailerActions";
-import "./AddProducts.css";
-import "./Table.css";
 
 class AddProducts extends Component {
   constructor(props) {
@@ -72,13 +70,18 @@ class AddProducts extends Component {
 
   loopForm() {
     let tabledata = document.querySelectorAll("tr");
+ 
     tabledata.forEach((ele,ind) => {
       if(ind && ele.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].checked){
         this.state.object.productName = ele.childNodes[1].childNodes[0].textContent;
         this.state.object.quantityAssigned = parseInt(ele.childNodes[5].childNodes[0].childNodes[1].childNodes[0].value)
         this.state.productList.push(this.state.object);
       }
+      
     })
+ 
+    
+    
     this.props.postProductToStore(
       this.props.zone,
       this.props.cluster,
@@ -90,12 +93,10 @@ class AddProducts extends Component {
   render() {
     return (
       <div
-        className="box-container"
-        style={{ justifyContent: "flex-start", flexDirection: "column" }}
+        className="box-container add-prods"
       >
         <div
           className="product-form-header"
-          style={{ width: "95%", margin: "40px", marginBottom: "0px" }}
         >
           <FormControl variant="outlined" fullWidth>
             <InputLabel htmlFor="category">Enter Category</InputLabel>
@@ -125,28 +126,27 @@ class AddProducts extends Component {
         </div>
         <div
           className="product-form-body"
-          style={{ width: "95%", margin: "40px", marginBottom: "0px" }}
+          
         >
           <form id="productform">
             <TableContainer component={Paper}>
               <Table size="small" aria-label="a dense table">
                 <TableHead
-                  style={{ backgroundColor: "#673ab7", color: "white" }}
-                >
+                > 
                   <TableRow>
                     {/* <TableCell>CheckBox</TableCell> */}
-                    <TableCell style={{ color: "White" }}>Select</TableCell>
-                    <TableCell style={{ color: "White" }}>
+                    <TableCell>Select</TableCell>
+                    <TableCell>
                       Product Name
                     </TableCell>
-                    <TableCell style={{ color: "White" }}>Price</TableCell>
-                    <TableCell style={{ color: "White" }}>
+                    <TableCell>Price</TableCell>
+                    <TableCell>
                       Vendor Name
                     </TableCell>
-                    <TableCell style={{ color: "White" }}>
+                    <TableCell>
                       Quantity Available
                     </TableCell>
-                    <TableCell style={{ color: "White" }}>
+                    <TableCell>
                       Quantity Required
                     </TableCell>
                   </TableRow>
@@ -167,7 +167,7 @@ class AddProducts extends Component {
                                   name="checkedB"
                                   color="primary"
                                   value={JSON.stringify(product)}
-                                  style={{ marginTop: "-2px" }}
+                                  
                                 />
                               }
                             />
@@ -181,7 +181,7 @@ class AddProducts extends Component {
                                   name="checkedB"
                                   color="primary"
                                   value={JSON.stringify(product)}
-                                  style={{ marginTop: "-2px" }}
+                                  
                                   disabled
                                 />
                               }
@@ -196,7 +196,7 @@ class AddProducts extends Component {
                           ) : (
                             <Typography
                               variant="subtitle1"
-                              style={{ color: "grey" }}
+                              className="disabled"
                               gutterBottom
                             >
                               {product.productName}
@@ -211,7 +211,7 @@ class AddProducts extends Component {
                           ) : (
                             <Typography
                               variant="subtitle1"
-                              style={{ color: "grey" }}
+                              className="disabled"
                               gutterBottom
                             >
                               {product.productBasePrice}
@@ -226,7 +226,7 @@ class AddProducts extends Component {
                           ) : (
                             <Typography
                               variant="subtitle1"
-                              style={{ color: "grey" }}
+                              className = "disabled"
                               gutterBottom
                             >
                               {product.companyName}
@@ -241,7 +241,7 @@ class AddProducts extends Component {
                           ) : (
                             <Typography
                               variant="subtitle1"
-                              style={{ color: "grey" }}
+                              className = "disabled"
                               gutterBottom
                             >
                               {product.remainingQuantity}
@@ -265,7 +265,6 @@ class AddProducts extends Component {
                               onChange={this.updateInputValue}
                               label="Quantity"
                               variant="outlined"
-                              style={{ padding: "9px 7px !important" }}
                             />
                           ) : (
                             <TextField
@@ -284,7 +283,6 @@ class AddProducts extends Component {
                               label="Quantity"
                               variant="outlined"
                               disabled
-                              style={{ padding: "9px 7px !important" }}
                             />
                           )}
                         </TableCell>
@@ -295,7 +293,7 @@ class AddProducts extends Component {
               </Table>
             </TableContainer>
             {this.state.quantityCheck && (
-              <Link to="/addproductstostore" style={{ textDecoration: "none" }}>
+              <Link to="/addproductstostore">
                 <Button
                   type="button"
                   fullWidth

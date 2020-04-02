@@ -5,18 +5,22 @@ import AddProducts from './AddProducts';
 import AddProductToStore from './AddProductToStore';
 
 export default class ProductRouter extends Component {
-    
+
+    componentWillMount() {
+        this.props.history.push("/products/store")
+    }
+
     render() {
         return (
-            <div>
-                <Router>
-                    <Redirect to='/addproductstostore'/>
-                    <Switch>
-                        <PrivateRoute exact={true} path="/addproductstostore" component={AddProductToStore} />
-                        <PrivateRoute exact={true} path="/addproducts" component={AddProducts} />
-                    </Switch>
-                </Router>
-            </div>
+
+            <Router>
+                <Redirect to='/addproductstostore' />
+                <Switch>
+                    <PrivateRoute exact={true} path="/addproductstostore" component={AddProductToStore} />
+                    <PrivateRoute exact={true} path="/addproducts" component={AddProducts} />
+                </Switch>
+            </Router>
+
         )
     }
 }

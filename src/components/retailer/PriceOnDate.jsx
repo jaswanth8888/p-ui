@@ -109,8 +109,6 @@ class PriceOnDate extends Component {
                   color="primary"
                   className="{classes.submit}"
                   style={{ marginTop: "30px" }}
-                  // onClick={this.handleSubmit}
-                  // onClick={this.props.getProductDetails(this.state.productName)}
                 >
                   Assign Price to product
                   </Button>
