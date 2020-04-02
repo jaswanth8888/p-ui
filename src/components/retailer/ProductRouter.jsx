@@ -12,15 +12,15 @@ export default class ProductRouter extends Component {
 
     render() {
         return (
-            <div>
-                <Router>
-                    <Redirect to='/addproductstostore' />
-                    <Switch>
-                        <PrivateRoute exact={true} path="/addproductstostore" component={AddProductToStore} />
-                        <PrivateRoute exact={true} path="/addproducts" component={AddProducts} />
-                    </Switch>
-                </Router>
-            </div>
+
+            <Router>
+                <Redirect to='/addproductstostore' />
+                <Switch>
+                    <PrivateRoute exact={true} path="/addproductstostore" component={AddProductToStore} />
+                    <PrivateRoute exact={true} path="/addproducts" component={AddProducts} />
+                </Switch>
+            </Router>
+
         )
     }
 }

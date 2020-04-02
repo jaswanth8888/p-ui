@@ -13,16 +13,16 @@ export default class ProductRouter extends Component {
 
     render() {
         return (
-            <div>
-                <Router>
-                    <Redirect to='/selectproduct'/>
-                    <Switch>
-                        <PrivateRoute exact={true} path="/selectproduct" component={SelectProduct} />
-                        <PrivateRoute exact={true} path="/assigntocluster" component={AssignToCluster} />
-                        <PrivateRoute exact={true} path="/assigntozone" component={AssignToZone} />
-                    </Switch>
-                </Router>
-            </div>
+
+            <Router>
+                <Redirect to='/selectproduct'/>
+                <Switch>
+                    <PrivateRoute exact={true} path="/selectproduct" component={SelectProduct} />
+                    <PrivateRoute exact={true} path="/assigntocluster" component={AssignToCluster} />
+                    <PrivateRoute exact={true} path="/assigntozone" component={AssignToZone} />
+                </Switch>
+            </Router>
+
         )
     }
 }
