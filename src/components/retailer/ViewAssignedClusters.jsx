@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { getProductDetails } from "../../redux/actions/RetailerActions";
 import ProductDetails from "../utils/ProductDetails";
 
-class ViewAssignedZones extends Component {
+class ViewAssignedClusters extends Component {
     constructor(props) {
         super(props)
 
@@ -17,11 +17,6 @@ class ViewAssignedZones extends Component {
 
         }
     }
-
-    // componentWillMount() {
-    //     this.props.getProductDetails(this.props.productName);
-    // }
-
 
     render() {
 
@@ -31,7 +26,7 @@ class ViewAssignedZones extends Component {
                 {/* <div className="">
                     <ProductDetails></ProductDetails>
                 </div> */}
-                
+
                 {console.log(this.props.productDetails)}
 
                 <TableContainer component={Paper}>
@@ -115,6 +110,9 @@ class ViewAssignedZones extends Component {
     }
 }
 
+
+
+
 const stateAsProps = (store) => ({
     productDetails: store.RetailerReducer.productDetails,
     productName: store.RetailerReducer.productName
@@ -123,4 +121,5 @@ const actionAsProps = {
     getProductDetails: getProductDetails
 
 }
-export default connect(stateAsProps, actionAsProps)(ViewAssignedZones);
+
+export default connect(stateAsProps, actionAsProps)(ViewAssignClusters);

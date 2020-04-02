@@ -403,13 +403,6 @@ export const assignToCluster = (clusterDetails,zoneName, clusterName,productName
           msg: "Quantity assigned is high, please enter a lower quantity",
           msgSeverity: "error"
         });
-      } else if (response.status === 400 && response.data.message === "Product price is below minimum selling price") {
-        dispatch({ type: MESSAGE_SET_NULL });
-        dispatch({
-          type: ASSIGN_TO_CLUSTER,
-          msg: "Profit percentage is very low, please enter a higher percentage",
-          msgSeverity: "error"
-        });
       } else if (response.status === 403) {
         dispatch({ type: MESSAGE_SET_NULL });
         dispatch({
