@@ -42,6 +42,7 @@ class ZoneForm extends Component {
       zoneName: this.state.zoneName,
       liquorPricePerUnit: this.state.liquorPricePerUnit
     }
+    console.log(zone);
 
 
     if (this.state.zoneName.length > 5) {

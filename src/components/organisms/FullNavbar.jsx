@@ -225,7 +225,7 @@ function FullNavbar(props) {
                   {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                 </IconButton>
               </div>
-              <Divider />
+              <Divider />giut
               <List>
                 <Link to="/products/assign">
                   <ListItem button>
