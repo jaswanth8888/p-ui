@@ -92,7 +92,7 @@ class AddGroup extends Component {
                 margin="normal"
                 required
                 fullWidth
-                id="groupName"
+                id="group-input"
                 label="Group Name"
                 name="groupName"
                 onChange={this.handleChange}
@@ -107,6 +107,7 @@ class AddGroup extends Component {
                 color="primary"
                 className="{classes.submit} submit-pad"
                 onClick={this.handleSubmit}
+                id="group-submit"
               >
                 Save
             </Button>
