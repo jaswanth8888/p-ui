@@ -74,12 +74,8 @@ class PriceOnDate extends Component {
                     color="primary"
                     component="h1"
                     variant="h4"
-                    style=
-                    {{
-                      fontFamily: "font-family: 'Open Sans', sans-serif;",
-                      position: "relative",
-                      top: "-20px"
-                    }}>
+                    className="help-block-h4"
+                  >
                     Select a Product
                 </Typography>
                 </div>
@@ -101,14 +97,13 @@ class PriceOnDate extends Component {
               </FormControl>
 
 
-              <Link to='/addpromotion' style={{ textDecoration: "none" }}>
+              <Link to='/addpromotion' className = "button-link">
                 <Button
                   type="button"
                   fullWidth
                   variant="contained"
                   color="primary"
-                  className="{classes.submit}"
-                  style={{ marginTop: "30px" }}
+                  className="{classes.submit} submit-pad"
                 >
                   Assign Price to product
                   </Button>

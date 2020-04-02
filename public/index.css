@@ -37,6 +37,7 @@
     margin-left: auto;
 }
 
+
 .box-container{
     display: flex;
     justify-content: center;
@@ -103,6 +104,14 @@ p{
     box-shadow: 0px 10px 17px 6px rgba(0,0,0,0.24);
 }
 
+.joint-form-large{
+    margin-top:60px;
+    height:85vh;
+    width: 1050px;
+    display: flex;
+    box-shadow: 0px 10px 17px 6px rgba(0,0,0,0.24);
+}
+
 
 
 .form-half{
@@ -130,7 +139,8 @@ p{
 
 .product-form-body{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: flex-start;
     padding:20px;
 }
@@ -172,7 +182,7 @@ a{
 }
 
 .help-block-h4{
-
+    text-align : left !important;
     font-family: 'Open Sans', sans-serif;
     position: relative;
     top: -20px
@@ -261,27 +271,82 @@ a{
 .flex-grid{
     display: flex;
     flex-direction: column;
+    width:100%;
+    height:100%;
 }
 
 .product-name{
-    flex:0.1;
+    height:10%;
+    width:100%;
     padding:20px;
+    color: #673ab7 !important;
 }
 
 .product-image{
-    flex:0.4;
-    height:100%;
     width:100%;
+    height:65%;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .product-table-data{
-    flex:0.2;
-    height:100%;
     width:100%;
+    height:15%;
+}
+
+.product-table-data  > tr,td,th,table,thead,tbody{
+    border:none !important;
+    box-shadow:none !important;
+    border-radius: 0px !important;
+}
+
+
+
+.product-image img{
+    width:100%;
+    
 }
 
 .product-desc{
-    flex:0.3;
-    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:10%;
     width:100%;
+    padding:20px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.card-header{
+    color: #673ab7 !important;
+}
+
+.productform{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width:100% !important;
+    height:100% !important;
+}
+
+.form-half form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:100% !important;
+    height:100% !important;
+}
+
+.button-link{
+    width : 100% !important;
+}
+
+.center-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100vw;
+    height:100vh;
 }

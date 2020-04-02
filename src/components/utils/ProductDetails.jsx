@@ -1,85 +1,78 @@
-import React, { Component, Fragment } from 'react'
-import connect from 'react-redux/es/connect/connect'
+import React, { Component, Fragment } from "react";
+import connect from "react-redux/es/connect/connect";
 import { getProductDetails } from "../../redux/actions/RetailerActions";
 import { Grid, Typography, Paper } from "@material-ui/core";
-
-
-
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import { Table } from "@material-ui/core";
 
 class ProductDetails extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props);
 
-        this.state = {
+    this.state = {};
+  }
 
-        }
-    }
+  componentDidMount() {
+    this.props.getProductDetails(this.props.productName);
+  }
 
-    componentDidMount() {
-        this.props.getProductDetails(this.props.productName);
-    }
-
-    render() {
-
-        return (
-            // <div className="flex-grid">
-            //     <div className="top-desc">
-            //         <Typography variant="h5" gutterBottom id="top-desc-h5">
-            //             Name : {this.props.productDetails.productName}
-            //         </Typography>
-            //     </div>
-            //     <div className="middle-desc">
-            //         <div className="image-half">
-            //             <img src= {this.props.productDetails.productImagePath}/>
-            //         </div>
-            //         <div className="data-half">
-            //             <div className="data-half-upper">
-            //                 <div className="text-space">
-            //                     <Typography  variant="h6">
-            //                         Base Price :  {this.props.productDetails.productBasePrice}
-            //                     </Typography>
-            //                 </div>
-            //                 <div className="text-space">
-            //                     <Typography  variant="h6">
-            //                         Vendor :  {this.props.productDetails.companyName}
-            //                     </Typography>
-            //                 </div>
-
-            //             </div>
-            //             <div className="data-half-lower">
-            //                 <div className="text-space">
-            //                     <Typography variant="h6">
-            //                         Quantity : {this.props.productDetails.remainingQuantity}
-            //                     </Typography>
-            //                 </div>
-            //                 <div className="text-space">
-            //                     <Typography  variant="h6">
-            //                         Category :  {this.props.productDetails.productCategory}
-            //                     </Typography>
-            //                 </div>
-            //             </div>
-            //         </div>
-            //     </div>
-            //     <div className="bottom-desc">
-            //         <Typography  variant="body2">
-            //             Description : {this.props.productDetails.productDescription}
-            //         </Typography>
-            //     </div>
-            // </div>
-            <div className="flex-grid">
-                
-            </div>
-
-        )
-    }
+  render() {
+    return (
+      <div className="flex-grid">
+        <div className="product-name">
+          <Typography className="card-header" variant="h4">
+            {this.props.productDetails.productName}
+          </Typography>
+        </div>
+        <div className="product-image">
+          <img src={this.props.productDetails.productImagePath} alt="none" />
+        </div>
+        <div className="product-table-data">
+          <TableContainer component={Paper}>
+            <Table aria-label="a dense table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Base Price</TableCell>
+                  <TableCell>Vendor</TableCell>
+                  <TableCell>Quantity</TableCell>
+                  <TableCell>Category</TableCell>
+                </TableRow>
+              </TableHead>
+              <tbody>
+                <TableRow>
+                  <TableCell>
+                    {this.props.productDetails.productBasePrice}
+                  </TableCell>
+                  <TableCell>{this.props.productDetails.companyName}</TableCell>
+                  <TableCell>
+                    {this.props.productDetails.remainingQuantity}
+                  </TableCell>
+                  <TableCell>
+                    {this.props.productDetails.productCategory}
+                  </TableCell>
+                </TableRow>
+              </tbody>
+            </Table>
+          </TableContainer>
+        </div>
+        <div className="product-desc">
+          <Typography variant="body2">
+            {this.props.productDetails.productDescription}
+          </Typography>
+        </div>
+      </div>
+    );
+  }
 }
 
-const stateAsProps = (store) => ({
-    productDetails: store.RetailerReducer.productDetails,
-    productName: store.RetailerReducer.productName
-
+const stateAsProps = store => ({
+  productDetails: store.RetailerReducer.productDetails,
+  productName: store.RetailerReducer.productName
 });
 const actionsAsProps = {
-    getProductDetails: getProductDetails
+  getProductDetails: getProductDetails
 };
-export default connect(stateAsProps, actionsAsProps)(ProductDetails)
+export default connect(stateAsProps, actionsAsProps)(ProductDetails);

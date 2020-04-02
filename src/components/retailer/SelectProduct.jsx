@@ -111,7 +111,7 @@ class SelectProduct extends Component {
                                 <Link to='/selectproduct'>
                                 </Link>}
 
-                            <Link to='/assigntocluster'>
+                            <Link className="button-link" to='/assigntocluster'>
                                 <Button
                                     type="button"
                                     fullWidth
@@ -124,7 +124,7 @@ class SelectProduct extends Component {
                                     </Button>
                             </Link>
 
-                            <Link to='/assigntozone'>
+                            <Link className="button-link" to='/assigntozone'>
                                 <Button 
                                     type="button"
                                     
