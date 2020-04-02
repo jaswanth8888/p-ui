@@ -134,7 +134,7 @@ export const postCluster = (cluster, zone) => async dispatch => {
 
 export const getZones = () => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/location-management/zoneNames", {
+    .get(RETAILER_BASE_URL + "/location-management/zones/names", {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
@@ -147,7 +147,7 @@ export const getZones = () => async dispatch => {
 
 export const getClusters = zone => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/location-management/" + zone + "/clusters", {
+    .get(RETAILER_BASE_URL + "/location-management/" + zone + "/clusters/names", {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
@@ -332,7 +332,7 @@ export const getStores = (zone, cluster) => async dispatch => {
         zone +
         "/" +
         cluster +
-        "/stores",
+        "/stores/names",
       { headers: { Authorization: TOKEN } }
     )
     .then(res => {
@@ -359,7 +359,7 @@ export const saveProductValue = productValue => dispatch => {
 
 export const getProductDetails = productName => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/product-management/product-details/" + productName , {
+    .get(RETAILER_BASE_URL + "/product-management/product/" + productName , {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
@@ -380,7 +380,7 @@ export const getZoneClusterNames = (clusterPattern) => async dispatch => {
 export const assignToCluster = (clusterDetails,zoneName, clusterName,productName) => async dispatch => {
   await axios
     .put(
-      RETAILER_BASE_URL +/product-management/+productName+"/"+zoneName+"/"+clusterName+"/products",clusterDetails,
+      RETAILER_BASE_URL +"/product-management/"+productName+"/"+zoneName+"/"+clusterName+"/products",clusterDetails,
       { headers: { Authorization: TOKEN } }
     )
     .then(res => {
@@ -390,17 +390,43 @@ export const assignToCluster = (clusterDetails,zoneName, clusterName,productName
       });
     })
     .catch(err => {
-      dispatch({
-        type: ASSIGN_TO_CLUSTER,
-        msg: ""
-      });
+      console.log(err)
+      console.log(err.response)
+      console.log(err.response.message)
+
+      let response = err.response;
+      if (response.status === 400 && response.data.message === "Quantity Insufficient") {
+        dispatch({
+          type: ASSIGN_TO_CLUSTER,
+          msg: "Quantity assigned is high, please enter a lower quantity",
+          msgSeverity: "error"
+        });
+      } else if (response.status === 400 && response.data.message === "Product price is below minimum selling price") {
+        dispatch({
+          type: ASSIGN_TO_CLUSTER,
+          msg: "Profit percentage is very low, please enter a higher percentage",
+          msgSeverity: "error"
+        });
+      } else if (response.status === 403) {
+        dispatch({
+          type: ASSIGN_TO_CLUSTER,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning"
+        });
+      } else {
+        dispatch({
+          type: ASSIGN_TO_CLUSTER,
+          msg: "Something went wrong ,please try again",
+          msgSeverity: "warning"
+        });
+      }
     });
 };
 
 export const assignToZone = (zoneDetails,zoneName,productName) => async dispatch => {
   await axios
     .put(
-      RETAILER_BASE_URL +/product-management/+zoneName+"/"+productName+"/productAssigned",zoneDetails,
+      RETAILER_BASE_URL +"/product-management/"+zoneName+"/"+productName+"/product",zoneDetails,
       { headers: { Authorization: TOKEN } }
     )
     .then(res => {
@@ -410,9 +436,41 @@ export const assignToZone = (zoneDetails,zoneName,productName) => async dispatch
       });
     })
     .catch(err => {
-      dispatch({
-        type: ASSIGN_TO_ZONE,
-        msg: ""
-      });
+      console.log(err)
+      console.log(err.response)
+      console.log(err.response.message)
+
+      let response = err.response;
+      if (response.status === 400 && response.data.message === "Product is already associated with zone") {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: "Product is already associated with zone, please try again",
+          msgSeverity: "error"
+        });
+      } else if (response.status === 400 && response.data.message === "Quantity Insufficient") {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: "Quantity assigned is high, please enter a lower quantity",
+          msgSeverity: "error"
+        });
+      } else if (response.status === 400 && response.data.message === "Product price is below minimum selling price") {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: "Profit percentage is very low, please enter a higher percentage",
+          msgSeverity: "error"
+        });
+      } else if (response.status === 403) {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning"
+        });
+      } else {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: "Something went wrong ,please try again",
+          msgSeverity: "warning"
+        });
+      }
     });
 };

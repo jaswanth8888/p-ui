@@ -11,18 +11,23 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { getZoneClusterNames, assignToCluster } from "../../redux/actions/RetailerActions";
 import ProductDetails from "../utils/ProductDetails";
 
+
+
 class AssignToCluster extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       zoneclustername: "",
+      zonecluster: "",
       isSubmitted: false,
       clusterName: "",
       zoneName: "",
       clusterDetails: {}
     };
 
+
+    this.handleChangeCluster = this.handleChangeCluster.bind(this);
     this.handleChangeClusterName = this.handleChangeClusterName.bind(this);
     this.handleChangeProfitPecentage = this.handleChangeProfitPecentage.bind(this);
     this.handleChangeQuantity = this.handleChangeQuantity.bind(this);
@@ -30,38 +35,40 @@ class AssignToCluster extends Component {
 
   }
 
-  handleChangeClusterName(e,value) {
+  handleChangeCluster(e) {
+    console.log(e.target.value);
+    this.setState({ zonecluster: e.target.value })
+    this.props.getZoneClusterNames(e.target.value)
 
-    console.log(value);
-    console.log("Hi")
-    this.setState({ zoneclustername: value })
-    console.log(this.state.zoneclustername)
-    let names = String(this.state.zoneclustername).split("/");
-    console.log(names)
-    console.log(names[0])
-
-    this.setState({ zoneName: names[0] })
-    this.setState({ clusterName: names[1] })
   }
 
-//   handleChangeProduct = (e, value) => {
-//     console.log(value);
-//     let productName = value;
-//     //this.setState({ productName });
-//     //console.log(this.state.productName)
-//     this.props.saveProductValue(productName);
-// }
+  handleChangeClusterName(e) {
+
+    console.log("Hi")
+    console.log(e.target.value)
+    //this.state.zoneclustername=e.target.value
+    //this.setState({ zoneclustername: e.target.value })
+
+    this.setState({ zoneclustername: e.target.value }, () => console.log(this.state))
+    let names = String(e.target.value).split("/");
+    this.setState({ zoneName: names[0] })
+    this.setState({ clusterName: names[1] })
+    console.log(names[1])
+    console.log(names[0])
+
+    // this.state.clusterName=names[1]
+    // this.state.zoneName=names[0]
+    console.log(this.state)
+  }
 
   handleChangeQuantity(e) {
     let dquantity = e.target.value
-    //this.setState({ quantity: e.target.value })
-    this.state.clusterDetails.quantity = dquantity
-    console.log(this.state.quantity)
+    this.state.clusterDetails.quantityAssigned = dquantity
+    console.log(this.state.quantityAssigned)
   }
   handleChangeProfitPecentage(e) {
     let dpercentage = e.target.value
-    this.state.clusterDetails.percentage = dpercentage
-    //this.setState({ percentage: e.target.value })
+    this.state.clusterDetails.profitPercentage = dpercentage
   }
   componentWillMount() {
     this.props.getZoneClusterNames()
@@ -69,22 +76,13 @@ class AssignToCluster extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // this.state.clusterDetails.quantity =this.state.quantity
-    // this.state.clusterDetails.percentage=this.state.percentage
-    //this.setState({isSubmitted: true })
     console.log(this.state.clusterDetails)
     this.props.assignToCluster(this.state.clusterDetails, this.state.zoneName, this.state.clusterName, this.props.productName)
   }
 
   render() {
     return (
-
-
       <div className="box-container-start store-form">
-        {console.log(this.state.clusterDetails)}
-        {console.log(this.state.zoneName)}
-        {console.log(this.state.clusterName)}
-        {console.log(this.props.productName)}
         <div className="joint-form-assign">
           <Typography
             color="primary"
@@ -100,96 +98,90 @@ class AssignToCluster extends Component {
               marginLeft: "auto"
             }}>
             Assign Product to Cluster
-          </Typography>
+            </Typography>
           <div className="product-details">
             <ProductDetails></ProductDetails>
           </div>
           <div className="form-full-center">
-
             <form className="{classes.form}" noValidate >
-
               <FormControl variant="outlined" fullWidth>
-                <InputLabel htmlFor="outlined-age-native-simple">Enter Cluster</InputLabel>
-                {/* <Select
+
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="zonecluster"
+                  label="ClusterName"
+                  name="zonecluster"
+                  onChange={this.handleChangeCluster}
+                  value={this.state.zonecluster}
+                  autoFocus
+                />
+                <Select
                   ref="cluster"
                   fullWidth
                   native
-                  // value={this.state.zoneclustername}
-                  onChange={this.handleChangeClusterName}
-                  label="Enter Cluster"
-                  inputProps={{
-                    name: 'cluster',
-                    id: 'cluster',
-                  }}
-                >
-                  <option aria-label="None" value="" />
-                  {this.props.zoneclusternames.map((zonecluster, index) => {
-                    return <option value={zonecluster} key={index}>{zonecluster}</option>
-                  })}
-                </Select> */}
-
-                <Autocomplete
-                  id="cluster-list"
-                  fullWidth
-                  options={this.props.zoneclusternames}
-                  getOptionLabel={(option) => option}
-                  renderInput={(params) => <TextField {...params} label="Cluster Name" variant="outlined" />}
                   value={this.state.zoneclustername}
                   onChange={this.handleChangeClusterName}
-                  name="zoneclustername"
+                  label="Enter Cluster"
+
+                  name='zoneclustername'
+                  id='zoneclustername'
+                >
+                  <option aria-label="None" />
+                  {this.props.zoneclusternames.map((zoneclustername, index) => {
+                    return <option value={zoneclustername} key={index}>{zoneclustername}</option>
+                  })}
+                </Select>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="clusterQuantity"
+                  label="ClusterQuantity"
+                  name="clusterQuantity"
+                  type="number"
+                  onChange={this.handleChangeQuantity}
+                  value={this.state.clusterDetails.quantityAssigned}
+                  autoFocus
                 />
 
-              </FormControl>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="clusterProfitPercentage"
+                  label="ClusterProfitPercentage"
+                  name="clusterProfitPercentage"
+                  type="number"
+                  onChange={this.handleChangeProfitPecentage}
+                  value={this.state.clusterDetails.profitPercentage}
+                  autoFocus
+                />
 
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="clusterQuantity"
-                label="ClusterQuantity"
-                name="clusterQuantity"
-                type="number"
-                onChange={this.handleChangeQuantity}
-                value={this.state.clusterDetails.quantity}
-                autoFocus
-              />
-
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="clusterProfitPercentage"
-                label="ClusterProfitPercentage"
-                name="clusterProfitPercentage"
-                type="number"
-                onChange={this.handleChangeProfitPecentage}
-                value={this.state.clusterDetails.percentage}
-                autoFocus
-              />
-
-              <Button
-                fullWidth
-                type="button"
-                variant="contained"
-                color="primary"
-                className="{classes.submit} submit-pad"
-                onClick={this.handleSubmit}
-              >
-                Save
+                <Button
+                  fullWidth
+                  type="button"
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit} submit-pad"
+                  onClick={this.handleSubmit}
+                >
+                  Save
               </Button>
-
+              </FormControl>
             </form>
-
           </div>
           <div className="store-requirement">
             <h3 style={{ textAlign: "center" }}>Requirements</h3>
-            {this.state.zoneclustername.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+            {this.state.zoneName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
               <Typography variant="subtitle2" gutterBottom>
                 Zone name has to be greater than 5 letters
               </Typography></div>}
-            {this.state.zoneclustername.length > 5 &&
+            {this.state.zoneName.length > 5 &&
               <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
                   Zone name has to be greater than 5 letters
@@ -197,6 +189,7 @@ class AssignToCluster extends Component {
 
           </div>
         </div>
+
         <Fragment>
 
           {(this.state.status === 1) ? (
@@ -220,7 +213,6 @@ class AssignToCluster extends Component {
             </div>) : (<div />)
           }
         </Fragment>
-
       </div>
     );
   }

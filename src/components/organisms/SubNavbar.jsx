@@ -13,6 +13,9 @@ import ViewClusters from "../retailer/ViewClusters.jsx";
 import ViewZones from "../retailer/ViewZones.jsx";
 import ZoneForm from "../retailer/ZoneForm.jsx";
 import ZoneClusterRouter from "../retailer/ZoneClusterRouter.jsx";
+import AssignToZoneRouter from "../retailer/AssignToZoneRouter.jsx";
+import ViewAssignedZones from "../retailer/ViewAssignedZones.jsx";
+import ViewAssignedClusters from "../retailer/ViewAssignedClusters.jsx";
 import SelectProduct from "../retailer/SelectProduct.jsx";
 import { useTranslation } from "react-i18next";
 
@@ -84,6 +87,8 @@ export default function VerticalTabs() {
         <Tab label={t("welcome.viewZones")} />
         <Tab label={t("welcome.viewClusters")} />
         <Tab label={t("welcome.assignProductToClusterZone")} />
+        <Tab label={"View assigned zones of a product"}/>
+        <Tab label={"View assigned clusters of a product"}/>
       </Tabs>
       <TabPanel value={value} index={0}>
         <AddGroup />
@@ -107,7 +112,13 @@ export default function VerticalTabs() {
         <ViewClusters />
       </TabPanel>
       <TabPanel value={value} index={7} to="/selectProduct">
-        <ZoneClusterRouter />
+        <ZoneClusterRouter />  
+      </TabPanel>
+      <TabPanel value={value} index={8}>
+        <ViewAssignedZones />  
+      </TabPanel>
+      <TabPanel value={value} index={9}>
+        <ViewAssignedClusters />  
       </TabPanel>
     </div>
   );

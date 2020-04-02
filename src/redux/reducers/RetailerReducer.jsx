@@ -27,8 +27,8 @@ const initialState = {
     clusterList: {},
     productList:[],
     product: "",
-    productName:"",
-    productDetails:{productName:"shampoo", vendorName:"Nidhi", basePrice:"100", quantityAvailable:"3",category:"alcohol",desc:"Fresh and subtle fruit notes, a delicate malt sweetness and balanced bitterness for a clean, snappy finish. Budweiser is a medium-bodied, flavorful, crisp and pure beer with blended layers of premium American and European hop aromas, brewed for the perfect balance of flavor and refreshment"},
+    productName:"JackDaniels",
+    productDetails:{},
     zoneclusternames: []
 
 };

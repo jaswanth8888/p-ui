@@ -30,18 +30,18 @@ class ProductDetails extends Component {
                 </div>
                 <div className="middle-desc">
                     <div className="image-half">
-                        <img src="https://bit.ly/3ay4Y03" />
+                        <img src= {this.props.productDetails.productImagePath}/>
                     </div>
                     <div className="data-half">
                         <div className="data-half-upper">
                             <div className="text-space">
                                 <Typography  variant="h6">
-                                    Base Price :  {this.props.productDetails.basePrice}
+                                    Base Price :  {this.props.productDetails.productBasePrice}
                                 </Typography>
                             </div>
                             <div className="text-space">
                                 <Typography  variant="h6">
-                                    Vendor :  {this.props.productDetails.vendorName}
+                                    Vendor :  {this.props.productDetails.companyName}
                                 </Typography>
                             </div>
 
@@ -49,12 +49,12 @@ class ProductDetails extends Component {
                         <div className="data-half-lower">
                             <div className="text-space">
                                 <Typography variant="h6">
-                                    Quantity : {this.props.productDetails.quantityAvailable}
+                                    Quantity : {this.props.productDetails.remainingQuantity}
                                 </Typography>
                             </div>
                             <div className="text-space">
                                 <Typography  variant="h6">
-                                    Category :  {this.props.productDetails.category}
+                                    Category :  {this.props.productDetails.productCategory}
                                 </Typography>
                             </div>
                         </div>
@@ -62,7 +62,7 @@ class ProductDetails extends Component {
                 </div>
                 <div className="bottom-desc">
                     <Typography  variant="body2">
-                        Description : {this.props.productDetails.desc}
+                        Description : {this.props.productDetails.productDescription}
                     </Typography>
                 </div>
             </div>
@@ -74,7 +74,7 @@ class ProductDetails extends Component {
 
 const stateAsProps = (store) => ({
     productDetails: store.RetailerReducer.productDetails,
-    productName: store.RetailerReducer.product
+    productName: store.RetailerReducer.productName
 
 });
 const actionsAsProps = {

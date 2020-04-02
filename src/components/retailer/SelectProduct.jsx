@@ -6,7 +6,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { getProductList, saveProductValue } from '../../redux/actions/RetailerActions';
+import { getProductList, saveProductValue, getProductDetails } from '../../redux/actions/RetailerActions';
 import { Link } from 'react-router-dom';
 import Message from "../utils/Message"
 
@@ -35,6 +35,7 @@ class SelectProduct extends Component {
         //this.setState({ productName });
         //console.log(this.state.productName)
         this.props.saveProductValue(productName);
+        this.props.getProductDetails(value);
     }
 
 
@@ -131,6 +132,9 @@ const stateAsProps = (store) => ({
 });
 const actionAsProps = {
     getProductList: getProductList,
-    saveProductValue: saveProductValue
+    saveProductValue: saveProductValue,
+    getProductDetails: getProductDetails
+
+
 }
 export default connect(stateAsProps, actionAsProps)(SelectProduct);
