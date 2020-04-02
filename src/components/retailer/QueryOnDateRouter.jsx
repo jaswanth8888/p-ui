@@ -8,15 +8,13 @@ export default class QueryOnDateRouter extends Component {
     
     render() {
         return (
-            <div>
-                <Router>
-                    <Redirect to='/queryondaterange'/>
-                    <Switch>
-                        <PrivateRoute exact={true} path="/queryondaterange" component={QueryOnDateRange} />
-                        <PrivateRoute exact={true} path="/showproducts" component={ShowProducts} />
-                    </Switch>
-                </Router>
-            </div>
+            <Router>
+                <Redirect to='/queryondaterange'/>
+                <Switch>
+                    <PrivateRoute exact={true} path="/queryondaterange" component={QueryOnDateRange} />
+                    <PrivateRoute exact={true} path="/showproducts" component={ShowProducts} />
+                </Switch>
+            </Router>
         )
     }
 }

@@ -1,31 +1,12 @@
-import React, { Component } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import { InputLabel, Typography } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/TextField';
-import { Link } from 'react-router-dom';
-import Snackbar from '@material-ui/core/Snackbar';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import MuiAlert from '@material-ui/lab/Alert';
-
-import {
-    InputLabel,
-    Select,
-    Table,
-    Typography
-} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Paper from "@material-ui/core/Paper";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import React, { Component } from 'react';
 import { connect } from "react-redux";
-import {
-    getProductsInRange
-} from "../../redux/actions/RetailerActions";
-import ShowProducts from "./ShowProducts"
+import { getProductsInRange } from "../../redux/actions/RetailerActions";
+
 class QueryOnDateRange extends Component {
     constructor(props) {
         super(props)
@@ -41,10 +22,11 @@ class QueryOnDateRange extends Component {
         const { name, value } = e.target;
         this.setState({ [name]: value });
     }
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         console.log(this.state.startDate, this.state.endDate)
         this.props.getAllProducts(this.state.startDate, this.state.endDate);
         this.setState({ isSubmited: true })
+        this.props.history.push("/showproducts")
     }
 
     render() {
@@ -132,7 +114,7 @@ class QueryOnDateRange extends Component {
                                 InputLabelProps={{ shrink: true, required: true }}
                             />
                             {(this.state.endDate > this.state.startDate) &&
-                                <Link to='/showproducts' style={{ textDecoration: "none" }}>
+
                                     <Button
 
                                         type="button"
@@ -145,7 +127,7 @@ class QueryOnDateRange extends Component {
                                             marginBottom: "30px"
                                         }}
                                         onClick={this.handleSubmit}>show</Button>
-                                </Link>
+
                             }
 
                         </form>

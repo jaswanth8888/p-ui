@@ -31,6 +31,7 @@ import StoreForm from "../retailer/StoreForm.jsx";
 import ViewClusters from "../retailer/ViewClusters.jsx";
 import ViewZones from "../retailer/ViewZones.jsx";
 import ZoneClusterRouter from "../retailer/ZoneClusterRouter.jsx";
+import QueryOnDateRouter from "../retailer/QueryOnDateRouter.jsx";
 import ZoneForm from "../retailer/ZoneForm.jsx";
 import { connect } from "react-redux";
 import { logout } from "../../redux/actions/RetailerActions";
@@ -381,10 +382,9 @@ function FullNavbar(props) {
                     </ListItem>
                   </Tooltip>
                 </Link>
-                {/*
-                <Link to="/view/assigned/clusters">
+                <Link to="queryondaterange">
                   <Tooltip
-                    title="View Assigned Clusters"
+                    title="Query on Date Range"
                     placement="right"
                   >
                     <ListItem button>
@@ -393,11 +393,11 @@ function FullNavbar(props) {
                       </ListItemIcon>
                       <ListItemText
                         className="list-item-text"
-                        primary={"View Assigned Clusters"}
+                        primary={"Query on Date Range"}
                       />
                     </ListItem>
                   </Tooltip>
-                </Link> */}
+                </Link> 
               </List>
               {/* <Divider />
         <List>
@@ -456,7 +456,11 @@ function FullNavbar(props) {
             path="/view/products/daterange"
             render={props => <EffectivePriceRouter {...props} />}
           />
-
+          <Route
+            exact
+            path="/queryondaterange"
+            render={props => <QueryOnDateRouter {...props} />}
+          />
         </Switch>
       </Router>
     </div>

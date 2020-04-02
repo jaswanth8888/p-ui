@@ -134,7 +134,7 @@ import {
                                                                   className="{classes.submit}"
                                                                   style={{ marginTop: "75px" , marginBottom: "75px" , justifyContent: "center"}}
                                                                   onClick={this.props.cancelEffectivePrice(product.productName, promotion.promotionId)}>
-                                                                  Cancel Price Change
+                                                                  Withdraw
                                                                 </Button> 
                                                                 </Typography>
                                                                 </TableCell>
