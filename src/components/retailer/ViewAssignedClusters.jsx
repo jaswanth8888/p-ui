@@ -23,9 +23,9 @@ class ViewAssignedClusters extends Component {
         return (
 
             <div className="box-container-start">
-                {/* <div className="">
+                <div className="">
                     <ProductDetails></ProductDetails>
-                </div> */}
+                </div>
 
                 {console.log(this.props.productDetails)}
 
@@ -122,4 +122,4 @@ const actionAsProps = {
 
 }
 
-export default connect(stateAsProps, actionAsProps)(ViewAssignClusters);
+export default connect(stateAsProps, actionAsProps)(ViewAssignedClusters);

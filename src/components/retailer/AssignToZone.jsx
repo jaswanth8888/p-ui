@@ -47,14 +47,10 @@ class AssignToZone extends Component {
     this.state.zoneDetails.profitPercentage = dpercentage
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) =>{
     e.preventDefault();
-    console.log(this.state.zoneDetails.profitPercentage.type)
     this.props.assignToZone(this.state.zoneDetails, this.state.zoneName, this.props.productName)
-    console.log(this.state.zoneDetails);
-    console.log(this.state.zoneName);
-    console.log(this.props.productName);
-
+    this.props.history.push("/view/assigned/zones")
   }
 
   render() {
@@ -137,7 +133,7 @@ class AssignToZone extends Component {
                   autoFocus
                 />
 
-                <Link to='/view/assigned/zones'>
+
                   <Button
                     fullWidth
                     type="button"
@@ -149,7 +145,7 @@ class AssignToZone extends Component {
                   >
                     Save
               </Button>
-                </Link>
+
 
               </form>
 

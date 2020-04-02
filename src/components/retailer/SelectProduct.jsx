@@ -19,10 +19,10 @@ class SelectProduct extends Component {
 
         this.state = {
             productName: "",
-            status: 0
+           // status: 0
         }
         this.handleChange = this.handleChangeProduct.bind(this);
-        this.productNameNotSelected = this.productNameNotSelected.bind(this);
+      //  this.productNameNotSelected = this.productNameNotSelected.bind(this);
 
     }
 
@@ -48,7 +48,7 @@ class SelectProduct extends Component {
         console.log(this.state.productName)
         this.props.saveProductValue(productName);
         this.props.getProductDetails(value);
-        this.productNameNotSelected();
+        //this.productNameNotSelected();
         console.log(this.state.status);
         
     }
@@ -114,7 +114,6 @@ class SelectProduct extends Component {
                             <Link to='/assigntocluster'>
                                 <Button
                                     type="button"
-                                    disabled = {this.productNameNotSelected}
                                     fullWidth
                                     variant="contained"
                                     color="primary"

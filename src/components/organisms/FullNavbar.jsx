@@ -49,6 +49,8 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import PublicIcon from "@material-ui/icons/Public";
 import LocalBarIcon from "@material-ui/icons/LocalBar";
 import Tooltip from "@material-ui/core/Tooltip";
+import ViewAssignedZones from "../retailer/ViewAssignedZones.jsx";
+import ViewAssignedClusters from "../retailer/ViewAssignedClusters.jsx";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -397,7 +399,39 @@ function FullNavbar(props) {
                       />
                     </ListItem>
                   </Tooltip>
-                </Link> 
+                </Link>
+                <Link to="/view/assigned/clusters">
+                  <Tooltip
+                    title="View Assigned Clusters"
+                    placement="right"
+                  >
+                    <ListItem button>
+                      <ListItemIcon>
+                        <ViewListIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={"View Assigned Clusters"}
+                      />
+                    </ListItem>
+                  </Tooltip>
+                </Link>
+                <Link to="/view/assigned/zones">
+                  <Tooltip
+                    title="View Assigned Zones"
+                    placement="right"
+                  >
+                    <ListItem button>
+                      <ListItemIcon>
+                        <ViewListIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={"View Assigned Zones"}
+                      />
+                    </ListItem>
+                  </Tooltip>
+                </Link>
               </List>
               {/* <Divider />
         <List>
@@ -458,8 +492,13 @@ function FullNavbar(props) {
           />
           <Route
             exact
-            path="/queryondaterange"
-            render={props => <QueryOnDateRouter {...props} />}
+            path="/view/assigned/clusters"
+            render={props => <ViewAssignedClusters {...props} />}
+          />
+          <Route
+            exact
+            path="/view/assigned/zones"
+            render={props => <ViewAssignedZones {...props} />}
           />
         </Switch>
       </Router>
