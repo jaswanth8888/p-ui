@@ -14,13 +14,15 @@ export const PRODUCTTOSTORE_POST_REQUEST="PRODUCTTOSTORE_POST_REQUEST";
 export const FAILURE = "FAILURE";
 
 // export const RETAILER_BASE_URL = "http://localhost:8765";
-export const RETAILER_BASE_URL = "http://10.150.222.113:8765";
+//export const RETAILER_BASE_URL = "http://10.150.222.113:8765";
 //export const RETAILER_BASE_URL = "http://10.102.137.146:8765";
 //export const RETAILER_BASE_URL = "http://10.102.143.225:8765";
-//export const RETAILER_BASE_URL = "http://10.155.236.236:8765";
+export const RETAILER_BASE_URL = "http://10.150.222.113:8765";
 
-
-export const RETAILER_URL = "http://10.155.236.236:9300";
+//export const RETAILER_URL = "http://localhost:9300";
+//export const RETAILER_URL = "http://10.102.137.146:9300";
+//export const RETAILER_URL = "http://10.102.143.225:9300";
+export const RETAILER_URL = "http://10.150.222.113:9500";
 
 
 export const MESSAGE_SET_NULL="MESSAGE_SET_NULL";
@@ -41,6 +43,11 @@ export const STORE_SAVE_VALUE="STORE_SAVE_VALUE";
 
 export const CATEGORIES_GET_REQUEST="CATEGORIES_GET_REQUEST";
 export const PRODUCTS_GET_REQUEST="PRODUCTS_GET_REQUEST"
+
+export const PRODUCTLIST_GET_REQUEST="PRODUCTLIST_GET_REQUEST"
+export const PRODUCT_SAVE_VALUE="PRODUCT_SAVE_VALUE"
+export const PRODUCT_GET_REQUEST="PRODUCT_GET_REQUEST"
+export const PROMOTION_POST_REQUEST="PROMOTION_POST_REQUEST"
 
 export const TOKEN='BearerR '+sessionStorage.getItem("token");
 

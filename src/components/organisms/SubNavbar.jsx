@@ -8,10 +8,12 @@ import React from "react";
 import AddGroup from "../retailer/AddGroup.jsx";
 import ClusterForm from "../retailer/ClusterForm.jsx";
 import ProductRouter from "../retailer/ProductRouter.jsx";
+import PromotionRouter from "../retailer/PromotionRouter.jsx";
 import StoreForm from "../retailer/StoreForm.jsx";
 import ViewClusters from "../retailer/ViewClusters.jsx";
 import ViewZones from "../retailer/ViewZones.jsx";
 import ZoneForm from "../retailer/ZoneForm.jsx";
+import PriceOnDate from "../retailer/PriceOnDate";
 import { useTranslation } from "react-i18next";
 
 function TabPanel(props) {
@@ -81,6 +83,8 @@ export default function VerticalTabs() {
         <Tab label={t("welcome.createStore")} />
         <Tab label={t("welcome.viewZones")} />
         <Tab label={t("welcome.viewClusters")} />
+        <Tab label={t("welcome.PriceOnDate")} />
+        
       </Tabs>
       <TabPanel value={value} index={0}>
         <AddGroup />
@@ -102,6 +106,9 @@ export default function VerticalTabs() {
       </TabPanel>
       <TabPanel value={value} index={6}>
         <ViewClusters />
+      </TabPanel>
+      <TabPanel value={value} index={7} to="/selectproduct">
+        <PromotionRouter />
       </TabPanel>
     </div>
   );

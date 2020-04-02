@@ -1,23 +1,19 @@
 import { InputLabel, Select, TextField, Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import Snackbar from "@material-ui/core/Snackbar";
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
-import MuiAlert from "@material-ui/lab/Alert";
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import {
-  getClusters,
-  getZones,
-  postStore
-} from "../../redux/actions/RetailerActions.js";
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import Snackbar from '@material-ui/core/Snackbar';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import MuiAlert from '@material-ui/lab/Alert';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { getClusters, getZones, postStore } from '../../redux/actions/RetailerActions';
 import "./StoreForm.css";
-import { withTranslation } from "react-i18next";
 
 class StoreForm extends Component {
+
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       zone: "",
@@ -27,8 +23,8 @@ class StoreForm extends Component {
       city: "",
       streetName: "",
       pin: "",
-      status: 0
-    };
+      status : 0
+    }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,11 +40,13 @@ class StoreForm extends Component {
     const { name, value } = e.target;
 
     this.setState({ [name]: value });
+
   }
 
   handleChangeZone(e) {
-    this.setState({ zone: e.target.value });
+    this.setState({ zone: e.target.value })
     this.props.getAllClusters(e.target.value);
+
   }
 
   handleSubmit(e) {
@@ -57,101 +55,84 @@ class StoreForm extends Component {
     let city = this.state.city;
     let pin = this.state.pin;
     let address = {
-      streetName,
-      city,
-      pin
-    };
+      streetName, city, pin
+    }
     let storeName = this.state.storeName;
-    let store = { storeName, address };
+    let store = { storeName, address }
     this.props.postStore(store, this.state.zone, this.state.cluster);
     if (this.state.storeName.length > 6) {
-      this.setState({ status: 1 });
-    } else {
-      this.setState({ status: -1 });
+      this.setState({ status : 1 })
     }
+    else{
+      this.setState({  status : -1 })
+    }
+
   }
 
   render() {
-    const { t, i18n } = this.props;
     return (
       <div className="box-container store-form">
+
         <div className="joint-form" style={{ width: "850px" }}>
           <Typography
             color="primary"
             component="h1"
             variant="h4"
-            style={{
+            style=
+            {{
               fontFamily: "font-family: 'Open Sans', sans-serif;",
               position: "absolute",
               top: "210px",
               left: "30px"
-            }}
-          >
-            {t("welcome.createStore")}
-          </Typography>
+            }}>
+            Create Store
+                </Typography>
           {/* <div className="validation-half" style={{ background: "#673ab7" }}>
             <div className="validations">
 
             </div>
           </div> */}
           <div className="form-first-half">
-            <form className="{classes.form}" noValidate>
+            <form className="{classes.form}" noValidate >
               <FormControl variant="outlined" fullWidth>
-                <InputLabel htmlFor="outlined-age-native-simple">
-                  {t("storeForm.enterZone")}
-                </InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple">Enter Zone</InputLabel>
                 <Select
                   ref="zone"
                   fullWidth
                   native
                   value={this.state.zone}
                   onChange={this.handleChangeZone}
-                  label={t("storeForm.enterZone")}
+                  label="Enter Zone"
                   inputProps={{
-                    name: "zone",
-                    id: "zone"
+                    name: 'zone',
+                    id: 'zone',
                   }}
                 >
                   <option aria-label="None" value="" />
                   {this.props.zones.map((zone, index) => {
-                    return (
-                      <option value={zone} key={index}>
-                        {zone}
-                      </option>
-                    );
+                    return <option value={zone} key={index}>{zone}</option>
                   })}
                 </Select>
               </FormControl>
-              <br />
-              <br />
+              <br /><br />
 
-              <FormControl
-                variant="outlined"
-                fullWidth
-                style={{ marginBottom: "10px" }}
-              >
-                <InputLabel htmlFor="outlined-age-native-simple">
-                  {t("storeForm.enterCluster")}
-                </InputLabel>
+              <FormControl variant="outlined" fullWidth style={{ marginBottom: "10px" }}>
+                <InputLabel htmlFor="outlined-age-native-simple">Enter Cluster</InputLabel>
                 <Select
                   ref="cluster"
                   fullWidth
                   native
                   value={this.state.cluster}
                   onChange={this.handleChange}
-                  label={t("storeForm.enterCluster")}
+                  label="Enter Cluster"
                   inputProps={{
-                    name: "cluster",
-                    id: "cluster"
+                    name: 'cluster',
+                    id: 'cluster',
                   }}
                 >
                   <option aria-label="None" value="" />
                   {this.props.clusters.map((cluster, index) => {
-                    return (
-                      <option value={cluster} key={index}>
-                        {cluster}
-                      </option>
-                    );
+                    return <option value={cluster} key={index}>{cluster}</option>
                   })}
                 </Select>
               </FormControl>
@@ -162,7 +143,7 @@ class StoreForm extends Component {
                 required
                 fullWidth
                 id="storeName"
-                label={t("storeForm.storeName")}
+                label="Store Name"
                 name="storeName"
                 autoComplete="storeName"
                 onChange={this.handleChange}
@@ -175,15 +156,10 @@ class StoreForm extends Component {
                 variant="contained"
                 color="primary"
                 className="{classes.submit}"
-                style={{
-                  marginTop: "30px",
-                  pointerEvents: "none",
-                  opacity: "0"
-                }}
-                onClick={this.handleSubmit}
-              >
-                {t("storeForm.submit")}
-              </Button>
+                style={{ marginTop: "30px", pointerEvents: "none", opacity: "0" }}
+                onClick={this.handleSubmit}>
+                Save
+            </Button>
             </form>
             <Button
               type="button"
@@ -195,11 +171,11 @@ class StoreForm extends Component {
               style={{ marginTop: "30px" }}
               onClick={this.handleSubmit}
             >
-              {t("storeForm.submit")}
-            </Button>
+              Save
+              </Button>
           </div>
           <div className="form-second-half">
-            <form className="{classes.form}" noValidate>
+            <form className="{classes.form}" noValidate >
               <TextField
                 ref="streetName"
                 variant="outlined"
@@ -207,7 +183,7 @@ class StoreForm extends Component {
                 required
                 fullWidth
                 name="streetName"
-                label={t("storeForm.streetName")}
+                label="Street name"
                 autoComplete="streetName"
                 id="streetName"
                 onChange={this.handleChange}
@@ -220,7 +196,7 @@ class StoreForm extends Component {
                 required
                 fullWidth
                 name="city"
-                label={t("storeForm.city")}
+                label="City"
                 id="city"
                 onChange={this.handleChange}
                 autoComplete="city"
@@ -233,7 +209,7 @@ class StoreForm extends Component {
                 required
                 fullWidth
                 name="pin"
-                label={t("storeForm.pinCode")}
+                label="Pin-code"
                 type="number"
                 id="pin"
                 onChange={this.handleChange}
@@ -246,70 +222,55 @@ class StoreForm extends Component {
                 variant="contained"
                 color="primary"
                 className="{classes.submit}"
-                style={{
-                  marginTop: "30px",
-                  pointerEvents: "none",
-                  opacity: "0"
-                }}
-                onClick={this.handleSubmit}
-              >
-                {t("storeForm.submit")}
-              </Button>
+                style={{ marginTop: "30px", pointerEvents: "none", opacity: "0" }}
+                onClick={this.handleSubmit}>
+                Save
+            </Button>
             </form>
           </div>
           <div className="store-requirement">
-            <h3 style={{ textAlign: "center" }}>
-              {t("storeForm.requirements")}
-            </h3>
-            {this.state.storeName.length <= 5 && (
-              <div style={{ display: "flex" }}>
-                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+            <h3 style={{ textAlign: "center" }}>Requirements</h3>
+            {this.state.storeName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <Typography variant="subtitle2" gutterBottom>
+                Store name has to be greater than 5 letters
+              </Typography></div>}
+            {this.state.storeName.length > 5 &&
+              <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
-                  {t("storeForm.lengthTooShort")}
-                </Typography>
-              </div>
-            )}
-            {this.state.storeName.length > 5 && (
-              <div style={{ display: "flex", color: "#ffc107" }}>
-                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
-                <Typography variant="subtitle2" gutterBottom>
-                  {t("storeForm.lengthTooShort")}
-                </Typography>
-              </div>
-            )}
+                  Store name has to be greater than 5 letters
+              </Typography></div>}
+              
           </div>
         </div>
         <Fragment>
-          {this.state.status === 1 ? (
+
+          {(this.state.status === 1) ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert elevation={6} variant="filled">
                   Store created successfully!
-                </MuiAlert>
+            </MuiAlert>
               </Snackbar>
             </div>
-          ) : (
-            <div />
-          )}
+          ) : (<div />)}
         </Fragment>
         <Fragment>
-          {this.state.status === -1 ? (
+          {(this.state.status === -1) ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
                   Store creation failed. Please match the requirements
                 </MuiAlert>
               </Snackbar>
-            </div>
-          ) : (
-            <div />
-          )}
+            </div>) : (<div />)
+          }
         </Fragment>
+
       </div>
-    );
+    )
   }
 }
-const stateAsProps = store => ({
+const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
   clusters: store.RetailerReducer.clusters
 });
@@ -317,8 +278,5 @@ const actionAsProps = {
   getAllZones: getZones,
   getAllClusters: getClusters,
   postStore: postStore
-};
-export default connect(
-  stateAsProps,
-  actionAsProps
-)(withTranslation()(StoreForm));
+}
+export default connect(stateAsProps, actionAsProps)(StoreForm);

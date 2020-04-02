@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import connect from 'react-redux/es/connect/connect'
-import {messageSetNull} from '../../redux/actions/RetailerActions.js'
+import {messageSetNull} from '../../redux/actions/RetailerActions'
 import MuiAlert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 
@@ -8,7 +8,10 @@ import Snackbar from '@material-ui/core/Snackbar';
 class Message extends Component {
     constructor(props) {
         super(props)
-        this.closeAlert = this.closeAlert.bind(this);
+    
+        this.state = {
+             
+        }
     }
 
     closeAlert=()=>{

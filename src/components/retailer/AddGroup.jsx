@@ -1,25 +1,25 @@
 import { TextField, Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
-import MuiAlert from "@material-ui/lab/Alert";
-import React, { Component, Fragment } from "react";
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import MuiAlert from '@material-ui/lab/Alert';
+import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
-import { postGroup } from "../../redux/actions/RetailerActions.js";
-import Message from "../utils/Message";
-import { withTranslation } from "react-i18next";
+import { postGroup } from "../../redux/actions/RetailerActions.jsx";
+import Message from "../utils/Message"
+
 
 class AddGroup extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       group: {
-        groupName: ""
+        groupName: '',
       },
       status: 0
-    };
+    }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -33,13 +33,14 @@ class AddGroup extends Component {
 
   is_validGroupName = () => {
     if (this.state.group.groupName.length > 0) {
-      this.setState({ status: 1 });
-    } else {
-      this.setState({ status: -1 });
-      return false;
+      this.setState({ status: 1 })    
     }
-    return true;
-  };
+    else {
+      this.setState({ status: -1 })
+      return false
+    }
+    return true
+ }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -49,52 +50,40 @@ class AddGroup extends Component {
   }
 
   render() {
-    const { t, i18n } = this.props;
     return (
+
+
       <div className="box-container">
         <div className="joint-form">
           <div className="validation-half" style={{ background: "#673ab7" }}>
             <div className="validations">
-              <h3 style={{ textAlign: "center" }}>
-                {t("groupForm.requirements")}
-              </h3>
-              {this.state.group.groupName.length <= 0 && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+              <h3 style={{ textAlign: "center" }}>Requirements</h3>
+              {this.state.group.groupName.length <= 0 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Please provide a group name
+                </Typography></div>}
+              {this.state.group.groupName.length > 0 &&
+                <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                   <Typography variant="subtitle2" gutterBottom>
-                    {t("groupForm.lengthTooShort")}
-                  </Typography>
-                </div>
-              )}
-              {this.state.group.groupName.length > 0 && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
-                  <Typography variant="subtitle2" gutterBottom>
-                    {t("welcome.createGroup")}
-                  </Typography>
-                </div>
-              )}
+                    Please provide a group name
+                  </Typography></div>}
             </div>
           </div>
           <div className="form-half">
-            <form className="{classes.form}" noValidate>
+            <form className="{classes.form}" noValidate >
               <div>
                 <div className="help-block">
                   <Typography
                     color="primary"
                     component="h1"
                     variant="h4"
-                    style={{
+                    style=
+                    {{
                       fontFamily: "font-family: 'Open Sans', sans-serif;",
                       position: "relative",
                       top: "-20px"
-                    }}
-                  >
-                    {t("welcome.createGroup")}
+                    }}>
+                    Create a Group
                   </Typography>
                 </div>
               </div>
@@ -104,7 +93,7 @@ class AddGroup extends Component {
                 required
                 fullWidth
                 id="groupName"
-                label={t("groupForm.groupName")}
+                label="Group Name"
                 name="groupName"
                 onChange={this.handleChange}
                 autoFocus
@@ -116,34 +105,31 @@ class AddGroup extends Component {
                 color="primary"
                 className="{classes.submit}"
                 style={{ marginTop: "30px" }}
-                onClick={this.handleSubmit}
-              >
-                {t("groupForm.save")}
-              </Button>
+                onClick={this.handleSubmit}>
+                Save
+            </Button>
             </form>
           </div>
         </div>
 
         <Fragment>
-          {this.state.status === -1 ? (
+          {(this.state.status === -1) ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
                   Group creation failed. Please match the requirements
                 </MuiAlert>
               </Snackbar>
-            </div>
-          ) : (
-            <div />
-          )}
+            </div>) : (<div />)
+          }
         </Fragment>
-        <Message />
+        <Message/> 
       </div>
-    );
+    )
   }
 }
 
 const actionAsProps = {
   postGroup: postGroup
-};
-export default connect(null, actionAsProps)(withTranslation()(AddGroup));
+}
+export default connect(null, actionAsProps)(AddGroup);

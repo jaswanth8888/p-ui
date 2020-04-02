@@ -21,7 +21,7 @@ import {
   getCategories,
   getProducts,
   postProductToStore
-} from "../../redux/actions/RetailerActions.js";
+} from "../../redux/actions/RetailerActions";
 import "./AddProducts.css";
 import "./Table.css";
 
@@ -72,18 +72,13 @@ class AddProducts extends Component {
 
   loopForm() {
     let tabledata = document.querySelectorAll("tr");
- 
     tabledata.forEach((ele,ind) => {
       if(ind && ele.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].checked){
         this.state.object.productName = ele.childNodes[1].childNodes[0].textContent;
         this.state.object.quantityAssigned = parseInt(ele.childNodes[5].childNodes[0].childNodes[1].childNodes[0].value)
         this.state.productList.push(this.state.object);
       }
-      
     })
- 
-    
-    
     this.props.postProductToStore(
       this.props.zone,
       this.props.cluster,
@@ -93,7 +88,6 @@ class AddProducts extends Component {
   }
 
   render() {
-    const tableCellData = ['Select', 'Product Name', 'Vendor Name','Quantity Available','Quantity Required']
     return (
       <div
         className="box-container"
@@ -140,10 +134,21 @@ class AddProducts extends Component {
                   style={{ backgroundColor: "#673ab7", color: "white" }}
                 >
                   <TableRow>
-                    {tableCellData.map(value=>
-                      (<TableCell style={{ color: "White" }}>
-                      {value}
-                    </TableCell>))}
+                    {/* <TableCell>CheckBox</TableCell> */}
+                    <TableCell style={{ color: "White" }}>Select</TableCell>
+                    <TableCell style={{ color: "White" }}>
+                      Product Name
+                    </TableCell>
+                    <TableCell style={{ color: "White" }}>Price</TableCell>
+                    <TableCell style={{ color: "White" }}>
+                      Vendor Name
+                    </TableCell>
+                    <TableCell style={{ color: "White" }}>
+                      Quantity Available
+                    </TableCell>
+                    <TableCell style={{ color: "White" }}>
+                      Quantity Required
+                    </TableCell>
                   </TableRow>
                 </TableHead>
 

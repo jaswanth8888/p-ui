@@ -55,6 +55,7 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
         product["nutritionalFacts"] =value
         this.setState({product}) */
 
+        console.log(this.state.product)   
         this.setState({isSubmitted:true})
         if(this.state.product.productName && this.state.product.productBasePrice>0 && this.state.product.initialQuantity>1 && this.state.product.initialQuantity<100) 
         {

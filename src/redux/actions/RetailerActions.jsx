@@ -17,10 +17,15 @@ import {
   ZONE_GET_REQUEST,
   ZONELIST_GET_REQUEST,
   RETAILER_BASE_URL,
+  RETAILER_URL,
   CLUSTER_GET_REQUEST,
   STORE_POST_REQUEST,
   FAILURE,
-  MESSAGE_SET_NULL
+  MESSAGE_SET_NULL,
+  PRODUCTLIST_GET_REQUEST,
+  PRODUCT_SAVE_VALUE,
+  PRODUCT_GET_REQUEST,
+  PROMOTION_POST_REQUEST
 } from "./types";
 import axios from "axios";
 import i18n from "i18next";
@@ -98,10 +103,10 @@ export const postCluster = (cluster, zone) => async dispatch => {
       dispatch({
         type: CREATE_CLUSTER,
         msg: "Cluster for Zone " + zone + " is Created Successfully",
-	msgSeverity: "success"
+        msgSeverity: "success"
       });
     })
-	.catch(err => {
+    .catch(err => {
       let response = err.response;
       if (response.status === 400) {
         dispatch({
@@ -123,7 +128,7 @@ export const postCluster = (cluster, zone) => async dispatch => {
         });
       }
     });
-      
+
 };
 
 export const getZones = () => async dispatch => {
@@ -131,12 +136,15 @@ export const getZones = () => async dispatch => {
     .get(RETAILER_BASE_URL + "/location-management/zoneNames", {
       headers: { Authorization: TOKEN }
     })
+
     .then(res => {
+      console.log(res);
       dispatch({ type: ZONE_GET_REQUEST, zones: res.data });
     })
     .catch(err => {
       dispatch({ type: FAILURE });
     });
+
 };
 
 export const getClusters = zone => async dispatch => {
@@ -156,11 +164,11 @@ export const postStore = (store, zone, cluster) => async dispatch => {
   await axios
     .put(
       RETAILER_BASE_URL +
-        "/location-management/" +
-        zone +
-        "/" +
-        cluster +
-        "/store",
+      "/location-management/" +
+      zone +
+      "/" +
+      cluster +
+      "/store",
       store,
       { headers: { Authorization: TOKEN } }
     )
@@ -294,13 +302,13 @@ export const postProductToStore = (
   await axios
     .put(
       RETAILER_BASE_URL +
-        "/product-management/" +
-        zone +
-        "/" +
-        cluster +
-        "/" +
-        store +
-        "/product",
+      "/product-management/" +
+      zone +
+      "/" +
+      cluster +
+      "/" +
+      store +
+      "/product",
       products,
       { headers: { Authorization: TOKEN } }
     )
@@ -322,11 +330,11 @@ export const getStores = (zone, cluster) => async dispatch => {
   await axios
     .get(
       RETAILER_BASE_URL +
-        "/location-management/" +
-        zone +
-        "/" +
-        cluster +
-        "/stores",
+      "/location-management/" +
+      zone +
+      "/" +
+      cluster +
+      "/stores",
       { headers: { Authorization: TOKEN } }
     )
     .then(res => {
@@ -334,5 +342,95 @@ export const getStores = (zone, cluster) => async dispatch => {
     })
     .catch(err => {
       dispatch({ type: FAILURE });
+    });
+};
+
+export const getProductList = () => async dispatch => {
+  await axios
+    .get(RETAILER_URL + "/products/names", {
+      headers: { Authorization: TOKEN }
+    })
+    .then(res => {
+      alert("Hellloooooooooooo")
+      dispatch({ type: PRODUCTLIST_GET_REQUEST, productList: res.data });
+    })
+    .catch(err => {
+      // alert(err)
+      dispatch({ type: FAILURE });
+    });
+};
+
+export const saveProductValue = productValue => dispatch => {
+  dispatch({ type: PRODUCT_SAVE_VALUE, product: productValue });
+};
+
+export const getProductDetails = productName => async dispatch => {
+  await axios
+    .get(RETAILER_URL + "/product/" + productName, {
+      headers: { Authorization: TOKEN }
+    })
+    .then(res => {
+      alert("Product")
+      dispatch({ type: PRODUCT_GET_REQUEST, productDetails: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: FAILURE });
+    });
+};
+export const postPromotion = (productName, promotionDetails) => async dispatch => {
+  // console.log(productName);
+  // console.log(promotionDetails);
+  await axios
+    .put("http://10.150.222.113:9500/product/promotion/" + productName, promotionDetails, {
+      headers: { Authorization: TOKEN }
+    })
+    .then(res => {
+      alert("Success")
+      if (res.data.status) {
+        alert("status true")
+        dispatch({
+          
+          type: PROMOTION_POST_REQUEST,
+          promotionDetails: { data: res.data },
+          msg: "promotion applied Succesfully",
+          msgSeverity: "success"
+        });
+      } else {
+        alert("status false")
+        dispatch({
+
+          type: PROMOTION_POST_REQUEST,
+          promotionDetails: { data: res.data },
+          msg: "promotion cannot not applied",
+          msgSeverity: "error"
+        });
+      }
+    }).catch(err => {
+      // console.log(promotionDetails)
+      // console.log(productName)
+      alert("Error")
+      let response = err.response;
+      if (response.status === 400) {
+        dispatch({ type: MESSAGE_SET_NULL });
+        dispatch({
+          type: PROMOTION_POST_REQUEST,
+          msg: "Sorry something went wrong",
+          msgSeverity: "error"
+        });
+      } else if (response.status === 403) {
+        dispatch({ type: MESSAGE_SET_NULL });
+        dispatch({
+          type: PROMOTION_POST_REQUEST,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning"
+        });
+      } else {
+        dispatch({ type: MESSAGE_SET_NULL });
+        dispatch({
+          type: PROMOTION_POST_REQUEST,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning"
+        });
+      }
     });
 };

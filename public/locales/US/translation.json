@@ -21,13 +21,7 @@
     "viewClusters": "VIEW CLUSTERS",
     "addGroup": "Add Group",
     "addProducttoStore": "Add Product to Store",
-    "createGroup": "Create A Group"
-  },
-  "groupForm": {
-    "groupName": "Group Name",
-    "save": "Save",
-    "lengthTooShort": "Group has to be greater than 5 letters",
-    "requirements": "Requirements"
+    "PriceOnDate":"Price On Date"
   },
   "zoneForm": {
     "lengthTooShort": "Zone has to be greater than 5 letters",

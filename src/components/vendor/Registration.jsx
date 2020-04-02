@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { connect } from "react-redux";
 import { render } from "@testing-library/react";
-import { registration } from "../../redux/actions/VendorActions.js";
+import { registration } from "../../redux/actions/VendorActions.jsx";
 import md5 from 'md5'
 const categoryList=['Baby','Liquor'];
 export class Registration extends Component{

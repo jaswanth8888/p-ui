@@ -6,7 +6,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import PersonIcon from "@material-ui/icons/Person";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { login } from "../redux/actions/RetailerActions.js";
+import { login } from "../redux/actions/RetailerActions.jsx";
 import md5 from "md5";
 import { withTranslation } from "react-i18next";
 import i18n from "i18next";
