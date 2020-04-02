@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import Navbar from './components/organisms/Navbar';
+import FullNavbar from './components/organisms/FullNavbar';
 import rootReducer from './redux/reducers/rootReducer';
 import VendorLogin from './components/vendor/VendorLogin';
 import Registration from './components/vendor/Registration'
@@ -34,28 +34,14 @@ store.subscribe(() => {
   render() {
     return (
       <Provider store={store}>
-        <div>
-        <Button
-         onClick={event =>  window.location.href='/vendor'}>
-          vendor login
-        </Button>
-        <Button
-         onClick={event =>  window.location.href='/reg'}>
-          vendor Registration
-        </Button>
-        <Button
-         onClick={event =>  window.location.href='/'}>
-           Retailer login
-        </Button>
-         <Navbar />
-         </div>
       <div>
           <Router >
                     <Switch>
+                      <Route exact={true} path="/" component={FullNavbar} />
                       <Route exact={true} path="/vendor" component={VendorLogin} />
-                      <Route exact={true} path="/reg" component={Registration} />  
-                      <Route exact path="/home" component={Home}/> 
-                      <Route exact={true} path="/addproduct" component={Addproduct}/>  
+                      <Route exact={true} path="/vendor/reg" component={Registration} />  
+                      <Route exact path="/vendor/home" component={Home}/> 
+                      <Route exact={true} path="/vendor/addproduct" component={Addproduct}/>  
                       </Switch>
                   </Router>
         </div>

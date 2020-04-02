@@ -48,7 +48,7 @@ import Button from '@material-ui/core/Button';
             </div>
         )
        }
-       else{ window.location.href='./'}
+       else{ window.location.href='./vendor'}
     }   
 }
 const actionsAsProps = {

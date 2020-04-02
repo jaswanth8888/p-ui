@@ -8,11 +8,12 @@ import React from "react";
 import AddGroup from "../retailer/AddGroup.jsx";
 import ClusterForm from "../retailer/ClusterForm.jsx";
 import ProductRouter from "../retailer/ProductRouter.jsx";
+import PromotionRouter from "../retailer/PromotionRouter.jsx";
 import StoreForm from "../retailer/StoreForm.jsx";
 import ViewClusters from "../retailer/ViewClusters.jsx";
 import ViewZones from "../retailer/ViewZones.jsx";
 import ZoneForm from "../retailer/ZoneForm.jsx";
-import QueryOnDateRange from "../retailer/QueryOnDateRange.jsx"
+import PriceOnDate from "../retailer/PriceOnDate";
 import { useTranslation } from "react-i18next";
 import QueryOnDateRouter from "../retailer/QueryOnDateRouter.jsx";
 
@@ -84,7 +85,8 @@ export default function VerticalTabs() {
         <Tab label={t("welcome.createStore")} />
         <Tab label={t("welcome.viewZones")} />
         <Tab label={t("welcome.viewClusters")} />
-        <Tab label={t("welcome.queryOnDateRange")} />
+        <Tab label={t("welcome.PriceOnDate")} />
+        
       </Tabs>
       <TabPanel value={value} index={0}>
         <AddGroup />
@@ -107,8 +109,8 @@ export default function VerticalTabs() {
       <TabPanel value={value} index={6}>
         <ViewClusters />
       </TabPanel>
-      <TabPanel value={value} index={7} to ="/queryondaterange">
-        <QueryOnDateRouter/>
+      <TabPanel value={value} index={7} to="/selectproduct">
+        <PromotionRouter />
       </TabPanel>
     </div>
   );

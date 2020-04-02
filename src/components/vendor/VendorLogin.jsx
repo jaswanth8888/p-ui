@@ -8,7 +8,6 @@ import PersonIcon from '@material-ui/icons/Person';
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import {vendorlogin} from "../../redux/actions/VendorActions"
-import Message from './Message';
 import md5 from 'md5'
 
  class  VenderLogin extends Component {
@@ -69,7 +68,7 @@ import md5 from 'md5'
         if (this.is_validusername() && this.is_validPassword()) {
           this.props.vendorlogin({ ...this.state.user_crendentials }); // thunk action
           if(this.isAuthenticated()){
-          window.location.href = "/home"
+          window.location.href = "/vendor/home"
           }
         }
       }
@@ -181,9 +180,8 @@ import md5 from 'md5'
                   fullWidth
                   variant="contained"
                   color="primary"
-                  className="{classes.submit}"
+                  className="{classes.submit} submit-pad"
                   onClick={this.handleSubmit}
-                  style = {{marginTop:"30px"}}
                 >
                   Login
                 </Button>

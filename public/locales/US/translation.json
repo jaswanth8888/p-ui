@@ -14,14 +14,18 @@
     "invalidCredentials": "Invalid username/Password"
   },
   "welcome": {
-    "createZone": "CREATE ZONE",
-    "createCluster": "CREATE CLUSTER",
-    "createStore": "CREATE STORE",
-    "viewZones": "VIEW ZONES",
-    "viewClusters": "VIEW CLUSTERS",
-    "addGroup": "Add Group",
+
+    "queryOnDateRange":"Query On Date Range",
+    "priceOnDate":"Price On Date",
+    "createZone": "Create Zone",
+    "createCluster": "Create Cluster",
+    "createStore": "Create Store",
+    "viewZones": "View Zones",
+    "viewClusters": "View Clusters",
+    "addGroup": "Create Group",
     "addProducttoStore": "Add Product to Store",
-    "queryOnDateRange":"Query On Date Range"
+    "assignProductToClusterZone": "Add Products to Zones / Clusters",
+    "cancelNotEffectivePriceChange": "Cancel Not Effective Price Change"
   },
   "zoneForm": {
     "lengthTooShort": "Zone has to be greater than 5 letters",

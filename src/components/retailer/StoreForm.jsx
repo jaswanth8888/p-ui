@@ -8,7 +8,6 @@ import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getClusters, getZones, postStore } from '../../redux/actions/RetailerActions';
-import "./StoreForm.css";
 
 class StoreForm extends Component {
 
@@ -23,13 +22,17 @@ class StoreForm extends Component {
       city: "",
       streetName: "",
       pin: "",
-      status : 0
+      status: 0
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleChangeStore = this.handleChangeStore.bind(this);
     this.handleChangeZone = this.handleChangeZone.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.history.push("/store")
   }
 
   componentDidMount() {
@@ -61,185 +64,175 @@ class StoreForm extends Component {
     let store = { storeName, address }
     this.props.postStore(store, this.state.zone, this.state.cluster);
     if (this.state.storeName.length > 6) {
-      this.setState({ status : 1 })
+      this.setState({ status: 1 })
     }
-    else{
-      this.setState({  status : -1 })
+    else {
+      this.setState({ status: -1 })
     }
 
   }
 
   render() {
     return (
-      <div className="box-container store-form">
-
-        <div className="joint-form" style={{ width: "850px" }}>
-          <Typography
+      <div className="box-container">
+        <div className="joint-form-assign flex-column">
+        <Button
+          type="button"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className="{classes.submit} submit-pad"
+          id="store-submit-btn"
+          onClick={this.handleSubmit}
+        >
+          Save
+        </Button>
+          {/* <Typography
             color="primary"
             component="h1"
             variant="h4"
-            style=
-            {{
-              fontFamily: "font-family: 'Open Sans', sans-serif;",
-              position: "absolute",
-              top: "210px",
-              left: "30px"
-            }}>
+            className="help-block-h4"
+            >
             Create Store
-                </Typography>
-          {/* <div className="validation-half" style={{ background: "#673ab7" }}>
-            <div className="validations">
+              </Typography> */}
+          <div className="advanced-form-container">
+
+            <div className="form-first-half">
+              <form className="{classes.form}" noValidate >
+                <FormControl margin="normal" variant="outlined" fullWidth>
+                  <InputLabel htmlFor="outlined-age-native-simple">Enter Zone</InputLabel>
+                  <Select
+                    ref="zone"
+                    fullWidth
+                    native
+                    value={this.state.zone}
+                    onChange={this.handleChangeZone}
+                    label="Enter Zone"
+                    inputProps={{
+                      name: 'zone',
+                      id: 'zone',
+                    }}
+                  >
+                    <option aria-label="None" value="" />
+                    {this.props.zones.map((zone, index) => {
+                      return <option value={zone} key={index}>{zone}</option>
+                    })}
+                  </Select>
+                </FormControl>
+
+                <FormControl  margin="normal" variant="outlined" fullWidth>
+                  <InputLabel htmlFor="outlined-age-native-simple">Enter Cluster</InputLabel>
+                  <Select
+                    ref="cluster"
+                    fullWidth
+                    native
+                    value={this.state.cluster}
+                    onChange={this.handleChange}
+                    label="Enter Cluster"
+                    inputProps={{
+                      name: 'cluster',
+                      id: 'cluster',
+                    }}
+                  >
+                    <option aria-label="None" value="" />
+                    {this.props.clusters.map((cluster, index) => {
+                      return <option value={cluster} key={index}>{cluster}</option>
+                    })}
+                  </Select>
+                </FormControl>
+
+
+                <TextField
+                  ref="storeName"
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="storeName"
+                  label="Store Name"
+                  name="storeName"
+                  autoComplete="storeName"
+                  onChange={this.handleChange}
+                  value={this.state.storeName}
+                  autoFocus
+                />
+
+              </form>
+
+
+
 
             </div>
-          </div> */}
-          <div className="form-first-half">
-            <form className="{classes.form}" noValidate >
-              <FormControl variant="outlined" fullWidth>
-                <InputLabel htmlFor="outlined-age-native-simple">Enter Zone</InputLabel>
-                <Select
-                  ref="zone"
+            <div className="form-second-half">
+              <form className="{classes.form}" noValidate >
+                <TextField
+                  ref="streetName"
+                  variant="outlined"
+                  margin="normal"
+                  required
                   fullWidth
-                  native
-                  value={this.state.zone}
-                  onChange={this.handleChangeZone}
-                  label="Enter Zone"
-                  inputProps={{
-                    name: 'zone',
-                    id: 'zone',
-                  }}
-                >
-                  <option aria-label="None" value="" />
-                  {this.props.zones.map((zone, index) => {
-                    return <option value={zone} key={index}>{zone}</option>
-                  })}
-                </Select>
-              </FormControl>
-              <br /><br />
-
-              <FormControl variant="outlined" fullWidth style={{ marginBottom: "10px" }}>
-                <InputLabel htmlFor="outlined-age-native-simple">Enter Cluster</InputLabel>
-                <Select
-                  ref="cluster"
-                  fullWidth
-                  native
-                  value={this.state.cluster}
+                  name="streetName"
+                  label="Street name"
+                  autoComplete="streetName"
+                  id="streetName"
                   onChange={this.handleChange}
-                  label="Enter Cluster"
-                  inputProps={{
-                    name: 'cluster',
-                    id: 'cluster',
-                  }}
-                >
-                  <option aria-label="None" value="" />
-                  {this.props.clusters.map((cluster, index) => {
-                    return <option value={cluster} key={index}>{cluster}</option>
-                  })}
-                </Select>
-              </FormControl>
-              <TextField
-                ref="storeName"
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="storeName"
-                label="Store Name"
-                name="storeName"
-                autoComplete="storeName"
-                onChange={this.handleChange}
-                value={this.state.storeName}
-                autoFocus
-              />
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className="{classes.submit}"
-                style={{ marginTop: "30px", pointerEvents: "none", opacity: "0" }}
-                onClick={this.handleSubmit}>
-                Save
-            </Button>
-            </form>
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className="{classes.submit}"
-              id="store-submit-btn"
-              style={{ marginTop: "30px" }}
-              onClick={this.handleSubmit}
-            >
-              Save
-              </Button>
+                  value={this.state.streetName}
+                />
+                <TextField
+                  ref="city"
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="city"
+                  label="City"
+                  id="city"
+                  onChange={this.handleChange}
+                  autoComplete="city"
+                  value={this.state.city}
+                />
+                <TextField
+                  ref="pin"
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="pin"
+                  label="Pin-code"
+                  type="number"
+                  id="pin"
+                  onChange={this.handleChange}
+                  autoComplete="pin"
+                  value={this.state.pin}
+                />
+              </form>
+
+            </div>
           </div>
-          <div className="form-second-half">
-            <form className="{classes.form}" noValidate >
-              <TextField
-                ref="streetName"
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="streetName"
-                label="Street name"
-                autoComplete="streetName"
-                id="streetName"
-                onChange={this.handleChange}
-                value={this.state.streetName}
-              />
-              <TextField
-                ref="city"
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="city"
-                label="City"
-                id="city"
-                onChange={this.handleChange}
-                autoComplete="city"
-                value={this.state.city}
-              />
-              <TextField
-                ref="pin"
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="pin"
-                label="Pin-code"
-                type="number"
-                id="pin"
-                onChange={this.handleChange}
-                autoComplete="pin"
-                value={this.state.pin}
-              />
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
+          <div>
+            <div className="help-block">
+              <Typography
                 color="primary"
-                className="{classes.submit}"
-                style={{ marginTop: "30px", pointerEvents: "none", opacity: "0" }}
-                onClick={this.handleSubmit}>
-                Save
-            </Button>
-            </form>
+                component="h1"
+                variant="h4"
+                className="special-store-help"
+                >
+                Create a Store
+              </Typography>
+            </div>
           </div>
           <div className="store-requirement">
-            <h3 style={{ textAlign: "center" }}>Requirements</h3>
-            {this.state.storeName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+            <h3 className="center-h3">Requirements</h3>
+            {this.state.storeName.length <= 5 && <div className="typo-div"><ClearIcon className="icon-style" />
               <Typography variant="subtitle2" gutterBottom>
                 Store name has to be greater than 5 letters
               </Typography></div>}
             {this.state.storeName.length > 5 &&
-              <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <div className="approved-text"><CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Store name has to be greater than 5 letters
               </Typography></div>}
-              
+
           </div>
         </div>
         <Fragment>

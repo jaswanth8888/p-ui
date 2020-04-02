@@ -1,6 +1,6 @@
 import axios from "axios"; 
 import {registerconstants} from './registrationtypes';
-import {VTOKEN,VENDOR_LOGIN_USER,VENDOR_LOGIN_FAILURE,VENDOR_LOGOUT, WELCOME_USER,VENDORFAILURE,RETAILER_BASE_URL, MESSAGE_SET_NULL,CREATE_PRODUCT}from "./types2"
+import {VTOKEN,VENDOR_LOGIN_USER,VENDOR_LOGIN_FAILURE,VENDOR_LOGOUT, WELCOME_USER,VENDORFAILURE,RETAILER_BASE_URL, MESSAGE_SET_NULL,CREATE_PRODUCT}from "./types"
 
 export const registration=(registrationdetails)=>async(dispatch)=>{
     await axios.post(RETAILER_BASE_URL+'/vendor-retailer-management/vendor',registrationdetails).then(

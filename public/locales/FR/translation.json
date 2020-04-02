@@ -21,7 +21,16 @@
     "viewClusters": "VOIR LES CLUSTERS",
     "addGroup": "Ajouter un groupe",
     "addProducttoStore": "Ajouter un produit au magasin",
+<<<<<<< HEAD
     "queryOnDateRange":"requête sur la plage de dates"
+=======
+<<<<<<< HEAD
+    "PriceOnDate":"prix à la date"
+=======
+    "assignProductToClusterZone": "Attribuer le produit au cluster / zone",
+    "cancelNotEffectivePriceChange": "Annuler la modification de prix non effective"
+>>>>>>> feature/sprint3-dev
+>>>>>>> feature/promotion-story
   },
   "zoneForm": {
     "lengthTooShort": "La zone doit être supérieure à 5 lettres",

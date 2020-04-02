@@ -9,7 +9,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getZones, postCluster } from '../../redux/actions/RetailerActions';
-import Message from "./Message"
+import Message from "../utils/Message"
 
 class ClusterForm extends Component {
 
@@ -20,12 +20,17 @@ class ClusterForm extends Component {
       clusterName: "",
       taxRate: "",
       isSubmitted: false,
-      status : 0
+      status: 0
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
+
+  componentWillMount() {
+    this.props.history.push("/cluster")
+  }
+
   componentDidMount() {
     this.props.getAllZones();
   }
@@ -40,10 +45,10 @@ class ClusterForm extends Component {
     this.setState({ isSubmitted: true })
     if (this.state.clusterName.length > 6) {
       this.props.postCluster(cluster, this.state.zone)
-      this.setState({ status : 1 })
+      this.setState({ status: 1 })
     }
-    else{
-      this.setState({  status : -1 })
+    else {
+      this.setState({ status: -1 })
     }
   }
 
@@ -55,13 +60,13 @@ class ClusterForm extends Component {
         <div className="joint-form">
           <div className="validation-half" style={{ background: "#673ab7" }}>
             <div className="validations">
-              <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {this.state.clusterName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <h3 className="center-h3">Requirements</h3>
+              {this.state.clusterName.length <= 5 && <div className="typo-div"><ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Cluster has to be greater than 5 letters
               </Typography></div>}
               {this.state.clusterName.length > 5 &&
-                <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <div className="approved-text"><CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Cluster has to be greater than 5 letters
               </Typography></div>}
@@ -75,12 +80,8 @@ class ClusterForm extends Component {
                     color="primary"
                     component="h1"
                     variant="h4"
-                    style=
-                    {{
-                      fontFamily: "font-family: 'Open Sans', sans-serif;",
-                      position: "relative",
-                      top: "-20px"
-                    }}>
+                    className="help-block-h4"
+                  >
                     Create a cluster
                 </Typography>
                 </div>
@@ -141,8 +142,7 @@ class ClusterForm extends Component {
                 fullWidth
                 variant="contained"
                 color="primary"
-                className="{classes.submit}"
-                style={{ marginTop: "30px" }}
+                className="{classes.submit} submit-pad"
                 onClick={this.handleSubmit}>
                 Save
             </Button>

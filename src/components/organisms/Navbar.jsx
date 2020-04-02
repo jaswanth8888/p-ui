@@ -12,7 +12,8 @@ import { logout } from "../../redux/actions/RetailerActions";
 import Login from "../Login";
 import Welcome from "../retailer/Welcome.jsx";
 import PrivateRoute from "../utils/privateRoute";
-
+import Promotion from "../retailer/Promotion";
+import AddProducts from "../retailer/AddProducts"
 import ReactFlagsSelect from "react-flags-select";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
@@ -22,6 +23,7 @@ import "react-flags-select/css/react-flags-select.css";
 
 //OR import sass module
 import "react-flags-select/scss/react-flags-select.scss";
+import AddProduct from "../vendor/AddProduct";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

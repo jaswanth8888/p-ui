@@ -21,8 +21,15 @@ import {
   STORE_POST_REQUEST,
   FAILURE,
   MESSAGE_SET_NULL,
-  PRODUCT_GET_BYRANGE
-  
+  PRODUCT_GET_BYRANGE,
+  PRODUCTLIST_GET_REQUEST,
+  PRODUCT_SAVE_VALUE,
+  PRODUCT_GET_REQUEST,
+  PROMOTION_POST_REQUEST,
+  ZONECLUSTER_GET_REQUEST,
+  ASSIGN_TO_CLUSTER,
+  ASSIGN_TO_ZONE,
+  PRODUCT_POST_REQUEST
 } from "./types";
 import axios from "axios";
 import i18n from "i18next";
@@ -100,10 +107,10 @@ export const postCluster = (cluster, zone) => async dispatch => {
       dispatch({
         type: CREATE_CLUSTER,
         msg: "Cluster for Zone " + zone + " is Created Successfully",
-	msgSeverity: "success"
+        msgSeverity: "success"
       });
     })
-	.catch(err => {
+    .catch(err => {
       let response = err.response;
       if (response.status === 400) {
         dispatch({
@@ -125,12 +132,11 @@ export const postCluster = (cluster, zone) => async dispatch => {
         });
       }
     });
-      
 };
 
 export const getZones = () => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/location-management/zoneNames", {
+    .get(RETAILER_BASE_URL + "/location-management/zones/names", {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
@@ -143,7 +149,7 @@ export const getZones = () => async dispatch => {
 
 export const getClusters = zone => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/location-management/" + zone + "/clusters", {
+    .get(RETAILER_BASE_URL + "/location-management/" + zone + "/clusters/names", {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
@@ -330,7 +336,7 @@ export const getStores = (zone, cluster) => async dispatch => {
         zone +
         "/" +
         cluster +
-        "/stores",
+        "/stores/names",
       { headers: { Authorization: TOKEN } }
     )
     .then(res => {
@@ -340,21 +346,225 @@ export const getStores = (zone, cluster) => async dispatch => {
       dispatch({ type: FAILURE });
     });
 };
+
 export const getProductsInRange = (fromDate,toDate,) => async dispatch => {
   await axios
-   .get( "http://10.150.222.113:9500/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D", {
+   .get( RETAILER_BASE_URL +"/product-management/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D", {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
-      console.log(res.data)
-      console.log("http://10.102.136.199:9500/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D")
-      alert("getbyrange")
       dispatch({ type: PRODUCT_GET_BYRANGE, products: res.data });
     })
     .catch(err => {
-      console.log("http://10.102.136.199:9500/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D")
-     // alert(err)
-     alert("fail")
+      dispatch({ type: FAILURE });
+    })
+}
+
+export const getProductList = () => async dispatch => {
+  await axios
+    .get(RETAILER_BASE_URL + "/product-management/products/names", {
+      headers: { Authorization: TOKEN }
+    })
+    .then(res => {
+      dispatch({ type: PRODUCTLIST_GET_REQUEST, productList: res.data });
+    });
+};
+
+export const saveProductValue = productValue => dispatch => {
+  dispatch({ type: PRODUCT_SAVE_VALUE, productName: productValue });
+};
+
+export const getProductDetails = productName => async dispatch => {
+  await axios
+    .get(RETAILER_BASE_URL + "/product-management/product/" + productName , {
+      headers: { Authorization: TOKEN }
+    })
+    .then(res => {
+      dispatch({ type: PRODUCT_GET_REQUEST, productDetails: res.data });
+    });
+};
+
+export const getZoneClusterNames = (clusterPattern) => async dispatch => {
+  await axios
+    .get(RETAILER_BASE_URL + "/location-management/clusters/regex/"+clusterPattern , {
+      headers: { Authorization: TOKEN }
+    })
+    .then(res => {
+      dispatch({ type: ZONECLUSTER_GET_REQUEST, zoneclusternames: res.data });
+    });
+};
+
+export const assignToCluster = (clusterDetails,zoneName, clusterName,productName) => async dispatch => {
+  await axios
+    .put(
+      RETAILER_BASE_URL +"/product-management/"+productName+"/"+zoneName+"/"+clusterName+"/products",clusterDetails,
+      { headers: { Authorization: TOKEN } }
+    )
+    .then(res => {
+      dispatch({
+        type: ASSIGN_TO_CLUSTER,
+        msg: "Product Asigned to Cluster Succesfully"
+      });
+    })
+    .catch(err => {
+      console.log(err)
+      console.log(err.response)
+      console.log(err.response.message)
+
+      let response = err.response;
+      if (response.status === 400 && response.data.message === "Quantity Insufficient") {
+        dispatch({ type: MESSAGE_SET_NULL });
+        dispatch({
+          type: ASSIGN_TO_CLUSTER,
+          msg: "Quantity assigned is high, please enter a lower quantity",
+          msgSeverity: "error"
+        });
+      } else if (response.status === 403) {
+        dispatch({ type: MESSAGE_SET_NULL });
+        dispatch({
+          type: ASSIGN_TO_CLUSTER,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning"
+        });
+      } else {
+        dispatch({ type: MESSAGE_SET_NULL });
+        dispatch({
+          type: ASSIGN_TO_CLUSTER,
+          msg: "Something went wrong ,please try again",
+          msgSeverity: "warning"
+        });
+      }
+    });
+};
+
+export const assignToZone = (zoneDetails,zoneName,productName) => async dispatch => {
+  await axios
+    .put(
+      RETAILER_BASE_URL +"/product-management/"+zoneName+"/"+productName+"/product",zoneDetails,
+      { headers: { Authorization: TOKEN } }
+    )
+    .then(res => {
+      dispatch({
+        type: ASSIGN_TO_ZONE,
+        msg: "Product Asigned to Zone Succesfully"
+      });
+    })
+    .catch(err => {
+      console.log(err)
+      console.log(err.response)
+      console.log(err.response.message)
+
+      let response = err.response;
+      if (response.status === 400 && response.data.message === "Product is already associated with zone") {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: "Product is already associated with zone, please try again",
+          msgSeverity: "error"
+        });
+      } else if (response.status === 400 && response.data.message === "Quantity Insufficient") {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: "Quantity assigned is high, please enter a lower quantity",
+          msgSeverity: "error"
+        });
+      } else if (response.status === 400 && response.data.message === "Product price is below minimum selling price") {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: "Profit percentage is very low, please enter a higher percentage",
+          msgSeverity: "error"
+        });
+      } else if (response.status === 403) {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning"
+        });
+      } else {
+        dispatch({ type: MESSAGE_SET_NULL });
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning"
+        });
+      }
+    });
+};
+
+export const postPromotion = (productName, promotionDetails) => async dispatch => {
+  dispatch({ type: MESSAGE_SET_NULL });
+  await axios
+    .put("http://10.150.222.113:9500/product/promotion/" + productName, promotionDetails, {
+      headers: { Authorization: TOKEN }
+    })
+    .then(res => {
+      alert("Success")
+      if (res.data.status) {
+        dispatch({
+          type: PROMOTION_POST_REQUEST,
+          promotionDetails: { data: res.data },
+          msg: "promotion applied Succesfully",
+          msgSeverity: "success"
+        });
+      } else {
+        dispatch({
+ 
+          type: PROMOTION_POST_REQUEST,
+          promotionDetails: { data: res.data },
+          msg: "promotion cannot not applied",
+          msgSeverity: "error"
+        });
+      }
+    }).catch(err => {
+      let response = err.response;
+      if (response.status === 400) {
+        dispatch({
+          type: PROMOTION_POST_REQUEST,
+          msg: "Sorry something went wrong",
+          msgSeverity: "error"
+        });
+      } else if (response.status === 403) {
+        dispatch({
+          type: PROMOTION_POST_REQUEST,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning"
+        });
+      } else {
+        dispatch({
+          type: PROMOTION_POST_REQUEST,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning"
+        });
+      }
+    });
+};
+
+export const getPricesInRange = (startDate,endDate,currentDate) => async dispatch => {
+  await axios
+   .get(
+      RETAILER_BASE_URL + "/product-management/products/data?filter=%7B%22startDate%22:%22"+startDate+"%22,%22endDate%22:%22"+endDate+"%22,%22currentDate%22:%22"+currentDate+"%22%7D", {
+      headers: { Authorization: TOKEN }
+    })
+    .then(res => {
+      dispatch({ type: PRODUCTS_GET_REQUEST, products: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: FAILURE });
+    });
+};
+
+export const cancelEffectivePrice = (productName,promotionId) => async dispatch => {
+  console.log(productName,promotionId);
+ 
+  await axios
+    .put(
+      RETAILER_BASE_URL +
+      "/product-management/" + "product/" + productName + "/" + promotionId,  
+      { headers: { Authorization: TOKEN } }
+    )
+    .then(res => {
+      dispatch({ type: PRODUCT_POST_REQUEST, msg: "Cancel Price Change Done!" });
+    })
+    .catch(err => {
       dispatch({ type: FAILURE });
     });
 };

@@ -13,16 +13,13 @@ export const PRODUCT_POST_REQUEST="PRODUCT_POST_REQUEST";
 export const PRODUCTTOSTORE_POST_REQUEST="PRODUCTTOSTORE_POST_REQUEST";
 export const FAILURE = "FAILURE";
 
-export const RETAILER_BASE_URL = "http://10.150.222.113:8765"
-//export const RETAILER_BASE_URL = "http://localhost:8765";
+export const RETAILER_BASE_URL = "http://10.150.16.126:8765";
 //export const RETAILER_BASE_URL = "http://10.150.222.113:8765";
 //export const RETAILER_BASE_URL = "http://10.102.137.146:8765";
 //export const RETAILER_BASE_URL = "http://10.102.143.225:8765";
 //export const RETAILER_BASE_URL = "http://10.155.236.236:8765";
 
-//export const RETAILER_URL = "http://localhost:9300";
-//export const RETAILER_URL = "http://10.102.137.146:9300";
-//export const RETAILER_URL = "http://10.102.143.225:9300";
+
 export const RETAILER_URL = "http://10.155.236.236:9300";
 
 
@@ -46,4 +43,23 @@ export const CATEGORIES_GET_REQUEST="CATEGORIES_GET_REQUEST";
 export const PRODUCTS_GET_REQUEST="PRODUCTS_GET_REQUEST"
 export const PRODUCT_GET_BYRANGE="PRODUCT_GET_BYRANGE"
 
+export const PRODUCTLIST_GET_REQUEST="PRODUCTLIST_GET_REQUEST"
+export const PRODUCT_SAVE_VALUE="PRODUCT_SAVE_VALUE"
+export const PRODUCT_GET_REQUEST="PRODUCT_GET_REQUEST"
+export const PROMOTION_POST_REQUEST="PROMOTION_POST_REQUEST"
+export const ZONECLUSTER_GET_REQUEST="ZONECLUSTER_GET_REQUEST";
+export const ASSIGN_TO_CLUSTER="ASSIGN_TO_CLUSTER";
+export const ASSIGN_TO_ZONE="ASSIGN_TO_ZONE";
+
+
 export const TOKEN='BearerR '+sessionStorage.getItem("token");
+
+
+//vendor constants
+export const VENDOR_LOGIN_USER = "VENDOR_LOGIN_USER";
+export const VENDOR_LOGIN_FAILURE = "VENDOR-LOGIN_FAILURE";
+export const VENDOR_LOGOUT = "VENDOR_LOGOUT"; 
+export const VENDOR_FAILURE = "VENDOR-FAILURE";
+
+export const CREATE_PRODUCT="CREATE_PRODUCT";
+export const VTOKEN='BearerV '+sessionStorage.getItem("token");
