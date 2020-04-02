@@ -39,6 +39,7 @@ import Tab from "@material-ui/core/Tab";
 import Login from "../Login";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
+import EffectivePriceRouter from '../retailer/EffectivePriceRouter.jsx';
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import ViewListIcon from "@material-ui/icons/ViewList";
@@ -449,7 +450,7 @@ function FullNavbar(props) {
             path="/products/assign"
             render={props => <ZoneClusterRouter {...props} />}
           />
-          
+
         </Switch>
       </Router>
     </div>
