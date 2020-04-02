@@ -7,8 +7,7 @@ import { Component, default as React, Fragment } from "react";
 import { connect } from "react-redux";
 import { assignToCluster, getZoneClusterNames } from "../../redux/actions/RetailerActions";
 import ProductDetails from "../utils/ProductDetails";
-
-
+import Message from "../utils/Message"
 
 class AssignToCluster extends Component {
   constructor(props) {
@@ -75,11 +74,14 @@ class AssignToCluster extends Component {
     e.preventDefault();
     console.log(this.state.clusterDetails)
     this.props.assignToCluster(this.state.clusterDetails, this.state.zoneName, this.state.clusterName, this.props.productName)
-    this.props.history.push("/view/assigned/clusters")
   }
 
   render() {
     return (
+      <React.Fragment>
+      {this.props.statusCode === 200 ? (
+        this.props.history.push("/view/assigned/clusters")
+      ) : (   
       <div className="box-container-start store-form">
         <div className="joint-form-assign">
           <Typography
@@ -178,37 +180,20 @@ class AssignToCluster extends Component {
         </div>
       </div>
 
-      <Fragment>
-
-        {(this.state.status === 1) ? (
-          <div>
-            <Snackbar open="true" autoHideDuration={2000}>
-              <MuiAlert elevation={6} variant="filled">
-                Price Assigned Successfully!
-            </MuiAlert>
-            </Snackbar>
-          </div>
-        ) : (<div />)}
-      </Fragment>
-      <Fragment>
-        {(this.state.status === -1) ? (
-          <div>
-            <Snackbar open="true" autoHideDuration={2000}>
-              <MuiAlert severity="error" elevation={6} variant="filled">
-                Price assign failed. Please match the requirements
-                </MuiAlert>
-            </Snackbar>
-          </div>) : (<div />)
-        }
-      </Fragment>
+      {}
+          <Message />
         </div >
+      )}
+        </React.Fragment>
     );
   }
 }
 
 const stateAsProps = store => ({
   zoneclusternames: store.RetailerReducer.zoneclusternames,
-  productName: store.RetailerReducer.productName
+  productName: store.RetailerReducer.productName,
+  statusCode: store.RetailerReducer.statusCode
+
 });
 
 const actionAsProps = {

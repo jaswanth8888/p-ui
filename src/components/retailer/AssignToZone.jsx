@@ -50,12 +50,18 @@ class AssignToZone extends Component {
   handleSubmit = (e) =>{
     e.preventDefault();
     this.props.assignToZone(this.state.zoneDetails, this.state.zoneName, this.props.productName)
-    this.props.history.push("/view/assigned/zones")
+    console.log(this.props.statusCode)
+    // if(this.props.statusCode == '200'){
+    //   this.props.history.push("/view/assigned/zones")
+    // }
   }
 
   render() {
     return (
-      <Router>
+      <React.Fragment>
+      {this.props.statusCode === 200 ? (
+        this.props.history.push("/view/assigned/zones")
+      ) : ( 
         <div className="box-container-start store-form">
           {/* {console.log(this.state.zoneDetails)}
     {console.log(this.state.zoneName)}
@@ -157,19 +163,16 @@ class AssignToZone extends Component {
 
 
         </div>
-        <Switch>
-          {/* <Route exact={true} path="/selectproduct" component={SelectProduct} />
-          <Route exact={true} path="/assigntozone" component={AssignToZone} /> */}
-          <Route exact path="/viewassignedzones" component={ViewAssignedZones}></Route>
-        </Switch>
-      </Router>
+        )} 
+      </React.Fragment>
     );
   }
 }
 
 const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
-  productName: store.RetailerReducer.productName
+  productName: store.RetailerReducer.productName,
+  statusCode: store.RetailerReducer.statusCode
 });
 
 const actionAsProps = {

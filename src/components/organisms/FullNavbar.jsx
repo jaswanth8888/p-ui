@@ -400,38 +400,6 @@ function FullNavbar(props) {
                     </ListItem>
                   </Tooltip>
                 </Link>
-                <Link to="/view/assigned/clusters">
-                  <Tooltip
-                    title="View Assigned Clusters"
-                    placement="right"
-                  >
-                    <ListItem button>
-                      <ListItemIcon>
-                        <ViewListIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        className="list-item-text"
-                        primary={"View Assigned Clusters"}
-                      />
-                    </ListItem>
-                  </Tooltip>
-                </Link>
-                <Link to="/view/assigned/zones">
-                  <Tooltip
-                    title="View Assigned Zones"
-                    placement="right"
-                  >
-                    <ListItem button>
-                      <ListItemIcon>
-                        <ViewListIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        className="list-item-text"
-                        primary={"View Assigned Zones"}
-                      />
-                    </ListItem>
-                  </Tooltip>
-                </Link>
               </List>
               {/* <Divider />
         <List>
@@ -489,16 +457,6 @@ function FullNavbar(props) {
             exact
             path="/view/products/daterange"
             render={props => <EffectivePriceRouter {...props} />}
-          />
-          <Route
-            exact
-            path="/view/assigned/clusters"
-            render={props => <ViewAssignedClusters {...props} />}
-          />
-          <Route
-            exact
-            path="/view/assigned/zones"
-            render={props => <ViewAssignedZones {...props} />}
           />
         </Switch>
       </Router>

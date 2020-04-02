@@ -29,7 +29,8 @@ import {
   ZONECLUSTER_GET_REQUEST,
   ASSIGN_TO_CLUSTER,
   ASSIGN_TO_ZONE,
-  PRODUCT_POST_REQUEST
+  PRODUCT_POST_REQUEST,
+  RESET_STATUS_CODE
 } from "./types";
 import axios from "axios";
 import i18n from "i18next";
@@ -403,7 +404,8 @@ export const assignToCluster = (clusterDetails,zoneName, clusterName,productName
     .then(res => {
       dispatch({
         type: ASSIGN_TO_CLUSTER,
-        msg: "Product Asigned to Cluster Succesfully"
+        msg: "Product Asigned to Cluster Succesfully",
+        statusCode: res.status
       });
     })
     .catch(err => {
@@ -417,21 +419,24 @@ export const assignToCluster = (clusterDetails,zoneName, clusterName,productName
         dispatch({
           type: ASSIGN_TO_CLUSTER,
           msg: "Quantity assigned is high, please enter a lower quantity",
-          msgSeverity: "error"
+          msgSeverity: "error",
+          statusCode: response.status
         });
       } else if (response.status === 403) {
         dispatch({ type: MESSAGE_SET_NULL });
         dispatch({
           type: ASSIGN_TO_CLUSTER,
           msg: "Something went wrong ,please logout and try again",
-          msgSeverity: "warning"
+          msgSeverity: "warning",
+          statusCode: response.status
         });
       } else {
         dispatch({ type: MESSAGE_SET_NULL });
         dispatch({
           type: ASSIGN_TO_CLUSTER,
           msg: "Something went wrong ,please try again",
-          msgSeverity: "warning"
+          msgSeverity: "warning",
+          statusCode: response.status
         });
       }
     });
@@ -444,9 +449,11 @@ export const assignToZone = (zoneDetails,zoneName,productName) => async dispatch
       { headers: { Authorization: TOKEN } }
     )
     .then(res => {
+      console.log(res)
       dispatch({
         type: ASSIGN_TO_ZONE,
-        msg: "Product Asigned to Zone Succesfully"
+        msg: "Product Asigned to Zone Succesfully",
+        statusCode: res.status
       });
     })
     .catch(err => {
@@ -459,32 +466,37 @@ export const assignToZone = (zoneDetails,zoneName,productName) => async dispatch
         dispatch({
           type: ASSIGN_TO_ZONE,
           msg: "Product is already associated with zone, please try again",
-          msgSeverity: "error"
+          msgSeverity: "error",
+          statusCode: response.status
         });
       } else if (response.status === 400 && response.data.message === "Quantity Insufficient") {
         dispatch({
           type: ASSIGN_TO_ZONE,
           msg: "Quantity assigned is high, please enter a lower quantity",
-          msgSeverity: "error"
+          msgSeverity: "error",
+          statusCode: response.status
         });
       } else if (response.status === 400 && response.data.message === "Product price is below minimum selling price") {
         dispatch({
           type: ASSIGN_TO_ZONE,
           msg: "Profit percentage is very low, please enter a higher percentage",
-          msgSeverity: "error"
+          msgSeverity: "error",
+          statusCode: response.status
         });
       } else if (response.status === 403) {
         dispatch({
           type: ASSIGN_TO_ZONE,
           msg: "Something went wrong ,please logout and try again",
-          msgSeverity: "warning"
+          msgSeverity: "warning",
+          statusCode: response.status
         });
       } else {
         dispatch({ type: MESSAGE_SET_NULL });
         dispatch({
           type: ASSIGN_TO_ZONE,
           msg: "Something went wrong ,please  try again",
-          msgSeverity: "warning"
+          msgSeverity: "warning",
+          statusCode: response.status
         });
       }
     });
@@ -567,4 +579,9 @@ export const cancelEffectivePrice = (productName,promotionId) => async dispatch 
     .catch(err => {
       dispatch({ type: FAILURE });
     });
+};
+
+export const resetStatusCode = () => dispatch => {
+  console.log(RESET_STATUS_CODE);
+  dispatch({ type: RESET_STATUS_CODE });
 };
