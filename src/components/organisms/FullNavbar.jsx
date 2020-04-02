@@ -40,6 +40,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import PublicIcon from '@material-ui/icons/Public';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
+import EffectivePriceRouter from '../retailer/EffectivePriceRouter.jsx';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -289,6 +290,12 @@ function FullNavbar(props) {
                     <ListItemText className="list-item-text" primary={"View assigned clusters"} />
                   </ListItem>
                 </Link>
+                <Link to="/view/products/daterange">
+                  <ListItem button>
+                    <ListItemIcon><InboxIcon /></ListItemIcon>
+                    <ListItemText className="list-item-text" primary={t("welcome.cancelNotEffectivePriceChange")} />
+                  </ListItem>
+                </Link>
               </List>
               {/* <Divider />
         <List>
@@ -314,6 +321,8 @@ function FullNavbar(props) {
           <Route exact path="/view/zones" render={props => <ViewZones {...props} />} />
           <Route exact path="/view/clusters" render={props => <ViewClusters {...props} />} />
           <Route exact path="/products/assign" render={props => <ZoneClusterRouter {...props} />} />
+          <Route exact path="/view/products/daterange" render={props => <EffectivePriceRouter {...props} />} />
+
         </Switch>
       </Router>
     </div>

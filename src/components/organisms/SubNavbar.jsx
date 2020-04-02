@@ -28,6 +28,7 @@ import ViewAssignedZones from "../retailer/ViewAssignedZones.jsx";
 import ViewAssignedClusters from "../retailer/ViewAssignedClusters.jsx";
 import SelectProduct from "../retailer/SelectProduct.jsx";
 import { createBrowserHistory } from "history";
+import EffectivePriceRouter from '../retailer/EffectivePriceRouter';
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -133,6 +134,12 @@ export default function SubNavbar() {
                 <ListItemText className="list-item-text" primary={"View assigned clusters"} />
               </ListItem>
             </Link>
+            <Link  to="/view/products/daterange">
+              <ListItem button>
+                <ListItemIcon><InboxIcon /></ListItemIcon>
+                <ListItemText className="list-item-text" primary={t("welcome.cancelNotEffectivePriceChange")} />
+              </ListItem>
+            </Link>
           </List>
           {/* <Divider />
         <List>
@@ -157,6 +164,7 @@ export default function SubNavbar() {
           <Route exact path="/products/assign" render={props => <ZoneClusterRouter {...props} />} />
           <Route exact path="/view/assigned/zones" render={props => <ViewAssignedZones {...props} />} />
           <Route exact path="/view/assigned/clusters" render={props => <ViewAssignedClusters {...props} />} />
+          <Route exact path="/view/products/daterange" render={props => <EffectivePriceRouter {...props} />} />
         </Switch>
       </Router>
     </div>

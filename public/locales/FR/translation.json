@@ -21,7 +21,8 @@
     "viewClusters": "VOIR LES CLUSTERS",
     "addGroup": "Ajouter un groupe",
     "addProducttoStore": "Ajouter un produit au magasin",
-    "assignProductToClusterZone": "Attribuer le produit au cluster / zone"
+    "assignProductToClusterZone": "Attribuer le produit au cluster / zone",
+    "cancelNotEffectivePriceChange": "Annuler la modification de prix non effective"
   },
   "zoneForm": {
     "lengthTooShort": "La zone doit être supérieure à 5 lettres",

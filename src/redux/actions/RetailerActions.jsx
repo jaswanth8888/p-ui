@@ -26,7 +26,8 @@ import {
   PRODUCT_GET_REQUEST,
   ZONECLUSTER_GET_REQUEST,
   ASSIGN_TO_CLUSTER,
-  ASSIGN_TO_ZONE
+  ASSIGN_TO_ZONE,
+  PRODUCT_POST_REQUEST
 } from "./types";
 import axios from "axios";
 import i18n from "i18next";
@@ -476,5 +477,42 @@ export const assignToZone = (zoneDetails,zoneName,productName) => async dispatch
           msgSeverity: "warning"
         });
       }
+    });
+};
+
+export const getPricesInRange = (startDate,endDate,currentDate) => async dispatch => {
+  await axios
+   .get("http://10.102.141.184:9500/products/data?filter=%7B%22startDate%22:%22"+startDate+"%22,%22endDate%22:%22"+endDate+"%22,%22currentDate%22:%22"+currentDate+"%22%7D", {
+  
+ 
+      headers: { Authorization: TOKEN }
+    })
+    .then(res => {
+      console.log(res.data)
+      console.log("http://10.102.141.184:9500/products/data?filter=%7B%22startDate%22:%22"+startDate+"%22,%22endDate%22:%22"+endDate+"%22,%22currentDate%22:%22"+currentDate+"%22%7D")
+      
+      //alert("sucess") 
+      dispatch({ type: PRODUCTS_GET_REQUEST, products: res.data });
+    })
+    .catch(err => {
+      console.log("http://10.102.141.184:9500/products/data?filter=%7B%22startDate%22:%22"+startDate+"%22,%22endDate%22:%22"+endDate+"%22,%22currentDate%22:%22"+currentDate+"%22%7D")
+      alert(err)
+      dispatch({ type: FAILURE });
+    });
+};
+
+export const cancelEffectivePrice = (productName,promotionId) => async dispatch => {
+  console.log(productName,promotionId);
+ 
+  await axios
+    .put("http://10.102.141.184:9500/product/" + productName + "/" + promotionId,
+        
+      { headers: { Authorization: TOKEN } }
+    )
+    .then(res => {
+      dispatch({ type: PRODUCT_POST_REQUEST, msg: "Cancel Price Change Done!" });
+    })
+    .catch(err => {
+      dispatch({ type: FAILURE });
     });
 };
