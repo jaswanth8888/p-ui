@@ -1,15 +1,11 @@
-import { InputLabel, Select, TextField, Typography } from "@material-ui/core";
+import { Select, TextField, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import Snackbar from '@material-ui/core/Snackbar';
-import CheckIcon from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
 import MuiAlert from '@material-ui/lab/Alert';
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { Component, default as React, Fragment } from "react";
 import { connect } from "react-redux";
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { getZoneClusterNames, assignToCluster } from "../../redux/actions/RetailerActions";
+import { assignToCluster, getZoneClusterNames } from "../../redux/actions/RetailerActions";
 import ProductDetails from "../utils/ProductDetails";
 
 
