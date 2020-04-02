@@ -121,6 +121,18 @@ export default function SubNavbar() {
                 <ListItemText className="list-item-text" primary={t("welcome.assignProductToClusterZone")} />
               </ListItem>
             </Link>
+            <Link  to="/view/assigned/zones">
+              <ListItem button>
+                <ListItemIcon><InboxIcon /></ListItemIcon>
+                <ListItemText className="list-item-text" primary={"View assigned zones"} />
+              </ListItem>
+            </Link>
+            <Link  to="/view/assigned/clusters">
+              <ListItem button>
+                <ListItemIcon><InboxIcon /></ListItemIcon>
+                <ListItemText className="list-item-text" primary={"View assigned clusters"} />
+              </ListItem>
+            </Link>
           </List>
           {/* <Divider />
         <List>
@@ -143,6 +155,8 @@ export default function SubNavbar() {
           <Route exact path="/view/zones"  render={props => <ViewZones {...props} />} />
           <Route exact path="/view/clusters" render={props => <ViewClusters {...props} />} />
           <Route exact path="/products/assign" render={props => <ZoneClusterRouter {...props} />} />
+          <Route exact path="/view/assigned/zones" render={props => <ViewAssignedZones {...props} />} />
+          <Route exact path="/view/assigned/clusters" render={props => <ViewAssignedClusters {...props} />} />
         </Switch>
       </Router>
     </div>

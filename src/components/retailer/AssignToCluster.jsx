@@ -5,6 +5,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import MuiAlert from '@material-ui/lab/Alert';
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { Component, default as React, Fragment } from "react";
 import { connect } from "react-redux";
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -104,20 +105,21 @@ class AssignToCluster extends Component {
           </div>
           <div className="form-full-center">
             <form className="{classes.form}" noValidate >
-              <FormControl variant="outlined" fullWidth>
+              {/* <FormControl variant="outlined" fullWidth> */}
 
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="zonecluster"
-                  label="ClusterName"
-                  name="zonecluster"
-                  onChange={this.handleChangeCluster}
-                  value={this.state.zonecluster}
-                  autoFocus
-                />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="zonecluster"
+                label="ClusterName"
+                name="zonecluster"
+                onChange={this.handleChangeCluster}
+                value={this.state.zonecluster}
+                autoFocus
+              />
+              <FormControl variant="outlined" fullWidth>
                 <Select
                   ref="cluster"
                   fullWidth
@@ -134,34 +136,36 @@ class AssignToCluster extends Component {
                     return <option value={zoneclustername} key={index}>{zoneclustername}</option>
                   })}
                 </Select>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="clusterQuantity"
-                  label="ClusterQuantity"
-                  name="clusterQuantity"
-                  type="number"
-                  onChange={this.handleChangeQuantity}
-                  value={this.state.clusterDetails.quantityAssigned}
-                  autoFocus
-                />
+              </FormControl>
 
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="clusterProfitPercentage"
-                  label="ClusterProfitPercentage"
-                  name="clusterProfitPercentage"
-                  type="number"
-                  onChange={this.handleChangeProfitPecentage}
-                  value={this.state.clusterDetails.profitPercentage}
-                  autoFocus
-                />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="clusterQuantity"
+                label="ClusterQuantity"
+                name="clusterQuantity"
+                type="number"
+                onChange={this.handleChangeQuantity}
+                value={this.state.clusterDetails.quantityAssigned}
+                autoFocus
+              />
 
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="clusterProfitPercentage"
+                label="ClusterProfitPercentage"
+                name="clusterProfitPercentage"
+                type="number"
+                onChange={this.handleChangeProfitPecentage}
+                value={this.state.clusterDetails.profitPercentage}
+                autoFocus
+              />
+              <Link to='/view/assigned/zones'>
                 <Button
                   fullWidth
                   type="button"
@@ -172,48 +176,48 @@ class AssignToCluster extends Component {
                 >
                   Save
               </Button>
-              </FormControl>
+              </Link>
             </form>
-          </div>
-          <div className="store-requirement">
-            <h3 style={{ textAlign: "center" }}>Requirements</h3>
-            {this.state.zoneName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+        </div>
+        <div className="store-requirement">
+          <h3 style={{ textAlign: "center" }}>Requirements</h3>
+          {this.state.zoneName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+            <Typography variant="subtitle2" gutterBottom>
+              Zone name has to be greater than 5 letters
+              </Typography></div>}
+          {this.state.zoneName.length > 5 &&
+            <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
               <Typography variant="subtitle2" gutterBottom>
                 Zone name has to be greater than 5 letters
               </Typography></div>}
-            {this.state.zoneName.length > 5 &&
-              <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
-                <Typography variant="subtitle2" gutterBottom>
-                  Zone name has to be greater than 5 letters
-              </Typography></div>}
 
-          </div>
         </div>
-
-        <Fragment>
-
-          {(this.state.status === 1) ? (
-            <div>
-              <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert elevation={6} variant="filled">
-                  Price Assigned Successfully!
-            </MuiAlert>
-              </Snackbar>
-            </div>
-          ) : (<div />)}
-        </Fragment>
-        <Fragment>
-          {(this.state.status === -1) ? (
-            <div>
-              <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert severity="error" elevation={6} variant="filled">
-                  Price assign failed. Please match the requirements
-                </MuiAlert>
-              </Snackbar>
-            </div>) : (<div />)
-          }
-        </Fragment>
       </div>
+
+      <Fragment>
+
+        {(this.state.status === 1) ? (
+          <div>
+            <Snackbar open="true" autoHideDuration={2000}>
+              <MuiAlert elevation={6} variant="filled">
+                Price Assigned Successfully!
+            </MuiAlert>
+            </Snackbar>
+          </div>
+        ) : (<div />)}
+      </Fragment>
+      <Fragment>
+        {(this.state.status === -1) ? (
+          <div>
+            <Snackbar open="true" autoHideDuration={2000}>
+              <MuiAlert severity="error" elevation={6} variant="filled">
+                Price assign failed. Please match the requirements
+                </MuiAlert>
+            </Snackbar>
+          </div>) : (<div />)
+        }
+      </Fragment>
+        </div >
     );
   }
 }

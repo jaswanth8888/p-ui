@@ -5,6 +5,8 @@ import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React, { Component, Fragment } from 'react';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import { connect } from 'react-redux';
 import { getProductList, saveProductValue, getProductDetails } from '../../redux/actions/RetailerActions';
 import { Link } from 'react-router-dom';
@@ -16,13 +18,23 @@ class SelectProduct extends Component {
         super(props)
 
         this.state = {
-            productName: ""
+            productName: "",
+            status: 0
         }
         this.handleChange = this.handleChangeProduct.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.productNameNotSelected = this.productNameNotSelected.bind(this);
 
     }
 
+    productNameNotSelected() {
+        console.log(this.state.productName);
+            if (this.state.productName) {
+          this.setState({ status: 1 })
+        }
+        else {
+          this.setState({ status: -1 })
+        }
+      }
 
     componentWillMount() {
 
@@ -32,17 +44,23 @@ class SelectProduct extends Component {
     handleChangeProduct = (e, value) => {
         console.log(value);
         let productName = value;
-        //this.setState({ productName });
-        //console.log(this.state.productName)
+        this.setState({ productName });
+        console.log(this.state.productName)
         this.props.saveProductValue(productName);
         this.props.getProductDetails(value);
+        this.productNameNotSelected();
+        console.log(this.state.status);
+        
     }
 
 
-    handleSubmit(e) {
-        e.preventDefault();
-        this.setState({ isSubmitted: true })
-    }
+    // handleSubmit(e) {
+    //     e.preventDefault();
+    //     if(this.productNameNotSelected()){
+    //         this.setState({ isSubmitted: true })
+    //     }
+    // }
+    
 
     render() {
 
@@ -85,7 +103,7 @@ class SelectProduct extends Component {
                                     options={this.props.products}
                                     getOptionLabel={(option) => option}
                                     renderInput={(params) => <TextField {...params} label="Product Name" variant="outlined" />}
-                                    onChange={this.handleChangeProduct}
+                                    onChange={this.handleChange}
                                     name="productName"
                                 />
                             </FormControl>
@@ -96,6 +114,7 @@ class SelectProduct extends Component {
                             <Link to='/assigntocluster'>
                                 <Button
                                     type="button"
+                                    disabled = {this.productNameNotSelected}
                                     fullWidth
                                     variant="contained"
                                     color="primary"
@@ -106,22 +125,35 @@ class SelectProduct extends Component {
                                     </Button>
                             </Link>
 
-                            <Link to='/assigntozone'>
-                                <Button
+                            {/* <Link to='/assigntozone'> */}
+                                <Button 
                                     type="button"
+                                    disabled = {this.state.status == -1 ? false : true}
                                     fullWidth
                                     variant="contained"
                                     color="primary"
                                     className="{classes.submit} submit-pad"
+                                    onClick={this.handleSubmit}
                                     >
                                     Assign Price and Zone
+                                    <Link to='/assigntozone'>
+                                    </Link>
                                     </Button>
-                            </Link>
 
                         </form>
                     </div>
                 </div>
-        <Message/> 
+                <Fragment>
+                    {(this.state.status === -1) ? (
+                    <div>
+                    <Snackbar open="true" autoHideDuration={2000}>
+                        <MuiAlert severity="error" elevation={6} variant="filled">
+                         Please select product name
+                        </MuiAlert>
+                    </Snackbar>
+                    </div>) : (<div />)
+                    }
+                </Fragment>
             </div>
         )
     }

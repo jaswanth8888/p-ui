@@ -137,7 +137,7 @@ class AssignToZone extends Component {
                   autoFocus
                 />
 
-                <Link to='/viewassignedzones'>
+                <Link to='/view/assigned/zones'>
                   <Button
                     fullWidth
                     type="button"
