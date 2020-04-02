@@ -225,7 +225,7 @@ function FullNavbar(props) {
                   {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                 </IconButton>
               </div>
-              <Divider />giut
+              <Divider />
               <List>
                 <Link to="/products/assign">
                   <ListItem button>
@@ -275,6 +275,18 @@ function FullNavbar(props) {
                   <ListItem button>
                     <ListItemIcon><ViewListIcon /></ListItemIcon>
                     <ListItemText className="list-item-text" primary={t("welcome.viewClusters")} />
+                  </ListItem>
+                </Link>
+                <Link to="/view/assigned/zones">
+                  <ListItem button>
+                    <ListItemIcon><ViewListIcon /></ListItemIcon>
+                    <ListItemText className="list-item-text" primary={"View assigned zones"} />
+                  </ListItem>
+                </Link>
+                <Link to="/view/assigned/clusters">
+                  <ListItem button>
+                    <ListItemIcon><ViewListIcon /></ListItemIcon>
+                    <ListItemText className="list-item-text" primary={"View assigned clusters"} />
                   </ListItem>
                 </Link>
               </List>
