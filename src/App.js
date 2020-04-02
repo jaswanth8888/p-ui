@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import Navbar from './components/organisms/Navbar';
+import FullNavbar from './components/organisms/FullNavbar';
 import rootReducer from './redux/reducers/rootReducer';
 import VendorLogin from './components/vendor/VendorLogin';
 import Registration from './components/vendor/Registration'
@@ -38,7 +38,7 @@ store.subscribe(() => {
       <div>
           <Router >
                     <Switch>
-                      <Route exact={true} path="/" component={Navbar} />
+                      <Route exact={true} path="/" component={FullNavbar} />
                       <Route exact={true} path="/vendor" component={VendorLogin} />
                       <Route exact={true} path="/vendor/reg" component={Registration} />  
                       <Route exact path="/vendor/home" component={Home}/> 

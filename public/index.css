@@ -15,6 +15,8 @@
     justify-content: center;
     align-items: center;
     padding:40px;
+    width:100vw;
+    height:100vh;
 }
 
 .joint-form-assign{
@@ -38,8 +40,10 @@
 .box-container{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     padding:40px;
+    width:100vw;
+    height:100vh;
 }
 
 
@@ -53,9 +57,8 @@
     background-color: #673ab7;
 }
 
-.list-item-text{
+.MuiTypography-body1{
     color: #673ab7;
-    font-size: 12px;
 }
 
 .validations{
@@ -302,4 +305,8 @@ a{
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.MuiListItemIcon-root{
+    color: #673ab7 !important;
 }

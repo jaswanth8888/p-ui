@@ -21,7 +21,7 @@
     "viewClusters": "View Clusters",
     "addGroup": "Create Group",
     "addProducttoStore": "Add Product to Store",
-    "assignProductToClusterZone": "Assign Product to Cluster / Zone"
+    "assignProductToClusterZone": "Add Products to Zones"
   },
   "zoneForm": {
     "lengthTooShort": "Zone has to be greater than 5 letters",
