@@ -150,9 +150,12 @@ export const getZones = () => async dispatch => {
 
 export const getClusters = zone => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/location-management/" + zone + "/clusters/names", {
-      headers: { Authorization: TOKEN }
-    })
+    .get(
+      RETAILER_BASE_URL + "/location-management/" + zone + "/clusters/names",
+      {
+        headers: { Authorization: TOKEN }
+      }
+    )
     .then(res => {
       dispatch({ type: CLUSTER_GET_REQUEST, clusters: res.data });
     })
@@ -256,11 +259,10 @@ export const getStoreList = () => async dispatch => {
     });
 };
 
-export const getCategories=() => async dispatch => {
+export const getCategories = () => async dispatch => {
   await axios
     .get(RETAILER_BASE_URL + "/product-management/categories", {
       headers: { Authorization: TOKEN }
-
     })
     .then(res => {
       dispatch({ type: CATEGORIES_GET_REQUEST, categories: res.data });
@@ -272,7 +274,7 @@ export const getCategories=() => async dispatch => {
 
 export const getProducts = category => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL+"/product-management/"+ category + "/products", {
+    .get(RETAILER_BASE_URL + "/product-management/" + category + "/products", {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
@@ -282,7 +284,6 @@ export const getProducts = category => async dispatch => {
       dispatch({ type: FAILURE });
     });
 };
-
 
 export const saveZoneValue = zoneValue => dispatch => {
   dispatch({ type: ZONE_SAVE_VALUE, zone: zoneValue });
@@ -348,18 +349,26 @@ export const getStores = (zone, cluster) => async dispatch => {
     });
 };
 
-export const getProductsInRange = (fromDate,toDate,) => async dispatch => {
+export const getProductsInRange = (fromDate, toDate) => async dispatch => {
   await axios
-   .get( RETAILER_BASE_URL +"/product-management/products/data?filter=%7B%22startDate%22:%22"+fromDate+"%22,%22endDate%22:%22"+toDate+"%22%7D", {
-      headers: { Authorization: TOKEN }
-    })
+    .get(
+      RETAILER_BASE_URL +
+        "/product-management/products/data?filter=%7B%22startDate%22:%22" +
+        fromDate +
+        "%22,%22endDate%22:%22" +
+        toDate +
+        "%22%7D",
+      {
+        headers: { Authorization: TOKEN }
+      }
+    )
     .then(res => {
       dispatch({ type: PRODUCT_GET_BYRANGE, products: res.data });
     })
     .catch(err => {
       dispatch({ type: FAILURE });
-    })
-}
+    });
+};
 
 export const getProductList = () => async dispatch => {
   await axios
@@ -377,7 +386,7 @@ export const saveProductValue = productValue => dispatch => {
 
 export const getProductDetails = productName => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/product-management/product/" + productName , {
+    .get(RETAILER_BASE_URL + "/product-management/product/" + productName, {
       headers: { Authorization: TOKEN }
     })
     .then(res => {
@@ -385,20 +394,38 @@ export const getProductDetails = productName => async dispatch => {
     });
 };
 
-export const getZoneClusterNames = (clusterPattern) => async dispatch => {
+export const getZoneClusterNames = clusterPattern => async dispatch => {
   await axios
-    .get(RETAILER_BASE_URL + "/location-management/clusters/regex/"+clusterPattern , {
-      headers: { Authorization: TOKEN }
-    })
+    .get(
+      RETAILER_BASE_URL +
+        "/location-management/clusters/regex/" +
+        clusterPattern,
+      {
+        headers: { Authorization: TOKEN }
+      }
+    )
     .then(res => {
       dispatch({ type: ZONECLUSTER_GET_REQUEST, zoneclusternames: res.data });
     });
 };
 
-export const assignToCluster = (clusterDetails,zoneName, clusterName,productName) => async dispatch => {
+export const assignToCluster = (
+  clusterDetails,
+  zoneName,
+  clusterName,
+  productName
+) => async dispatch => {
   await axios
     .put(
-      RETAILER_BASE_URL +"/product-management/"+productName+"/"+zoneName+"/"+clusterName+"/products",clusterDetails,
+      RETAILER_BASE_URL +
+        "/product-management/" +
+        productName +
+        "/" +
+        zoneName +
+        "/" +
+        clusterName +
+        "/products",
+      clusterDetails,
       { headers: { Authorization: TOKEN } }
     )
     .then(res => {
@@ -409,16 +436,30 @@ export const assignToCluster = (clusterDetails,zoneName, clusterName,productName
       });
     })
     .catch(err => {
-      console.log(err)
-      console.log(err.response)
-      console.log(err.response.message)
+      console.log(err);
+      console.log(err.response);
+      console.log(err.response.message);
 
       let response = err.response;
-      if (response.status === 400 && response.data.message === "Quantity Insufficient") {
+      if (
+        response.status === 400 &&
+        response.data.message === "Quantity Insufficient"
+      ) {
         dispatch({ type: MESSAGE_SET_NULL });
         dispatch({
           type: ASSIGN_TO_CLUSTER,
           msg: "Quantity assigned is high, please enter a lower quantity",
+          msgSeverity: "error",
+          statusCode: response.status
+        });
+      } else if (
+        response.status === 400 &&
+        response.data.message === "Product price is below minimum selling price"
+      ) {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg:
+            "Profit percentage is very low, please enter a higher percentage",
           msgSeverity: "error",
           statusCode: response.status
         });
@@ -442,14 +483,24 @@ export const assignToCluster = (clusterDetails,zoneName, clusterName,productName
     });
 };
 
-export const assignToZone = (zoneDetails,zoneName,productName) => async dispatch => {
+export const assignToZone = (
+  zoneDetails,
+  zoneName,
+  productName
+) => async dispatch => {
   await axios
     .put(
-      RETAILER_BASE_URL +"/product-management/"+zoneName+"/"+productName+"/product",zoneDetails,
+      RETAILER_BASE_URL +
+        "/product-management/" +
+        zoneName +
+        "/" +
+        productName +
+        "/product",
+      zoneDetails,
       { headers: { Authorization: TOKEN } }
     )
     .then(res => {
-      console.log(res)
+      console.log(res);
       dispatch({
         type: ASSIGN_TO_ZONE,
         msg: "Product Asigned to Zone Succesfully",
@@ -457,29 +508,39 @@ export const assignToZone = (zoneDetails,zoneName,productName) => async dispatch
       });
     })
     .catch(err => {
-      console.log(err)
-      console.log(err.response)
-      console.log(err.response.message)
+      console.log(err);
+      console.log(err.response);
+      console.log(err.response.message);
 
       let response = err.response;
-      if (response.status === 400 && response.data.message === "Product is already associated with zone") {
+      if (
+        response.status === 400 &&
+        response.data.message === "Product is already associated with zone"
+      ) {
         dispatch({
           type: ASSIGN_TO_ZONE,
           msg: "Product is already associated with zone, please try again",
           msgSeverity: "error",
           statusCode: response.status
         });
-      } else if (response.status === 400 && response.data.message === "Quantity Insufficient") {
+      } else if (
+        response.status === 400 &&
+        response.data.message === "Quantity Insufficient"
+      ) {
         dispatch({
           type: ASSIGN_TO_ZONE,
           msg: "Quantity assigned is high, please enter a lower quantity",
           msgSeverity: "error",
           statusCode: response.status
         });
-      } else if (response.status === 400 && response.data.message === "Product price is below minimum selling price") {
+      } else if (
+        response.status === 400 &&
+        response.data.message === "Product price is below minimum selling price"
+      ) {
         dispatch({
           type: ASSIGN_TO_ZONE,
-          msg: "Profit percentage is very low, please enter a higher percentage",
+          msg:
+            "Profit percentage is very low, please enter a higher percentage",
           msgSeverity: "error",
           statusCode: response.status
         });
@@ -502,15 +563,24 @@ export const assignToZone = (zoneDetails,zoneName,productName) => async dispatch
     });
 };
 
-export const postPromotion = (productName, promotionDetails) => async dispatch => {
+export const postPromotion = (
+  productName,
+  promotionDetails
+) => async dispatch => {
   dispatch({ type: MESSAGE_SET_NULL });
   await axios
-    .put(RETAILER_BASE_URL+"/product-management/product/promotion/" + productName, promotionDetails, {
-      headers: { Authorization: TOKEN }
-    })
+    .put(
+      RETAILER_BASE_URL +
+        "/product-management/product/promotion/" +
+        productName,
+      promotionDetails,
+      {
+        headers: { Authorization: TOKEN }
+      }
+    )
     .then(res => {
-      console.log(res)
-      console.log(res.data.status)
+      console.log(res);
+      console.log(res.data.status);
       if (res.data.status) {
         dispatch({
           type: PROMOTION_POST_REQUEST,
@@ -519,13 +589,13 @@ export const postPromotion = (productName, promotionDetails) => async dispatch =
         });
       } else {
         dispatch({
- 
           type: PROMOTION_POST_REQUEST,
           msg: "promotion cannot not applied",
           msgSeverity: "error"
         });
       }
-    }).catch(err => {
+    })
+    .catch(err => {
       let response = err.response;
       if (response.status === 400) {
         dispatch({
@@ -549,14 +619,37 @@ export const postPromotion = (productName, promotionDetails) => async dispatch =
     });
 };
 
-export const getPricesInRange = (startDate,endDate,currentDate) => async dispatch => {
+export const getPricesInRange = (
+  startDate,
+  endDate,
+  currentDate
+) => async dispatch => {
   await axios
-   .get(
-      RETAILER_BASE_URL + "/product-management/products/data?filter=%7B%22startDate%22:%22"+startDate+"%22,%22endDate%22:%22"+endDate+"%22,%22currentDate%22:%22"+currentDate+"%22%7D", {
-      headers: { Authorization: TOKEN }
-    })
+    .get(
+      RETAILER_BASE_URL +
+        "/product-management/products/data?filter=%7B%22startDate%22:%22" +
+        startDate +
+        "%22,%22endDate%22:%22" +
+        endDate +
+        "%22,%22currentDate%22:%22" +
+        currentDate +
+        "%22%7D",
+      {
+        headers: { Authorization: TOKEN }
+      }
+    )
     .then(res => {
-      console.log(RETAILER_BASE_URL + "/product-management/products/data?filter=%7B%22startDate%22:%22"+startDate+"%22,%22endDate%22:%22"+endDate+"%22,%22currentDate%22:%22"+currentDate+"%22%7D",res.data)
+      console.log(
+        RETAILER_BASE_URL +
+          "/product-management/products/data?filter=%7B%22startDate%22:%22" +
+          startDate +
+          "%22,%22endDate%22:%22" +
+          endDate +
+          "%22,%22currentDate%22:%22" +
+          currentDate +
+          "%22%7D",
+        res.data
+      );
       dispatch({ type: PRODUCTS_GET_REQUEST, products: res.data });
     })
     .catch(err => {
@@ -564,13 +657,20 @@ export const getPricesInRange = (startDate,endDate,currentDate) => async dispatc
     });
 };
 
-export const cancelEffectivePrice = (productName,promotionId) => async dispatch => {
-  console.log(productName,promotionId);
- 
+export const cancelEffectivePrice = (
+  productName,
+  promotionId
+) => async dispatch => {
+  console.log(productName, promotionId);
+
   await axios
     .put(
       RETAILER_BASE_URL +
-      "/product-management/" + "product/" + productName + "/" + promotionId,  
+        "/product-management/" +
+        "product/" +
+        productName +
+        "/" +
+        promotionId,
       { headers: { Authorization: TOKEN } }
     )
     .then(res => {
