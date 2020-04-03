@@ -17,7 +17,7 @@ export default class ZoneClusterRouter extends Component {
         return (
 
             <Router>
-                <Redirect to='/view/assigned/clusters'/>
+                <Redirect to='/selectproduct'/>
                 <Switch>
                     <PrivateRoute exact={true} path="/selectproduct" component={SelectProduct} />
                     <PrivateRoute exact={true} path="/assigntocluster" component={AssignToCluster} />

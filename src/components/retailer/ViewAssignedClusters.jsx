@@ -21,52 +21,50 @@ class ViewAssignedClusters extends Component {
         const zoneData = this.props.productDetails.assignProduct; // Swap with the actual prop while integrating: this.props.productDetails.assignProduct
         
         const tableRowElm = zone => {
-            return (
-               zone.cluster.map(cluster => (
-                <TableRow>
-                    <TableCell>
-                        {zone.price > 0 ? (
-                            <Typography variant="subtitle1" gutterBottom>
-                                {console.log(zone.zoneName)
-                                }
-                                aaaaa
-                                {cluster.clusterName}<br />
-                                <Typography variant="subtitle1" style={{ color: "grey" }} gutterBottom>
-                                    {zone.zoneName}
-                                    
-                                </Typography>
-                            </Typography>
-                        ) : (
-                                <Typography variant="subtitle1"
-                                    gutterBottom
-                                >
-                                    {cluster.clusterName}
-                                    <Typography variant="subtitle1"
-                                        gutterBottom>
-                                        {zone.zoneName}
+            if(zone.cluster !== null && Array.isArray(zone.cluster)){
 
-                                    </Typography>
-                                </Typography>
-                            )}
+                return zone.cluster.map(cluster => (
+                  <TableRow>
+                    <TableCell>
+                      {zone.price > 0 ? (
+                        <Typography variant="subtitle1" gutterBottom>
+                          {cluster.clusterName}
+                          <br />
+                          <Typography
+                            variant="subtitle1"
+                            style={{ color: "grey" }}
+                            gutterBottom
+                          >
+                            {zone.zoneName}
+                          </Typography>
+                        </Typography>
+                      ) : (
+                        <Typography variant="subtitle1" gutterBottom>
+                          {cluster.clusterName}
+                          <Typography variant="subtitle1" gutterBottom>
+                            {zone.zoneName}
+                          </Typography>
+                        </Typography>
+                      )}
                     </TableCell>
                     <TableCell>
-                        <Typography variant="subtitle1" gutterBottom>
-                            {cluster.quantityAssigned}
-                        </Typography>
+                      <Typography variant="subtitle1" gutterBottom>
+                        {cluster.quantityAssigned}
+                      </Typography>
                     </TableCell>
                     <TableCell>
-                        <Typography variant="subtitle1" gutterBottom>
-                            {cluster.profitPercentage}
-                        </Typography>
+                      <Typography variant="subtitle1" gutterBottom>
+                        {cluster.profitPercentage}
+                      </Typography>
                     </TableCell>
                     <TableCell>
-                        <Typography variant="subtitle1" gutterBottom>
-                            {cluster.price}
-                        </Typography>
+                      <Typography variant="subtitle1" gutterBottom>
+                        {cluster.price}
+                      </Typography>
                     </TableCell>
-                </TableRow>
-               ))
-            )
+                  </TableRow>
+                ));
+            }
         }
 
         return (

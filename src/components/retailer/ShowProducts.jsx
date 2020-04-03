@@ -1,24 +1,12 @@
-import React, { Component } from "react";
-import {
-  InputLabel,
-  Select,
-  Table,
-  TextField,
-  Typography
-} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { Table, Typography } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import "./AddProducts.css";
-import "./Table.css";
+
 class ShowProducts extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +56,7 @@ class ShowProducts extends Component {
                                   Profit Percentage
                                 </TableCell>
                                 <TableCell style={{ color: "White" }}>
-                                  Price
+                                  Zones/Cluster
                                 </TableCell>
                                 <TableCell style={{ color: "White" }}>
                                   Effective price
@@ -98,7 +86,7 @@ class ShowProducts extends Component {
                                         variant="subtitle1"
                                         gutterBottom
                                       >
-                                        {promotion.price}
+                                        {promotion.zoneCluster}
                                       </Typography>
                                     </TableCell>
                                     <TableCell>

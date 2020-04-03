@@ -96,7 +96,6 @@ class QueryOnDateRange extends Component {
                                 InputLabelProps={{ shrink: true, required: true }}
                             
                             />
-                            <InputLabel htmlFor="category">End Date</InputLabel>
                             <TextField
                                 id="endDate"
                                 name="endDate"

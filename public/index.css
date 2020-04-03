@@ -19,6 +19,16 @@
     height:100vh;
 }
 
+.box-container-table{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top:60px;
+    padding:40px;
+    width:100vw;
+    height:100vh;
+}
+
 .joint-form-assign{
     margin-top:60px;
     width:850px;
@@ -284,7 +294,7 @@ a{
 
 .product-image{
     width:100%;
-    height:65%;
+    height:60%;
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -311,7 +321,7 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
-    height:10%;
+    height:20%;
     width:100%;
     padding:20px;
     overflow: scroll;

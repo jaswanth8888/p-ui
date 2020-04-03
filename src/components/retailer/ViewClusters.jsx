@@ -20,7 +20,7 @@ class ViewClusters extends Component {
 
     render() {
         return (
-            <div className="box-container-start">
+            <div className="box-container-table">
                 <TableContainer component={Paper} >
                     <Table  aria-label="a dense table">
                         <TableHead >

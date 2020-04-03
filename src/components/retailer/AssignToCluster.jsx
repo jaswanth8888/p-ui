@@ -82,11 +82,14 @@ class AssignToCluster extends Component {
       this.state.clusterName,
       this.props.productName
     );
-    this.props.history.push("/view/assigned/clusters");
   };
 
   render() {
     return (
+      <React.Fragment>
+        {this.props.statusCode === 200 ? (
+        this.props.history.push("/view/assigned/clusters")
+      ) : ( 
       <div className="box-container">
         <div className="joint-form-large">
           <ProductDetails />
@@ -174,13 +177,17 @@ class AssignToCluster extends Component {
         </div>
         <Message />
       </div>
+      )}
+      </React.Fragment>
     );
   }
 }
 
 const stateAsProps = store => ({
   zoneclusternames: store.RetailerReducer.zoneclusternames,
-  productName: store.RetailerReducer.productName
+  productName: store.RetailerReducer.productName,
+  statusCode: store.RetailerReducer.statusCode
+
 });
 
 const actionAsProps = {

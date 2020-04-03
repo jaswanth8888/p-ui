@@ -54,11 +54,14 @@ class AssignToZone extends Component {
       this.state.zoneName,
       this.props.productName
     );
-    this.props.history.push("/view/assigned/zones");
   };
 
   render() {
     return (
+      <React.Fragment>
+        {this.props.statusCode === 200 ? (
+        this.props.history.push("/view/assigned/zones")
+      ) : ( 
       <div className="box-container">
         <div className="joint-form-large">
           <ProductDetails />
@@ -138,13 +141,16 @@ class AssignToZone extends Component {
         </div>
         <Message />
       </div>
+      )} 
+      </React.Fragment>
     );
   }
 }
 
 const stateAsProps = store => ({
   zones: store.RetailerReducer.zones,
-  productName: store.RetailerReducer.productName
+  productName: store.RetailerReducer.productName,
+  statusCode: store.RetailerReducer.statusCode
 });
 
 const actionAsProps = {
