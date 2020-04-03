@@ -11,7 +11,7 @@ export const registration=(registrationdetails)=>async(dispatch)=>{
         }
     ).catch((res)=>{
         console.log("failed Registration");
-        dispatch({type:registerconstants.REGISTER_FAILURE,register_status:{registered:false,error:true,msg:"Registration Failed"}})
+        dispatch({type:registerconstants.REGISTER_FAILURE,register_status:{registered:false,error:true},msg:res.response.data.message,msgSeverity:"error"})
     })
     }
 export const postProduct = (productDetails) =>async (dispatch) => {
@@ -29,7 +29,7 @@ export const vendorlogin = (loginDetails) => async (dispatch) => {
             dispatch({ type: VENDOR_LOGIN_USER,login_status:{success:true,msg:'',data:res.data},userInfo:loginDetails})
         }
     ).catch((res)=>{
-        dispatch({type:VENDOR_LOGIN_FAILURE,login_status:{success:false,msg:"Invalid Username/password",msgSeverity:"error"},msg:"Invalid Username/password",msgSeverity:"error"}) 
+        dispatch({type:VENDOR_LOGIN_FAILURE,login_status:{success:false},msg:res.response.data.message,msgSeverity:"error"}) 
     }); 
 }
 export const vendorlogout = () => (dispatch) => {

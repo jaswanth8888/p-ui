@@ -15,7 +15,7 @@ export default (state = initialState, action = {}) => {
 
     switch (action.type) {
         case registerconstants.REGISTER_SUCCESS:
-            return { ...state,register_status:action.register_status,msg:action.msg,msgSeverity:action.msgSeverity}
+            return { ...state,register_status:action.register_status                           }
         case registerconstants.REGISTER_FAILURE:
             return { ...state,register_status:action.register_status,msg:action.msg,msgSeverity:action.msgSeverity}   
         case VENDOR_LOGIN_USER:
