@@ -6,7 +6,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getClusters, getStores, getZones, saveClusterValue, saveStoreValue, saveZoneValue } from '../../redux/actions/RetailerActions.js';
+import { getClusters, getStores, getZones, saveClusterValue, saveStoreValue, saveZoneValue } from '../../redux/actions/RetailerActions';
 
 class AddProductToStore extends Component {
 
@@ -21,6 +21,7 @@ class AddProductToStore extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        //this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeZone = this.handleChangeZone.bind(this);
         this.handleChangeCluster = this.handleChangeCluster.bind(this);
         this.handleChangeStore = this.handleChangeStore.bind(this);
@@ -49,19 +50,35 @@ class AddProductToStore extends Component {
 
     handleChangeStore(e) {
         this.setState({ store: e.target.value })
+        //this.props.setState({store:this.state.store})
         this.props.saveStoreValue(e.target.value)
     }
 
-    render() {
+    // handleSubmit(e) {
+    //   e.preventDefault();
+    //   this.setState({isSubmitted:true})
+    // }
 
+    render() {
+        //   if(this.state.isSubmitted && this.state.cluster && this.state.zone && this.state.store){
+        //   return <Redirect to='/welcome'/>
+        // }
         return (
             
-        <Fragment>
             <div className="box-container">
                 <div className="joint-form">
                     <div className="validation-half" style={{ background: "#673ab7" }}>
                         <div className="validations">
                             <h3 style={{ textAlign: "center" }}>Requirements</h3>
+                            {/* {this.state.zoneName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Zone has to be greater than 5 letters
+                </Typography></div>}
+              {this.state.zoneName.length > 5 &&
+                <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Zone has to be greater than 5 letters
+                </Typography></div>} */}
                         </div>
                     </div>
                     <div className="form-half">
@@ -72,16 +89,14 @@ class AddProductToStore extends Component {
                                         color="primary"
                                         component="h1"
                                         variant="h4"
-                                        style=
-                                        {{
-                                            fontFamily: "font-family: 'Open Sans', sans-serif;",
-                                            marginTop : "-80px"
-                                        }}>
+                                        className="help-block-h4"
+                                        id="special-add-prods-help"
+                                    >
                                         Add a Product to the Store
                                     </Typography>
                                 </div>
                             </div>
-                            <FormControl variant="outlined" fullWidth style = {{ marginTop : "30px"}}>
+                            <FormControl variant="outlined" fullWidth className="space-margin-top">
                                 <InputLabel htmlFor="outlined-age-native-simple">Zone</InputLabel>
                                 <Select
                                     fullWidth
@@ -100,7 +115,7 @@ class AddProductToStore extends Component {
                                     })}
                                 </Select>
                             </FormControl>
-                            <FormControl variant="outlined" fullWidth style = {{ marginTop : "30px"}}>
+                            <FormControl variant="outlined" fullWidth className="space-margin-top">
                                 <InputLabel htmlFor="outlined-age-native-simple">Cluster</InputLabel>
                                 <Select
                                     fullWidth
@@ -119,7 +134,7 @@ class AddProductToStore extends Component {
                                     })}
                                 </Select>
                             </FormControl>
-                            <FormControl variant="outlined" fullWidth style = {{ marginTop : "30px"}}>
+                            <FormControl variant="outlined" fullWidth className="space-margin-top">
                                 <InputLabel htmlFor="outlined-age-native-simple">Store</InputLabel>
                                 <Select
                                     fullWidth
@@ -139,39 +154,38 @@ class AddProductToStore extends Component {
                                 </Select>
                             </FormControl>
                             {( this.state.cluster !== "" && this.props.stores.length <= 0) &&
-                                <Link to='/addproducttostore'  style = {{textDecoration : "none"}}>
+                                <Link to='/addproducttostore'>
                                     <Button
                                         type="button"
                                         fullWidth
                                         variant="contained"
                                         color="primary"
-                                        className="{classes.submit}"
-                                        style={{ marginTop: "30px" }}
+                                        className="{classes.submit} submit-pad"
+                                    // onClick={this.handleSubmit}
                                     >
                                         Add Store
                                     </Button>
                                 </Link>}
                             {(this.state.store !== "" && this.state.zone !== "" && this.state.cluster !== "") ? (
-                                <Link to='/addproducts' style = {{textDecoration : "none"}}>
+                                <Link to='/addproducts'>
                                     <Button
                                         type="button"
                                         fullWidth
                                         variant="contained"
                                         color="primary"
-                                        className="{classes.submit}"
-                                        style={{ marginTop: "30px" }}
+                                        className="{classes.submit} submit-pad"                                   
                                     >
                                         Add Products
                                     </Button>
                                 </Link>) : (
-                                <Link to='/addproducts' style = {{textDecoration : "none" , opacity : 0,pointerEvents:"none"}}>
+                                <Link to='/addproducts' id="special-href">
                                     <Button
                                         type="button"
                                         fullWidth
                                         variant="contained"
                                         color="primary"
-                                        className="{classes.submit}"
-                                        style={{ marginTop: "30px" }}
+                                        className="{classes.submit} submit-pad empty-submit"
+                                    //onClick={this.handleSubmit}
                                     >
                                         Add Products
                                     </Button>
@@ -204,8 +218,6 @@ class AddProductToStore extends Component {
                     }
                 </Fragment>
             </div>
-            
-        </Fragment>
         )
     }
 }

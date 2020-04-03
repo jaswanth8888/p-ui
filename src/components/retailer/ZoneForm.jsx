@@ -1,15 +1,15 @@
 import { TextField, Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
-import MuiAlert from "@material-ui/lab/Alert";
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import MuiAlert from '@material-ui/lab/Alert';
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { postZone } from "../../redux/actions/RetailerActions.js";
-import "./ZoneForm.css";
-import Message from "../utils/Message";
-import { withTranslation } from "react-i18next";
+import { connect } from 'react-redux';
+import { postZone } from '../../redux/actions/RetailerActions';
+import Message from "../utils/Message"
+
+
 
 class ZoneForm extends Component {
   constructor(props) {
@@ -19,11 +19,15 @@ class ZoneForm extends Component {
       zoneName: "",
       liquorPricePerUnit: "",
       isSubmit: false,
-      status: 0
+      status : 0
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount(){
+    this.props.history.push("/zone")
   }
 
   handleChange(e) {
@@ -32,66 +36,54 @@ class ZoneForm extends Component {
   }
 
   handleSubmit(e) {
+
     e.preventDefault();
     let zone = {
       zoneName: this.state.zoneName,
       liquorPricePerUnit: this.state.liquorPricePerUnit
-    };
+    }
+
 
     if (this.state.zoneName.length > 5) {
-      this.props.postZone(zone);
-      this.setState({ isSubmit: true, status: 1 });
-    } else {
-      this.setState({ isSubmit: false, status: -1 });
+      this.props.postZone(zone)
+      this.setState({ isSubmit: true ,status : 1})
     }
+    else {
+      this.setState({ isSubmit: false, status : -1 })
+    }
+
   }
 
   render() {
-    const { t, i18n } = this.props;
+
     return (
       <div className="box-container">
         <div className="joint-form">
           <div className="validation-half" style={{ background: "#673ab7" }}>
             <div className="validations">
-              <h3 style={{ textAlign: "center" }}>
-                {" "}
-                {t("zoneForm.requirements")}
-              </h3>
-              {this.state.zoneName.length <= 5 && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+              <h3 style={{ textAlign: "center" }}>Requirements</h3>
+              {this.state.zoneName.length <= 5 && <div className="typo-div"><ClearIcon className="icon-style" />
+                <Typography variant="subtitle2" gutterBottom>
+                  Zone has to be greater than 5 letters
+                </Typography></div>}
+              {this.state.zoneName.length > 5 &&
+                <div className="approved-text"><CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    {t("zoneForm.lengthTooShort")}
-                  </Typography>
-                </div>
-              )}
-              {this.state.zoneName.length > 5 && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
-                  <Typography variant="subtitle2" gutterBottom>
-                    {t("zoneForm.lengthTooShort")}
-                  </Typography>
-                </div>
-              )}
+                    Zone has to be greater than 5 letters
+                </Typography></div>}
             </div>
           </div>
           <div className="form-half">
-            <form className="{classes.form}" noValidate>
+            <form className="{classes.form}" noValidate >
               <div>
                 <div className="help-block">
                   <Typography
                     color="primary"
                     component="h1"
                     variant="h4"
-                    style={{
-                      fontFamily: "font-family: 'Open Sans', sans-serif;"
-                    }}
-                  >
-                    {t("zoneForm.createZone")}
+                    className="help-block-h4"
+                    >
+                    Create a Zone
                   </Typography>
                 </div>
               </div>
@@ -101,7 +93,7 @@ class ZoneForm extends Component {
                 required
                 fullWidth
                 id="zoneName"
-                label={t("zoneForm.zoneName")}
+                label="Zone Name"
                 name="zoneName"
                 autoComplete="zoneName"
                 onChange={this.handleChange}
@@ -115,7 +107,7 @@ class ZoneForm extends Component {
                 type="number"
                 step="0.01"
                 id="liquorPricePerUnit"
-                label={t("zoneForm.pricePerUnit")}
+                label="Price Per Unit"
                 name="liquorPricePerUnit"
                 autoComplete="pricePerUnit"
                 onChange={this.handleChange}
@@ -127,27 +119,23 @@ class ZoneForm extends Component {
                 fullWidth
                 variant="contained"
                 color="primary"
-                className="{classes.submit}"
-                style={{ marginTop: "30px" }}
-                onClick={this.handleSubmit}
-              >
-                {t("zoneForm.save")}
+                className="{classes.submit} submit-pad"
+                onClick={this.handleSubmit}>
+                Save
               </Button>
             </form>
           </div>
         </div>
         <Fragment>
-          {this.state.status === -1 ? (
+          {(this.state.status === -1) ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert severity="error" elevation={6} variant="filled">
+                <MuiAlert severity="error" elevation={6} variant="filled" > 
                   Zone creation failed. Please match the requirements
                 </MuiAlert>
               </Snackbar>
-            </div>
-          ) : (
-            <div />
-          )}
+            </div>) : (<div />)
+          }
         </Fragment>
         <Message />
       </div>
@@ -157,5 +145,5 @@ class ZoneForm extends Component {
 
 const actionAsProps = {
   postZone: postZone
-};
-export default connect(null, actionAsProps)(withTranslation()(ZoneForm));
+}
+export default connect(null, actionAsProps)(ZoneForm);

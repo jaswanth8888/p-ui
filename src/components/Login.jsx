@@ -6,7 +6,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import PersonIcon from "@material-ui/icons/Person";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { login } from "../redux/actions/RetailerActions.js";
+import { login } from "../redux/actions/RetailerActions.jsx";
 import md5 from "md5";
 import { withTranslation } from "react-i18next";
 import i18n from "i18next";
@@ -87,7 +87,7 @@ class Login extends Component {
     return (
       <React.Fragment>
         {this.props.login_status.success ? (
-          this.props.history.push("/welcome")
+          this.props.history.push("/group")
         ) : (
           <Grid
             container
@@ -120,27 +120,6 @@ class Login extends Component {
                 }}
                 pt={4}
               >
-                <Box p={1}>
-                  <Avatar
-                    style={{
-                      background: "#673ab7",
-                      marginLeft: "10px",
-                      padding: "30px",
-                      position: "absolute",
-                      top: "-40px",
-                      left: "-25px",
-                      right: "0px",
-                      marginRight: "auto"
-                    }}
-                  >
-                    <LockOutlinedIcon
-                      color="white"
-                      style={{
-                        fontSize: "48px"
-                      }}
-                    />
-                  </Avatar>
-                </Box>
                 <Typography
                   color="primary"
                   component="h1"

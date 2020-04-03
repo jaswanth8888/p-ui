@@ -21,13 +21,16 @@
     "viewClusters": "CLUSTER ANZEIGEN",
     "addGroup": "Gruppe hinzufügen",
     "addProducttoStore": "Produkt zum Store hinzufügen",
-    "createGroup": "Erstellen Sie eine Gruppe"
-  },
-  "groupForm": {
-    "groupName": "Gruppenname",
-    "save": "Speichern",
-    "lengthTooShort": "Die Gruppe muss größer als 5 Buchstaben sein",
-    "requirements": "Bedarf"
+<<<<<<< HEAD
+    "queryOnDateRange":"Abfrage zum Datumsbereich"
+=======
+<<<<<<< HEAD
+    "PriceOnDate":"Preis am Datum"
+=======
+    "assignProductToClusterZone": "Produkt dem Cluster / der Zone zuweisen",
+    "cancelNotEffectivePriceChange": "Nicht effektive Preisänderung abbrechen"
+>>>>>>> feature/sprint3-dev
+>>>>>>> feature/promotion-story
   },
   "zoneForm": {
     "lengthTooShort": "Die Zone muss größer als 5 Buchstaben sein",

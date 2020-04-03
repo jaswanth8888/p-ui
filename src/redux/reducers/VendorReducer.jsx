@@ -4,6 +4,7 @@ import {registerconstants} from "../actions/registrationtypes"
 const initialState = {
     loggedInUser: null,
     msg:"",
+    msgSeverity: '',
     login_status:{
         success:false
     },
@@ -14,24 +15,20 @@ export default (state = initialState, action = {}) => {
 
     switch (action.type) {
         case registerconstants.REGISTER_SUCCESS:
-            return { ...state,register_status:action.register_status}
+            return { ...state,register_status:action.register_status                           }
         case registerconstants.REGISTER_FAILURE:
-            return { ...state,register_status:action.register_status}   
+            return { ...state,register_status:action.register_status,msg:action.msg,msgSeverity:action.msgSeverity}   
         case VENDOR_LOGIN_USER:
             // return { ...state, loggedInUser: action.userInfo };
             return { ...state, login_status: action.login_status };
         case VENDOR_LOGOUT:
-            return { ...state, loggedInUser: null }
-/*         case VENDOR_WELCOME_USER:
-           return {...state, userInfo:action.userInfo} */
+            return { ...initialState}
         case CREATE_PRODUCT:
             return { ...state, msg:action.msg}
- /*        case VENDOR_FAILURE:
-            return {...state,login_status:action.login_status} */
         case MESSAGE_SET_NULL:
-            return {...state,msg:''}
+            return { ...state, msg: '', msgSeverity: '' }
         case VENDOR_LOGIN_FAILURE:
-            return {...state,login_status:action.login_status}
+            return {...state,msg:action.msg,msgSeverity:action.msgSeverity,login_status:action.login_status}
         default:
         return {...state}
     }

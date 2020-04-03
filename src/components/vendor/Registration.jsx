@@ -4,8 +4,10 @@ import Button from '@material-ui/core/Button';
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { connect } from "react-redux";
 import { render } from "@testing-library/react";
-import { registration } from "../../redux/actions/VendorActions.js";
+import { registration } from "../../redux/actions/VendorActions.jsx";
 import md5 from 'md5'
+import Message from './Message'
+
 const categoryList=['Baby','Liquor'];
 export class Registration extends Component{
     constructor(props){
@@ -159,6 +161,7 @@ export class Registration extends Component{
         <div>
           {this.props.register_status.registered ? (
             (console.log("successfully registered"))
+            
           ):
           (
 
@@ -292,7 +295,9 @@ export class Registration extends Component{
                 </Button>
               </form>
             </Grid>
+            <Message/>
           </Grid>
+
            )} 
         </div>
     );

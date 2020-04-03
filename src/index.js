@@ -17,13 +17,16 @@ let theme = createMuiTheme({
     primary: deepPurple,
     secondary: amber
   }
+  // typography: {
+  //     fontFamily: "'Open Sans Condensed', sans-serif, 'Open Sans', sans-serif",
+  // },
 });
 
 theme = responsiveFontSizes(theme);
 ReactDOM.render(
   <Suspense fallback={<div>Loading</div>}>
     <MuiThemeProvider theme={theme}>
-    <App />
+    <App></App>
     </MuiThemeProvider>
   </Suspense>,
   

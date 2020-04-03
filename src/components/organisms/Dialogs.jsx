@@ -31,12 +31,16 @@ export default function Dialogs() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
 
+    // const handleClickOpen = () => {
+    //   setOpen(true);
+    // };
+
     const handleClose = () => {
         setOpen(false);
     };
 
     return (
-        <React.Fragment>
+        <div>
             <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
                 <AppBar className={classes.appBar}>
                     <Toolbar>
@@ -61,6 +65,6 @@ export default function Dialogs() {
                     </ListItem>
                 </List>
             </Dialog>
-        </React.Fragment>
+        </div>
     );
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import connect from 'react-redux/es/connect/connect'
-import {messageSetNull} from '../../redux/actions/RetailerActions'
+import {messageSetNull} from '../../redux/actions/VendorActions'
 import MuiAlert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 
@@ -36,8 +36,8 @@ class Message extends Component {
 }
 
 const stateAsProps = (store) => ({
-    msg: store.RetailerReducer.msg,
-    msgSeverity: store.RetailerReducer.msgSeverity
+    msg: store.VendorReducer.msg,
+    msgSeverity: store.VendorReducer.msgSeverity
 });
 const actionsAsProps = {
     messageSetNull: messageSetNull

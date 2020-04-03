@@ -9,11 +9,9 @@ export const registration=(registrationdetails)=>async(dispatch)=>{
             dispatch({type:registerconstants.REGISTER_SUCCESS,register_status:{registered:true,msg:""}})
 
         }
-
-
     ).catch((res)=>{
         console.log("failed Registration");
-        dispatch({type:registerconstants.REGISTER_FAILURE,register_status:{registered:false,error:true,msg:"Registration Failed"}})
+        dispatch({type:registerconstants.REGISTER_FAILURE,register_status:{registered:false,error:true},msg:res.response.data.message,msgSeverity:"error"})
     })
     }
 export const postProduct = (productDetails) =>async (dispatch) => {
@@ -21,9 +19,6 @@ export const postProduct = (productDetails) =>async (dispatch) => {
         alert("added sucessfuly")
         dispatch({type:CREATE_PRODUCT, msg:"Product Added Succesfully"}) 
     }).catch((err)=>{
-        console.log(productDetails)
-        alert(err)
-        console.log(productDetails)
         dispatch({type:CREATE_PRODUCT, msg:"Sorry try again"}) 
     });
 }
@@ -31,18 +26,15 @@ export const vendorlogin = (loginDetails) => async (dispatch) => {
         await axios.post(RETAILER_BASE_URL+'/vendor/authenticate',loginDetails).then(
         (res)=>{
             sessionStorage.setItem("token",res.data['jwt'])
-            dispatch({ type: VENDOR_LOGIN_USER,login_status:{success:true,errorMsg:'',data:res.data},userInfo:loginDetails})
+            dispatch({ type: VENDOR_LOGIN_USER,login_status:{success:true,msg:'',data:res.data},userInfo:loginDetails})
         }
     ).catch((res)=>{
-            console.log(loginDetails,res)
-            alert("invalid ")
-        dispatch({type:VENDOR_LOGIN_FAILURE,login_status:{success:false,errorMsg:"Invalid Username/password"}}) 
+        dispatch({type:VENDOR_LOGIN_FAILURE,login_status:{success:false},msg:res.response.data.message==="Access Denied" ? "Invalid Username/Password" :res.response.data.message,msgSeverity:"error"}) 
     }); 
 }
 export const vendorlogout = () => (dispatch) => {
     dispatch({ type: VENDOR_LOGOUT });
 }
-export const vendormessageSetNull=() =>(dispatch) =>{
-    dispatch({type:MESSAGE_SET_NULL})
-}
-
+export const messageSetNull = () => dispatch => {
+    dispatch({ type: MESSAGE_SET_NULL });
+  };
