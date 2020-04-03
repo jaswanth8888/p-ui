@@ -29,7 +29,7 @@ export const vendorlogin = (loginDetails) => async (dispatch) => {
             dispatch({ type: VENDOR_LOGIN_USER,login_status:{success:true,msg:'',data:res.data},userInfo:loginDetails})
         }
     ).catch((res)=>{
-        dispatch({type:VENDOR_LOGIN_FAILURE,login_status:{success:false},msg:res.response.data.message,msgSeverity:"error"}) 
+        dispatch({type:VENDOR_LOGIN_FAILURE,login_status:{success:false},msg:res.response.data.message==="Access Denied" ? "Invalid Username/Password" :res.response.data.message,msgSeverity:"error"}) 
     }); 
 }
 export const vendorlogout = () => (dispatch) => {
