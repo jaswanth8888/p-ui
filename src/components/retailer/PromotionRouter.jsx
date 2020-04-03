@@ -8,27 +8,15 @@ export default class PromotionRouter extends Component {
     
     render() {
         return (
-<<<<<<< HEAD
-            <div>
-                <Router>
-                    <Redirect to='/selectproduct'/>
-                    <Switch>
-                        <PrivateRoute exact={true} path="/selectproduct" component={PriceOnDate} />
-                        <PrivateRoute exact={true} path="/addpromotion" component={Promotion} />
-                    </Switch>
-                </Router>
-            </div>
-=======
 
             <Router>
-                <Redirect to='/selectproduct'/>
+                <Redirect to='/selectproductname'/>
                 <Switch>
-                    <PrivateRoute exact={true} path="/selectproduct" component={PriceOnDate} />
+                    <PrivateRoute exact={true} path="/selectproductname" component={PriceOnDate} />
                     <PrivateRoute exact={true} path="/addpromotion" component={Promotion} />
                 </Switch>
             </Router>
 
->>>>>>> feature/sprint3-dev
         )
     }
 }

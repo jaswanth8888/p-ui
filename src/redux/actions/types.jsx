@@ -50,6 +50,7 @@ export const PROMOTION_POST_REQUEST="PROMOTION_POST_REQUEST"
 export const ZONECLUSTER_GET_REQUEST="ZONECLUSTER_GET_REQUEST";
 export const ASSIGN_TO_CLUSTER="ASSIGN_TO_CLUSTER";
 export const ASSIGN_TO_ZONE="ASSIGN_TO_ZONE";
+export const RESET_STATUS_CODE="RESET_STATUS_CODE";
 
 
 export const TOKEN='BearerR '+sessionStorage.getItem("token");

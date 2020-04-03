@@ -14,6 +14,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import MenuIcon from "@material-ui/icons/Menu";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
+import LocationCityIcon from "@material-ui/icons/LocationCity";
 import clsx from "clsx";
 import { default as React, Fragment } from "react";
 import { useTranslation } from "react-i18next";
@@ -31,6 +32,7 @@ import StoreForm from "../retailer/StoreForm.jsx";
 import ViewClusters from "../retailer/ViewClusters.jsx";
 import ViewZones from "../retailer/ViewZones.jsx";
 import ZoneClusterRouter from "../retailer/ZoneClusterRouter.jsx";
+import PromotionRouter from "../retailer/PromotionRouter.jsx";
 import QueryOnDateRouter from "../retailer/QueryOnDateRouter.jsx";
 import ZoneForm from "../retailer/ZoneForm.jsx";
 import { connect } from "react-redux";
@@ -40,7 +42,7 @@ import Tab from "@material-ui/core/Tab";
 import Login from "../Login";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
-import EffectivePriceRouter from '../retailer/EffectivePriceRouter.jsx';
+import EffectivePriceRouter from "../retailer/EffectivePriceRouter.jsx";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import ViewListIcon from "@material-ui/icons/ViewList";
@@ -51,6 +53,11 @@ import LocalBarIcon from "@material-ui/icons/LocalBar";
 import Tooltip from "@material-ui/core/Tooltip";
 import ViewAssignedZones from "../retailer/ViewAssignedZones.jsx";
 import ViewAssignedClusters from "../retailer/ViewAssignedClusters.jsx";
+import DateRangeIcon from "@material-ui/icons/DateRange";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
+import StoreIcon from "@material-ui/icons/Store";
+import EventBusyIcon from "@material-ui/icons/EventBusy";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -178,35 +185,45 @@ function FullNavbar(props) {
           })}
         >
           <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, {
-                [classes.hide]: open
-              })}
-            >
-              <MenuIcon />
-            </IconButton>
-            <StyledTab
-              label={t("header.home")}
-              {...a11yProps(0)}
-              component={Link}
-              to="/group"
-            />
+            {sessionStorage.getItem("token") &&
+              sessionStorage.getItem("token").length > 10 ? (
+                <Fragment>
+                  <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleDrawerOpen}
+                    edge="start"
+                    className={clsx(classes.menuButton, {
+                      [classes.hide]: open
+                    })}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                  <StyledTab
+                    label={t("header.home")}
+                    {...a11yProps(0)}
+                    component={Link}
+                    to="/group"
+                  />
 
-            <Link to="/" style={{ marginLeft: "auto", color: "white" }}>
-              <StyledTab
-                label={t("header.logOut")}
-                {...a11yProps(2)}
-                onClick={() => {
-                  sessionStorage.removeItem("token");
-                  sessionStorage.removeItem("reduxstate");
-                  props.logout();
-                }}
-              ></StyledTab>
-            </Link>
+                  <Link to="/" style={{ marginLeft: "auto", color: "white" }}>
+                    <StyledTab
+                      label={t("header.logOut")}
+                      {...a11yProps(2)}
+                      onClick={() => {
+                        sessionStorage.removeItem("token");
+                        props.logout();
+                      }}
+                    ></StyledTab>
+                  </Link>
+                </Fragment>
+              ): (
+                <StyledTab
+                    label={t("header.home")}
+                    {...a11yProps(0)}
+                    component={Link}
+                  />
+              )}
           </Toolbar>
         </AppBar>
         {sessionStorage.getItem("token") &&
@@ -238,12 +255,12 @@ function FullNavbar(props) {
               <List>
                 <Link to="/products/assign">
                   <Tooltip
-                    title="Add Products to Clusters or Zones"
+                    title="Assign Price to Zone/Cluster"
                     placement="right"
                   >
                     <ListItem button>
                       <ListItemIcon>
-                        <LocalBarIcon />
+                        <AddShoppingCartIcon />
                       </ListItemIcon>
                       <ListItemText
                         className="list-item-text"
@@ -254,13 +271,10 @@ function FullNavbar(props) {
                 </Link>
 
                 <Link to="/products/store">
-                  <Tooltip
-                    title="Add Products to Store"
-                    placement="right"
-                  >
+                  <Tooltip title="Add Products to Store" placement="right">
                     <ListItem button>
                       <ListItemIcon>
-                        <LocalBarIcon />
+                        <AddShoppingCartIcon />
                       </ListItemIcon>
                       <ListItemText
                         className="list-item-text"
@@ -270,12 +284,23 @@ function FullNavbar(props) {
                   </Tooltip>
                 </Link>
 
+                <Link to="/selectproductname">
+                  <Tooltip title="Price on Date" placement="right">
+                    <ListItem button>
+                      <ListItemIcon>
+                        <AttachMoneyIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={"Price on Date"}
+                      />
+                    </ListItem>
+                  </Tooltip>
+                </Link>
+
                 <Divider />
                 <Link to="/group">
-                  <Tooltip
-                    title="Create a Group"
-                    placement="right"
-                  >
+                  <Tooltip title="Create a Group" placement="right">
                     <ListItem button>
                       <ListItemIcon>
                         <GroupIcon />
@@ -288,10 +313,7 @@ function FullNavbar(props) {
                   </Tooltip>
                 </Link>
                 <Link to="/zone">
-                  <Tooltip
-                    title="Create a Zone"
-                    placement="right"
-                  >
+                  <Tooltip title="Create a Zone" placement="right">
                     <ListItem button>
                       <ListItemIcon>
                         <PublicIcon />
@@ -304,13 +326,10 @@ function FullNavbar(props) {
                   </Tooltip>
                 </Link>
                 <Link to="/cluster">
-                  <Tooltip
-                    title="Create a Cluster"
-                    placement="right"
-                  >
+                  <Tooltip title="Create a Cluster" placement="right">
                     <ListItem button>
                       <ListItemIcon>
-                        <PublicIcon />
+                        <LocationCityIcon />
                       </ListItemIcon>
                       <ListItemText
                         className="list-item-text"
@@ -320,13 +339,10 @@ function FullNavbar(props) {
                   </Tooltip>
                 </Link>
                 <Link to="/store">
-                  <Tooltip
-                    title="Create a Store"
-                    placement="right"
-                  >
+                  <Tooltip title="Create a Store" placement="right">
                     <ListItem button>
                       <ListItemIcon>
-                        <ShoppingCartIcon />
+                        <StoreIcon />
                       </ListItemIcon>
                       <ListItemText
                         className="list-item-text"
@@ -336,14 +352,41 @@ function FullNavbar(props) {
                   </Tooltip>
                 </Link>
                 <Divider />
-                <Link to="/view/zones">
+                <Link to="/view/products/daterange">
                   <Tooltip
-                    title="View Zones"
+                    title="Cancel Effective Price Range"
                     placement="right"
                   >
                     <ListItem button>
                       <ListItemIcon>
-                        <ViewListIcon />
+                        <EventBusyIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={"Cancel Effective Price"}
+                      />
+                    </ListItem>
+                  </Tooltip>
+                </Link>
+                <Link to="/queryondaterange">
+                  <Tooltip title="Query on Date Range" placement="right">
+                    <ListItem button>
+                      <ListItemIcon>
+                        <DateRangeIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={"Query on Date Range"}
+                      />
+                    </ListItem>
+                  </Tooltip>
+                </Link>
+                <Divider />
+                <Link to="/view/zones">
+                  <Tooltip title="View Zones" placement="right">
+                    <ListItem button>
+                      <ListItemIcon>
+                        <FormatListBulletedIcon />
                       </ListItemIcon>
                       <ListItemText
                         className="list-item-text"
@@ -353,81 +396,14 @@ function FullNavbar(props) {
                   </Tooltip>
                 </Link>
                 <Link to="/view/clusters">
-                  <Tooltip
-                    title="View Clusters"
-                    placement="right"
-                  >
+                  <Tooltip title="View Clusters" placement="right">
                     <ListItem button>
                       <ListItemIcon>
-                        <ViewListIcon />
+                        <FormatListBulletedIcon />
                       </ListItemIcon>
                       <ListItemText
                         className="list-item-text"
                         primary={t("welcome.viewClusters")}
-                      />
-                    </ListItem>
-                  </Tooltip>
-                </Link>
-                <Link to="/view/products/daterange">
-                  <Tooltip
-                    title="Cancel Effective Price Range"
-                    placement="right"
-                  >
-                    <ListItem button>
-                      <ListItemIcon>
-                        <ViewListIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        className="list-item-text"
-                        primary={"Cancel Effective Price"}
-                      />
-                    </ListItem>
-                  </Tooltip>
-                </Link>
-                <Link to="queryondaterange">
-                  <Tooltip
-                    title="Query on Date Range"
-                    placement="right"
-                  >
-                    <ListItem button>
-                      <ListItemIcon>
-                        <ViewListIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        className="list-item-text"
-                        primary={"Query on Date Range"}
-                      />
-                    </ListItem>
-                  </Tooltip>
-                </Link>
-                <Link to="/view/assigned/clusters">
-                  <Tooltip
-                    title="View Assigned Clusters"
-                    placement="right"
-                  >
-                    <ListItem button>
-                      <ListItemIcon>
-                        <ViewListIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        className="list-item-text"
-                        primary={"View Assigned Clusters"}
-                      />
-                    </ListItem>
-                  </Tooltip>
-                </Link>
-                <Link to="/view/assigned/zones">
-                  <Tooltip
-                    title="View Assigned Zones"
-                    placement="right"
-                  >
-                    <ListItem button>
-                      <ListItemIcon>
-                        <ViewListIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        className="list-item-text"
-                        primary={"View Assigned Zones"}
                       />
                     </ListItem>
                   </Tooltip>
@@ -492,13 +468,13 @@ function FullNavbar(props) {
           />
           <Route
             exact
-            path="/view/assigned/clusters"
-            render={props => <ViewAssignedClusters {...props} />}
+            path="/queryondaterange"
+            render={props => <QueryOnDateRouter {...props} />}
           />
           <Route
             exact
-            path="/view/assigned/zones"
-            render={props => <ViewAssignedZones {...props} />}
+            path="/selectproductname"
+            render={props => <PromotionRouter {...props} />}
           />
         </Switch>
       </Router>

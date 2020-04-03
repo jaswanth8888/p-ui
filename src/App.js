@@ -7,8 +7,8 @@ import FullNavbar from './components/organisms/FullNavbar';
 import rootReducer from './redux/reducers/rootReducer';
 import VendorLogin from './components/vendor/VendorLogin';
 import Registration from './components/vendor/Registration'
-import Home from './components/vendor/Home';
-import Addproduct from './components/vendor/AddProduct';
+import Home from './components/vendor/Home.jsx';
+import Addproduct from './components/vendor/AddProduct.jsx';
 import { BrowserRouter as Router,Route, Switch} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 let state = window.sessionStorage.reduxstate;

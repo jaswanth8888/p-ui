@@ -6,7 +6,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getProductDetails } from "../../redux/actions/RetailerActions";
+import { getProductDetails, resetStatusCode } from "../../redux/actions/RetailerActions";
 import ProductDetails from "../utils/ProductDetails";
 
 class ViewAssignedZones extends Component {
@@ -28,6 +28,7 @@ class ViewAssignedZones extends Component {
         return (
 
             <div className="box-container-start">
+                {this.props.resetStatusCode()}
                 <div className="">
                     <ProductDetails></ProductDetails>
                 </div>
@@ -83,7 +84,8 @@ const stateAsProps = (store) => ({
     productName: store.RetailerReducer.productName
 });
 const actionAsProps = {
-    getProductDetails: getProductDetails
+    getProductDetails: getProductDetails,
+    resetStatusCode: resetStatusCode
 
 }
 export default connect(stateAsProps, actionAsProps)(ViewAssignedZones);

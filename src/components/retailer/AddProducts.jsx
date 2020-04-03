@@ -128,7 +128,7 @@ class AddProducts extends Component {
           className="product-form-body"
           
         >
-          <form id="productform">
+          <form className="productform">
             <TableContainer component={Paper}>
               <Table size="small" aria-label="a dense table">
                 <TableHead
