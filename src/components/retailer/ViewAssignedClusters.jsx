@@ -6,29 +6,75 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getProductDetails } from "../../redux/actions/RetailerActions";
+import { getProductDetails, resetStatusCode } from "../../redux/actions/RetailerActions";
 import ProductDetails from "../utils/ProductDetails";
 
 class ViewAssignedClusters extends Component {
     constructor(props) {
         super(props)
-
-        this.state = {
-
-        }
+        this.state = {}
     }
 
     render() {
 
-        return (
 
+        const zoneData = this.props.productDetails.assignProduct; // Swap with the actual prop while integrating: this.props.productDetails.assignProduct
+        
+        const tableRowElm = zone => {
+            return (
+               zone.cluster.map(cluster => (
+                <TableRow>
+                    <TableCell>
+                        {zone.price > 0 ? (
+                            <Typography variant="subtitle1" gutterBottom>
+                                {console.log(zone.zoneName)
+                                }
+                                aaaaa
+                                {cluster.clusterName}<br />
+                                <Typography variant="subtitle1" style={{ color: "grey" }} gutterBottom>
+                                    {zone.zoneName}
+                                    
+                                </Typography>
+                            </Typography>
+                        ) : (
+                                <Typography variant="subtitle1"
+                                    gutterBottom
+                                >
+                                    {cluster.clusterName}
+                                    <Typography variant="subtitle1"
+                                        gutterBottom>
+                                        {zone.zoneName}
+
+                                    </Typography>
+                                </Typography>
+                            )}
+                    </TableCell>
+                    <TableCell>
+                        <Typography variant="subtitle1" gutterBottom>
+                            {cluster.quantityAssigned}
+                        </Typography>
+                    </TableCell>
+                    <TableCell>
+                        <Typography variant="subtitle1" gutterBottom>
+                            {cluster.profitPercentage}
+                        </Typography>
+                    </TableCell>
+                    <TableCell>
+                        <Typography variant="subtitle1" gutterBottom>
+                            {cluster.price}
+                        </Typography>
+                    </TableCell>
+                </TableRow>
+               ))
+            )
+        }
+
+        return (
             <div className="box-container-start">
+                {this.props.resetStatusCode()}
                 <div className="">
                     <ProductDetails></ProductDetails>
                 </div>
-
-                {console.log(this.props.productDetails)}
-
                 <TableContainer component={Paper}>
                     <Table aria-label="a dense table">
                         <TableHead>
@@ -40,68 +86,9 @@ class ViewAssignedClusters extends Component {
                             </TableRow>
                         </TableHead>
                         <tbody>
-                            {this.props.productDetails.assignProduct.map((zone) => {
-
-                                if (zone.cluster !== null) {
-                                    {
-                                        {
-                                            console.log(zone.cluster);
-
-                                        }
-                                        zone.cluster.map((clusterObject) => {
-                                            { console.log(clusterObject); }
-                                            return (
-                                                <TableRow>
-                                                    
-                                                        <TableCell>
-                                                            {zone.price > 0 ? (
-                                                                <Typography variant="subtitle1" gutterBottom>
-                                                                    {console.log(zone.zoneName)
-                                                                    }
-                                                                    aaaaa
-                                                                    {clusterObject.clusterName}<br />
-                                                                    <Typography variant="subtitle1" style={{ color: "grey" }} gutterBottom>
-                                                                        {zone.zoneName}
-                                                                        
-                                                                    </Typography>
-                                                                </Typography>
-                                                            ) : (
-                                                                    <Typography variant="subtitle1"
-                                                                        gutterBottom
-                                                                    >
-                                                                        {clusterObject.clusterName}
-                                                                        <Typography variant="subtitle1"
-                                                                            gutterBottom>
-                                                                            {zone.zoneName}
-
-                                                                        </Typography>
-                                                                    </Typography>
-                                                                )}
-                                                        </TableCell>
-
-                                                        <TableCell>
-                                                            <Typography variant="subtitle1" gutterBottom>
-                                                                {clusterObject.quantityAssigned}
-                                                            </Typography>
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            <Typography variant="subtitle1" gutterBottom>
-                                                                {clusterObject.profitPercentage}
-                                                            </Typography>
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            <Typography variant="subtitle1" gutterBottom>
-                                                                {clusterObject.price}
-                                                            </Typography>
-                                                        </TableCell>
-                                                    
-
-                                                </TableRow>
-                                            );
-                                        })
-                                    }
-                                }
-                            })}
+                            {zoneData.map((zone) => (
+                                tableRowElm(zone)
+                            ))}
                         </tbody>
                     </Table>
                 </TableContainer>
@@ -111,14 +98,13 @@ class ViewAssignedClusters extends Component {
 }
 
 
-
-
 const stateAsProps = (store) => ({
     productDetails: store.RetailerReducer.productDetails,
     productName: store.RetailerReducer.productName
 });
 const actionAsProps = {
-    getProductDetails: getProductDetails
+    getProductDetails: getProductDetails,
+    resetStatusCode: resetStatusCode
 
 }
 
