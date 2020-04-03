@@ -22,7 +22,7 @@ class ViewZones extends Component {
 
         return (
             
-            <div className="box-container-start">
+            <div className="box-container-table">
                 {/* <div className="">
                     <ProductDetails></ProductDetails>
                 </div> */}

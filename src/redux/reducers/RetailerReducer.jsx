@@ -27,7 +27,8 @@ import {
     ZONECLUSTER_GET_REQUEST,
     ASSIGN_TO_CLUSTER,
     ASSIGN_TO_ZONE,
-    PRODUCT_GET_BYRANGE
+    PRODUCT_GET_BYRANGE,
+    RESET_STATUS_CODE
 } from "../actions/types";
 
 const initialState = {
@@ -48,12 +49,13 @@ const initialState = {
     isvendor: false,
     zoneList: {},
     clusterList: {},
-    productList: ["BabyOil"],
+    productList: [],
     productName: "",
     updatedPrice: "",
-    productDetails:{},
-    promotionDetails:{},
-    zoneclusternames:[]
+    productDetails: {},
+    promotionDetails: {},
+    zoneclusternames: [],
+    statusCode: ''
 };
 export default (state = initialState, action = {}) => {
 
@@ -91,7 +93,7 @@ export default (state = initialState, action = {}) => {
         case CATEGORIES_GET_REQUEST:
             return { ...state, categories: action.categories }
         case PRODUCTS_GET_REQUEST:
-            return {...state,products:action.products}
+            return { ...state, products: action.products }
         case PRODUCT_GET_BYRANGE:
             return { ...state, products: action.products }
         case ZONE_SAVE_VALUE:
@@ -109,14 +111,18 @@ export default (state = initialState, action = {}) => {
         case PRODUCT_GET_REQUEST:
             return { ...state, productDetails: action.productDetails }
         case PROMOTION_POST_REQUEST:
-            return { ...state, promotionDetails: action.promotionDetails,
-                 msg: action.msg, msgSeverity: action.msgSeverity }
+            return {
+                ...state, promotionDetails: action.promotionDetails,
+                msg: action.msg, msgSeverity: action.msgSeverity
+            }
         case ZONECLUSTER_GET_REQUEST:
             return { ...state, zoneclusternames: action.zoneclusternames }
         case ASSIGN_TO_CLUSTER:
-            return { ...state, msg:action.msg, msgSeverity: action.msgSeverity  }
+            return { ...state, msg: action.msg, msgSeverity: action.msgSeverity, statusCode: action.statusCode }
         case ASSIGN_TO_ZONE:
-            return { ...state, msg:action.msg, msgSeverity: action.msgSeverity  }
+            return { ...state, msg: action.msg, msgSeverity: action.msgSeverity, statusCode: action.statusCode }
+        case RESET_STATUS_CODE:
+            return { ...state, statusCode: ''}
         default:
             return { ...state }
     }
