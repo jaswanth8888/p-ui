@@ -185,35 +185,45 @@ function FullNavbar(props) {
           })}
         >
           <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, {
-                [classes.hide]: open
-              })}
-            >
-              <MenuIcon />
-            </IconButton>
-            <StyledTab
-              label={t("header.home")}
-              {...a11yProps(0)}
-              component={Link}
-              to="/group"
-            />
+            {sessionStorage.getItem("token") &&
+              sessionStorage.getItem("token").length > 10 ? (
+                <Fragment>
+                  <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleDrawerOpen}
+                    edge="start"
+                    className={clsx(classes.menuButton, {
+                      [classes.hide]: open
+                    })}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                  <StyledTab
+                    label={t("header.home")}
+                    {...a11yProps(0)}
+                    component={Link}
+                    to="/group"
+                  />
 
-            <Link to="/" style={{ marginLeft: "auto", color: "white" }}>
-              <StyledTab
-                label={t("header.logOut")}
-                {...a11yProps(2)}
-                onClick={() => {
-                  sessionStorage.removeItem("token");
-                  sessionStorage.removeItem("reduxstate");
-                  props.logout();
-                }}
-              ></StyledTab>
-            </Link>
+                  <Link to="/" style={{ marginLeft: "auto", color: "white" }}>
+                    <StyledTab
+                      label={t("header.logOut")}
+                      {...a11yProps(2)}
+                      onClick={() => {
+                        sessionStorage.removeItem("token");
+                        props.logout();
+                      }}
+                    ></StyledTab>
+                  </Link>
+                </Fragment>
+              ): (
+                <StyledTab
+                    label={t("header.home")}
+                    {...a11yProps(0)}
+                    component={Link}
+                  />
+              )}
           </Toolbar>
         </AppBar>
         {sessionStorage.getItem("token") &&
@@ -245,7 +255,7 @@ function FullNavbar(props) {
               <List>
                 <Link to="/products/assign">
                   <Tooltip
-                    title="Add Products to Clusters or Zones"
+                    title="Assign Price to Zone/Cluster"
                     placement="right"
                   >
                     <ListItem button>
