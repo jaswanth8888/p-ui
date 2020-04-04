@@ -25,30 +25,30 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom"
-import ZoneForm from "../retailer/ZoneForm.jsx";
-import { connect } from "react-redux";
-import { logout } from "../../redux/actions/RetailerActions";
+import { connect } from "react-redux"
 
 import Tab from "@material-ui/core/Tab"
-import PropTypes from "prop-types";
-import Box from "@material-ui/core/Box";
-import EffectivePriceRouter from "../retailer/EffectivePriceRouter.jsx";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import ViewListIcon from "@material-ui/icons/ViewList";
-import GroupIcon from "@material-ui/icons/Group";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import PublicIcon from "@material-ui/icons/Public";
-import LocalBarIcon from "@material-ui/icons/LocalBar";
-import Tooltip from "@material-ui/core/Tooltip";
-import ViewAssignedZones from "../retailer/ViewAssignedZones.jsx";
-import ViewAssignedClusters from "../retailer/ViewAssignedClusters.jsx";
-import DateRangeIcon from "@material-ui/icons/DateRange";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
-import StoreIcon from "@material-ui/icons/Store";
-import EventBusyIcon from "@material-ui/icons/EventBusy";
-import QueryOnDateRouter from "../retailer/QueryOnDateRouter.jsx";
+import PropTypes from "prop-types"
+import Box from "@material-ui/core/Box"
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
+import ViewListIcon from "@material-ui/icons/ViewList"
+import GroupIcon from "@material-ui/icons/Group"
+import GroupAddIcon from "@material-ui/icons/GroupAdd"
+import PublicIcon from "@material-ui/icons/Public"
+import LocalBarIcon from "@material-ui/icons/LocalBar"
+import Tooltip from "@material-ui/core/Tooltip"
+import DateRangeIcon from "@material-ui/icons/DateRange"
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney"
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted"
+import StoreIcon from "@material-ui/icons/Store"
+import EventBusyIcon from "@material-ui/icons/EventBusy"
+import ViewAssignedClusters from "../retailer/ViewAssignedClusters.jsx"
+import ViewAssignedZones from "../retailer/ViewAssignedZones.jsx"
+import EffectivePriceRouter from "../retailer/EffectivePriceRouter.jsx"
+import { logout } from "../../redux/actions/RetailerActions"
+import ZoneForm from "../retailer/ZoneForm.jsx"
+import QueryOnDateRouter from "../retailer/QueryOnDateRouter.jsx"
 import PromotionRouter from "../retailer/PromotionRouter.jsx"
 import ZoneClusterRouter from "../retailer/ZoneClusterRouter.jsx"
 import ViewZones from "../retailer/ViewZones.jsx"

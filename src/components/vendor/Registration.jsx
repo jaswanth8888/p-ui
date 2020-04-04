@@ -16,8 +16,8 @@ import Button from "@material-ui/core/Button"
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import { connect } from "react-redux"
 import { render } from "@testing-library/react"
-import md5 from 'md5'
-import { registration } from "../../redux/actions/VendorActions.js";
+import md5 from "md5"
+import { registration } from "../../redux/actions/VendorActions.js"
 import Message from "./Message"
 
 const categoryList = ["Baby", "Liquor"]
@@ -52,16 +52,18 @@ export class Registration extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleCheckedInput = this.handleCheckedInput.bind(this)
   }
+
   handleChange(e) {
     const { name, value } = e.target
-    let vender_details = this.state.vender_details
+    const { vender_details } = this.state
     vender_details[name] = value
     this.setState({ vender_details })
   }
+
   handleCheckedInput(e) {
     e.preventDefault()
     const { checked, value } = e.target
-    let productSold = this.state.vender_details.productSold
+    const { productSold } = this.state.vender_details
     if (checked) {
       productSold.push(value)
     } else {
@@ -69,14 +71,15 @@ export class Registration extends Component {
     }
     this.setState({ productSold })
   }
+
   remove_attribute = () => {
     this.setState({
       vender_details: this.state.vender_details.filter(
         (item) => item != "confirmPassword"
-      )
+      ),
     })
-
   }
+
   handleSubmit(e) {
     e.preventDefault()
     if (
@@ -87,19 +90,20 @@ export class Registration extends Component {
       this.is_validCheckBox()
     ) {
       delete this.state.vender_details.confirmPassword
-      let vender_details = { ...this.state.vender_details }
+      const vender_details = { ...this.state.vender_details }
       vender_details.password = md5(vender_details.password)
       this.props.registration({ ...this.state.vender_details })
       console.log(this.state.vender_details)
-      let submitted = this.state.submitted
+      let { submitted } = this.state
       submitted = true
       this.setState({ submitted })
       console.log(submitted)
     }
   }
+
   is_validPassword = () => {
-    let password = this.state.vender_details.password
-    let error = this.state.error
+    const { password } = this.state.vender_details
+    const { error } = this.state
     if (password === "") {
       error.passwordError = true
       error.passwordErrorMsg = "please fill password"
@@ -112,10 +116,11 @@ export class Registration extends Component {
 
     return true
   }
+
   is_validEmail = () => {
-    let email = this.state.vender_details.email
-    let error = this.state.error
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const { email } = this.state.vender_details
+    const { error } = this.state
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (!re.test(email)) {
       error.emailError = true
       error.emailErrorMsg = "Please enter valid email address"
@@ -127,9 +132,10 @@ export class Registration extends Component {
     this.setState({ error })
     return true
   }
+
   is_confirmPassword = () => {
-    let confirmPassword = this.state.vender_details.confirmPassword
-    let error = this.state.error
+    const { confirmPassword } = this.state.vender_details
+    const { error } = this.state
     if (confirmPassword !== this.state.vender_details.password) {
       error.confirmPasswordError = true
       error.confirmPasswordErrorMsg =
@@ -142,9 +148,10 @@ export class Registration extends Component {
     this.setState({ error })
     return true
   }
+
   is_validCompanyName = () => {
-    let companyName = this.state.vender_details.companyName
-    let error = this.state.error
+    const { companyName } = this.state.vender_details
+    const { error } = this.state
     if (companyName.length < 5) {
       error.companyNameError = true
       error.companyNameErrorMsg =
@@ -157,9 +164,10 @@ export class Registration extends Component {
     this.setState({ error })
     return true
   }
+
   is_validCheckBox = () => {
-    let productSold = this.state.vender_details.productSold
-    let error = this.state.error
+    const { productSold } = this.state.vender_details
+    const { error } = this.state
     if (productSold.length === 0) {
       error.checkedBoxError = true
       error.checkedBoxErrorMsg = "Please select minimum 1 category to sell"
@@ -168,6 +176,7 @@ export class Registration extends Component {
     }
     return true
   }
+
   render() {
     return (
       <div>
@@ -271,8 +280,8 @@ export class Registration extends Component {
                   value={this.state.vender_details.companyType}
                   onChange={this.handleChange}
                 >
-                  <MenuItem value={"Alcohol"}>Alcohol</MenuItem>
-                  <MenuItem value={"BabyFood"}>BabyFood </MenuItem>
+                  <MenuItem value="Alcohol">Alcohol</MenuItem>
+                  <MenuItem value="BabyFood">BabyFood </MenuItem>
                 </Select>
 
                 <div>
@@ -314,13 +323,12 @@ export class Registration extends Component {
     )
   }
 }
-const stateAsProps = function(store) {
-if ("register_status" in store.VendorReducer) {
-  return {
-    register_status: store.VendorReducer.register_status
-  };
-} 
-  return { register_status: { errorMsg: "Registration Failed" } };
-
-};
+const stateAsProps = function (store) {
+  if ("register_status" in store.VendorReducer) {
+    return {
+      register_status: store.VendorReducer.register_status,
+    }
+  }
+  return { register_status: { errorMsg: "Registration Failed" } }
+}
 export default connect(stateAsProps, { registration })(Registration)
