@@ -1,17 +1,18 @@
-import { Table, Typography } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import { Table, Typography } from "@material-ui/core"
+import Paper from "@material-ui/core/Paper"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
+import React, { Component } from "react"
+import { connect } from "react-redux"
 
 class ShowProducts extends Component {
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
+
   render() {
     return (
       <div
@@ -29,7 +30,7 @@ class ShowProducts extends Component {
                 </TableRow>
               </TableHead>
               <tbody>
-                {this.props.products.map(product => {
+                {this.props.products.map((product) => {
                   return (
                     <TableRow key={product.productId}>
                       <TableCell>
@@ -48,7 +49,7 @@ class ShowProducts extends Component {
                             <TableHead
                               style={{
                                 backgroundColor: "#673ab7",
-                                color: "white"
+                                color: "white",
                               }}
                             >
                               <TableRow>
@@ -70,7 +71,7 @@ class ShowProducts extends Component {
                               </TableRow>
                             </TableHead>
                             <tbody>
-                              {product.promotions.map(promotion => {
+                              {product.promotions.map((promotion) => {
                                 return (
                                   <TableRow key={promotion.promotionId}>
                                     <TableCell>
@@ -114,24 +115,24 @@ class ShowProducts extends Component {
                                       </Typography>
                                     </TableCell>
                                   </TableRow>
-                                );
+                                )
                               })}
                             </tbody>
                           </Table>
                         </Typography>
                       </TableCell>
                     </TableRow>
-                  );
+                  )
                 })}
               </tbody>
             </Table>
           </TableContainer>
         </div>
       </div>
-    );
+    )
   }
 }
-const stateAsProps = store => ({
-  products: store.RetailerReducer.products
-});
-export default connect(stateAsProps, null)(ShowProducts);
+const stateAsProps = (store) => ({
+  products: store.RetailerReducer.products,
+})
+export default connect(stateAsProps, null)(ShowProducts)

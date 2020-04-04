@@ -1,14 +1,13 @@
-import { TextField, Typography } from "@material-ui/core";
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import CheckIcon from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
-import MuiAlert from '@material-ui/lab/Alert';
-import React, { Component, Fragment } from 'react';
-import { connect } from "react-redux";
-import { postGroup } from "../../redux/actions/RetailerActions.jsx";
+import { TextField, Typography } from "@material-ui/core"
+import Button from "@material-ui/core/Button"
+import Snackbar from "@material-ui/core/Snackbar"
+import CheckIcon from "@material-ui/icons/Check"
+import ClearIcon from "@material-ui/icons/Clear"
+import MuiAlert from "@material-ui/lab/Alert"
+import React, { Component, Fragment } from "react"
+import { connect } from "react-redux"
+import { postGroup } from "../../redux/actions/RetailerActions.js"
 import Message from "../utils/Message"
-
 
 class AddGroup extends Component {
   constructor(props) {
@@ -16,12 +15,12 @@ class AddGroup extends Component {
 
     this.state = {
       group: {
-        groupName: '',
+        groupName: "",
       },
-      status: 0
+      status: 0,
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentWillMount() {
@@ -29,17 +28,16 @@ class AddGroup extends Component {
   }
 
   handleChange(e) {
-    const { name, value } = e.target;
-    let group = this.state.group;
-    group[name] = value;
-    this.setState({ group });
+    const { name, value } = e.target
+    const { group } = this.state
+    group[name] = value
+    this.setState({ group })
   }
 
   is_validGroupName = () => {
     if (this.state.group.groupName.length > 0) {
       this.setState({ status: 1 })
-    }
-    else {
+    } else {
       this.setState({ status: -1 })
       return false
     }
@@ -47,34 +45,39 @@ class AddGroup extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
     if (this.is_validGroupName()) {
-      this.props.postGroup({ ...this.state.group }); // thunk action
+      this.props.postGroup({ ...this.state.group }) // thunk action
     }
   }
 
   render() {
     return (
-
-
       <div className="box-container">
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
               <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {this.state.group.groupName.length <= 0 && <div className="typo-div"><ClearIcon className="icon-style" />
-                <Typography variant="subtitle2" gutterBottom>
-                  Please provide a group name
-                </Typography></div>}
-              {this.state.group.groupName.length > 0 &&
-                <div className="approved-div"><CheckIcon className="icon-style" />
+              {this.state.group.groupName.length <= 0 && (
+                <div className="typo-div">
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Please provide a group name
-                  </Typography></div>}
+                  </Typography>
+                </div>
+              )}
+              {this.state.group.groupName.length > 0 && (
+                <div className="approved-div">
+                  <CheckIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Please provide a group name
+                  </Typography>
+                </div>
+              )}
             </div>
           </div>
           <div className="form-half">
-            <form className="{classes.form} expanded-form" noValidate >
+            <form className="{classes.form} expanded-form" noValidate>
               <div>
                 <div className="help-block">
                   <Typography
@@ -110,22 +113,24 @@ class AddGroup extends Component {
                 id="group-submit"
               >
                 Save
-            </Button>
+              </Button>
             </form>
           </div>
         </div>
 
-        <Fragment>
-          {(this.state.status === -1) ? (
+        <>
+          {this.state.status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
                   Group creation failed. Please match the requirements
                 </MuiAlert>
               </Snackbar>
-            </div>) : (<div />)
-          }
-        </Fragment>
+            </div>
+          ) : (
+            <div />
+          )}
+        </>
         <Message />
       </div>
     )
@@ -133,6 +138,6 @@ class AddGroup extends Component {
 }
 
 const actionAsProps = {
-  postGroup: postGroup
+  postGroup,
 }
-export default connect(null, actionAsProps)(AddGroup);
+export default connect(null, actionAsProps)(AddGroup)

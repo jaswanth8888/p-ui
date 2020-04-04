@@ -5,13 +5,12 @@ import RetailerReducer from './RetailerReducer.jsx';
 export default combineReducers({
     RetailerReducer
 });  */
-import { combineReducers } from 'redux';
-import VendorReducer from "./VendorReducer";
-import RetailerReducer from './RetailerReducer.jsx';
+import { combineReducers } from "redux"
+import VendorReducer from "./VendorReducer"
+import RetailerReducer from "./RetailerReducer"
 
 // combine multiple reducers into one
 export default combineReducers({
-    VendorReducer,
-    RetailerReducer
-
-}); 
+  VendorReducer,
+  RetailerReducer,
+})

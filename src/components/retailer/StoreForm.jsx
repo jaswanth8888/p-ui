@@ -1,16 +1,19 @@
-import { InputLabel, Select, TextField, Typography } from "@material-ui/core";
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import Snackbar from '@material-ui/core/Snackbar';
-import CheckIcon from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
-import MuiAlert from '@material-ui/lab/Alert';
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { getClusters, getZones, postStore } from '../../redux/actions/RetailerActions';
+import { InputLabel, Select, TextField, Typography } from "@material-ui/core"
+import Button from "@material-ui/core/Button"
+import FormControl from "@material-ui/core/FormControl"
+import Snackbar from "@material-ui/core/Snackbar"
+import CheckIcon from "@material-ui/icons/Check"
+import ClearIcon from "@material-ui/icons/Clear"
+import MuiAlert from "@material-ui/lab/Alert"
+import React, { Component, Fragment } from "react"
+import { connect } from "react-redux"
+import {
+  getClusters,
+  getZones,
+  postStore,
+} from "../../redux/actions/RetailerActions"
 
 class StoreForm extends Component {
-
   constructor(props) {
     super(props)
 
@@ -22,13 +25,13 @@ class StoreForm extends Component {
       city: "",
       streetName: "",
       pin: "",
-      status: 0
+      status: 0,
     }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     // this.handleChangeStore = this.handleChangeStore.bind(this);
-    this.handleChangeZone = this.handleChangeZone.bind(this);
+    this.handleChangeZone = this.handleChangeZone.bind(this)
   }
 
   componentWillMount() {
@@ -36,57 +39,55 @@ class StoreForm extends Component {
   }
 
   componentDidMount() {
-    this.props.getAllZones();
+    this.props.getAllZones()
   }
 
   handleChange(e) {
-    const { name, value } = e.target;
+    const { name, value } = e.target
 
-    this.setState({ [name]: value });
-
+    this.setState({ [name]: value })
   }
 
   handleChangeZone(e) {
     this.setState({ zone: e.target.value })
-    this.props.getAllClusters(e.target.value);
-
+    this.props.getAllClusters(e.target.value)
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    let streetName = this.state.streetName;
-    let city = this.state.city;
-    let pin = this.state.pin;
-    let address = {
-      streetName, city, pin
+    e.preventDefault()
+    const { streetName } = this.state
+    const { city } = this.state
+    const { pin } = this.state
+    const address = {
+      streetName,
+      city,
+      pin,
     }
-    let storeName = this.state.storeName;
-    let store = { storeName, address }
-    this.props.postStore(store, this.state.zone, this.state.cluster);
+    const { storeName } = this.state
+    const store = { storeName, address }
+    this.props.postStore(store, this.state.zone, this.state.cluster)
     if (this.state.storeName.length > 6) {
       this.setState({ status: 1 })
-    }
-    else {
+    } else {
       this.setState({ status: -1 })
     }
-
   }
 
   render() {
     return (
       <div className="box-container">
         <div className="joint-form-assign flex-column">
-        <Button
-          type="button"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className="{classes.submit} submit-pad"
-          id="store-submit-btn"
-          onClick={this.handleSubmit}
-        >
-          Save
-        </Button>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className="{classes.submit} submit-pad"
+            id="store-submit-btn"
+            onClick={this.handleSubmit}
+          >
+            Save
+          </Button>
           {/* <Typography
             color="primary"
             component="h1"
@@ -96,11 +97,12 @@ class StoreForm extends Component {
             Create Store
               </Typography> */}
           <div className="advanced-form-container">
-
             <div className="form-first-half">
-              <form className="{classes.form}" noValidate >
+              <form className="{classes.form}" noValidate>
                 <FormControl margin="normal" variant="outlined" fullWidth>
-                  <InputLabel htmlFor="outlined-age-native-simple">Enter Zone</InputLabel>
+                  <InputLabel htmlFor="outlined-age-native-simple">
+                    Enter Zone
+                  </InputLabel>
                   <Select
                     ref="zone"
                     fullWidth
@@ -109,19 +111,25 @@ class StoreForm extends Component {
                     onChange={this.handleChangeZone}
                     label="Enter Zone"
                     inputProps={{
-                      name: 'zone',
-                      id: 'zone',
+                      name: "zone",
+                      id: "zone",
                     }}
                   >
                     <option aria-label="None" value="" />
                     {this.props.zones.map((zone, index) => {
-                      return <option value={zone} key={index}>{zone}</option>
+                      return (
+                        <option value={zone} key={index}>
+                          {zone}
+                        </option>
+                      )
                     })}
                   </Select>
                 </FormControl>
 
-                <FormControl  margin="normal" variant="outlined" fullWidth>
-                  <InputLabel htmlFor="outlined-age-native-simple">Enter Cluster</InputLabel>
+                <FormControl margin="normal" variant="outlined" fullWidth>
+                  <InputLabel htmlFor="outlined-age-native-simple">
+                    Enter Cluster
+                  </InputLabel>
                   <Select
                     ref="cluster"
                     fullWidth
@@ -130,17 +138,20 @@ class StoreForm extends Component {
                     onChange={this.handleChange}
                     label="Enter Cluster"
                     inputProps={{
-                      name: 'cluster',
-                      id: 'cluster',
+                      name: "cluster",
+                      id: "cluster",
                     }}
                   >
                     <option aria-label="None" value="" />
                     {this.props.clusters.map((cluster, index) => {
-                      return <option value={cluster} key={index}>{cluster}</option>
+                      return (
+                        <option value={cluster} key={index}>
+                          {cluster}
+                        </option>
+                      )
                     })}
                   </Select>
                 </FormControl>
-
 
                 <TextField
                   ref="storeName"
@@ -156,15 +167,10 @@ class StoreForm extends Component {
                   value={this.state.storeName}
                   autoFocus
                 />
-
               </form>
-
-
-
-
             </div>
             <div className="form-second-half">
-              <form className="{classes.form}" noValidate >
+              <form className="{classes.form}" noValidate>
                 <TextField
                   ref="streetName"
                   variant="outlined"
@@ -206,7 +212,6 @@ class StoreForm extends Component {
                   value={this.state.pin}
                 />
               </form>
-
             </div>
           </div>
           <div>
@@ -216,60 +221,68 @@ class StoreForm extends Component {
                 component="h1"
                 variant="h4"
                 className="special-store-help"
-                >
+              >
                 Create a Store
               </Typography>
             </div>
           </div>
           <div className="store-requirement">
             <h3 className="center-h3">Requirements</h3>
-            {this.state.storeName.length <= 5 && <div className="typo-div"><ClearIcon className="icon-style" />
-              <Typography variant="subtitle2" gutterBottom>
-                Store name has to be greater than 5 letters
-              </Typography></div>}
-            {this.state.storeName.length > 5 &&
-              <div className="approved-text"><CheckIcon className="icon-style" />
+            {this.state.storeName.length <= 5 && (
+              <div className="typo-div">
+                <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Store name has to be greater than 5 letters
-              </Typography></div>}
-
+                </Typography>
+              </div>
+            )}
+            {this.state.storeName.length > 5 && (
+              <div className="approved-text">
+                <CheckIcon className="icon-style" />
+                <Typography variant="subtitle2" gutterBottom>
+                  Store name has to be greater than 5 letters
+                </Typography>
+              </div>
+            )}
           </div>
         </div>
-        <Fragment>
-
-          {(this.state.status === 1) ? (
+        <>
+          {this.state.status === 1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert elevation={6} variant="filled">
                   Store created successfully!
-            </MuiAlert>
+                </MuiAlert>
               </Snackbar>
             </div>
-          ) : (<div />)}
-        </Fragment>
-        <Fragment>
-          {(this.state.status === -1) ? (
+          ) : (
+            <div />
+          )}
+        </>
+        <>
+          {this.state.status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
                   Store creation failed. Please match the requirements
                 </MuiAlert>
               </Snackbar>
-            </div>) : (<div />)
-          }
-        </Fragment>
-
+            </div>
+          ) : (
+            <div />
+          )}
+        </>
       </div>
     )
   }
 }
 const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
-  clusters: store.RetailerReducer.clusters
-});
+  clusters: store.RetailerReducer.clusters,
+})
 const actionAsProps = {
   getAllZones: getZones,
   getAllClusters: getClusters,
-  postStore: postStore
+  postStore,
 }
-export default connect(stateAsProps, actionAsProps)(StoreForm);
+export default connect(stateAsProps, actionAsProps)(StoreForm)

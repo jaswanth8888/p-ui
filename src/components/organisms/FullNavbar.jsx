@@ -1,45 +1,35 @@
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import MenuIcon from "@material-ui/icons/Menu";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import LocationCityIcon from "@material-ui/icons/LocationCity";
-import clsx from "clsx";
-import { default as React, Fragment } from "react";
-import { useTranslation } from "react-i18next";
+import AppBar from "@material-ui/core/AppBar"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import Divider from "@material-ui/core/Divider"
+import Drawer from "@material-ui/core/Drawer"
+import IconButton from "@material-ui/core/IconButton"
+import List from "@material-ui/core/List"
+import ListItem from "@material-ui/core/ListItem"
+import ListItemIcon from "@material-ui/core/ListItemIcon"
+import ListItemText from "@material-ui/core/ListItemText"
+import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles"
+import Toolbar from "@material-ui/core/Toolbar"
+import Typography from "@material-ui/core/Typography"
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
+import ChevronRightIcon from "@material-ui/icons/ChevronRight"
+import MenuIcon from "@material-ui/icons/Menu"
+import InboxIcon from "@material-ui/icons/MoveToInbox"
+import LocationCityIcon from "@material-ui/icons/LocationCity"
+import clsx from "clsx"
+import { default as React, Fragment } from "react"
+import { useTranslation } from "react-i18next"
 import {
   BrowserRouter as Router,
   Link,
   Route,
   Switch,
-  Redirect
-} from "react-router-dom";
-import AddGroup from "../retailer/AddGroup.jsx";
-import ClusterForm from "../retailer/ClusterForm.jsx";
-import ProductRouter from "../retailer/ProductRouter.jsx";
-import StoreForm from "../retailer/StoreForm.jsx";
-import ViewClusters from "../retailer/ViewClusters.jsx";
-import ViewZones from "../retailer/ViewZones.jsx";
-import ZoneClusterRouter from "../retailer/ZoneClusterRouter.jsx";
-import PromotionRouter from "../retailer/PromotionRouter.jsx";
-import QueryOnDateRouter from "../retailer/QueryOnDateRouter.jsx";
+  Redirect,
+} from "react-router-dom"
 import ZoneForm from "../retailer/ZoneForm.jsx";
 import { connect } from "react-redux";
 import { logout } from "../../redux/actions/RetailerActions";
-import { withStyles } from "@material-ui/core/styles";
-import Tab from "@material-ui/core/Tab";
-import Login from "../Login";
+
+import Tab from "@material-ui/core/Tab"
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import EffectivePriceRouter from "../retailer/EffectivePriceRouter.jsx";
@@ -58,9 +48,19 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import StoreIcon from "@material-ui/icons/Store";
 import EventBusyIcon from "@material-ui/icons/EventBusy";
+import QueryOnDateRouter from "../retailer/QueryOnDateRouter.jsx";
+import PromotionRouter from "../retailer/PromotionRouter.jsx"
+import ZoneClusterRouter from "../retailer/ZoneClusterRouter.jsx"
+import ViewZones from "../retailer/ViewZones.jsx"
+import ViewClusters from "../retailer/ViewClusters.jsx"
+import StoreForm from "../retailer/StoreForm.jsx"
+import ProductRouter from "../retailer/ProductRouter.jsx"
+import ClusterForm from "../retailer/ClusterForm.jsx"
+import AddGroup from "../retailer/AddGroup.jsx"
+import Login from "../Login"
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, ...other } = props
 
   return (
     <Typography
@@ -73,64 +73,64 @@ function TabPanel(props) {
     >
       {value === index && <Box p={3}>{children}</Box>}
     </Typography>
-  );
+  )
 }
 
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
-};
+  value: PropTypes.any.isRequired,
+}
 
-const drawerWidth = 250;
+const drawerWidth = 250
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
-    marginRight: 36
+    marginRight: 36,
   },
   hide: {
-    display: "none"
+    display: "none",
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
   },
   drawerOpen: {
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   drawerClose: {
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9) + 1
-    }
+      width: theme.spacing(9) + 1,
+    },
   },
   toolbar: {
     display: "flex",
@@ -138,41 +138,41 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "flex-end",
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
-    ...theme.mixins.toolbar
+    ...theme.mixins.toolbar,
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
-  }
-}));
+    padding: theme.spacing(3),
+  },
+}))
 
 const StyledTab = withStyles({
   root: {
     fontFamily: "'Open Sans Condensed', sans-serif",
-    fontSize: "18px"
-  }
-})(Tab);
+    fontSize: "18px",
+  },
+})(Tab)
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`
-  };
+    "aria-controls": `simple-tabpanel-${index}`,
+  }
 }
 
 function FullNavbar(props) {
-  const classes = useStyles();
-  const { t, i18n } = useTranslation();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const classes = useStyles()
+  const { t, i18n } = useTranslation()
+  const theme = useTheme()
+  const [open, setOpen] = React.useState(false)
 
   const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
     <div className={classes.root}>
@@ -181,65 +181,65 @@ function FullNavbar(props) {
         <AppBar
           position="fixed"
           className={clsx(classes.appBar, {
-            [classes.appBarShift]: open
+            [classes.appBarShift]: open,
           })}
         >
           <Toolbar>
             {sessionStorage.getItem("token") &&
-              sessionStorage.getItem("token").length > 10 ? (
-                <Fragment>
-                  <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawerOpen}
-                    edge="start"
-                    className={clsx(classes.menuButton, {
-                      [classes.hide]: open
-                    })}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                  <StyledTab
-                    label={t("header.home")}
-                    {...a11yProps(0)}
-                    component={Link}
-                    to="/group"
-                  />
-
-                  <Link to="/" style={{ marginLeft: "auto", color: "white" }}>
-                    <StyledTab
-                      label={t("header.logOut")}
-                      {...a11yProps(2)}
-                      onClick={() => {
-                        sessionStorage.removeItem("token");
-                        props.logout();
-                      }}
-                    ></StyledTab>
-                  </Link>
-                </Fragment>
-              ): (
+            sessionStorage.getItem("token").length > 10 ? (
+              <>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={handleDrawerOpen}
+                  edge="start"
+                  className={clsx(classes.menuButton, {
+                    [classes.hide]: open,
+                  })}
+                >
+                  <MenuIcon />
+                </IconButton>
                 <StyledTab
-                    label={t("header.home")}
-                    {...a11yProps(0)}
-                    component={Link}
+                  label={t("header.home")}
+                  {...a11yProps(0)}
+                  component={Link}
+                  to="/group"
+                />
+
+                <Link to="/" style={{ marginLeft: "auto", color: "white" }}>
+                  <StyledTab
+                    label={t("header.logOut")}
+                    {...a11yProps(2)}
+                    onClick={() => {
+                      sessionStorage.removeItem("token")
+                      props.logout()
+                    }}
                   />
-              )}
+                </Link>
+              </>
+            ) : (
+              <StyledTab
+                label={t("header.home")}
+                {...a11yProps(0)}
+                component={Link}
+              />
+            )}
           </Toolbar>
         </AppBar>
         {sessionStorage.getItem("token") &&
         sessionStorage.getItem("token").length > 10 ? (
-          <Fragment>
+          <>
             <Drawer
               variant="permanent"
               className={clsx(classes.drawer, {
                 [classes.drawerOpen]: open,
-                [classes.drawerClose]: !open
+                [classes.drawerClose]: !open,
               })}
               classes={{
                 paper: clsx({
                   [classes.drawerOpen]: open,
-                  [classes.drawerClose]: !open
-                })
+                  [classes.drawerClose]: !open,
+                }),
               }}
             >
               <div className={classes.toolbar}>
@@ -292,7 +292,7 @@ function FullNavbar(props) {
                       </ListItemIcon>
                       <ListItemText
                         className="list-item-text"
-                        primary={"Price on Date"}
+                        primary="Price on Date"
                       />
                     </ListItem>
                   </Tooltip>
@@ -363,7 +363,7 @@ function FullNavbar(props) {
                       </ListItemIcon>
                       <ListItemText
                         className="list-item-text"
-                        primary={"Cancel Effective Price"}
+                        primary="Cancel Effective Price"
                       />
                     </ListItem>
                   </Tooltip>
@@ -376,7 +376,7 @@ function FullNavbar(props) {
                       </ListItemIcon>
                       <ListItemText
                         className="list-item-text"
-                        primary={"Query on Date Range"}
+                        primary="Query on Date Range"
                       />
                     </ListItem>
                   </Tooltip>
@@ -419,74 +419,78 @@ function FullNavbar(props) {
           ))}
         </List> */}
             </Drawer>
-          </Fragment>
+          </>
         ) : (
-          <Fragment />
+          <></>
         )}
         <Switch>
-          <Route exact={true} path="/" component={Login} />
+          <Route exact path="/" component={Login} />
           <Route
             exact
             path="/group"
-            render={props => <AddGroup {...props} />}
+            render={(props) => <AddGroup {...props} />}
           />
           <Route
             exact
             path="/products/store"
-            render={props => <ProductRouter {...props} />}
+            render={(props) => <ProductRouter {...props} />}
           />
-          <Route exact path="/zone" render={props => <ZoneForm {...props} />} />
+          <Route
+            exact
+            path="/zone"
+            render={(props) => <ZoneForm {...props} />}
+          />
           <Route
             exact
             path="/cluster"
-            render={props => <ClusterForm {...props} />}
+            render={(props) => <ClusterForm {...props} />}
           />
           <Route
             exact
             path="/store"
-            render={props => <StoreForm {...props} />}
+            render={(props) => <StoreForm {...props} />}
           />
           <Route
             exact
             path="/view/zones"
-            render={props => <ViewZones {...props} />}
+            render={(props) => <ViewZones {...props} />}
           />
           <Route
             exact
             path="/view/clusters"
-            render={props => <ViewClusters {...props} />}
+            render={(props) => <ViewClusters {...props} />}
           />
           <Route
             exact
             path="/products/assign"
-            render={props => <ZoneClusterRouter {...props} />}
+            render={(props) => <ZoneClusterRouter {...props} />}
           />
           <Route
             exact
             path="/view/products/daterange"
-            render={props => <EffectivePriceRouter {...props} />}
+            render={(props) => <EffectivePriceRouter {...props} />}
           />
           <Route
             exact
             path="/queryondaterange"
-            render={props => <QueryOnDateRouter {...props} />}
+            render={(props) => <QueryOnDateRouter {...props} />}
           />
           <Route
             exact
             path="/selectproductname"
-            render={props => <PromotionRouter {...props} />}
+            render={(props) => <PromotionRouter {...props} />}
           />
         </Switch>
       </Router>
     </div>
-  );
+  )
 }
 
-const stateAsProps = store => ({
+const stateAsProps = (store) => ({
   loggedInUser: store.RetailerReducer.loggedInUser,
-  login_status: store.RetailerReducer.login_status
-});
+  login_status: store.RetailerReducer.login_status,
+})
 const actionsAsProps = {
-  logout: logout
-};
-export default connect(stateAsProps, actionsAsProps)(FullNavbar);
+  logout,
+}
+export default connect(stateAsProps, actionsAsProps)(FullNavbar)

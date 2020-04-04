@@ -1,19 +1,18 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import React from "react"
+import { Route, Redirect } from "react-router-dom"
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isLoggedIn =
     sessionStorage.getItem("token") &&
-    sessionStorage.getItem("token").length > 10;
+    sessionStorage.getItem("token").length > 10
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         isLoggedIn ? <Component {...props} /> : <Redirect to="/" />
       }
     />
-  );
-};
+  )
+}
 
-export default PrivateRoute;
-
+export default PrivateRoute

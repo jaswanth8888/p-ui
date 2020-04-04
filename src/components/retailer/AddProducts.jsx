@@ -3,29 +3,29 @@ import {
   Select,
   Table,
   TextField,
-  Typography
-} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Paper from "@material-ui/core/Paper";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+  Typography,
+} from "@material-ui/core"
+import Button from "@material-ui/core/Button"
+import Checkbox from "@material-ui/core/Checkbox"
+import FormControl from "@material-ui/core/FormControl"
+import FormControlLabel from "@material-ui/core/FormControlLabel"
+import Paper from "@material-ui/core/Paper"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
 import {
   getCategories,
   getProducts,
-  postProductToStore
-} from "../../redux/actions/RetailerActions";
+  postProductToStore,
+} from "../../redux/actions/RetailerActions"
 
 class AddProducts extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       category: "",
@@ -37,67 +37,67 @@ class AddProducts extends Component {
       dummyobject: [
         {
           productName: "baby",
-          quantityAssigned: 20
-        }
+          quantityAssigned: 20,
+        },
       ],
-      quantityCheck: false
-    };
-    this.handleChangeCategory = this.handleChangeCategory.bind(this);
-    this.loopForm = this.loopForm.bind(this);
-    this.updateInputValue = this.updateInputValue.bind(this);
+      quantityCheck: false,
+    }
+    this.handleChangeCategory = this.handleChangeCategory.bind(this)
+    this.loopForm = this.loopForm.bind(this)
+    this.updateInputValue = this.updateInputValue.bind(this)
   }
 
   updateInputValue(e) {
-    const newArray = Array.from(this.state.numberBoxInputValue);
-    newArray[e.target.id] = e.target.value;
-    this.setState({ numberBoxInputValue: newArray });
-    if (e.target.value != null) this.setState({ quantityCheck: true });
+    const newArray = Array.from(this.state.numberBoxInputValue)
+    newArray[e.target.id] = e.target.value
+    this.setState({ numberBoxInputValue: newArray })
+    if (e.target.value != null) this.setState({ quantityCheck: true })
   }
 
   componentDidMount() {
-    this.props.getAllCategories();
+    this.props.getAllCategories()
   }
 
   handleChangeCategory(e) {
     if (e.target.value === "") {
-      this.setState({ isSelectedCategory: false });
+      this.setState({ isSelectedCategory: false })
     } else {
-      this.setState({ isSelectedCategory: true });
+      this.setState({ isSelectedCategory: true })
     }
-    this.setState({ category: e.target.value });
-    this.props.getAllProducts(e.target.value);
+    this.setState({ category: e.target.value })
+    this.props.getAllProducts(e.target.value)
   }
 
   loopForm() {
-    let tabledata = document.querySelectorAll("tr");
- 
-    tabledata.forEach((ele,ind) => {
-      if(ind && ele.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].checked){
-        this.state.object.productName = ele.childNodes[1].childNodes[0].textContent;
-        this.state.object.quantityAssigned = parseInt(ele.childNodes[5].childNodes[0].childNodes[1].childNodes[0].value)
-        this.state.productList.push(this.state.object);
+    const tabledata = document.querySelectorAll("tr")
+
+    tabledata.forEach((ele, ind) => {
+      if (
+        ind &&
+        ele.childNodes[0].childNodes[0].childNodes[0].childNodes[0]
+          .childNodes[0].checked
+      ) {
+        this.state.object.productName =
+          ele.childNodes[1].childNodes[0].textContent
+        this.state.object.quantityAssigned = parseInt(
+          ele.childNodes[5].childNodes[0].childNodes[1].childNodes[0].value
+        )
+        this.state.productList.push(this.state.object)
       }
-      
     })
- 
-    
-    
+
     this.props.postProductToStore(
       this.props.zone,
       this.props.cluster,
       this.props.store,
       this.state.productList
-    );
+    )
   }
 
   render() {
     return (
-      <div
-        className="box-container add-prods"
-      >
-        <div
-          className="product-form-header"
-        >
+      <div className="box-container add-prods">
+        <div className="product-form-header">
           <FormControl variant="outlined" fullWidth>
             <InputLabel htmlFor="category">Enter Category</InputLabel>
             <Select
@@ -110,50 +110,38 @@ class AddProducts extends Component {
               onChange={this.handleChangeCategory}
               inputProps={{
                 name: "category",
-                id: "category"
+                id: "category",
               }}
             >
-              <option aria-label="None" value=""></option>
+              <option aria-label="None" value="" />
               {this.props.categories.map((category, index) => {
                 return (
                   <option value={category} key={index}>
                     {category}
                   </option>
-                );
+                )
               })}
             </Select>
           </FormControl>
         </div>
-        <div
-          className="product-form-body"
-          
-        >
+        <div className="product-form-body">
           <form className="productform">
             <TableContainer component={Paper}>
               <Table size="small" aria-label="a dense table">
-                <TableHead
-                > 
+                <TableHead>
                   <TableRow>
                     {/* <TableCell>CheckBox</TableCell> */}
                     <TableCell>Select</TableCell>
-                    <TableCell>
-                      Product Name
-                    </TableCell>
+                    <TableCell>Product Name</TableCell>
                     <TableCell>Price</TableCell>
-                    <TableCell>
-                      Vendor Name
-                    </TableCell>
-                    <TableCell>
-                      Quantity Available
-                    </TableCell>
-                    <TableCell>
-                      Quantity Required
-                    </TableCell>
+                    <TableCell>Vendor Name</TableCell>
+                    <TableCell>Quantity Available</TableCell>
+                    <TableCell>Quantity Required</TableCell>
                   </TableRow>
                 </TableHead>
 
                 <tbody>
-                  {this.props.products.map(product => {
+                  {this.props.products.map((product) => {
                     return (
                       <TableRow key={product.id}>
                         <TableCell>
@@ -167,7 +155,6 @@ class AddProducts extends Component {
                                   name="checkedB"
                                   color="primary"
                                   value={JSON.stringify(product)}
-                                  
                                 />
                               }
                             />
@@ -181,7 +168,6 @@ class AddProducts extends Component {
                                   name="checkedB"
                                   color="primary"
                                   value={JSON.stringify(product)}
-                                  
                                   disabled
                                 />
                               }
@@ -226,7 +212,7 @@ class AddProducts extends Component {
                           ) : (
                             <Typography
                               variant="subtitle1"
-                              className = "disabled"
+                              className="disabled"
                               gutterBottom
                             >
                               {product.companyName}
@@ -241,7 +227,7 @@ class AddProducts extends Component {
                           ) : (
                             <Typography
                               variant="subtitle1"
-                              className = "disabled"
+                              className="disabled"
                               gutterBottom
                             >
                               {product.remainingQuantity}
@@ -259,7 +245,7 @@ class AddProducts extends Component {
                               min="0"
                               max={product.remainingQuantity}
                               step="1"
-                              onKeyDown={evt =>
+                              onKeyDown={(evt) =>
                                 evt.key === "." && evt.preventDefault()
                               }
                               onChange={this.updateInputValue}
@@ -276,7 +262,7 @@ class AddProducts extends Component {
                               min="0"
                               max={product.remainingQuantity}
                               step="1"
-                              onKeyDown={evt =>
+                              onKeyDown={(evt) =>
                                 evt.key === "e" && evt.preventDefault()
                               }
                               onChange={this.updateInputValue}
@@ -287,7 +273,7 @@ class AddProducts extends Component {
                           )}
                         </TableCell>
                       </TableRow>
-                    );
+                    )
                   })}
                 </tbody>
               </Table>
@@ -309,22 +295,22 @@ class AddProducts extends Component {
           </form>
         </div>
       </div>
-    );
+    )
   }
 }
 
-const stateAsProps = store => ({
+const stateAsProps = (store) => ({
   categories: store.RetailerReducer.categories,
   zone: store.RetailerReducer.zone,
   cluster: store.RetailerReducer.cluster,
   store: store.RetailerReducer.store,
-  products: store.RetailerReducer.products
-});
+  products: store.RetailerReducer.products,
+})
 
 const actionAsProps = {
   getAllCategories: getCategories,
   getAllProducts: getProducts,
-  postProductToStore: postProductToStore
-};
+  postProductToStore,
+}
 
-export default connect(stateAsProps, actionAsProps)(AddProducts);
+export default connect(stateAsProps, actionAsProps)(AddProducts)

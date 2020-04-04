@@ -1,49 +1,46 @@
-import { TextField } from "@material-ui/core";
-import { Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import {
-  getProducts,
-  postPromotion
-} from "../../redux/actions/RetailerActions";
-import ProductDetails from "../utils/ProductDetails";
-import Message from "../utils/Message";
+import { TextField, Typography } from "@material-ui/core"
+
+import Button from "@material-ui/core/Button"
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { getProducts, postPromotion } from "../../redux/actions/RetailerActions"
+import ProductDetails from "../utils/ProductDetails"
+import Message from "../utils/Message"
 
 class Promotion extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       promotionDetails: {
         startDate: "",
         endDate: "",
-        effectivePercentage: ""
+        effectivePercentage: "",
       },
-      productName: ""
+      productName: "",
       // isSubmit: false,
       // status: 0
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(e) {
-    const { name, value } = e.target;
-    let promotionDetails = this.state.promotionDetails;
-    promotionDetails[name] = value;
-    this.setState({ promotionDetails });
+    const { name, value } = e.target
+    const { promotionDetails } = this.state
+    promotionDetails[name] = value
+    this.setState({ promotionDetails })
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    console.log(this.state.productName);
+    e.preventDefault()
+    console.log(this.state.productName)
     // console.log(this.state);
 
     this.props.postPromotion(
       this.props.productDetails.productName,
       this.state.promotionDetails
-    );
+    )
   }
 
   render() {
@@ -116,19 +113,19 @@ class Promotion extends Component {
         </div>
         <Message />
       </div>
-    );
+    )
   }
 }
 
-const stateAsProps = store => ({
+const stateAsProps = (store) => ({
   products: store.RetailerReducer.products,
   productDetails: store.RetailerReducer.productDetails,
-  productName: store.RetailerReducer.product
-});
+  productName: store.RetailerReducer.product,
+})
 
 const actionAsProps = {
   getAllProducts: getProducts,
-  postPromotion: postPromotion
-};
+  postPromotion,
+}
 
-export default connect(stateAsProps, actionAsProps)(Promotion);
+export default connect(stateAsProps, actionAsProps)(Promotion)
