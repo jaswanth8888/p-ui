@@ -71,10 +71,10 @@ export class Registration extends Component {
   }
   remove_attribute = () => {
     this.setState({
-      letvender_details: this.state.vender_details.filter(
+      vender_details: this.state.vender_details.filter(
         (item) => item != "confirmPassword"
-      ),
-    }
+      )
+    })
 
   }
   handleSubmit(e) {
