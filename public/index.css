@@ -31,7 +31,6 @@
 
 .joint-form-assign{
     margin-top:60px;
-    width:850px;
     display: flex;
     justify-content: center;
     box-shadow: 0px 10px 17px 6px rgba(0,0,0,0.24);
@@ -74,6 +73,7 @@
 
 .validations{
     padding:20px;
+    
 }
 
 .flex-column{
@@ -108,15 +108,12 @@ p{
 
 .joint-form{
     margin-top:60px;
-    height:400px;
     display: flex;
     box-shadow: 0px 10px 17px 6px rgba(0,0,0,0.24);
 }
 
 .joint-form-large{
     margin-top:60px;
-    height:85vh;
-    width: 1050px;
     display: flex;
     box-shadow: 0px 10px 17px 6px rgba(0,0,0,0.24);
 }
@@ -270,9 +267,6 @@ a{
     margin-top:20px !important;
 }
 
-#special-add-prods-help{
-    margin-top:60px !important;
-}
 
 .expanded-form{
     width:100%;
@@ -380,4 +374,20 @@ a{
 
 .flag-select__option , .flag-select__option--placeholder{
     color: black !important
+}
+
+@media only screen and (max-width: 600px) {
+    .joint-form , .joint-form-large, .joint-form-assign{
+        display: table-row;
+        margin: 0px 20px;
+    }
+
+    .box-container ,  .box-container-start , .box-container-table{
+        padding:0px;
+    }
+
+    #app-header{
+        display: none;
+    }
+
 }
