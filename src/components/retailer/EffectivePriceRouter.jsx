@@ -1,5 +1,5 @@
 import React from "react"
-import { BrowserRouter as Router, Switch } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom"
 import PrivateRoute from "../utils/privateRoute"
 import GetProductsInDateRange from "./GetProductsInDateRange"
 import ViewEffectiveDatesAndPrices from "./ViewEffectiveDatesAndPrices"
@@ -7,6 +7,7 @@ import ViewEffectiveDatesAndPrices from "./ViewEffectiveDatesAndPrices"
 const EffectivePriceRouter = () => {
   return (
     <Router>
+      <Redirect to="/view/products/daterange" />
       <Switch>
         <PrivateRoute
           exact

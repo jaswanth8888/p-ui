@@ -432,7 +432,7 @@ function FullNavbar(props) {
           />
           <Route
             exact
-            path="/view/products/daterange"
+            path={["/view/products/daterange", "/view/effectiveprices"]}
             component={EffectivePriceRouter}
           />
           <Route
