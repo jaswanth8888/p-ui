@@ -23,7 +23,7 @@ import {
   Link,
   Route,
   Switch,
-  Redirect,
+  Redirect
 } from "react-router-dom"
 import { connect } from "react-redux"
 
@@ -43,6 +43,10 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney"
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted"
 import StoreIcon from "@material-ui/icons/Store"
 import EventBusyIcon from "@material-ui/icons/EventBusy"
+import ReactFlagsSelect from "react-flags-select";
+import i18n from "../../i18n";
+import "react-flags-select/css/react-flags-select.css";
+import "react-flags-select/scss/react-flags-select.scss";
 import ViewAssignedClusters from "../retailer/ViewAssignedClusters.jsx"
 import ViewAssignedZones from "../retailer/ViewAssignedZones.jsx"
 import EffectivePriceRouter from "../retailer/EffectivePriceRouter.jsx"
@@ -79,58 +83,58 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
 }
 
 const drawerWidth = 250
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
+    display: "flex"
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+      duration: theme.transitions.duration.leavingScreen
+    })
   },
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 36
   },
   hide: {
-    display: "none",
+    display: "none"
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: "nowrap",
+    whiteSpace: "nowrap"
   },
   drawerOpen: {
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
   drawerClose: {
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
     overflowX: "hidden",
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9) + 1,
-    },
+      width: theme.spacing(9) + 1
+    }
   },
   toolbar: {
     display: "flex",
@@ -138,25 +142,25 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
+    ...theme.mixins.toolbar
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
-  },
+    padding: theme.spacing(3)
+  }
 }))
 
 const StyledTab = withStyles({
   root: {
     fontFamily: "'Open Sans Condensed', sans-serif",
-    fontSize: "18px",
-  },
+    fontSize: "18px"
+  }
 })(Tab)
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`
   }
 }
 
@@ -181,7 +185,7 @@ function FullNavbar(props) {
         <AppBar
           position="fixed"
           className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
+            [classes.appBarShift]: open
           })}
         >
           <Toolbar>
@@ -194,22 +198,33 @@ function FullNavbar(props) {
                   onClick={handleDrawerOpen}
                   edge="start"
                   className={clsx(classes.menuButton, {
-                    [classes.hide]: open,
+                    [classes.hide]: open
                   })}
                 >
                   <MenuIcon />
                 </IconButton>
                 <StyledTab
                   label={t("header.home")}
-                  {...a11yProps(0)}
                   component={Link}
                   to="/group"
                 />
-
-                <Link to="/" style={{ marginLeft: "auto", color: "white" }}>
+                <ReactFlagsSelect
+                  countries={["US", "FR", "DE"]}
+                  customLabels={{
+                    US: "EN-US",
+                    FR: "FR",
+                    DE: "DE"
+                  }}
+                  placeholder="Select Language"
+                  defaultCountry={sessionStorage.getItem("countryCode")}
+                  onSelect={(countryCode) => {
+                    i18n.changeLanguage(countryCode)
+                    sessionStorage.setItem("countryCode", countryCode)
+                  }}
+                />
+                <Link to="/" className="right-nav-btn">
                   <StyledTab
                     label={t("header.logOut")}
-                    {...a11yProps(2)}
                     onClick={() => {
                       sessionStorage.removeItem("token")
                       props.logout()
@@ -218,11 +233,24 @@ function FullNavbar(props) {
                 </Link>
               </>
             ) : (
-              <StyledTab
-                label={t("header.home")}
-                {...a11yProps(0)}
-                component={Link}
-              />
+              <>
+                <StyledTab label={t("header.home")} component={Link} />
+                <ReactFlagsSelect
+                  countries={["US", "FR", "DE"]}
+                  customLabels={{
+                    US: "EN-US",
+                    FR: "FR",
+                    DE: "DE",
+                  }}
+                  className="right-nav-btn"
+                  placeholder="Select Language"
+                  defaultCountry={sessionStorage.getItem("countryCode")}
+                  onSelect={(countryCode) => {
+                    i18n.changeLanguage(countryCode)
+                    sessionStorage.setItem("countryCode", countryCode)
+                  }}
+                />
+              </>
             )}
           </Toolbar>
         </AppBar>
@@ -233,13 +261,13 @@ function FullNavbar(props) {
               variant="permanent"
               className={clsx(classes.drawer, {
                 [classes.drawerOpen]: open,
-                [classes.drawerClose]: !open,
+                [classes.drawerClose]: !open
               })}
               classes={{
                 paper: clsx({
                   [classes.drawerOpen]: open,
-                  [classes.drawerClose]: !open,
-                }),
+                  [classes.drawerClose]: !open
+                })
               }}
             >
               <div className={classes.toolbar}>
@@ -428,57 +456,53 @@ function FullNavbar(props) {
           <Route
             exact
             path="/group"
-            render={(props) => <AddGroup {...props} />}
+            render={props => <AddGroup {...props} />}
           />
           <Route
             exact
             path="/products/store"
-            render={(props) => <ProductRouter {...props} />}
+            render={props => <ProductRouter {...props} />}
           />
-          <Route
-            exact
-            path="/zone"
-            render={(props) => <ZoneForm {...props} />}
-          />
+          <Route exact path="/zone" render={props => <ZoneForm {...props} />} />
           <Route
             exact
             path="/cluster"
-            render={(props) => <ClusterForm {...props} />}
+            render={props => <ClusterForm {...props} />}
           />
           <Route
             exact
             path="/store"
-            render={(props) => <StoreForm {...props} />}
+            render={props => <StoreForm {...props} />}
           />
           <Route
             exact
             path="/view/zones"
-            render={(props) => <ViewZones {...props} />}
+            render={props => <ViewZones {...props} />}
           />
           <Route
             exact
             path="/view/clusters"
-            render={(props) => <ViewClusters {...props} />}
+            render={props => <ViewClusters {...props} />}
           />
           <Route
             exact
             path="/products/assign"
-            render={(props) => <ZoneClusterRouter {...props} />}
+            render={props => <ZoneClusterRouter {...props} />}
           />
           <Route
             exact
             path="/view/products/daterange"
-            render={(props) => <EffectivePriceRouter {...props} />}
+            render={props => <EffectivePriceRouter {...props} />}
           />
           <Route
             exact
             path="/queryondaterange"
-            render={(props) => <QueryOnDateRouter {...props} />}
+            render={props => <QueryOnDateRouter {...props} />}
           />
           <Route
             exact
             path="/selectproductname"
-            render={(props) => <PromotionRouter {...props} />}
+            render={props => <PromotionRouter {...props} />}
           />
         </Switch>
       </Router>
@@ -486,11 +510,11 @@ function FullNavbar(props) {
   )
 }
 
-const stateAsProps = (store) => ({
+const stateAsProps = store => ({
   loggedInUser: store.RetailerReducer.loggedInUser,
-  login_status: store.RetailerReducer.login_status,
+  login_status: store.RetailerReducer.login_status
 })
 const actionsAsProps = {
-  logout,
+  logout
 }
 export default connect(stateAsProps, actionsAsProps)(FullNavbar)
