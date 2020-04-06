@@ -27,6 +27,8 @@
     padding:40px;
     width:100vw;
     height:100vh;
+    margin-left:20px;
+    margin-right: 20px;
 }
 
 .joint-form-assign{
@@ -73,7 +75,7 @@
 
 .validations{
     padding:20px;
-    
+    height:500px;
 }
 
 .flex-column{
@@ -384,10 +386,16 @@ a{
 
     .box-container ,  .box-container-start , .box-container-table{
         padding:0px;
+        padding-top:20px;
     }
 
     #app-header{
         display: none;
     }
+
+    .validations{
+        height: auto;
+    }
+
 
 }

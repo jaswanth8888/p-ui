@@ -35,20 +35,22 @@ import {
   RESET_STATUS_CODE,
 } from "./types"
 
-let TOKEN = ""
+const TOKEN = () => {
+  return `BearerR ${sessionStorage.getItem("token")}`
+}
+
 export const login = (loginDetails) => async (dispatch) => {
   await axios
     .post(`${RETAILER_BASE_URL}/retailer/authenticate`, loginDetails)
     .then((res) => {
       sessionStorage.setItem("token", res.data.jwt)
-      TOKEN = `BearerR ${res.data.jwt}`
       dispatch({
         type: LOGIN_USER,
         login_status: { success: true, errorMsg: "", data: res.data },
         userInfo: loginDetails,
       })
     })
-    .catch((res) => {
+    .catch(() => {
       dispatch({
         type: LOGIN_FAILURE,
         login_status: {
@@ -64,9 +66,9 @@ export const fetchUserDetails = (loginDetails) => async (dispatch) => {
 export const postZone = (zoneDetails) => async (dispatch) => {
   await axios
     .post(`${RETAILER_BASE_URL}/location-management/zone`, zoneDetails, {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: TOKEN() },
     })
-    .then((res) => {
+    .then(() => {
       dispatch({
         type: CREATE_ZONE,
         msg: "Zone Created Succesfully",
@@ -100,9 +102,9 @@ export const postZone = (zoneDetails) => async (dispatch) => {
 export const postCluster = (cluster, zone) => async (dispatch) => {
   await axios
     .put(`${RETAILER_BASE_URL}/location-management/${zone}/cluster`, cluster, {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: TOKEN() },
     })
-    .then((res) => {
+    .then(() => {
       dispatch({
         type: CREATE_CLUSTER,
         msg: `Cluster for Zone ${zone} is Created Successfully`,
@@ -136,12 +138,12 @@ export const postCluster = (cluster, zone) => async (dispatch) => {
 export const getZones = () => async (dispatch) => {
   await axios
     .get(`${RETAILER_BASE_URL}/location-management/zones/names`, {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: TOKEN() },
     })
     .then((res) => {
       dispatch({ type: ZONE_GET_REQUEST, zones: res.data })
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: FAILURE })
     })
 }
@@ -149,12 +151,12 @@ export const getZones = () => async (dispatch) => {
 export const getClusters = (zone) => async (dispatch) => {
   await axios
     .get(`${RETAILER_BASE_URL}/location-management/${zone}/clusters/names`, {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: TOKEN() },
     })
     .then((res) => {
       dispatch({ type: CLUSTER_GET_REQUEST, clusters: res.data })
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: FAILURE })
     })
 }
@@ -164,12 +166,12 @@ export const postStore = (store, zone, cluster) => async (dispatch) => {
     .put(
       `${RETAILER_BASE_URL}/location-management/${zone}/${cluster}/store`,
       store,
-      { headers: { Authorization: TOKEN } }
+      { headers: { Authorization: TOKEN() } }
     )
-    .then((res) => {
+    .then(() => {
       dispatch({ type: STORE_POST_REQUEST, msg: "Store Created Succesfully" })
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: FAILURE })
     })
 }
@@ -184,7 +186,7 @@ export const messageSetNull = () => (dispatch) => {
 export const getZoneList = () => async (dispatch) => {
   await axios
     .get(`${RETAILER_BASE_URL}/location-management/zone-map`, {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: TOKEN() },
     })
     .then((res) => {
       dispatch({ type: ZONELIST_GET_REQUEST, zoneList: res.data })
@@ -194,7 +196,7 @@ export const getZoneList = () => async (dispatch) => {
 export const getClusterList = () => async (dispatch) => {
   await axios
     .get(`${RETAILER_BASE_URL}/location-management/cluster-map`, {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: TOKEN() },
     })
     .then((res) => {
       dispatch({ type: CLUSTERLIST_GET_REQUEST, clusterList: res.data })
@@ -206,9 +208,9 @@ export const getClusterList = () => async (dispatch) => {
 export const postGroup = (groupDetails) => async (dispatch) => {
   await axios
     .post(`${RETAILER_BASE_URL}/group-management/group`, groupDetails, {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: TOKEN() },
     })
-    .then((res) => {
+    .then(() => {
       dispatch({
         type: CREATE_ZONE,
         msg: "Group Created Succesfully",
@@ -242,7 +244,7 @@ export const postGroup = (groupDetails) => async (dispatch) => {
 export const getStoreList = () => async (dispatch) => {
   await axios
     .get(`${RETAILER_BASE_URL}/location-management/store`, {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: TOKEN() },
     })
     .then((res) => {
       dispatch({ type: STORELIST_GET_REQUEST, storeList: res.data })
@@ -252,12 +254,12 @@ export const getStoreList = () => async (dispatch) => {
 export const getCategories = () => async (dispatch) => {
   await axios
     .get(`${RETAILER_BASE_URL}/product-management/categories`, {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: TOKEN() },
     })
     .then((res) => {
       dispatch({ type: CATEGORIES_GET_REQUEST, categories: res.data })
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: FAILURE })
     })
 }
@@ -265,12 +267,12 @@ export const getCategories = () => async (dispatch) => {
 export const getProducts = (category) => async (dispatch) => {
   await axios
     .get(`${RETAILER_BASE_URL}/product-management/${category}/products`, {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: TOKEN() },
     })
     .then((res) => {
       dispatch({ type: PRODUCTS_GET_REQUEST, products: res.data })
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: FAILURE })
     })
 }
@@ -294,15 +296,15 @@ export const postProductToStore = (zone, cluster, store, products) => async (
     .put(
       `${RETAILER_BASE_URL}/product-management/${zone}/${cluster}/${store}/product`,
       products,
-      { headers: { Authorization: TOKEN } }
+      { headers: { Authorization: TOKEN() } }
     )
-    .then((res) => {
+    .then(() => {
       dispatch({
         type: PRODUCTTOSTORE_POST_REQUEST,
         msg: "Product Added to Store Succesfully",
       })
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({
         type: PRODUCTTOSTORE_POST_REQUEST,
         msg: "Sorry Products already exists in Store",
@@ -314,12 +316,12 @@ export const getStores = (zone, cluster) => async (dispatch) => {
   await axios
     .get(
       `${RETAILER_BASE_URL}/location-management/${zone}/${cluster}/stores/names`,
-      { headers: { Authorization: TOKEN } }
+      { headers: { Authorization: TOKEN() } }
     )
     .then((res) => {
       dispatch({ type: STORE_GET_REQUEST, stores: res.data })
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: FAILURE })
     })
 }
@@ -329,13 +331,13 @@ export const getProductsInRange = (fromDate, toDate) => async (dispatch) => {
     .get(
       `${RETAILER_BASE_URL}/product-management/products/data?filter=%7B%22startDate%22:%22${fromDate}%22,%22endDate%22:%22${toDate}%22%7D`,
       {
-        headers: { Authorization: TOKEN },
+        headers: { Authorization: TOKEN() },
       }
     )
     .then((res) => {
       dispatch({ type: PRODUCT_GET_BYRANGE, products: res.data })
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: FAILURE })
     })
 }
@@ -343,7 +345,7 @@ export const getProductsInRange = (fromDate, toDate) => async (dispatch) => {
 export const getProductList = () => async (dispatch) => {
   await axios
     .get(`${RETAILER_BASE_URL}/product-management/products/names`, {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: TOKEN() },
     })
     .then((res) => {
       dispatch({ type: PRODUCTLIST_GET_REQUEST, productList: res.data })
@@ -357,7 +359,7 @@ export const saveProductValue = (productValue) => (dispatch) => {
 export const getProductDetails = (productName) => async (dispatch) => {
   await axios
     .get(`${RETAILER_BASE_URL}/product-management/product/${productName}`, {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: TOKEN() },
     })
     .then((res) => {
       dispatch({ type: PRODUCT_GET_REQUEST, productDetails: res.data })
@@ -369,7 +371,7 @@ export const getZoneClusterNames = (clusterPattern) => async (dispatch) => {
     .get(
       `${RETAILER_BASE_URL}/location-management/clusters/regex/${clusterPattern}`,
       {
-        headers: { Authorization: TOKEN },
+        headers: { Authorization: TOKEN() },
       }
     )
     .then((res) => {
@@ -387,7 +389,7 @@ export const assignToCluster = (
     .put(
       `${RETAILER_BASE_URL}/product-management/${productName}/${zoneName}/${clusterName}/products`,
       clusterDetails,
-      { headers: { Authorization: TOKEN } }
+      { headers: { Authorization: TOKEN() } }
     )
     .then((res) => {
       dispatch({
@@ -397,10 +399,6 @@ export const assignToCluster = (
       })
     })
     .catch((err) => {
-      console.log(err)
-      console.log(err.response)
-      console.log(err.response.message)
-
       const { response } = err
       if (
         response.status === 400 &&
@@ -451,10 +449,9 @@ export const assignToZone = (zoneDetails, zoneName, productName) => async (
     .put(
       `${RETAILER_BASE_URL}/product-management/${zoneName}/${productName}/product`,
       zoneDetails,
-      { headers: { Authorization: TOKEN } }
+      { headers: { Authorization: TOKEN() } }
     )
     .then((res) => {
-      console.log(res)
       dispatch({
         type: ASSIGN_TO_ZONE,
         msg: "Product Asigned to Zone Succesfully",
@@ -462,10 +459,6 @@ export const assignToZone = (zoneDetails, zoneName, productName) => async (
       })
     })
     .catch((err) => {
-      console.log(err)
-      console.log(err.response)
-      console.log(err.response.message)
-
       const { response } = err
       if (
         response.status === 400 &&
@@ -526,12 +519,10 @@ export const postPromotion = (productName, promotionDetails) => async (
       `${RETAILER_BASE_URL}/product-management/product/promotion/${productName}`,
       promotionDetails,
       {
-        headers: { Authorization: TOKEN },
+        headers: { Authorization: TOKEN() },
       }
     )
     .then((res) => {
-      console.log(res)
-      console.log(res.data.status)
       if (res.data.status) {
         dispatch({
           type: PROMOTION_POST_REQUEST,
@@ -577,17 +568,13 @@ export const getPricesInRange = (startDate, endDate, currentDate) => async (
     .get(
       `${RETAILER_BASE_URL}/product-management/products/data?filter=%7B%22startDate%22:%22${startDate}%22,%22endDate%22:%22${endDate}%22,%22currentDate%22:%22${currentDate}%22%7D`,
       {
-        headers: { Authorization: TOKEN },
+        headers: { Authorization: TOKEN() },
       }
     )
     .then((res) => {
-      console.log(
-        `${RETAILER_BASE_URL}/product-management/products/data?filter=%7B%22startDate%22:%22${startDate}%22,%22endDate%22:%22${endDate}%22,%22currentDate%22:%22${currentDate}%22%7D`,
-        res.data
-      )
       dispatch({ type: PRODUCTS_GET_REQUEST, products: res.data })
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: FAILURE })
     })
 }
@@ -595,23 +582,20 @@ export const getPricesInRange = (startDate, endDate, currentDate) => async (
 export const cancelEffectivePrice = (productName, promotionId) => async (
   dispatch
 ) => {
-  console.log(productName, promotionId)
-
   await axios
     .put(
       `${RETAILER_BASE_URL}/product-management/` +
         `product/${productName}/${promotionId}`,
-      { headers: { Authorization: TOKEN } }
+      { headers: { Authorization: TOKEN() } }
     )
-    .then((res) => {
+    .then(() => {
       dispatch({ type: PRODUCT_POST_REQUEST, msg: "Withdraw Done!" })
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: FAILURE })
     })
 }
 
 export const resetStatusCode = () => (dispatch) => {
-  console.log(RESET_STATUS_CODE)
   dispatch({ type: RESET_STATUS_CODE })
 }

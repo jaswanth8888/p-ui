@@ -122,7 +122,7 @@ function FullNavbar(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        <Link to="/products/assign">
+        <Link to="/selectproduct">
           <Tooltip title="Assign Price to Zone/Cluster" placement="right">
             <ListItem button>
               <ListItemIcon>
@@ -284,6 +284,10 @@ function FullNavbar(props) {
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open
           })}
+          style={{
+            width: "100%",
+            zIndex: 1400,
+          }}
         >
           <Toolbar>
             {sessionStorage.getItem("token") &&
@@ -355,89 +359,77 @@ function FullNavbar(props) {
             )}
           </Toolbar>
         </AppBar>
-        <nav className={classes.drawer} aria-label="mailbox folders">
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation="css">
-            <Drawer
-              container={container}
-              variant="temporary"
-              anchor={theme.direction === "rtl" ? "right" : "left"}
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              ModalProps={{
-                keepMounted: true // Better open performance on mobile.
-              }}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              variant="permanent"
-              open
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-        </nav>
+        {sessionStorage.getItem("token") && (
+          <nav className={classes.drawer} aria-label="mailbox folders">
+            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+            <Hidden smUp implementation="css">
+              <Drawer
+                container={container}
+                variant="temporary"
+                anchor={theme.direction === "rtl" ? "right" : "left"}
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                classes={{
+                  paper: classes.drawerPaper
+                }}
+                ModalProps={{
+                  keepMounted: true // Better open performance on mobile.
+                }}
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+            <Hidden xsDown implementation="css">
+              <Drawer
+                classes={{
+                  paper: classes.drawerPaper
+                }}
+                variant="permanent"
+                open
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+          </nav>
+        )}
         <Switch>
           <Route exact path="/" component={Login} />
+          <Route exact path="/group" component={AddGroup} />
           <Route
             exact
-            path="/group"
-            render={props => <AddGroup {...props} />}
+            path={["/products/store", "/addproductstostore", "/addproducts"]}
+            component={ProductRouter}
           />
+          <Route exact path="/zone" component={ZoneForm} />
+          <Route exact path="/cluster" component={ClusterForm} />
+          <Route exact path="/store" component={StoreForm} />
+          <Route exact path="/view/zones" component={ViewZones} />
+          <Route exact path="/view/clusters" component={ViewClusters} />
           <Route
             exact
-            path="/products/store"
-            render={props => <ProductRouter {...props} />}
-          />
-          <Route exact path="/zone" render={props => <ZoneForm {...props} />} />
-          <Route
-            exact
-            path="/cluster"
-            render={props => <ClusterForm {...props} />}
-          />
-          <Route
-            exact
-            path="/store"
-            render={props => <StoreForm {...props} />}
-          />
-          <Route
-            exact
-            path="/view/zones"
-            render={props => <ViewZones {...props} />}
-          />
-          <Route
-            exact
-            path="/view/clusters"
-            render={props => <ViewClusters {...props} />}
-          />
-          <Route
-            exact
-            path="/products/assign"
-            render={props => <ZoneClusterRouter {...props} />}
+            path={[
+              "/selectproduct",
+              "/assigntocluster",
+              "/assigntozone",
+              "/view/assigned/zones",
+              "/view/assigned/clusters"
+            ]}
+            component={ZoneClusterRouter}
           />
           <Route
             exact
             path="/view/products/daterange"
-            render={props => <EffectivePriceRouter {...props} />}
+            component={EffectivePriceRouter}
           />
           <Route
             exact
-            path="/queryondaterange"
-            render={props => <QueryOnDateRouter {...props} />}
+            path={["/queryondaterange", "/showproducts"]}
+            component={QueryOnDateRouter}
           />
           <Route
             exact
-            path="/selectproductname"
-            render={props => <PromotionRouter {...props} />}
+            path={["/selectproductname", "/addpromotion"]}
+            component={PromotionRouter}
           />
         </Switch>
       </Router>
