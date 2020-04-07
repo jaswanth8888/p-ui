@@ -1,60 +1,96 @@
-import { Table } from "@material-ui/core"
-import Paper from "@material-ui/core/Paper"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import { getZoneList } from "../../redux/actions/RetailerActions"
+import { Table } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import TablePagination from "@material-ui/core/TablePagination";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import TableBody from "@material-ui/core/TableBody";
+import { getZoneList } from "../../redux/actions/RetailerActions";
 
 class ViewZones extends Component {
   constructor(props) {
-    super(props)
-    this.props.getZoneList()
+    super(props);
+    this.props.getZoneList();
+
+    this.state = {
+      page: 0,
+      setPage: 0,
+      rowsPerPage: 10,
+      setRowsPerPage: 10
+    };
   }
 
-  componentWillMount() {
-    this.props.history.push("/view/zones")
-  }
+  handleChangePage = (event, newPage) => {
+    this.setState({ page: +newPage });
+    console.log("fired handlechangepage " + this.setState.page);
+  };
+
+  handleChangeRowsPerPage = (event) => {
+    this.setState({ setPage: 0 }, () => {
+      this.setState({ rowsPerPage: +event.target.value });
+    });
+  };
 
   render() {
+    const classes = this.props;
+    const rows = this.props.zoneList;
     return (
-      <div className="box-container-table">
-        {/* <div className="">
-                    <ProductDetails></ProductDetails>
-                </div> */}
-        <TableContainer component={Paper}>
-          <Table aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Zone Name</TableCell>
-                <TableCell>Number of Stores</TableCell>
-              </TableRow>
-            </TableHead>
-            <tbody>
-              {Object.keys(this.props.zoneList).map((i) => {
-                return (
-                  <TableRow>
-                    <TableCell key={i} value={i}>
-                      {i}
-                    </TableCell>
-                    <TableCell>{this.props.zoneList[i]}</TableCell>
-                  </TableRow>
-                )
-              })}
-            </tbody>
-          </Table>
-        </TableContainer>
+      <div className="box-container-table data-tables">
+        <Paper className={classes.root}>
+          <TableContainer className={classes.container}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Zone Name</TableCell>
+                  <TableCell>Number of Zones</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Object.keys(rows)
+                  .slice(
+                    this.state.page * this.state.rowsPerPage,
+                    this.state.page * this.state.rowsPerPage +
+                      this.state.rowsPerPage
+                  )
+                  .map(row => {
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.code}
+                      >
+                        <TableCell>{row}</TableCell>
+                        <TableCell>{rows[row]}</TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={Object.keys(rows).length}
+            rowsPerPage={this.state.rowsPerPage}
+            page={this.state.page}
+            onChangePage={this.handleChangePage}
+            onChangeRowsPerPage={this.handleChangeRowsPerPage}
+          />
+        </Paper>
       </div>
-    )
+    );
   }
 }
 
-const stateAsProps = (store) => ({
-  zoneList: store.RetailerReducer.zoneList,
-})
+const stateAsProps = store => ({
+  zoneList: store.RetailerReducer.zoneList
+});
 const actionAsProps = {
-  getZoneList,
-}
-export default connect(stateAsProps, actionAsProps)(ViewZones)
+  getZoneList
+};
+export default connect(stateAsProps, actionAsProps)(ViewZones);

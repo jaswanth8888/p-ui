@@ -377,6 +377,10 @@ a{
     color: black !important
 }
 
+.data-tables table{
+    width:80vw !important
+}
+
 @media only screen and (max-width: 600px) {
     .joint-form , .joint-form-large, .joint-form-assign{
         display: table-row;
