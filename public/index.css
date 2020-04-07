@@ -117,9 +117,9 @@ p{
     height:auto;
     display: flex;
     width:70vw;
-    height:80vh;
+    height:85vh;
     box-shadow: 0px 10px 17px 6px rgba(0,0,0,0.24);
-    margin-top:100px;
+    margin-top:130px;
 }
 
 
@@ -301,23 +301,26 @@ a{
 
 .product-image{
     width:100%;
-    height:75%;
+    height:65%;
     overflow: scroll;
     overflow-x: hidden;
 }
 
 .product-table-data{
     width:100%;
-    height:20%;
+    height:30%;
 }
 
-.product-table-data tr,td,th,table,thead,tbody{
+.product-table{
     border:none !important;
+    font-size: 12px !important;
     box-shadow:none !important;
     border-radius: 0px !important;
 }
 
-
+.table-text{
+    font-size: 12px !important;
+}
 
 .product-image img{
     width:100%;
@@ -406,7 +409,7 @@ a{
 
     .product-form-body{
         border:1px solid rgba(0,0,0,0.1);
-        margin-bottom: 60px;
+        margin-bottom: 220px;
     }
 
     .product-name{
