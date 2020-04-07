@@ -311,6 +311,7 @@ export class Registration extends Component {
                   color="primary"
                   className="{classes.submit}"
                   onClick={this.handleSubmit}
+                  id="signupsubmit"
                 >
                   Sign up
                 </Button>

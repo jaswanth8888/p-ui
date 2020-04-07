@@ -164,7 +164,7 @@ class VenderLogin extends Component {
                 fullWidth
                 error={this.state.error.usernameError}
                 helperText={this.state.error.usernameErrorMsg}
-                id="username"
+                id="username-vendor"
                 label="User Name"
                 name="username"
                 autoComplete="username"
@@ -192,7 +192,7 @@ class VenderLogin extends Component {
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
+                id="password-vendor"
                 onChange={this.handleChange}
                 autoComplete="current-password"
                 InputProps={{
@@ -213,6 +213,7 @@ class VenderLogin extends Component {
                 variant="contained"
                 color="primary"
                 className="{classes.submit} submit-pad"
+                id="login-vendor"
                 onClick={this.handleSubmit}
               >
                 Login

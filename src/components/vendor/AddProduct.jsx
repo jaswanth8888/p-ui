@@ -209,6 +209,7 @@ class AddProduct extends Component {
                   name="productCategory"
                   label="productCategory"
                   onChange={this.handleChange}
+                  id="select-product"
                 >
                   <MenuItem value="ALCOHOL_PROD">ALCOHOL_PROD</MenuItem>
                   <MenuItem value="BABY_PROD">BABY_PROD</MenuItem>
@@ -254,6 +255,7 @@ class AddProduct extends Component {
                     fullWidth
                     name="uom"
                     label="uom"
+                    id="alc-prod"
                     onChange={this.handleChange}
                   >
                     <MenuItem value="Lts">LTS</MenuItem>
@@ -268,6 +270,7 @@ class AddProduct extends Component {
                     name="uom"
                     label="uom"
                     onChange={this.handleChange}
+                    id="baby-prod"
                   >
                     <MenuItem value="KGs">KGs</MenuItem>
                     <MenuItem value="Pounds">Pounds</MenuItem>
@@ -291,6 +294,7 @@ class AddProduct extends Component {
                   className="{classes.submit}"
                   style={{ marginTop: "30px" }}
                   onClick={this.handleSubmit}
+                  id="submit-prods"
                 >
                   Save
                 </Button>
