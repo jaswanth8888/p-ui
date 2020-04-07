@@ -7,8 +7,8 @@ import ViewEffectiveDatesAndPrices from "./ViewEffectiveDatesAndPrices"
 const EffectivePriceRouter = () => {
   return (
     <Router>
+      <Redirect to="/view/products/daterange" />
       <Switch>
-        {/* <Redirect to="/view/products/daterange" /> */}
         <PrivateRoute
           exact
           path="/view/products/daterange"

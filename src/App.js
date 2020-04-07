@@ -1,5 +1,4 @@
-/* eslint-disable react/prefer-stateless-function */
-import React, { Component } from "react"
+import React from "react"
 import { Provider } from "react-redux"
 import { applyMiddleware, createStore } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension"
@@ -34,50 +33,50 @@ if (state) {
 store.subscribe(() => {
   window.sessionStorage.reduxstate = JSON.stringify(store.getState())
 })
-export default class App extends Component {
-  render() {
-    const retailerRoutes = [
-      "/group",
-      "/products/store",
-      "/zone",
-      "/cluster",
-      "/store",
-      "/view/zones",
-      "/view/clusters",
-      "/products/assign",
-      "/view/products/daterange",
-      "/selectproductname",
-      "/addproductstostore",
-      "/addproducts",
-      "/selectproduct",
-      "/assigntocluster",
-      "/assigntozone",
-      "/view/assigned/zones",
-      "/view/assigned/clusters",
-      "/view/products/daterange",
-      "/view/effectiveprices",
-      "/queryondaterange",
-      "/showproducts",
-      "/selectproductname",
-      "/addpromotion",
-    ]
-    return (
-      <Provider store={store}>
-        <div>
-          <Router>
-            <Switch>
-              <Route exact path="/" component={FullNavbar} />
-              {retailerRoutes.map((route) => {
-                return <PrivateRoute component={FullNavbar} path={route} />
-              })}
-              <Route exact path="/vendor" component={VendorLogin} />
-              <Route exact path="/vendor/reg" component={Registration} />
-              <Route exact path="/vendor/home" component={Home} />
-              <Route exact path="/vendor/addproduct" component={Addproduct} />
-            </Switch>
-          </Router>
-        </div>
-      </Provider>
-    )
-  }
+
+const App = () => {
+  const retailerRoutes = [
+    "/group",
+    "/products/store",
+    "/zone",
+    "/cluster",
+    "/store",
+    "/view/zones",
+    "/view/clusters",
+    "/products/assign",
+    "/view/products/daterange",
+    "/selectproductname",
+    "/addproductstostore",
+    "/addproducts",
+    "/selectproduct",
+    "/assigntocluster",
+    "/assigntozone",
+    "/view/assigned/zones",
+    "/view/assigned/clusters",
+    "/view/products/daterange",
+    "/view/effectiveprices",
+    "/queryondaterange",
+    "/showproducts",
+    "/selectproductname",
+    "/addpromotion",
+  ]
+  return (
+    <Provider store={store}>
+      <div>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={FullNavbar} />
+            {retailerRoutes.map((route) => {
+              return <PrivateRoute component={FullNavbar} path={route} />
+            })}
+            <Route exact path="/vendor" component={VendorLogin} />
+            <Route exact path="/vendor/reg" component={Registration} />
+            <Route exact path="/vendor/home" component={Home} />
+            <Route exact path="/vendor/addproduct" component={Addproduct} />
+          </Switch>
+        </Router>
+      </div>
+    </Provider>
+  )
 }
+export default App
