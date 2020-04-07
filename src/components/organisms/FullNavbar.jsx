@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import AppBar from "@material-ui/core/AppBar"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import Divider from "@material-ui/core/Divider"
@@ -10,7 +9,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles"
 import Toolbar from "@material-ui/core/Toolbar"
-import Typography from "@material-ui/core/Typography"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import MenuIcon from "@material-ui/icons/Menu"
@@ -23,7 +21,6 @@ import { connect } from "react-redux"
 
 import Tab from "@material-ui/core/Tab"
 import PropTypes from "prop-types"
-import Box from "@material-ui/core/Box"
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
 import GroupIcon from "@material-ui/icons/Group"
 import PublicIcon from "@material-ui/icons/Public"
@@ -46,29 +43,6 @@ import ProductRouter from "../retailer/ProductRouter"
 import ClusterForm from "../retailer/ClusterForm"
 import AddGroup from "../retailer/AddGroup"
 import Login from "../Login"
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props
-
-  return (
-    <Typography
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box p={3}>{children}</Box>}
-    </Typography>
-  )
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node.isRequired,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-}
 
 const drawerWidth = 250
 
@@ -141,13 +115,6 @@ const StyledTab = withStyles({
   },
 })(Tab)
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  }
-}
-
 function FullNavbar(props) {
   const classes = useStyles()
   const { t } = useTranslation()
@@ -193,15 +160,14 @@ function FullNavbar(props) {
                 </IconButton>
                 <StyledTab
                   label={t("header.home")}
-                  {...a11yProps(0)}
                   component={Link}
+                  id="app-header"
                   to="/group"
                 />
 
                 <Link to="/" style={{ marginLeft: "auto", color: "white" }}>
                   <StyledTab
                     label={t("header.logOut")}
-                    {...a11yProps(2)}
                     onClick={() => {
                       sessionStorage.removeItem("token")
                       props.logout()
@@ -210,11 +176,7 @@ function FullNavbar(props) {
                 </Link>
               </>
             ) : (
-              <StyledTab
-                label={t("header.home")}
-                {...a11yProps(0)}
-                component={Link}
-              />
+              <StyledTab label={t("header.home")} component={Link} />
             )}
           </Toolbar>
         </AppBar>
