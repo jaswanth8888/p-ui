@@ -384,10 +384,33 @@ a{
     width:80vw !important
 }
 
+.product-details-row{
+    font-size:12px !important;
+}
+
 @media only screen and (max-width: 600px) {
-    .joint-form , .joint-form-large, .joint-form-assign{
+    .joint-form , .joint-form-assign{
         display: table-row;
         margin: 0px 20px;
+        box-shadow: none;
+        border:1px solid rgba(0,0,0,0.1);
+        width: 90vw;
+    }
+
+    .joint-form-large{
+        display: table-row;
+        box-shadow: none;
+        border:1px solid rgba(0,0,0,0.1);
+        width: 90vw;
+    }
+
+    .product-form-body{
+        border:1px solid rgba(0,0,0,0.1);
+        margin-bottom: 60px;
+    }
+
+    .product-name{
+        padding:10px;
     }
 
     .box-container ,  .box-container-start , .box-container-table{

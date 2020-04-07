@@ -34,8 +34,8 @@ class ProductDetails extends Component {
           <TableContainer component={Paper}>
             <Table  size="small" aria-label="a dense table">
               <TableHead>
-                <TableRow>
-                  <TableCell>Base Price</TableCell>
+                <TableRow className="product-details-row">
+                  <TableCell>Base</TableCell>
                   <TableCell>Vendor</TableCell>
                   <TableCell>Quantity</TableCell>
                   <TableCell>Category</TableCell>
