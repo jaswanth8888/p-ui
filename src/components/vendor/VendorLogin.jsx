@@ -123,7 +123,6 @@ class VenderLogin extends Component {
               <Box p={1}>
                 <Avatar
                   style={{
-                    background: "#673ab7",
                     marginLeft: "10px",
                     padding: "30px",
                     position: "absolute",

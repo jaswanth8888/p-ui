@@ -101,7 +101,6 @@ class AddProducts extends Component {
           <FormControl variant="outlined" fullWidth>
             <InputLabel htmlFor="category">Enter Category</InputLabel>
             <Select
-              ref="category"
               fullWidth
               native
               variant="outlined"
@@ -115,11 +114,7 @@ class AddProducts extends Component {
             >
               <option aria-label="None" value="" />
               {this.props.categories.map((category, index) => {
-                return (
-                  <option value={category} key={index}>
-                    {category}
-                  </option>
-                )
+                return <option value={category}>{category}</option>
               })}
             </Select>
           </FormControl>

@@ -66,11 +66,11 @@
     flex-direction: column;
     height:100%;
     color:white;
-    background-color: #673ab7;
+    background-color: #3f51b5;
 }
 
 .MuiTypography-body1{
-    color: #673ab7;
+    color: #3f51b5;
 }
 
 .validations{
@@ -99,7 +99,7 @@ p{
     flex-direction: column;
     height:170px;
     color:white;
-    background-color: #673ab7;
+    background-color: #3f51b5;
 }
 
 p{
@@ -165,7 +165,7 @@ p{
 }
 
 th{
-    background-color: #673ab7 !important;
+    background-color: #3f51b5 !important;
     color: white !important;
     
 }
@@ -281,7 +281,7 @@ a{
 }
 
 .MuiListItemIcon-root{
-    color: #673ab7 !important;
+    color: #3f51b5 !important;
 }
 
 .flex-grid{
@@ -296,7 +296,7 @@ a{
     width:100%;
     padding-left:20px;
     padding-top:20px;
-    color: #673ab7 !important;
+    color: #3f51b5 !important;
 }
 
 .product-image{
@@ -338,7 +338,7 @@ a{
 }
 
 .card-header{
-    color: #673ab7 !important;
+    color: #3f51b5 !important;
 }
 
 .productform{
@@ -396,19 +396,19 @@ a{
         display: table-row;
         margin: 0px 20px;
         box-shadow: none;
-        border:1px solid rgba(0,0,0,0.1);
+        border:1px solid rgba(0,0,0,0.2);
         width: 90vw;
     }
 
     .joint-form-large{
         display: table-row;
         box-shadow: none;
-        border:1px solid rgba(0,0,0,0.1);
+        border:1px solid rgba(0,0,0,0.2);
         width: 90vw;
     }
 
     .product-form-body{
-        border:1px solid rgba(0,0,0,0.1);
+        border:1px solid rgba(0,0,0,0.2);
         margin-bottom: 220px;
     }
 
