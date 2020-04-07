@@ -212,6 +212,7 @@ class AddProductToStore extends Component {
                     variant="contained"
                     color="primary"
                     className="{classes.submit} submit-pad"
+                    id="add-prods-store-submit"
                   >
                     Add Products
                   </Button>
@@ -224,6 +225,7 @@ class AddProductToStore extends Component {
                     variant="contained"
                     color="primary"
                     className="{classes.submit} submit-pad empty-submit"
+                    id="add-prods-store-submit"
                     // onClick={this.handleSubmit}
                   >
                     Add Products

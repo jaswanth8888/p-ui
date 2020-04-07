@@ -135,6 +135,7 @@ class AssignToZone extends Component {
                     className="{classes.submit}"
                     onClick={this.handleSubmit}
                     style={{ marginTop: "10px" }}
+                    id="assign-zone-submit"
                   >
                     Save
                   </Button>

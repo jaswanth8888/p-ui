@@ -118,7 +118,7 @@ class QueryOnDateRange extends Component {
               </div>
 
               <TextField
-                id="startDate"
+                id="startDate-query"
                 label="Start Date"
                 name="startDate"
                 fullWidth
@@ -133,7 +133,7 @@ class QueryOnDateRange extends Component {
                 InputLabelProps={{ shrink: true, required: true }}
               />
               <TextField
-                id="endDate"
+                id="endDate-query"
                 name="endDate"
                 label="End Date"
                 fullWidth
@@ -158,6 +158,7 @@ class QueryOnDateRange extends Component {
                     marginTop: "30px",
                     marginBottom: "30px",
                   }}
+                  id="query-submit"
                   onClick={this.handleSubmit}
                 >
                   show

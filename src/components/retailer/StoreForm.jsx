@@ -234,6 +234,7 @@ class StoreForm extends Component {
               color="primary"
               className="{classes.submit}"
               onClick={this.handleSubmit}
+              id="store-form-submit"
             >
               Save
             </Button>

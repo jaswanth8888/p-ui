@@ -124,6 +124,7 @@ class SelectProduct extends Component {
                   variant="contained"
                   color="primary"
                   className="{classes.submit} submit-pad"
+                  id="selprods-submit"
                 >
                   Assign Price and Cluster
                 </Button>
@@ -137,6 +138,7 @@ class SelectProduct extends Component {
                   color="primary"
                   className="{classes.submit} submit-pad"
                   onClick={this.handleSubmit}
+                  id="assign-price-zone-submit"
                 >
                   Assign Price and Zone
                 </Button>

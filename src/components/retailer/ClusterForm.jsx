@@ -155,6 +155,7 @@ class ClusterForm extends Component {
                 color="primary"
                 className="{classes.submit} submit-pad"
                 onClick={this.handleSubmit}
+                id="cluster-form-submit"
               >
                 Save
               </Button>

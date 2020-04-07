@@ -287,6 +287,7 @@ class AddProducts extends Component {
                   color="primary"
                   className="{classes.submit}"
                   onClick={this.loopForm}
+                  id="add-product-submit"
                 >
                   ADD PRODUCTS
                 </Button>

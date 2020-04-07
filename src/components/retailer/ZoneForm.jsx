@@ -121,6 +121,7 @@ class ZoneForm extends Component {
                 color="primary"
                 className="{classes.submit} submit-pad"
                 onClick={this.handleSubmit}
+                id="zone-form-submit"
               >
                 Save
               </Button>

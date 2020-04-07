@@ -151,7 +151,7 @@ class GetProductsInDateRange extends Component {
                 required
                 fullWidth
                 type="date"
-                id="startDate"
+                id="startDate-in-range"
                 label="Start Date"
                 InputLabelProps={{ shrink: true, required: true }}
                 name="startDate"
@@ -167,7 +167,7 @@ class GetProductsInDateRange extends Component {
                 type="date"
                 // defaultValue={new Date().toISOString().slice(0,10)}
                 step="0.01"
-                id="endDate"
+                id="endDate-in-range"
                 label="End Date"
                 InputLabelProps={{ shrink: true, required: true }}
                 name="endDate"
@@ -185,6 +185,7 @@ class GetProductsInDateRange extends Component {
                     className="{classes.submit}"
                     onClick={this.handleSubmit}
                     style={{ marginTop: "30px" }}
+                    id="get-prods-in-range-submit"
                   >
                     Show
                   </Button>

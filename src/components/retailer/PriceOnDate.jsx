@@ -116,6 +116,7 @@ class PriceOnDate extends Component {
                   variant="contained"
                   color="primary"
                   className="{classes.submit} submit-pad"
+                  id="add-promo-btn"
                 >
                   Assign Price to product
                 </Button>

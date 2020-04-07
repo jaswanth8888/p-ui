@@ -171,6 +171,7 @@ class AssignToCluster extends Component {
                     color="primary"
                     className="{classes.submit} submit-pad"
                     onClick={this.handleSubmit}
+                    id="assign-cluster-submit"
                   >
                     Save
                   </Button>

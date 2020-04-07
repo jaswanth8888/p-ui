@@ -105,6 +105,7 @@ class Promotion extends Component {
                 color="primary"
                 className="{classes.submit} submit-pad"
                 onClick={this.handleSubmit}
+                id="promotion-submit"
               >
                 SAVE
               </Button>
