@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import AppBar from "@material-ui/core/AppBar"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import Divider from "@material-ui/core/Divider"
@@ -13,50 +14,37 @@ import Typography from "@material-ui/core/Typography"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import MenuIcon from "@material-ui/icons/Menu"
-import InboxIcon from "@material-ui/icons/MoveToInbox"
 import LocationCityIcon from "@material-ui/icons/LocationCity"
 import clsx from "clsx"
-import { default as React, Fragment } from "react"
+import React from "react"
 import { useTranslation } from "react-i18next"
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom"
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom"
 import { connect } from "react-redux"
 
 import Tab from "@material-ui/core/Tab"
 import PropTypes from "prop-types"
 import Box from "@material-ui/core/Box"
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
-import ViewListIcon from "@material-ui/icons/ViewList"
 import GroupIcon from "@material-ui/icons/Group"
-import GroupAddIcon from "@material-ui/icons/GroupAdd"
 import PublicIcon from "@material-ui/icons/Public"
-import LocalBarIcon from "@material-ui/icons/LocalBar"
 import Tooltip from "@material-ui/core/Tooltip"
 import DateRangeIcon from "@material-ui/icons/DateRange"
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney"
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted"
 import StoreIcon from "@material-ui/icons/Store"
 import EventBusyIcon from "@material-ui/icons/EventBusy"
-import ViewAssignedClusters from "../retailer/ViewAssignedClusters.jsx"
-import ViewAssignedZones from "../retailer/ViewAssignedZones.jsx"
-import EffectivePriceRouter from "../retailer/EffectivePriceRouter.jsx"
+import EffectivePriceRouter from "../retailer/EffectivePriceRouter"
 import { logout } from "../../redux/actions/RetailerActions"
-import ZoneForm from "../retailer/ZoneForm.jsx"
-import QueryOnDateRouter from "../retailer/QueryOnDateRouter.jsx"
-import PromotionRouter from "../retailer/PromotionRouter.jsx"
-import ZoneClusterRouter from "../retailer/ZoneClusterRouter.jsx"
-import ViewZones from "../retailer/ViewZones.jsx"
-import ViewClusters from "../retailer/ViewClusters.jsx"
-import StoreForm from "../retailer/StoreForm.jsx"
-import ProductRouter from "../retailer/ProductRouter.jsx"
-import ClusterForm from "../retailer/ClusterForm.jsx"
-import AddGroup from "../retailer/AddGroup.jsx"
+import ZoneForm from "../retailer/ZoneForm"
+import QueryOnDateRouter from "../retailer/QueryOnDateRouter"
+import PromotionRouter from "../retailer/PromotionRouter"
+import ZoneClusterRouter from "../retailer/ZoneClusterRouter"
+import ViewZones from "../retailer/ViewZones"
+import ViewClusters from "../retailer/ViewClusters"
+import StoreForm from "../retailer/StoreForm"
+import ProductRouter from "../retailer/ProductRouter"
+import ClusterForm from "../retailer/ClusterForm"
+import AddGroup from "../retailer/AddGroup"
 import Login from "../Login"
 
 function TabPanel(props) {
@@ -77,9 +65,9 @@ function TabPanel(props) {
 }
 
 TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  children: PropTypes.node.isRequired,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
 }
 
 const drawerWidth = 250
@@ -162,9 +150,13 @@ function a11yProps(index) {
 
 function FullNavbar(props) {
   const classes = useStyles()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
+
+  FullNavbar.propTypes = {
+    logout: PropTypes.func.isRequired,
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -253,7 +245,7 @@ function FullNavbar(props) {
               </div>
               <Divider />
               <List>
-                <Link to="/products/assign">
+                <Link to="/selectproduct">
                   <Tooltip
                     title="Assign Price to Zone/Cluster"
                     placement="right"
@@ -270,7 +262,7 @@ function FullNavbar(props) {
                   </Tooltip>
                 </Link>
 
-                <Link to="/products/store">
+                <Link to="/addproductstostore">
                   <Tooltip title="Add Products to Store" placement="right">
                     <ListItem button>
                       <ListItemIcon>
@@ -409,15 +401,6 @@ function FullNavbar(props) {
                   </Tooltip>
                 </Link>
               </List>
-              {/* <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
             </Drawer>
           </>
         ) : (
@@ -425,60 +408,42 @@ function FullNavbar(props) {
         )}
         <Switch>
           <Route exact path="/" component={Login} />
+          <Route exact path="/group" component={AddGroup} />
           <Route
             exact
-            path="/group"
-            render={(props) => <AddGroup {...props} />}
+            path={["/products/store", "/addproductstostore", "/addproducts"]}
+            component={ProductRouter}
+          />
+          <Route exact path="/zone" component={ZoneForm} />
+          <Route exact path="/cluster" component={ClusterForm} />
+          <Route exact path="/store" component={StoreForm} />
+          <Route exact path="/view/zones" component={ViewZones} />
+          <Route exact path="/view/clusters" component={ViewClusters} />
+          <Route
+            exact
+            path={[
+              "/selectproduct",
+              "/assigntocluster",
+              "/assigntozone",
+              "/view/assigned/zones",
+              "/view/assigned/clusters",
+            ]}
+            component={ZoneClusterRouter}
           />
           <Route
             exact
-            path="/products/store"
-            render={(props) => <ProductRouter {...props} />}
+            path={["/view/products/daterange", "/view/effectiveprices"]}
+            component={EffectivePriceRouter}
           />
           <Route
             exact
-            path="/zone"
-            render={(props) => <ZoneForm {...props} />}
+            path={["/queryondaterange", "/showproducts"]}
+            component={QueryOnDateRouter}
           />
           <Route
             exact
-            path="/cluster"
-            render={(props) => <ClusterForm {...props} />}
-          />
-          <Route
-            exact
-            path="/store"
-            render={(props) => <StoreForm {...props} />}
-          />
-          <Route
-            exact
-            path="/view/zones"
-            render={(props) => <ViewZones {...props} />}
-          />
-          <Route
-            exact
-            path="/view/clusters"
-            render={(props) => <ViewClusters {...props} />}
-          />
-          <Route
-            exact
-            path="/products/assign"
-            render={(props) => <ZoneClusterRouter {...props} />}
-          />
-          <Route
-            exact
-            path="/view/products/daterange"
-            render={(props) => <EffectivePriceRouter {...props} />}
-          />
-          <Route
-            exact
-            path="/queryondaterange"
-            render={(props) => <QueryOnDateRouter {...props} />}
-          />
-          <Route
-            exact
-            path="/selectproductname"
-            render={(props) => <PromotionRouter {...props} />}
+            path={["/selectproductname", "/addpromotion"]}
+            component={PromotionRouter}
           />
         </Switch>
       </Router>
