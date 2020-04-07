@@ -32,7 +32,7 @@ class ProductDetails extends Component {
         </div>
         <div className="product-table-data">
           <TableContainer component={Paper}>
-            <Table aria-label="a dense table">
+            <Table  size="small" aria-label="a dense table">
               <TableHead>
                 <TableRow>
                   <TableCell>Base Price</TableCell>
