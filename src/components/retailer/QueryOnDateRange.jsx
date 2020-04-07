@@ -108,9 +108,6 @@ class QueryOnDateRange extends Component {
                     color="primary"
                     component="h1"
                     variant="h4"
-                    style={{
-                      fontFamily: "font-family: 'Open Sans', sans-serif;",
-                    }}
                   >
                     Promotions for Products
                   </Typography>

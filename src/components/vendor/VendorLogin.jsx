@@ -146,7 +146,6 @@ class VenderLogin extends Component {
                 variant="h4"
                 style={{
                   marginLeft: "20px",
-                  fontFamily: "font-family: 'Open Sans', sans-serif;",
                 }}
               >
                 Login

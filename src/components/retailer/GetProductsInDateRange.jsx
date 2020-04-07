@@ -137,9 +137,6 @@ class GetProductsInDateRange extends Component {
                     color="primary"
                     component="h1"
                     variant="h4"
-                    style={{
-                      fontFamily: "font-family: 'Open Sans', sans-serif;",
-                    }}
                   >
                     Prices for Products
                   </Typography>

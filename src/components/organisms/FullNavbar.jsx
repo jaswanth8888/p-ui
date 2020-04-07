@@ -100,8 +100,9 @@ const useStyles = makeStyles(theme => ({
 
 const StyledTab = withStyles({
   root: {
-    fontFamily: "'Open Sans Condensed', sans-serif",
-    fontSize: "18px"
+    color: "white",
+    fontFamily : "Oswald, sans-serif",
+    fontSize: "18px",
   }
 })(Tab);
 
@@ -326,7 +327,7 @@ function FullNavbar(props) {
                       sessionStorage.setItem("countryCode", countryCode);
                     }}
                   />
-                  <Link to="/" style={{ color: "white" }}>
+                  <Link to="/" id="logout-btn">
                     <StyledTab
                       label={t("header.logOut")}
                       onClick={() => {
