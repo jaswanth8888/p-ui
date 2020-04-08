@@ -59,6 +59,12 @@ const App = () => {
     "/showproducts",
     "/selectproductname",
     "/addpromotion",
+    "/applypromotion/zone",
+    "/definepromotion/zone",
+    "/view/promotions/zone",
+    "/applypromotion/cluster",
+    "/definepromotion/cluster",
+    "/view/promotions/cluster",
   ]
   return (
     <Provider store={store}>

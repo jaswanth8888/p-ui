@@ -10,7 +10,7 @@ const ProductRouter = () => {
       <Switch>
         <PrivateRoute
           exact
-          path="/addproductstostore"
+          path="/products/store"
           component={AddProductToStore}
         />
         <PrivateRoute exact path="/addproducts" component={AddProducts} />
