@@ -63,6 +63,9 @@ import ClusterForm from "../retailer/ClusterForm.jsx";
 import AddGroup from "../retailer/AddGroup.jsx";
 import Login from "../Login";
 import Hidden from "@material-ui/core/Hidden";
+import CancelPromotionRouter from "../retailer/CancelPromotionRouter";
+import WithdrawPromotionZoneRouter from "../retailer/WithdrawPromotionZoneRouter";
+import WithdrawPromotionClusterRouter from "../retailer/WithdrawPromotionClusterRouter";
 
 const drawerWidth = 250;
 const useStyles = makeStyles(theme => ({
@@ -213,6 +216,52 @@ function FullNavbar(props) {
               <ListItemText
                 className="list-item-text"
                 primary={t("welcome.createStore")}
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+        <Divider />
+        <Link to="/cancel/promotion">
+          <Tooltip title="Cancel Percentage Promotion" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <EventBusyIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Cancel Percentage Promotion"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+        <Link to="/withdraw/zonepromotion">
+          <Tooltip
+            title="Withdraw Percentage Promotion Zone"
+            placement="right"
+          >
+            <ListItem button>
+              <ListItemIcon>
+                <EventBusyIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Withdraw Percentage Promotion Zone"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+        <Link to="/withdraw/clusterpromotion">
+          <Tooltip
+            title="Withdraw Percentage Promotion Cluster"
+            placement="right"
+          >
+            <ListItem button>
+              <ListItemIcon>
+                <EventBusyIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Withdraw Percentage Promotion Cluster"
               />
             </ListItem>
           </Tooltip>
@@ -405,6 +454,21 @@ function FullNavbar(props) {
           <Route exact path="/store" component={StoreForm} />
           <Route exact path="/view/zones" component={ViewZones} />
           <Route exact path="/view/clusters" component={ViewClusters} />
+          <Route
+            exact
+            path="/cancel/promotion"
+            component={CancelPromotionRouter}
+          />
+          <Route
+            exact
+            path="/withdraw/zonepromotion"
+            component={WithdrawPromotionZoneRouter}
+          />
+          <Route
+            exact
+            path="/withdraw/clusterpromotion"
+            component={WithdrawPromotionClusterRouter}
+          />
           <Route
             exact
             path={[

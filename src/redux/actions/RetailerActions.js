@@ -599,3 +599,38 @@ export const cancelEffectivePrice = (productName, promotionId) => async (
 export const resetStatusCode = () => (dispatch) => {
   dispatch({ type: RESET_STATUS_CODE })
 }
+
+export const cancelPromotion = (productName, levelOption) => async (dispatch) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/` +
+        `product/promotion/cancel/${productName}/${levelOption}`,
+      { headers: { Authorization: TOKEN() } }
+    )
+    .then(() => {
+      dispatch({ type: PRODUCT_POST_REQUEST, msg: "Cancel Successful!" })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
+}
+
+export const withdrawPromotion = (
+  productName,
+  levelOption,
+  promotionId
+) => async (dispatch) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/` +
+        `product/promotion/withdraw/${productName}/${levelOption}/${promotionId}`,
+      { headers: { Authorization: TOKEN() } }
+    )
+    .then(() => {
+      dispatch({ type: PRODUCT_POST_REQUEST, msg: "Withdraw Successful!" })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
+}
+
