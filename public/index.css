@@ -1,3 +1,17 @@
+body{
+    font-family: 'Roboto', sans-serif !important;
+}
+
+h1,h2,h3,h4,h5{
+    font-family: 'Oswald', sans-serif;
+    
+}
+
+#logout-btn{
+    color: "white" !important;
+    font-family : 'Oswald', sans-serif !important;
+}
+
 .form-full-center{
     position: absolute;
     display: flex;
@@ -35,6 +49,7 @@
     margin-top:60px;
     display: flex;
     justify-content: center;
+    align-items: center;
     box-shadow: 0px 10px 17px 6px rgba(0,0,0,0.24);
 }
 
@@ -54,7 +69,7 @@
     justify-content: center;
     align-items:center;
     width:100vw;
-    height:100vh;
+    height:90vh;
     padding:40px;
 }
 
@@ -66,11 +81,11 @@
     flex-direction: column;
     height:100%;
     color:white;
-    background-color: #673ab7;
+    background-color: #3f51b5;
 }
 
 .MuiTypography-body1{
-    color: #673ab7;
+    color: #3f51b5;
 }
 
 .validations{
@@ -99,7 +114,7 @@ p{
     flex-direction: column;
     height:170px;
     color:white;
-    background-color: #673ab7;
+    background-color: #3f51b5;
 }
 
 p{
@@ -114,9 +129,12 @@ p{
 }
 
 .joint-form-large{
-    margin-top:60px;
+    height:auto;
     display: flex;
+    width:70vw;
+    height:85vh;
     box-shadow: 0px 10px 17px 6px rgba(0,0,0,0.24);
+    margin-top:130px;
 }
 
 
@@ -162,7 +180,7 @@ p{
 }
 
 th{
-    background-color: #673ab7 !important;
+    background-color: #3f51b5 !important;
     color: white !important;
     
 }
@@ -199,7 +217,7 @@ a{
 
 .help-block-h4{
     text-align : left !important;
-    font-family: 'Open Sans', sans-serif;
+    
     position: relative;
     top: -20px
                     
@@ -215,7 +233,7 @@ a{
 
 .joint-form-store-style{
 
-    font-family: 'Open Sans', sans-serif;
+    
     position: absolute;
     top: 210px;
     left: 40px;
@@ -248,6 +266,7 @@ a{
     padding:20px;
 }
 
+
 .form-first-half{
     display: flex;
     justify-content: center;
@@ -278,7 +297,7 @@ a{
 }
 
 .MuiListItemIcon-root{
-    color: #673ab7 !important;
+    color: #3f51b5 !important;
 }
 
 .flex-grid{
@@ -291,48 +310,52 @@ a{
 .product-name{
     height:10%;
     width:100%;
-    padding:20px;
-    color: #673ab7 !important;
+    padding-left:20px;
+    padding-top:20px;
+    color: #3f51b5 !important;
 }
 
 .product-image{
     width:100%;
-    height:60%;
+    max-height:65%;
     overflow: scroll;
     overflow-x: hidden;
 }
 
 .product-table-data{
     width:100%;
-    height:15%;
+    max-height:30%;
 }
 
-.product-table-data  > tr,td,th,table,thead,tbody{
+.product-table{
     border:none !important;
+    font-size: 12px !important;
     box-shadow:none !important;
     border-radius: 0px !important;
 }
 
-
+.table-text{
+    font-size: 12px !important;
+}
 
 .product-image img{
     width:100%;
-    
 }
 
 .product-desc{
     display: flex;
     justify-content: center;
     align-items: center;
-    height:20%;
+    max-height:25%;
     width:100%;
-    padding:20px;
+    padding:0px 15px 10px 15px;
     overflow: scroll;
+    padding:15px;
     overflow-x: hidden;
 }
 
 .card-header{
-    color: #673ab7 !important;
+    color: #3f51b5 !important;
 }
 
 .productform{
@@ -359,7 +382,11 @@ a{
     width:100% !important;
     height:100% !important;
     padding:40px;
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> fc7d550960f650099b78a72729f11ba91d4d295f
 }
 
 .button-link{
@@ -387,10 +414,45 @@ a{
     color: black !important
 }
 
+.data-tables{
+    width:100vw !important
+}
+
+.product-details-row{
+    font-size:12px !important;
+}
+
+.login-icon{
+    font-size: 120px !important;
+    color: #3f51b5;
+    margin-top:-40px;
+    margin-bottom : 40px;
+}
+
+
 @media only screen and (max-width: 600px) {
-    .joint-form , .joint-form-large, .joint-form-assign{
+    .joint-form , .joint-form-assign{
         display: table-row;
-        margin: 0px 20px;
+        box-shadow: none;
+        border:1px solid rgba(0,0,0,0.1);
+        width: 90vw;
+    }
+
+
+    .joint-form-large{
+        display: table-row;
+        box-shadow: none;
+        border:1px solid rgba(0,0,0,0.1);
+        width: 90vw;
+    }
+
+    .product-form-body{
+        border:1px solid rgba(0,0,0,0.1);
+        margin-bottom: 40px;
+    }
+
+    .product-name{
+        padding:10px;
     }
 
     .box-container ,  .box-container-start , .box-container-table{

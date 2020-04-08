@@ -5,6 +5,7 @@ import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import React, { Component, Fragment } from "react"
+import Select from "@material-ui/core/Select"
 import Snackbar from "@material-ui/core/Snackbar"
 import MuiAlert from "@material-ui/lab/Alert"
 import { connect } from "react-redux"
@@ -13,32 +14,27 @@ import {
   getProductList,
   saveProductValue,
   getProductDetails,
+  getZones,
+  saveZoneValue
 } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
 
-class SelectProduct extends Component {
+class ApplyPromotionInZone extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       productName: "",
+      zone: "",
       // status: 0
     }
     this.handleChangeProduct = this.handleChangeProduct.bind(this)
-    //  this.productNameNotSelected = this.productNameNotSelected.bind(this);
-  }
-
-  productNameNotSelected() {
-    console.log(this.state.productName)
-    if (this.state.productName) {
-      this.setState({ status: 1 })
-    } else {
-      this.setState({ status: -1 })
-    }
+    this.handleChangeZone = this.handleChangeZone.bind(this)
   }
 
   componentWillMount() {
     this.props.getProductList()
+    this.props.getZones()
   }
 
   handleChangeProduct = (e, value) => {
@@ -48,16 +44,16 @@ class SelectProduct extends Component {
     console.log(this.state.productName)
     this.props.saveProductValue(productName)
     this.props.getProductDetails(value)
-    // this.productNameNotSelected();
-    // console.log(this.state.status);
   }
 
-  // handleSubmit(e) {
-  //     e.preventDefault();
-  //     if(this.productNameNotSelected()){
-  //         this.setState({ isSubmitted: true })
-  //     }
-  // }
+  handleChangeZone(e) {
+    const { name, value } = e.target
+    this.setState({ zone: value })
+    console.log(value)
+    this.props.saveZoneValue(value)
+  }
+
+
 
   render() {
     return (
@@ -66,22 +62,48 @@ class SelectProduct extends Component {
           <div className="validation-half">
             <div className="validations">
               <h3 className="center-h3">Requirements</h3>
-              {this.state.productName.length === "" && (
-                <div className="typo-div">
-                  <ClearIcon className="icon-style" />
+
+              {this.state.productName === "" && (
+                <div style={{ display: "flex" }}>
+                  <ClearIcon
+                    style={{ paddingRight: "5px", marginTop: "-2px" }}
+                  />
                   <Typography variant="subtitle2" gutterBottom>
-                    Please provide a product name
+                    Select a product name
                   </Typography>
                 </div>
               )}
-              {this.state.productName.length > 0 && (
-                <div className="approved-text">
-                  <CheckIcon className="icon-style" />
+              {this.state.productName !== "" && (
+                <div style={{ display: "flex", color: "#ffc107" }}>
+                  <CheckIcon
+                    style={{ paddingRight: "5px", marginTop: "-2px" }}
+                  />
                   <Typography variant="subtitle2" gutterBottom>
-                    Please provide a product name
+                    Select a product name
                   </Typography>
                 </div>
               )}
+              {this.state.zone === "" && (
+                <div style={{ display: "flex" }}>
+                  <ClearIcon
+                    style={{ paddingRight: "5px", marginTop: "-2px" }}
+                  />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select a zone name
+                  </Typography>
+                </div>
+              )}
+              {this.state.zone !== "" && (
+                <div style={{ display: "flex", color: "#ffc107" }}>
+                  <CheckIcon
+                    style={{ paddingRight: "5px", marginTop: "-2px" }}
+                  />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select a zone name 
+                  </Typography>
+                </div>
+              )}
+
             </div>
           </div>
           <div className="form-half">
@@ -94,7 +116,7 @@ class SelectProduct extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    Select a Product
+                    Select product name and zone
                   </Typography>
                 </div>
               </div>
@@ -111,26 +133,37 @@ class SelectProduct extends Component {
                       variant="outlined"
                     />
                   )}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeProduct}
                   name="productName"
                 />
               </FormControl>
-              {this.state.productName === "" && <Link to="/selectproduct" />}
-
-              <Link className="button-link" to="/assigntocluster">
-                <Button
-                  type="button"
+              <FormControl margin="normal" variant="outlined" fullWidth>
+                <InputLabel htmlFor="outlined-age-native-simple">
+                  Zone
+                </InputLabel>
+                <Select
                   fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                  id="selprods-submit"
+                  native
+                  value={this.state.zone}
+                  onChange={this.handleChangeZone}
+                  label="Zone"
+                  inputProps={{
+                    name: "zone",
+                    id: "zone",
+                  }}
                 >
-                  Assign Price and Cluster
-                </Button>
-              </Link>
+                  <option aria-label="None" value="" />
+                  {this.props.zones.map((zone, index) => {
+                    return (
+                      <option value={zone} key={index}>
+                        {zone}
+                      </option>
+                    )
+                  })}
+                </Select>
+              </FormControl>
 
-              <Link className="button-link" to="/assigntozone">
+              <Link className="button-link" to="/definepromotion/zone">
                 <Button
                   type="button"
                   fullWidth
@@ -138,25 +171,14 @@ class SelectProduct extends Component {
                   color="primary"
                   className="{classes.submit} submit-pad"
                   onClick={this.handleSubmit}
-                  id="assign-price-zone-submit"
+                  id="apply-promotion-zone-submit"
                 >
-                  Assign Price and Zone
+                  Go
                 </Button>
               </Link>
             </form>
           </div>
         </div>
-        {/* <Fragment>
-                    {(this.state.status === -1) ? (
-                    <div>
-                    <Snackbar open="true" autoHideDuration={2000}>
-                        <MuiAlert severity="error" elevation={6} variant="filled">
-                         Please select product name
-                        </MuiAlert>
-                    </Snackbar>
-                    </div>) : (<div />)
-                    }
-                </Fragment> */}
       </div>
     )
   }
@@ -164,10 +186,13 @@ class SelectProduct extends Component {
 
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
+  zones: store.RetailerReducer.zones,
 })
 const actionAsProps = {
   getProductList,
   saveProductValue,
   getProductDetails,
+  getZones,
+  saveZoneValue,
 }
-export default connect(stateAsProps, actionAsProps)(SelectProduct)
+export default connect(stateAsProps, actionAsProps)(ApplyPromotionInZone)

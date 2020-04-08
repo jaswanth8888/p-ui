@@ -3,7 +3,7 @@
   "please fill password": "please fill password",
   "header": {
     "logIn": "Login",
-    "logOut": "Log out",
+    "logOut": "Logout",
     "title": "Retail Application",
     "home": "Prices and Promotions"
   },
@@ -25,7 +25,9 @@
     "addGroup": "Create Group",
     "addProducttoStore": "Add Product to Store",
     "assignProductToClusterZone": "Assign Price to Zone/Cluster",
-    "cancelNotEffectivePriceChange": "Cancel Not Effective Price Change"
+    "cancelNotEffectivePriceChange": "Cancel Not Effective Price Change",
+    "applyPromotionInZoneLevel": "Apply Promotion in Zone Level",
+    "applyPromotionInClusterLevel": "Apply Promotion in Cluster Level"
   },
   "zoneForm": {
     "lengthTooShort": "Zone has to be greater than 5 letters",

@@ -123,7 +123,6 @@ class VenderLogin extends Component {
               <Box p={1}>
                 <Avatar
                   style={{
-                    background: "#673ab7",
                     marginLeft: "10px",
                     padding: "30px",
                     position: "absolute",
@@ -147,7 +146,6 @@ class VenderLogin extends Component {
                 variant="h4"
                 style={{
                   marginLeft: "20px",
-                  fontFamily: "font-family: 'Open Sans', sans-serif;",
                 }}
               >
                 Login
@@ -164,7 +162,7 @@ class VenderLogin extends Component {
                 fullWidth
                 error={this.state.error.usernameError}
                 helperText={this.state.error.usernameErrorMsg}
-                id="username"
+                id="username-vendor"
                 label="User Name"
                 name="username"
                 autoComplete="username"
@@ -192,7 +190,7 @@ class VenderLogin extends Component {
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
+                id="password-vendor"
                 onChange={this.handleChange}
                 autoComplete="current-password"
                 InputProps={{
@@ -213,6 +211,7 @@ class VenderLogin extends Component {
                 variant="contained"
                 color="primary"
                 className="{classes.submit} submit-pad"
+                id="login-vendor"
                 onClick={this.handleSubmit}
               >
                 Login

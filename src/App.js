@@ -64,7 +64,13 @@ const App = () => {
     "/withdraw/zonepromotion",
     "/withdraw/zoneproduct",
     "/withdraw/clusterpromotion",
-    "/withdraw/clusterproduct"
+    "/withdraw/clusterproduct",
+    "/applypromotion/zone",
+    "/definepromotion/zone",
+    "/view/promotions/zone",
+    "/applypromotion/cluster",
+    "/definepromotion/cluster",
+    "/view/promotions/cluster",
   ]
   return (
     <Provider store={store}>

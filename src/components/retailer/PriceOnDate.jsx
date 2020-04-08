@@ -49,7 +49,7 @@ class PriceOnDate extends Component {
     return (
       <div className="box-container">
         <div className="joint-form">
-          <div className="validation-half" style={{ background: "#673ab7" }}>
+          <div className="validation-half">
             <div className="validations">
               <h3 style={{ textAlign: "center" }}>Requirements</h3>
               {this.state.productName.length <= 0 && (

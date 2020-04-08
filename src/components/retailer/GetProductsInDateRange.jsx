@@ -44,7 +44,7 @@ class GetProductsInDateRange extends Component {
     return (
       <div className="box-container">
         <div className="joint-form">
-          <div className="validation-half" style={{ background: "#673ab7" }}>
+          <div className="validation-half">
             <div className="validations">
               <h3 style={{ textAlign: "center" }}>Requirements</h3>
               {this.state.startDate.length == 0 && (
@@ -137,9 +137,6 @@ class GetProductsInDateRange extends Component {
                     color="primary"
                     component="h1"
                     variant="h4"
-                    style={{
-                      fontFamily: "font-family: 'Open Sans', sans-serif;",
-                    }}
                   >
                     Prices for Products
                   </Typography>

@@ -34,6 +34,7 @@ class Home extends Component {
             className="{classes.submit}"
             style={{ marginTop: "30px", maeginleft: "70px" }}
             onClick={this.handleSubmit}
+            id="add-prod-vendor"
           >
             addproduct
           </Button>
@@ -44,6 +45,7 @@ class Home extends Component {
             className="{classes.submit}"
             style={{ marginTop: "30px", marginLeft: "1000px" }}
             onClick={this.handleLogout}
+            id="logout-vendor"
           >
             logout
           </Button>

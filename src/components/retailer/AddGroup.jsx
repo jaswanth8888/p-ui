@@ -4,9 +4,9 @@ import Snackbar from "@material-ui/core/Snackbar"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import MuiAlert from "@material-ui/lab/Alert"
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import { connect } from "react-redux"
-import { postGroup } from "../../redux/actions/RetailerActions.js"
+import { postGroup } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
 
 class AddGroup extends Component {
@@ -23,18 +23,7 @@ class AddGroup extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillMount() {
-    this.props.history.push("/group")
-  }
-
-  handleChange(e) {
-    const { name, value } = e.target
-    const { group } = this.state
-    group[name] = value
-    this.setState({ group })
-  }
-
-  is_validGroupName = () => {
+  isValidGroupName = () => {
     if (this.state.group.groupName.length > 0) {
       this.setState({ status: 1 })
     } else {
@@ -44,9 +33,16 @@ class AddGroup extends Component {
     return true
   }
 
+  handleChange(e) {
+    const { name, value } = e.target
+    const { group } = this.state
+    group[name] = value
+    this.setState({ group })
+  }
+
   handleSubmit(e) {
     e.preventDefault()
-    if (this.is_validGroupName()) {
+    if (this.isValidGroupName()) {
       this.props.postGroup({ ...this.state.group }) // thunk action
     }
   }
