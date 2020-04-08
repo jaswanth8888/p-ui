@@ -638,4 +638,3 @@ export const withdrawPromotion = (
 export const saveLevelValue = (level) => (dispatch) => {
   dispatch({ type: LEVEL_SAVE_VALUE, levelOption: level })
 }
-
