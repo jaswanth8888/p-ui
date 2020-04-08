@@ -32,9 +32,9 @@ h5 {
   justify-content: center;
   align-items: center;
   padding: 40px;
+  margin-top: 64px;
   width: 100vw;
   height: 100vh;
-  margin-top: 64px;
   margin-bottom: 64px;
 }
 
@@ -43,19 +43,20 @@ h5 {
   justify-content: center;
   align-items: flex-start;
   margin-top: 64px;
-  margin-bottom: 64px;
   padding: 40px;
   width: 100vw;
   height: 100vh;
   margin-left: 20px;
   margin-right: 20px;
+  margin-bottom: 64px;
 }
 
 .joint-form-assign {
   margin-top: 60px;
+  width:40vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
   box-shadow: 0px 10px 17px 6px rgba(0, 0, 0, 0.24);
 }
 
@@ -73,11 +74,11 @@ h5 {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 64px;
+  margin-bottom: 64px;
   width: 100vw;
   height: 90vh;
   padding: 40px;
-  margin-top: 64px;
-  margin-bottom: 64px;
 }
 
 .validation-half {
@@ -85,7 +86,7 @@ h5 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
   color: white;
   background-color: #3f51b5;
 }
@@ -97,10 +98,6 @@ h5 {
 .validations {
   padding: 20px;
   height: 500px;
-}
-
-.flex-column {
-  flex-direction: column-reverse;
 }
 
 p {
@@ -131,11 +128,6 @@ p {
   display: flex;
   box-shadow: 0px 10px 17px 6px rgba(0, 0, 0, 0.24);
 }
-.joint-form-large-table {
-  margin-top: 500px;
-  display: flex;
-  box-shadow: 0px 10px 17px 6px rgba(0, 0, 0, 0.24);
-}
 
 .joint-form-large {
   height: auto;
@@ -144,6 +136,12 @@ p {
   height: 85vh;
   box-shadow: 0px 10px 17px 6px rgba(0, 0, 0, 0.24);
   margin-top: 130px;
+}
+
+.joint-form-large-table {
+  margin-top: 450px;
+  display: flex;
+  box-shadow: 0px 10px 17px 6px rgba(0, 0, 0, 0.24);
 }
 
 .form-half {
@@ -224,9 +222,7 @@ a {
 
 .help-block-h4 {
   text-align: left !important;
-
   position: relative;
-  top: -20px;
 }
 
 .submit-pad {
@@ -257,34 +253,37 @@ a {
   margin-top: 30px !important;
 }
 
-#special-href {
-  text-decoration: "none";
-  opacity: 0;
-  pointer-events: "none";
+.special-href {
+  width: 100% !important;
 }
 
 .advanced-form-container {
   display: flex;
-  justify-content: space-between;
-  padding: 20px;
+  justify-content: space-evenly;
 }
 
 .form-first-half {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  flex: 0.47;
+  flex: 0.5;
+  padding: 20px;
+}
+
+.form-first-half form {
+  width: 100% !important;
 }
 
 .form-second-half {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0.47;
+  flex: 0.5;
+  padding: 20px;
 }
 
 .special-store-help {
-  margin-left: 40px !important;
+  margin-left: 20px !important;
   margin-top: 20px !important;
 }
 
@@ -425,6 +424,10 @@ a {
   margin-bottom: 40px;
 }
 
+#store-form-container {
+    padding:20px;
+}
+
 @media only screen and (max-width: 600px) {
   .joint-form,
   .joint-form-assign {
@@ -432,6 +435,16 @@ a {
     box-shadow: none;
     border: 1px solid rgba(0, 0, 0, 0.1);
     width: 90vw;
+  }
+
+  .form-first-half {
+    padding-right: 5px;
+    padding-top: 0px;
+  }
+
+  .form-second-half {
+    padding-left: 5px;
+    padding-top: 0px;
   }
 
   .joint-form-large {
@@ -453,9 +466,14 @@ a {
   .box-container,
   .box-container-start,
   .box-container-table {
+    margin: 10px 0px;
     padding: 0px;
     padding-top: 20px;
   }
+
+  #store-form-container {
+    padding:0px;
+    }
 
   #app-header {
     display: none;
@@ -463,6 +481,10 @@ a {
 
   .validations {
     height: auto;
+  }
+
+  .help-block-h4 {
+    margin-bottom: 20px !important;
   }
 }
 
@@ -477,3 +499,5 @@ a {
 .thumbnail:hover {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
+
+
