@@ -478,6 +478,10 @@ a{
         height: auto;
     }
 
+    .help-block-h4{
+        margin-bottom:20px !important; 
+    }
+
 }
 
 .thumbnail {

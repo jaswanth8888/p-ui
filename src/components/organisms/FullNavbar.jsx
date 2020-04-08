@@ -374,9 +374,9 @@ function FullNavbar(props) {
                   <ReactFlagsSelect
                     countries={["US", "FR", "DE"]}
                     customLabels={{
-                      US: "EN-US",
-                      FR: "FR",
-                      DE: "DE",
+                      US: " ",
+                      FR: " ",
+                      DE: " ",
                     }}
                     className="right-nav-btn"
                     placeholder="Select Language"
@@ -403,9 +403,9 @@ function FullNavbar(props) {
                 <ReactFlagsSelect
                   countries={["US", "FR", "DE"]}
                   customLabels={{
-                    US: "EN-US",
-                    FR: "FR",
-                    DE: "DE",
+                    US: " ",
+                    FR: " ",
+                    DE: " ",
                   }}
                   className="right-nav-btn"
                   placeholder="Select Language"
