@@ -52,7 +52,7 @@ class ViewClusterPromotions extends Component {
 
     return (
       <div className="box-container">
-        <div className="joint-form">
+        <div className="joint-form-large-table">
           <div className="form-center">
             <div className="flex-grid">
               <ProductDetailsTable />

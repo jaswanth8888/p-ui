@@ -15,7 +15,7 @@ import {
   saveProductValue,
   getProductDetails,
   getZones,
-  saveZoneValue
+  saveZoneValue,
 } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
 
@@ -52,8 +52,6 @@ class ApplyPromotionInZone extends Component {
     console.log(value)
     this.props.saveZoneValue(value)
   }
-
-
 
   render() {
     return (
@@ -99,11 +97,10 @@ class ApplyPromotionInZone extends Component {
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
                   />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a zone name 
+                    Select a zone name
                   </Typography>
                 </div>
               )}
-
             </div>
           </div>
           <div className="form-half">
@@ -163,19 +160,21 @@ class ApplyPromotionInZone extends Component {
                 </Select>
               </FormControl>
 
-              <Link className="button-link" to="/definepromotion/zone">
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                  onClick={this.handleSubmit}
-                  id="apply-promotion-zone-submit"
-                >
-                  Go
-                </Button>
-              </Link>
+              {this.state.productName !== "" && this.state.zone !== "" && (
+                <Link className="button-link" to="/definepromotion/zone">
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit} submit-pad"
+                    onClick={this.handleSubmit}
+                    id="apply-promotion-zone-submit"
+                  >
+                    Go
+                  </Button>
+                </Link>
+              )}
             </form>
           </div>
         </div>
@@ -187,6 +186,7 @@ class ApplyPromotionInZone extends Component {
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
   zones: store.RetailerReducer.zones,
+
 })
 const actionAsProps = {
   getProductList,

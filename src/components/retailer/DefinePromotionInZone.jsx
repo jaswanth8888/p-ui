@@ -2,7 +2,10 @@ import { TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { getProductDetails } from "../../redux/actions/RetailerActions"
+import {
+  getProductDetails,
+  postPromotion,
+} from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 
 class DefinePromotionInZone extends Component {
@@ -17,11 +20,13 @@ class DefinePromotionInZone extends Component {
         promotionPercentage: "",
         zoneName: this.props.zone,
       },
+      levelOption: "zone",
       var: "1",
     }
 
     this.handleChangePercentage = this.handleChangePercentage.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
+    this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -29,9 +34,13 @@ class DefinePromotionInZone extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    //this.props.assignToZone(this.state.promotionDetails, "zone")
+    console.log(this.state.promotionDetails)
+    this.props.postPromotion(
+      this.state.promotionDetails,
+      this.props.productName,
+      this.state.levelOption
+    )
     this.props.history.push("/view/promotions/zone")
-
   }
 
   handleChangePercentage(e) {
@@ -39,15 +48,20 @@ class DefinePromotionInZone extends Component {
     this.state.promotionDetails.promotionPercentage = percentage
   }
 
-  handleChange(e) {
-    const { name, value } = e.target
-    this.setState({ [name]: value })
+  handleChangeStartDate(e) {
+    const start = e.target.value
+    this.state.promotionDetails.startDate = start
+  }
+
+  handleChangeEndDate(e) {
+    const end = e.target.value
+    this.state.promotionDetails.endDate = end
   }
 
   render() {
     return (
       <div className="box-container">
-        <div className="joint-form">
+        <div className="joint-form-large-table">
           <div className="form-center">
             <div className="flex-grid">
               <Typography className="card-header" variant="h4">
@@ -88,7 +102,7 @@ class DefinePromotionInZone extends Component {
                 InputLabelProps={{ shrink: true, required: true }}
                 name="startDate"
                 autoComplete="startDate"
-                onChange={this.handleChange}
+                onChange={this.handleChangeStartDate}
                 autoFocus
               />
               <TextField
@@ -104,7 +118,7 @@ class DefinePromotionInZone extends Component {
                 InputLabelProps={{ shrink: true, required: true }}
                 name="endDate"
                 autoComplete="endDate"
-                onChange={this.handleChange}
+                onChange={this.handleChangeEndDate}
                 autoFocus
               />
 
@@ -137,5 +151,6 @@ const stateAsProps = (store) => ({
 
 const actionAsProps = {
   getProductDetails,
+  postPromotion,
 }
 export default connect(stateAsProps, actionAsProps)(DefinePromotionInZone)
