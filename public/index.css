@@ -32,6 +32,7 @@ h1,h2,h3,h4,h5{
     margin-top:64px;
     width:100vw;
     height:100vh;
+    margin-bottom:64px;
 }
 
 .box-container-table{
@@ -44,13 +45,14 @@ h1,h2,h3,h4,h5{
     height:100vh;
     margin-left:20px;
     margin-right: 20px;
+    margin-bottom:64px;
 }
 
 .joint-form-assign{
     margin-top:60px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
     box-shadow: 0px 10px 17px 6px rgba(0,0,0,0.24);
 }
 
@@ -70,6 +72,7 @@ h1,h2,h3,h4,h5{
     justify-content: center;
     align-items:center;
     margin-top:64px;
+    margin-bottom:64px;
     width:100vw;
     height:90vh;
     padding:40px;
@@ -95,9 +98,6 @@ h1,h2,h3,h4,h5{
     height:500px;
 }
 
-.flex-column{
-    flex-direction: column-reverse;
-}
 
 p{
     font-size: 15px;
@@ -219,10 +219,7 @@ a{
 
 .help-block-h4{
     text-align : left !important;
-    
     position: relative;
-    top: -20px
-                    
 }
 
 .submit-pad{
@@ -285,7 +282,7 @@ a{
 }
 
 .special-store-help{
-    margin-left:40px !important;
+    margin-left:20px !important;
     margin-top:20px !important;
 }
 
@@ -384,11 +381,6 @@ a{
     width:100% !important;
     height:100% !important;
     padding:40px;
-<<<<<<< HEAD
- 
-=======
-
->>>>>>> fc7d550960f650099b78a72729f11ba91d4d295f
 }
 
 .button-link{
