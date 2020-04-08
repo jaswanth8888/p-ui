@@ -46,7 +46,6 @@ const App = () => {
     "/products/assign",
     "/view/products/daterange",
     "/selectproductname",
-    "/addproductstostore",
     "/addproducts",
     "/selectproduct",
     "/assigntocluster",

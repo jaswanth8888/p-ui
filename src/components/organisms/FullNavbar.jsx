@@ -457,7 +457,7 @@ function FullNavbar(props) {
           <Route exact path="/group" component={AddGroup} />
           <Route
             exact
-            path={["/products/store", "/addproductstostore", "/addproducts"]}
+            path={["/products/store", "/addproducts"]}
             component={ProductRouter}
           />
           <Route exact path="/zone" component={ZoneForm} />
