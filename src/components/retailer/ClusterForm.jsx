@@ -57,7 +57,7 @@ class ClusterForm extends Component {
     return (
       <div className="box-container">
         <div className="joint-form">
-          <div className="validation-half" style={{ background: "#673ab7" }}>
+          <div className="validation-half">
             <div className="validations">
               <h3 className="center-h3">Requirements</h3>
               {this.state.clusterName.length <= 5 && (

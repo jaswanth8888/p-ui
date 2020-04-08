@@ -37,7 +37,7 @@ class ViewEffectiveDatesAndPrices extends Component {
             >
               <Table aria-label="a dense table">
                 <TableHead
-                  style={{ backgroundColor: "#673ab7", color: "white" }}
+                  style={{ color: "white" }}
                 >
                   <TableRow>
                     <TableCell
@@ -89,7 +89,6 @@ class ViewEffectiveDatesAndPrices extends Component {
                             <Table size="small" aria-label="a dense table">
                               <TableHead
                                 style={{
-                                  backgroundColor: "#673ab7",
                                   color: "white",
                                 }}
                               >

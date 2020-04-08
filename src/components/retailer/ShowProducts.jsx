@@ -22,7 +22,7 @@ class ShowProducts extends Component {
         <div className="center-body">
           <TableContainer component={Paper}>
             <Table aria-label="a dense table" style={{ width: "80vw" }}>
-              <TableHead style={{ backgroundColor: "#673ab7", color: "white" }}>
+              <TableHead style={{ color: "white" }}>
                 <TableRow>
                   <TableCell style={{ color: "White" }}>Product Name</TableCell>
                   <TableCell style={{ color: "White" }}>Base Price</TableCell>
@@ -48,7 +48,6 @@ class ShowProducts extends Component {
                           <Table size="small" aria-label="a dense table">
                             <TableHead
                               style={{
-                                backgroundColor: "#673ab7",
                                 color: "white",
                               }}
                             >
