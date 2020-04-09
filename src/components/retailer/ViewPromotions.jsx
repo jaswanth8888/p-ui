@@ -34,13 +34,7 @@ class ViewPromotions extends Component {
               <TableHead style={{ color: "white" }}>
                 <TableRow>
                   <TableCell style={{ color: "White" }}>Product</TableCell>
-                  <TableCell style={{ color: "White" }}>Vendor Name</TableCell>
-                  <TableCell style={{ color: "White" }}>Base Price</TableCell>
-                  <TableCell style={{ color: "White" }}>
-                    Effective Price
-                  </TableCell>
-                  <TableCell style={{ color: "White" }}>Quantity</TableCell>
-                  <TableCell style={{ color: "White" }}>Category</TableCell>
+                  <TableCell style={{ color: "White" }}>Product Details</TableCell>
                   <TableCell style={{ color: "White" }}>Promotions</TableCell>
                 </TableRow>
               </TableHead>
@@ -66,33 +60,24 @@ class ViewPromotions extends Component {
                       </TableCell>
                       <TableCell>
                         <Typography variant="subtitle1" gutterBottom>
-                          {product.vendorName}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="subtitle1" gutterBottom>
-                          {product.vendorPrice}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="subtitle1" gutterBottom>
-                          {product.effectivePrice}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="subtitle1" gutterBottom>
-                          Initial : {product.initialQty}
+                          Vendor Name : {product.vendorName}
                         </Typography>
                         <Typography variant="subtitle1" gutterBottom>
-                          Remaining : {product.remainingQty}
+                          Base Price : {product.vendorPrice}
                         </Typography>
-                      </TableCell>
-                      <TableCell>
                         <Typography variant="subtitle1" gutterBottom>
-                          {product.category}
+                          Effective Price : {product.effectivePrice}
+                        </Typography>
+                        <Typography variant="subtitle1" gutterBottom>
+                          Initial Quantity : {product.initialQty}
+                        </Typography>
+                        <Typography variant="subtitle1" gutterBottom>
+                          Remaining Quantity : {product.remainingQty}
+                        </Typography>
+                        <Typography variant="subtitle1" gutterBottom>
+                          Product Category : {product.category}
                         </Typography>
                       </TableCell>
-
                       <TableCell>
                         <Typography variant="subtitle1" gutterBottom>
                           <Table size="small" aria-label="a dense table">
