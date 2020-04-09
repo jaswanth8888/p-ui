@@ -6,11 +6,20 @@ import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import { getPromotionsInRange } from "../../redux/actions/RetailerActions"
 
 class ViewPromotions extends Component {
   constructor(props) {
     super(props)
     this.state = {}
+  }
+
+  componentWillMount() {
+    this.props.getPromotionsInRange(
+      this.props.startDate,
+      this.props.endDate,
+      this.props.levelOption
+    )
   }
 
   render() {
@@ -181,5 +190,12 @@ class ViewPromotions extends Component {
 const stateAsProps = (store) => ({
   promotions: store.RetailerReducer.promotions,
   levelOption: store.RetailerReducer.levelOption,
+  startDate: store.RetailerReducer.startDate,
+  endDate: store.RetailerReducer.endDate,
 })
-export default connect(stateAsProps, null)(ViewPromotions)
+
+const actionAsProps = {
+  getPromotionsInRange,
+}
+
+export default connect(stateAsProps, actionAsProps)(ViewPromotions)

@@ -149,8 +149,12 @@ class ApplyPromotionInCluster extends Component {
                   fullWidth
                   options={this.props.products}
                   getOptionLabel={(option) => option}
-                  renderInput={() => (
-                    <TextField label="Product Name" variant="outlined" />
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Product Name"
+                      variant="outlined"
+                    />
                   )}
                   onChange={this.handleChangeProduct}
                   name="productName"
@@ -200,19 +204,23 @@ class ApplyPromotionInCluster extends Component {
                 </Select>
               </FormControl>
 
-              <Link className="button-link" to="/definepromotion/cluster">
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                  onClick={this.handleSubmit}
-                  id="apply-promotion-cluster-submit"
-                >
-                  Go
-                </Button>
-              </Link>
+              {this.state.productName !== "" &&
+                this.state.zone !== "" &&
+                this.state.cluster !== "" && (
+                  <Link className="button-link" to="/definepromotion/cluster">
+                    <Button
+                      type="button"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className="{classes.submit} submit-pad"
+                      onClick={this.handleSubmit}
+                      id="apply-promotion-cluster-submit"
+                    >
+                      Go
+                    </Button>
+                  </Link>
+                )}
             </form>
           </div>
         </div>

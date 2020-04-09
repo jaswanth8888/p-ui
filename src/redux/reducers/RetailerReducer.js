@@ -31,6 +31,8 @@ import {
   LEVEL_SAVE_VALUE,
   PROMOTIONS_GET_BYRANGE,
   GET_PROMOTIONS_CLUSTER,
+  STARTDATE_SAVE_VALUE,
+  ENDDATE_SAVE_VALUE,
 } from "../actions/types"
 
 const initialState = {
@@ -58,9 +60,11 @@ const initialState = {
   promotionDetails: {},
   zoneclusternames: [],
   statusCode: "",
-  levelOption: "",
-  promotions: {},
+  promotions: [],
   clusterPromotions: [],
+  startDate: "",
+  endDate: "",
+  levelOption: "",
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -143,6 +147,10 @@ export default (state = initialState, action = {}) => {
       return { ...state, promotions: action.promotions }
     case GET_PROMOTIONS_CLUSTER:
       return { ...state, clusterPromotions: action.clusterPromotions }
+    case STARTDATE_SAVE_VALUE:
+      return { ...state, startDate: action.endDate }
+    case ENDDATE_SAVE_VALUE:
+      return { ...state, endDate: action.startDate }
     default:
       return { ...state }
   }
