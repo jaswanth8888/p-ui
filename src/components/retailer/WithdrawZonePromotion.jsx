@@ -38,70 +38,71 @@ class WithdrawZonePromotion extends Component {
       zoneName: this.props.zone,
       date: this.state.date,
     }
-    console.log(this.state.details)
-    console.log(promoId)
     this.props.withdrawPromotion(
       this.state.details,
       this.props.productName,
       this.state.levelOption,
       promoId
     )
-    this.props.history.push("/withdraw/zoneproduct")
+    //(e.target.parentNode.parentNode.parentNode)
   }
 
   render() {
     const zoneData = this.props.productDetails.assignProduct
     const tableRowElm = (zone) => {
-      return zone.promotions.map((promotion) => (
-        <TableRow key={promotion.promotionId}>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.promotionPercentage}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {this.props.productDetails.effectivePrice}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.startDate}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.endDate}
-            </Typography>
-          </TableCell>
-          <TableCell
-            style={{
-              textAlign: "center",
-            }}
-          >
-            <Typography variant="subtitle1" gutterBottom>
-              <Button
-                type="button"
-                halfWidth
-                variant="contained"
-                color="primary"
-                className="{classes.submit}"
-                onClick={(e) => {
-                  if (
-                    // eslint-disable-next-line no-alert
-                    window.confirm(
-                      "Are you sure you wish to withdraw the promotion?"
-                    )
-                  )
-                  this.handleSubmit(promotion.promotionId)
+      return zone.promotions.map(
+        (promotion) =>
+          promotion.withDrawnDate === null && (
+            <TableRow key={promotion.promotionId}>
+              <TableCell>
+                <Typography variant="subtitle1" gutterBottom>
+                  {promotion.promotionPercentage}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="subtitle1" gutterBottom>
+                  {this.props.productDetails.effectivePrice}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="subtitle1" gutterBottom>
+                  {promotion.startDate}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="subtitle1" gutterBottom>
+                  {promotion.endDate}
+                </Typography>
+              </TableCell>
+              <TableCell
+                style={{
+                  textAlign: "center",
                 }}
               >
-                Withdraw
-              </Button>
-            </Typography>
-          </TableCell>
-        </TableRow>
-      ))
+                <Typography variant="subtitle1" gutterBottom>
+                  <Button
+                    type="button"
+                    halfWidth
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit}"
+                    onClick={(e) => {
+                      if (
+                        // eslint-disable-next-line no-alert
+                        window.confirm(
+                          "Are you sure you wish to withdraw the promotion?"
+                        )
+                      )
+                        this.handleSubmit(promotion.promotionId)
+                    }}
+                  >
+                    Withdraw
+                  </Button>
+                </Typography>
+              </TableCell>
+            </TableRow>
+          )
+      )
     }
 
     return (
@@ -123,7 +124,7 @@ class WithdrawZonePromotion extends Component {
                       </IconButton>
                     }
                   >
-                    Sorry No Promotions exist for the Product: {this.props.productDetails.productName} 
+                    Sorry No Promotions are applied on this Product: {this.props.productDetails.productName}
                   </Alert>
                 </div>
               )}
@@ -142,6 +143,7 @@ class WithdrawZonePromotion extends Component {
                       <TableCell>Actual Price</TableCell>
                       <TableCell>Promotion From Date</TableCell>
                       <TableCell>Promotion To Date</TableCell>
+                      <TableCell>Withdraw</TableCell>
                     </TableRow>
                   </TableHead>
                   <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>

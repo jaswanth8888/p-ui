@@ -26,6 +26,7 @@ class CancelProductPromotion extends Component {
       date: new Date().toISOString().slice(0, 10),
       details: {},
       levelOption: "zone",
+      cancelStatus: 1,
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -45,36 +46,39 @@ class CancelProductPromotion extends Component {
       this.props.productName,
       this.state.levelOption
     )
-    this.props.history.push("/cancel/productdetails")
+    this.setState({ cancelStatus: 0 })
   }
 
   render() {
     const zoneData = this.props.productDetails.assignProduct
     const tableRowElm = (zone) => {
-      return zone.promotions.map((promotion) => (
-        <TableRow key={promotion.promotionId}>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.promotionPercentage}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {this.props.productDetails.effectivePrice}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.startDate.slice(0, 10)}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.endDate.slice(0, 10)}
-            </Typography>
-          </TableCell>
-        </TableRow>
-      ))
+      return zone.promotions.map(
+        (promotion) =>
+          promotion.cancelledDate === null && (
+            <TableRow key={promotion.promotionId}>
+              <TableCell>
+                <Typography variant="subtitle1" gutterBottom>
+                  {promotion.promotionPercentage}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="subtitle1" gutterBottom>
+                  {this.props.productDetails.effectivePrice}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="subtitle1" gutterBottom>
+                  {promotion.startDate.slice(0, 10)}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="subtitle1" gutterBottom>
+                  {promotion.endDate.slice(0, 10)}
+                </Typography>
+              </TableCell>
+            </TableRow>
+          )
+      )
     }
 
     return (
@@ -96,47 +100,53 @@ class CancelProductPromotion extends Component {
                       </IconButton>
                     }
                   >
-                    Sorry No Promotions exist for the Product: {this.props.productDetails.productName} 
+                    Sorry No Promotions are applied on this Product: {this.props.productDetails.productName}
                   </Alert>
                 </div>
               )}
               <br />
               <ProductDetailsTable />
               <br />
-              <Typography className="card-header" variant="h5">
-                Promotions
-              </Typography>
-              <br />
-              <TableContainer component={Paper}>
-                <Table aria-label="a dense table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Promotion Percentage</TableCell>
-                      <TableCell>Actual Price</TableCell>
-                      <TableCell>Promotion From Date</TableCell>
-                      <TableCell>Promotion To Date</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>
-                </Table>
-              </TableContainer>
-              <br />
-              <Typography variant="subtitle1" gutterBottom>
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit}"
-                  onClick={(e) => {
-                    // eslint-disable-next-line no-alert
-                    if (window.confirm("Are you sure you wish to cancel?"))
-                      this.handleSubmit(e)
-                  }}
-                >
-                  Cancel Promotion
-                </Button>
-              </Typography>
+              {this.state.cancelStatus ? (
+                <>
+                  <Typography className="card-header" variant="h5">
+                    Promotions
+                  </Typography>
+                  <br />
+                  <TableContainer component={Paper}>
+                    <Table aria-label="a dense table">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Promotion Percentage</TableCell>
+                          <TableCell>Actual Price</TableCell>
+                          <TableCell>Promotion From Date</TableCell>
+                          <TableCell>Promotion To Date</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>
+                    </Table>
+                  </TableContainer>
+                  <br />
+                  <Typography variant="subtitle1" gutterBottom>
+                    <Button
+                      type="button"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className="{classes.submit}"
+                      onClick={(e) => {
+                        // eslint-disable-next-line no-alert
+                        if (window.confirm("Are you sure you wish to cancel?"))
+                          this.handleSubmit(e)
+                      }}
+                    >
+                      Cancel Promotion
+                    </Button>
+                  </Typography>
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>
