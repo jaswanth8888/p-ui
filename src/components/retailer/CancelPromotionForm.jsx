@@ -49,7 +49,6 @@ class CancelPromotionForm extends Component {
   }
 
   handleSubmit(e) {
-    this.props.getProductDetails(this.props.productName)
     this.props.history.push("/cancel/productdetails")
   }
 
@@ -147,7 +146,7 @@ class CancelPromotionForm extends Component {
                       <option value={zone} key={index}>
                         {zone}
                       </option>
-                    );
+                    )
                   })}
                 </Select>
               </FormControl>
@@ -165,21 +164,6 @@ class CancelPromotionForm extends Component {
             </form>
           </div>
         </div>
-        <Message />
-        <Divider />
-        <>
-          {this.state.status === -1 ? (
-            <div>
-              <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert severity="error" elevation={6} variant="filled">
-                  Cluster creation failed. Please match the requirements
-                </MuiAlert>
-              </Snackbar>
-            </div>
-          ) : (
-            <div />
-          )}
-        </>
       </div>
     )
   }
@@ -190,7 +174,7 @@ const stateAsProps = (store) => ({
 })
 const actionAsProps = {
   getAllZones: getZones,
-  getProductList: getProductList,
+  getProductList,
   saveProductValue,
   getProductDetails,
   saveZoneValue,

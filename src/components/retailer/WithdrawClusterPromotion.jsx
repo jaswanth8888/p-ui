@@ -6,8 +6,7 @@ import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-// eslint-disable-next-line no-unused-vars
-import { TextField, Typography } from "@material-ui/core"
+import { Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
@@ -16,11 +15,27 @@ class WithdrawClusterPromotion extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      date: new Date().toISOString().slice(0, 10),
+      details: {},
+      levelOption: "cluster",
+    }
   }
 
   componentWillMount() {
     this.props.getProductDetails(this.props.productName)
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    this.state.details = {
+      zoneName: this.props.zone,
+      date: this.state.date,
+      clusterName: this.state.cluster,
+    }
+    console.log(this.state.details)
+    this.props.cancelPromotion(this.state.details, this.props.productName, this.state.levelOption, )
+    this.props.history.push("/withdraw/clusterproduct")
   }
 
   render() {
@@ -60,8 +75,13 @@ class WithdrawClusterPromotion extends Component {
                 variant="contained"
                 color="primary"
                 className="{classes.submit}"
-                style={{
-                  justifyContent: "center",
+                onClick={(e) => {
+                  if (
+                    window.confirm(
+                      "Are you sure you wish to withdraw the promotion?"
+                    )
+                  )
+                    this.handleSubmit(e)
                 }}
               >
                 Withdraw
@@ -74,7 +94,7 @@ class WithdrawClusterPromotion extends Component {
 
     return (
       <div className="box-container">
-        <div className="joint-form">
+        <div className="joint-form-large-table">
           <div className="form-center">
             <div className="flex-grid">
               <br />

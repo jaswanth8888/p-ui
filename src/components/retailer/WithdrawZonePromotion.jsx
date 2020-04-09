@@ -9,18 +9,41 @@ import { connect } from "react-redux"
 // eslint-disable-next-line no-unused-vars
 import { TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
-import { getProductDetails } from "../../redux/actions/RetailerActions"
+import {
+  getProductDetails,
+  withdrawPromotion,
+} from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 
 class WithdrawZonePromotion extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      date: new Date().toISOString().slice(0, 10),
+      details: {},
+      levelOption: "zone",
+    }
   }
 
   componentWillMount() {
     this.props.getProductDetails(this.props.productName)
+  }
+
+  handleSubmit = (promoId) => {
+    this.state.details = {
+      zoneName: this.props.zone,
+      date: this.state.date,
+    }
+    console.log(this.state.details)
+    console.log(promoId)
+    this.props.withdrawPromotion(
+      this.state.details,
+      this.props.productName,
+      this.state.levelOption,
+      promoId
+    )
+    this.props.history.push("/withdraw/zoneproduct")
   }
 
   render() {
@@ -60,8 +83,14 @@ class WithdrawZonePromotion extends Component {
                 variant="contained"
                 color="primary"
                 className="{classes.submit}"
-                style={{
-                  justifyContent: "center",
+                onClick={(e) => {
+                  if (
+                    // eslint-disable-next-line no-alert
+                    window.confirm(
+                      "Are you sure you wish to withdraw the promotion?"
+                    )
+                  )
+                  this.handleSubmit(promotion.promotionId)
                 }}
               >
                 Withdraw
@@ -74,7 +103,7 @@ class WithdrawZonePromotion extends Component {
 
     return (
       <div className="box-container">
-        <div className="joint-form">
+        <div className="joint-form-large-table">
           <div className="form-center">
             <div className="flex-grid">
               <br />
@@ -109,8 +138,10 @@ const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
   products: store.RetailerReducer.products,
+  zone: store.RetailerReducer.zone,
 })
 const actionAsProps = {
   getProductDetails,
+  withdrawPromotion,
 }
 export default connect(stateAsProps, actionAsProps)(WithdrawZonePromotion)
