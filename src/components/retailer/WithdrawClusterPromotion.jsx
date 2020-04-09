@@ -8,7 +8,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
-import { getProductDetails } from "../../redux/actions/RetailerActions"
+import { getProductDetails , getPromotionsInCluster } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 
 class WithdrawClusterPromotion extends Component {
@@ -39,59 +39,6 @@ class WithdrawClusterPromotion extends Component {
   }
 
   render() {
-    const zoneData = this.props.productDetails.assignProduct
-    const tableRowElm = (zone) => {
-      return zone.promotions.map((promotion) => (
-        <TableRow key={promotion.promotionId}>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.promotionPercentage}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {this.props.productDetails.effectivePrice}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.startDate}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.endDate}
-            </Typography>
-          </TableCell>
-          <TableCell
-            style={{
-              textAlign: "center",
-            }}
-          >
-            <Typography variant="subtitle1" gutterBottom>
-              <Button
-                type="button"
-                halfWidth
-                variant="contained"
-                color="primary"
-                className="{classes.submit}"
-                onClick={(e) => {
-                  if (
-                    window.confirm(
-                      "Are you sure you wish to withdraw the promotion?"
-                    )
-                  )
-                    this.handleSubmit(e)
-                }}
-              >
-                Withdraw
-              </Button>
-            </Typography>
-          </TableCell>
-        </TableRow>
-      ))
-    }
-
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
@@ -114,7 +61,9 @@ class WithdrawClusterPromotion extends Component {
                       <TableCell>Promotion To Date</TableCell>
                     </TableRow>
                   </TableHead>
-                  <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>
+                  <tbody>
+
+                  </tbody>
                 </Table>
               </TableContainer>
             </div>
@@ -129,8 +78,11 @@ const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
   products: store.RetailerReducer.products,
+  zone: store.RetailerReducer.zone,
+  cluster: store.RetailerReducer.cluster,
 })
 const actionAsProps = {
   getProductDetails,
+  getPromotionsInCluster,
 }
 export default connect(stateAsProps, actionAsProps)(WithdrawClusterPromotion)
