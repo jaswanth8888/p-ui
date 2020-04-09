@@ -606,11 +606,7 @@ export const resetStatusCode = () => (dispatch) => {
   dispatch({ type: RESET_STATUS_CODE })
 }
 
-<<<<<<< HEAD
-export const cancelPromotion = (productName, levelOption) => async (
-=======
 export const cancelPromotion = (details, productName, levelOption) => async (
->>>>>>> 3e0a766b15ce973e810944e6cf0f818ff50f49a3
   dispatch
 ) => {
   await axios
