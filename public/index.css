@@ -34,7 +34,6 @@ h5 {
   padding: 40px;
   margin-top: 64px;
   width: 100vw;
-  height: 100vh;
   margin-bottom: 64px;
 }
 
@@ -45,7 +44,6 @@ h5 {
   margin-top: 64px;
   padding: 40px;
   width: 100vw;
-  height: 100vh;
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 64px;
@@ -77,7 +75,6 @@ h5 {
   margin-top: 64px;
   margin-bottom: 64px;
   width: 100vw;
-  height: 90vh;
   padding: 40px;
 }
 
@@ -139,8 +136,8 @@ p {
 }
 
 .joint-form-large-table {
-  margin-top: 450px;
   display: flex;
+  flex-direction: column-reverse;
   box-shadow: 0px 10px 17px 6px rgba(0, 0, 0, 0.24);
 }
 
@@ -430,7 +427,8 @@ a {
 
 @media only screen and (max-width: 600px) {
   .joint-form,
-  .joint-form-assign {
+  .joint-form-assign
+  .joint-form-large-table {
     display: table-row;
     box-shadow: none;
     border: 1px solid rgba(0, 0, 0, 0.1);

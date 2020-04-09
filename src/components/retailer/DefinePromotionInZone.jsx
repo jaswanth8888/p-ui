@@ -3,6 +3,9 @@ import Button from "@material-ui/core/Button"
 import React, { Component } from "react"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
+import Alert from "@material-ui/lab/Alert"
+import IconButton from "@material-ui/core/IconButton"
+import CloseIcon from "@material-ui/icons/Close"
 import { connect } from "react-redux"
 import {
   getProductDetails,
@@ -98,7 +101,8 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.endDate <= this.state.promotionDetails.startDate && (
+            {this.state.promotionDetails.endDate <=
+              this.state.promotionDetails.startDate && (
               <div style={{ display: "flex" }}>
                 <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -106,7 +110,8 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.endDate > this.state.promotionDetails.startDate && (
+            {this.state.promotionDetails.endDate >
+              this.state.promotionDetails.startDate && (
               <div style={{ display: "flex", color: "#ffc107" }}>
                 <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -130,10 +135,23 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-
           </div>
+          
           <div className="form-center">
             <div className="flex-grid">
+            <div>
+            <Alert
+              severity="info"
+              action={
+                <IconButton aria-label="close" color="inherit" size="small">
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              Close me!
+            </Alert>
+          </div>
+
               <Typography className="card-header" variant="h4">
                 Apply Percentage Promotion
               </Typography>
