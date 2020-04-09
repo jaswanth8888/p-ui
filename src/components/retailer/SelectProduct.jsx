@@ -24,7 +24,7 @@ class SelectProduct extends Component {
       productName: "",
       // status: 0
     }
-    this.handleChange = this.handleChangeProduct.bind(this)
+    this.handleChangeProduct = this.handleChangeProduct.bind(this)
     //  this.productNameNotSelected = this.productNameNotSelected.bind(this);
   }
 

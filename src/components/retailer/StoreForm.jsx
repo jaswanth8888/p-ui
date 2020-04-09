@@ -96,148 +96,150 @@ class StoreForm extends Component {
               </div>
             )}
           </div>
-          <div>
-            <div className="help-block">
-              <Typography
-                color="primary"
-                component="h1"
-                variant="h4"
-                className="special-store-help"
-              >
-                Create a Store
-              </Typography>
+          <div id="store-form-container">
+            <div>
+              <div className="help-block">
+                <Typography
+                  color="primary"
+                  component="h1"
+                  variant="h4"
+                  className="special-store-help"
+                >
+                  Create a Store
+                </Typography>
+              </div>
             </div>
-          </div>
-          <div className="advanced-form-container">
-            <div className="form-first-half">
-              <form className="{classes.form}" noValidate>
-                <FormControl margin="normal" variant="outlined" fullWidth>
-                  <InputLabel htmlFor="outlined-age-native-simple">
-                    Enter Zone
-                  </InputLabel>
-                  <Select
-                    ref="zone"
-                    fullWidth
-                    native
-                    value={this.state.zone}
-                    onChange={this.handleChangeZone}
-                    label="Enter Zone"
-                    inputProps={{
-                      name: "zone",
-                      id: "zone"
-                    }}
-                  >
-                    <option aria-label="None" value="" />
-                    {this.props.zones.map((zone, index) => {
-                      return (
-                        <option value={zone} key={index}>
-                          {zone}
-                        </option>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
+            <div className="advanced-form-container">
+              <div className="form-first-half">
+                <form className="{classes.form}" noValidate>
+                  <FormControl margin="normal" variant="outlined" fullWidth>
+                    <InputLabel htmlFor="outlined-age-native-simple">
+                      Enter Zone
+                    </InputLabel>
+                    <Select
+                      ref="zone"
+                      fullWidth
+                      native
+                      value={this.state.zone}
+                      onChange={this.handleChangeZone}
+                      label="Enter Zone"
+                      inputProps={{
+                        name: "zone",
+                        id: "zone"
+                      }}
+                    >
+                      <option aria-label="None" value="" />
+                      {this.props.zones.map((zone, index) => {
+                        return (
+                          <option value={zone} key={index}>
+                            {zone}
+                          </option>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
 
-                <FormControl margin="normal" variant="outlined" fullWidth>
-                  <InputLabel htmlFor="outlined-age-native-simple">
-                    Enter Cluster
-                  </InputLabel>
-                  <Select
-                    ref="cluster"
+                  <FormControl margin="normal" variant="outlined" fullWidth>
+                    <InputLabel htmlFor="outlined-age-native-simple">
+                      Enter Cluster
+                    </InputLabel>
+                    <Select
+                      ref="cluster"
+                      fullWidth
+                      native
+                      value={this.state.cluster}
+                      onChange={this.handleChange}
+                      label="Enter Cluster"
+                      inputProps={{
+                        name: "cluster",
+                        id: "cluster"
+                      }}
+                    >
+                      <option aria-label="None" value="" />
+                      {this.props.clusters.map((cluster, index) => {
+                        return (
+                          <option value={cluster} key={index}>
+                            {cluster}
+                          </option>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+
+                  <TextField
+                    ref="storeName"
+                    variant="outlined"
+                    margin="normal"
+                    required
                     fullWidth
-                    native
-                    value={this.state.cluster}
+                    id="storeName"
+                    label="Store Name"
+                    name="storeName"
+                    autoComplete="storeName"
                     onChange={this.handleChange}
-                    label="Enter Cluster"
-                    inputProps={{
-                      name: "cluster",
-                      id: "cluster"
-                    }}
-                  >
-                    <option aria-label="None" value="" />
-                    {this.props.clusters.map((cluster, index) => {
-                      return (
-                        <option value={cluster} key={index}>
-                          {cluster}
-                        </option>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-
-                <TextField
-                  ref="storeName"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="storeName"
-                  label="Store Name"
-                  name="storeName"
-                  autoComplete="storeName"
-                  onChange={this.handleChange}
-                  value={this.state.storeName}
-                  autoFocus
-                />
-              </form>
+                    value={this.state.storeName}
+                    autoFocus
+                  />
+                </form>
+              </div>
+              <div className="form-second-half">
+                <form className="{classes.form}" noValidate>
+                  <TextField
+                    ref="streetName"
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="streetName"
+                    label="Street name"
+                    autoComplete="streetName"
+                    id="streetName"
+                    onChange={this.handleChange}
+                    value={this.state.streetName}
+                  />
+                  <TextField
+                    ref="city"
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="city"
+                    label="City"
+                    id="city"
+                    onChange={this.handleChange}
+                    autoComplete="city"
+                    value={this.state.city}
+                  />
+                  <TextField
+                    ref="pin"
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="pin"
+                    label="Pin-code"
+                    type="number"
+                    id="pin"
+                    onChange={this.handleChange}
+                    autoComplete="pin"
+                    value={this.state.pin}
+                  />
+                </form>
+              </div>
             </div>
-            <div className="form-second-half">
-              <form className="{classes.form}" noValidate>
-                <TextField
-                  ref="streetName"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="streetName"
-                  label="Street name"
-                  autoComplete="streetName"
-                  id="streetName"
-                  onChange={this.handleChange}
-                  value={this.state.streetName}
-                />
-                <TextField
-                  ref="city"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="city"
-                  label="City"
-                  id="city"
-                  onChange={this.handleChange}
-                  autoComplete="city"
-                  value={this.state.city}
-                />
-                <TextField
-                  ref="pin"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="pin"
-                  label="Pin-code"
-                  type="number"
-                  id="pin"
-                  onChange={this.handleChange}
-                  autoComplete="pin"
-                  value={this.state.pin}
-                />
-              </form>
+            <div id="store-submit-btn">
+              <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className="{classes.submit}"
+                onClick={this.handleSubmit}
+                id="store-form-submit"
+              >
+                Save
+              </Button>
             </div>
-          </div>
-          <div id="store-submit-btn">
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className="{classes.submit}"
-              onClick={this.handleSubmit}
-              id="store-form-submit"
-            >
-              Save
-            </Button>
           </div>
         </div>
         <>

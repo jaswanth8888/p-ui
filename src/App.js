@@ -46,7 +46,6 @@ const App = () => {
     "/products/assign",
     "/view/products/daterange",
     "/selectproductname",
-    "/addproductstostore",
     "/addproducts",
     "/selectproduct",
     "/assigntocluster",
@@ -59,6 +58,18 @@ const App = () => {
     "/showproducts",
     "/selectproductname",
     "/addpromotion",
+    "/cancel/promotion",
+    "/cancel/productdetails",
+    "/withdraw/zonepromotion",
+    "/withdraw/zoneproduct",
+    "/withdraw/clusterpromotion",
+    "/withdraw/clusterproduct",
+    "/applypromotion/zone",
+    "/definepromotion/zone",
+    "/view/promotions/zone",
+    "/applypromotion/cluster",
+    "/definepromotion/cluster",
+    "/view/promotions/cluster",
   ]
   return (
     <Provider store={store}>

@@ -23,7 +23,6 @@ import {
   STORE_POST_REQUEST,
   FAILURE,
   MESSAGE_SET_NULL,
-  PRODUCT_GET_BYRANGE,
   PRODUCTLIST_GET_REQUEST,
   PRODUCT_SAVE_VALUE,
   PRODUCT_GET_REQUEST,
@@ -33,6 +32,8 @@ import {
   ASSIGN_TO_ZONE,
   PRODUCT_POST_REQUEST,
   RESET_STATUS_CODE,
+  LEVEL_SAVE_VALUE,
+  PROMOTIONS_GET_BYRANGE,
 } from "./types"
 
 const TOKEN = () => {
@@ -326,16 +327,16 @@ export const getStores = (zone, cluster) => async (dispatch) => {
     })
 }
 
-export const getProductsInRange = (fromDate, toDate) => async (dispatch) => {
+export const getPromotionsInRange = (fromDate, toDate, levelOption) => async (dispatch) => {
   await axios
     .get(
-      `${RETAILER_BASE_URL}/product-management/products/data?filter=%7B%22startDate%22:%22${fromDate}%22,%22endDate%22:%22${toDate}%22%7D`,
+      `${RETAILER_BASE_URL}/product-management/products/${levelOption}/data?filter=%7B%22startDate%22:%22${fromDate}%22,%22endDate%22:%22${toDate}%22%7D`,
       {
         headers: { Authorization: TOKEN() },
       }
     )
     .then((res) => {
-      dispatch({ type: PRODUCT_GET_BYRANGE, products: res.data })
+      dispatch({ type: PROMOTIONS_GET_BYRANGE, promotions: res.data })
     })
     .catch(() => {
       dispatch({ type: FAILURE })
@@ -510,13 +511,13 @@ export const assignToZone = (zoneDetails, zoneName, productName) => async (
     })
 }
 
-export const postPromotion = (productName, promotionDetails) => async (
+export const postPromotion = (promotionDetails, productName, levelOption) => async (
   dispatch
 ) => {
   dispatch({ type: MESSAGE_SET_NULL })
   await axios
     .put(
-      `${RETAILER_BASE_URL}/product-management/product/promotion/${productName}`,
+      `${RETAILER_BASE_URL}/product-management/product/promotion/${productName}/${levelOption}`,
       promotionDetails,
       {
         headers: { Authorization: TOKEN() },
@@ -598,4 +599,47 @@ export const cancelEffectivePrice = (productName, promotionId) => async (
 
 export const resetStatusCode = () => (dispatch) => {
   dispatch({ type: RESET_STATUS_CODE })
+}
+
+export const cancelPromotion = (details, productName, levelOption) => async (
+  dispatch
+) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/` +
+        `product/promotion/cancel/${productName}/${levelOption}`,
+      details,
+      { headers: { Authorization: TOKEN() } }
+    )
+    .then(() => {
+      dispatch({ type: PRODUCT_POST_REQUEST, msg: "Cancel Successful!" })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
+}
+
+export const withdrawPromotion = (
+  details,
+  productName,
+  levelOption,
+  promotionId
+) => async (dispatch) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/` +
+        `product/promotion/withdraw/${productName}/${levelOption}/${promotionId}`,
+      details,
+      { headers: { Authorization: TOKEN() } }
+    )
+    .then(() => {
+      dispatch({ type: PRODUCT_POST_REQUEST, msg: "Withdraw Successful!" })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
+}
+
+export const saveLevelValue = (level) => (dispatch) => {
+  dispatch({ type: LEVEL_SAVE_VALUE, levelOption: level })
 }

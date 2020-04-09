@@ -24,7 +24,9 @@
     "queryOnDateRange":"requête sur la plage de dates",
     "PriceOnDate":"prix à la date",
     "assignProductToClusterZone": "Attribuer le produit au cluster / zone",
-    "cancelNotEffectivePriceChange": "Annuler la modification de prix non effective"
+    "cancelNotEffectivePriceChange": "Annuler la modification de prix non effective",
+    "applyPromotionInZoneLevel": "Appliquer la promotion au niveau de la zone",
+    "applyPromotionInClusterLevel": "Appliquer la promotion au niveau de la cluster"
   },
   "zoneForm": {
     "lengthTooShort": "La zone doit être supérieure à 5 lettres",
