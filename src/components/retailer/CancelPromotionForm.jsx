@@ -40,7 +40,7 @@ class CancelPromotionForm extends Component {
     this.props.saveProductValue(productName)
     this.props.getProductDetails(value)
   }
- 
+
   handleChangeZone(e) {
     const { name, value } = e.target
     this.setState({ zone: value })

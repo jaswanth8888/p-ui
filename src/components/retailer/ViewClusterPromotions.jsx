@@ -37,7 +37,7 @@ class ViewClusterPromotions extends Component {
               <ProductDetailsTable />
               <br />
               <Typography className="card-header" variant="h6">
-                Promotions in cluster level
+                Promotions in Cluster level
               </Typography>
 
               <TableContainer component={Paper}>
