@@ -1,28 +1,28 @@
-import { TextField, Typography, Paper } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Table from "@material-ui/core/Table";
+import { TextField, Typography, Paper } from "@material-ui/core"
+import Button from "@material-ui/core/Button"
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
+import Table from "@material-ui/core/Table"
 import {
   getProductDetails,
   getPromotionsIncluster,
-  withdrawPromotion
-} from "../../redux/actions/RetailerActions";
-import ProductDetailsTable from "../utils/ProductDetailsTable";
+  withdrawPromotion,
+} from "../../redux/actions/RetailerActions"
+import ProductDetailsTable from "../utils/ProductDetailsTable"
 
 class WithdrawClusterPromotion extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       date: new Date().toISOString().slice(0, 10),
       details: {},
-      levelOption: "cluster"
-    };
+      levelOption: "cluster",
+    }
   }
 
   componentWillMount() {
@@ -30,26 +30,26 @@ class WithdrawClusterPromotion extends Component {
       this.props.productName,
       this.props.zone,
       this.props.cluster
-    );
+    )
   }
 
   handleSubmit = (e, promoId) => {
     this.state.details = {
       zoneName: this.props.zone,
       date: this.state.date,
-      clusterName: this.props.cluster
-    };
+      clusterName: this.props.cluster,
+    }
     this.props.withdrawPromotion(
       this.state.details,
       this.props.productName,
       this.state.levelOption,
       promoId
-    );
-    this.props.history.push("/withdraw/clusterproduct");
+    )
+    this.props.history.push("/withdraw/clusterproduct")
     document
       .getElementById("withdraw-tbody")
-      .removeChild(document.getElementById("row" + promoId));
-  };
+      .removeChild(document.getElementById("row" + promoId))
+  }
 
   render() {
     return (
@@ -76,7 +76,7 @@ class WithdrawClusterPromotion extends Component {
                   </TableHead>
                   <tbody id="withdraw-tbody">
                     {this.props.clusterPromotions.map(
-                      promotion =>
+                      (promotion) =>
                         promotion.withDrawnDate === null && (
                           <TableRow id={"row" + promotion.promotionId}>
                             <TableCell>
@@ -101,7 +101,7 @@ class WithdrawClusterPromotion extends Component {
                             </TableCell>
                             <TableCell
                               style={{
-                                textAlign: "center"
+                                textAlign: "center",
                               }}
                             >
                               <Typography variant="subtitle1" gutterBottom>
@@ -111,7 +111,7 @@ class WithdrawClusterPromotion extends Component {
                                   variant="contained"
                                   color="primary"
                                   className="{classes.submit}"
-                                  onClick={e => {
+                                  onClick={(e) => {
                                     if (
                                       // eslint-disable-next-line no-alert
                                       window.confirm(
@@ -121,7 +121,7 @@ class WithdrawClusterPromotion extends Component {
                                       this.handleSubmit(
                                         e,
                                         promotion.promotionId
-                                      );
+                                      )
                                   }}
                                 >
                                   Withdraw
@@ -138,21 +138,21 @@ class WithdrawClusterPromotion extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-const stateAsProps = store => ({
+const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
   zone: store.RetailerReducer.zone,
   cluster: store.RetailerReducer.cluster,
-  clusterPromotions: store.RetailerReducer.clusterPromotions
-});
+  clusterPromotions: store.RetailerReducer.clusterPromotions,
+})
 
 const actionAsProps = {
   getProductDetails,
   withdrawPromotion,
-  getPromotionsIncluster
-};
-export default connect(stateAsProps, actionAsProps)(WithdrawClusterPromotion);
+  getPromotionsIncluster,
+}
+export default connect(stateAsProps, actionAsProps)(WithdrawClusterPromotion)
