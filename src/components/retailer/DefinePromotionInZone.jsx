@@ -224,8 +224,8 @@ class DefinePromotionInZone extends Component {
                 onChange={this.handleChangeEndDate}
                 autoFocus
               />
-              {this.state.promotionDetails.endDate >
-                this.state.promotionDetails.startDate && (
+              {/* {this.state.promotionDetails.endDate >
+                this.state.promotionDetails.startDate && ( */}
                 <Button
                   halfWidth
                   type="button"
@@ -238,7 +238,7 @@ class DefinePromotionInZone extends Component {
                 >
                   Apply Promotion to Zone
                 </Button>
-              )}
+              {/* )} */}
             </div>
           </div>
         </div>
