@@ -2,7 +2,10 @@ import { TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { getProductDetails, postPromotion } from "../../redux/actions/RetailerActions"
+import {
+  getProductDetails,
+  postPromotion,
+} from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 
 class DefinePromotionInCluster extends Component {
@@ -33,7 +36,7 @@ class DefinePromotionInCluster extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     console.log(this.state.promotionDetails)
-    this.props.postPromotion( 
+    this.props.postPromotion(
       this.state.promotionDetails,
       this.props.productName,
       this.state.levelOption
@@ -60,8 +63,91 @@ class DefinePromotionInCluster extends Component {
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
+          <div className="store-requirement">
+            <h3 className="center-h3">Requirements</h3>
+            {this.state.promotionDetails.startDate.length === 0 && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Enter a valid Start Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.startDate.length !== 0 && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Enter a valid Start Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.endDate.length === 0 && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Enter a valid End Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.endDate.length !== 0 && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Enter a valid End Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.endDate <=
+              this.state.promotionDetails.startDate && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  End Date has to be greater than Start Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.endDate >
+              this.state.promotionDetails.startDate && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  End Date has to be greater than Start Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.promotionPercentage >= 0 && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Promotion percentage has to be lesser than 0
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.promotionPercentage < 0 && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Promotion percentage has to be lesser than 0
+                </Typography>
+              </div>
+            )}
+          </div>
+
           <div className="form-center">
             <div className="flex-grid">
+              <div>
+                <Alert
+                  severity="info"
+                  action={
+                    <IconButton aria-label="close" color="inherit" size="small">
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >
+                  Close me!
+                </Alert>
+              </div>
+
               <Typography className="card-header" variant="h4">
                 Apply Percentage Promotion
               </Typography>

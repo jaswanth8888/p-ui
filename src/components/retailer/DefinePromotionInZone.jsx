@@ -136,21 +136,21 @@ class DefinePromotionInZone extends Component {
               </div>
             )}
           </div>
-          
+
           <div className="form-center">
             <div className="flex-grid">
-            <div>
-            <Alert
-              severity="info"
-              action={
-                <IconButton aria-label="close" color="inherit" size="small">
-                  <CloseIcon fontSize="inherit" />
-                </IconButton>
-              }
-            >
-              Close me!
-            </Alert>
-          </div>
+              <div>
+                <Alert
+                  severity="info"
+                  action={
+                    <IconButton aria-label="close" color="inherit" size="small">
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >
+                  Close me!
+                </Alert>
+              </div>
 
               <Typography className="card-header" variant="h4">
                 Apply Percentage Promotion
