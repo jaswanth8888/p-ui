@@ -427,9 +427,15 @@ a {
 
 @media only screen and (max-width: 600px) {
   .joint-form,
-  .joint-form-assign
-  .joint-form-large-table {
+  .joint-form-assign{
     display: table-row;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 90vw;
+  }
+
+  .joint-form-large-table{
+    margin-top:60px;
     box-shadow: none;
     border: 1px solid rgba(0, 0, 0, 0.1);
     width: 90vw;
