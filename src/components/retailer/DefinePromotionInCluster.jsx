@@ -1,8 +1,16 @@
 import { TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import React, { Component } from "react"
+import CheckIcon from "@material-ui/icons/Check"
+import ClearIcon from "@material-ui/icons/Clear"
+import Alert from "@material-ui/lab/Alert"
+import IconButton from "@material-ui/core/IconButton"
+import CloseIcon from "@material-ui/icons/Close"
 import { connect } from "react-redux"
-import { getProductDetails } from "../../redux/actions/RetailerActions"
+import {
+  getProductDetails,
+  postPromotion,
+} from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 
 class DefinePromotionInCluster extends Component {
@@ -18,11 +26,13 @@ class DefinePromotionInCluster extends Component {
         zoneName: this.props.zone,
         clusterName: this.props.cluster,
       },
+      levelOption: "cluster",
       var: "1",
     }
 
     this.handleChangePercentage = this.handleChangePercentage.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
+    this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -30,9 +40,13 @@ class DefinePromotionInCluster extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    //this.props.assignToCluster(this.state.promotionDetails, "cluster")
+    console.log(this.state.promotionDetails)
+    this.props.postPromotion(
+      this.state.promotionDetails,
+      this.props.productName,
+      this.state.levelOption
+    )
     this.props.history.push("/view/promotions/cluster")
-
   }
 
   handleChangePercentage(e) {
@@ -40,17 +54,105 @@ class DefinePromotionInCluster extends Component {
     this.state.promotionDetails.promotionPercentage = percentage
   }
 
-  handleChange(e) {
-    const { name, value } = e.target
-    this.setState({ [name]: value })
+  handleChangeStartDate(e) {
+    const start = e.target.value
+    this.state.promotionDetails.startDate = start
+  }
+
+  handleChangeEndDate(e) {
+    const end = e.target.value
+    this.state.promotionDetails.endDate = end
   }
 
   render() {
     return (
       <div className="box-container">
-        <div className="joint-form">
+        <div className="joint-form-large-table">
+          <div className="store-requirement">
+            <h3 className="center-h3">Requirements</h3>
+            {this.state.promotionDetails.startDate.length === 0 && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Enter a valid Start Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.startDate.length !== 0 && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Enter a valid Start Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.endDate.length === 0 && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Enter a valid End Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.endDate.length !== 0 && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Enter a valid End Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.endDate <=
+              this.state.promotionDetails.startDate && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  End Date has to be greater than Start Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.endDate >
+              this.state.promotionDetails.startDate && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  End Date has to be greater than Start Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.promotionPercentage >= 0 && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Promotion percentage has to be lesser than 0
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.promotionPercentage < 0 && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Promotion percentage has to be lesser than 0
+                </Typography>
+              </div>
+            )}
+          </div>
+
           <div className="form-center">
             <div className="flex-grid">
+              <div>
+                <Alert
+                  severity="info"
+                  action={
+                    <IconButton aria-label="close" color="inherit" size="small">
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >
+                  Close me!
+                </Alert>
+              </div>
+
               <Typography className="card-header" variant="h4">
                 Apply Percentage Promotion
               </Typography>
@@ -89,7 +191,7 @@ class DefinePromotionInCluster extends Component {
                 InputLabelProps={{ shrink: true, required: true }}
                 name="startDate"
                 autoComplete="startDate"
-                onChange={this.handleChange}
+                onChange={this.handleChangeStartDate}
                 autoFocus
               />
               <TextField
@@ -105,7 +207,7 @@ class DefinePromotionInCluster extends Component {
                 InputLabelProps={{ shrink: true, required: true }}
                 name="endDate"
                 autoComplete="endDate"
-                onChange={this.handleChange}
+                onChange={this.handleChangeEndDate}
                 autoFocus
               />
 
@@ -139,5 +241,6 @@ const stateAsProps = (store) => ({
 
 const actionAsProps = {
   getProductDetails,
+  postPromotion,
 }
 export default connect(stateAsProps, actionAsProps)(DefinePromotionInCluster)

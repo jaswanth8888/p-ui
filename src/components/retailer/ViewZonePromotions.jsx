@@ -28,7 +28,7 @@ class ViewZonePromotions extends Component {
         <TableRow key={promotion.promotionId}>
           <TableCell>
             <Typography variant="subtitle1" gutterBottom>
-              {promotion.appliedDate}
+              {promotion.appliedDate.slice(0, 10)}
             </Typography>
           </TableCell>
           <TableCell>
@@ -43,12 +43,12 @@ class ViewZonePromotions extends Component {
           </TableCell>
           <TableCell>
             <Typography variant="subtitle1" gutterBottom>
-              {promotion.startDate}
+              {promotion.startDate.slice(0, 10)}
             </Typography>
           </TableCell>
           <TableCell>
             <Typography variant="subtitle1" gutterBottom>
-              {promotion.endDate}
+              {promotion.endDate.slice(0, 10)}
             </Typography>
           </TableCell>
           <TableCell>
@@ -57,9 +57,11 @@ class ViewZonePromotions extends Component {
             </Typography>
           </TableCell>
           <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.cancelledDate}
-            </Typography>
+            {promotion.cancelledDate !== null && (
+              <Typography variant="subtitle1" gutterBottom>
+                {promotion.cancelledDate.slice(0, 10)}
+              </Typography>
+            )}
           </TableCell>
         </TableRow>
       ))
@@ -67,7 +69,7 @@ class ViewZonePromotions extends Component {
 
     return (
       <div className="box-container">
-        <div className="joint-form">
+        <div className="joint-form-large-table">
           <div className="form-center">
             <div className="flex-grid">
               <ProductDetailsTable />

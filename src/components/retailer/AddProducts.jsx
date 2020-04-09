@@ -274,7 +274,7 @@ class AddProducts extends Component {
               </Table>
             </TableContainer>
             {this.state.quantityCheck && (
-              <Link to="/addproductstostore">
+              <Link to="/addproducts">
                 <Button
                   type="button"
                   fullWidth

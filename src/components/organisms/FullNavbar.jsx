@@ -374,9 +374,9 @@ function FullNavbar(props) {
                   <ReactFlagsSelect
                     countries={["US", "FR", "DE"]}
                     customLabels={{
-                      US: "EN-US",
-                      FR: "FR",
-                      DE: "DE",
+                      US: " ",
+                      FR: " ",
+                      DE: " ",
                     }}
                     className="right-nav-btn"
                     placeholder="Select Language"
@@ -403,9 +403,9 @@ function FullNavbar(props) {
                 <ReactFlagsSelect
                   countries={["US", "FR", "DE"]}
                   customLabels={{
-                    US: "EN-US",
-                    FR: "FR",
-                    DE: "DE",
+                    US: " ",
+                    FR: " ",
+                    DE: " ",
                   }}
                   className="right-nav-btn"
                   placeholder="Select Language"
@@ -457,7 +457,7 @@ function FullNavbar(props) {
           <Route exact path="/group" component={AddGroup} />
           <Route
             exact
-            path={["/products/store", "/addproductstostore", "/addproducts"]}
+            path={["/products/store", "/addproducts"]}
             component={ProductRouter}
           />
           <Route exact path="/zone" component={ZoneForm} />

@@ -3,9 +3,17 @@ import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
+import Radio from "@material-ui/core/Radio"
+import RadioGroup from "@material-ui/core/RadioGroup"
+import FormControlLabel from "@material-ui/core/FormControlLabel"
+import FormControl from "@material-ui/core/FormControl"
+import FormLabel from "@material-ui/core/FormLabel"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { getProductsInRange } from "../../redux/actions/RetailerActions"
+import {
+  getPromotionsInRange,
+  saveLevelValue,
+} from "../../redux/actions/RetailerActions"
 
 class QueryOnDateRange extends Component {
   constructor(props) {
@@ -13,22 +21,21 @@ class QueryOnDateRange extends Component {
     this.state = {
       startDate: "",
       endDate: "",
-      isSubmited: false,
+      levelOption: "",
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  handleSubmit = (e) => {
+    this.props.saveLevelValue(this.state.levelOption)
+    this.props.getPromotionsInRange(this.state.startDate, this.state.endDate, this.state.levelOption)
+    this.props.history.push("/view/promotions")
+  }
+
   handleChange(e) {
     const { name, value } = e.target
     this.setState({ [name]: value })
-  }
-
-  handleSubmit = (e) => {
-    console.log(this.state.startDate, this.state.endDate)
-    this.props.getAllProducts(this.state.startDate, this.state.endDate)
-    this.setState({ isSubmited: true })
-    this.props.history.push("/showproducts")
   }
 
   render() {
@@ -98,17 +105,33 @@ class QueryOnDateRange extends Component {
                   </Typography>
                 </div>
               )}
+              {this.state.levelOption === "" && (
+                <div style={{ display: "flex" }}>
+                  <ClearIcon
+                    style={{ paddingRight: "5px", marginTop: "-2px" }}
+                  />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select level option
+                  </Typography>
+                </div>
+              )}
+              {this.state.levelOption !== "" && (
+                <div style={{ display: "flex", color: "#ffc107" }}>
+                  <CheckIcon
+                    style={{ paddingRight: "5px", marginTop: "-2px" }}
+                  />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select level option
+                  </Typography>
+                </div>
+              )}
             </div>
           </div>
           <div className="form-half">
             <form className="{classes.form}" noValidate>
               <div>
                 <div className="help-block">
-                  <Typography
-                    color="primary"
-                    component="h1"
-                    variant="h4"
-                  >
+                  <Typography color="primary" component="h1" variant="h4">
                     Promotions for Products
                   </Typography>
                 </div>
@@ -144,23 +167,47 @@ class QueryOnDateRange extends Component {
                 autoFocus
                 InputLabelProps={{ shrink: true, required: true }}
               />
-              {this.state.endDate > this.state.startDate && (
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit}"
-                  style={{
-                    marginTop: "30px",
-                    marginBottom: "30px",
-                  }}
-                  id="query-submit"
-                  onClick={this.handleSubmit}
+
+              <FormControl>
+                <Typography variant="h6">Level Option</Typography>
+                <RadioGroup
+                  row
+                  aria-label="condition"
+                  name="levelOption"
+                  value={this.state.levelOption}
+                  onChange={this.handleChange}
                 >
-                  show
-                </Button>
-              )}
+                  <FormControlLabel
+                    value="zone"
+                    control={<Radio />}
+                    label="Zone"
+                  />
+                  <FormControlLabel
+                    value="cluster"
+                    control={<Radio />}
+                    label="Cluster"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              {this.state.endDate > this.state.startDate &&
+                this.state.levelOption !== "" && (
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit}"
+                    style={{
+                      marginTop: "30px",
+                      marginBottom: "30px",
+                    }}
+                    id="query-submit"
+                    onClick={this.handleSubmit}
+                  >
+                    Show Promotions
+                  </Button>
+                )}
             </form>
           </div>
         </div>
@@ -172,7 +219,8 @@ const stateAsProps = (store) => ({
   products: store.RetailerReducer.products,
 })
 const actionAsProps = {
-  getAllProducts: getProductsInRange,
+  getPromotionsInRange,
+  saveLevelValue,
 }
 
 export default connect(stateAsProps, actionAsProps)(QueryOnDateRange)
