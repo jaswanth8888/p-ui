@@ -110,7 +110,7 @@ class WithdrawZonePromotion extends Component {
               <ProductDetailsTable />
               <br />
               <Typography className="card-header" variant="h5">
-                Promotions
+                Promotions in Zone Level
               </Typography>
               <br />
               <TableContainer component={Paper}>
