@@ -34,6 +34,7 @@ import {
   RESET_STATUS_CODE,
   LEVEL_SAVE_VALUE,
   PROMOTIONS_GET_BYRANGE,
+  GET_PROMOTIONS_CLUSTER,
 } from "./types"
 
 const TOKEN = () => {
@@ -327,7 +328,9 @@ export const getStores = (zone, cluster) => async (dispatch) => {
     })
 }
 
-export const getPromotionsInRange = (fromDate, toDate, levelOption) => async (dispatch) => {
+export const getPromotionsInRange = (fromDate, toDate, levelOption) => async (
+  dispatch
+) => {
   await axios
     .get(
       `${RETAILER_BASE_URL}/product-management/products/${levelOption}/data?filter=%7B%22startDate%22:%22${fromDate}%22,%22endDate%22:%22${toDate}%22%7D`,
@@ -511,9 +514,11 @@ export const assignToZone = (zoneDetails, zoneName, productName) => async (
     })
 }
 
-export const postPromotion = (promotionDetails, productName, levelOption) => async (
-  dispatch
-) => {
+export const postPromotion = (
+  promotionDetails,
+  productName,
+  levelOption
+) => async (dispatch) => {
   dispatch({ type: MESSAGE_SET_NULL })
   await axios
     .put(
@@ -601,7 +606,11 @@ export const resetStatusCode = () => (dispatch) => {
   dispatch({ type: RESET_STATUS_CODE })
 }
 
+<<<<<<< HEAD
+export const cancelPromotion = (productName, levelOption) => async (
+=======
 export const cancelPromotion = (details, productName, levelOption) => async (
+>>>>>>> 3e0a766b15ce973e810944e6cf0f818ff50f49a3
   dispatch
 ) => {
   await axios
@@ -642,4 +651,24 @@ export const withdrawPromotion = (
 
 export const saveLevelValue = (level) => (dispatch) => {
   dispatch({ type: LEVEL_SAVE_VALUE, levelOption: level })
+}
+
+export const getPromotionsIncluster = (
+  productName,
+  zoneName,
+  clusterName
+) => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/product/promotions/${productName}/${zoneName}/${clusterName}`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: GET_PROMOTIONS_CLUSTER, clusterPromotions: res.data })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
 }
