@@ -2,7 +2,7 @@ import { TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { getProductDetails } from "../../redux/actions/RetailerActions"
+import { getProductDetails, postPromotion } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 
 class DefinePromotionInCluster extends Component {
@@ -39,7 +39,6 @@ class DefinePromotionInCluster extends Component {
       this.state.levelOption
     )
     this.props.history.push("/view/promotions/cluster")
-
   }
 
   handleChangePercentage(e) {
@@ -151,5 +150,6 @@ const stateAsProps = (store) => ({
 
 const actionAsProps = {
   getProductDetails,
+  postPromotion,
 }
 export default connect(stateAsProps, actionAsProps)(DefinePromotionInCluster)

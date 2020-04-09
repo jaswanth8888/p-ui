@@ -1,6 +1,8 @@
 import { TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import React, { Component } from "react"
+import CheckIcon from "@material-ui/icons/Check"
+import ClearIcon from "@material-ui/icons/Clear"
 import { connect } from "react-redux"
 import {
   getProductDetails,
@@ -62,6 +64,74 @@ class DefinePromotionInZone extends Component {
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
+          <div className="store-requirement">
+            <h3 className="center-h3">Requirements</h3>
+            {this.state.promotionDetails.startDate.length === 0 && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Enter a valid Start Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.startDate.length !== 0 && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Enter a valid Start Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.endDate.length === 0 && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Enter a valid End Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.endDate.length !== 0 && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Enter a valid End Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.endDate <= this.state.promotionDetails.startDate && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  End Date has to be greater than Start Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.endDate > this.state.promotionDetails.startDate && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  End Date has to be greater than Start Date
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.promotionPercentage >= 0 && (
+              <div style={{ display: "flex" }}>
+                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Promotion percentage has to be lesser than 0
+                </Typography>
+              </div>
+            )}
+            {this.state.promotionDetails.promotionPercentage < 0 && (
+              <div style={{ display: "flex", color: "#ffc107" }}>
+                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+                <Typography variant="subtitle2" gutterBottom>
+                  Promotion percentage has to be lesser than 0
+                </Typography>
+              </div>
+            )}
+
+          </div>
           <div className="form-center">
             <div className="flex-grid">
               <Typography className="card-header" variant="h4">
