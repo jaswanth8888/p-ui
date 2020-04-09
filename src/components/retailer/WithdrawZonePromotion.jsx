@@ -90,7 +90,7 @@ class WithdrawZonePromotion extends Component {
                       "Are you sure you wish to withdraw the promotion?"
                     )
                   )
-                  this.handleSubmit(promotion.promotionId)
+                    this.handleSubmit(promotion.promotionId)
                 }}
               >
                 Withdraw

@@ -186,7 +186,6 @@ class ApplyPromotionInZone extends Component {
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
   zones: store.RetailerReducer.zones,
-
 })
 const actionAsProps = {
   getProductList,

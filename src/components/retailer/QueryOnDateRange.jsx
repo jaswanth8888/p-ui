@@ -29,7 +29,11 @@ class QueryOnDateRange extends Component {
 
   handleSubmit = (e) => {
     this.props.saveLevelValue(this.state.levelOption)
-    this.props.getPromotionsInRange(this.state.startDate, this.state.endDate, this.state.levelOption)
+    this.props.getPromotionsInRange(
+      this.state.startDate,
+      this.state.endDate,
+      this.state.levelOption
+    )
     this.props.history.push("/view/promotions")
   }
 

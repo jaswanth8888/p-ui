@@ -1,4 +1,4 @@
-import { Table } from "@material-ui/core"
+import { Table, Typography } from "@material-ui/core"
 import Paper from "@material-ui/core/Paper"
 import TableCell from "@material-ui/core/TableCell"
 import TableContainer from "@material-ui/core/TableContainer"
@@ -6,7 +6,7 @@ import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { Typography } from "@material-ui/core"
+
 import Button from "@material-ui/core/Button"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
@@ -34,7 +34,11 @@ class WithdrawClusterPromotion extends Component {
       clusterName: this.state.cluster,
     }
     console.log(this.state.details)
-    this.props.cancelPromotion(this.state.details, this.props.productName, this.state.levelOption, )
+    this.props.cancelPromotion(
+      this.state.details,
+      this.props.productName,
+      this.state.levelOption
+    )
     this.props.history.push("/withdraw/clusterproduct")
   }
 

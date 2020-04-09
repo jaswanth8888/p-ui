@@ -11,9 +11,9 @@ export const PRODUCT_POST_REQUEST = "PRODUCT_POST_REQUEST"
 export const PRODUCTTOSTORE_POST_REQUEST = "PRODUCTTOSTORE_POST_REQUEST"
 export const FAILURE = "FAILURE"
 
-//export const RETAILER_BASE_URL = "http://10.102.130.31:8765"  //Prerana system
-export const RETAILER_BASE_URL = "http://10.150.16.126:8765"    //centOS
-//export const RETAILER_BASE_URL = "http://10.150.222.113:8765";  //saahil
+// export const RETAILER_BASE_URL = "http://10.102.130.31:8765"  //Prerana system
+export const RETAILER_BASE_URL = "http://10.150.16.126:8765" // centOS
+// export const RETAILER_BASE_URL = "http://10.150.222.113:8765";  //saahil
 // export const RETAILER_BASE_URL = "http://10.102.137.146:8765";
 // export const RETAILER_BASE_URL = "http://10.102.143.225:8765";
 // export const RETAILER_BASE_URL = "http://10.102.130.66:8765";    //kartheek system
@@ -50,7 +50,6 @@ export const RESET_STATUS_CODE = "RESET_STATUS_CODE"
 
 export const LEVEL_SAVE_VALUE = "LEVEL_SAVE_VALUE"
 export const PROMOTIONS_GET_BYRANGE = "PROMOTIONS_GET_BYRANGE"
-
 
 export const TOKEN = `BearerR ${sessionStorage.getItem("token")}`
 

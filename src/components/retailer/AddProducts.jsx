@@ -29,22 +29,22 @@ class AddProducts extends Component {
 
     this.state = {
       category: "",
-      isSubmitted: false,
-      isSelectedCategory: false,
       productList: [],
       object: {},
       numberBoxInputValue: [],
-      dummyobject: [
-        {
-          productName: "baby",
-          quantityAssigned: 20,
-        },
-      ],
       quantityCheck: false,
     }
     this.handleChangeCategory = this.handleChangeCategory.bind(this)
     this.loopForm = this.loopForm.bind(this)
     this.updateInputValue = this.updateInputValue.bind(this)
+  }
+
+  AddProducts.propTypes ={
+
+  }
+
+  componentDidMount() {
+    this.props.getAllCategories()
   }
 
   updateInputValue(e) {
@@ -54,16 +54,7 @@ class AddProducts extends Component {
     if (e.target.value != null) this.setState({ quantityCheck: true })
   }
 
-  componentDidMount() {
-    this.props.getAllCategories()
-  }
-
   handleChangeCategory(e) {
-    if (e.target.value === "") {
-      this.setState({ isSelectedCategory: false })
-    } else {
-      this.setState({ isSelectedCategory: true })
-    }
     this.setState({ category: e.target.value })
     this.props.getAllProducts(e.target.value)
   }

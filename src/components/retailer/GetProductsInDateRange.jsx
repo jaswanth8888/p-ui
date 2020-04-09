@@ -133,11 +133,7 @@ class GetProductsInDateRange extends Component {
             <form className="{classes.form}" noValidate>
               <div>
                 <div className="help-block">
-                  <Typography
-                    color="primary"
-                    component="h1"
-                    variant="h4"
-                  >
+                  <Typography color="primary" component="h1" variant="h4">
                     Prices for Products
                   </Typography>
                 </div>

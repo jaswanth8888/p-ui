@@ -1,22 +1,22 @@
-import React, { Component, Fragment } from "react";
-import connect from "react-redux/es/connect/connect";
-import { Grid, Typography, Paper, Table } from "@material-ui/core";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import React, { Component, Fragment } from "react"
+import connect from "react-redux/es/connect/connect"
+import { Grid, Typography, Paper, Table } from "@material-ui/core"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
 
-import { getProductDetails } from "../../redux/actions/RetailerActions";
+import { getProductDetails } from "../../redux/actions/RetailerActions"
 
 class ProductDetails extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.state = {};
+    this.state = {}
   }
 
   componentDidMount() {
-    this.props.getProductDetails(this.props.productName);
+    this.props.getProductDetails(this.props.productName)
   }
 
   render() {
@@ -43,7 +43,9 @@ class ProductDetails extends Component {
                 <TableCell className="table-text">
                   {this.props.productDetails.productBasePrice}
                 </TableCell>
-                <TableCell className="table-text">{this.props.productDetails.companyName}</TableCell>
+                <TableCell className="table-text">
+                  {this.props.productDetails.companyName}
+                </TableCell>
               </TableRow>
               <TableHead>
                 <TableRow className="product-details-row">
@@ -68,15 +70,15 @@ class ProductDetails extends Component {
           </Typography>
         </div>
       </div>
-    );
+    )
   }
 }
 
-const stateAsProps = store => ({
+const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
-  productName: store.RetailerReducer.productName
-});
+  productName: store.RetailerReducer.productName,
+})
 const actionsAsProps = {
-  getProductDetails
-};
-export default connect(stateAsProps, actionsAsProps)(ProductDetails);
+  getProductDetails,
+}
+export default connect(stateAsProps, actionsAsProps)(ProductDetails)

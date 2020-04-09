@@ -51,6 +51,7 @@ export class Registration extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleCheckedInput = this.handleCheckedInput.bind(this)
   }
+
   handleCheckedInput(e) {
     e.preventDefault()
     const { checked, value } = e.target

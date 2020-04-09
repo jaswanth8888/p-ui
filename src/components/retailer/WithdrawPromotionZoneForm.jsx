@@ -143,7 +143,7 @@ class WithdrawPromotionZoneForm extends Component {
                   label="Zone"
                   inputProps={{
                     name: "zone",
-                    id: "zone"
+                    id: "zone",
                   }}
                 >
                   <option aria-label="None" value="" />

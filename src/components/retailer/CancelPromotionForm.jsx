@@ -8,10 +8,16 @@ import ClearIcon from "@material-ui/icons/Clear"
 import MuiAlert from "@material-ui/lab/Alert"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { getZones, getProductList, saveProductValue, saveZoneValue, getProductDetails } from "../../redux/actions/RetailerActions"
-import Message from "../utils/Message"
 import Autocomplete from "@material-ui/lab/Autocomplete"
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider"
+import {
+  getZones,
+  getProductList,
+  saveProductValue,
+  saveZoneValue,
+  getProductDetails,
+} from "../../redux/actions/RetailerActions"
+import Message from "../utils/Message"
 
 class CancelPromotionForm extends Component {
   constructor(props) {
@@ -40,7 +46,7 @@ class CancelPromotionForm extends Component {
     this.props.saveProductValue(productName)
     this.props.getProductDetails(value)
   }
- 
+
   handleChangeZone(e) {
     const { name, value } = e.target
     this.setState({ zone: value })
@@ -137,7 +143,7 @@ class CancelPromotionForm extends Component {
                   label="Enter Zone"
                   inputProps={{
                     name: "zone",
-                    id: "zone"
+                    id: "zone",
                   }}
                 >
                   <option aria-label="None" value="" />

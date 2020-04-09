@@ -327,7 +327,9 @@ export const getStores = (zone, cluster) => async (dispatch) => {
     })
 }
 
-export const getPromotionsInRange = (fromDate, toDate, levelOption) => async (dispatch) => {
+export const getPromotionsInRange = (fromDate, toDate, levelOption) => async (
+  dispatch
+) => {
   await axios
     .get(
       `${RETAILER_BASE_URL}/product-management/products/${levelOption}/data?filter=%7B%22startDate%22:%22${fromDate}%22,%22endDate%22:%22${toDate}%22%7D`,
@@ -511,9 +513,11 @@ export const assignToZone = (zoneDetails, zoneName, productName) => async (
     })
 }
 
-export const postPromotion = (promotionDetails, productName, levelOption) => async (
-  dispatch
-) => {
+export const postPromotion = (
+  promotionDetails,
+  productName,
+  levelOption
+) => async (dispatch) => {
   dispatch({ type: MESSAGE_SET_NULL })
   await axios
     .put(

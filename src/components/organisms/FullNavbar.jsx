@@ -86,10 +86,10 @@ const useStyles = makeStyles((theme) => ({
 const StyledTab = withStyles({
   root: {
     color: "white",
-    fontFamily : "Oswald, sans-serif",
+    fontFamily: "Oswald, sans-serif",
     fontSize: "18px",
-  }
-})(Tab);
+  },
+})(Tab)
 
 function FullNavbar(props) {
   const classes = useStyles()
@@ -246,10 +246,7 @@ function FullNavbar(props) {
           </Tooltip>
         </Link>
         <Link to="/withdraw/zonepromotion">
-          <Tooltip
-            title="Withdraw Percentage Promotion Zone"
-            placement="right"
-          >
+          <Tooltip title="Withdraw Percentage Promotion Zone" placement="right">
             <ListItem button>
               <ListItemIcon>
                 <EventBusyIcon />
