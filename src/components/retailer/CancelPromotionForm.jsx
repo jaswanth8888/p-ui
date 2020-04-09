@@ -8,10 +8,16 @@ import ClearIcon from "@material-ui/icons/Clear"
 import MuiAlert from "@material-ui/lab/Alert"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { getZones, getProductList, saveProductValue, saveZoneValue, getProductDetails } from "../../redux/actions/RetailerActions"
+import {
+  getZones,
+  getProductList,
+  saveProductValue,
+  saveZoneValue,
+  getProductDetails,
+} from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
 import Autocomplete from "@material-ui/lab/Autocomplete"
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider"
 
 class CancelPromotionForm extends Component {
   constructor(props) {
@@ -137,7 +143,7 @@ class CancelPromotionForm extends Component {
                   label="Enter Zone"
                   inputProps={{
                     name: "zone",
-                    id: "zone"
+                    id: "zone",
                   }}
                 >
                   <option aria-label="None" value="" />
@@ -150,17 +156,19 @@ class CancelPromotionForm extends Component {
                   })}
                 </Select>
               </FormControl>
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className="{classes.submit} submit-pad"
-                onClick={this.handleSubmit}
-                id="cluster-form-submit"
-              >
-                Go
-              </Button>
+              {this.state.productName !== "" && this.state.zone !== "" && (
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit} submit-pad"
+                  onClick={this.handleSubmit}
+                  id="cluster-form-submit"
+                >
+                  Go
+                </Button>
+              )}
             </form>
           </div>
         </div>

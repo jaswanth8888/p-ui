@@ -143,7 +143,7 @@ class WithdrawPromotionZoneForm extends Component {
                   label="Zone"
                   inputProps={{
                     name: "zone",
-                    id: "zone"
+                    id: "zone",
                   }}
                 >
                   <option aria-label="None" value="" />
@@ -156,17 +156,19 @@ class WithdrawPromotionZoneForm extends Component {
                   })}
                 </Select>
               </FormControl>
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className="{classes.submit} submit-pad"
-                onClick={this.handleSubmit}
-                id="cluster-form-submit"
-              >
-                Go
-              </Button>
+              {this.state.productName !== "" && this.state.zone !== "" && (
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit} submit-pad"
+                  onClick={this.handleSubmit}
+                  id="cluster-form-submit"
+                >
+                  Go
+                </Button>
+              )}
             </form>
           </div>
         </div>
