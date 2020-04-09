@@ -600,11 +600,14 @@ export const resetStatusCode = () => (dispatch) => {
   dispatch({ type: RESET_STATUS_CODE })
 }
 
-export const cancelPromotion = (productName, levelOption) => async (dispatch) => {
+export const cancelPromotion = (details, productName, levelOption) => async (
+  dispatch
+) => {
   await axios
     .put(
       `${RETAILER_BASE_URL}/product-management/` +
         `product/promotion/cancel/${productName}/${levelOption}`,
+      details,
       { headers: { Authorization: TOKEN() } }
     )
     .then(() => {
@@ -616,6 +619,7 @@ export const cancelPromotion = (productName, levelOption) => async (dispatch) =>
 }
 
 export const withdrawPromotion = (
+  details,
   productName,
   levelOption,
   promotionId
@@ -624,6 +628,7 @@ export const withdrawPromotion = (
     .put(
       `${RETAILER_BASE_URL}/product-management/` +
         `product/promotion/withdraw/${productName}/${levelOption}/${promotionId}`,
+      details,
       { headers: { Authorization: TOKEN() } }
     )
     .then(() => {
@@ -633,4 +638,3 @@ export const withdrawPromotion = (
       dispatch({ type: FAILURE })
     })
 }
-
