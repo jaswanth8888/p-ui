@@ -39,7 +39,7 @@ export default (state = initialState, action = {}) => {
     case VENDOR_LOGOUT:
       return { ...initialState }
     case CREATE_PRODUCT:
-      return { ...state, msg: action.msg }
+      return { ...state, msg: action.msg, msgSeverity: action.msgSeverity }
     case MESSAGE_SET_NULL:
       return { ...state, msg: "", msgSeverity: "" }
     case VENDOR_LOGIN_FAILURE:

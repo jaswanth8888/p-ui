@@ -56,12 +56,18 @@ export const postProduct = (productDetails) => async (dispatch) => {
       headers: { Authorization: VTOKEN },
     })
     .then(() => {
-      // eslint-disable-next-line no-alert
-      alert("added sucessfuly")
-      dispatch({ type: CREATE_PRODUCT, msg: "Product Added Succesfully" })
+      dispatch({
+        type: CREATE_PRODUCT,
+        msg: "Product Added Succesfully",
+        msgSeverity: "success",
+      })
     })
     .catch(() => {
-      dispatch({ type: CREATE_PRODUCT, msg: "Sorry try again" })
+      dispatch({
+        type: CREATE_PRODUCT,
+        msg: "Sorry try again",
+        msgSeverity: "error",
+      })
     })
 }
 export const vendorlogin = (loginDetails) => async (dispatch) => {

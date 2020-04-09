@@ -1,21 +1,20 @@
-// new AddProduct
 import { InputLabel, TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
-import Snackbar from "@material-ui/core/Snackbar"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
-import MuiAlert from "@material-ui/lab/Alert"
-import React, { Component, Fragment } from "react"
+import PropTypes from "prop-types"
+import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
-import thunk from "redux-thunk"
 import MenuItem from "@material-ui/core/MenuItem"
-import FormControl from "@material-ui/core/FormControl"
+
 import Select from "@material-ui/core/Select"
 import InputAdornment from "@material-ui/core/InputAdornment"
-import OutlinedInput from "@material-ui/core/OutlinedInput"
-import { makeStyles } from "@material-ui/core/styles"
+
 import TextareaAutosize from "@material-ui/core/TextareaAutosize"
+
+import Container from "@material-ui/core/Container"
+import Box from "@material-ui/core/Box"
 import { postProduct } from "../../redux/actions/VendorActions"
 
 class AddProduct extends Component {
@@ -29,15 +28,17 @@ class AddProduct extends Component {
         productBasePrice: "",
         initialQuantity: "",
         uom: "",
-        // n:"",
-        // nutritionalFacts:[]
+        productDescription: "",
+        productGroup: "",
+        abv: "",
+        volume: "",
+        productImagePath: "",
       },
       isSubmitted: false,
       isPosted: false,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleSet = this.handleSet.bind(this)
   }
 
   handleChange(e) {
@@ -47,57 +48,62 @@ class AddProduct extends Component {
     this.setState({ product })
   }
 
-  handleSubmit(e) {
-    // window.location.href='./home'
-    /*  let value=[]
-        if(this.state.product.n!=null){
-          value=Array(this.state.product.n.split("/n"))
-        }
-        let product= this.state.product;
-
-        product["nutritionalFacts"] =value
-        this.setState({product}) */
-
+  handleSubmit() {
+    const { product } = this.state
+    const { productName } = product
+    const { productBasePrice } = product
+    const { initialQuantity } = product
+    const test = this.props
     this.setState({ isSubmitted: true })
     if (
-      this.state.product.productName &&
-      this.state.product.productBasePrice > 0 &&
-      this.state.product.initialQuantity > 1 &&
-      this.state.product.initialQuantity < 100
+      productName &&
+      productBasePrice > 0 &&
+      initialQuantity > 1 &&
+      initialQuantity < 100
     ) {
-      this.props.postProduct(this.state.product)
+      test.postProduct(product)
       this.setState({ isPosted: true })
     }
-    this.handleSet()
-  }
-
-  handleSet() {
-    const product = {
-      productName: "",
-      // productCategory:"",
-      productBasePrice: "",
-      initialQuantity: "",
-      companyName: "",
-      //  uom:"",
-      n: "",
-    }
-    this.setState({ isSubmitted: true })
-    // this.setState({product})
   }
 
   render() {
     if (sessionStorage.getItem("token") != null) {
-      if (this.state.isPosted) {
+      const { isPosted } = this.state
+      const { product } = this.state
+      const { productName } = product
+      const { productBasePrice } = product
+      const { initialQuantity } = product
+      const { productCategory } = product
+      const { productDescription } = product
+      const { productImagePath } = product
+      const { abv } = product
+      const { volume } = product
+      const { companyName } = product
+      const { uom } = product
+      const { isSubmitted } = this.state
+      if (isPosted) {
         return <Redirect to="/vendor/home" />
       }
       return (
-        <div className="box-container">
-          <div className="joint-form">
+        <Container
+          display="flex"
+          justifyContent="center"
+          borderRadius="borderRadius"
+          marginTop="50px"
+        >
+          <Box
+            display="flex"
+            justifyContent="center"
+            borderRadius="borderRadius"
+          >
             <div className="validation-half">
               <div className="validations">
-                <h3 style={{ textAlign: "center" }}>Requirements</h3>
-                {this.state.isSubmitted && !this.state.product.productName && (
-                  <div style={{ display: "flex" }}>
+                {isSubmitted && (
+                  <h3 style={{ textAlign: "center" }}>Requirements</h3>
+                )}
+
+                {isSubmitted && !productName && (
+                  <div style={{ display: "flex", color: "#ffc107" }}>
                     <ClearIcon
                       style={{ paddingRight: "5px", marginTop: "-2px" }}
                     />
@@ -106,31 +112,29 @@ class AddProduct extends Component {
                     </Typography>
                   </div>
                 )}
-                {this.state.isSubmitted &&
-                  this.state.product.productBasePrice <= 0 && (
-                    <div style={{ display: "flex", color: "#ffc107" }}>
-                      <CheckIcon
-                        style={{ paddingRight: "5px", marginTop: "-2px" }}
-                      />
-                      <Typography variant="subtitle2" gutterBottom>
-                        base price must be greater than 0
-                      </Typography>
-                    </div>
-                  )}
-                {this.state.isSubmitted &&
-                  this.state.product.initialQuantity < 1 && (
-                    <div style={{ display: "flex", color: "#ffc107" }}>
-                      <CheckIcon
-                        style={{ paddingRight: "5px", marginTop: "-2px" }}
-                      />
-                      <Typography variant="subtitle2" gutterBottom>
-                        >minimum quantity should be 1
-                      </Typography>
-                    </div>
-                  )}
-                {this.state.isSubmitted &&
-                  this.state.product.productCategory === "ALCOHOL_PROD" &&
-                  this.state.product.initialQuantity > 100 && (
+                {isSubmitted && productBasePrice < 1 && (
+                  <div style={{ display: "flex", color: "#ffc107" }}>
+                    <CheckIcon
+                      style={{ paddingRight: "5px", marginTop: "-2px" }}
+                    />
+                    <Typography variant="subtitle2" gutterBottom>
+                      base price must be greater than 0
+                    </Typography>
+                  </div>
+                )}
+                {isSubmitted && initialQuantity < 1 && (
+                  <div style={{ display: "flex", color: "#ffc107" }}>
+                    <CheckIcon
+                      style={{ paddingRight: "5px", marginTop: "-2px" }}
+                    />
+                    <Typography variant="subtitle2" gutterBottom>
+                      minimum quantity should be 1
+                    </Typography>
+                  </div>
+                )}
+                {isSubmitted &&
+                  productCategory === "ALCOHOL_PROD" &&
+                  initialQuantity > 100 && (
                     <div style={{ display: "flex", color: "#ffc107" }}>
                       <CheckIcon
                         style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -140,9 +144,9 @@ class AddProduct extends Component {
                       </Typography>
                     </div>
                   )}
-                {this.state.isSubmitted &&
-                  this.state.product.productCategory === "BABY_PROD" &&
-                  this.state.product.initialQuantity > 500 && (
+                {isSubmitted &&
+                  productCategory === "BABY_PROD" &&
+                  initialQuantity > 500 && (
                     <div style={{ display: "flex", color: "#ffc107" }}>
                       <CheckIcon
                         style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -173,7 +177,7 @@ class AddProduct extends Component {
                   name="productName"
                   autoComplete="productName"
                   onChange={this.handleChange}
-                  value={this.state.product.productName}
+                  value={productName}
                   autoFocus
                 />
                 <TextField
@@ -186,7 +190,7 @@ class AddProduct extends Component {
                   name="companyName"
                   autoComplete="companyName"
                   onChange={this.handleChange}
-                  value={this.state.product.companyName}
+                  value={companyName}
                   autoFocus
                 />
                 <InputLabel htmlFor="outlined-age-native-simple">
@@ -198,7 +202,6 @@ class AddProduct extends Component {
                   variant="outlined"
                   margin="normal"
                   required
-                  fullWidth
                   name="productCategory"
                   label="productCategory"
                   onChange={this.handleChange}
@@ -218,7 +221,7 @@ class AddProduct extends Component {
                   name="initialQuantity"
                   autoComplete="initialQuantity"
                   onChange={this.handleChange}
-                  value={this.state.product.initialQuantity}
+                  value={initialQuantity}
                   autoFocus
                 />
                 <TextField
@@ -232,53 +235,114 @@ class AddProduct extends Component {
                   name="productBasePrice"
                   autoComplete="productBasePrice"
                   onChange={this.handleChange}
-                  value={this.state.product.productBasePrice}
+                  value={productBasePrice}
+                  startAdornment={
+                    <InputAdornment position="start">$</InputAdornment>
+                  }
                   autoFocus
                 />
-                <InputLabel htmlFor="outlined-age-native-simple">
-                  Units Of Measuremment
-                </InputLabel>
-                {this.state.product.productCategory == "ALCOHOL_PROD" && (
-                  <Select
-                    labelId="uom"
-                    fullWidth
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="uom"
-                    label="uom"
-                    id="alc-prod"
-                    onChange={this.handleChange}
-                  >
-                    <MenuItem value="Lts">LTS</MenuItem>
-                    <MenuItem value="GALLONs">GALLONS</MenuItem>
-                    <MenuItem value="ML">ML </MenuItem>
-                  </Select>
-                )}
-                {this.state.product.productCategory == "BABY_PROD" && (
-                  <Select
-                    labelId="uom"
-                    fullWidth
-                    name="uom"
-                    label="uom"
-                    onChange={this.handleChange}
-                    id="baby-prod"
-                  >
-                    <MenuItem value="KGs">KGs</MenuItem>
-                    <MenuItem value="Pounds">Pounds</MenuItem>
-                  </Select>
-                )}
-                {this.state.product.productCategory == "BABY_PROD" && (
+
+                {productCategory === "ALCOHOL_PROD" && (
                   <div>
-                    {/*     <TextareaAutosize
-                    name="n" 
-                  placeholder="Nutritional Facts"             
-                    onChange={this.handleChange}
-                    value={this.state.product.n}
-                  /> */}
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      type="number"
+                      id="abv"
+                      label="abv"
+                      name="abv"
+                      autoComplete="abv"
+                      onChange={this.handleChange}
+                      value={abv}
+                      autoFocus
+                    />
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      type="number"
+                      id="volume"
+                      label="volume"
+                      name="volume"
+                      autoComplete="volume"
+                      onChange={this.handleChange}
+                      value={volume}
+                      autoFocus
+                    />
+                    <InputLabel htmlFor="outlined-age-native-simple">
+                      Units Of Measuremment
+                    </InputLabel>
+                    <Select
+                      labelId="uom"
+                      fullWidth
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      name="uom"
+                      label="uom"
+                      value={uom}
+                      id="alc-prod"
+                      onChange={this.handleChange}
+                    >
+                      <MenuItem value="Lts">LTS</MenuItem>
+                      <MenuItem value="GALLONs">GALLONS</MenuItem>
+                      <MenuItem value="ML">ML </MenuItem>
+                    </Select>
                   </div>
                 )}
+                {productCategory === "BABY_PROD" && (
+                  <div>
+                    <InputLabel htmlFor="outlined-age-native-simple">
+                      Units Of Measuremment
+                    </InputLabel>
+
+                    <Select
+                      labelId="uom"
+                      fullWidth
+                      name="uom"
+                      label="uom"
+                      onChange={this.handleChange}
+                      value={uom}
+                      id="baby-prod"
+                    >
+                      <MenuItem value="KGs">KGs</MenuItem>
+                      <MenuItem value="Pounds">Pounds</MenuItem>
+                    </Select>
+                  </div>
+                )}
+
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="productImagePath"
+                  label="productImagePath"
+                  name="productImagePath"
+                  autoComplete="productImagePath"
+                  onChange={this.handleChange}
+                  value={productImagePath}
+                  autoFocus
+                />
+
+                <TextareaAutosize
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="productDescription"
+                  name="productDescription"
+                  autoComplete="productDescription"
+                  onChange={this.handleChange}
+                  value={productDescription}
+                  aria-label="minimum height"
+                  rowsMin={3}
+                  placeholder="product discription"
+                />
+
                 <Button
                   type="button"
                   fullWidth
@@ -293,12 +357,18 @@ class AddProduct extends Component {
                 </Button>
               </form>
             </div>
-          </div>
-        </div>
+          </Box>
+        </Container>
       )
     }
+    return true
   }
 }
+
+AddProduct.propTypes = {
+  postProduct: PropTypes.func.isRequired,
+}
+
 const actionAsProps = {
   postProduct,
 }
