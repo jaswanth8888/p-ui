@@ -1,11 +1,7 @@
 import {
-  VTOKEN,
   VENDOR_LOGIN_USER,
   VENDOR_LOGIN_FAILURE,
   VENDOR_LOGOUT,
-  WELCOME_USER,
-  VENDORFAILURE,
-  RETAILER_BASE_URL,
   MESSAGE_SET_NULL,
   CREATE_PRODUCT,
 } from "../actions/types"
@@ -24,7 +20,12 @@ const initialState = {
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case registerconstants.REGISTER_SUCCESS:
-      return { ...state, register_status: action.register_status }
+      return {
+        ...state,
+        register_status: action.register_status,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
     case registerconstants.REGISTER_FAILURE:
       return {
         ...state,
