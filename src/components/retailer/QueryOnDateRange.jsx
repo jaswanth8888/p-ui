@@ -13,6 +13,8 @@ import { connect } from "react-redux"
 import {
   getPromotionsInRange,
   saveLevelValue,
+  saveStartDate,
+  saveEndDate,
 } from "../../redux/actions/RetailerActions"
 
 class QueryOnDateRange extends Component {
@@ -28,12 +30,13 @@ class QueryOnDateRange extends Component {
   }
 
   handleSubmit = (e) => {
+    console.log(this.state.levelOption)
+    console.log(this.state.startDate)
+    console.log(this.state.endDate)
     this.props.saveLevelValue(this.state.levelOption)
-    this.props.getPromotionsInRange(
-      this.state.startDate,
-      this.state.endDate,
-      this.state.levelOption
-    )
+    this.props.saveStartDate(this.state.startDate)
+    this.props.saveEndDate(this.state.endDate)
+    this.props.getPromotionsInRange(this.state.startDate, this.state.endDate, this.state.levelOption)
     this.props.history.push("/view/promotions")
   }
 
@@ -225,6 +228,8 @@ const stateAsProps = (store) => ({
 const actionAsProps = {
   getPromotionsInRange,
   saveLevelValue,
+  saveStartDate,
+  saveEndDate,
 }
 
 export default connect(stateAsProps, actionAsProps)(QueryOnDateRange)

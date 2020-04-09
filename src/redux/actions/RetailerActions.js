@@ -35,6 +35,8 @@ import {
   LEVEL_SAVE_VALUE,
   PROMOTIONS_GET_BYRANGE,
   GET_PROMOTIONS_CLUSTER,
+  STARTDATE_SAVE_VALUE,
+  ENDDATE_SAVE_VALUE,
 } from "./types"
 
 const TOKEN = () => {
@@ -667,4 +669,13 @@ export const getPromotionsIncluster = (
     .catch(() => {
       dispatch({ type: FAILURE })
     })
+}
+
+export const saveStartDate = (start) => (dispatch) => {
+  console.log(start);
+  dispatch({ type: STARTDATE_SAVE_VALUE, startDate: start })
+}
+
+export const saveEndDate = (end) => (dispatch) => {
+  dispatch({ type: ENDDATE_SAVE_VALUE, endDate: end })
 }
