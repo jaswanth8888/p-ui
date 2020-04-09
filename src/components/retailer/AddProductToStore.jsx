@@ -1,78 +1,71 @@
-import { InputLabel, Select, Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { InputLabel, Select, Typography } from "@material-ui/core"
+import Button from "@material-ui/core/Button"
+import FormControl from "@material-ui/core/FormControl"
+import Snackbar from "@material-ui/core/Snackbar"
+import MuiAlert from "@material-ui/lab/Alert"
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
 import {
   getClusters,
   getStores,
   getZones,
   saveClusterValue,
   saveStoreValue,
-  saveZoneValue
-} from "../../redux/actions/RetailerActions";
+  saveZoneValue,
+} from "../../redux/actions/RetailerActions"
 
 class AddProductToStore extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       zone: "",
       cluster: "",
-      isSubmitted: false,
-      store: ""
-    };
+      store: "",
+      status: 0,
+    }
 
-    this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeZone = this.handleChangeZone.bind(this);
-    this.handleChangeCluster = this.handleChangeCluster.bind(this);
-    this.handleChangeStore = this.handleChangeStore.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChangeZone = this.handleChangeZone.bind(this)
+    this.handleChangeCluster = this.handleChangeCluster.bind(this)
+    this.handleChangeStore = this.handleChangeStore.bind(this)
   }
 
   componentDidMount() {
-    this.props.getAllZones();
+    this.props.getAllZones()
   }
 
-  handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  }
-
-  handleChangeZone(e) {
-    this.setState({ zone: e.target.value });
-    this.props.getAllClusters(e.target.value);
-    this.props.saveZoneValue(e.target.value);
-  }
-
-  handleChangeCluster(e) {
-    this.setState({ cluster: e.target.value });
-    this.props.getAllStores(this.props.zone, e.target.value);
-    this.props.saveClusterValue(e.target.value);
+  handleSubmitHistory = () => {
+    this.props.history.push("/store")
   }
 
   handleChangeStore(e) {
-    this.setState({ store: e.target.value });
+    this.setState({ store: e.target.value })
     // this.props.setState({store:this.state.store})
-    this.props.saveStoreValue(e.target.value);
+    this.props.saveStoreValue(e.target.value)
   }
 
-  handleSubmitHistory = event => {
-    this.props.history.push("/store");
-  };
+  handleChangeCluster(e) {
+    this.setState({ cluster: e.target.value })
+    this.props.getAllStores(this.props.zone, e.target.value)
+    this.props.saveClusterValue(e.target.value)
+  }
 
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   this.setState({isSubmitted:true})
-  // }
+  handleChangeZone(e) {
+    this.setState({ zone: e.target.value })
+    this.props.getAllClusters(e.target.value)
+    this.props.saveZoneValue(e.target.value)
+  }
+
+  handleChange(e) {
+    const { name, value } = e.target
+    this.setState({ [name]: value })
+  }
 
   render() {
-    //   if(this.state.isSubmitted && this.state.cluster && this.state.zone && this.state.store){
-    //   return <Redirect to='/welcome'/>
-    // }
+    const { zone, cluster, store, status } = this.state
     return (
       <div className="box-container">
         <div className="joint-form">
@@ -116,21 +109,17 @@ class AddProductToStore extends Component {
                 <Select
                   fullWidth
                   native
-                  value={this.state.zone}
+                  value={zone}
                   onChange={this.handleChangeZone}
                   label="Zone"
                   inputProps={{
                     name: "zone",
-                    id: "zone"
+                    id: "zone",
                   }}
                 >
                   <option aria-label="None" value="" />
                   {this.props.zones.map((zone, index) => {
-                    return (
-                      <option value={zone} key={index}>
-                        {zone}
-                      </option>
-                    );
+                    return <option value={zone}>{zone}</option>
                   })}
                 </Select>
               </FormControl>
@@ -145,21 +134,17 @@ class AddProductToStore extends Component {
                 <Select
                   fullWidth
                   native
-                  value={this.state.cluster}
+                  value={cluster}
                   onChange={this.handleChangeCluster}
                   label="Cluster"
                   inputProps={{
                     name: "cluster",
-                    id: "cluster"
+                    id: "cluster",
                   }}
                 >
                   <option aria-label="None" value="" />
                   {this.props.clusters.map((cluster, index) => {
-                    return (
-                      <option value={cluster} key={index}>
-                        {cluster}
-                      </option>
-                    );
+                    return <option value={cluster}>{cluster}</option>
                   })}
                 </Select>
               </FormControl>
@@ -174,25 +159,21 @@ class AddProductToStore extends Component {
                 <Select
                   fullWidth
                   native
-                  value={this.state.store}
+                  value={store}
                   onChange={this.handleChangeStore}
                   label="Store"
                   inputProps={{
                     name: "store",
-                    id: "store"
+                    id: "store",
                   }}
                 >
                   <option aria-label="None" value="" />
                   {this.props.stores.map((store, index) => {
-                    return (
-                      <option value={store} key={index}>
-                        {store}
-                      </option>
-                    );
+                    return <option value={store}>{store}</option>
                   })}
                 </Select>
               </FormControl>
-              {this.state.cluster !== "" && this.props.stores.length <= 0 && (
+              {cluster !== "" && this.props.stores.length <= 0 && (
                 <Button
                   type="button"
                   fullWidth
@@ -204,9 +185,7 @@ class AddProductToStore extends Component {
                   Add Store
                 </Button>
               )}
-              {this.state.store !== "" &&
-              this.state.zone !== "" &&
-              this.state.cluster !== "" ? (
+              {store !== "" && zone !== "" && cluster !== "" ? (
                 <Link to="/addproducts" className="special-href">
                   <Button
                     type="button"
@@ -238,7 +217,7 @@ class AddProductToStore extends Component {
           </div>
         </div>
         <>
-          {this.state.status === 1 ? (
+          {status === 1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert elevation={6} variant="filled">
@@ -251,7 +230,7 @@ class AddProductToStore extends Component {
           )}
         </>
         <>
-          {this.state.status === -1 ? (
+          {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
@@ -264,23 +243,23 @@ class AddProductToStore extends Component {
           )}
         </>
       </div>
-    );
+    )
   }
 }
-const stateAsProps = store => ({
+const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
   clusters: store.RetailerReducer.clusters,
   zone: store.RetailerReducer.zone,
   cluster: store.RetailerReducer.cluster,
   store: store.RetailerReducer.store,
-  stores: store.RetailerReducer.stores
-});
+  stores: store.RetailerReducer.stores,
+})
 const actionAsProps = {
   getAllZones: getZones,
   getAllClusters: getClusters,
   getAllStores: getStores,
   saveZoneValue,
   saveClusterValue,
-  saveStoreValue
-};
-export default connect(stateAsProps, actionAsProps)(AddProductToStore);
+  saveStoreValue,
+}
+export default connect(stateAsProps, actionAsProps)(AddProductToStore)

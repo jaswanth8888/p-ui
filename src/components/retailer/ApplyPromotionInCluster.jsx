@@ -1,25 +1,22 @@
 import { InputLabel, TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import FormControl from "@material-ui/core/FormControl"
+import Select from "@material-ui/core/Select"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import Autocomplete from "@material-ui/lab/Autocomplete"
-import React, { Component, Fragment } from "react"
-import Select from "@material-ui/core/Select"
-import Snackbar from "@material-ui/core/Snackbar"
-import MuiAlert from "@material-ui/lab/Alert"
+import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import {
-  getProductList,
-  saveProductValue,
-  getProductDetails,
-  getZones,
-  saveZoneValue,
   getClusters,
+  getProductDetails,
+  getProductList,
+  getZones,
   saveClusterValue,
+  saveProductValue,
+  saveZoneValue,
 } from "../../redux/actions/RetailerActions"
-import Message from "../utils/Message"
 
 class ApplyPromotionInCluster extends Component {
   constructor(props) {
@@ -42,10 +39,8 @@ class ApplyPromotionInCluster extends Component {
   }
 
   handleChangeProduct = (e, value) => {
-    console.log(value)
     const productName = value
     this.setState({ productName })
-    console.log(this.state.productName)
     this.props.saveProductValue(productName)
     this.props.getProductDetails(value)
   }
@@ -54,18 +49,17 @@ class ApplyPromotionInCluster extends Component {
     const { name, value } = e.target
     this.setState({ zone: value })
     this.props.getClusters(e.target.value)
-    console.log(value)
     this.props.saveZoneValue(value)
   }
 
   handleChangeCluster(e) {
     const { name, value } = e.target
     this.setState({ cluster: value })
-    console.log(value)
     this.props.saveClusterValue(value)
   }
 
   render() {
+    const { productName, zone, cluster } = this.state
     return (
       <div className="box-container">
         <div className="joint-form">
@@ -73,7 +67,7 @@ class ApplyPromotionInCluster extends Component {
             <div className="validations">
               <h3 className="center-h3">Requirements</h3>
 
-              {this.state.productName === "" && (
+              {productName === "" && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -83,7 +77,7 @@ class ApplyPromotionInCluster extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.productName !== "" && (
+              {productName !== "" && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -93,7 +87,7 @@ class ApplyPromotionInCluster extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.zone === "" && (
+              {zone === "" && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -103,7 +97,7 @@ class ApplyPromotionInCluster extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.zone !== "" && (
+              {zone !== "" && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -113,7 +107,7 @@ class ApplyPromotionInCluster extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.cluster === "" && (
+              {cluster === "" && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -123,7 +117,7 @@ class ApplyPromotionInCluster extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.cluster !== "" && (
+              {cluster !== "" && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -155,12 +149,8 @@ class ApplyPromotionInCluster extends Component {
                   fullWidth
                   options={this.props.products}
                   getOptionLabel={(option) => option}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Product Name"
-                      variant="outlined"
-                    />
+                  renderInput={() => (
+                    <TextField label="Product Name" variant="outlined" />
                   )}
                   onChange={this.handleChangeProduct}
                   name="productName"
@@ -173,7 +163,7 @@ class ApplyPromotionInCluster extends Component {
                 <Select
                   fullWidth
                   native
-                  value={this.state.zone}
+                  value={zone}
                   onChange={this.handleChangeZone}
                   label="Zone"
                   inputProps={{
@@ -183,11 +173,7 @@ class ApplyPromotionInCluster extends Component {
                 >
                   <option aria-label="None" value="" />
                   {this.props.zones.map((zone, index) => {
-                    return (
-                      <option value={zone} key={index}>
-                        {zone}
-                      </option>
-                    )
+                    return <option value={zone}>{zone}</option>
                   })}
                 </Select>
               </FormControl>
@@ -197,10 +183,9 @@ class ApplyPromotionInCluster extends Component {
                   Enter Cluster
                 </InputLabel>
                 <Select
-                  ref="cluster"
                   fullWidth
                   native
-                  value={this.state.cluster}
+                  value={cluster}
                   onChange={this.handleChangeCluster}
                   label="Enter Cluster"
                   inputProps={{
@@ -210,11 +195,7 @@ class ApplyPromotionInCluster extends Component {
                 >
                   <option aria-label="None" value="" />
                   {this.props.clusters.map((cluster, index) => {
-                    return (
-                      <option value={cluster} key={index}>
-                        {cluster}
-                      </option>
-                    )
+                    return <option value={cluster}>{cluster}</option>
                   })}
                 </Select>
               </FormControl>

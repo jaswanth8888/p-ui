@@ -6,7 +6,7 @@ import Snackbar from "@material-ui/core/Snackbar"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import MuiAlert from "@material-ui/lab/Alert"
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import { connect } from "react-redux"
 import { getZones, postCluster } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
@@ -18,7 +18,6 @@ class ClusterForm extends Component {
       zone: "",
       clusterName: "",
       taxRate: "",
-      isSubmitted: false,
       status: 0,
     }
     this.handleChange = this.handleChange.bind(this)

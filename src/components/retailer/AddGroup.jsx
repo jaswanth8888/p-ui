@@ -24,7 +24,8 @@ class AddGroup extends Component {
   }
 
   isValidGroupName = () => {
-    if (this.state.group.groupName.length > 0) {
+    const { group } = this.state
+    if (group.groupName.length > 0) {
       this.setState({ status: 1 })
     } else {
       this.setState({ status: -1 })
@@ -43,18 +44,20 @@ class AddGroup extends Component {
   handleSubmit(e) {
     e.preventDefault()
     if (this.isValidGroupName()) {
-      this.props.postGroup({ ...this.state.group }) // thunk action
+      const { group } = this.state
+      this.props.postGroup({ ...group }) // thunk action
     }
   }
 
   render() {
+    const { group, status } = this.state
     return (
       <div className="box-container">
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
               <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {this.state.group.groupName.length <= 0 && (
+              {group.groupName.length <= 0 && (
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -62,7 +65,7 @@ class AddGroup extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.group.groupName.length > 0 && (
+              {group.groupName.length > 0 && (
                 <div className="approved-div">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -115,7 +118,7 @@ class AddGroup extends Component {
         </div>
 
         <>
-          {this.state.status === -1 ? (
+          {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
