@@ -148,9 +148,9 @@ export default (state = initialState, action = {}) => {
     case GET_PROMOTIONS_CLUSTER:
       return { ...state, clusterPromotions: action.clusterPromotions }
     case STARTDATE_SAVE_VALUE:
-      return { ...state, startDate: action.endDate }
+      return { ...state, startDate: action.startDate }
     case ENDDATE_SAVE_VALUE:
-      return { ...state, endDate: action.startDate }
+      return { ...state, endDate: action.endDate }
     default:
       return { ...state }
   }

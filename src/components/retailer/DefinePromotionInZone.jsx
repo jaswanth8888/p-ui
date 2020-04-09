@@ -66,6 +66,12 @@ class DefinePromotionInZone extends Component {
     const end = e.target.value
     this.state.endDate = end
     this.state.promotionDetails.endDate = end
+    console.log(this.state.promotionDetails)
+    console.log(this.state.startDate)
+    console.log(this.state.endDate)
+    console.log(this.state.promotionPercentage)
+
+    
   }
 
   render() {
@@ -218,21 +224,21 @@ class DefinePromotionInZone extends Component {
                 onChange={this.handleChangeEndDate}
                 autoFocus
               />
-              {/* {this.state.endDate > this.state.startDate &&
-                this.state.promotionPercentage !== "" && ( */}
-              <Button
-                halfWidth
-                type="button"
-                variant="contained"
-                color="primary"
-                className="{classes.submit}"
-                onClick={this.handleSubmit}
-                style={{ marginTop: "10px" }}
-                id="apply-zone-percentage"
-              >
-                Apply Promotion to Zone
-              </Button>
-                {/* )} */}
+              {this.state.promotionDetails.endDate >
+                this.state.promotionDetails.startDate && (
+                <Button
+                  halfWidth
+                  type="button"
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit}"
+                  onClick={this.handleSubmit}
+                  style={{ marginTop: "10px" }}
+                  id="apply-zone-percentage"
+                >
+                  Apply Promotion to Zone
+                </Button>
+              )}
             </div>
           </div>
         </div>
