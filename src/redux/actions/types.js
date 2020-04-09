@@ -50,7 +50,7 @@ export const RESET_STATUS_CODE = "RESET_STATUS_CODE"
 
 export const LEVEL_SAVE_VALUE = "LEVEL_SAVE_VALUE"
 export const PROMOTIONS_GET_BYRANGE = "PROMOTIONS_GET_BYRANGE"
-
+export const GET_PROMOTIONS_CLUSTER = "GET_PROMOTIONS_CLUSTER"
 
 export const TOKEN = `BearerR ${sessionStorage.getItem("token")}`
 
