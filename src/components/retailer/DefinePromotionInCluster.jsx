@@ -1,21 +1,21 @@
-import { TextField, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import React, { Component } from "react"
-import CheckIcon from "@material-ui/icons/Check"
-import ClearIcon from "@material-ui/icons/Clear"
-import Alert from "@material-ui/lab/Alert"
-import IconButton from "@material-ui/core/IconButton"
-import CloseIcon from "@material-ui/icons/Close"
-import { connect } from "react-redux"
+import { TextField, Typography } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import React, { Component } from "react";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
+import Alert from "@material-ui/lab/Alert";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import { connect } from "react-redux";
 import {
   getProductDetails,
-  postPromotion,
-} from "../../redux/actions/RetailerActions"
-import ProductDetailsTable from "../utils/ProductDetailsTable"
+  postPromotion
+} from "../../redux/actions/RetailerActions";
+import ProductDetailsTable from "../utils/ProductDetailsTable";
 
 class DefinePromotionInCluster extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       promotionDetails: {
@@ -24,43 +24,58 @@ class DefinePromotionInCluster extends Component {
         endDate: "",
         promotionPercentage: "",
         zoneName: this.props.zone,
-        clusterName: this.props.cluster,
+        clusterName: this.props.cluster
       },
-      levelOption: "cluster",
-    }
+      levelOption: "cluster"
+    };
 
-    this.handleChangePercentage = this.handleChangePercentage.bind(this)
-    this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
-    this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChangePercentage = this.handleChangePercentage.bind(this);
+    this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
+    this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillMount() {}
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(this.state.promotionDetails)
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(this.state.promotionDetails);
     this.props.postPromotion(
       this.state.promotionDetails,
       this.props.productName,
       this.state.levelOption
-    )
-    this.props.history.push("/view/promotions/cluster")
-  }
+    );
+    this.props.history.push("/view/promotions/cluster");
+  };
 
   handleChangePercentage(e) {
-    const percentage = e.target.value
-    this.state.promotionDetails.promotionPercentage = percentage
+    const percentage = e.target.value;
+    this.setState({
+      promotionDetails: {
+        ...this.state.promotionDetails,
+        promotionPercentage: percentage
+      }
+    });
   }
 
   handleChangeStartDate(e) {
-    const start = e.target.value
-    this.state.promotionDetails.startDate = start
+    const start = e.target.value;
+    this.setState({
+      promotionDetails: {
+        ...this.state.promotionDetails,
+        startDate: start
+      }
+    });
   }
 
   handleChangeEndDate(e) {
-    const end = e.target.value
-    this.state.promotionDetails.endDate = end
+    const end = e.target.value;
+    this.setState({
+      promotionDetails: {
+        ...this.state.promotionDetails,
+        endDate: end
+      }
+    });
   }
 
   render() {
@@ -139,7 +154,7 @@ class DefinePromotionInCluster extends Component {
 
           <div className="form-center">
             <div className="flex-grid">
-            {this.props.productDetails.assignProduct.length > 0 && (
+              {this.props.productDetails.assignProduct.length > 0 && (
                 <div>
                   <Alert
                     severity="info"
@@ -216,37 +231,40 @@ class DefinePromotionInCluster extends Component {
                 onChange={this.handleChangeEndDate}
                 autoFocus
               />
-
-              <Button
-                halfWidth
-                type="button"
-                variant="contained"
-                color="primary"
-                className="{classes.submit}"
-                onClick={this.handleSubmit}
-                style={{ marginTop: "10px" }}
-                id="apply-zone-percentage"
-              >
-                Apply Promotion to Cluster
-              </Button>
+              {this.state.promotionDetails.endDate >
+                this.state.promotionDetails.startDate &&
+                this.state.promotionDetails.promotionPercentage < 0 && (
+                  <Button
+                    halfWidth
+                    type="button"
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit}"
+                    onClick={this.handleSubmit}
+                    style={{ marginTop: "10px" }}
+                    id="apply-cluster-percentage"
+                  >
+                    Apply Promotion to Cluster
+                  </Button>
+                )}
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-const stateAsProps = (store) => ({
+const stateAsProps = store => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
   zone: store.RetailerReducer.zone,
   cluster: store.RetailerReducer.cluster,
-  statusCode: store.RetailerReducer.statusCode,
-})
+  statusCode: store.RetailerReducer.statusCode
+});
 
 const actionAsProps = {
   getProductDetails,
-  postPromotion,
-}
-export default connect(stateAsProps, actionAsProps)(DefinePromotionInCluster)
+  postPromotion
+};
+export default connect(stateAsProps, actionAsProps)(DefinePromotionInCluster);
