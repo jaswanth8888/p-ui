@@ -7,7 +7,7 @@ import TableRow from "@material-ui/core/TableRow"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 
-class ShowProducts extends Component {
+class ViewPromotions extends Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -24,25 +24,66 @@ class ShowProducts extends Component {
             <Table aria-label="a dense table" style={{ width: "80vw" }}>
               <TableHead style={{ color: "white" }}>
                 <TableRow>
-                  <TableCell style={{ color: "White" }}>Product Name</TableCell>
+                  <TableCell style={{ color: "White" }}>Product</TableCell>
+                  <TableCell style={{ color: "White" }}>Vendor Name</TableCell>
                   <TableCell style={{ color: "White" }}>Base Price</TableCell>
+                  <TableCell style={{ color: "White" }}>
+                    Effective Price
+                  </TableCell>
+                  <TableCell style={{ color: "White" }}>Quantity</TableCell>
+                  <TableCell style={{ color: "White" }}>Category</TableCell>
                   <TableCell style={{ color: "White" }}>Promotions</TableCell>
                 </TableRow>
               </TableHead>
               <tbody>
-                {this.props.products.map((product) => {
+                {this.props.promotions.map((product) => {
                   return (
-                    <TableRow key={product.productId}>
+                    <TableRow>
                       <TableCell>
                         <Typography variant="subtitle1" gutterBottom>
                           {product.productName}
                         </Typography>
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={product.image}
+                        >
+                          <img
+                            className="thumbnail"
+                            src={product.image}
+                            alt="none"
+                          />
+                        </a>
                       </TableCell>
                       <TableCell>
                         <Typography variant="subtitle1" gutterBottom>
-                          {product.productBasePrice}
+                          {product.vendorName}
                         </Typography>
                       </TableCell>
+                      <TableCell>
+                        <Typography variant="subtitle1" gutterBottom>
+                          {product.vendorPrice}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="subtitle1" gutterBottom>
+                          {product.effectivePrice}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="subtitle1" gutterBottom>
+                          Initial : {product.initialQty}
+                        </Typography>
+                        <Typography variant="subtitle1" gutterBottom>
+                          Remaining : {product.remainingQty}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="subtitle1" gutterBottom>
+                          {product.category}
+                        </Typography>
+                      </TableCell>
+
                       <TableCell>
                         <Typography variant="subtitle1" gutterBottom>
                           <Table size="small" aria-label="a dense table">
@@ -53,24 +94,24 @@ class ShowProducts extends Component {
                             >
                               <TableRow>
                                 <TableCell style={{ color: "White" }}>
-                                  Profit Percentage
+                                  Promotion Percentage
                                 </TableCell>
                                 <TableCell style={{ color: "White" }}>
-                                  Zones/Cluster
+                                  Selling Price
                                 </TableCell>
                                 <TableCell style={{ color: "White" }}>
-                                  Effective price
+                                  Start Date
                                 </TableCell>
                                 <TableCell style={{ color: "White" }}>
-                                  From Date
+                                  End Date
                                 </TableCell>
                                 <TableCell style={{ color: "White" }}>
-                                  TO Date
+                                  Level Applied
                                 </TableCell>
                               </TableRow>
                             </TableHead>
                             <tbody>
-                              {product.promotions.map((promotion) => {
+                              {product.list.map((promotion) => {
                                 return (
                                   <TableRow key={promotion.promotionId}>
                                     <TableCell>
@@ -78,39 +119,45 @@ class ShowProducts extends Component {
                                         variant="subtitle1"
                                         gutterBottom
                                       >
-                                        {promotion.profitPercentage}
+                                        {promotion.promotionPercentage}
                                       </Typography>
                                     </TableCell>
                                     <TableCell>
+                                      <Typography
+                                        variant="subtitle1"
+                                        gutterBottom
+                                      >
+                                        {promotion.promotionSellingPrice}
+                                      </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                      <Typography
+                                        variant="subtitle1"
+                                        gutterBottom
+                                      >
+                                        {promotion.startDate.slice(0, 10)}
+                                      </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                      <Typography
+                                        variant="subtitle1"
+                                        gutterBottom
+                                      >
+                                        {promotion.endDate.slice(0, 10)}
+                                      </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                      <Typography
+                                        variant="subtitle1"
+                                        gutterBottom
+                                      >
+                                        {this.props.levelOption}
+                                      </Typography>
                                       <Typography
                                         variant="subtitle1"
                                         gutterBottom
                                       >
                                         {promotion.zoneCluster}
-                                      </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                      <Typography
-                                        variant="subtitle1"
-                                        gutterBottom
-                                      >
-                                        {promotion.effectivePrice}
-                                      </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                      <Typography
-                                        variant="subtitle1"
-                                        gutterBottom
-                                      >
-                                        {promotion.startDate}
-                                      </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                      <Typography
-                                        variant="subtitle1"
-                                        gutterBottom
-                                      >
-                                        {promotion.endDate}
                                       </Typography>
                                     </TableCell>
                                   </TableRow>
@@ -132,6 +179,7 @@ class ShowProducts extends Component {
   }
 }
 const stateAsProps = (store) => ({
-  products: store.RetailerReducer.products,
+  promotions: store.RetailerReducer.promotions,
+  levelOption: store.RetailerReducer.levelOption,
 })
-export default connect(stateAsProps, null)(ShowProducts)
+export default connect(stateAsProps, null)(ViewPromotions)

@@ -27,8 +27,9 @@ import {
   ZONECLUSTER_GET_REQUEST,
   ASSIGN_TO_CLUSTER,
   ASSIGN_TO_ZONE,
-  PRODUCT_GET_BYRANGE,
   RESET_STATUS_CODE,
+  LEVEL_SAVE_VALUE,
+  PROMOTIONS_GET_BYRANGE,
 } from "../actions/types"
 
 const initialState = {
@@ -56,6 +57,8 @@ const initialState = {
   promotionDetails: {},
   zoneclusternames: [],
   statusCode: "",
+  levelOption: "",
+  promotions: {},
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -92,8 +95,6 @@ export default (state = initialState, action = {}) => {
     case CATEGORIES_GET_REQUEST:
       return { ...state, categories: action.categories }
     case PRODUCTS_GET_REQUEST:
-      return { ...state, products: action.products }
-    case PRODUCT_GET_BYRANGE:
       return { ...state, products: action.products }
     case ZONE_SAVE_VALUE:
       return { ...state, zone: action.zone }
@@ -134,6 +135,10 @@ export default (state = initialState, action = {}) => {
       }
     case RESET_STATUS_CODE:
       return { ...state, statusCode: "" }
+    case LEVEL_SAVE_VALUE:
+      return { ...state, levelOption: action.levelOption }
+    case PROMOTIONS_GET_BYRANGE:
+      return { ...state, promotions: action.promotions }
     default:
       return { ...state }
   }
