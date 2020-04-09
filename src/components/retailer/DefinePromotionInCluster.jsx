@@ -1,6 +1,11 @@
 import { TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import React, { Component } from "react"
+import CheckIcon from "@material-ui/icons/Check"
+import ClearIcon from "@material-ui/icons/Clear"
+import Alert from "@material-ui/lab/Alert"
+import IconButton from "@material-ui/core/IconButton"
+import CloseIcon from "@material-ui/icons/Close"
 import { connect } from "react-redux"
 import {
   getProductDetails,
