@@ -30,6 +30,7 @@ import {
   RESET_STATUS_CODE,
   LEVEL_SAVE_VALUE,
   PROMOTIONS_GET_BYRANGE,
+  GET_PROMOTIONS_CLUSTER,
 } from "../actions/types"
 
 const initialState = {
@@ -59,6 +60,7 @@ const initialState = {
   statusCode: "",
   levelOption: "",
   promotions: {},
+  clusterPromotions: [],
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -139,6 +141,8 @@ export default (state = initialState, action = {}) => {
       return { ...state, levelOption: action.levelOption }
     case PROMOTIONS_GET_BYRANGE:
       return { ...state, promotions: action.promotions }
+    case GET_PROMOTIONS_CLUSTER:
+      return { ...state, clusterPromotions: action.clusterPromotions }
     default:
       return { ...state }
   }

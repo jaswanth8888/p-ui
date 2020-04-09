@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button"
 import Checkbox from "@material-ui/core/Checkbox"
 import FormControl from "@material-ui/core/FormControl"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
+import PropTypes from "prop-types"
 import Paper from "@material-ui/core/Paper"
 import TableCell from "@material-ui/core/TableCell"
 import TableContainer from "@material-ui/core/TableContainer"
@@ -37,18 +38,21 @@ class AddProducts extends Component {
     this.handleChangeCategory = this.handleChangeCategory.bind(this)
     this.loopForm = this.loopForm.bind(this)
     this.updateInputValue = this.updateInputValue.bind(this)
-  }
-
-  AddProducts.propTypes ={
-
+    this.getAllCategories = this.getAllCategories.bind(this)
   }
 
   componentDidMount() {
-    this.props.getAllCategories()
+    this.getAllCategories()
+  }
+
+  getAllCategories() {
+    const { getAllCategories } = this.props
+    getAllCategories()
   }
 
   updateInputValue(e) {
-    const newArray = Array.from(this.state.numberBoxInputValue)
+    const { numberBoxInputValue } = this.state
+    const newArray = Array.from(numberBoxInputValue)
     newArray[e.target.id] = e.target.value
     this.setState({ numberBoxInputValue: newArray })
     if (e.target.value != null) this.setState({ quantityCheck: true })
@@ -284,6 +288,18 @@ class AddProducts extends Component {
       </div>
     )
   }
+}
+
+AddProducts.propTypes = {
+  getAllCategories: PropTypes.func.isRequired,
+  getAllProducts: PropTypes.func.isRequired,
+  postProductToStore: PropTypes.func.isRequired,
+
+  categories: PropTypes.shape.isRequired,
+  zone: PropTypes.string.isRequired,
+  cluster: PropTypes.string.isRequired,
+  store: PropTypes.string.isRequired,
+  products: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({

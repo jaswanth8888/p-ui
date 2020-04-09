@@ -34,6 +34,7 @@ import {
   RESET_STATUS_CODE,
   LEVEL_SAVE_VALUE,
   PROMOTIONS_GET_BYRANGE,
+  GET_PROMOTIONS_CLUSTER,
 } from "./types"
 
 const TOKEN = () => {
@@ -646,4 +647,24 @@ export const withdrawPromotion = (
 
 export const saveLevelValue = (level) => (dispatch) => {
   dispatch({ type: LEVEL_SAVE_VALUE, levelOption: level })
+}
+
+export const getPromotionsIncluster = (
+  productName,
+  zoneName,
+  clusterName
+) => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/product/promotions/${productName}/${zoneName}/${clusterName}`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: GET_PROMOTIONS_CLUSTER, clusterPromotions: res.data })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
 }

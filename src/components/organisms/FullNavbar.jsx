@@ -23,7 +23,7 @@ import MenuIcon from "@material-ui/icons/Menu"
 import PublicIcon from "@material-ui/icons/Public"
 import StoreIcon from "@material-ui/icons/Store"
 import clsx from "clsx"
-import { default as React } from "react"
+import React from "react"
 import ReactFlagsSelect from "react-flags-select"
 import "react-flags-select/css/react-flags-select.css"
 import "react-flags-select/scss/react-flags-select.scss"
@@ -32,22 +32,22 @@ import { connect } from "react-redux"
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom"
 import { logout } from "../../redux/actions/RetailerActions"
 import Login from "../Login"
-import AddGroup from "../retailer/AddGroup.jsx"
+import AddGroup from "../retailer/AddGroup"
 import CancelPromotionRouter from "../retailer/CancelPromotionRouter"
-import ClusterForm from "../retailer/ClusterForm.jsx"
+import ClusterForm from "../retailer/ClusterForm"
 import ClusterPromotionRouter from "../retailer/ClusterPromotionRouter"
-import EffectivePriceRouter from "../retailer/EffectivePriceRouter.jsx"
-import ProductRouter from "../retailer/ProductRouter.jsx"
-import PromotionRouter from "../retailer/PromotionRouter.jsx"
-import QueryOnDateRouter from "../retailer/QueryOnDateRouter.jsx"
-import StoreForm from "../retailer/StoreForm.jsx"
-import ViewClusters from "../retailer/ViewClusters.jsx"
-import ViewZones from "../retailer/ViewZones.jsx"
+import EffectivePriceRouter from "../retailer/EffectivePriceRouter"
+import ProductRouter from "../retailer/ProductRouter"
+import PromotionRouter from "../retailer/PromotionRouter"
+import QueryOnDateRouter from "../retailer/QueryOnDateRouter"
+import StoreForm from "../retailer/StoreForm"
+import ViewClusters from "../retailer/ViewClusters"
+import ViewZones from "../retailer/ViewZones"
 import WithdrawPromotionClusterRouter from "../retailer/WithdrawPromotionClusterRouter"
 import WithdrawPromotionZoneRouter from "../retailer/WithdrawPromotionZoneRouter"
-import ZoneClusterRouter from "../retailer/ZoneClusterRouter.jsx"
-import ZoneForm from "../retailer/ZoneForm.jsx"
-import ZonePromotionRouter from "../retailer/ZonePromotionRouter.jsx"
+import ZoneClusterRouter from "../retailer/ZoneClusterRouter"
+import ZoneForm from "../retailer/ZoneForm"
+import ZonePromotionRouter from "../retailer/ZonePromotionRouter"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -95,7 +95,7 @@ function FullNavbar(props) {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
   const theme = useTheme()
-  const [open, setOpen] = React.useState(false)
+  const [open] = React.useState(false)
   const { container } = props
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
