@@ -14,6 +14,9 @@ import {
   cancelPromotion,
 } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
+import Alert from "@material-ui/lab/Alert"
+import IconButton from "@material-ui/core/IconButton"
+import CloseIcon from "@material-ui/icons/Close"
 
 class CancelProductPromotion extends Component {
   constructor(props) {
@@ -79,6 +82,24 @@ class CancelProductPromotion extends Component {
         <div className="joint-form-large-table">
           <div className="form-center">
             <div className="flex-grid">
+            {this.props.productDetails.assignProduct.length <= 0 && (
+                <div>
+                  <Alert
+                    severity="info"
+                    action={
+                      <IconButton
+                        aria-label="close"
+                        color="inherit"
+                        size="small"
+                      >
+                        <CloseIcon fontSize="inherit" />
+                      </IconButton>
+                    }
+                  >
+                    Sorry No Promotions exist for the Product: {this.props.productDetails.productName} 
+                  </Alert>
+                </div>
+              )}
               <br />
               <ProductDetailsTable />
               <br />

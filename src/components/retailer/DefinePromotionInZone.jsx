@@ -25,8 +25,10 @@ class DefinePromotionInZone extends Component {
         promotionPercentage: "",
         zoneName: this.props.zone,
       },
+      startDate: "",
+      endDate: "",
+      promotionPercentage: "",
       levelOption: "zone",
-      var: "1",
     }
 
     this.handleChangePercentage = this.handleChangePercentage.bind(this)
@@ -50,16 +52,19 @@ class DefinePromotionInZone extends Component {
 
   handleChangePercentage(e) {
     const percentage = e.target.value
+    this.state.promotionPercentage = percentage
     this.state.promotionDetails.promotionPercentage = percentage
   }
 
   handleChangeStartDate(e) {
     const start = e.target.value
+    this.state.startDate = start
     this.state.promotionDetails.startDate = start
   }
 
   handleChangeEndDate(e) {
     const end = e.target.value
+    this.state.endDate = end
     this.state.promotionDetails.endDate = end
   }
 
@@ -69,7 +74,7 @@ class DefinePromotionInZone extends Component {
         <div className="joint-form-large-table">
           <div className="store-requirement">
             <h3 className="center-h3">Requirements</h3>
-            {this.state.promotionDetails.startDate.length === 0 && (
+            {this.state.startDate.length == 0 && (
               <div style={{ display: "flex" }}>
                 <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -77,7 +82,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.startDate.length !== 0 && (
+            {this.state.startDate.length != 0 && (
               <div style={{ display: "flex", color: "#ffc107" }}>
                 <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -85,7 +90,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.endDate.length === 0 && (
+            {this.state.endDate.length == 0 && (
               <div style={{ display: "flex" }}>
                 <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -93,7 +98,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.endDate.length !== 0 && (
+            {this.state.endDate.length != 0 && (
               <div style={{ display: "flex", color: "#ffc107" }}>
                 <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -101,8 +106,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.endDate <=
-              this.state.promotionDetails.startDate && (
+            {this.state.endDate <= this.state.startDate && (
               <div style={{ display: "flex" }}>
                 <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -110,8 +114,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.endDate >
-              this.state.promotionDetails.startDate && (
+            {this.state.endDate > this.state.startDate && (
               <div style={{ display: "flex", color: "#ffc107" }}>
                 <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -119,7 +122,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.promotionPercentage >= 0 && (
+            {this.state.promotionPercentage >= 0 && (
               <div style={{ display: "flex" }}>
                 <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -127,7 +130,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.promotionPercentage < 0 && (
+            {this.state.promotionPercentage < 0 && (
               <div style={{ display: "flex", color: "#ffc107" }}>
                 <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -139,19 +142,25 @@ class DefinePromotionInZone extends Component {
 
           <div className="form-center">
             <div className="flex-grid">
-              <div>
-                <Alert
-                  severity="info"
-                  action={
-                    <IconButton aria-label="close" color="inherit" size="small">
-                      <CloseIcon fontSize="inherit" />
-                    </IconButton>
-                  }
-                >
-                  Close me!
-                </Alert>
-              </div>
-
+              {this.props.productDetails.assignProduct.length > 0 && (
+                <div>
+                  <Alert
+                    severity="info"
+                    action={
+                      <IconButton
+                        aria-label="close"
+                        color="inherit"
+                        size="small"
+                      >
+                        <CloseIcon fontSize="inherit" />
+                      </IconButton>
+                    }
+                  >
+                    Product: {this.props.productDetails.productName} already has
+                    promotion applied
+                  </Alert>
+                </div>
+              )}
               <Typography className="card-header" variant="h4">
                 Apply Percentage Promotion
               </Typography>

@@ -27,7 +27,6 @@ class DefinePromotionInCluster extends Component {
         clusterName: this.props.cluster,
       },
       levelOption: "cluster",
-      var: "1",
     }
 
     this.handleChangePercentage = this.handleChangePercentage.bind(this)
@@ -140,18 +139,25 @@ class DefinePromotionInCluster extends Component {
 
           <div className="form-center">
             <div className="flex-grid">
-              <div>
-                <Alert
-                  severity="info"
-                  action={
-                    <IconButton aria-label="close" color="inherit" size="small">
-                      <CloseIcon fontSize="inherit" />
-                    </IconButton>
-                  }
-                >
-                  Close me!
-                </Alert>
-              </div>
+            {this.props.productDetails.assignProduct.length > 0 && (
+                <div>
+                  <Alert
+                    severity="info"
+                    action={
+                      <IconButton
+                        aria-label="close"
+                        color="inherit"
+                        size="small"
+                      >
+                        <CloseIcon fontSize="inherit" />
+                      </IconButton>
+                    }
+                  >
+                    Product: {this.props.productDetails.productName} already has
+                    promotion applied
+                  </Alert>
+                </div>
+              )}
 
               <Typography className="card-header" variant="h4">
                 Apply Percentage Promotion
