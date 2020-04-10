@@ -672,7 +672,7 @@ export const getPromotionsIncluster = (
 }
 
 export const saveStartDate = (start) => (dispatch) => {
-  console.log(start);
+  console.log(start)
   dispatch({ type: STARTDATE_SAVE_VALUE, startDate: start })
 }
 

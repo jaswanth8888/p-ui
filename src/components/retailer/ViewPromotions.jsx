@@ -34,7 +34,9 @@ class ViewPromotions extends Component {
               <TableHead style={{ color: "white" }}>
                 <TableRow>
                   <TableCell style={{ color: "White" }}>Product</TableCell>
-                  <TableCell style={{ color: "White" }}>Product Details</TableCell>
+                  <TableCell style={{ color: "White" }}>
+                    Product Details
+                  </TableCell>
                   <TableCell style={{ color: "White" }}>Promotions</TableCell>
                 </TableRow>
               </TableHead>

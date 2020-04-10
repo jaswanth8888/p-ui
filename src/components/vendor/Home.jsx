@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button"
 import { vendorlogout } from "../../redux/actions/VendorActions"
 import Message from "./Message"
 
-/*eslint class-methods-use-this: ["error", { "exceptMethods": ["handleSubmit","handleLogout"] }] */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["handleSubmit","handleLogout"] }] */
 class Home extends Component {
   constructor(props) {
     super(props)
@@ -57,7 +57,7 @@ class Home extends Component {
   }
 }
 const stateAsProps = (store) => ({
-  msg: store.VendorReducer.msg
+  msg: store.VendorReducer.msg,
 })
 const actionsAsProps = {
   vendorlogout,
