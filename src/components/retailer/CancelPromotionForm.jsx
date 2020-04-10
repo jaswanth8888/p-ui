@@ -2,16 +2,18 @@ import { InputLabel, TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
-import Snackbar from "@material-ui/core/Snackbar"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
-import MuiAlert from "@material-ui/lab/Alert"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { getZones, getProductList, saveProductValue, saveZoneValue, getProductDetails } from "../../redux/actions/RetailerActions"
-import Message from "../utils/Message"
 import Autocomplete from "@material-ui/lab/Autocomplete"
-import Divider from '@material-ui/core/Divider';
+import {
+  getZones,
+  getProductList,
+  saveProductValue,
+  saveZoneValue,
+  getProductDetails,
+} from "../../redux/actions/RetailerActions"
 
 class CancelPromotionForm extends Component {
   constructor(props) {
@@ -137,7 +139,7 @@ class CancelPromotionForm extends Component {
                   label="Enter Zone"
                   inputProps={{
                     name: "zone",
-                    id: "zone"
+                    id: "zone",
                   }}
                 >
                   <option aria-label="None" value="" />

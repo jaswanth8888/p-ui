@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button"
 import Checkbox from "@material-ui/core/Checkbox"
 import FormControl from "@material-ui/core/FormControl"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
+import PropTypes from "prop-types"
 import Paper from "@material-ui/core/Paper"
 import TableCell from "@material-ui/core/TableCell"
 import TableContainer from "@material-ui/core/TableContainer"
@@ -29,41 +30,35 @@ class AddProducts extends Component {
 
     this.state = {
       category: "",
-      isSubmitted: false,
-      isSelectedCategory: false,
       productList: [],
       object: {},
       numberBoxInputValue: [],
-      dummyobject: [
-        {
-          productName: "baby",
-          quantityAssigned: 20,
-        },
-      ],
       quantityCheck: false,
     }
     this.handleChangeCategory = this.handleChangeCategory.bind(this)
     this.loopForm = this.loopForm.bind(this)
     this.updateInputValue = this.updateInputValue.bind(this)
+    this.getAllCategories = this.getAllCategories.bind(this)
+  }
+
+  componentDidMount() {
+    this.getAllCategories()
+  }
+
+  getAllCategories() {
+    const { getAllCategories } = this.props
+    getAllCategories()
   }
 
   updateInputValue(e) {
-    const newArray = Array.from(this.state.numberBoxInputValue)
+    const { numberBoxInputValue } = this.state
+    const newArray = Array.from(numberBoxInputValue)
     newArray[e.target.id] = e.target.value
     this.setState({ numberBoxInputValue: newArray })
     if (e.target.value != null) this.setState({ quantityCheck: true })
   }
 
-  componentDidMount() {
-    this.props.getAllCategories()
-  }
-
   handleChangeCategory(e) {
-    if (e.target.value === "") {
-      this.setState({ isSelectedCategory: false })
-    } else {
-      this.setState({ isSelectedCategory: true })
-    }
     this.setState({ category: e.target.value })
     this.props.getAllProducts(e.target.value)
   }
@@ -95,6 +90,7 @@ class AddProducts extends Component {
   }
 
   render() {
+    const { categories, products } = this.props
     return (
       <div className="box-container add-prods">
         <div className="product-form-header">
@@ -113,7 +109,7 @@ class AddProducts extends Component {
               }}
             >
               <option aria-label="None" value="" />
-              {this.props.categories.map((category, index) => {
+              {categories.map((category) => {
                 return <option value={category}>{category}</option>
               })}
             </Select>
@@ -136,7 +132,7 @@ class AddProducts extends Component {
                 </TableHead>
 
                 <tbody>
-                  {this.props.products.map((product) => {
+                  {products.map((product) => {
                     return (
                       <TableRow key={product.id}>
                         <TableCell>
@@ -293,6 +289,18 @@ class AddProducts extends Component {
       </div>
     )
   }
+}
+
+AddProducts.propTypes = {
+  getAllCategories: PropTypes.func.isRequired,
+  getAllProducts: PropTypes.func.isRequired,
+  postProductToStore: PropTypes.func.isRequired,
+
+  categories: PropTypes.shape.isRequired,
+  zone: PropTypes.string.isRequired,
+  cluster: PropTypes.string.isRequired,
+  store: PropTypes.string.isRequired,
+  products: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({

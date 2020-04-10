@@ -36,9 +36,7 @@ class ViewEffectiveDatesAndPrices extends Component {
               style={{ textAlign: "center", width: "80vw" }}
             >
               <Table aria-label="a dense table">
-                <TableHead
-                  style={{ color: "white" }}
-                >
+                <TableHead style={{ color: "white" }}>
                   <TableRow>
                     <TableCell
                       style={{

@@ -9,14 +9,14 @@ import { connect } from "react-redux"
 // eslint-disable-next-line no-unused-vars
 import { TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
+import Alert from "@material-ui/lab/Alert"
+import IconButton from "@material-ui/core/IconButton"
+import CloseIcon from "@material-ui/icons/Close"
+import ProductDetailsTable from "../utils/ProductDetailsTable"
 import {
   getProductDetails,
   cancelPromotion,
 } from "../../redux/actions/RetailerActions"
-import ProductDetailsTable from "../utils/ProductDetailsTable"
-import Alert from "@material-ui/lab/Alert"
-import IconButton from "@material-ui/core/IconButton"
-import CloseIcon from "@material-ui/icons/Close"
 
 class CancelProductPromotion extends Component {
   constructor(props) {
@@ -86,7 +86,7 @@ class CancelProductPromotion extends Component {
         <div className="joint-form-large-table">
           <div className="form-center">
             <div className="flex-grid">
-            {this.props.productDetails.assignProduct.length <= 0 && (
+              {this.props.productDetails.assignProduct.length <= 0 && (
                 <div>
                   <Alert
                     severity="info"
@@ -100,7 +100,8 @@ class CancelProductPromotion extends Component {
                       </IconButton>
                     }
                   >
-                    Sorry No Promotions are applied on this Product: {this.props.productDetails.productName}
+                    Sorry No Promotions are applied on this Product:{" "}
+                    {this.props.productDetails.productName}
                   </Alert>
                 </div>
               )}

@@ -4,10 +4,8 @@ import FormControl from "@material-ui/core/FormControl"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import Autocomplete from "@material-ui/lab/Autocomplete"
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import Select from "@material-ui/core/Select"
-import Snackbar from "@material-ui/core/Snackbar"
-import MuiAlert from "@material-ui/lab/Alert"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import {
@@ -186,7 +184,6 @@ class ApplyPromotionInZone extends Component {
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
   zones: store.RetailerReducer.zones,
-
 })
 const actionAsProps = {
   getProductList,

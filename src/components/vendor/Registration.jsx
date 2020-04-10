@@ -15,9 +15,8 @@ import {
 import Button from "@material-ui/core/Button"
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import { connect } from "react-redux"
-import { render } from "@testing-library/react"
 import md5 from "md5"
-import { registration } from "../../redux/actions/VendorActions.js"
+import { registration } from "../../redux/actions/VendorActions"
 import Message from "./Message"
 
 const categoryList = ["Baby", "Liquor"]
@@ -53,13 +52,6 @@ export class Registration extends Component {
     this.handleCheckedInput = this.handleCheckedInput.bind(this)
   }
 
-  handleChange(e) {
-    const { name, value } = e.target
-    const { vender_details } = this.state
-    vender_details[name] = value
-    this.setState({ vender_details })
-  }
-
   handleCheckedInput(e) {
     e.preventDefault()
     const { checked, value } = e.target
@@ -75,7 +67,7 @@ export class Registration extends Component {
   remove_attribute = () => {
     this.setState({
       vender_details: this.state.vender_details.filter(
-        (item) => item != "confirmPassword"
+        (item) => item !== "confirmPassword"
       ),
     })
   }
@@ -115,6 +107,13 @@ export class Registration extends Component {
     this.setState({ error })
 
     return true
+  }
+
+  handleChange(e) {
+    const { name, value } = e.target
+    const { vender_details } = this.state
+    vender_details[name] = value
+    this.setState({ vender_details })
   }
 
   is_validEmail = () => {
@@ -179,148 +178,144 @@ export class Registration extends Component {
 
   render() {
     return (
-      <div>
-        {this.props.register_status.registered ? (
-          console.log("successfully registered")
-        ) : (
-          <Grid
-            container
-            spacing={0}
-            direction="column"
-            alignItems="center"
-            justify="center"
-            style={{ minHeight: "100vh" }}
-          >
-            <Grid item xs={3}>
-              <Box diasplay="flex" flexDirection="row" justifyContent="center">
-                <Box p={1}>
-                  <Avatar
-                    className="{classes.avatar}"
-                    style={{ color: "#3F51B5" }}
-                  >
-                    <LockOutlinedIcon />
-                  </Avatar>
-                </Box>
-
-                <Typography component="h1" variant="h5">
-                  Sign Up
-                </Typography>
-                <Typography component="span" color="error" variant="h5">
-                  {this.props.register_status.msg}
-                </Typography>
+      <>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justify="center"
+          style={{ minHeight: "100vh" }}
+        >
+          <Grid item xs={3}>
+            <Box diasplay="flex" flexDirection="row" justifyContent="center">
+              <Box p={1}>
+                <Avatar
+                  className="{classes.avatar}"
+                  style={{ color: "#3F51B5" }}
+                >
+                  <LockOutlinedIcon />
+                </Avatar>
               </Box>
 
-              <form className="{classes.form}">
-                <TextField
-                  className="{classes.form}"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  error={this.state.error.emailError}
-                  helperText={this.state.error.emailErrorMsg}
-                  id="email"
-                  label="email"
-                  type="email"
-                  name="email"
-                  autoComplete="email"
-                  onChange={this.handleChange}
-                  autoFocus
-                />
-                <TextField
-                  className="{classes.form}"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  error={this.state.error.passwordError}
-                  helperText={this.state.error.passwordErrorMsg}
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  onChange={this.handleChange}
-                  autoComplete="current-password"
-                />
-                <TextField
-                  className="{classes.form}"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  error={this.state.error.confirmPasswordError}
-                  helperText={this.state.error.confirmPasswordErrorMsg}
-                  name="confirmPassword"
-                  label="Confirm Password"
-                  type="password"
-                  id="confirmPassword"
-                  onChange={this.handleChange}
-                  autoComplete="current-password"
-                />
-                <TextField
-                  className="{classes.form}"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  error={this.state.error.companyNameError}
-                  helperText={this.state.error.companyNameErrorMsg}
-                  name="companyName"
-                  label="Company Name"
-                  type="text"
-                  id="companyName"
-                  onChange={this.handleChange}
-                />
-                <InputLabel htmlFor="companyType">Company Type</InputLabel>
-                <Select
-                  label="Company Type"
-                  fullWidth
-                  id="companyType"
-                  name="companyType"
-                  value={this.state.vender_details.companyType}
-                  onChange={this.handleChange}
-                >
-                  <MenuItem value="Alcohol">Alcohol</MenuItem>
-                  <MenuItem value="BabyFood">BabyFood </MenuItem>
-                </Select>
+              <Typography component="h1" variant="h5">
+                Sign Up
+              </Typography>
+              <Typography component="span" color="error" variant="h5">
+                {this.props.register_status.msg}
+              </Typography>
+            </Box>
 
-                <div>
-                  <FormLabel>Products Sold</FormLabel>
-                  {categoryList.map((x) => (
-                    <div key={x}>
-                      <Checkbox
-                        variant="outlined"
-                        margin="normal"
-                        onChange={this.handleCheckedInput}
-                        label={x}
-                        value={x}
-                        key={x}
-                        id="Checkbox"
-                      />
-                      <FormLabel>{x}</FormLabel>
-                    </div>
-                  ))}
-                  <FormHelperText error={this.state.error.checkedBoxError}>
-                    {this.state.error.checkedBoxErrorMsg}
-                  </FormHelperText>
-                </div>
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit}"
-                  onClick={this.handleSubmit}
-                  id="signupsubmit"
-                >
-                  Sign up
-                </Button>
-              </form>
-            </Grid>
-            <Message />
+            <form className="{classes.form}">
+              <TextField
+                className="{classes.form}"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                error={this.state.error.emailError}
+                helperText={this.state.error.emailErrorMsg}
+                id="email"
+                label="email"
+                type="email"
+                name="email"
+                autoComplete="email"
+                onChange={this.handleChange}
+                autoFocus
+              />
+              <TextField
+                className="{classes.form}"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                error={this.state.error.passwordError}
+                helperText={this.state.error.passwordErrorMsg}
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                onChange={this.handleChange}
+                autoComplete="current-password"
+              />
+              <TextField
+                className="{classes.form}"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                error={this.state.error.confirmPasswordError}
+                helperText={this.state.error.confirmPasswordErrorMsg}
+                name="confirmPassword"
+                label="Confirm Password"
+                type="password"
+                id="confirmPassword"
+                onChange={this.handleChange}
+                autoComplete="current-password"
+              />
+              <TextField
+                className="{classes.form}"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                error={this.state.error.companyNameError}
+                helperText={this.state.error.companyNameErrorMsg}
+                name="companyName"
+                label="Company Name"
+                type="text"
+                id="companyName"
+                onChange={this.handleChange}
+              />
+              <InputLabel htmlFor="companyType">Company Type</InputLabel>
+              <Select
+                label="Company Type"
+                fullWidth
+                id="companyType"
+                name="companyType"
+                value={this.state.vender_details.companyType}
+                onChange={this.handleChange}
+              >
+                <MenuItem value="Alcohol">Alcohol</MenuItem>
+                <MenuItem value="BabyFood">BabyFood </MenuItem>
+              </Select>
+
+              <div>
+                <FormLabel>Products Sold</FormLabel>
+                {categoryList.map((x) => (
+                  <div key={x}>
+                    <Checkbox
+                      variant="outlined"
+                      margin="normal"
+                      onChange={this.handleCheckedInput}
+                      label={x}
+                      value={x}
+                      key={x}
+                      id="Checkbox"
+                    />
+                    <FormLabel>{x}</FormLabel>
+                  </div>
+                ))}
+                <FormHelperText error={this.state.error.checkedBoxError}>
+                  {this.state.error.checkedBoxErrorMsg}
+                </FormHelperText>
+              </div>
+              <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className="{classes.submit}"
+                onClick={this.handleSubmit}
+                id="signupsubmit"
+              >
+                Sign up
+              </Button>
+            </form>
           </Grid>
-        )}
-      </div>
+          <Message />
+        </Grid>
+      </>
     )
   }
 }

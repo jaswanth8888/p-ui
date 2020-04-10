@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import connect from "react-redux/es/connect/connect"
 import MuiAlert from "@material-ui/lab/Alert"
 import Snackbar from "@material-ui/core/Snackbar"
+import PropTypes from "prop-types"
 import { messageSetNull } from "../../redux/actions/RetailerActions"
 
 class Message extends Component {
@@ -16,9 +17,10 @@ class Message extends Component {
   }
 
   render() {
+    const { msg, msgSeverity } = this.props
     return (
       <>
-        {this.props.msg !== "" ? (
+        {msg !== "" ? (
           <Snackbar
             open="true"
             onClose={this.closeAlert}
@@ -26,12 +28,12 @@ class Message extends Component {
             anchorOrigin={{ vertical: "top", horizontal: "right" }}
           >
             <MuiAlert
-              severity={this.props.msgSeverity}
+              severity={msgSeverity}
               elevation={6}
               variant="filled"
               onClose={this.closeAlert}
             >
-              {this.props.msg}
+              {msg}
             </MuiAlert>
           </Snackbar>
         ) : (
@@ -40,6 +42,12 @@ class Message extends Component {
       </>
     )
   }
+}
+
+Message.propTypes = {
+  msg: PropTypes.string.isRequired,
+  msgSeverity: PropTypes.string.isRequired,
+  messageSetNull: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({

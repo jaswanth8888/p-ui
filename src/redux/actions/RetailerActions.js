@@ -81,7 +81,7 @@ export const postZone = (zoneDetails) => async (dispatch) => {
     })
     .catch((err) => {
       const { response } = err
-      if (response.status === 400) {
+      if (response.status === 404) {
         dispatch({
           type: CREATE_ZONE,
           msg: "Sorry Zone already exists",
@@ -672,6 +672,7 @@ export const getPromotionsIncluster = (
 }
 
 export const saveStartDate = (start) => (dispatch) => {
+  console.log(start)
   dispatch({ type: STARTDATE_SAVE_VALUE, startDate: start })
 }
 
