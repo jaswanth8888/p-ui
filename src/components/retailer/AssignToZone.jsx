@@ -1,16 +1,10 @@
 import { InputLabel, Select, TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import FormControl from "@material-ui/core/FormControl"
-import Snackbar from "@material-ui/core/Snackbar"
-import CheckIcon from "@material-ui/icons/Check"
-import ClearIcon from "@material-ui/icons/Clear"
-import MuiAlert from "@material-ui/lab/Alert"
-import { Component, default as React, Fragment } from "react"
+import React, { Component } from "react"
 import { connect } from "react-redux"
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom"
 import { getZones, assignToZone } from "../../redux/actions/RetailerActions"
 import ProductDetails from "../utils/ProductDetails"
-import ViewAssignedZones from "./ViewAssignedZones"
 import Message from "../utils/Message"
 
 class AssignToZone extends Component {

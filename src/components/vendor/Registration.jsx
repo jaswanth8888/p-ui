@@ -67,7 +67,7 @@ export class Registration extends Component {
   remove_attribute = () => {
     this.setState({
       vender_details: this.state.vender_details.filter(
-        (item) => item != "confirmPassword"
+        (item) => item !== "confirmPassword"
       ),
     })
   }

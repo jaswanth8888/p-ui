@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import connect from "react-redux/es/connect/connect"
-import { Grid, Typography, Paper, Table } from "@material-ui/core"
+import { Typography, Paper, Table } from "@material-ui/core"
 import TableCell from "@material-ui/core/TableCell"
 import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"

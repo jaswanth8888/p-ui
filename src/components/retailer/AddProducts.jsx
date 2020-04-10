@@ -90,6 +90,7 @@ class AddProducts extends Component {
   }
 
   render() {
+    const { categories, products } = this.props
     return (
       <div className="box-container add-prods">
         <div className="product-form-header">
@@ -108,7 +109,7 @@ class AddProducts extends Component {
               }}
             >
               <option aria-label="None" value="" />
-              {this.props.categories.map((category, index) => {
+              {categories.map((category) => {
                 return <option value={category}>{category}</option>
               })}
             </Select>
@@ -131,7 +132,7 @@ class AddProducts extends Component {
                 </TableHead>
 
                 <tbody>
-                  {this.props.products.map((product) => {
+                  {products.map((product) => {
                     return (
                       <TableRow key={product.id}>
                         <TableCell>
