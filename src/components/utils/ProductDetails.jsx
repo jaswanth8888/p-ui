@@ -5,6 +5,7 @@ import TableCell from "@material-ui/core/TableCell"
 import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
+import PropTypes from "prop-types"
 
 import { getProductDetails } from "../../redux/actions/RetailerActions"
 
@@ -72,6 +73,13 @@ class ProductDetails extends Component {
       </div>
     )
   }
+}
+
+ProductDetails.propTypes = {
+  getProductDetails: PropTypes.func.isRequired,
+
+  productName: PropTypes.string.isRequired,
+  productDetails: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({
