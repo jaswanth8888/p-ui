@@ -186,6 +186,7 @@ class DefinePromotionInCluster extends Component {
               <TextField
                 variant="outlined"
                 margin="normal"
+                defaultValue="-1"
                 required
                 fullWidth="false"
                 type="number"
