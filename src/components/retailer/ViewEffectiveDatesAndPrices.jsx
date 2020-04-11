@@ -1,11 +1,5 @@
 import React, { Component } from "react"
-import {
-  InputLabel,
-  Select,
-  Table,
-  TextField,
-  Typography,
-} from "@material-ui/core"
+import { Table, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import Paper from "@material-ui/core/Paper"
 import TableCell from "@material-ui/core/TableCell"
@@ -13,7 +7,6 @@ import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
 import { cancelEffectivePrice } from "../../redux/actions/RetailerActions"
 
 class ViewEffectiveDatesAndPrices extends Component {

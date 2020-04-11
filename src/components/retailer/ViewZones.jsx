@@ -7,7 +7,6 @@ import TableRow from "@material-ui/core/TableRow"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import TablePagination from "@material-ui/core/TablePagination"
-import { withStyles, makeStyles } from "@material-ui/core/styles"
 import TableBody from "@material-ui/core/TableBody"
 import { getZoneList } from "../../redux/actions/RetailerActions"
 
