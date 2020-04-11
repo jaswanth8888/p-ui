@@ -1,4 +1,4 @@
-import { Table } from "@material-ui/core"
+import { Table, Typography } from "@material-ui/core"
 import Paper from "@material-ui/core/Paper"
 import TableCell from "@material-ui/core/TableCell"
 import TableContainer from "@material-ui/core/TableContainer"
@@ -6,12 +6,12 @@ import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-// eslint-disable-next-line no-unused-vars
-import { TextField, Typography } from "@material-ui/core"
+
 import Button from "@material-ui/core/Button"
 import Alert from "@material-ui/lab/Alert"
 import IconButton from "@material-ui/core/IconButton"
 import CloseIcon from "@material-ui/icons/Close"
+import PropTypes from "prop-types"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 import {
   getProductDetails,
@@ -30,7 +30,8 @@ class WithdrawZonePromotion extends Component {
   }
 
   componentWillMount() {
-    this.props.getProductDetails(this.props.productName)
+    const { productName } = this.props
+    this.props.getProductDetails(productName)
   }
 
   handleSubmit = (e, promoId) => {
@@ -50,7 +51,8 @@ class WithdrawZonePromotion extends Component {
   }
 
   render() {
-    const zoneData = this.props.productDetails.assignProduct
+    const { productDetails } = this.props
+    const zoneData = productDetails.assignProduct
     const tableRowElm = (zone) => {
       return zone.promotions.map(
         (promotion) =>
@@ -112,7 +114,7 @@ class WithdrawZonePromotion extends Component {
         <div className="joint-form-large-table">
           <div className="form-center">
             <div className="flex-grid">
-              {this.props.productDetails.assignProduct.length <= 0 && (
+              {productDetails.assignProduct.length <= 0 && (
                 <div>
                   <Alert
                     severity="info"
@@ -127,14 +129,14 @@ class WithdrawZonePromotion extends Component {
                     }
                   >
                     Sorry No Promotions are applied on this Product:{" "}
-                    {this.props.productDetails.productName}
+                    {productDetails.productName}
                   </Alert>
                 </div>
               )}
               <br />
               <ProductDetailsTable />
               <br />
-              {this.props.productDetails.assignProduct.length > 0 ? (
+              {productDetails.assignProduct.length > 0 ? (
                 <>
                   <Typography className="card-header" variant="h5">
                     Promotions in Zone Level
@@ -168,10 +170,18 @@ class WithdrawZonePromotion extends Component {
   }
 }
 
+WithdrawZonePromotion.propTypes = {
+  productDetails: PropTypes.shape.isRequired,
+  productName: PropTypes.string.isRequired,
+  zone: PropTypes.string.isRequired,
+
+  getProductDetails: PropTypes.func.isRequired,
+  withdrawPromotion: PropTypes.func.isRequired,
+}
+
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
-  products: store.RetailerReducer.products,
   zone: store.RetailerReducer.zone,
 })
 const actionAsProps = {
