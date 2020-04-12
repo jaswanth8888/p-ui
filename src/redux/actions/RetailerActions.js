@@ -497,6 +497,13 @@ export const assignToZone = (zoneDetails, zoneName, productName) => async (
           msgSeverity: "error",
           statusCode: response.status,
         })
+      } else if (response.status === 400) {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: response.data.message,
+          msgSeverity: "warning",
+          statusCode: response.status,
+        })
       } else if (response.status === 403) {
         dispatch({
           type: ASSIGN_TO_ZONE,
