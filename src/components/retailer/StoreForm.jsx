@@ -20,7 +20,6 @@ class StoreForm extends Component {
     this.state = {
       zone: "",
       cluster: "",
-      isSubmitted: false,
       storeName: "",
       city: "",
       streetName: "",

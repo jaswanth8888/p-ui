@@ -21,15 +21,16 @@ class ProductDetails extends Component {
   }
 
   render() {
+    const { productDetails } = this.props
     return (
       <div className="flex-grid">
         <div className="product-name">
           <Typography className="card-header" variant="h4">
-            {this.props.productDetails.productName}
+            {productDetails.productName}
           </Typography>
         </div>
         <div className="product-image">
-          <img src={this.props.productDetails.productImagePath} alt="none" />
+          <img src={productDetails.productImagePath} alt="none" />
         </div>
         <div className="product-table-data">
           <TableContainer component={Paper} className="product-table">
@@ -42,10 +43,10 @@ class ProductDetails extends Component {
               </TableHead>
               <TableRow>
                 <TableCell className="table-text">
-                  {this.props.productDetails.productBasePrice}
+                  {productDetails.productBasePrice}
                 </TableCell>
                 <TableCell className="table-text">
-                  {this.props.productDetails.companyName}
+                  {productDetails.companyName}
                 </TableCell>
               </TableRow>
               <TableHead>
@@ -56,10 +57,10 @@ class ProductDetails extends Component {
               </TableHead>
               <TableRow>
                 <TableCell className="table-text">
-                  {this.props.productDetails.remainingQuantity}
+                  {productDetails.remainingQuantity}
                 </TableCell>
                 <TableCell className="table-text">
-                  {this.props.productDetails.productCategory}
+                  {productDetails.productCategory}
                 </TableCell>
               </TableRow>
             </Table>
@@ -67,7 +68,7 @@ class ProductDetails extends Component {
         </div>
         <div className="product-desc">
           <Typography variant="body2">
-            {this.props.productDetails.productDescription}
+            {productDetails.productDescription}
           </Typography>
         </div>
       </div>
