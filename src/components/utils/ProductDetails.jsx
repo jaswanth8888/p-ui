@@ -17,7 +17,8 @@ class ProductDetails extends Component {
   }
 
   componentDidMount() {
-    this.props.getProductDetails(this.props.productName)
+    const { productName, getProductDetails: getProductDetailsAlt } = this.props
+    getProductDetailsAlt(productName)
   }
 
   render() {
