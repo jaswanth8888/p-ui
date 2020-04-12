@@ -6,6 +6,7 @@ import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import { getPromotionsInRange } from "../../redux/actions/RetailerActions"
 
 class ViewPromotions extends Component {
@@ -15,14 +16,17 @@ class ViewPromotions extends Component {
   }
 
   componentWillMount() {
-    this.props.getPromotionsInRange(
-      this.props.startDate,
-      this.props.endDate,
-      this.props.levelOption
-    )
+    const {
+      getPromotionsInRange: getPromotionsInRangeAlt,
+      startDate,
+      endDate,
+      levelOption,
+    } = this.props
+    getPromotionsInRangeAlt(startDate, endDate, levelOption)
   }
 
   render() {
+    const { promotions, levelOption } = this.props
     return (
       <div
         className="box-container"
@@ -41,7 +45,7 @@ class ViewPromotions extends Component {
                 </TableRow>
               </TableHead>
               <tbody>
-                {this.props.promotions.map((product) => {
+                {promotions.map((product) => {
                   return (
                     <TableRow>
                       <TableCell>
@@ -150,7 +154,7 @@ class ViewPromotions extends Component {
                                         variant="subtitle1"
                                         gutterBottom
                                       >
-                                        {this.props.levelOption}
+                                        {levelOption}
                                       </Typography>
                                       <Typography
                                         variant="subtitle1"
@@ -177,6 +181,15 @@ class ViewPromotions extends Component {
     )
   }
 }
+
+ViewPromotions.propTypes = {
+  getPromotionsInRange: PropTypes.func.isRequired,
+  promotions: PropTypes.shape.isRequired,
+  levelOption: PropTypes.string.isRequired,
+  startDate: PropTypes.instanceOf(Date).isRequired,
+  endDate: PropTypes.instanceOf(Date).isRequired,
+}
+
 const stateAsProps = (store) => ({
   promotions: store.RetailerReducer.promotions,
   levelOption: store.RetailerReducer.levelOption,
