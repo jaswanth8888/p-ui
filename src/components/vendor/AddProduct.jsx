@@ -108,7 +108,7 @@ class AddProduct extends Component {
                       style={{ paddingRight: "5px", marginTop: "-2px" }}
                     />
                     <Typography variant="subtitle2" gutterBottom>
-                      name can't be empty
+                      name cannot be empty
                     </Typography>
                   </div>
                 )}

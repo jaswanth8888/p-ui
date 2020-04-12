@@ -8,12 +8,14 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import TablePagination from "@material-ui/core/TablePagination"
 import TableBody from "@material-ui/core/TableBody"
+import PropTypes from "prop-types"
 import { getZoneList } from "../../redux/actions/RetailerActions"
 
 class ViewZones extends Component {
   constructor(props) {
     super(props)
-    this.props.getZoneList()
+    const { getZoneList: getZoneListAlt } = this.props
+    getZoneListAlt()
 
     this.state = {
       page: 0,
@@ -35,8 +37,10 @@ class ViewZones extends Component {
   }
 
   render() {
+    const { zoneList } = this.props
+    const { page, rowsPerPage } = this.state
     const classes = this.props
-    const rows = this.props.zoneList
+    const rows = zoneList
     return (
       <div className="box-container-table data-tables">
         <Paper className={classes.root}>
@@ -50,11 +54,7 @@ class ViewZones extends Component {
               </TableHead>
               <TableBody>
                 {Object.keys(rows)
-                  .slice(
-                    this.state.page * this.state.rowsPerPage,
-                    this.state.page * this.state.rowsPerPage +
-                      this.state.rowsPerPage
-                  )
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
                       <TableRow
@@ -75,8 +75,8 @@ class ViewZones extends Component {
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
             count={Object.keys(rows).length}
-            rowsPerPage={this.state.rowsPerPage}
-            page={this.state.page}
+            rowsPerPage={rowsPerPage}
+            page={page}
             onChangePage={this.handleChangePage}
             onChangeRowsPerPage={this.handleChangeRowsPerPage}
           />
@@ -85,7 +85,10 @@ class ViewZones extends Component {
     )
   }
 }
-
+ViewZones.propTypes = {
+  getZoneList: PropTypes.func.isRequired,
+  zoneList: PropTypes.shape.isRequired,
+}
 const stateAsProps = (store) => ({
   zoneList: store.RetailerReducer.zoneList,
 })

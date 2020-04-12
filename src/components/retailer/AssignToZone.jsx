@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button"
 import FormControl from "@material-ui/core/FormControl"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import { getZones, assignToZone } from "../../redux/actions/RetailerActions"
 import ProductDetails from "../utils/ProductDetails"
 import Message from "../utils/Message"
@@ -12,7 +13,6 @@ class AssignToZone extends Component {
     super(props)
 
     this.state = {
-      isSubmitted: false,
       zoneName: "",
       zoneDetails: {},
     }
@@ -26,7 +26,15 @@ class AssignToZone extends Component {
   }
 
   componentDidMount() {
-    this.props.getZones()
+    const { getZones: getZonesAlt } = this.props
+    getZonesAlt()
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const { assignToZone: assignToZoneAlt, productName } = this.props
+    const { zoneDetails, zoneName } = this.state
+    assignToZoneAlt(zoneDetails, zoneName, productName)
   }
 
   handleChangeZoneName(e) {
@@ -35,28 +43,23 @@ class AssignToZone extends Component {
 
   handleChangeQuantity(e) {
     const dquantity = e.target.value
-    this.state.zoneDetails.quantityAssigned = dquantity
+    const { zoneDetails } = this.state
+    zoneDetails.quantityAssigned = dquantity
   }
 
   handleChangeProfitPecentage(e) {
     const dpercentage = e.target.value
-    this.state.zoneDetails.profitPercentage = dpercentage
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault()
-    this.props.assignToZone(
-      this.state.zoneDetails,
-      this.state.zoneName,
-      this.props.productName
-    )
+    const { zoneDetails } = this.state
+    zoneDetails.profitPercentage = dpercentage
   }
 
   render() {
+    const { statusCode, history, zones } = this.props
+    const { zoneDetails } = this.state
     return (
       <>
-        {this.props.statusCode === 200 ? (
-          this.props.history.push("/view/assigned/zones")
+        {statusCode === 200 ? (
+          history.push("/view/assigned/zones")
         ) : (
           <div className="box-container">
             <div className="joint-form-large">
@@ -71,10 +74,8 @@ class AssignToZone extends Component {
                       Enter Zone
                     </InputLabel>
                     <Select
-                      ref="zone"
                       fullWidth
                       native
-                      // value={this.state.zoneName}
                       onChange={this.handleChangeZoneName}
                       label="Enter zone"
                       inputProps={{
@@ -83,12 +84,8 @@ class AssignToZone extends Component {
                       }}
                     >
                       <option aria-label="None" value="" />
-                      {this.props.zones.map((zone, index) => {
-                        return (
-                          <option value={zone} key={index}>
-                            {zone}
-                          </option>
-                        )
+                      {zones.map((zoneVal) => {
+                        return <option value={zoneVal}>{zoneVal}</option>
                       })}
                     </Select>
                   </FormControl>
@@ -103,7 +100,7 @@ class AssignToZone extends Component {
                     name="zoneQuantity"
                     type="number"
                     onChange={this.handleChangeQuantity}
-                    value={this.state.zoneDetails.quantityAssigned}
+                    value={zoneDetails.quantityAssigned}
                     autoFocus
                   />
 
@@ -117,7 +114,7 @@ class AssignToZone extends Component {
                     name="zoneProfitPercentage"
                     type="number"
                     onChange={this.handleChangeProfitPecentage}
-                    value={this.state.zoneDetails.profitPercentage}
+                    value={zoneDetails.profitPercentage}
                     autoFocus
                   />
 
@@ -142,6 +139,15 @@ class AssignToZone extends Component {
       </>
     )
   }
+}
+
+AssignToZone.propTypes = {
+  productName: PropTypes.string.isRequired,
+  statusCode: PropTypes.number.isRequired,
+  zones: PropTypes.arrayOf.isRequired,
+  getZones: PropTypes.func.isRequired,
+  assignToZone: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({

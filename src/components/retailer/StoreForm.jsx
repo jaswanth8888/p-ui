@@ -7,6 +7,7 @@ import ClearIcon from "@material-ui/icons/Clear"
 import MuiAlert from "@material-ui/lab/Alert"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import {
   getClusters,
   getZones,
@@ -34,11 +35,13 @@ class StoreForm extends Component {
   }
 
   componentWillMount() {
-    this.props.history.push("/store")
+    const { history } = this.props
+    history.push("/store")
   }
 
   componentDidMount() {
-    this.props.getAllZones()
+    const { getZones: getZonesAlt } = this.props
+    getZonesAlt()
   }
 
   handleChange(e) {
@@ -49,23 +52,22 @@ class StoreForm extends Component {
 
   handleChangeZone(e) {
     this.setState({ zone: e.target.value })
-    this.props.getAllClusters(e.target.value)
+    const { getClusters: getClustersAlt } = this.props
+    getClustersAlt(e.target.value)
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    const { streetName } = this.state
-    const { city } = this.state
-    const { pin } = this.state
+    const { postStore: postStoreAlt } = this.props
+    const { storeName, zone, cluster, pin, city, streetName } = this.state
     const address = {
       streetName,
       city,
       pin,
     }
-    const { storeName } = this.state
     const store = { storeName, address }
-    this.props.postStore(store, this.state.zone, this.state.cluster)
-    if (this.state.storeName.length > 6) {
+    postStoreAlt(store, zone, cluster)
+    if (storeName.length > 6) {
       this.setState({ status: 1 })
     } else {
       this.setState({ status: -1 })
@@ -73,12 +75,22 @@ class StoreForm extends Component {
   }
 
   render() {
+    const {
+      storeName,
+      zone,
+      cluster,
+      pin,
+      city,
+      streetName,
+      status,
+    } = this.state
+    const { clusters, zones } = this.props
     return (
       <div className="box-container">
         <div className="joint-form-assign flex-column">
           <div className="store-requirement">
             <h3 className="center-h3">Requirements</h3>
-            {this.state.storeName.length <= 5 && (
+            {storeName.length <= 5 && (
               <div className="typo-div">
                 <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
@@ -86,7 +98,7 @@ class StoreForm extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.storeName.length > 5 && (
+            {storeName.length > 5 && (
               <div className="approved-text">
                 <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
@@ -116,10 +128,9 @@ class StoreForm extends Component {
                       Enter Zone
                     </InputLabel>
                     <Select
-                      ref="zone"
                       fullWidth
                       native
-                      value={this.state.zone}
+                      value={zone}
                       onChange={this.handleChangeZone}
                       label="Enter Zone"
                       inputProps={{
@@ -128,12 +139,8 @@ class StoreForm extends Component {
                       }}
                     >
                       <option aria-label="None" value="" />
-                      {this.props.zones.map((zone, index) => {
-                        return (
-                          <option value={zone} key={index}>
-                            {zone}
-                          </option>
-                        )
+                      {zones.map((zoneVal) => {
+                        return <option value={zoneVal}>{zoneVal}</option>
                       })}
                     </Select>
                   </FormControl>
@@ -143,10 +150,9 @@ class StoreForm extends Component {
                       Enter Cluster
                     </InputLabel>
                     <Select
-                      ref="cluster"
                       fullWidth
                       native
-                      value={this.state.cluster}
+                      value={cluster}
                       onChange={this.handleChange}
                       label="Enter Cluster"
                       inputProps={{
@@ -155,18 +161,13 @@ class StoreForm extends Component {
                       }}
                     >
                       <option aria-label="None" value="" />
-                      {this.props.clusters.map((cluster, index) => {
-                        return (
-                          <option value={cluster} key={index}>
-                            {cluster}
-                          </option>
-                        )
+                      {clusters.map((clusterVal) => {
+                        return <option value={clusterVal}>{clusterVal}</option>
                       })}
                     </Select>
                   </FormControl>
 
                   <TextField
-                    ref="storeName"
                     variant="outlined"
                     margin="normal"
                     required
@@ -176,7 +177,7 @@ class StoreForm extends Component {
                     name="storeName"
                     autoComplete="storeName"
                     onChange={this.handleChange}
-                    value={this.state.storeName}
+                    value={storeName}
                     autoFocus
                   />
                 </form>
@@ -184,7 +185,6 @@ class StoreForm extends Component {
               <div className="form-second-half">
                 <form className="{classes.form}" noValidate>
                   <TextField
-                    ref="streetName"
                     variant="outlined"
                     margin="normal"
                     required
@@ -194,10 +194,9 @@ class StoreForm extends Component {
                     autoComplete="streetName"
                     id="streetName"
                     onChange={this.handleChange}
-                    value={this.state.streetName}
+                    value={streetName}
                   />
                   <TextField
-                    ref="city"
                     variant="outlined"
                     margin="normal"
                     required
@@ -207,10 +206,9 @@ class StoreForm extends Component {
                     id="city"
                     onChange={this.handleChange}
                     autoComplete="city"
-                    value={this.state.city}
+                    value={city}
                   />
                   <TextField
-                    ref="pin"
                     variant="outlined"
                     margin="normal"
                     required
@@ -221,7 +219,7 @@ class StoreForm extends Component {
                     id="pin"
                     onChange={this.handleChange}
                     autoComplete="pin"
-                    value={this.state.pin}
+                    value={pin}
                   />
                 </form>
               </div>
@@ -242,7 +240,7 @@ class StoreForm extends Component {
           </div>
         </div>
         <>
-          {this.state.status === 1 ? (
+          {status === 1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert elevation={6} variant="filled">
@@ -255,7 +253,7 @@ class StoreForm extends Component {
           )}
         </>
         <>
-          {this.state.status === -1 ? (
+          {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
@@ -271,13 +269,22 @@ class StoreForm extends Component {
     )
   }
 }
+
+StoreForm.propTypes = {
+  getZones: PropTypes.func.isRequired,
+  getClusters: PropTypes.func.isRequired,
+  postStore: PropTypes.func.isRequired,
+  zones: PropTypes.arrayOf.isRequired,
+  clusters: PropTypes.arrayOf.isRequired,
+  history: PropTypes.shape.isRequired,
+}
 const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
   clusters: store.RetailerReducer.clusters,
 })
 const actionAsProps = {
-  getAllZones: getZones,
-  getAllClusters: getClusters,
+  getZones,
+  getClusters,
   postStore,
 }
 export default connect(stateAsProps, actionAsProps)(StoreForm)

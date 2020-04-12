@@ -8,12 +8,14 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import TablePagination from "@material-ui/core/TablePagination"
 import TableBody from "@material-ui/core/TableBody"
+import PropTypes from "prop-types"
 import { getClusterList } from "../../redux/actions/RetailerActions"
 
 class ViewClusters extends Component {
   constructor(props) {
     super(props)
-    this.props.getClusterList()
+    const { getClusterList: getClusterListAlt } = this.props
+    getClusterListAlt()
 
     this.state = {
       page: 0,
@@ -25,7 +27,6 @@ class ViewClusters extends Component {
 
   handleChangePage = (event, newPage) => {
     this.setState({ page: +newPage })
-    console.log(`fired handlechangepage ${this.setState.page}`)
   }
 
   handleChangeRowsPerPage = (event) => {
@@ -35,8 +36,10 @@ class ViewClusters extends Component {
   }
 
   render() {
+    const { clusterList } = this.props
+    const { page, rowsPerPage } = this.state
     const classes = this.props
-    const rows = this.props.clusterList
+    const rows = clusterList
     return (
       <div className="box-container-table data-tables">
         <Paper className={classes.root}>
@@ -50,11 +53,7 @@ class ViewClusters extends Component {
               </TableHead>
               <TableBody>
                 {Object.keys(rows)
-                  .slice(
-                    this.state.page * this.state.rowsPerPage,
-                    this.state.page * this.state.rowsPerPage +
-                      this.state.rowsPerPage
-                  )
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
                       <TableRow
@@ -75,8 +74,8 @@ class ViewClusters extends Component {
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
             count={Object.keys(rows).length}
-            rowsPerPage={this.state.rowsPerPage}
-            page={this.state.page}
+            rowsPerPage={rowsPerPage}
+            page={page}
             onChangePage={this.handleChangePage}
             onChangeRowsPerPage={this.handleChangeRowsPerPage}
           />
@@ -84,6 +83,11 @@ class ViewClusters extends Component {
       </div>
     )
   }
+}
+
+ViewClusters.propTypes = {
+  getClusterList: PropTypes.func.isRequired,
+  clusterList: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({

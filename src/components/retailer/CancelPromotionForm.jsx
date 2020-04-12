@@ -7,6 +7,7 @@ import ClearIcon from "@material-ui/icons/Clear"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import Autocomplete from "@material-ui/lab/Autocomplete"
+import PropTypes from "prop-types"
 import {
   getZones,
   getProductList,
@@ -21,8 +22,6 @@ class CancelPromotionForm extends Component {
     this.state = {
       zone: "",
       productName: "",
-      isSubmitted: false,
-      status: 0,
     }
     this.handleChangeZone = this.handleChangeZone.bind(this)
     this.handleChangeProduct = this.handleChangeProduct.bind(this)
@@ -30,38 +29,47 @@ class CancelPromotionForm extends Component {
   }
 
   componentWillMount() {
-    this.props.getAllZones()
-    this.props.getProductList()
+    const {
+      getZones: getZonesAlt,
+      getProductList: getProductListAlt,
+    } = this.props
+    getProductListAlt()
+    getZonesAlt()
   }
 
   handleChangeProduct = (e, value) => {
-    console.log(value)
+    const {
+      saveProductValue: saveProductValueAlt,
+      getProductDetails: getProductDetailsAlt,
+    } = this.props
     const productName = value
     this.setState({ productName })
-    console.log(this.state.productName)
-    this.props.saveProductValue(productName)
-    this.props.getProductDetails(value)
+    saveProductValueAlt(productName)
+    getProductDetailsAlt(value)
   }
 
   handleChangeZone(e) {
-    const { name, value } = e.target
+    const { value } = e.target
     this.setState({ zone: value })
-    console.log(value)
-    this.props.saveZoneValue(value)
+    const { saveZoneValue: saveZoneValueAlt } = this.props
+    saveZoneValueAlt(value)
   }
 
-  handleSubmit(e) {
-    this.props.history.push("/cancel/productdetails")
+  handleSubmit() {
+    const { history } = this.props
+    history.push("/cancel/productdetails")
   }
 
   render() {
+    const { zones, products } = this.props
+    const { productName, zone } = this.state
     return (
       <div className="box-container">
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
               <h3 className="center-h3">Requirements</h3>
-              {this.state.zone === "" && (
+              {zone === "" && (
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -69,7 +77,7 @@ class CancelPromotionForm extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.zone !== "" && (
+              {zone !== "" && (
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -77,7 +85,7 @@ class CancelPromotionForm extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.productName === "" && (
+              {productName === "" && (
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -85,7 +93,7 @@ class CancelPromotionForm extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.productName !== "" && (
+              {productName !== "" && (
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -113,7 +121,7 @@ class CancelPromotionForm extends Component {
                 <Autocomplete
                   id="product-list"
                   fullWidth
-                  options={this.props.products}
+                  options={products}
                   getOptionLabel={(option) => option}
                   renderInput={(params) => (
                     <TextField
@@ -131,10 +139,9 @@ class CancelPromotionForm extends Component {
                   Enter Zone
                 </InputLabel>
                 <Select
-                  ref="zone"
                   fullWidth
                   native
-                  value={this.state.zone}
+                  value={zone}
                   onChange={this.handleChangeZone}
                   label="Enter Zone"
                   inputProps={{
@@ -143,12 +150,8 @@ class CancelPromotionForm extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.zones.map((zone, index) => {
-                    return (
-                      <option value={zone} key={index}>
-                        {zone}
-                      </option>
-                    )
+                  {zones.map((zoneVal) => {
+                    return <option value={zoneVal}>{zoneVal}</option>
                   })}
                 </Select>
               </FormControl>
@@ -170,12 +173,23 @@ class CancelPromotionForm extends Component {
     )
   }
 }
+
+CancelPromotionForm.propTypes = {
+  products: PropTypes.arrayOf.isRequired,
+  zones: PropTypes.arrayOf.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
+  saveProductValue: PropTypes.func.isRequired,
+  getProductList: PropTypes.func.isRequired,
+  getZones: PropTypes.func.isRequired,
+  saveZoneValue: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
+}
 const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
   products: store.RetailerReducer.productList,
 })
 const actionAsProps = {
-  getAllZones: getZones,
+  getZones,
   getProductList,
   saveProductValue,
   getProductDetails,

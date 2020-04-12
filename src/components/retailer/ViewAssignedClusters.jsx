@@ -6,6 +6,7 @@ import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import {
   getProductDetails,
   resetStatusCode,
@@ -19,7 +20,8 @@ class ViewAssignedClusters extends Component {
   }
 
   render() {
-    const zoneData = this.props.productDetails.assignProduct // Swap with the actual prop while integrating: this.props.productDetails.assignProduct
+    const { productDetails, resetStatusCode: resetStatusCodeAlt } = this.props
+    const zoneData = productDetails.assignProduct // Swap with the actual prop while integrating: this.props.productDetails.assignProduct
 
     const tableRowElm = (zone) => {
       if (zone.cluster !== null && Array.isArray(zone.cluster)) {
@@ -69,7 +71,7 @@ class ViewAssignedClusters extends Component {
 
     return (
       <div className="box-container-start">
-        {this.props.resetStatusCode()}
+        {resetStatusCodeAlt()}
         <div className="">
           <ProductDetails />
         </div>
@@ -91,13 +93,14 @@ class ViewAssignedClusters extends Component {
   }
 }
 
-const stateAsProps = (store) => ({
-  productDetails: store.RetailerReducer.productDetails,
-  productName: store.RetailerReducer.productName,
-})
+ViewAssignedClusters.propTypes = {
+  resetStatusCode: PropTypes.func.isRequired,
+  productDetails: PropTypes.shape.isRequired,
+}
+
 const actionAsProps = {
   getProductDetails,
   resetStatusCode,
 }
 
-export default connect(stateAsProps, actionAsProps)(ViewAssignedClusters)
+export default connect(null, actionAsProps)(ViewAssignedClusters)

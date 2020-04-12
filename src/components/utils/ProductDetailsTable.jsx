@@ -17,8 +17,8 @@ class ProductDetailsTable extends Component {
   }
 
   componentDidMount() {
-    const { productName } = this.props
-    this.props.getProductDetails(productName)
+    const { productName, getProductDetails: getProductDetailsAlt } = this.props
+    getProductDetailsAlt(productName)
   }
 
   render() {
