@@ -24,7 +24,6 @@ class WithdrawZonePromotion extends Component {
 
     this.state = {
       date: new Date().toISOString().slice(0, 10),
-      details: {},
       levelOption: "zone",
     }
   }
@@ -40,8 +39,8 @@ class WithdrawZonePromotion extends Component {
       productName,
       withdrawPromotion: withdrawPromotionAlt,
     } = this.props
-    const { date, details, levelOption } = this.state
-    this.state.details = {
+    const { date, levelOption } = this.state
+    const details = {
       zoneName: zone,
       date,
     }

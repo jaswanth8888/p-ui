@@ -639,6 +639,7 @@ export const withdrawPromotion = (
   levelOption,
   promotionId
 ) => async (dispatch) => {
+  console.log("asasd")
   await axios
     .put(
       `${RETAILER_BASE_URL}/product-management/` +
