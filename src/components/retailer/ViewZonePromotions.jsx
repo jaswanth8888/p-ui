@@ -6,6 +6,7 @@ import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import Table from "@material-ui/core/Table"
+import PropTypes from "prop-types"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 
@@ -17,11 +18,13 @@ class ViewZonePromotions extends Component {
   }
 
   componentWillMount() {
-    this.props.getProductDetails(this.props.productName)
+    const { getProductDetails: getProductDetailsAlt, productName } = this.props
+    getProductDetailsAlt(productName)
   }
 
   render() {
-    const zoneData = this.props.productDetails.assignProduct
+    const { productDetails } = this.props
+    const zoneData = productDetails.assignProduct
     const tableRowElm = (zone) => {
       return zone.promotions.map((promotion) => (
         <TableRow key={promotion.promotionId}>
@@ -99,6 +102,12 @@ class ViewZonePromotions extends Component {
       </div>
     )
   }
+}
+
+ViewZonePromotions.propTypes = {
+  productName: PropTypes.string.isRequired,
+  productDetails: PropTypes.shape.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({
