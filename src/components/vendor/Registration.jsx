@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
+import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import md5 from "md5"
 import { registration } from "../../redux/actions/VendorActions"
@@ -177,6 +178,8 @@ export class Registration extends Component {
   }
 
   render() {
+    const { error, vender_details } = this.state
+    const { register_status } = this.props
     return (
       <>
         <Grid
@@ -202,7 +205,7 @@ export class Registration extends Component {
                 Sign Up
               </Typography>
               <Typography component="span" color="error" variant="h5">
-                {this.props.register_status.msg}
+                {register_status.msg}
               </Typography>
             </Box>
 
@@ -213,8 +216,8 @@ export class Registration extends Component {
                 margin="normal"
                 required
                 fullWidth
-                error={this.state.error.emailError}
-                helperText={this.state.error.emailErrorMsg}
+                error={error.emailError}
+                helperText={error.emailErrorMsg}
                 id="email"
                 label="email"
                 type="email"
@@ -229,8 +232,8 @@ export class Registration extends Component {
                 margin="normal"
                 required
                 fullWidth
-                error={this.state.error.passwordError}
-                helperText={this.state.error.passwordErrorMsg}
+                error={error.passwordError}
+                helperText={error.passwordErrorMsg}
                 name="password"
                 label="Password"
                 type="password"
@@ -244,8 +247,8 @@ export class Registration extends Component {
                 margin="normal"
                 required
                 fullWidth
-                error={this.state.error.confirmPasswordError}
-                helperText={this.state.error.confirmPasswordErrorMsg}
+                error={error.confirmPasswordError}
+                helperText={error.confirmPasswordErrorMsg}
                 name="confirmPassword"
                 label="Confirm Password"
                 type="password"
@@ -259,8 +262,8 @@ export class Registration extends Component {
                 margin="normal"
                 required
                 fullWidth
-                error={this.state.error.companyNameError}
-                helperText={this.state.error.companyNameErrorMsg}
+                error={error.companyNameError}
+                helperText={error.companyNameErrorMsg}
                 name="companyName"
                 label="Company Name"
                 type="text"
@@ -273,7 +276,7 @@ export class Registration extends Component {
                 fullWidth
                 id="companyType"
                 name="companyType"
-                value={this.state.vender_details.companyType}
+                value={vender_details.companyType}
                 onChange={this.handleChange}
               >
                 <MenuItem value="Alcohol">Alcohol</MenuItem>
@@ -296,8 +299,8 @@ export class Registration extends Component {
                     <FormLabel>{x}</FormLabel>
                   </div>
                 ))}
-                <FormHelperText error={this.state.error.checkedBoxError}>
-                  {this.state.error.checkedBoxErrorMsg}
+                <FormHelperText error={error.checkedBoxError}>
+                  {error.checkedBoxErrorMsg}
                 </FormHelperText>
               </div>
               <Button
@@ -318,6 +321,9 @@ export class Registration extends Component {
       </>
     )
   }
+}
+Registration.propTypes = {
+  register_status: PropTypes.shape.isRequired,
 }
 const stateAsProps = function (store) {
   if ("register_status" in store.VendorReducer) {
