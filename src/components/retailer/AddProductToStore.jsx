@@ -67,7 +67,7 @@ class AddProductToStore extends Component {
 
   render() {
     const { zone, cluster, store, status } = this.state
-    const { zones,clusters,stores } = this.props
+    const { zones, clusters, stores } = this.props
     return (
       <div className="box-container">
         <div className="joint-form">

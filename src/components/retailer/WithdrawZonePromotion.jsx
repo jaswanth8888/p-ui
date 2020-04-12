@@ -65,7 +65,7 @@ class WithdrawZonePromotion extends Component {
               </TableCell>
               <TableCell>
                 <Typography variant="subtitle1" gutterBottom>
-                  {this.props.productDetails.effectivePrice}
+                  {productDetails.effectivePrice}
                 </Typography>
               </TableCell>
               <TableCell>
