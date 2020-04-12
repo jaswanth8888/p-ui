@@ -4,6 +4,7 @@ import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import { getPricesInRange } from "../../redux/actions/RetailerActions"
 
 class GetProductsInDateRange extends Component {
@@ -14,12 +15,17 @@ class GetProductsInDateRange extends Component {
       currentDate: new Date().toISOString().slice(0, 10),
       startDate: "",
       endDate: "",
-      isSubmit: false,
-      status: 0,
     }
 
     this.handleChange = this.handleChange.bind(this)
     // this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit = () => {
+    const { startDate, endDate, currentDate } = this.state
+    const { history, getPricesInRange: getPricesInRangeAlt } = this.props
+    getPricesInRangeAlt(startDate, endDate, currentDate)
+    history.push("/view/effectiveprices")
   }
 
   handleChange(e) {
@@ -27,23 +33,15 @@ class GetProductsInDateRange extends Component {
     this.setState({ [name]: value })
   }
 
-  handleSubmit = () => {
-    this.props.getPricesInRange(
-      this.state.startDate,
-      this.state.endDate,
-      this.state.currentDate
-    )
-    this.props.history.push("/view/effectiveprices")
-  }
-
   render() {
+    const { startDate, endDate, currentDate } = this.state
     return (
       <div className="box-container">
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
               <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {this.state.startDate.length == 0 && (
+              {startDate.length === 0 && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -53,7 +51,7 @@ class GetProductsInDateRange extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.startDate.length != 0 && (
+              {startDate.length !== 0 && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -63,7 +61,7 @@ class GetProductsInDateRange extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.endDate.length == 0 && (
+              {endDate.length === 0 && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -73,7 +71,7 @@ class GetProductsInDateRange extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.endDate.length != 0 && (
+              {endDate.length !== 0 && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -83,7 +81,7 @@ class GetProductsInDateRange extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.startDate <= this.state.currentDate && (
+              {startDate <= currentDate && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -93,7 +91,7 @@ class GetProductsInDateRange extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.startDate >= this.state.currentDate && (
+              {startDate >= currentDate && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -103,7 +101,7 @@ class GetProductsInDateRange extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.endDate <= this.state.startDate && (
+              {endDate <= startDate && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -113,7 +111,7 @@ class GetProductsInDateRange extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.endDate > this.state.startDate && (
+              {endDate > startDate && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -164,21 +162,20 @@ class GetProductsInDateRange extends Component {
                 onChange={this.handleChange}
                 autoFocus
               />
-              {this.state.startDate >= this.state.currentDate &&
-                this.state.endDate > this.state.startDate && (
-                  <Button
-                    type="button"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className="{classes.submit}"
-                    onClick={this.handleSubmit}
-                    style={{ marginTop: "30px" }}
-                    id="get-prods-in-range-submit"
-                  >
-                    Show
-                  </Button>
-                )}
+              {startDate >= currentDate && endDate > startDate && (
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit}"
+                  onClick={this.handleSubmit}
+                  style={{ marginTop: "30px" }}
+                  id="get-prods-in-range-submit"
+                >
+                  Show
+                </Button>
+              )}
             </form>
           </div>
         </div>
@@ -186,6 +183,12 @@ class GetProductsInDateRange extends Component {
     )
   }
 }
+
+GetProductsInDateRange.propTypes = {
+  getPricesInRange: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
+}
+
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.products,
 })
