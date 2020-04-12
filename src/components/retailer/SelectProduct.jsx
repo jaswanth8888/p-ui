@@ -108,7 +108,7 @@ class SelectProduct extends Component {
                       variant="outlined"
                     />
                   )}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeProduct}
                   name="productName"
                 />
               </FormControl>
