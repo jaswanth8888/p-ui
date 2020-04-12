@@ -639,7 +639,6 @@ export const withdrawPromotion = (
   levelOption,
   promotionId
 ) => async (dispatch) => {
-  console.log("asasd")
   await axios
     .put(
       `${RETAILER_BASE_URL}/product-management/` +
@@ -680,7 +679,6 @@ export const getPromotionsIncluster = (
 }
 
 export const saveStartDate = (start) => (dispatch) => {
-  console.log(start)
   dispatch({ type: STARTDATE_SAVE_VALUE, startDate: start })
 }
 
