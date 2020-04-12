@@ -7,10 +7,8 @@ import Alert from "@material-ui/lab/Alert"
 import IconButton from "@material-ui/core/IconButton"
 import CloseIcon from "@material-ui/icons/Close"
 import { connect } from "react-redux"
-import {
-  getProductDetails,
-  postPromotion,
-} from "../../redux/actions/RetailerActions"
+import PropTypes from "prop-types"
+import { postPromotion } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 
 class DefinePromotionInZone extends Component {
@@ -34,36 +32,32 @@ class DefinePromotionInZone extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillMount() {}
-
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state.promotionDetails)
-    this.props.postPromotion(
-      this.state.promotionDetails,
-      this.props.productName,
-      this.state.levelOption
-    )
-    this.props.history.push("/view/promotions/zone")
+    const { postPromotion: postPromotionAlt, productName, history } = this.props
+    const { promotionDetails, levelOption } = this.state
+    postPromotionAlt(promotionDetails, productName, levelOption)
+    history.push("/view/promotions/zone")
   }
 
   handleChangePercentage(e) {
     const percentage = e.target.value
+    const { promotionDetails } = this.state
     this.setState({
       promotionDetails: {
-        ...this.state.promotionDetails,
+        ...promotionDetails,
         promotionPercentage: percentage,
       },
     })
-    // promotionDetails.promotionPercentage = percentage;
   }
 
   handleChangeStartDate(e) {
     const start = e.target.value
-    this.state.promotionDetails.startDate = start
+    const { promotionDetails } = this.state
+    promotionDetails.startDate = start
     this.setState({
       promotionDetails: {
-        ...this.state.promotionDetails,
+        ...promotionDetails,
         startDate: start,
       },
     })
@@ -71,22 +65,25 @@ class DefinePromotionInZone extends Component {
 
   handleChangeEndDate(e) {
     const end = e.target.value
-    this.state.promotionDetails.endDate = end
+    const { promotionDetails } = this.state
+    promotionDetails.endDate = end
     this.setState({
       promotionDetails: {
-        ...this.state.promotionDetails,
+        ...promotionDetails,
         endDate: end,
       },
     })
   }
 
   render() {
+    const { promotionDetails } = this.state
+    const { productDetails, zone } = this.props
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
           <div className="store-requirement">
             <h3 className="center-h3">Requirements</h3>
-            {this.state.promotionDetails.startDate.length == 0 && (
+            {promotionDetails.startDate.length === 0 && (
               <div style={{ display: "flex" }}>
                 <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -94,7 +91,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.startDate.length != 0 && (
+            {promotionDetails.startDate.length !== 0 && (
               <div style={{ display: "flex", color: "#ffc107" }}>
                 <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -102,7 +99,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.endDate.length == 0 && (
+            {promotionDetails.endDate.length === 0 && (
               <div style={{ display: "flex" }}>
                 <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -110,7 +107,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.endDate.length != 0 && (
+            {promotionDetails.endDate.length !== 0 && (
               <div style={{ display: "flex", color: "#ffc107" }}>
                 <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -118,8 +115,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.endDate <=
-              this.state.promotionDetails.startDate && (
+            {promotionDetails.endDate <= promotionDetails.startDate && (
               <div style={{ display: "flex" }}>
                 <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -127,8 +123,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.endDate >
-              this.state.promotionDetails.startDate && (
+            {promotionDetails.endDate > promotionDetails.startDate && (
               <div style={{ display: "flex", color: "#ffc107" }}>
                 <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -136,7 +131,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.promotionPercentage >= 0 && (
+            {promotionDetails.promotionPercentage >= 0 && (
               <div style={{ display: "flex" }}>
                 <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -144,7 +139,7 @@ class DefinePromotionInZone extends Component {
                 </Typography>
               </div>
             )}
-            {this.state.promotionDetails.promotionPercentage < 0 && (
+            {promotionDetails.promotionPercentage < 0 && (
               <div style={{ display: "flex", color: "#ffc107" }}>
                 <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
                 <Typography variant="subtitle2" gutterBottom>
@@ -156,7 +151,7 @@ class DefinePromotionInZone extends Component {
 
           <div className="form-center">
             <div className="flex-grid">
-              {this.props.productDetails.assignProduct.length > 0 && (
+              {productDetails.assignProduct.length > 0 && (
                 <div>
                   <Alert
                     severity="info"
@@ -170,8 +165,8 @@ class DefinePromotionInZone extends Component {
                       </IconButton>
                     }
                   >
-                    Product: {this.props.productDetails.productName} already has
-                    promotion applied
+                    Product: {productDetails.productName} already has promotion
+                    applied
                   </Alert>
                 </div>
               )}
@@ -181,7 +176,7 @@ class DefinePromotionInZone extends Component {
               <ProductDetailsTable />
               <br />
               <Typography className="card-header" variant="h6">
-                Selected Zone : {this.props.zone}
+                Selected Zone : {zone}
               </Typography>
 
               <TextField
@@ -206,7 +201,7 @@ class DefinePromotionInZone extends Component {
                 autoFocus
               />
               <Typography className="card-header" variant="h6">
-                Actual Price : {this.props.productDetails.productBasePrice}
+                Actual Price : {productDetails.productBasePrice}
               </Typography>
 
               <TextField
@@ -229,7 +224,6 @@ class DefinePromotionInZone extends Component {
                 required
                 fullWidth
                 type="date"
-                // defaultValue={new Date().toISOString().slice(0,10)}
                 step="0.01"
                 id="endDate-in-range"
                 label="End Date"
@@ -239,9 +233,8 @@ class DefinePromotionInZone extends Component {
                 onChange={this.handleChangeEndDate}
                 autoFocus
               />
-              {this.state.promotionDetails.endDate >
-                this.state.promotionDetails.startDate &&
-                this.state.promotionDetails.promotionPercentage < 0 && (
+              {promotionDetails.endDate > promotionDetails.startDate &&
+                promotionDetails.promotionPercentage < 0 && (
                   <Button
                     halfWidth
                     type="button"
@@ -263,15 +256,20 @@ class DefinePromotionInZone extends Component {
   }
 }
 
+DefinePromotionInZone.propTypes = {
+  productName: PropTypes.string.isRequired,
+  productDetails: PropTypes.shape.isRequired,
+  zone: PropTypes.string.isRequired,
+  postPromotion: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
+}
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
   zone: store.RetailerReducer.zone,
-  statusCode: store.RetailerReducer.statusCode,
 })
 
 const actionAsProps = {
-  getProductDetails,
   postPromotion,
 }
 export default connect(stateAsProps, actionAsProps)(DefinePromotionInZone)

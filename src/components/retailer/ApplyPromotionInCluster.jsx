@@ -51,7 +51,7 @@ class ApplyPromotionInCluster extends Component {
     const productName = value
     this.setState({ productName })
     saveProductValueAlt(productName)
-    getProductDetailsAlt(value)
+    getProductDetailsAlt(productName)
   }
 
   handleChangeZone(e) {
