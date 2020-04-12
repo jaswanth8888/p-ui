@@ -48,7 +48,7 @@ class WithdrawClusterPromotion extends Component {
     this.props.history.push("/withdraw/clusterproduct")
     document
       .getElementById("withdraw-tbody")
-      .removeChild(document.getElementById("row" + promoId))
+      .removeChild(document.getElementById(`row${promoId}`))
   }
 
   render() {
@@ -78,7 +78,7 @@ class WithdrawClusterPromotion extends Component {
                     {this.props.clusterPromotions.map(
                       (promotion) =>
                         promotion.withDrawnDate === null && (
-                          <TableRow id={"row" + promotion.promotionId}>
+                          <TableRow id={`row${promotion.promotionId}`}>
                             <TableCell>
                               <Typography variant="subtitle1" gutterBottom>
                                 {promotion.promotionPercentage}

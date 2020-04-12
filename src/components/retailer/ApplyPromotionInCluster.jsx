@@ -8,6 +8,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import PropTypes from "prop-types"
 import {
   getClusters,
   getProductDetails,
@@ -34,32 +35,47 @@ class ApplyPromotionInCluster extends Component {
   }
 
   componentWillMount() {
-    this.props.getProductList()
-    this.props.getZones()
+    const {
+      getZones: getZonesAlt,
+      getProductList: getProductListAlt,
+    } = this.props
+    getProductListAlt()
+    getZonesAlt()
   }
 
   handleChangeProduct = (e, value) => {
+    const {
+      saveProductValue: saveProductValueAlt,
+      getProductDetails: getProductDetailsAlt,
+    } = this.props
     const productName = value
     this.setState({ productName })
-    this.props.saveProductValue(productName)
-    this.props.getProductDetails(value)
+    saveProductValueAlt(productName)
+    getProductDetailsAlt(productName)
   }
 
   handleChangeZone(e) {
-    const { name, value } = e.target
+    const { value } = e.target
     this.setState({ zone: value })
-    this.props.getClusters(e.target.value)
-    this.props.saveZoneValue(value)
+    const {
+      saveZoneValue: saveZoneValueAlt,
+      getClusters: getClustersAlt,
+    } = this.props
+    getClustersAlt(e.target.value)
+    saveZoneValueAlt(value)
   }
 
   handleChangeCluster(e) {
-    const { name, value } = e.target
+    const { value } = e.target
     this.setState({ cluster: value })
-    this.props.saveClusterValue(value)
+    const { saveClusterValue: saveClusterValueAlt } = this.props
+    saveClusterValueAlt(value)
   }
 
   render() {
     const { productName, zone, cluster } = this.state
+    const { zones, clusters, products } = this.props
+
     return (
       <div className="box-container">
         <div className="joint-form">
@@ -147,7 +163,7 @@ class ApplyPromotionInCluster extends Component {
                 <Autocomplete
                   id="product-list"
                   fullWidth
-                  options={this.props.products}
+                  options={products}
                   getOptionLabel={(option) => option}
                   renderInput={(params) => (
                     <TextField
@@ -176,8 +192,8 @@ class ApplyPromotionInCluster extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.zones.map((zone, index) => {
-                    return <option value={zone}>{zone}</option>
+                  {zones.map((zoneVal) => {
+                    return <option value={zoneVal}>{zoneVal}</option>
                   })}
                 </Select>
               </FormControl>
@@ -198,35 +214,46 @@ class ApplyPromotionInCluster extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.clusters.map((cluster, index) => {
-                    return <option value={cluster}>{cluster}</option>
+                  {clusters.map((clusterVal) => {
+                    return <option value={clusterVal}>{clusterVal}</option>
                   })}
                 </Select>
               </FormControl>
 
-              {this.state.productName !== "" &&
-                this.state.zone !== "" &&
-                this.state.cluster !== "" && (
-                  <Link className="button-link" to="/definepromotion/cluster">
-                    <Button
-                      type="button"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      className="{classes.submit} submit-pad"
-                      onClick={this.handleSubmit}
-                      id="apply-promotion-cluster-submit"
-                    >
-                      Go
-                    </Button>
-                  </Link>
-                )}
+              {productName !== "" && zone !== "" && cluster !== "" && (
+                <Link className="button-link" to="/definepromotion/cluster">
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit} submit-pad"
+                    onClick={this.handleSubmit}
+                    id="apply-promotion-cluster-submit"
+                  >
+                    Go
+                  </Button>
+                </Link>
+              )}
             </form>
           </div>
         </div>
       </div>
     )
   }
+}
+
+ApplyPromotionInCluster.propTypes = {
+  products: PropTypes.arrayOf.isRequired,
+  zones: PropTypes.arrayOf.isRequired,
+  clusters: PropTypes.arrayOf.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
+  saveProductValue: PropTypes.func.isRequired,
+  getProductList: PropTypes.func.isRequired,
+  getZones: PropTypes.func.isRequired,
+  getClusters: PropTypes.func.isRequired,
+  saveZoneValue: PropTypes.func.isRequired,
+  saveClusterValue: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({

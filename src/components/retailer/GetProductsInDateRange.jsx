@@ -1,14 +1,10 @@
 import { TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
-import Snackbar from "@material-ui/core/Snackbar"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
-import MuiAlert from "@material-ui/lab/Alert"
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import { postZone, getPricesInRange } from "../../redux/actions/RetailerActions"
-import Message from "../utils/Message"
+import { getPricesInRange } from "../../redux/actions/RetailerActions"
 
 class GetProductsInDateRange extends Component {
   constructor(props) {
@@ -133,11 +129,7 @@ class GetProductsInDateRange extends Component {
             <form className="{classes.form}" noValidate>
               <div>
                 <div className="help-block">
-                  <Typography
-                    color="primary"
-                    component="h1"
-                    variant="h4"
-                  >
+                  <Typography color="primary" component="h1" variant="h4">
                     Prices for Products
                   </Typography>
                 </div>

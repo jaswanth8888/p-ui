@@ -1,5 +1,4 @@
-import { TextField, Typography, Paper } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
+import { Typography, Paper } from "@material-ui/core"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import TableCell from "@material-ui/core/TableCell"
@@ -7,10 +6,8 @@ import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import Table from "@material-ui/core/Table"
-import {
-  getProductDetails,
-  getPromotionsIncluster,
-} from "../../redux/actions/RetailerActions"
+import PropTypes from "prop-types"
+import { getPromotionsIncluster } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 
 class ViewClusterPromotions extends Component {
@@ -21,14 +18,17 @@ class ViewClusterPromotions extends Component {
   }
 
   componentWillMount() {
-    this.props.getPromotionsIncluster(
-      this.props.productName,
-      this.props.zone,
-      this.props.cluster
-    )
+    const {
+      getPromotionsIncluster: getPromotionsInclusterAlt,
+      productName,
+      zone,
+      cluster,
+    } = this.props
+    getPromotionsInclusterAlt(productName, zone, cluster)
   }
 
   render() {
+    const { clusterPromotions } = this.props
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
@@ -54,7 +54,7 @@ class ViewClusterPromotions extends Component {
                     </TableRow>
                   </TableHead>
                   <tbody>
-                    {this.props.clusterPromotions.map((promotion) => (
+                    {clusterPromotions.map((promotion) => (
                       <TableRow key={promotion.promotionId}>
                         <TableCell>
                           <Typography variant="subtitle1" gutterBottom>
@@ -106,8 +106,15 @@ class ViewClusterPromotions extends Component {
   }
 }
 
+ViewClusterPromotions.propTypes = {
+  productName: PropTypes.string.isRequired,
+  getPromotionsIncluster: PropTypes.func.isRequired,
+  zone: PropTypes.string.isRequired,
+  cluster: PropTypes.string.isRequired,
+  clusterPromotions: PropTypes.shape.isRequired,
+}
+
 const stateAsProps = (store) => ({
-  productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
   zone: store.RetailerReducer.zone,
   cluster: store.RetailerReducer.cluster,
@@ -115,7 +122,6 @@ const stateAsProps = (store) => ({
 })
 
 const actionAsProps = {
-  getProductDetails,
   getPromotionsIncluster,
 }
 export default connect(stateAsProps, actionAsProps)(ViewClusterPromotions)

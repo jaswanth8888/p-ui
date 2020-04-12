@@ -81,7 +81,7 @@ export const postZone = (zoneDetails) => async (dispatch) => {
     })
     .catch((err) => {
       const { response } = err
-      if (response.status === 400) {
+      if (response.status === 404) {
         dispatch({
           type: CREATE_ZONE,
           msg: "Sorry Zone already exists",
@@ -497,6 +497,13 @@ export const assignToZone = (zoneDetails, zoneName, productName) => async (
           msgSeverity: "error",
           statusCode: response.status,
         })
+      } else if (response.status === 400) {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: response.data.message,
+          msgSeverity: "warning",
+          statusCode: response.status,
+        })
       } else if (response.status === 403) {
         dispatch({
           type: ASSIGN_TO_ZONE,
@@ -672,6 +679,7 @@ export const getPromotionsIncluster = (
 }
 
 export const saveStartDate = (start) => (dispatch) => {
+  console.log(start)
   dispatch({ type: STARTDATE_SAVE_VALUE, startDate: start })
 }
 

@@ -3,7 +3,6 @@ import {
   MuiThemeProvider,
   responsiveFontSizes,
 } from "@material-ui/core/styles"
-import Button from "@material-ui/core/Button"
 import React, { Suspense } from "react"
 import ReactDOM from "react-dom"
 

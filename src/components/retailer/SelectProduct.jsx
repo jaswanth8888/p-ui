@@ -1,12 +1,10 @@
-import { InputLabel, TextField, Typography } from "@material-ui/core"
+import { TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import FormControl from "@material-ui/core/FormControl"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import Autocomplete from "@material-ui/lab/Autocomplete"
-import React, { Component, Fragment } from "react"
-import Snackbar from "@material-ui/core/Snackbar"
-import MuiAlert from "@material-ui/lab/Alert"
+import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import {
@@ -14,7 +12,6 @@ import {
   saveProductValue,
   getProductDetails,
 } from "../../redux/actions/RetailerActions"
-import Message from "../utils/Message"
 
 class SelectProduct extends Component {
   constructor(props) {
@@ -111,7 +108,7 @@ class SelectProduct extends Component {
                       variant="outlined"
                     />
                   )}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeProduct}
                   name="productName"
                 />
               </FormControl>

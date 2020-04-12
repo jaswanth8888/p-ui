@@ -1,75 +1,74 @@
-import { InputLabel, Select, TextField, Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import Snackbar from "@material-ui/core/Snackbar";
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
-import MuiAlert from "@material-ui/lab/Alert";
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
+import { InputLabel, Select, TextField, Typography } from "@material-ui/core"
+import Button from "@material-ui/core/Button"
+import FormControl from "@material-ui/core/FormControl"
+import Snackbar from "@material-ui/core/Snackbar"
+import CheckIcon from "@material-ui/icons/Check"
+import ClearIcon from "@material-ui/icons/Clear"
+import MuiAlert from "@material-ui/lab/Alert"
+import React, { Component } from "react"
+import { connect } from "react-redux"
 import {
   getClusters,
   getZones,
-  postStore
-} from "../../redux/actions/RetailerActions";
+  postStore,
+} from "../../redux/actions/RetailerActions"
 
 class StoreForm extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       zone: "",
       cluster: "",
-      isSubmitted: false,
       storeName: "",
       city: "",
       streetName: "",
       pin: "",
-      status: 0
-    };
+      status: 0,
+    }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     // this.handleChangeStore = this.handleChangeStore.bind(this);
-    this.handleChangeZone = this.handleChangeZone.bind(this);
+    this.handleChangeZone = this.handleChangeZone.bind(this)
   }
 
   componentWillMount() {
-    this.props.history.push("/store");
+    this.props.history.push("/store")
   }
 
   componentDidMount() {
-    this.props.getAllZones();
+    this.props.getAllZones()
   }
 
   handleChange(e) {
-    const { name, value } = e.target;
+    const { name, value } = e.target
 
-    this.setState({ [name]: value });
+    this.setState({ [name]: value })
   }
 
   handleChangeZone(e) {
-    this.setState({ zone: e.target.value });
-    this.props.getAllClusters(e.target.value);
+    this.setState({ zone: e.target.value })
+    this.props.getAllClusters(e.target.value)
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    const { streetName } = this.state;
-    const { city } = this.state;
-    const { pin } = this.state;
+    e.preventDefault()
+    const { streetName } = this.state
+    const { city } = this.state
+    const { pin } = this.state
     const address = {
       streetName,
       city,
-      pin
-    };
-    const { storeName } = this.state;
-    const store = { storeName, address };
-    this.props.postStore(store, this.state.zone, this.state.cluster);
+      pin,
+    }
+    const { storeName } = this.state
+    const store = { storeName, address }
+    this.props.postStore(store, this.state.zone, this.state.cluster)
     if (this.state.storeName.length > 6) {
-      this.setState({ status: 1 });
+      this.setState({ status: 1 })
     } else {
-      this.setState({ status: -1 });
+      this.setState({ status: -1 })
     }
   }
 
@@ -125,7 +124,7 @@ class StoreForm extends Component {
                       label="Enter Zone"
                       inputProps={{
                         name: "zone",
-                        id: "zone"
+                        id: "zone",
                       }}
                     >
                       <option aria-label="None" value="" />
@@ -134,7 +133,7 @@ class StoreForm extends Component {
                           <option value={zone} key={index}>
                             {zone}
                           </option>
-                        );
+                        )
                       })}
                     </Select>
                   </FormControl>
@@ -152,7 +151,7 @@ class StoreForm extends Component {
                       label="Enter Cluster"
                       inputProps={{
                         name: "cluster",
-                        id: "cluster"
+                        id: "cluster",
                       }}
                     >
                       <option aria-label="None" value="" />
@@ -161,7 +160,7 @@ class StoreForm extends Component {
                           <option value={cluster} key={index}>
                             {cluster}
                           </option>
-                        );
+                        )
                       })}
                     </Select>
                   </FormControl>
@@ -269,16 +268,16 @@ class StoreForm extends Component {
           )}
         </>
       </div>
-    );
+    )
   }
 }
-const stateAsProps = store => ({
+const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
-  clusters: store.RetailerReducer.clusters
-});
+  clusters: store.RetailerReducer.clusters,
+})
 const actionAsProps = {
   getAllZones: getZones,
   getAllClusters: getClusters,
-  postStore
-};
-export default connect(stateAsProps, actionAsProps)(StoreForm);
+  postStore,
+}
+export default connect(stateAsProps, actionAsProps)(StoreForm)

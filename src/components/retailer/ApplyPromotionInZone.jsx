@@ -4,12 +4,11 @@ import FormControl from "@material-ui/core/FormControl"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import Autocomplete from "@material-ui/lab/Autocomplete"
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import Select from "@material-ui/core/Select"
-import Snackbar from "@material-ui/core/Snackbar"
-import MuiAlert from "@material-ui/lab/Alert"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import PropTypes from "prop-types"
 import {
   getProductList,
   saveProductValue,
@@ -17,7 +16,6 @@ import {
   getZones,
   saveZoneValue,
 } from "../../redux/actions/RetailerActions"
-import Message from "../utils/Message"
 
 class ApplyPromotionInZone extends Component {
   constructor(props) {
@@ -33,27 +31,35 @@ class ApplyPromotionInZone extends Component {
   }
 
   componentWillMount() {
-    this.props.getProductList()
-    this.props.getZones()
+    const {
+      getZones: getZonesAlt,
+      getProductList: getProductListAlt,
+    } = this.props
+    getProductListAlt()
+    getZonesAlt()
   }
 
   handleChangeProduct = (e, value) => {
-    console.log(value)
+    const {
+      saveProductValue: saveProductValueAlt,
+      getProductDetails: getProductDetailsAlt,
+    } = this.props
     const productName = value
     this.setState({ productName })
-    console.log(this.state.productName)
-    this.props.saveProductValue(productName)
-    this.props.getProductDetails(value)
+    saveProductValueAlt(productName)
+    getProductDetailsAlt(value)
   }
 
   handleChangeZone(e) {
-    const { name, value } = e.target
+    const { value } = e.target
     this.setState({ zone: value })
-    console.log(value)
-    this.props.saveZoneValue(value)
+    const { saveZoneValue: saveZoneValueAlt } = this.props
+    saveZoneValueAlt(value)
   }
 
   render() {
+    const { zones, products } = this.props
+    const { productName, zone } = this.state
     return (
       <div className="box-container">
         <div className="joint-form">
@@ -61,7 +67,7 @@ class ApplyPromotionInZone extends Component {
             <div className="validations">
               <h3 className="center-h3">Requirements</h3>
 
-              {this.state.productName === "" && (
+              {productName === "" && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -71,7 +77,7 @@ class ApplyPromotionInZone extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.productName !== "" && (
+              {productName !== "" && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -81,7 +87,7 @@ class ApplyPromotionInZone extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.zone === "" && (
+              {zone === "" && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -91,7 +97,7 @@ class ApplyPromotionInZone extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.zone !== "" && (
+              {zone !== "" && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -121,7 +127,7 @@ class ApplyPromotionInZone extends Component {
                 <Autocomplete
                   id="product-list"
                   fullWidth
-                  options={this.props.products}
+                  options={products}
                   getOptionLabel={(option) => option}
                   renderInput={(params) => (
                     <TextField
@@ -141,7 +147,7 @@ class ApplyPromotionInZone extends Component {
                 <Select
                   fullWidth
                   native
-                  value={this.state.zone}
+                  value={zone}
                   onChange={this.handleChangeZone}
                   label="Zone"
                   inputProps={{
@@ -150,17 +156,13 @@ class ApplyPromotionInZone extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.zones.map((zone, index) => {
-                    return (
-                      <option value={zone} key={index}>
-                        {zone}
-                      </option>
-                    )
+                  {zones.map((zoneValue) => {
+                    return <option value={zoneValue}>{zoneValue}</option>
                   })}
                 </Select>
               </FormControl>
 
-              {this.state.productName !== "" && this.state.zone !== "" && (
+              {productName !== "" && zone !== "" && (
                 <Link className="button-link" to="/definepromotion/zone">
                   <Button
                     type="button"
@@ -183,10 +185,19 @@ class ApplyPromotionInZone extends Component {
   }
 }
 
+ApplyPromotionInZone.propTypes = {
+  products: PropTypes.arrayOf.isRequired,
+  zones: PropTypes.arrayOf.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
+  saveProductValue: PropTypes.func.isRequired,
+  getProductList: PropTypes.func.isRequired,
+  getZones: PropTypes.func.isRequired,
+  saveZoneValue: PropTypes.func.isRequired,
+}
+
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
   zones: store.RetailerReducer.zones,
-
 })
 const actionAsProps = {
   getProductList,
