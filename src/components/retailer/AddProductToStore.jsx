@@ -4,6 +4,7 @@ import FormControl from "@material-ui/core/FormControl"
 import Snackbar from "@material-ui/core/Snackbar"
 import MuiAlert from "@material-ui/lab/Alert"
 import React, { Component } from "react"
+import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import {
@@ -66,6 +67,7 @@ class AddProductToStore extends Component {
 
   render() {
     const { zone, cluster, store, status } = this.state
+    const { zones,clusters,stores } = this.props
     return (
       <div className="box-container">
         <div className="joint-form">
@@ -118,7 +120,7 @@ class AddProductToStore extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.zones.map((zone, index) => {
+                  {zones.map((zone, index) => {
                     return <option value={zone}>{zone}</option>
                   })}
                 </Select>
@@ -143,7 +145,7 @@ class AddProductToStore extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.clusters.map((cluster, index) => {
+                  {clusters.map((cluster, index) => {
                     return <option value={cluster}>{cluster}</option>
                   })}
                 </Select>
@@ -168,12 +170,12 @@ class AddProductToStore extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.stores.map((store, index) => {
+                  {stores.map((store) => {
                     return <option value={store}>{store}</option>
                   })}
                 </Select>
               </FormControl>
-              {cluster !== "" && this.props.stores.length <= 0 && (
+              {cluster !== "" && stores.length <= 0 && (
                 <Button
                   type="button"
                   fullWidth
@@ -246,6 +248,16 @@ class AddProductToStore extends Component {
     )
   }
 }
+
+AddProductToStore.propTypes = {
+  zones: PropTypes.shape.isRequired,
+  clusters: PropTypes.shape.isRequired,
+  zone: PropTypes.string.isRequired,
+  cluster: PropTypes.string.isRequired,
+  store: PropTypes.string.isRequired,
+  stores: PropTypes.shape.isRequired,
+}
+
 const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
   clusters: store.RetailerReducer.clusters,
