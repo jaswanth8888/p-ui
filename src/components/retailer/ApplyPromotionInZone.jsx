@@ -51,7 +51,7 @@ class ApplyPromotionInZone extends Component {
   }
 
   handleChangeZone(e) {
-    const { name, value } = e.target
+    const { value } = e.target
     this.setState({ zone: value })
     const { saveZoneValue: saveZoneValueAlt } = this.props
     saveZoneValueAlt(value)
@@ -156,12 +156,8 @@ class ApplyPromotionInZone extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {zones.map((zoneValue, index) => {
-                    return (
-                      <option value={zoneValue} key={index}>
-                        {zoneValue}
-                      </option>
-                    )
+                  {zones.map((zoneValue) => {
+                    return <option value={zoneValue}>{zoneValue}</option>
                   })}
                 </Select>
               </FormControl>
