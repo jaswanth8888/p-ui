@@ -117,10 +117,10 @@ export const postCluster = (cluster, zone) => async (dispatch) => {
     })
     .catch((err) => {
       const { response } = err
-      if (response.status === 400) {
+      if (response.status === 404) {
         dispatch({
           type: CREATE_CLUSTER,
-          msg: "Sorry Cluster already exists",
+          msg: response.data.message,
           msgSeverity: "error",
         })
       } else if (response.status === 403) {

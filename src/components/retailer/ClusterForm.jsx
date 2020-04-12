@@ -8,6 +8,7 @@ import ClearIcon from "@material-ui/icons/Clear"
 import MuiAlert from "@material-ui/lab/Alert"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import { getZones, postCluster } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
 
@@ -25,11 +26,13 @@ class ClusterForm extends Component {
   }
 
   componentWillMount() {
-    this.props.history.push("/cluster")
+    const { history } = this.props
+    history.push("/cluster")
   }
 
   componentDidMount() {
-    this.props.getAllZones()
+    const { getAllZones: getAllZonesAlt } = this.props
+    getAllZonesAlt()
   }
 
   handleChange(e) {
@@ -39,13 +42,14 @@ class ClusterForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    const { clusterName, taxRate, zone } = this.state
+    const { postCluster: postClusterAlt } = this.props
     const cluster = {
-      clusterName: this.state.clusterName,
-      taxRate: this.state.taxRate,
+      clusterName,
+      taxRate,
     }
-    this.setState({ isSubmitted: true })
-    if (this.state.clusterName.length > 6) {
-      this.props.postCluster(cluster, this.state.zone)
+    if (clusterName.length > 6) {
+      postClusterAlt(cluster, zone)
       this.setState({ status: 1 })
     } else {
       this.setState({ status: -1 })
@@ -53,13 +57,15 @@ class ClusterForm extends Component {
   }
 
   render() {
+    const { clusterName, zone, taxRate, status } = this.state
+    const { zones } = this.props
     return (
       <div className="box-container">
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
               <h3 className="center-h3">Requirements</h3>
-              {this.state.clusterName.length <= 5 && (
+              {clusterName.length <= 5 && (
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -67,7 +73,7 @@ class ClusterForm extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.clusterName.length > 5 && (
+              {clusterName.length > 5 && (
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -98,7 +104,7 @@ class ClusterForm extends Component {
                 <Select
                   fullWidth
                   native
-                  value={this.state.zone}
+                  value={zone}
                   onChange={this.handleChange}
                   label="Zone"
                   inputProps={{
@@ -107,10 +113,10 @@ class ClusterForm extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.zones.map((zone, index) => {
+                  {zones.map((zoneOption, index) => {
                     return (
-                      <option value={zone} key={index}>
-                        {zone}
+                      <option value={zoneOption} key={index}>
+                        {zoneOption}
                       </option>
                     )
                   })}
@@ -126,7 +132,7 @@ class ClusterForm extends Component {
                 name="clusterName"
                 autoComplete="clusterName"
                 onChange={this.handleChange}
-                value={this.state.clusterName}
+                value={clusterName}
                 style={{
                   marginTop: "24px",
                 }}
@@ -144,7 +150,7 @@ class ClusterForm extends Component {
                 name="taxRate"
                 autoComplete="taxRate"
                 onChange={this.handleChange}
-                value={this.state.taxRate}
+                value={taxRate}
                 autoFocus
               />
               <Button
@@ -164,7 +170,7 @@ class ClusterForm extends Component {
         <Message />
 
         <>
-          {this.state.status === -1 ? (
+          {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
@@ -179,6 +185,12 @@ class ClusterForm extends Component {
       </div>
     )
   }
+}
+ClusterForm.propTypes = {
+  zones: PropTypes.shape.isRequired,
+  getAllZones: PropTypes.func.isRequired,
+  postCluster: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
 }
 const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
