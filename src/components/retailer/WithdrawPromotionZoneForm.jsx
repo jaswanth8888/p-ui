@@ -30,11 +30,11 @@ class WithdrawPromotionZoneForm extends Component {
 
   componentWillMount() {
     const {
-      getAllZones: getAllZonesAlt,
+      getZones: getZonesAlt,
       getProductList: getProductListAlt,
     } = this.props
-    getAllZonesAlt()
     getProductListAlt()
+    getZonesAlt()
   }
 
   handleChangeProduct = (e, value) => {
@@ -50,8 +50,8 @@ class WithdrawPromotionZoneForm extends Component {
 
   handleChangeZone(e) {
     const { value } = e.target
-    const { saveZoneValue: saveZoneValueAlt } = this.props
     this.setState({ zone: value })
+    const { saveZoneValue: saveZoneValueAlt } = this.props
     saveZoneValueAlt(value)
   }
 
@@ -139,7 +139,6 @@ class WithdrawPromotionZoneForm extends Component {
                   Zone
                 </InputLabel>
                 <Select
-                  ref="zone"
                   fullWidth
                   native
                   value={zone}
@@ -151,12 +150,8 @@ class WithdrawPromotionZoneForm extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {zones.map((zoneOption, index) => {
-                    return (
-                      <option value={zoneOption} key={index}>
-                        {zoneOption}
-                      </option>
-                    )
+                  {zones.map((zoneValue) => {
+                    return <option value={zoneValue}>{zoneValue}</option>
                   })}
                 </Select>
               </FormControl>
@@ -178,15 +173,16 @@ class WithdrawPromotionZoneForm extends Component {
     )
   }
 }
+
 WithdrawPromotionZoneForm.propTypes = {
-  zones: PropTypes.shape.isRequired,
-  products: PropTypes.shape.isRequired,
-  history: PropTypes.shape.isRequired,
-  getAllZones: PropTypes.func.isRequired,
-  getProductList: PropTypes.func.isRequired,
-  saveProductValue: PropTypes.func.isRequired,
+  products: PropTypes.arrayOf.isRequired,
+  zones: PropTypes.arrayOf.isRequired,
   getProductDetails: PropTypes.func.isRequired,
+  saveProductValue: PropTypes.func.isRequired,
+  getProductList: PropTypes.func.isRequired,
+  getZones: PropTypes.func.isRequired,
   saveZoneValue: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({
@@ -194,7 +190,7 @@ const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
 })
 const actionAsProps = {
-  getAllZones: getZones,
+  getZones,
   getProductList,
   saveProductValue,
   getProductDetails,
