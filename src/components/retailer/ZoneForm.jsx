@@ -16,7 +16,6 @@ class ZoneForm extends Component {
     this.state = {
       zoneName: "",
       liquorPricePerUnit: "",
-      isSubmit: false,
       status: 0,
     }
 
@@ -34,28 +33,30 @@ class ZoneForm extends Component {
   }
 
   handleSubmit(e) {
+    const { zoneName, liquorPricePerUnit } = this.state
     e.preventDefault()
     const zone = {
-      zoneName: this.state.zoneName,
-      liquorPricePerUnit: this.state.liquorPricePerUnit,
+      zoneName,
+      liquorPricePerUnit,
     }
 
     if (this.state.zoneName.length > 5) {
       this.props.postZone(zone)
-      this.setState({ isSubmit: true, status: 1 })
+      this.setState({ status: 1 })
     } else {
-      this.setState({ isSubmit: false, status: -1 })
+      this.setState({ status: -1 })
     }
   }
 
   render() {
+    const { zoneName, status } = this.state
     return (
       <div className="box-container">
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
               <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {this.state.zoneName.length <= 5 && (
+              {zoneName.length <= 5 && (
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -63,7 +64,7 @@ class ZoneForm extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.zoneName.length > 5 && (
+              {zoneName.length > 5 && (
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -129,7 +130,7 @@ class ZoneForm extends Component {
           </div>
         </div>
         <>
-          {this.state.status === -1 ? (
+          {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">

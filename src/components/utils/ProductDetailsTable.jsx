@@ -17,15 +17,17 @@ class ProductDetailsTable extends Component {
   }
 
   componentDidMount() {
-    this.props.getProductDetails(this.props.productName)
+    const { productName } = this.props
+    this.props.getProductDetails(productName)
   }
 
   render() {
+    const { productDetails } = this.props
     return (
       <div className="flex-grid">
         <div className="product-name">
           <Typography className="card-header" variant="h5">
-            Product Name : {this.props.productDetails.productName}
+            Product Name : {productDetails.productName}
           </Typography>
         </div>
         <TableContainer component={Paper}>
@@ -42,18 +44,16 @@ class ProductDetailsTable extends Component {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={this.props.productDetails.productImagePath}
+                    href={productDetails.productImagePath}
                   >
                     <img
                       className="thumbnail"
-                      src={this.props.productDetails.productImagePath}
+                      src={productDetails.productImagePath}
                       alt="none"
                     />
                   </a>
                 </TableCell>
-                <TableCell>
-                  {this.props.productDetails.productDescription}
-                </TableCell>
+                <TableCell>{productDetails.productDescription}</TableCell>
               </TableRow>
             </tbody>
           </Table>
@@ -74,23 +74,13 @@ class ProductDetailsTable extends Component {
             </TableHead>
             <tbody>
               <TableRow>
-                <TableCell>{this.props.productDetails.companyName}</TableCell>
-                <TableCell>
-                  {this.props.productDetails.productBasePrice}
-                </TableCell>
-                <TableCell>
-                  {this.props.productDetails.effectivePrice}
-                </TableCell>
-                <TableCell>
-                  {this.props.productDetails.initialQuantity}
-                </TableCell>
-                <TableCell>
-                  {this.props.productDetails.remainingQuantity}
-                </TableCell>
-                <TableCell>
-                  {this.props.productDetails.productCategory}
-                </TableCell>
-                <TableCell>{this.props.productDetails.uom}</TableCell>
+                <TableCell>{productDetails.companyName}</TableCell>
+                <TableCell>{productDetails.productBasePrice}</TableCell>
+                <TableCell>{productDetails.effectivePrice}</TableCell>
+                <TableCell>{productDetails.initialQuantity}</TableCell>
+                <TableCell>{productDetails.remainingQuantity}</TableCell>
+                <TableCell>{productDetails.productCategory}</TableCell>
+                <TableCell>{productDetails.uom}</TableCell>
               </TableRow>
             </tbody>
           </Table>

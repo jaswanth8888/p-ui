@@ -1,4 +1,4 @@
-import {  TextField, Typography } from "@material-ui/core"
+import { TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import FormControl from "@material-ui/core/FormControl"
 import CheckIcon from "@material-ui/icons/Check"
