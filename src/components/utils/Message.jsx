@@ -10,10 +10,12 @@ class Message extends Component {
     super(props)
 
     this.state = {}
+    this.closeAlert = this.closeAlert.bind(this)
   }
 
   closeAlert = () => {
-    this.props.messageSetNull()
+    const { messageSetNull: messageSetNullAlt } = this.props
+    messageSetNullAlt()
   }
 
   render() {
