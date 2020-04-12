@@ -89,7 +89,10 @@ class ViewPromotions extends Component {
                               }}
                             >
                               <TableRow>
-                                <TableCell style={{ color: "White" }}>
+                                <TableCell
+                                  size="small"
+                                  style={{ color: "White" }}
+                                >
                                   Promotion Percentage
                                 </TableCell>
                                 <TableCell style={{ color: "White" }}>

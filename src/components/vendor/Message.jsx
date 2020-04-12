@@ -10,6 +10,7 @@ class Message extends Component {
     super(props)
 
     this.state = {}
+    this.closeAlert = this.clo.bind(this)
   }
 
   closeAlert = () => {
