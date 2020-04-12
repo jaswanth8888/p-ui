@@ -30,21 +30,22 @@ class WithdrawZonePromotion extends Component {
   }
 
   componentWillMount() {
-    const { productName } = this.props
-    this.props.getProductDetails(productName)
+    const { productName, getProductDetails: getProductDetailsAlt } = this.props
+    getProductDetailsAlt(productName)
   }
 
   handleSubmit = (e, promoId) => {
+    const {
+      zone,
+      productName,
+      withdrawPromotion: withdrawPromotionAlt,
+    } = this.props
+    const { date, details, levelOption } = this.state
     this.state.details = {
-      zoneName: this.props.zone,
-      date: this.state.date,
+      zoneName: zone,
+      date,
     }
-    this.props.withdrawPromotion(
-      this.state.details,
-      this.props.productName,
-      this.state.levelOption,
-      promoId
-    )
+    withdrawPromotionAlt(details, productName, levelOption, promoId)
     document
       .getElementById("withdraw-tbody")
       .removeChild(document.getElementById(`row${promoId}`))

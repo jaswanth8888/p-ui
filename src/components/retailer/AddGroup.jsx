@@ -6,6 +6,7 @@ import ClearIcon from "@material-ui/icons/Clear"
 import MuiAlert from "@material-ui/lab/Alert"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import { postGroup } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
 
@@ -45,7 +46,8 @@ class AddGroup extends Component {
     e.preventDefault()
     if (this.isValidGroupName()) {
       const { group } = this.state
-      this.props.postGroup({ ...group }) // thunk action
+      const { postGroup: postGroupAlt } = this.props
+      postGroupAlt({ ...group }) // thunk action
     }
   }
 
@@ -134,6 +136,10 @@ class AddGroup extends Component {
       </div>
     )
   }
+}
+
+AddGroup.propTypes = {
+  postGroup: PropTypes.func.isRequired,
 }
 
 const actionAsProps = {

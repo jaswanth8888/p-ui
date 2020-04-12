@@ -6,6 +6,7 @@ import ClearIcon from "@material-ui/icons/Clear"
 import MuiAlert from "@material-ui/lab/Alert"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import { postZone } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
 
@@ -24,7 +25,8 @@ class ZoneForm extends Component {
   }
 
   componentWillMount() {
-    this.props.history.push("/zone")
+    const { history } = this.props
+    history.push("/zone")
   }
 
   handleChange(e) {
@@ -34,14 +36,15 @@ class ZoneForm extends Component {
 
   handleSubmit(e) {
     const { zoneName, liquorPricePerUnit } = this.state
+    const { postZone: postZoneAlt } = this.props
     e.preventDefault()
     const zone = {
       zoneName,
       liquorPricePerUnit,
     }
 
-    if (this.state.zoneName.length > 5) {
-      this.props.postZone(zone)
+    if (zoneName.length > 5) {
+      postZoneAlt(zone)
       this.setState({ status: 1 })
     } else {
       this.setState({ status: -1 })
@@ -147,7 +150,10 @@ class ZoneForm extends Component {
     )
   }
 }
-
+ZoneForm.propTypes = {
+  postZone: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
+}
 const actionAsProps = {
   postZone,
 }
