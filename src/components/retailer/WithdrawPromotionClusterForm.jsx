@@ -223,17 +223,19 @@ class WithdrawPromotionClusterForm extends Component {
                   })}
                 </Select>
               </FormControl>
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className="{classes.submit} submit-pad"
-                onClick={this.handleSubmit}
-                id="apply-promotion-cluster-submit"
-              >
-                Go
-              </Button>
+              {this.state.productName !== "" && this.state.zone !== "" && (
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit} submit-pad"
+                  onClick={this.handleSubmit}
+                  id="apply-promotion-cluster-submit"
+                >
+                  Go
+                </Button>
+              )}
             </form>
           </div>
         </div>
