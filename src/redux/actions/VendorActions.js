@@ -1,7 +1,6 @@
 import axios from "axios"
 import { registerconstants } from "./registrationtypes"
 import {
-  VTOKEN,
   VENDOR_LOGIN_USER,
   VENDOR_LOGIN_FAILURE,
   VENDOR_LOGOUT,
@@ -9,6 +8,10 @@ import {
   MESSAGE_SET_NULL,
   CREATE_PRODUCT,
 } from "./types"
+
+const VTOKEN = () => {
+  return `BearerV ${sessionStorage.getItem("token")}`
+}
 
 export const registration = (registrationdetails) => async (dispatch) => {
   await axios
@@ -53,7 +56,7 @@ export const registration = (registrationdetails) => async (dispatch) => {
 export const postProduct = (productDetails) => async (dispatch) => {
   await axios
     .post(`${RETAILER_BASE_URL}/product-management/product`, productDetails, {
-      headers: { Authorization: VTOKEN },
+      headers: { Authorization: VTOKEN() },
     })
     .then(() => {
       dispatch({
