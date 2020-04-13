@@ -82,7 +82,8 @@ class AddProducts extends Component {
       ) {
         object.productName = ele.childNodes[1].childNodes[0].textContent
         object.quantityAssigned = parseInt(
-          ele.childNodes[5].childNodes[0].childNodes[1].childNodes[0].value
+          ele.childNodes[5].childNodes[0].childNodes[1].childNodes[0].value,
+          10
         )
         productList.push(object)
       }
