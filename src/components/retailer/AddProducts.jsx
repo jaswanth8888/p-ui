@@ -60,10 +60,18 @@ class AddProducts extends Component {
 
   handleChangeCategory(e) {
     this.setState({ category: e.target.value })
-    this.props.getAllProducts(e.target.value)
+    const { getAllProducts: getAllProductsAlt } = this.props
+    getAllProductsAlt(e.target.value)
   }
 
   loopForm() {
+    const { object, productList } = this.state
+    const {
+      postProductToStore: postProductToStoreAlt,
+      zone,
+      cluster,
+      store,
+    } = this.props
     const tabledata = document.querySelectorAll("tr")
 
     tabledata.forEach((ele, ind) => {
@@ -72,25 +80,21 @@ class AddProducts extends Component {
         ele.childNodes[0].childNodes[0].childNodes[0].childNodes[0]
           .childNodes[0].checked
       ) {
-        this.state.object.productName =
-          ele.childNodes[1].childNodes[0].textContent
-        this.state.object.quantityAssigned = parseInt(
-          ele.childNodes[5].childNodes[0].childNodes[1].childNodes[0].value
+        object.productName = ele.childNodes[1].childNodes[0].textContent
+        object.quantityAssigned = parseInt(
+          ele.childNodes[5].childNodes[0].childNodes[1].childNodes[0].value,
+          10
         )
-        this.state.productList.push(this.state.object)
+        productList.push(object)
       }
     })
 
-    this.props.postProductToStore(
-      this.props.zone,
-      this.props.cluster,
-      this.props.store,
-      this.state.productList
-    )
+    postProductToStoreAlt(zone, cluster, store, productList)
   }
 
   render() {
     const { categories, products } = this.props
+    const { category, numberBoxInputValue, quantityCheck } = this.state
     return (
       <div className="box-container add-prods">
         <div className="product-form-header">
@@ -101,7 +105,7 @@ class AddProducts extends Component {
               native
               variant="outlined"
               label="Enter Category"
-              value={this.state.category}
+              value={category}
               onChange={this.handleChangeCategory}
               inputProps={{
                 name: "category",
@@ -109,8 +113,8 @@ class AddProducts extends Component {
               }}
             >
               <option aria-label="None" value="" />
-              {categories.map((category) => {
-                return <option value={category}>{category}</option>
+              {categories.map((categoryVal) => {
+                return <option value={categoryVal}>{categoryVal}</option>
               })}
             </Select>
           </FormControl>
@@ -231,7 +235,7 @@ class AddProducts extends Component {
                               fullWidth
                               type="number"
                               id={product.id}
-                              value={this.state.numberBoxInputValue[product.id]}
+                              value={numberBoxInputValue[product.id]}
                               pattern="[0-9]*"
                               min="0"
                               max={product.remainingQuantity}
@@ -248,7 +252,7 @@ class AddProducts extends Component {
                               fullWidth
                               type="number"
                               id={product.id}
-                              value={this.state.numberBoxInputValue[product.id]}
+                              value={numberBoxInputValue[product.id]}
                               pattern="[0-9]*"
                               min="0"
                               max={product.remainingQuantity}
@@ -269,7 +273,7 @@ class AddProducts extends Component {
                 </tbody>
               </Table>
             </TableContainer>
-            {this.state.quantityCheck && (
+            {quantityCheck && (
               <Link to="/addproducts">
                 <Button
                   type="button"

@@ -7,6 +7,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete"
 import React, { Component } from "react"
 import Select from "@material-ui/core/Select"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import {
   getProductList,
   saveProductValue,
@@ -34,39 +35,51 @@ class WithdrawPromotionClusterForm extends Component {
   }
 
   componentWillMount() {
-    this.props.getProductList()
-    this.props.getZones()
+    const {
+      getZones: getZonesAlt,
+      getProductList: getProductListAlt,
+    } = this.props
+    getProductListAlt()
+    getZonesAlt()
   }
 
   handleChangeProduct = (e, value) => {
-    console.log(value)
+    const {
+      saveProductValue: saveProductValueAlt,
+      getProductDetails: getProductDetailsAlt,
+    } = this.props
     const productName = value
     this.setState({ productName })
-    console.log(this.state.productName)
-    this.props.saveProductValue(productName)
-    this.props.getProductDetails(value)
+    saveProductValueAlt(productName)
+    getProductDetailsAlt(productName)
   }
 
   handleChangeZone(e) {
-    const { name, value } = e.target
+    const { value } = e.target
     this.setState({ zone: value })
-    this.props.getClusters(e.target.value)
-    console.log(value)
-    this.props.saveZoneValue(value)
+    const {
+      saveZoneValue: saveZoneValueAlt,
+      getClusters: getClustersAlt,
+    } = this.props
+    getClustersAlt(e.target.value)
+    saveZoneValueAlt(value)
   }
 
   handleChangeCluster(e) {
-    const { name, value } = e.target
+    const { value } = e.target
     this.setState({ cluster: value })
-    console.log(value)
-    this.props.saveClusterValue(value)
+    const { saveClusterValue: saveClusterValueAlt } = this.props
+    saveClusterValueAlt(value)
   }
 
-  handleSubmit(e) {
-    this.props.history.push("/withdraw/clusterproduct")
+  handleSubmit() {
+    const { history } = this.props
+    history.push("/withdraw/clusterproduct")
   }
 
   render() {
+    const { productName, zone, cluster } = this.state
+    const { zones, clusters, products } = this.props
     return (
       <div className="box-container">
         <div className="joint-form">
@@ -74,7 +87,7 @@ class WithdrawPromotionClusterForm extends Component {
             <div className="validations">
               <h3 className="center-h3">Requirements</h3>
 
-              {this.state.productName === "" && (
+              {productName === "" && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -84,7 +97,7 @@ class WithdrawPromotionClusterForm extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.productName !== "" && (
+              {productName !== "" && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -94,7 +107,7 @@ class WithdrawPromotionClusterForm extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.zone === "" && (
+              {zone === "" && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -104,7 +117,7 @@ class WithdrawPromotionClusterForm extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.zone !== "" && (
+              {zone !== "" && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -114,7 +127,7 @@ class WithdrawPromotionClusterForm extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.cluster === "" && (
+              {cluster === "" && (
                 <div style={{ display: "flex" }}>
                   <ClearIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -124,7 +137,7 @@ class WithdrawPromotionClusterForm extends Component {
                   </Typography>
                 </div>
               )}
-              {this.state.cluster !== "" && (
+              {cluster !== "" && (
                 <div style={{ display: "flex", color: "#ffc107" }}>
                   <CheckIcon
                     style={{ paddingRight: "5px", marginTop: "-2px" }}
@@ -154,7 +167,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <Autocomplete
                   id="product-list"
                   fullWidth
-                  options={this.props.products}
+                  options={products}
                   getOptionLabel={(option) => option}
                   renderInput={(params) => (
                     <TextField
@@ -174,7 +187,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <Select
                   fullWidth
                   native
-                  value={this.state.zone}
+                  value={zone}
                   onChange={this.handleChangeZone}
                   label="Zone"
                   inputProps={{
@@ -183,12 +196,8 @@ class WithdrawPromotionClusterForm extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.zones.map((zone, index) => {
-                    return (
-                      <option value={zone} key={index}>
-                        {zone}
-                      </option>
-                    )
+                  {zones.map((zoneValue) => {
+                    return <option value={zoneValue}>{zoneValue}</option>
                   })}
                 </Select>
               </FormControl>
@@ -198,10 +207,9 @@ class WithdrawPromotionClusterForm extends Component {
                   Enter Cluster
                 </InputLabel>
                 <Select
-                  ref="cluster"
                   fullWidth
                   native
-                  value={this.state.cluster}
+                  value={cluster}
                   onChange={this.handleChangeCluster}
                   label="Enter Cluster"
                   inputProps={{
@@ -210,12 +218,8 @@ class WithdrawPromotionClusterForm extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.clusters.map((cluster, index) => {
-                    return (
-                      <option value={cluster} key={index}>
-                        {cluster}
-                      </option>
-                    )
+                  {clusters.map((clusterValue) => {
+                    return <option value={clusterValue}>{clusterValue}</option>
                   })}
                 </Select>
               </FormControl>
@@ -238,6 +242,20 @@ class WithdrawPromotionClusterForm extends Component {
       </div>
     )
   }
+}
+
+WithdrawPromotionClusterForm.propTypes = {
+  products: PropTypes.arrayOf.isRequired,
+  zones: PropTypes.arrayOf.isRequired,
+  clusters: PropTypes.arrayOf.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
+  saveProductValue: PropTypes.func.isRequired,
+  getProductList: PropTypes.func.isRequired,
+  getZones: PropTypes.func.isRequired,
+  getClusters: PropTypes.func.isRequired,
+  saveZoneValue: PropTypes.func.isRequired,
+  saveClusterValue: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({

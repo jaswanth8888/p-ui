@@ -1,4 +1,4 @@
-import { Table } from "@material-ui/core"
+import { Table, Typography } from "@material-ui/core"
 import Paper from "@material-ui/core/Paper"
 import TableCell from "@material-ui/core/TableCell"
 import TableContainer from "@material-ui/core/TableContainer"
@@ -7,11 +7,11 @@ import TableRow from "@material-ui/core/TableRow"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 // eslint-disable-next-line no-unused-vars
-import { TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import Alert from "@material-ui/lab/Alert"
 import IconButton from "@material-ui/core/IconButton"
 import CloseIcon from "@material-ui/icons/Close"
+import PropTypes from "prop-types"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 import {
   getProductDetails,
@@ -24,7 +24,6 @@ class CancelProductPromotion extends Component {
 
     this.state = {
       date: new Date().toISOString().slice(0, 10),
-      details: {},
       levelOption: "zone",
       cancelStatus: 1,
     }
@@ -33,24 +32,29 @@ class CancelProductPromotion extends Component {
   }
 
   componentWillMount() {
-    this.props.getProductDetails(this.props.productName)
+    const { getProductDetails: getProductDetailsAlt, productName } = this.props
+    getProductDetailsAlt(productName)
   }
 
   handleSubmit() {
-    this.state.details = {
-      zoneName: this.props.zone,
-      date: this.state.date,
+    const {
+      cancelPromotion: cancelPromotionAlt,
+      zone,
+      productName,
+    } = this.props
+    const { date, levelOption } = this.state
+    const details = {
+      zoneName: zone,
+      date,
     }
-    this.props.cancelPromotion(
-      this.state.details,
-      this.props.productName,
-      this.state.levelOption
-    )
+    cancelPromotionAlt(details, productName, levelOption)
     this.setState({ cancelStatus: 0 })
   }
 
   render() {
-    const zoneData = this.props.productDetails.assignProduct
+    const { productDetails } = this.props
+    const { cancelStatus } = this.state
+    const zoneData = productDetails.assignProduct
     const tableRowElm = (zone) => {
       return zone.promotions.map(
         (promotion) =>
@@ -63,7 +67,7 @@ class CancelProductPromotion extends Component {
               </TableCell>
               <TableCell>
                 <Typography variant="subtitle1" gutterBottom>
-                  {this.props.productDetails.effectivePrice}
+                  {productDetails.effectivePrice}
                 </Typography>
               </TableCell>
               <TableCell>
@@ -86,7 +90,7 @@ class CancelProductPromotion extends Component {
         <div className="joint-form-large-table">
           <div className="form-center">
             <div className="flex-grid">
-              {this.props.productDetails.assignProduct.length <= 0 && (
+              {productDetails.assignProduct.length <= 0 && (
                 <div>
                   <Alert
                     severity="info"
@@ -101,14 +105,14 @@ class CancelProductPromotion extends Component {
                     }
                   >
                     Sorry No Promotions are applied on this Product:{" "}
-                    {this.props.productDetails.productName}
+                    {productDetails.productName}
                   </Alert>
                 </div>
               )}
               <br />
               <ProductDetailsTable />
               <br />
-              {this.state.cancelStatus ? (
+              {cancelStatus ? (
                 <>
                   <Typography className="card-header" variant="h5">
                     Promotions
@@ -156,6 +160,13 @@ class CancelProductPromotion extends Component {
   }
 }
 
+CancelProductPromotion.propTypes = {
+  zone: PropTypes.string.isRequired,
+  productDetails: PropTypes.shape.isRequired,
+  productName: PropTypes.string.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
+  cancelPromotion: PropTypes.func.isRequired,
+}
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,

@@ -61,6 +61,8 @@ export const login = (loginDetails) => async (dispatch) => {
           success: false,
           errorMsg: i18n.t("login.invalidCredentials"),
         },
+        msg: i18n.t("login.invalidCredentials"),
+        msgSeverity: "error",
       })
     })
 }
@@ -117,10 +119,10 @@ export const postCluster = (cluster, zone) => async (dispatch) => {
     })
     .catch((err) => {
       const { response } = err
-      if (response.status === 400) {
+      if (response.status === 404) {
         dispatch({
           type: CREATE_CLUSTER,
-          msg: "Sorry Cluster already exists",
+          msg: response.data.message,
           msgSeverity: "error",
         })
       } else if (response.status === 403) {
@@ -679,7 +681,6 @@ export const getPromotionsIncluster = (
 }
 
 export const saveStartDate = (start) => (dispatch) => {
-  console.log(start)
   dispatch({ type: STARTDATE_SAVE_VALUE, startDate: start })
 }
 

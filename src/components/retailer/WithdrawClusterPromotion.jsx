@@ -1,4 +1,4 @@
-import { TextField, Typography, Paper } from "@material-ui/core"
+import { Typography, Paper } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import React, { Component } from "react"
 import { connect } from "react-redux"
@@ -7,8 +7,8 @@ import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import Table from "@material-ui/core/Table"
+import PropTypes from "prop-types"
 import {
-  getProductDetails,
   getPromotionsIncluster,
   withdrawPromotion,
 } from "../../redux/actions/RetailerActions"
@@ -20,38 +20,43 @@ class WithdrawClusterPromotion extends Component {
 
     this.state = {
       date: new Date().toISOString().slice(0, 10),
-      details: {},
       levelOption: "cluster",
     }
   }
 
   componentWillMount() {
-    this.props.getPromotionsIncluster(
-      this.props.productName,
-      this.props.zone,
-      this.props.cluster
-    )
+    const {
+      productName,
+      zone,
+      cluster,
+      getPromotionsIncluster: getPromotionsInclusterAlt,
+    } = this.props
+    getPromotionsInclusterAlt(productName, zone, cluster)
   }
 
   handleSubmit = (e, promoId) => {
-    this.state.details = {
-      zoneName: this.props.zone,
-      date: this.state.date,
-      clusterName: this.props.cluster,
+    const {
+      productName,
+      zone,
+      cluster,
+      withdrawPromotion: withdrawPromotionAlt,
+      history,
+    } = this.props
+    const { levelOption, date } = this.state
+    const details = {
+      zoneName: zone,
+      date,
+      clusterName: cluster,
     }
-    this.props.withdrawPromotion(
-      this.state.details,
-      this.props.productName,
-      this.state.levelOption,
-      promoId
-    )
-    this.props.history.push("/withdraw/clusterproduct")
+    withdrawPromotionAlt(details, productName, levelOption, promoId)
+    history.push("/withdraw/clusterproduct")
     document
       .getElementById("withdraw-tbody")
       .removeChild(document.getElementById(`row${promoId}`))
   }
 
   render() {
+    const { clusterPromotions, productDetails } = this.props
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
@@ -75,7 +80,7 @@ class WithdrawClusterPromotion extends Component {
                     </TableRow>
                   </TableHead>
                   <tbody id="withdraw-tbody">
-                    {this.props.clusterPromotions.map(
+                    {clusterPromotions.map(
                       (promotion) =>
                         promotion.withDrawnDate === null && (
                           <TableRow id={`row${promotion.promotionId}`}>
@@ -86,7 +91,7 @@ class WithdrawClusterPromotion extends Component {
                             </TableCell>
                             <TableCell>
                               <Typography variant="subtitle1" gutterBottom>
-                                {this.props.productDetails.effectivePrice}
+                                {productDetails.effectivePrice}
                               </Typography>
                             </TableCell>
                             <TableCell>
@@ -142,6 +147,18 @@ class WithdrawClusterPromotion extends Component {
   }
 }
 
+WithdrawClusterPromotion.propTypes = {
+  productDetails: PropTypes.shape.isRequired,
+  productName: PropTypes.string.isRequired,
+  zone: PropTypes.string.isRequired,
+  cluster: PropTypes.string.isRequired,
+  clusterPromotions: PropTypes.shape.isRequired,
+  history: PropTypes.shape.isRequired,
+
+  withdrawPromotion: PropTypes.func.isRequired,
+  getPromotionsIncluster: PropTypes.func.isRequired,
+}
+
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
@@ -151,7 +168,6 @@ const stateAsProps = (store) => ({
 })
 
 const actionAsProps = {
-  getProductDetails,
   withdrawPromotion,
   getPromotionsIncluster,
 }

@@ -28,36 +28,46 @@ class AddProductToStore extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChangeZone = this.handleChangeZone.bind(this)
     this.handleChangeCluster = this.handleChangeCluster.bind(this)
     this.handleChangeStore = this.handleChangeStore.bind(this)
   }
 
   componentDidMount() {
-    this.props.getAllZones()
+    const { getAllZones: getAllZonesAlt } = this.props
+    getAllZonesAlt()
   }
 
   handleSubmitHistory = () => {
-    this.props.history.push("/store")
+    const { history } = this.props
+    history.push("/store")
   }
 
   handleChangeStore(e) {
     this.setState({ store: e.target.value })
-    // this.props.setState({store:this.state.store})
-    this.props.saveStoreValue(e.target.value)
+    const { saveStoreValue: saveStoreValueAlt } = this.props
+    saveStoreValueAlt(e.target.value)
   }
 
   handleChangeCluster(e) {
     this.setState({ cluster: e.target.value })
-    this.props.getAllStores(this.props.zone, e.target.value)
-    this.props.saveClusterValue(e.target.value)
+    const {
+      getAllStores: getAllStoresAlt,
+      saveClusterValue: saveClusterValueAlt,
+      zone,
+    } = this.props
+    getAllStoresAlt(zone, e.target.value)
+    saveClusterValueAlt(e.target.value)
   }
 
   handleChangeZone(e) {
     this.setState({ zone: e.target.value })
-    this.props.getAllClusters(e.target.value)
-    this.props.saveZoneValue(e.target.value)
+    const {
+      getAllClusters: getAllClustersAlt,
+      saveZoneValue: saveZoneValueAlt,
+    } = this.props
+    getAllClustersAlt(e.target.value)
+    saveZoneValueAlt(e.target.value)
   }
 
   handleChange(e) {
@@ -120,8 +130,8 @@ class AddProductToStore extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {zones.map((zone, index) => {
-                    return <option value={zone}>{zone}</option>
+                  {zones.map((zoneVal) => {
+                    return <option value={zoneVal}>{zoneVal}</option>
                   })}
                 </Select>
               </FormControl>
@@ -145,8 +155,8 @@ class AddProductToStore extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {clusters.map((cluster, index) => {
-                    return <option value={cluster}>{cluster}</option>
+                  {clusters.map((clusterVal) => {
+                    return <option value={clusterVal}>{clusterVal}</option>
                   })}
                 </Select>
               </FormControl>
@@ -170,8 +180,8 @@ class AddProductToStore extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {stores.map((store) => {
-                    return <option value={store}>{store}</option>
+                  {stores.map((storeVal) => {
+                    return <option value={storeVal}>{storeVal}</option>
                   })}
                 </Select>
               </FormControl>
@@ -253,9 +263,14 @@ AddProductToStore.propTypes = {
   zones: PropTypes.shape.isRequired,
   clusters: PropTypes.shape.isRequired,
   zone: PropTypes.string.isRequired,
-  cluster: PropTypes.string.isRequired,
-  store: PropTypes.string.isRequired,
   stores: PropTypes.shape.isRequired,
+  getAllStores: PropTypes.func.isRequired,
+  getAllClusters: PropTypes.func.isRequired,
+  getAllZones: PropTypes.func.isRequired,
+  saveZoneValue: PropTypes.func.isRequired,
+  saveClusterValue: PropTypes.func.isRequired,
+  saveStoreValue: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({

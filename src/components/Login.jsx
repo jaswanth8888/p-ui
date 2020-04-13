@@ -1,4 +1,4 @@
-import { TextField, Typography } from "@material-ui/core"
+import { TextField } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import InputAdornment from "@material-ui/core/InputAdornment"
 import Lock from "@material-ui/icons/Lock"
@@ -9,12 +9,7 @@ import md5 from "md5"
 import React, { Component } from "react"
 import { withTranslation } from "react-i18next"
 import { connect } from "react-redux"
-import Snackbar from "@material-ui/core/Snackbar"
-import MuiAlert from "@material-ui/lab/Alert"
-import Avatar from "@material-ui/core/Avatar"
-import PageviewIcon from "@material-ui/icons/Pageview"
-import AssignmentIcon from "@material-ui/icons/Assignment"
-import { login } from "../redux/actions/RetailerActions.js"
+import { login } from "../redux/actions/RetailerActions"
 import Message from "./utils/Message"
 
 class Login extends Component {
@@ -181,19 +176,6 @@ class Login extends Component {
                 </form>
               </div>
             </div>
-            <>
-              {this.state.status === -1 ? (
-                <div>
-                  <Snackbar open="true" autoHideDuration={2000}>
-                    <MuiAlert severity="error" elevation={6} variant="filled">
-                      Zone creation failed. Please match the requirements
-                    </MuiAlert>
-                  </Snackbar>
-                </div>
-              ) : (
-                <div />
-              )}
-            </>
             <Message />
           </div>
         )}
