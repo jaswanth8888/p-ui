@@ -17,7 +17,8 @@ class ViewClusterPromotions extends Component {
     this.state = {}
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const {
       getPromotionsIncluster: getPromotionsInclusterAlt,
       productName,

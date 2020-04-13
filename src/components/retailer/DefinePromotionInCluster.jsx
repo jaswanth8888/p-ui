@@ -14,6 +14,7 @@ import ProductDetailsTable from "../utils/ProductDetailsTable"
 class DefinePromotionInCluster extends Component {
   constructor(props) {
     super(props)
+    const { zone, cluster } = this.props
 
     this.state = {
       promotionDetails: {
@@ -21,8 +22,8 @@ class DefinePromotionInCluster extends Component {
         startDate: "",
         endDate: "",
         promotionPercentage: "",
-        zoneName: this.props.zone,
-        clusterName: this.props.cluster,
+        zoneName: zone,
+        clusterName: cluster,
       },
       levelOption: "cluster",
     }

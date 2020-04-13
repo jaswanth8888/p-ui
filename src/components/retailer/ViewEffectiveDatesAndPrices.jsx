@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from "react"
 import { Table, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"

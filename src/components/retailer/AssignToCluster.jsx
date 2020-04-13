@@ -33,7 +33,8 @@ class AssignToCluster extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const { getZoneClusterNames: getZoneClusterNamesAlt } = this.props
     getZoneClusterNamesAlt()
   }

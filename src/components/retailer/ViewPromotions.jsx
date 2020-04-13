@@ -15,7 +15,8 @@ class ViewPromotions extends Component {
     this.state = {}
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const {
       getPromotionsInRange: getPromotionsInRangeAlt,
       startDate,

@@ -34,7 +34,8 @@ class WithdrawPromotionClusterForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const {
       getZones: getZonesAlt,
       getProductList: getProductListAlt,
@@ -171,6 +172,7 @@ class WithdrawPromotionClusterForm extends Component {
                   getOptionLabel={(option) => option}
                   renderInput={(params) => (
                     <TextField
+                      // eslint-disable-next-line react/jsx-props-no-spreading
                       {...params}
                       label="Product Name"
                       variant="outlined"
@@ -223,17 +225,19 @@ class WithdrawPromotionClusterForm extends Component {
                   })}
                 </Select>
               </FormControl>
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className="{classes.submit} submit-pad"
-                onClick={this.handleSubmit}
-                id="apply-promotion-cluster-submit"
-              >
-                Go
-              </Button>
+              {productName !== "" && zone !== "" && (
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit} submit-pad"
+                  onClick={this.handleSubmit}
+                  id="apply-promotion-cluster-submit"
+                >
+                  Go
+                </Button>
+              )}
             </form>
           </div>
         </div>

@@ -14,6 +14,7 @@ import ProductDetailsTable from "../utils/ProductDetailsTable"
 class DefinePromotionInZone extends Component {
   constructor(props) {
     super(props)
+    const { zone } = this.props
 
     this.state = {
       promotionDetails: {
@@ -21,7 +22,7 @@ class DefinePromotionInZone extends Component {
         startDate: "",
         endDate: "",
         promotionPercentage: "",
-        zoneName: this.props.zone,
+        zoneName: zone,
       },
       levelOption: "zone",
     }

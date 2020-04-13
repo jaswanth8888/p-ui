@@ -25,7 +25,8 @@ class ClusterForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const { history } = this.props
     history.push("/cluster")
   }

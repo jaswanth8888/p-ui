@@ -34,7 +34,8 @@ class StoreForm extends Component {
     this.handleChangeZone = this.handleChangeZone.bind(this)
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const { history } = this.props
     history.push("/store")
   }
