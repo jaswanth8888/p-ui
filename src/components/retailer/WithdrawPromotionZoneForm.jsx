@@ -157,7 +157,7 @@ class WithdrawPromotionZoneForm extends Component {
                   })}
                 </Select>
               </FormControl>
-              {this.state.productName !== "" && this.state.zone !== "" && (
+              {productName !== "" && zone !== "" && (
                 <Button
                   type="button"
                   fullWidth

@@ -13,7 +13,6 @@ import Tab from "@material-ui/core/Tab"
 import Toolbar from "@material-ui/core/Toolbar"
 import Tooltip from "@material-ui/core/Tooltip"
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney"
 import DateRangeIcon from "@material-ui/icons/DateRange"
 import EventBusyIcon from "@material-ui/icons/EventBusy"
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted"
@@ -38,7 +37,6 @@ import ClusterForm from "../retailer/ClusterForm"
 import ClusterPromotionRouter from "../retailer/ClusterPromotionRouter"
 import EffectivePriceRouter from "../retailer/EffectivePriceRouter"
 import ProductRouter from "../retailer/ProductRouter"
-import PromotionRouter from "../retailer/PromotionRouter"
 import QueryOnDateRouter from "../retailer/QueryOnDateRouter"
 import StoreForm from "../retailer/StoreForm"
 import ViewClusters from "../retailer/ViewClusters"
@@ -164,7 +162,7 @@ function FullNavbar(props) {
           </Tooltip>
         </Link>
 
-        <Link to="/selectproductname">
+        {/* <Link to="/selectproductname">
           <Tooltip title="Price on Date" placement="right">
             <ListItem button>
               <ListItemIcon>
@@ -176,7 +174,7 @@ function FullNavbar(props) {
               />
             </ListItem>
           </Tooltip>
-        </Link>
+        </Link> */}
 
         <Divider />
         <Link to="/group">
@@ -498,11 +496,11 @@ function FullNavbar(props) {
             path={["/queryondaterange", "/showproducts"]}
             component={QueryOnDateRouter}
           />
-          <Route
+          {/* <Route
             exact
             path={["/selectproductname", "/addpromotion"]}
             component={PromotionRouter}
-          />
+          /> */}
           <Route
             exact
             path="/applypromotion/zone"
