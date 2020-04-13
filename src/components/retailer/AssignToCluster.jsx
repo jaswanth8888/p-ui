@@ -1,7 +1,7 @@
 import { Select, TextField, Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import FormControl from "@material-ui/core/FormControl"
-import { Component, React } from "react"
+import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import {
@@ -80,7 +80,7 @@ class AssignToCluster extends Component {
     const { statusCode, history, zoneclusternames } = this.props
     const { zonecluster, zoneclustername, clusterDetails } = this.state
     return (
-      <>
+      <div>
         {statusCode === 200 ? (
           history.push("/view/assigned/clusters")
         ) : (
@@ -172,7 +172,7 @@ class AssignToCluster extends Component {
             <Message />
           </div>
         )}
-      </>
+      </div>
     )
   }
 }
