@@ -87,7 +87,12 @@ export default (state = initialState, action = {}) => {
     case MESSAGE_SET_NULL:
       return { ...state, msg: "", msgSeverity: "" }
     case LOGIN_FAILURE:
-      return { ...state, login_status: action.login_status }
+      return {
+        ...state,
+        login_status: action.login_status,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
     case CREATE_ZONE:
       return { ...state, msg: action.msg, msgSeverity: action.msgSeverity }
     case CREATE_CLUSTER:

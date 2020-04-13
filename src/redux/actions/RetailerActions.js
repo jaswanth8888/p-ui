@@ -61,6 +61,8 @@ export const login = (loginDetails) => async (dispatch) => {
           success: false,
           errorMsg: i18n.t("login.invalidCredentials"),
         },
+        msg: i18n.t("login.invalidCredentials"),
+        msgSeverity: "error",
       })
     })
 }
