@@ -7,6 +7,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import PropTypes from "prop-types"
 import {
   getProductList,
   saveProductValue,
@@ -25,57 +26,45 @@ class SelectProduct extends Component {
     //  this.productNameNotSelected = this.productNameNotSelected.bind(this);
   }
 
-  productNameNotSelected() {
-    console.log(this.state.productName)
-    if (this.state.productName) {
-      this.setState({ status: 1 })
-    } else {
-      this.setState({ status: -1 })
-    }
-  }
-
   componentWillMount() {
-    this.props.getProductList()
+    const { getProductList: getProductListAlt } = this.props
+    getProductListAlt()
   }
 
   handleChangeProduct = (e, value) => {
-    console.log(value)
     const productName = value
+    const {
+      saveProductValue: saveProductValueAlt,
+      getProductDetails: getProductDetailsAlt,
+    } = this.props
     this.setState({ productName })
-    console.log(this.state.productName)
-    this.props.saveProductValue(productName)
-    this.props.getProductDetails(value)
-    // this.productNameNotSelected();
-    // console.log(this.state.status);
+    saveProductValueAlt(productName)
+    getProductDetailsAlt(value)
   }
 
-  // handleSubmit(e) {
-  //     e.preventDefault();
-  //     if(this.productNameNotSelected()){
-  //         this.setState({ isSubmitted: true })
-  //     }
-  // }
-
   render() {
+    const { productName } = this.state
+    const { products } = this.props
+
     return (
       <div className="box-container">
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
               <h3 className="center-h3">Requirements</h3>
-              {this.state.productName.length === "" && (
+              {productName === "" && (
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Please provide a product name
+                    Please select a product name
                   </Typography>
                 </div>
               )}
-              {this.state.productName.length > 0 && (
+              {productName !== "" && (
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Please provide a product name
+                    Please select a product name
                   </Typography>
                 </div>
               )}
@@ -99,7 +88,7 @@ class SelectProduct extends Component {
                 <Autocomplete
                   id="product-list"
                   fullWidth
-                  options={this.props.products}
+                  options={products}
                   getOptionLabel={(option) => option}
                   renderInput={(params) => (
                     <TextField
@@ -112,7 +101,7 @@ class SelectProduct extends Component {
                   name="productName"
                 />
               </FormControl>
-              {this.state.productName === "" && <Link to="/selectproduct" />}
+              {productName === "" && <Link to="/selectproduct" />}
 
               <Link className="button-link" to="/assigntocluster">
                 <Button
@@ -143,22 +132,17 @@ class SelectProduct extends Component {
             </form>
           </div>
         </div>
-        {/* <Fragment>
-                    {(this.state.status === -1) ? (
-                    <div>
-                    <Snackbar open="true" autoHideDuration={2000}>
-                        <MuiAlert severity="error" elevation={6} variant="filled">
-                         Please select product name
-                        </MuiAlert>
-                    </Snackbar>
-                    </div>) : (<div />)
-                    }
-                </Fragment> */}
       </div>
     )
   }
 }
 
+SelectProduct.propTypes = {
+  products: PropTypes.arrayOf.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
+  saveProductValue: PropTypes.func.isRequired,
+  getProductList: PropTypes.func.isRequired,
+}
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
 })

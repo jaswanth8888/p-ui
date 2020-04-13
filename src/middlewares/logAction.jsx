@@ -2,7 +2,7 @@
 
 // A middleware function, when configured with a redux store,
 // gets called by Redux, which supplies a reference to the store
-export function logAction(store) {
+export function logAction() {
   return function (dispatch) {
     return function (action) {
       dispatch(action)

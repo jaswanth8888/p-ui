@@ -31,8 +31,8 @@ class ClusterForm extends Component {
   }
 
   componentDidMount() {
-    const { getAllZones: getAllZonesAlt } = this.props
-    getAllZonesAlt()
+    const { getZones: getZonesAlt } = this.props
+    getZonesAlt()
   }
 
   handleChange(e) {
@@ -57,7 +57,7 @@ class ClusterForm extends Component {
   }
 
   render() {
-    const { clusterName, zone, taxRate, status } = this.state
+    const { clusterName, zone, status, taxRate } = this.state
     const { zones } = this.props
     return (
       <div className="box-container">
@@ -113,12 +113,8 @@ class ClusterForm extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {zones.map((zoneOption, index) => {
-                    return (
-                      <option value={zoneOption} key={index}>
-                        {zoneOption}
-                      </option>
-                    )
+                  {zones.map((zoneVal) => {
+                    return <option value={zoneVal}>{zoneVal}</option>
                   })}
                 </Select>
               </FormControl>
@@ -186,9 +182,10 @@ class ClusterForm extends Component {
     )
   }
 }
+
 ClusterForm.propTypes = {
-  zones: PropTypes.shape.isRequired,
-  getAllZones: PropTypes.func.isRequired,
+  zones: PropTypes.arrayOf.isRequired,
+  getZones: PropTypes.func.isRequired,
   postCluster: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
 }
@@ -196,7 +193,7 @@ const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
 })
 const actionAsProps = {
-  getAllZones: getZones,
+  getZones,
   postCluster,
 }
 export default connect(stateAsProps, actionAsProps)(ClusterForm)

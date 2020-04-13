@@ -6,6 +6,7 @@ import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import {
   getProductDetails,
   resetStatusCode,
@@ -20,17 +21,18 @@ class ViewAssignedZones extends Component {
   }
 
   componentWillMount() {
-    this.props.getProductDetails(this.props.productName)
+    const { getProductDetails: getProductDetailsAlt, productName } = this.props
+    getProductDetailsAlt(productName)
   }
 
   render() {
+    const { productDetails, resetStatusCode: resetStatusCodeAlt } = this.props
     return (
       <div className="box-container-start">
-        {this.props.resetStatusCode()}
+        {resetStatusCodeAlt()}
         <div className="">
           <ProductDetails />
         </div>
-        {console.log(this.props.productDetails)}
 
         <TableContainer component={Paper}>
           <Table aria-label="a dense table">
@@ -43,7 +45,7 @@ class ViewAssignedZones extends Component {
               </TableRow>
             </TableHead>
             <tbody>
-              {this.props.productDetails.assignProduct.map((zone) => {
+              {productDetails.assignProduct.map((zone) => {
                 return (
                   <TableRow>
                     <TableCell>
@@ -75,6 +77,13 @@ class ViewAssignedZones extends Component {
       </div>
     )
   }
+}
+
+ViewAssignedZones.propTypes = {
+  resetStatusCode: PropTypes.func.isRequired,
+  productDetails: PropTypes.shape.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
+  productName: PropTypes.string.isRequired,
 }
 
 const stateAsProps = (store) => ({
