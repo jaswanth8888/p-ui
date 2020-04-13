@@ -26,7 +26,7 @@ class Message extends Component {
           <Snackbar
             open="true"
             onClose={this.closeAlert}
-            autoHideDuration={6000}
+            autoHideDuration={4000}
             anchorOrigin={{ vertical: "top", horizontal: "right" }}
           >
             <MuiAlert
