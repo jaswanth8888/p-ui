@@ -26,7 +26,8 @@ class SelectProduct extends Component {
     //  this.productNameNotSelected = this.productNameNotSelected.bind(this);
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const { getProductList: getProductListAlt } = this.props
     getProductListAlt()
   }
@@ -92,6 +93,7 @@ class SelectProduct extends Component {
                   getOptionLabel={(option) => option}
                   renderInput={(params) => (
                     <TextField
+                      // eslint-disable-next-line react/jsx-props-no-spreading
                       {...params}
                       label="Product Name"
                       variant="outlined"

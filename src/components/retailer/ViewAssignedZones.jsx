@@ -20,7 +20,8 @@ class ViewAssignedZones extends Component {
     this.state = {}
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const { getProductDetails: getProductDetailsAlt, productName } = this.props
     getProductDetailsAlt(productName)
   }

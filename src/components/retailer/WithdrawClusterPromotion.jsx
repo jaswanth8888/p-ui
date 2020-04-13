@@ -24,7 +24,8 @@ class WithdrawClusterPromotion extends Component {
     }
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const {
       productName,
       zone,

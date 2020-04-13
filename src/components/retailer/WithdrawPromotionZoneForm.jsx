@@ -28,7 +28,8 @@ class WithdrawPromotionZoneForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const {
       getZones: getZonesAlt,
       getProductList: getProductListAlt,
@@ -125,6 +126,7 @@ class WithdrawPromotionZoneForm extends Component {
                   getOptionLabel={(option) => option}
                   renderInput={(params) => (
                     <TextField
+                      // eslint-disable-next-line react/jsx-props-no-spreading
                       {...params}
                       label="Product Name"
                       variant="outlined"

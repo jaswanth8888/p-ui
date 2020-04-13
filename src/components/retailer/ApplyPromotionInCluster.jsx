@@ -34,7 +34,8 @@ class ApplyPromotionInCluster extends Component {
     this.handleChangeCluster = this.handleChangeCluster.bind(this)
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const {
       getZones: getZonesAlt,
       getProductList: getProductListAlt,
@@ -167,6 +168,7 @@ class ApplyPromotionInCluster extends Component {
                   getOptionLabel={(option) => option}
                   renderInput={(params) => (
                     <TextField
+                      // eslint-disable-next-line react/jsx-props-no-spreading
                       {...params}
                       label="Product Name"
                       variant="outlined"

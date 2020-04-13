@@ -30,7 +30,8 @@ class ApplyPromotionInZone extends Component {
     this.handleChangeZone = this.handleChangeZone.bind(this)
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const {
       getZones: getZonesAlt,
       getProductList: getProductListAlt,
@@ -131,6 +132,7 @@ class ApplyPromotionInZone extends Component {
                   getOptionLabel={(option) => option}
                   renderInput={(params) => (
                     <TextField
+                      // eslint-disable-next-line react/jsx-props-no-spreading
                       {...params}
                       label="Product Name"
                       variant="outlined"

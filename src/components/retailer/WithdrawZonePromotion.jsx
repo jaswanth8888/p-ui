@@ -28,7 +28,8 @@ class WithdrawZonePromotion extends Component {
     }
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const { productName, getProductDetails: getProductDetailsAlt } = this.props
     getProductDetailsAlt(productName)
   }

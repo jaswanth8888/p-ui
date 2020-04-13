@@ -31,7 +31,8 @@ class CancelProductPromotion extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const { getProductDetails: getProductDetailsAlt, productName } = this.props
     getProductDetailsAlt(productName)
   }
