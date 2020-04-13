@@ -38,7 +38,6 @@ import ClusterForm from "../retailer/ClusterForm"
 import ClusterPromotionRouter from "../retailer/ClusterPromotionRouter"
 import EffectivePriceRouter from "../retailer/EffectivePriceRouter"
 import ProductRouter from "../retailer/ProductRouter"
-import PromotionRouter from "../retailer/PromotionRouter"
 import QueryOnDateRouter from "../retailer/QueryOnDateRouter"
 import StoreForm from "../retailer/StoreForm"
 import ViewClusters from "../retailer/ViewClusters"
@@ -164,7 +163,7 @@ function FullNavbar(props) {
           </Tooltip>
         </Link>
 
-        <Link to="/selectproductname">
+        {/* <Link to="/selectproductname">
           <Tooltip title="Price on Date" placement="right">
             <ListItem button>
               <ListItemIcon>
@@ -176,7 +175,7 @@ function FullNavbar(props) {
               />
             </ListItem>
           </Tooltip>
-        </Link>
+        </Link> */}
 
         <Divider />
         <Link to="/group">
@@ -498,11 +497,11 @@ function FullNavbar(props) {
             path={["/queryondaterange", "/showproducts"]}
             component={QueryOnDateRouter}
           />
-          <Route
+          {/* <Route
             exact
             path={["/selectproductname", "/addpromotion"]}
             component={PromotionRouter}
-          />
+          /> */}
           <Route
             exact
             path="/applypromotion/zone"

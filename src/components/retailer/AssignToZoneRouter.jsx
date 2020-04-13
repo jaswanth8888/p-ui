@@ -5,10 +5,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom"
-import PrivateRoute from "../utils/privateRoute"
 import SelectProduct from "./SelectProduct"
 import AssignToZone from "./AssignToZone"
-import AssignToCluster from "./AssignToCluster"
 import ViewAssignedZones from "./ViewAssignedZones"
 
 export default class AssignToZoneRouter extends Component {
