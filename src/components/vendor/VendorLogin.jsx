@@ -7,14 +7,15 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import PersonIcon from "@material-ui/icons/Person"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { vendorlogin } from "../../redux/actions/VendorActions"
+import PropTypes from "prop-types"
+import { vendorLogin } from "../../redux/actions/VendorActions"
 import Message from "./Message"
 
-class VenderLogin extends Component {
+class VendorLogin extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user_crendentials: {
+      userCredentials: {
         username: "",
         password: "",
       },
@@ -31,9 +32,9 @@ class VenderLogin extends Component {
 
   isValidusername = () => {
     // console.log('entered valid username')
-    const { username } = this.state.user_crendentials
+    const { userCredentials } = this.state
     const { error } = this.state
-    if (username === "") {
+    if (userCredentials.username === "") {
       error.usernameError = true
       error.usernameErrorMsg = "please fill username"
       this.setState({ error })
@@ -46,9 +47,9 @@ class VenderLogin extends Component {
   }
 
   isValidPassword = () => {
-    const { password } = this.state.user_crendentials
+    const { userCredentials } = this.state
     const { error } = this.state
-    if (password === "") {
+    if (userCredentials.password === "") {
       error.passwordError = true
       error.passwordErrorMsg = "please fill password"
       this.setState({ error })
@@ -62,15 +63,17 @@ class VenderLogin extends Component {
 
   handleChange(e) {
     const { name, value } = e.target
-    const { user_crendentials } = this.state
-    user_crendentials[name] = value
-    this.setState({ user_crendentials })
+    const { userCredentials } = this.state
+    userCredentials[name] = value
+    this.setState({ userCredentials })
   }
 
   handleSubmit(e) {
     e.preventDefault()
+    const { userCredentials } = this.state
+    const { vendorLogin: vendorLoginAlt } = this.props
     if (this.isValidusername() && this.isValidPassword()) {
-      this.props.vendorlogin({ ...this.state.user_crendentials }) // thunk action
+      vendorLoginAlt({ ...userCredentials }) // thunk action
       if (this.isAuthenticated()) {
         window.location.href = "/vendor/home"
       }
@@ -83,10 +86,8 @@ class VenderLogin extends Component {
   }
 
   render() {
-    if (this.props.login_status.success) {
-      console.log(this.props.login_status)
-      // window.location.href = "/home"
-    }
+    const { loginStatus } = this.props
+    const { error } = this.state
     return (
       <div>
         <Grid
@@ -113,7 +114,7 @@ class VenderLogin extends Component {
                 Login
               </Typography>
               <Typography component="span" color="error" variant="h5">
-                {this.props.login_status.errorMsg}
+                {loginStatus.errorMsg}
               </Typography>
             </Box>
             <form>
@@ -122,8 +123,8 @@ class VenderLogin extends Component {
                 margin="normal"
                 required
                 fullWidth
-                error={this.state.error.usernameError}
-                helperText={this.state.error.usernameErrorMsg}
+                error={error.usernameError}
+                helperText={error.usernameErrorMsg}
                 id="username-vendor"
                 label="User Name"
                 name="username"
@@ -147,8 +148,8 @@ class VenderLogin extends Component {
                 margin="normal"
                 required
                 fullWidth
-                error={this.state.error.passwordError}
-                helperText={this.state.error.passwordErrorMsg}
+                error={error.passwordError}
+                helperText={error.passwordErrorMsg}
                 name="password"
                 label="Password"
                 type="password"
@@ -186,13 +187,19 @@ class VenderLogin extends Component {
     )
   }
 }
-const stateAsProps = function (state) {
-  if (state.login_status) {
+
+VendorLogin.propTypes = {
+  loginStatus: PropTypes.shape.isRequired,
+  vendorLogin: PropTypes.func.isRequired,
+}
+
+const stateAsProps = (store) => {
+  if ("loginStatus" in store.VendorReducer) {
     return {
-      login_status: state.login_status,
-      loggedInUser: state.loggedInUser,
+      loginStatus: store.VendorReducer.loginStatus,
     }
   }
-  return { login_status: { errorMsg: "" } }
+  return { loginStatus: { errorMsg: "" } }
 }
-export default connect(stateAsProps, { vendorlogin })(VenderLogin)
+
+export default connect(stateAsProps, { vendorLogin })(VendorLogin)

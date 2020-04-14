@@ -158,7 +158,4 @@ const stateAsProps = (store) => ({
 const actionAsProps = {
   cancelEffectivePrice,
 }
-export default connect(
-  stateAsProps,
-  actionAsProps
-)(ViewEffectiveDatesAndPrices)
+export default connect(stateAsProps, actionAsProps)(ViewEffectiveDatesAndPrices)

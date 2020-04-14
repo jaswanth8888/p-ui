@@ -19,21 +19,16 @@ class ViewZones extends Component {
 
     this.state = {
       page: 0,
-      setPage: 0,
       rowsPerPage: 10,
-      setRowsPerPage: 10,
     }
   }
 
   handleChangePage = (event, newPage) => {
     this.setState({ page: +newPage })
-    console.log(`fired handlechangepage ${this.setState.page}`)
   }
 
   handleChangeRowsPerPage = (event) => {
-    this.setState({ setPage: 0 }, () => {
-      this.setState({ rowsPerPage: +event.target.value })
-    })
+    this.setState({ rowsPerPage: +event.target.value })
   }
 
   render() {
@@ -88,6 +83,8 @@ class ViewZones extends Component {
 ViewZones.propTypes = {
   getZoneList: PropTypes.func.isRequired,
   zoneList: PropTypes.shape.isRequired,
+  root: PropTypes.shape.isRequired,
+  container: PropTypes.shape.isRequired,
 }
 const stateAsProps = (store) => ({
   zoneList: store.RetailerReducer.zoneList,

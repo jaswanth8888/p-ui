@@ -54,9 +54,8 @@ export class Registration extends Component {
   }
 
   isValidPassword = () => {
-    const { password } = this.state.vendorDetails
-    const { error } = this.state
-    if (password === "") {
+    const { vendorDetails, error } = this.state
+    if (vendorDetails.password === "") {
       error.passwordError = true
       error.passwordErrorMsg = "please fill password"
       this.setState({ error })
@@ -87,9 +86,8 @@ export class Registration extends Component {
   }
 
   isConfirmPassword = () => {
-    const { confirmPassword } = this.state.vendorDetails
-    const { error } = this.state
-    if (confirmPassword !== this.state.vendorDetails.password) {
+    const { vendorDetails, error } = this.state
+    if (vendorDetails.confirmPassword !== vendorDetails.password) {
       error.confirmPasswordError = true
       error.confirmPasswordErrorMsg =
         "Please enter a password and confirm password same"
@@ -103,9 +101,8 @@ export class Registration extends Component {
   }
 
   isValidCompanyName = () => {
-    const { companyName } = this.state.vendorDetails
-    const { error } = this.state
-    if (companyName.length < 5) {
+    const { vendorDetails, error } = this.state
+    if (vendorDetails.companyName.length < 5) {
       error.companyNameError = true
       error.companyNameErrorMsg =
         "Company name cannot be empty or should be minimum 5 characters"
@@ -119,10 +116,8 @@ export class Registration extends Component {
   }
 
   isValidCheckBox = () => {
-    const { vendorDetails } = this.state
-    const { productSold } = vendorDetails
-    const { error } = this.state
-    if (productSold.length === 0) {
+    const { vendorDetails, error } = this.state
+    if (vendorDetails.productSold.length === 0) {
       error.checkedBoxError = true
       error.checkedBoxErrorMsg = "Please select minimum 1 category to sell"
       this.setState({ error })
@@ -150,7 +145,8 @@ export class Registration extends Component {
     ) {
       delete vendorDetails.confirmPassword
       vendorDetails.password = md5(vendorDetails.password)
-      this.props.registration({ ...vendorDetails })
+      const { registration: registrationAlt } = this.props
+      registrationAlt({ ...vendorDetails })
       let { submitted } = this.state
       submitted = true
       this.setState({ submitted })
@@ -163,10 +159,14 @@ export class Registration extends Component {
     const { vendorDetails } = this.state
     const { productSold } = vendorDetails
     if (checked) {
-      productSold.push(value)
+      vendorDetails.productSold.push(value)
     } else {
-      productSold.splice(productSold.indexOf(value), 1)
+      vendorDetails.productSold.splice(
+        vendorDetails.productSold.indexOf(value),
+        1
+      )
     }
+    // eslint-disable-next-line react/no-unused-state
     this.setState({ productSold })
   }
 
@@ -313,8 +313,9 @@ export class Registration extends Component {
 }
 Registration.propTypes = {
   registerStatus: PropTypes.shape.isRequired,
+  registration: PropTypes.func.isRequired,
 }
-const stateAsProps = function (store) {
+const stateAsProps = (store) => {
   if ("registerStatus" in store.VendorReducer) {
     return {
       registerStatus: store.VendorReducer.registerStatus,
@@ -322,4 +323,5 @@ const stateAsProps = function (store) {
   }
   return { registerStatus: { errorMsg: "Registration Failed" } }
 }
+
 export default connect(stateAsProps, { registration })(Registration)

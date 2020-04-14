@@ -36,11 +36,7 @@ class DefinePromotionInCluster extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const {
-      postPromotion: postPromotionAlt,
-      productName,
-      history,
-    } = this.props
+    const { postPromotion: postPromotionAlt, productName, history } = this.props
     const { promotionDetails, levelOption } = this.state
     postPromotionAlt(promotionDetails, productName, levelOption)
     history.push("/view/promotions/cluster")

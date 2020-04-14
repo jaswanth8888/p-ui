@@ -19,9 +19,7 @@ class ViewClusters extends Component {
 
     this.state = {
       page: 0,
-      setPage: 0,
       rowsPerPage: 10,
-      setRowsPerPage: 10,
     }
   }
 
@@ -30,9 +28,7 @@ class ViewClusters extends Component {
   }
 
   handleChangeRowsPerPage = (event) => {
-    this.setState({ setPage: 0 }, () => {
-      this.setState({ rowsPerPage: +event.target.value })
-    })
+    this.setState({ rowsPerPage: +event.target.value })
   }
 
   render() {
@@ -48,7 +44,7 @@ class ViewClusters extends Component {
               <TableHead>
                 <TableRow>
                   <TableCell>Cluster Name</TableCell>
-                  <TableCell>Number of Clusters</TableCell>
+                  <TableCell>Number of Stores</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -88,6 +84,8 @@ class ViewClusters extends Component {
 ViewClusters.propTypes = {
   getClusterList: PropTypes.func.isRequired,
   clusterList: PropTypes.shape.isRequired,
+  root: PropTypes.shape.isRequired,
+  container: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({

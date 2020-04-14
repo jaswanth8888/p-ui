@@ -18,7 +18,6 @@ class AssignToCluster extends Component {
     this.state = {
       zoneclustername: "",
       zonecluster: "",
-      isSubmitted: false,
       clusterName: "",
       zoneName: "",
       clusterDetails: {},
@@ -56,9 +55,7 @@ class AssignToCluster extends Component {
     // this.state.zoneclustername=e.target.value
     // this.setState({ zoneclustername: e.target.value })
 
-    this.setState({ zoneclustername: e.target.value }, () =>
-      console.log(this.state)
-    )
+    this.setState({ zoneclustername: e.target.value })
     const names = String(e.target.value).split("/")
     this.setState({ zoneName: names[0] })
     this.setState({ clusterName: names[1] })

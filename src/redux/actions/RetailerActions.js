@@ -50,14 +50,14 @@ export const login = (loginDetails) => async (dispatch) => {
       sessionStorage.setItem("token", res.data.jwt)
       dispatch({
         type: LOGIN_USER,
-        login_status: { success: true, errorMsg: "", data: res.data },
+        loginStatus: { success: true, errorMsg: "", data: res.data },
         userInfo: loginDetails,
       })
     })
     .catch(() => {
       dispatch({
         type: LOGIN_FAILURE,
-        login_status: {
+        loginStatus: {
           success: false,
           errorMsg: i18n.t("login.invalidCredentials"),
         },
