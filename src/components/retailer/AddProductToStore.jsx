@@ -228,7 +228,7 @@ class AddProductToStore extends Component {
             </form>
           </div>
         </div>
-        <>
+        <null>
           {status === 1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
@@ -240,8 +240,8 @@ class AddProductToStore extends Component {
           ) : (
             <div />
           )}
-        </>
-        <>
+        </null>
+        <null>
           {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
@@ -253,7 +253,7 @@ class AddProductToStore extends Component {
           ) : (
             <div />
           )}
-        </>
+        </null>
       </div>
     )
   }
