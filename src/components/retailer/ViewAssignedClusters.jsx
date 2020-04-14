@@ -63,6 +63,7 @@ class ViewAssignedClusters extends Component {
           </TableRow>
         ))
       }
+      return null
     }
 
     return (
