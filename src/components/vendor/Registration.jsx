@@ -53,17 +53,82 @@ export class Registration extends Component {
     this.handleCheckedInput = this.handleCheckedInput.bind(this)
   }
 
-  handleCheckedInput(e) {
-    e.preventDefault()
-    const { checked, value } = e.target
-    const { vendorDetails } = this.state
-    const { productSold } = vendorDetails
-    if (checked) {
-      productSold.push(value)
-    } else {
-      productSold.splice(productSold.indexOf(value), 1)
+  isValidPassword = () => {
+    const { vendorDetails, error } = this.state
+    if (vendorDetails.password === "") {
+      error.passwordError = true
+      error.passwordErrorMsg = "please fill password"
+      this.setState({ error })
+      return false
     }
-    this.setState({ productSold })
+    error.passwordError = false
+    error.passwordErrorMsg = ""
+    this.setState({ error })
+
+    return true
+  }
+
+  isValidEmail = () => {
+    const { vendorDetails, error } = this.state
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if (!re.test(vendorDetails.email)) {
+      error.emailError = true
+      error.emailErrorMsg = "Please enter valid email address"
+      this.setState({ error })
+      return false
+    }
+    error.emailError = false
+    error.emailErrorMsg = ""
+    this.setState({ error })
+    return true
+  }
+
+  isConfirmPassword = () => {
+    const { vendorDetails, error } = this.state
+    if (vendorDetails.confirmPassword !== vendorDetails.password) {
+      error.confirmPasswordError = true
+      error.confirmPasswordErrorMsg =
+        "Please enter a password and confirm password same"
+      this.setState({ error })
+      return false
+    }
+    error.confirmPasswordError = false
+    error.confirmPasswordErrorMsg = ""
+    this.setState({ error })
+    return true
+  }
+
+  isValidCompanyName = () => {
+    const { vendorDetails, error } = this.state
+    if (vendorDetails.companyName.length < 5) {
+      error.companyNameError = true
+      error.companyNameErrorMsg =
+        "Company name cannot be empty or should be minimum 5 characters"
+      this.setState({ error })
+      return false
+    }
+    error.companyNameError = false
+    error.companyNameErrorMsg = ""
+    this.setState({ error })
+    return true
+  }
+
+  isValidCheckBox = () => {
+    const { vendorDetails, error } = this.state
+    if (vendorDetails.productSold.length === 0) {
+      error.checkedBoxError = true
+      error.checkedBoxErrorMsg = "Please select minimum 1 category to sell"
+      this.setState({ error })
+      return false
+    }
+    return true
+  }
+
+  handleChange(e) {
+    const { name, value } = e.target
+    const { vendorDetails } = this.state
+    vendorDetails[name] = value
+    this.setState({ vendorDetails })
   }
 
   handleSubmit(e) {
@@ -78,95 +143,25 @@ export class Registration extends Component {
     ) {
       delete vendorDetails.confirmPassword
       vendorDetails.password = md5(vendorDetails.password)
-      this.props.registration({ ...vendorDetails })
+      const { registration: registrationAlt } = this.props
+      registrationAlt({ ...vendorDetails })
       let { submitted } = this.state
       submitted = true
       this.setState({ submitted })
     }
   }
 
-  isValidPassword = () => {
-    const { password } = this.state.vendorDetails
-    const { error } = this.state
-    if (password === "") {
-      error.passwordError = true
-      error.passwordErrorMsg = "please fill password"
-      this.setState({ error })
-      return false
-    }
-    error.passwordError = false
-    error.passwordErrorMsg = ""
-    this.setState({ error })
-
-    return true
-  }
-
-  handleChange(e) {
-    const { name, value } = e.target
-    const { vendorDetails } = this.state
-    vendorDetails[name] = value
-    this.setState({ vendorDetails })
-  }
-
-  isValidEmail = () => {
-    const { email } = this.state.vendorDetails
-    const { error } = this.state
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if (!re.test(email)) {
-      error.emailError = true
-      error.emailErrorMsg = "Please enter valid email address"
-      this.setState({ error })
-      return false
-    }
-    error.emailError = false
-    error.emailErrorMsg = ""
-    this.setState({ error })
-    return true
-  }
-
-  isConfirmPassword = () => {
-    const { confirmPassword } = this.state.vendorDetails
-    const { error } = this.state
-    if (confirmPassword !== this.state.vendorDetails.password) {
-      error.confirmPasswordError = true
-      error.confirmPasswordErrorMsg =
-        "Please enter a password and confirm password same"
-      this.setState({ error })
-      return false
-    }
-    error.confirmPasswordError = false
-    error.confirmPasswordErrorMsg = ""
-    this.setState({ error })
-    return true
-  }
-
-  isValidCompanyName = () => {
-    const { companyName } = this.state.vendorDetails
-    const { error } = this.state
-    if (companyName.length < 5) {
-      error.companyNameError = true
-      error.companyNameErrorMsg =
-        "Company name cannot be empty or should be minimum 5 characters"
-      this.setState({ error })
-      return false
-    }
-    error.companyNameError = false
-    error.companyNameErrorMsg = ""
-    this.setState({ error })
-    return true
-  }
-
-  isValidCheckBox = () => {
+  handleCheckedInput(e) {
+    e.preventDefault()
+    const { checked, value } = e.target
     const { vendorDetails } = this.state
     const { productSold } = vendorDetails
-    const { error } = this.state
-    if (productSold.length === 0) {
-      error.checkedBoxError = true
-      error.checkedBoxErrorMsg = "Please select minimum 1 category to sell"
-      this.setState({ error })
-      return false
+    if (checked) {
+      vendorDetails.productSold.push(value)
+    } else {
+      vendorDetails.productSold.splice(productSold.indexOf(value), 1)
     }
-    return true
+    this.setState({ productSold })
   }
 
   render() {
@@ -316,6 +311,7 @@ export class Registration extends Component {
 }
 Registration.propTypes = {
   registerStatus: PropTypes.shape.isRequired,
+  registration: PropTypes.func.isRequired,
 }
 const stateAsProps = function (store) {
   if ("registerStatus" in store.VendorReducer) {
