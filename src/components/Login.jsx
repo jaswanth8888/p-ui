@@ -9,6 +9,7 @@ import md5 from "md5"
 import React, { Component } from "react"
 import { withTranslation } from "react-i18next"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import { login } from "../redux/actions/RetailerActions"
 import Message from "./utils/Message"
 
@@ -71,14 +72,14 @@ class Login extends Component {
     e.preventDefault()
     const u = this.isValidUsername()
     const p = this.isValidPassword()
-    const tempProps = this.props
+    const { login: loginAlt } = this.props
     if (u && p) {
       const userObject = this.state
       userObject.userCredentials.password = md5(
         userObject.userCredentials.password
       )
 
-      tempProps.login({ ...userObject.userCredentials }) // thunk action
+      loginAlt({ ...userObject.userCredentials }) // thunk action
     }
   }
 
@@ -88,17 +89,18 @@ class Login extends Component {
   }
 
   render() {
-    const { t, i18n } = this.props
+    const { t, loginStatus, history } = this.props
+    const { userCredentials, error } = this.state
     return (
       <null>
-        {this.props.login_status.success ? (
-          this.props.history.push("/group")
+        {loginStatus.success ? (
+          history.push("/group")
         ) : (
           <div className="box-container">
             <div className="joint-form">
               <div className="login-full">
                 <div>
-                  {this.state.userCredentials.password.length <= 0 ? (
+                  {userCredentials.password.length <= 0 ? (
                     <div className="help-block">
                       <Lock className="login-icon" />
                     </div>
@@ -114,8 +116,8 @@ class Login extends Component {
                     margin="normal"
                     required
                     fullWidth
-                    error={this.state.error.usernameError}
-                    helperText={this.state.error.usernameErrorMsg}
+                    error={error.usernameError}
+                    helperText={error.usernameErrorMsg}
                     id="username"
                     label={t("login.userName")}
                     name="username"
@@ -139,8 +141,8 @@ class Login extends Component {
                     margin="normal"
                     required
                     fullWidth
-                    error={this.state.error.passwordError}
-                    helperText={this.state.error.passwordErrorMsg}
+                    error={error.passwordError}
+                    helperText={error.passwordErrorMsg}
                     name="password"
                     label={t("login.password")}
                     type="password"
@@ -179,14 +181,19 @@ class Login extends Component {
     )
   }
 }
-
+Login.propTypes = {
+  loginStatus: PropTypes.shape.isRequired,
+  login: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
+  t: PropTypes.shape.isRequired,
+}
 const stateAsProps = (store) => {
-  if ("login_status" in store.RetailerReducer) {
+  if ("loginStatus" in store.RetailerReducer) {
     return {
-      login_status: store.RetailerReducer.login_status,
+      loginStatus: store.RetailerReducer.loginStatus,
     }
   }
-  return { login_status: { errorMsg: "" } }
+  return { loginStatus: { errorMsg: "" } }
 }
 
 export default connect(stateAsProps, { login })(withTranslation()(Login))
