@@ -426,6 +426,11 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
+
+  body {
+    font-size: 12px !important; 
+  }
+
   .joint-form,
   .joint-form-assign{
     display: table-row;
@@ -496,8 +501,8 @@ a {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
-  width: 150px;
-  height: 150px;
+  max-width: 200px;
+  max-height: 200px;
 }
 
 .thumbnail:hover {
