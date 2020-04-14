@@ -21,7 +21,7 @@ class Message extends Component {
   render() {
     const { msg, msgSeverity } = this.props
     return (
-      <null>
+      <>
         {msg !== "" ? (
           <Snackbar
             open="true"
@@ -38,10 +38,8 @@ class Message extends Component {
               {msg}
             </MuiAlert>
           </Snackbar>
-        ) : (
-          ""
-        )}
-      </null>
+        ) : null}
+      </>
     )
   }
 }

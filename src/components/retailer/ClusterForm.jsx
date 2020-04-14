@@ -166,7 +166,7 @@ class ClusterForm extends Component {
         </div>
         <Message />
 
-        <null>
+        <>
           {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
@@ -175,10 +175,8 @@ class ClusterForm extends Component {
                 </MuiAlert>
               </Snackbar>
             </div>
-          ) : (
-            <div />
-          )}
-        </null>
+          ) : null}
+        </>
       </div>
     )
   }
