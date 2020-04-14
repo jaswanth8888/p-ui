@@ -47,7 +47,7 @@ const initialState = {
   products: [],
   msg: "",
   msgSeverity: "",
-  login_status: {
+  loginStatus: {
     success: false,
   },
   isvendor: false,
@@ -69,7 +69,7 @@ const initialState = {
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case LOGIN_USER:
-      return { ...state, login_status: action.login_status }
+      return { ...state, loginStatus: action.loginStatus }
     case LOGOUT:
       return { ...initialState }
     case WELCOME_USER:
@@ -83,13 +83,13 @@ export default (state = initialState, action = {}) => {
     case STORE_POST_REQUEST:
       return { ...state, msg: action.msg }
     case FAILURE:
-      return { ...state, login_status: action.login_status }
+      return { ...state, loginStatus: action.loginStatus }
     case MESSAGE_SET_NULL:
       return { ...state, msg: "", msgSeverity: "" }
     case LOGIN_FAILURE:
       return {
         ...state,
-        login_status: action.login_status,
+        loginStatus: action.loginStatus,
         msg: action.msg,
         msgSeverity: action.msgSeverity,
       }

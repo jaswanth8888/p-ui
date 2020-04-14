@@ -87,9 +87,6 @@ class VenderLogin extends Component {
   render() {
     const { error } = this.state
     const { loginStatus } = this.props
-    if (loginStatus.success) {
-      console.log(loginStatus)
-    }
     return (
       <div>
         <Grid

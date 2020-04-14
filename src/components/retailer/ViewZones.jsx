@@ -19,9 +19,7 @@ class ViewZones extends Component {
 
     this.state = {
       page: 0,
-      setPage: 0,
       rowsPerPage: 10,
-      setRowsPerPage: 10,
     }
   }
 
@@ -31,9 +29,7 @@ class ViewZones extends Component {
   }
 
   handleChangeRowsPerPage = (event) => {
-    this.setState({ setPage: 0 }, () => {
-      this.setState({ rowsPerPage: +event.target.value })
-    })
+    this.setState({ rowsPerPage: +event.target.value })
   }
 
   render() {
