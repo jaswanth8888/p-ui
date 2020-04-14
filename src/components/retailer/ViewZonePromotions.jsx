@@ -9,7 +9,7 @@ import Table from "@material-ui/core/Table"
 import PropTypes from "prop-types"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
-import { viewZonePromotions } from "./../utils/constants"
+import { viewZonePromotions } from "../utils/constants"
 
 class ViewZonePromotions extends Component {
   constructor(props) {
@@ -93,11 +93,9 @@ class ViewZonePromotions extends Component {
                       <TableCell>Promotion To Date</TableCell>
                       <TableCell>Promotion Level</TableCell>
                       <TableCell>Promotion Cancelled Date</TableCell> */}
-                      {viewZonePromotions.map(
-                        (tcell) => 
-                        <TableCell>{tcell }</TableCell>
-
-                      )}
+                      {viewZonePromotions.map((tcell) => (
+                        <TableCell>{tcell}</TableCell>
+                      ))}
                     </TableRow>
                   </TableHead>
                   <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>
