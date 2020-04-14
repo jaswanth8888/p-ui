@@ -31,7 +31,7 @@ class ViewAssignedClusters extends Component {
               {zone.price > 0 ? (
                 <Typography variant="subtitle1" gutterBottom>
                   {cluster.clusterName}
-                  <br />
+
                   <Typography variant="subtitle1" gutterBottom>
                     {zone.zoneName}
                   </Typography>
@@ -63,6 +63,7 @@ class ViewAssignedClusters extends Component {
           </TableRow>
         ))
       }
+      return null
     }
 
     return (

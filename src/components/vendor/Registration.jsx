@@ -69,9 +69,12 @@ export class Registration extends Component {
   }
 
   isValidEmail = () => {
-    const { vendorDetails, error } = this.state
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if (!re.test(vendorDetails.email)) {
+    const { vendorDetails } = this.state
+    const { email } = vendorDetails
+    const { error } = this.state
+    // eslint-disable-next-line no-useless-escape
+    const re = /^(([^<>()[\]\\.,:\s@\"]+(\.[^<>()[\]\\.,:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if (!re.test(email)) {
       error.emailError = true
       error.emailErrorMsg = "Please enter valid email address"
       this.setState({ error })
@@ -164,6 +167,7 @@ export class Registration extends Component {
         1
       )
     }
+    // eslint-disable-next-line react/no-unused-state
     this.setState({ productSold })
   }
 
@@ -312,7 +316,7 @@ Registration.propTypes = {
   registerStatus: PropTypes.shape.isRequired,
   registration: PropTypes.func.isRequired,
 }
-const stateAsProps = function (store) {
+const stateAsProps = (store) => {
   if ("registerStatus" in store.VendorReducer) {
     return {
       registerStatus: store.VendorReducer.registerStatus,
@@ -320,4 +324,5 @@ const stateAsProps = function (store) {
   }
   return { registerStatus: { errorMsg: "Registration Failed" } }
 }
+
 export default connect(stateAsProps, { registration })(Registration)

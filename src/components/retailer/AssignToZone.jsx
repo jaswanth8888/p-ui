@@ -45,19 +45,21 @@ class AssignToZone extends Component {
     const dquantity = e.target.value
     const { zoneDetails } = this.state
     zoneDetails.quantityAssigned = dquantity
+    this.setState({ zoneDetails })
   }
 
   handleChangeProfitPecentage(e) {
     const dpercentage = e.target.value
     const { zoneDetails } = this.state
     zoneDetails.profitPercentage = dpercentage
+    this.setState({ zoneDetails })
   }
 
   render() {
     const { statusCode, history, zones } = this.props
     const { zoneDetails } = this.state
     return (
-      <null>
+      <>
         {statusCode === 200 ? (
           history.push("/view/assigned/zones")
         ) : (
@@ -135,7 +137,7 @@ class AssignToZone extends Component {
             <Message />
           </div>
         )}
-      </null>
+      </>
     )
   }
 }

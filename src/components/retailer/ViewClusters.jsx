@@ -44,7 +44,7 @@ class ViewClusters extends Component {
               <TableHead>
                 <TableRow>
                   <TableCell>Cluster Name</TableCell>
-                  <TableCell>Number of Clusters</TableCell>
+                  <TableCell>Number of Stores</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -84,6 +84,8 @@ class ViewClusters extends Component {
 ViewClusters.propTypes = {
   getClusterList: PropTypes.func.isRequired,
   clusterList: PropTypes.shape.isRequired,
+  root: PropTypes.shape.isRequired,
+  container: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({

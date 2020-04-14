@@ -29,6 +29,7 @@ import "react-flags-select/scss/react-flags-select.scss"
 import { useTranslation } from "react-i18next"
 import { connect } from "react-redux"
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom"
+import PropTypes from "prop-types"
 import { logout } from "../../redux/actions/RetailerActions"
 import Login from "../Login"
 import AddGroup from "../retailer/AddGroup"
@@ -347,7 +348,7 @@ function FullNavbar(props) {
           <Toolbar>
             {sessionStorage.getItem("token") &&
             sessionStorage.getItem("token").length > 10 ? (
-              <null>
+              <>
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"
@@ -391,9 +392,9 @@ function FullNavbar(props) {
                     />
                   </Link>
                 </div>
-              </null>
+              </>
             ) : (
-              <null>
+              <>
                 <StyledTab label={t("header.home")} component={Link} />
                 <ReactFlagsSelect
                   countries={["US", "FR", "DE"]}
@@ -410,7 +411,7 @@ function FullNavbar(props) {
                     sessionStorage.setItem("countryCode", countryCode)
                   }}
                 />
-              </null>
+              </>
             )}
           </Toolbar>
         </AppBar>
@@ -516,10 +517,14 @@ function FullNavbar(props) {
     </div>
   )
 }
+FullNavbar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  container: PropTypes.shape.isRequired,
+}
 
 const stateAsProps = (store) => ({
   loggedInUser: store.RetailerReducer.loggedInUser,
-  login_status: store.RetailerReducer.login_status,
+  loginStatus: store.RetailerReducer.loginStatus,
 })
 const actionsAsProps = {
   logout,
