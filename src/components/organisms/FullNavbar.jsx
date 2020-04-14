@@ -410,7 +410,7 @@ function FullNavbar(props) {
                     sessionStorage.setItem("countryCode", countryCode)
                   }}
                 />
-              </>
+              </null>
             )}
           </Toolbar>
         </AppBar>
