@@ -66,7 +66,6 @@ export class Registration extends Component {
     this.setState({ productSold })
   }
 
-
   handleSubmit(e) {
     e.preventDefault()
     const { vendorDetails } = this.state
@@ -169,8 +168,6 @@ export class Registration extends Component {
     }
     return true
   }
-
-  
 
   render() {
     const { error, vendorDetails } = this.state
