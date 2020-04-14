@@ -517,13 +517,10 @@ function FullNavbar(props) {
     </div>
   )
 }
-FullNavbar.propTypes = {
-  logout: PropTypes.func.isRequired,
-  container: PropTypes.shape.isRequired,
-}
+
 const stateAsProps = (store) => ({
   loggedInUser: store.RetailerReducer.loggedInUser,
-  login_status: store.RetailerReducer.login_status,
+  loginStatus: store.RetailerReducer.loginStatus,
 })
 const actionsAsProps = {
   logout,
