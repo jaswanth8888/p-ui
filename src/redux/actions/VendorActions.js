@@ -73,21 +73,21 @@ export const postProduct = (productDetails) => async (dispatch) => {
       })
     })
 }
-export const vendorlogin = (loginDetails) => async (dispatch) => {
+export const vendorLogin = (loginDetails) => async (dispatch) => {
   await axios
     .post(`${RETAILER_BASE_URL}/vendor/authenticate`, loginDetails)
     .then((res) => {
       sessionStorage.setItem("token", res.data.jwt)
       dispatch({
         type: VENDOR_LOGIN_USER,
-        login_status: { success: true, msg: "", data: res.data },
+        loginStatus: { success: true, msg: "", data: res.data },
         userInfo: loginDetails,
       })
     })
     .catch((res) => {
       dispatch({
         type: VENDOR_LOGIN_FAILURE,
-        login_status: { success: false },
+        loginStatus: { success: false },
         msg:
           res.response.data.message === "Access Denied"
             ? "Invalid Username/Password"

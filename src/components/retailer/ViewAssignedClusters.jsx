@@ -32,10 +32,7 @@ class ViewAssignedClusters extends Component {
                 <Typography variant="subtitle1" gutterBottom>
                   {cluster.clusterName}
                   <br />
-                  <Typography
-                    variant="subtitle1"
-                    gutterBottom
-                  >
+                  <Typography variant="subtitle1" gutterBottom>
                     {zone.zoneName}
                   </Typography>
                 </Typography>

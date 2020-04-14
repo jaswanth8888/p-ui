@@ -95,9 +95,7 @@ class Login extends Component {
           this.props.history.push("/group")
         ) : (
           <div className="box-container">
-            <div
-              className="joint-form"
-            >
+            <div className="joint-form">
               <div className="login-full">
                 <div>
                   {this.state.userCredentials.password.length <= 0 ? (

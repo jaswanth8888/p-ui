@@ -11,7 +11,7 @@ const initialState = {
   loggedInUser: null,
   msg: "",
   msgSeverity: "",
-  login_status: {
+  loginStatus: {
     success: false,
   },
   registerStatus: { registered: false },
@@ -35,7 +35,7 @@ export default (state = initialState, action = {}) => {
       }
     case VENDOR_LOGIN_USER:
       // return { ...state, loggedInUser: action.userInfo };
-      return { ...state, login_status: action.login_status }
+      return { ...state, loginStatus: action.loginStatus }
     case VENDOR_LOGOUT:
       return { ...initialState }
     case CREATE_PRODUCT:
@@ -47,7 +47,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         msg: action.msg,
         msgSeverity: action.msgSeverity,
-        login_status: action.login_status,
+        loginStatus: action.loginStatus,
       }
     default:
       return { ...state }
