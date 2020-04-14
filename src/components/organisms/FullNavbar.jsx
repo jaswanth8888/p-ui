@@ -26,6 +26,7 @@ import React from "react"
 import ReactFlagsSelect from "react-flags-select"
 import "react-flags-select/css/react-flags-select.css"
 import "react-flags-select/scss/react-flags-select.scss"
+import PropTypes from "prop-types"
 import { useTranslation } from "react-i18next"
 import { connect } from "react-redux"
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom"
@@ -516,7 +517,10 @@ function FullNavbar(props) {
     </div>
   )
 }
-
+FullNavbar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  container: PropTypes.shape.isRequired,
+}
 const stateAsProps = (store) => ({
   loggedInUser: store.RetailerReducer.loggedInUser,
   login_status: store.RetailerReducer.login_status,

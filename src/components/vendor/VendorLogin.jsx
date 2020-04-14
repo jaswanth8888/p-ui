@@ -11,7 +11,7 @@ import PropTypes from "prop-types"
 import { vendorLogin } from "../../redux/actions/VendorActions"
 import Message from "./Message"
 
-class VenderLogin extends Component {
+class VendorLogin extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -31,9 +31,10 @@ class VenderLogin extends Component {
   }
 
   isValidusername = () => {
-    const { userCredentials, error } = this.state
-    const { username } = userCredentials
-    if (username === "") {
+    // console.log('entered valid username')
+    const { userCredentials } = this.state
+    const { error } = this.state
+    if (userCredentials.username === "") {
       error.usernameError = true
       error.usernameErrorMsg = "please fill username"
       this.setState({ error })
@@ -46,9 +47,9 @@ class VenderLogin extends Component {
   }
 
   isValidPassword = () => {
-    const { userCredentails, error } = this.state
-    const { password } = userCredentails
-    if (password === "") {
+    const { userCredentials } = this.state
+    const { error } = this.state
+    if (userCredentials.password === "") {
       error.passwordError = true
       error.passwordErrorMsg = "please fill password"
       this.setState({ error })
@@ -85,8 +86,8 @@ class VenderLogin extends Component {
   }
 
   render() {
-    const { error } = this.state
     const { loginStatus } = this.props
+    const { error } = this.state
     return (
       <div>
         <Grid
@@ -187,18 +188,18 @@ class VenderLogin extends Component {
   }
 }
 
-VenderLogin.propTypes = {
+VendorLogin.propTypes = {
   loginStatus: PropTypes.shape.isRequired,
   vendorLogin: PropTypes.func.isRequired,
 }
 
-const stateAsProps = function (state) {
-  if (state.loginStatus) {
+const stateAsProps = (store) => {
+  if ("loginStatus" in store.VendorReducer) {
     return {
-      loginStatus: state.loginStatus,
-      loggedInUser: state.loggedInUser,
+      loginStatus: store.VendorReducer.loginStatus,
     }
   }
   return { loginStatus: { errorMsg: "" } }
 }
-export default connect(stateAsProps, { vendorLogin })(VenderLogin)
+
+export default connect(stateAsProps, { vendorLogin })(VendorLogin)
