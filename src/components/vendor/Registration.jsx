@@ -26,7 +26,7 @@ export class Registration extends Component {
     super(props)
 
     this.state = {
-      vender_details: {
+      vendorDetails: {
         email: "",
         companyName: "",
         companyType: "",
@@ -56,7 +56,8 @@ export class Registration extends Component {
   handleCheckedInput(e) {
     e.preventDefault()
     const { checked, value } = e.target
-    const { productSold } = this.state.vender_details
+    const { vendorDetails } = this.state
+    const { productSold } = vendorDetails
     if (checked) {
       productSold.push(value)
     } else {
@@ -65,37 +66,28 @@ export class Registration extends Component {
     this.setState({ productSold })
   }
 
-  remove_attribute = () => {
-    this.setState({
-      vender_details: this.state.vender_details.filter(
-        (item) => item !== "confirmPassword"
-      ),
-    })
-  }
 
   handleSubmit(e) {
     e.preventDefault()
+    const { vendorDetails } = this.state
     if (
-      this.is_validEmail() &&
-      this.is_validPassword() &&
-      this.is_confirmPassword() &&
-      this.is_validCompanyName() &&
-      this.is_validCheckBox()
+      this.isValidEmail() &&
+      this.isValidPassword() &&
+      this.isConfirmPassword() &&
+      this.isValidCompanyName() &&
+      this.isValidCheckBox()
     ) {
-      delete this.state.vender_details.confirmPassword
-      const vender_details = { ...this.state.vender_details }
-      vender_details.password = md5(vender_details.password)
-      this.props.registration({ ...this.state.vender_details })
-      console.log(this.state.vender_details)
+      delete vendorDetails.confirmPassword
+      vendorDetails.password = md5(vendorDetails.password)
+      this.props.registration({ ...vendorDetails })
       let { submitted } = this.state
       submitted = true
       this.setState({ submitted })
-      console.log(submitted)
     }
   }
 
-  is_validPassword = () => {
-    const { password } = this.state.vender_details
+  isValidPassword = () => {
+    const { password } = this.state.vendorDetails
     const { error } = this.state
     if (password === "") {
       error.passwordError = true
@@ -112,13 +104,13 @@ export class Registration extends Component {
 
   handleChange(e) {
     const { name, value } = e.target
-    const { vender_details } = this.state
-    vender_details[name] = value
-    this.setState({ vender_details })
+    const { vendorDetails } = this.state
+    vendorDetails[name] = value
+    this.setState({ vendorDetails })
   }
 
-  is_validEmail = () => {
-    const { email } = this.state.vender_details
+  isValidEmail = () => {
+    const { email } = this.state.vendorDetails
     const { error } = this.state
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (!re.test(email)) {
@@ -133,10 +125,10 @@ export class Registration extends Component {
     return true
   }
 
-  is_confirmPassword = () => {
-    const { confirmPassword } = this.state.vender_details
+  isConfirmPassword = () => {
+    const { confirmPassword } = this.state.vendorDetails
     const { error } = this.state
-    if (confirmPassword !== this.state.vender_details.password) {
+    if (confirmPassword !== this.state.vendorDetails.password) {
       error.confirmPasswordError = true
       error.confirmPasswordErrorMsg =
         "Please enter a password and confirm password same"
@@ -149,8 +141,8 @@ export class Registration extends Component {
     return true
   }
 
-  is_validCompanyName = () => {
-    const { companyName } = this.state.vender_details
+  isValidCompanyName = () => {
+    const { companyName } = this.state.vendorDetails
     const { error } = this.state
     if (companyName.length < 5) {
       error.companyNameError = true
@@ -165,8 +157,9 @@ export class Registration extends Component {
     return true
   }
 
-  is_validCheckBox = () => {
-    const { productSold } = this.state.vender_details
+  isValidCheckBox = () => {
+    const { vendorDetails } = this.state
+    const { productSold } = vendorDetails
     const { error } = this.state
     if (productSold.length === 0) {
       error.checkedBoxError = true
@@ -177,9 +170,11 @@ export class Registration extends Component {
     return true
   }
 
+  
+
   render() {
-    const { error, vender_details } = this.state
-    const { register_status } = this.props
+    const { error, vendorDetails } = this.state
+    const { registerStatus } = this.props
     return (
       <>
         <Grid
@@ -205,7 +200,7 @@ export class Registration extends Component {
                 Sign Up
               </Typography>
               <Typography component="span" color="error" variant="h5">
-                {register_status.msg}
+                {registerStatus.msg}
               </Typography>
             </Box>
 
@@ -276,7 +271,7 @@ export class Registration extends Component {
                 fullWidth
                 id="companyType"
                 name="companyType"
-                value={vender_details.companyType}
+                value={vendorDetails.companyType}
                 onChange={this.handleChange}
               >
                 <MenuItem value="Alcohol">Alcohol</MenuItem>
@@ -323,14 +318,14 @@ export class Registration extends Component {
   }
 }
 Registration.propTypes = {
-  register_status: PropTypes.shape.isRequired,
+  registerStatus: PropTypes.shape.isRequired,
 }
 const stateAsProps = function (store) {
-  if ("register_status" in store.VendorReducer) {
+  if ("registerStatus" in store.VendorReducer) {
     return {
-      register_status: store.VendorReducer.register_status,
+      registerStatus: store.VendorReducer.registerStatus,
     }
   }
-  return { register_status: { errorMsg: "Registration Failed" } }
+  return { registerStatus: { errorMsg: "Registration Failed" } }
 }
 export default connect(stateAsProps, { registration })(Registration)

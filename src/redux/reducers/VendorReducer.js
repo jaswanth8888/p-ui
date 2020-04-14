@@ -14,7 +14,7 @@ const initialState = {
   login_status: {
     success: false,
   },
-  register_status: { registered: false },
+  registerStatus: { registered: false },
   product: [],
 }
 export default (state = initialState, action = {}) => {
@@ -22,14 +22,14 @@ export default (state = initialState, action = {}) => {
     case registerconstants.REGISTER_SUCCESS:
       return {
         ...state,
-        register_status: action.register_status,
+        registerStatus: action.registerStatus,
         msg: action.msg,
         msgSeverity: action.msgSeverity,
       }
     case registerconstants.REGISTER_FAILURE:
       return {
         ...state,
-        register_status: action.register_status,
+        registerStatus: action.registerStatus,
         msg: action.msg,
         msgSeverity: action.msgSeverity,
       }

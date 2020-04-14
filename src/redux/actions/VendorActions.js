@@ -29,7 +29,7 @@ export const registration = (registrationdetails) => async (dispatch) => {
         .then(() => {
           dispatch({
             type: registerconstants.REGISTER_SUCCESS,
-            register_status: { registered: true },
+            registerStatus: { registered: true },
             msg:
               "Account registered,please verify your mail by clicking on the link sent to you",
             msgSeverity: "success",
@@ -38,7 +38,7 @@ export const registration = (registrationdetails) => async (dispatch) => {
         .catch(() => {
           dispatch({
             type: registerconstants.REGISTER_FAILURE,
-            register_status: { registered: false, error: true },
+            registerStatus: { registered: false, error: true },
             msg: "something went wrong while sending mail",
             msgSeverity: "error",
           })
@@ -47,7 +47,7 @@ export const registration = (registrationdetails) => async (dispatch) => {
     .catch((res) => {
       dispatch({
         type: registerconstants.REGISTER_FAILURE,
-        register_status: { registered: false, error: true },
+        registerStatus: { registered: false, error: true },
         msg: res.response.data.message,
         msgSeverity: "error",
       })
