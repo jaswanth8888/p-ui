@@ -79,11 +79,7 @@ class WithdrawZonePromotion extends Component {
                   {promotion.endDate}
                 </Typography>
               </TableCell>
-              <TableCell
-                style={{
-                  textAlign: "center",
-                }}
-              >
+              <TableCell>
                 <Typography variant="subtitle1" gutterBottom>
                   <Button
                     type="button"

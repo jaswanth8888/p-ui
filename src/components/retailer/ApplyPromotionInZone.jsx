@@ -1,33 +1,33 @@
-import { InputLabel, TextField, Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import React, { Component } from "react";
-import Select from "@material-ui/core/Select";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { InputLabel, TextField, Typography } from "@material-ui/core"
+import Button from "@material-ui/core/Button"
+import FormControl from "@material-ui/core/FormControl"
+import CheckIcon from "@material-ui/icons/Check"
+import ClearIcon from "@material-ui/icons/Clear"
+import Autocomplete from "@material-ui/lab/Autocomplete"
+import React, { Component } from "react"
+import Select from "@material-ui/core/Select"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import PropTypes from "prop-types"
 import {
   getProductList,
   saveProductValue,
   getProductDetails,
   getZones,
   saveZoneValue,
-} from "../../redux/actions/RetailerActions";
+} from "../../redux/actions/RetailerActions"
 
 class ApplyPromotionInZone extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       productName: "",
       zone: "",
       // status: 0
-    };
-    this.handleChangeProduct = this.handleChangeProduct.bind(this);
-    this.handleChangeZone = this.handleChangeZone.bind(this);
+    }
+    this.handleChangeProduct = this.handleChangeProduct.bind(this)
+    this.handleChangeZone = this.handleChangeZone.bind(this)
   }
 
   // eslint-disable-next-line camelcase
@@ -35,32 +35,32 @@ class ApplyPromotionInZone extends Component {
     const {
       getZones: getZonesAlt,
       getProductList: getProductListAlt,
-    } = this.props;
-    getProductListAlt();
-    getZonesAlt();
+    } = this.props
+    getProductListAlt()
+    getZonesAlt()
   }
 
   handleChangeProduct = (e, value) => {
     const {
       saveProductValue: saveProductValueAlt,
       getProductDetails: getProductDetailsAlt,
-    } = this.props;
-    const productName = value;
-    this.setState({ productName });
-    saveProductValueAlt(productName);
-    getProductDetailsAlt(value);
-  };
+    } = this.props
+    const productName = value
+    this.setState({ productName })
+    saveProductValueAlt(productName)
+    getProductDetailsAlt(value)
+  }
 
   handleChangeZone(e) {
-    const { value } = e.target;
-    this.setState({ zone: value });
-    const { saveZoneValue: saveZoneValueAlt } = this.props;
-    saveZoneValueAlt(value);
+    const { value } = e.target
+    this.setState({ zone: value })
+    const { saveZoneValue: saveZoneValueAlt } = this.props
+    saveZoneValueAlt(value)
   }
 
   render() {
-    const { zones, products } = this.props;
-    const { productName, zone } = this.state;
+    const { zones, products } = this.props
+    const { productName, zone } = this.state
     return (
       <div className="box-container">
         <div className="joint-form">
@@ -151,7 +151,7 @@ class ApplyPromotionInZone extends Component {
                 >
                   <option aria-label="None" value="" />
                   {zones.map((zoneValue) => {
-                    return <option value={zoneValue}>{zoneValue}</option>;
+                    return <option value={zoneValue}>{zoneValue}</option>
                   })}
                 </Select>
               </FormControl>
@@ -175,7 +175,7 @@ class ApplyPromotionInZone extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -187,17 +187,17 @@ ApplyPromotionInZone.propTypes = {
   getProductList: PropTypes.func.isRequired,
   getZones: PropTypes.func.isRequired,
   saveZoneValue: PropTypes.func.isRequired,
-};
+}
 
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
   zones: store.RetailerReducer.zones,
-});
+})
 const actionAsProps = {
   getProductList,
   saveProductValue,
   getProductDetails,
   getZones,
   saveZoneValue,
-};
-export default connect(stateAsProps, actionAsProps)(ApplyPromotionInZone);
+}
+export default connect(stateAsProps, actionAsProps)(ApplyPromotionInZone)

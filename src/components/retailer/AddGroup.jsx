@@ -58,7 +58,7 @@ class AddGroup extends Component {
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
-              <h3 style={{ textAlign: "center" }}>Requirements</h3>
+              <h3>Requirements</h3>
               {group.groupName.length <= 0 && (
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />

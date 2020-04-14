@@ -85,64 +85,64 @@ class DefinePromotionInZone extends Component {
           <div className="store-requirement">
             <h3 className="center-h3">Requirements</h3>
             {promotionDetails.startDate.length === 0 && (
-              <div style={{ display: "flex" }}>
-                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <div>
+                <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Enter a valid Start Date
                 </Typography>
               </div>
             )}
             {promotionDetails.startDate.length !== 0 && (
-              <div style={{ display: "flex", color: "#ffc107" }}>
-                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <div>
+                <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Enter a valid Start Date
                 </Typography>
               </div>
             )}
             {promotionDetails.endDate.length === 0 && (
-              <div style={{ display: "flex" }}>
-                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <div>
+                <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Enter a valid End Date
                 </Typography>
               </div>
             )}
             {promotionDetails.endDate.length !== 0 && (
-              <div style={{ display: "flex", color: "#ffc107" }}>
-                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <div>
+                <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Enter a valid End Date
                 </Typography>
               </div>
             )}
             {promotionDetails.endDate <= promotionDetails.startDate && (
-              <div style={{ display: "flex" }}>
-                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <div>
+                <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   End Date has to be greater than Start Date
                 </Typography>
               </div>
             )}
             {promotionDetails.endDate > promotionDetails.startDate && (
-              <div style={{ display: "flex", color: "#ffc107" }}>
-                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <div>
+                <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   End Date has to be greater than Start Date
                 </Typography>
               </div>
             )}
             {promotionDetails.promotionPercentage >= 0 && (
-              <div style={{ display: "flex" }}>
-                <ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <div>
+                <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Promotion percentage has to be lesser than 0
                 </Typography>
               </div>
             )}
             {promotionDetails.promotionPercentage < 0 && (
-              <div style={{ display: "flex", color: "#ffc107" }}>
-                <CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <div>
+                <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   Promotion percentage has to be lesser than 0
                 </Typography>

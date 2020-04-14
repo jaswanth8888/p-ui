@@ -23,7 +23,7 @@ class SelectProduct extends Component {
       // status: 0
     }
     this.handleChangeProduct = this.handleChangeProduct.bind(this)
-    //  this.productNameNotSelected = this.productNameNotSelected.bind(this);
+    //  this.productNameNotSelected = this.productNameNotSelected.bind(this)
   }
 
   // eslint-disable-next-line camelcase
