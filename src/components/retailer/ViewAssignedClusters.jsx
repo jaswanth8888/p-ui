@@ -31,7 +31,7 @@ class ViewAssignedClusters extends Component {
               {zone.price > 0 ? (
                 <Typography variant="subtitle1" gutterBottom>
                   {cluster.clusterName}
-                  
+
                   <Typography variant="subtitle1" gutterBottom>
                     {zone.zoneName}
                   </Typography>

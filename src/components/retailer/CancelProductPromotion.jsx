@@ -110,15 +110,15 @@ class CancelProductPromotion extends Component {
                   </Alert>
                 </div>
               )}
-              
+
               <ProductDetailsTable />
-              
+
               {cancelStatus ? (
                 <>
                   <Typography className="card-header" variant="h5">
                     Promotions
                   </Typography>
-                  
+
                   <TableContainer component={Paper}>
                     <Table aria-label="a dense table">
                       <TableHead>
@@ -132,7 +132,7 @@ class CancelProductPromotion extends Component {
                       <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>
                     </Table>
                   </TableContainer>
-                  
+
                   <Typography variant="subtitle1" gutterBottom>
                     <Button
                       type="button"

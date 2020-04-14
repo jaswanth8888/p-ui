@@ -175,7 +175,7 @@ class DefinePromotionInZone extends Component {
                 Apply Percentage Promotion
               </Typography>
               <ProductDetailsTable />
-              
+
               <Typography className="card-header" variant="h6">
                 Selected Zone : {zone}
               </Typography>

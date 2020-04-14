@@ -58,7 +58,6 @@ class ProductDetailsTable extends Component {
             </tbody>
           </Table>
         </TableContainer>
-        
         <TableContainer component={Paper}>
           <Table aria-label="a dense table">
             <TableHead>

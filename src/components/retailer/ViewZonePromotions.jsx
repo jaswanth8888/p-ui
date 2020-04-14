@@ -76,7 +76,7 @@ class ViewZonePromotions extends Component {
           <div className="form-center">
             <div className="flex-grid">
               <ProductDetailsTable />
-              
+
               <Typography className="card-header" variant="h6">
                 Promotions in zone level
               </Typography>
