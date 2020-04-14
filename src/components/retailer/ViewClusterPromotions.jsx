@@ -9,6 +9,7 @@ import Table from "@material-ui/core/Table"
 import PropTypes from "prop-types"
 import { getPromotionsIncluster } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
+import { viewClusterPromotion } from "./../utils/constants"
 
 class ViewClusterPromotions extends Component {
   constructor(props) {
@@ -44,13 +45,18 @@ class ViewClusterPromotions extends Component {
                 <Table aria-label="a dense table">
                   <TableHead>
                     <TableRow>
-                      <TableCell>Promotion Applied Date</TableCell>
+                      {/* <TableCell>Promotion Applied Date</TableCell>
                       <TableCell>Promotion Percentage</TableCell>
                       <TableCell>Promotion Selling Price</TableCell>
                       <TableCell>Promotion From Date</TableCell>
                       <TableCell>Promotion To Date</TableCell>
                       <TableCell>Promotion Level</TableCell>
-                      <TableCell>Promotion Cancelled Date</TableCell>
+                      <TableCell>Promotion Cancelled Date</TableCell> */}
+                      {viewClusterPromotion.map(
+                        (tcell) => 
+                        <TableCell>{tcell }</TableCell>
+
+                      )}
                     </TableRow>
                   </TableHead>
                   <tbody>

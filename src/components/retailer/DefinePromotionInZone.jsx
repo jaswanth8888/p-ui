@@ -10,6 +10,7 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { postPromotion } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
+import {startdate, enddate, datecheck, promotioncheck} from "./../utils/constants"
 
 class DefinePromotionInZone extends Component {
   constructor(props) {
@@ -88,7 +89,7 @@ class DefinePromotionInZone extends Component {
               <div>
                 <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
-                  Enter a valid Start Date
+                  {startdate}
                 </Typography>
               </div>
             )}
@@ -96,7 +97,7 @@ class DefinePromotionInZone extends Component {
               <div>
                 <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
-                  Enter a valid Start Date
+                  {startdate}
                 </Typography>
               </div>
             )}
@@ -104,7 +105,7 @@ class DefinePromotionInZone extends Component {
               <div>
                 <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
-                  Enter a valid End Date
+                  {enddate}
                 </Typography>
               </div>
             )}
@@ -112,7 +113,7 @@ class DefinePromotionInZone extends Component {
               <div>
                 <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
-                  Enter a valid End Date
+                  {enddate}
                 </Typography>
               </div>
             )}
@@ -120,7 +121,7 @@ class DefinePromotionInZone extends Component {
               <div>
                 <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
-                  End Date has to be greater than Start Date
+                  {datecheck}
                 </Typography>
               </div>
             )}
@@ -128,7 +129,7 @@ class DefinePromotionInZone extends Component {
               <div>
                 <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
-                  End Date has to be greater than Start Date
+                  {datecheck}
                 </Typography>
               </div>
             )}
@@ -136,7 +137,7 @@ class DefinePromotionInZone extends Component {
               <div>
                 <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
-                  Promotion percentage has to be lesser than 0
+                  {promotioncheck}
                 </Typography>
               </div>
             )}
@@ -144,7 +145,7 @@ class DefinePromotionInZone extends Component {
               <div>
                 <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
-                  Promotion percentage has to be lesser than 0
+                  {promotioncheck}
                 </Typography>
               </div>
             )}

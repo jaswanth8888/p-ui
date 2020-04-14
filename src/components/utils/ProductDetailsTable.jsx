@@ -6,7 +6,7 @@ import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import PropTypes from "prop-types"
-
+import {productDetails} from "./constants"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
 
 class ProductDetailsTable extends Component {
@@ -69,6 +69,11 @@ class ProductDetailsTable extends Component {
                 <TableCell>Existing Quantity</TableCell>
                 <TableCell>Category</TableCell>
                 <TableCell>UOM</TableCell>
+                {/* {productDetails.map(
+                        (tcell) => 
+                        <TableCell>{ tcell }</TableCell>
+
+                      )} */}
               </TableRow>
             </TableHead>
             <tbody>
