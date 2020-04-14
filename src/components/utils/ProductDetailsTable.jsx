@@ -6,7 +6,7 @@ import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import PropTypes from "prop-types"
-import {productDetails} from "./constants"
+import { productdetails } from "./constants"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
 
 class ProductDetailsTable extends Component {

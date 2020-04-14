@@ -4,7 +4,8 @@ import MuiAlert from "@material-ui/lab/Alert"
 import Snackbar from "@material-ui/core/Snackbar"
 import PropTypes from "prop-types"
 import { messageSetNull } from "../../redux/actions/RetailerActions"
-import { autoHideDuration } from "./constants";
+import { autoHideDuration } from "./constants"
+
 class Message extends Component {
   constructor(props) {
     super(props)

@@ -10,7 +10,12 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { postPromotion } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
-import {startdate, enddate, datecheck, promotioncheck} from "./../utils/constants"
+import {
+  startdate,
+  enddate,
+  datecheck,
+  promotioncheck,
+} from "../utils/constants"
 
 class DefinePromotionInZone extends Component {
   constructor(props) {
