@@ -130,15 +130,15 @@ class WithdrawZonePromotion extends Component {
                   </Alert>
                 </div>
               )}
-              <br />
+              
               <ProductDetailsTable />
-              <br />
+              
               {productDetails.assignProduct.length > 0 ? (
                 <null>
                   <Typography className="card-header" variant="h5">
                     Promotions in Zone Level
                   </Typography>
-                  <br />
+                  
                   <TableContainer component={Paper}>
                     <Table aria-label="a dense table">
                       <TableHead>

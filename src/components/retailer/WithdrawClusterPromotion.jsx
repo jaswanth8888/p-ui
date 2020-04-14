@@ -64,7 +64,7 @@ class WithdrawClusterPromotion extends Component {
           <div className="form-center">
             <div className="flex-grid">
               <ProductDetailsTable />
-              <br />
+              
               <Typography className="card-header" variant="h6">
                 Promotions in cluster level
               </Typography>
