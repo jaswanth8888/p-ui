@@ -53,38 +53,6 @@ export class Registration extends Component {
     this.handleCheckedInput = this.handleCheckedInput.bind(this)
   }
 
-  handleCheckedInput(e) {
-    e.preventDefault()
-    const { checked, value } = e.target
-    const { vendorDetails } = this.state
-    const { productSold } = vendorDetails
-    if (checked) {
-      productSold.push(value)
-    } else {
-      productSold.splice(productSold.indexOf(value), 1)
-    }
-    this.setState({ productSold })
-  }
-
-  handleSubmit(e) {
-    e.preventDefault()
-    const { vendorDetails } = this.state
-    if (
-      this.isValidEmail() &&
-      this.isValidPassword() &&
-      this.isConfirmPassword() &&
-      this.isValidCompanyName() &&
-      this.isValidCheckBox()
-    ) {
-      delete vendorDetails.confirmPassword
-      vendorDetails.password = md5(vendorDetails.password)
-      this.props.registration({ ...vendorDetails })
-      let { submitted } = this.state
-      submitted = true
-      this.setState({ submitted })
-    }
-  }
-
   isValidPassword = () => {
     const { password } = this.state.vendorDetails
     const { error } = this.state
@@ -101,17 +69,10 @@ export class Registration extends Component {
     return true
   }
 
-  handleChange(e) {
-    const { name, value } = e.target
-    const { vendorDetails } = this.state
-    vendorDetails[name] = value
-    this.setState({ vendorDetails })
-  }
-
   isValidEmail = () => {
     const { email } = this.state.vendorDetails
     const { error } = this.state
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const re = /^(([^<>()[\]\\.,:\s@\"]+(\.[^<>()[\]\\.,:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (!re.test(email)) {
       error.emailError = true
       error.emailErrorMsg = "Please enter valid email address"
@@ -169,6 +130,45 @@ export class Registration extends Component {
     return true
   }
 
+  handleChange(e) {
+    const { name, value } = e.target
+    const { vendorDetails } = this.state
+    vendorDetails[name] = value
+    this.setState({ vendorDetails })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    const { vendorDetails } = this.state
+    if (
+      this.isValidEmail() &&
+      this.isValidPassword() &&
+      this.isConfirmPassword() &&
+      this.isValidCompanyName() &&
+      this.isValidCheckBox()
+    ) {
+      delete vendorDetails.confirmPassword
+      vendorDetails.password = md5(vendorDetails.password)
+      this.props.registration({ ...vendorDetails })
+      let { submitted } = this.state
+      submitted = true
+      this.setState({ submitted })
+    }
+  }
+
+  handleCheckedInput(e) {
+    e.preventDefault()
+    const { checked, value } = e.target
+    const { vendorDetails } = this.state
+    const { productSold } = vendorDetails
+    if (checked) {
+      productSold.push(value)
+    } else {
+      productSold.splice(productSold.indexOf(value), 1)
+    }
+    this.setState({ productSold })
+  }
+
   render() {
     const { error, vendorDetails } = this.state
     const { registerStatus } = this.props
@@ -180,15 +180,11 @@ export class Registration extends Component {
           direction="column"
           alignItems="center"
           justify="center"
-          style={{ minHeight: "100vh" }}
         >
           <Grid item xs={3}>
             <Box diasplay="flex" flexDirection="row" justifyContent="center">
               <Box p={1}>
-                <Avatar
-                  className="{classes.avatar}"
-                  style={{ color: "#3F51B5" }}
-                >
+                <Avatar className="{classes.avatar}">
                   <LockOutlinedIcon />
                 </Avatar>
               </Box>

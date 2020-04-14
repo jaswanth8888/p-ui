@@ -105,11 +105,7 @@ class WithdrawClusterPromotion extends Component {
                                 {promotion.endDate.slice(0, 10)}
                               </Typography>
                             </TableCell>
-                            <TableCell
-                              style={{
-                                textAlign: "center",
-                              }}
-                            >
+                            <TableCell>
                               <Typography variant="subtitle1" gutterBottom>
                                 <Button
                                   type="button"

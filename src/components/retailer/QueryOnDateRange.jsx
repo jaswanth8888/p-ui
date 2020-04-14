@@ -57,82 +57,66 @@ class QueryOnDateRange extends Component {
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
-              <h3 style={{ textAlign: "center" }}>Requirements</h3>
+              <h3>Requirements</h3>
               {startDate.length === 0 && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Enter a valid Start Date
                   </Typography>
                 </div>
               )}
               {startDate.length !== 0 && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Enter a valid Start Date
                   </Typography>
                 </div>
               )}
               {endDate.length === 0 && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Enter a valid End Date
                   </Typography>
                 </div>
               )}
               {endDate.length !== 0 && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Enter a valid End Date
                   </Typography>
                 </div>
               )}
               {endDate <= startDate && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     End Date has to be greater than Start Date
                   </Typography>
                 </div>
               )}
               {endDate > startDate && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     End Date has to be greater than Start Date
                   </Typography>
                 </div>
               )}
               {levelOption === "" && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select level option
                   </Typography>
                 </div>
               )}
               {levelOption !== "" && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select level option
                   </Typography>

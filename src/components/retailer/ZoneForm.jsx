@@ -59,7 +59,7 @@ class ZoneForm extends Component {
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
-              <h3 style={{ textAlign: "center" }}>Requirements</h3>
+              <h3>Requirements</h3>
               {zoneName.length <= 5 && (
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />

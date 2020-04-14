@@ -18,7 +18,7 @@ class GetProductsInDateRange extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit = () => {
@@ -40,82 +40,66 @@ class GetProductsInDateRange extends Component {
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
-              <h3 style={{ textAlign: "center" }}>Requirements</h3>
+              <h3>Requirements</h3>
               {startDate.length === 0 && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Enter a valid Start Date
                   </Typography>
                 </div>
               )}
               {startDate.length !== 0 && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Enter a valid Start Date
                   </Typography>
                 </div>
               )}
               {endDate.length === 0 && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Enter a valid End Date
                   </Typography>
                 </div>
               )}
               {endDate.length !== 0 && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Enter a valid End Date
                   </Typography>
                 </div>
               )}
               {startDate <= currentDate && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Start date has to be a future Date
                   </Typography>
                 </div>
               )}
               {startDate >= currentDate && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Start date has to be a future Date
                   </Typography>
                 </div>
               )}
               {endDate <= startDate && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     End Date has to be greater than Start Date
                   </Typography>
                 </div>
               )}
               {endDate > startDate && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     End Date has to be greater than Start Date
                   </Typography>
@@ -168,9 +152,8 @@ class GetProductsInDateRange extends Component {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  className="{classes.submit}"
+                  className="{classes.submit} submit-pad"
                   onClick={this.handleSubmit}
-                  style={{ marginTop: "30px" }}
                   id="get-prods-in-range-submit"
                 >
                   Show

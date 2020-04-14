@@ -29,14 +29,7 @@ class VenderLogin extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange(e) {
-    const { name, value } = e.target
-    const { user_crendentials } = this.state
-    user_crendentials[name] = value
-    this.setState({ user_crendentials })
-  }
-
-  is_validusername = () => {
+  isValidusername = () => {
     // console.log('entered valid username')
     const { username } = this.state.user_crendentials
     const { error } = this.state
@@ -52,7 +45,7 @@ class VenderLogin extends Component {
     return true
   }
 
-  is_validPassword = () => {
+  isValidPassword = () => {
     const { password } = this.state.user_crendentials
     const { error } = this.state
     if (password === "") {
@@ -67,9 +60,16 @@ class VenderLogin extends Component {
     return true
   }
 
+  handleChange(e) {
+    const { name, value } = e.target
+    const { user_crendentials } = this.state
+    user_crendentials[name] = value
+    this.setState({ user_crendentials })
+  }
+
   handleSubmit(e) {
     e.preventDefault()
-    if (this.is_validusername() && this.is_validPassword()) {
+    if (this.isValidusername() && this.isValidPassword()) {
       this.props.vendorlogin({ ...this.state.user_crendentials }) // thunk action
       if (this.isAuthenticated()) {
         window.location.href = "/vendor/home"
@@ -78,8 +78,8 @@ class VenderLogin extends Component {
   }
 
   isAuthenticated() {
-    const token = sessionStorage.getItem("token")
-    return token && token.length > 10
+    this.token = sessionStorage.getItem("token")
+    return this.token && this.token.length > 10
   }
 
   render() {
@@ -95,59 +95,21 @@ class VenderLogin extends Component {
           direction="column"
           alignItems="center"
           justify="center"
-          style={{ minHeight: "100vh" }}
         >
-          <Grid
-            item
-            xs={3}
-            style={{
-              border: "1px solid rgba(0,0,0,0.2)",
-              borderLeft: "5px solid #673ab7",
-              borderRadius: "4px",
-              boxShadow: "0px 10px 17px 6px rgba(0,0,0,0.24)",
-            }}
-          >
+          <Grid item xs={3}>
             <Box
               display="flex"
               flexDirection="row"
               justifyContent="center"
               alignItems="center"
-              style={{
-                fontWeight: 300,
-                BorderRadius: "4px",
-                marginLeft: "-40px",
-                position: "relative",
-              }}
               pt={4}
             >
               <Box p={1}>
-                <Avatar
-                  style={{
-                    marginLeft: "10px",
-                    padding: "30px",
-                    position: "absolute",
-                    top: "-40px",
-                    left: "-25px",
-                    right: "0px",
-                    marginRight: "auto",
-                  }}
-                >
-                  <LockOutlinedIcon
-                    color="white"
-                    style={{
-                      fontSize: "48px",
-                    }}
-                  />
+                <Avatar>
+                  <LockOutlinedIcon color="white" />
                 </Avatar>
               </Box>
-              <Typography
-                color="primary"
-                component="h1"
-                variant="h4"
-                style={{
-                  marginLeft: "20px",
-                }}
-              >
+              <Typography color="primary" component="h1" variant="h4">
                 Login
               </Typography>
               <Typography component="span" color="error" variant="h5">

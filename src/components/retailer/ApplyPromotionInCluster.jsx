@@ -1,14 +1,14 @@
-import { InputLabel, TextField, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import FormControl from "@material-ui/core/FormControl"
-import Select from "@material-ui/core/Select"
-import CheckIcon from "@material-ui/icons/Check"
-import ClearIcon from "@material-ui/icons/Clear"
-import Autocomplete from "@material-ui/lab/Autocomplete"
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import PropTypes from "prop-types"
+import { InputLabel, TextField, Typography } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   getClusters,
   getProductDetails,
@@ -17,21 +17,21 @@ import {
   saveClusterValue,
   saveProductValue,
   saveZoneValue,
-} from "../../redux/actions/RetailerActions"
+} from "../../redux/actions/RetailerActions";
 
 class ApplyPromotionInCluster extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       productName: "",
       zone: "",
       cluster: "",
       // status: 0
-    }
-    this.handleChangeProduct = this.handleChangeProduct.bind(this)
-    this.handleChangeZone = this.handleChangeZone.bind(this)
-    this.handleChangeCluster = this.handleChangeCluster.bind(this)
+    };
+    this.handleChangeProduct = this.handleChangeProduct.bind(this);
+    this.handleChangeZone = this.handleChangeZone.bind(this);
+    this.handleChangeCluster = this.handleChangeCluster.bind(this);
   }
 
   // eslint-disable-next-line camelcase
@@ -39,43 +39,43 @@ class ApplyPromotionInCluster extends Component {
     const {
       getZones: getZonesAlt,
       getProductList: getProductListAlt,
-    } = this.props
-    getProductListAlt()
-    getZonesAlt()
+    } = this.props;
+    getProductListAlt();
+    getZonesAlt();
   }
 
   handleChangeProduct = (e, value) => {
     const {
       saveProductValue: saveProductValueAlt,
       getProductDetails: getProductDetailsAlt,
-    } = this.props
-    const productName = value
-    this.setState({ productName })
-    saveProductValueAlt(productName)
-    getProductDetailsAlt(productName)
-  }
+    } = this.props;
+    const productName = value;
+    this.setState({ productName });
+    saveProductValueAlt(productName);
+    getProductDetailsAlt(productName);
+  };
 
   handleChangeZone(e) {
-    const { value } = e.target
-    this.setState({ zone: value })
+    const { value } = e.target;
+    this.setState({ zone: value });
     const {
       saveZoneValue: saveZoneValueAlt,
       getClusters: getClustersAlt,
-    } = this.props
-    getClustersAlt(e.target.value)
-    saveZoneValueAlt(value)
+    } = this.props;
+    getClustersAlt(e.target.value);
+    saveZoneValueAlt(value);
   }
 
   handleChangeCluster(e) {
-    const { value } = e.target
-    this.setState({ cluster: value })
-    const { saveClusterValue: saveClusterValueAlt } = this.props
-    saveClusterValueAlt(value)
+    const { value } = e.target;
+    this.setState({ cluster: value });
+    const { saveClusterValue: saveClusterValueAlt } = this.props;
+    saveClusterValueAlt(value);
   }
 
   render() {
-    const { productName, zone, cluster } = this.state
-    const { zones, clusters, products } = this.props
+    const { productName, zone, cluster } = this.state;
+    const { zones, clusters, products } = this.props;
 
     return (
       <div className="box-container">
@@ -85,60 +85,48 @@ class ApplyPromotionInCluster extends Component {
               <h3 className="center-h3">Requirements</h3>
 
               {productName === "" && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a product name
                   </Typography>
                 </div>
               )}
               {productName !== "" && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a product name
                   </Typography>
                 </div>
               )}
               {zone === "" && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a zone name
                   </Typography>
                 </div>
               )}
               {zone !== "" && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a zone name
                   </Typography>
                 </div>
               )}
               {cluster === "" && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a cluster name
                   </Typography>
                 </div>
               )}
               {cluster !== "" && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a cluster name
                   </Typography>
@@ -195,7 +183,7 @@ class ApplyPromotionInCluster extends Component {
                 >
                   <option aria-label="None" value="" />
                   {zones.map((zoneVal) => {
-                    return <option value={zoneVal}>{zoneVal}</option>
+                    return <option value={zoneVal}>{zoneVal}</option>;
                   })}
                 </Select>
               </FormControl>
@@ -217,7 +205,7 @@ class ApplyPromotionInCluster extends Component {
                 >
                   <option aria-label="None" value="" />
                   {clusters.map((clusterVal) => {
-                    return <option value={clusterVal}>{clusterVal}</option>
+                    return <option value={clusterVal}>{clusterVal}</option>;
                   })}
                 </Select>
               </FormControl>
@@ -241,7 +229,7 @@ class ApplyPromotionInCluster extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -256,13 +244,13 @@ ApplyPromotionInCluster.propTypes = {
   getClusters: PropTypes.func.isRequired,
   saveZoneValue: PropTypes.func.isRequired,
   saveClusterValue: PropTypes.func.isRequired,
-}
+};
 
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
   zones: store.RetailerReducer.zones,
   clusters: store.RetailerReducer.clusters,
-})
+});
 const actionAsProps = {
   getProductList,
   saveProductValue,
@@ -271,5 +259,5 @@ const actionAsProps = {
   getClusters,
   saveZoneValue,
   saveClusterValue,
-}
-export default connect(stateAsProps, actionAsProps)(ApplyPromotionInCluster)
+};
+export default connect(stateAsProps, actionAsProps)(ApplyPromotionInCluster);

@@ -97,7 +97,6 @@ class Login extends Component {
           <div className="box-container">
             <div
               className="joint-form"
-              style={{ border: "none", boxShadow: "none" }}
             >
               <div className="login-full">
                 <div>
@@ -167,9 +166,8 @@ class Login extends Component {
                     fullWidth
                     variant="contained"
                     color="primary"
-                    className="{classes.submit}"
+                    className="{classes.submit} submit-pad"
                     onClick={this.handleSubmit}
-                    style={{ marginTop: "30px" }}
                   >
                     {t("header.logIn")}
                   </Button>

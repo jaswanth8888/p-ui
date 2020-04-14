@@ -83,16 +83,7 @@ class AddProductToStore extends Component {
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
-              <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {/* {this.state.zoneName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
-                <Typography variant="subtitle2" gutterBottom>
-                  Zone has to be greater than 5 letters
-                </Typography></div>}
-              {this.state.zoneName.length > 5 &&
-                <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
-                  <Typography variant="subtitle2" gutterBottom>
-                    Zone has to be greater than 5 letters
-                </Typography></div>} */}
+              <h3>Requirements</h3>
             </div>
           </div>
           <div className="form-half">
