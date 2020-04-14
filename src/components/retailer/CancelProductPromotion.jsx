@@ -114,7 +114,7 @@ class CancelProductPromotion extends Component {
               <ProductDetailsTable />
               <br />
               {cancelStatus ? (
-                <>
+                <null>
                   <Typography className="card-header" variant="h5">
                     Promotions
                   </Typography>
@@ -149,9 +149,9 @@ class CancelProductPromotion extends Component {
                       Cancel Promotion
                     </Button>
                   </Typography>
-                </>
+                </null>
               ) : (
-                <></>
+                <null />
               )}
             </div>
           </div>

@@ -240,7 +240,7 @@ class StoreForm extends Component {
             </div>
           </div>
         </div>
-        <>
+        <null>
           {status === 1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
@@ -252,8 +252,8 @@ class StoreForm extends Component {
           ) : (
             <div />
           )}
-        </>
-        <>
+        </null>
+        <null>
           {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
@@ -265,7 +265,7 @@ class StoreForm extends Component {
           ) : (
             <div />
           )}
-        </>
+        </null>
       </div>
     )
   }

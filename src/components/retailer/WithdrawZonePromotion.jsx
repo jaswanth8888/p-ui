@@ -138,7 +138,7 @@ class WithdrawZonePromotion extends Component {
               <ProductDetailsTable />
               <br />
               {productDetails.assignProduct.length > 0 ? (
-                <>
+                <null>
                   <Typography className="card-header" variant="h5">
                     Promotions in Zone Level
                   </Typography>
@@ -159,9 +159,9 @@ class WithdrawZonePromotion extends Component {
                       </tbody>
                     </Table>
                   </TableContainer>
-                </>
+                </null>
               ) : (
-                <></>
+                <null />
               )}
             </div>
           </div>
