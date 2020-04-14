@@ -30,7 +30,7 @@ class StoreForm extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    // this.handleChangeStore = this.handleChangeStore.bind(this);
+    // this.handleChangeStore = this.handleChangeStore.bind(this)
     this.handleChangeZone = this.handleChangeZone.bind(this)
   }
 

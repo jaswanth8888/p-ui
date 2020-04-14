@@ -20,46 +20,16 @@ class ViewEffectiveDatesAndPrices extends Component {
 
   render() {
     return (
-      <div
-        className="box-container"
-        style={{ alignItems: "flex-start", marginTop: "150px" }}
-      >
+      <div className="box-container">
         <div className="center-body">
           <form className="productform">
-            <TableContainer
-              component={Paper}
-              style={{ textAlign: "center", width: "80vw" }}
-            >
+            <TableContainer component={Paper}>
               <Table aria-label="a dense table">
-                <TableHead style={{ color: "white" }}>
+                <TableHead>
                   <TableRow>
-                    <TableCell
-                      style={{
-                        color: "#FFF",
-
-                        textAlign: "center",
-                      }}
-                    >
-                      Product Name
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        color: "#FFF",
-
-                        textAlign: "center",
-                      }}
-                    >
-                      Base Price
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        color: "#FFF",
-
-                        textAlign: "center",
-                      }}
-                    >
-                      Promotions
-                    </TableCell>
+                    <TableCell>Product Name</TableCell>
+                    <TableCell>Base Price</TableCell>
+                    <TableCell>Promotions</TableCell>
                   </TableRow>
                 </TableHead>
                 <tbody>
@@ -67,90 +37,34 @@ class ViewEffectiveDatesAndPrices extends Component {
                   {this.props.products.map((product) => {
                     return (
                       <TableRow key={product.productId}>
-                        <TableCell style={{ textAlign: "center" }}>
+                        <TableCell>
                           <Typography variant="subtitle1" gutterBottom>
                             {product.productName}
                           </Typography>
                         </TableCell>
-                        <TableCell style={{ textAlign: "center" }}>
+                        <TableCell>
                           <Typography variant="subtitle1" gutterBottom>
                             {product.productBasePrice}
                           </Typography>
                         </TableCell>
-                        <TableCell style={{ textAlign: "center" }}>
+                        <TableCell>
                           <Typography variant="subtitle1" gutterBottom>
                             <Table size="small" aria-label="a dense table">
-                              <TableHead
-                                style={{
-                                  color: "white",
-                                }}
-                              >
+                              <TableHead>
                                 <TableRow>
-                                  <TableCell
-                                    style={{
-                                      color: "#FFF",
-
-                                      textAlign: "center",
-                                    }}
-                                  >
-                                    Profit Percentage
-                                  </TableCell>
-                                  <TableCell
-                                    style={{
-                                      color: "#FFF",
-
-                                      textAlign: "center",
-                                    }}
-                                  >
-                                    Zone/Cluster
-                                  </TableCell>
-                                  <TableCell
-                                    style={{
-                                      color: "#FFF",
-
-                                      textAlign: "center",
-                                    }}
-                                  >
-                                    Effective price
-                                  </TableCell>
-                                  <TableCell
-                                    style={{
-                                      color: "#FFF",
-
-                                      textAlign: "center",
-                                    }}
-                                  >
-                                    Start Date
-                                  </TableCell>
-                                  <TableCell
-                                    style={{
-                                      color: "#FFF",
-
-                                      textAlign: "center",
-                                    }}
-                                  >
-                                    End Date
-                                  </TableCell>
-                                  <TableCell
-                                    style={{
-                                      color: "#FFF",
-
-                                      textAlign: "center",
-                                    }}
-                                  >
-                                    Promotion Id
-                                  </TableCell>
+                                  <TableCell>Profit Percentage</TableCell>
+                                  <TableCell>Zone/Cluster</TableCell>
+                                  <TableCell>Effective price</TableCell>
+                                  <TableCell>Start Date</TableCell>
+                                  <TableCell>End Date</TableCell>
+                                  <TableCell>Promotion Id</TableCell>
                                 </TableRow>
                               </TableHead>
                               <tbody>
                                 {product.promotions.map((promotion) => {
                                   return (
                                     <TableRow key={promotion.promotionId}>
-                                      <TableCell
-                                        style={{
-                                          textAlign: "center",
-                                        }}
-                                      >
+                                      <TableCell>
                                         <Typography
                                           variant="subtitle1"
                                           gutterBottom
@@ -158,11 +72,7 @@ class ViewEffectiveDatesAndPrices extends Component {
                                           {promotion.profitPercentage}
                                         </Typography>
                                       </TableCell>
-                                      <TableCell
-                                        style={{
-                                          textAlign: "center",
-                                        }}
-                                      >
+                                      <TableCell>
                                         <Typography
                                           variant="subtitle1"
                                           gutterBottom
@@ -170,11 +80,7 @@ class ViewEffectiveDatesAndPrices extends Component {
                                           {promotion.zoneCluster}
                                         </Typography>
                                       </TableCell>
-                                      <TableCell
-                                        style={{
-                                          textAlign: "center",
-                                        }}
-                                      >
+                                      <TableCell>
                                         <Typography
                                           variant="subtitle1"
                                           gutterBottom
@@ -182,11 +88,7 @@ class ViewEffectiveDatesAndPrices extends Component {
                                           {promotion.effectivePrice}
                                         </Typography>
                                       </TableCell>
-                                      <TableCell
-                                        style={{
-                                          textAlign: "center",
-                                        }}
-                                      >
+                                      <TableCell>
                                         <Typography
                                           variant="subtitle1"
                                           gutterBottom
@@ -194,11 +96,7 @@ class ViewEffectiveDatesAndPrices extends Component {
                                           {promotion.startDate}
                                         </Typography>
                                       </TableCell>
-                                      <TableCell
-                                        style={{
-                                          textAlign: "center",
-                                        }}
-                                      >
+                                      <TableCell>
                                         <Typography
                                           variant="subtitle1"
                                           gutterBottom
@@ -206,11 +104,7 @@ class ViewEffectiveDatesAndPrices extends Component {
                                           {promotion.endDate}
                                         </Typography>
                                       </TableCell>
-                                      <TableCell
-                                        style={{
-                                          textAlign: "center",
-                                        }}
-                                      >
+                                      <TableCell>
                                         <Typography
                                           variant="subtitle1"
                                           gutterBottom
@@ -218,11 +112,7 @@ class ViewEffectiveDatesAndPrices extends Component {
                                           {promotion.promotionId}
                                         </Typography>
                                       </TableCell>
-                                      <TableCell
-                                        style={{
-                                          textAlign: "center",
-                                        }}
-                                      >
+                                      <TableCell>
                                         <Typography
                                           variant="subtitle1"
                                           gutterBottom
@@ -233,9 +123,6 @@ class ViewEffectiveDatesAndPrices extends Component {
                                             variant="contained"
                                             color="primary"
                                             className="{classes.submit}"
-                                            style={{
-                                              justifyContent: "center",
-                                            }}
                                             onClick={this.props.cancelEffectivePrice(
                                               product.productName,
                                               promotion.promotionId
@@ -271,4 +158,7 @@ const stateAsProps = (store) => ({
 const actionAsProps = {
   cancelEffectivePrice,
 }
-export default connect(stateAsProps, actionAsProps)(ViewEffectiveDatesAndPrices)
+export default connect(
+  stateAsProps,
+  actionAsProps
+)(ViewEffectiveDatesAndPrices)

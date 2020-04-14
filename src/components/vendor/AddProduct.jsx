@@ -98,35 +98,27 @@ class AddProduct extends Component {
           >
             <div className="validation-half">
               <div className="validations">
-                {isSubmitted && (
-                  <h3 style={{ textAlign: "center" }}>Requirements</h3>
-                )}
+                {isSubmitted && <h3>Requirements</h3>}
 
                 {isSubmitted && !productName && (
-                  <div style={{ display: "flex", color: "#ffc107" }}>
-                    <ClearIcon
-                      style={{ paddingRight: "5px", marginTop: "-2px" }}
-                    />
+                  <div>
+                    <ClearIcon className="icon-style" />
                     <Typography variant="subtitle2" gutterBottom>
                       name cannot be empty
                     </Typography>
                   </div>
                 )}
                 {isSubmitted && productBasePrice < 1 && (
-                  <div style={{ display: "flex", color: "#ffc107" }}>
-                    <CheckIcon
-                      style={{ paddingRight: "5px", marginTop: "-2px" }}
-                    />
+                  <div>
+                    <CheckIcon className="icon-style" />
                     <Typography variant="subtitle2" gutterBottom>
                       base price must be greater than 0
                     </Typography>
                   </div>
                 )}
                 {isSubmitted && initialQuantity < 1 && (
-                  <div style={{ display: "flex", color: "#ffc107" }}>
-                    <CheckIcon
-                      style={{ paddingRight: "5px", marginTop: "-2px" }}
-                    />
+                  <div>
+                    <CheckIcon className="icon-style" />
                     <Typography variant="subtitle2" gutterBottom>
                       minimum quantity should be 1
                     </Typography>
@@ -135,10 +127,8 @@ class AddProduct extends Component {
                 {isSubmitted &&
                   productCategory === "ALCOHOL_PROD" &&
                   initialQuantity > 100 && (
-                    <div style={{ display: "flex", color: "#ffc107" }}>
-                      <CheckIcon
-                        style={{ paddingRight: "5px", marginTop: "-2px" }}
-                      />
+                    <div>
+                      <CheckIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
                         maximum quantity of ALCOHOL should be 100
                       </Typography>
@@ -147,10 +137,8 @@ class AddProduct extends Component {
                 {isSubmitted &&
                   productCategory === "BABY_PROD" &&
                   initialQuantity > 500 && (
-                    <div style={{ display: "flex", color: "#ffc107" }}>
-                      <CheckIcon
-                        style={{ paddingRight: "5px", marginTop: "-2px" }}
-                      />
+                    <div>
+                      <CheckIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
                         maximum quantity of BabyProducts should be 500
                       </Typography>
@@ -349,7 +337,6 @@ class AddProduct extends Component {
                   variant="contained"
                   color="primary"
                   className="{classes.submit}"
-                  style={{ marginTop: "30px" }}
                   onClick={this.handleSubmit}
                   id="submit-prods"
                 >

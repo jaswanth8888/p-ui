@@ -159,7 +159,10 @@ export class Registration extends Component {
     if (checked) {
       vendorDetails.productSold.push(value)
     } else {
-      vendorDetails.productSold.splice(productSold.indexOf(value), 1)
+      vendorDetails.productSold.splice(
+        vendorDetails.productSold.indexOf(value),
+        1
+      )
     }
     this.setState({ productSold })
   }
@@ -175,15 +178,11 @@ export class Registration extends Component {
           direction="column"
           alignItems="center"
           justify="center"
-          style={{ minHeight: "100vh" }}
         >
           <Grid item xs={3}>
             <Box diasplay="flex" flexDirection="row" justifyContent="center">
               <Box p={1}>
-                <Avatar
-                  className="{classes.avatar}"
-                  style={{ color: "#3F51B5" }}
-                >
+                <Avatar className="{classes.avatar}">
                   <LockOutlinedIcon />
                 </Avatar>
               </Box>

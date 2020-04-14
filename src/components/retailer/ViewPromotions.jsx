@@ -29,20 +29,15 @@ class ViewPromotions extends Component {
   render() {
     const { promotions, levelOption } = this.props
     return (
-      <div
-        className="box-container"
-        style={{ alignItems: "flex-start", marginTop: "150px" }}
-      >
+      <div className="box-container">
         <div className="center-body">
           <TableContainer component={Paper}>
-            <Table aria-label="a dense table" style={{ width: "80vw" }}>
-              <TableHead style={{ color: "white" }}>
+            <Table aria-label="a dense table">
+              <TableHead>
                 <TableRow>
-                  <TableCell style={{ color: "White" }}>Product</TableCell>
-                  <TableCell style={{ color: "White" }}>
-                    Product Details
-                  </TableCell>
-                  <TableCell style={{ color: "White" }}>Promotions</TableCell>
+                  <TableCell>Product</TableCell>
+                  <TableCell>Product Details</TableCell>
+                  <TableCell>Promotions</TableCell>
                 </TableRow>
               </TableHead>
               <tbody>
@@ -88,30 +83,15 @@ class ViewPromotions extends Component {
                       <TableCell>
                         <Typography variant="subtitle1" gutterBottom>
                           <Table size="small" aria-label="a dense table">
-                            <TableHead
-                              style={{
-                                color: "white",
-                              }}
-                            >
+                            <TableHead>
                               <TableRow>
-                                <TableCell
-                                  size="small"
-                                  style={{ color: "White" }}
-                                >
+                                <TableCell size="small">
                                   Promotion Percentage
                                 </TableCell>
-                                <TableCell style={{ color: "White" }}>
-                                  Selling Price
-                                </TableCell>
-                                <TableCell style={{ color: "White" }}>
-                                  Start Date
-                                </TableCell>
-                                <TableCell style={{ color: "White" }}>
-                                  End Date
-                                </TableCell>
-                                <TableCell style={{ color: "White" }}>
-                                  Level Applied
-                                </TableCell>
+                                <TableCell>Selling Price</TableCell>
+                                <TableCell>Start Date</TableCell>
+                                <TableCell>End Date</TableCell>
+                                <TableCell>Level Applied</TableCell>
                               </TableRow>
                             </TableHead>
                             <tbody>

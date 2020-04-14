@@ -85,60 +85,48 @@ class ApplyPromotionInCluster extends Component {
               <h3 className="center-h3">Requirements</h3>
 
               {productName === "" && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a product name
                   </Typography>
                 </div>
               )}
               {productName !== "" && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a product name
                   </Typography>
                 </div>
               )}
               {zone === "" && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a zone name
                   </Typography>
                 </div>
               )}
               {zone !== "" && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a zone name
                   </Typography>
                 </div>
               )}
               {cluster === "" && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a cluster name
                   </Typography>
                 </div>
               )}
               {cluster !== "" && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+                <div>
+                  <CheckIcon />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a cluster name
                   </Typography>

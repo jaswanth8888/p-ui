@@ -34,7 +34,6 @@ class ViewAssignedClusters extends Component {
                   <br />
                   <Typography
                     variant="subtitle1"
-                    style={{ color: "grey" }}
                     gutterBottom
                   >
                     {zone.zoneName}

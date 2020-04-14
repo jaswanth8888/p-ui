@@ -347,7 +347,7 @@ function FullNavbar(props) {
           <Toolbar>
             {sessionStorage.getItem("token") &&
             sessionStorage.getItem("token").length > 10 ? (
-              <>
+              <null>
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"
@@ -391,9 +391,9 @@ function FullNavbar(props) {
                     />
                   </Link>
                 </div>
-              </>
+              </null>
             ) : (
-              <>
+              <null>
                 <StyledTab label={t("header.home")} component={Link} />
                 <ReactFlagsSelect
                   countries={["US", "FR", "DE"]}
@@ -410,7 +410,7 @@ function FullNavbar(props) {
                     sessionStorage.setItem("countryCode", countryCode)
                   }}
                 />
-              </>
+              </null>
             )}
           </Toolbar>
         </AppBar>
