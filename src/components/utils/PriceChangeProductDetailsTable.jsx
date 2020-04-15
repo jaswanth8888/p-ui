@@ -37,23 +37,25 @@ class PriceChangeProductDetailsTable extends Component {
               </TableRow>
             </TableHead>
             <tbody>
-              <TableRow>
-                <TableCell>{priceChangeProductsList.ProductId}</TableCell>
-                <TableCell>{priceChangeProductsList.productName}</TableCell>
-                <TableCell>{priceChangeProductsList.StartDate}</TableCell>
-                <TableCell>{priceChangeProductsList.EndDate}</TableCell>
-                <Button
-                  fullWidth
-                  type="button"
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                  onClick={this.handleSubmit}
-                  id="assign-cluster-submit"
-                >
-                  Cancel Price Change
-                </Button>
-              </TableRow>
+              {priceChangeProductsList.map((product) => (
+                <TableRow>
+                  <TableCell>{product.productId}</TableCell>
+                  <TableCell>{product.productName}</TableCell>
+                  <TableCell>{product.startDate}</TableCell>
+                  <TableCell>{product.endDate}</TableCell>
+                  <Button
+                    fullWidth
+                    type="button"
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit} submit-pad"
+                    onClick={this.handleSubmit}
+                    id="assign-cluster-submit"
+                  >
+                    Cancel Price Change
+                  </Button>
+                </TableRow>
+              ))}
             </tbody>
           </Table>
         </TableContainer>
