@@ -743,13 +743,13 @@ export const cancelProductEffectivePriceChange = (productName) => async (
       const { response } = err
       if (response.status === 403) {
         dispatch({
-          type: PROMOTION_POST_REQUEST,
+          type: PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
           msg: "Something went wrong ,please logout and try again",
           msgSeverity: "warning",
         })
       } else {
         dispatch({
-          type: PROMOTION_POST_REQUEST,
+          type: PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
           msg: "Something went wrong ,please  try again",
           msgSeverity: "warning",
         })
