@@ -37,6 +37,8 @@ import {
   GET_PROMOTIONS_CLUSTER,
   STARTDATE_SAVE_VALUE,
   ENDDATE_SAVE_VALUE,
+  IS_PROMOTION_APPLLIED,
+  PRODUCT_UPDATE,
 } from "./types"
 
 const TOKEN = () => {
@@ -371,6 +373,38 @@ export const getProductDetails = (productName) => async (dispatch) => {
     })
     .then((res) => {
       dispatch({ type: PRODUCT_GET_REQUEST, productDetails: res.data })
+    })
+}
+export const isPromotionApplied = (productName) => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/${productName}/product/promotion`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: IS_PROMOTION_APPLLIED, isPromotion: res.data })
+    })
+}
+export const updateProduct = (updatedProduct, productName) => async (
+  dispatch
+) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/${productName}/product`,
+      updatedProduct,
+      { headers: { Authorization: TOKEN() } }
+    )
+    .then(() => {
+      dispatch({ type: PRODUCT_UPDATE, msg: "Updated Sucessfully" })
+    })
+    .catch(() => {
+      dispatch({
+        type: FAILURE,
+        msg: "try again",
+        msgSeverity: "error",
+      })
     })
 }
 

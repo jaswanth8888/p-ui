@@ -2,6 +2,7 @@ import React, { Component } from "react"
 
 import connect from "react-redux/es/connect/connect"
 import Button from "@material-ui/core/Button"
+import { Link } from "react-router-dom"
 import { vendorlogout } from "../../redux/actions/VendorActions"
 import Message from "./Message"
 
@@ -26,16 +27,29 @@ class Home extends Component {
     if (sessionStorage.getItem("token") != null) {
       return (
         <div>
-          <Button
-            type="button"
-            variant="contained"
-            color="primary"
-            className="{classes.submit}"
-            onClick={this.handleSubmit}
-            id="add-prod-vendor"
-          >
-            addproduct
-          </Button>
+          <Link className="button-link" to="/assigntozone">
+            <Button
+              type="button"
+              variant="contained"
+              color="primary"
+              className="{classes.submit}"
+              onClick={this.handleSubmit}
+              id="add-prod-vendor"
+            >
+              addproduct
+            </Button>
+          </Link>
+          <Link to="./updateprice">
+            <Button
+              type="button"
+              variant="contained"
+              color="primary"
+              className="{classes.submit}"
+              id="update-prod-vendor"
+            >
+              Update Price/quantity
+            </Button>
+          </Link>
           <Button
             type="button"
             variant="contained"
@@ -50,7 +64,7 @@ class Home extends Component {
         </div>
       )
     }
-    window.location.href = "./vendor"
+    window.location.href = "./"
     return true
   }
 }

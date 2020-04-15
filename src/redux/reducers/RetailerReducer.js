@@ -33,6 +33,8 @@ import {
   GET_PROMOTIONS_CLUSTER,
   STARTDATE_SAVE_VALUE,
   ENDDATE_SAVE_VALUE,
+  IS_PROMOTION_APPLLIED,
+  PRODUCT_UPDATE,
 } from "../actions/types"
 
 const initialState = {
@@ -65,6 +67,8 @@ const initialState = {
   startDate: "",
   endDate: "",
   levelOption: "",
+  isPromotion: false,
+  updatedProduct: {},
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -121,6 +125,15 @@ export default (state = initialState, action = {}) => {
       return { ...state, productName: action.productName }
     case PRODUCT_GET_REQUEST:
       return { ...state, productDetails: action.productDetails }
+    case IS_PROMOTION_APPLLIED:
+      return { ...state, isPromotion: action.isPromotion }
+    case PRODUCT_UPDATE:
+      return {
+        ...state,
+        updatedProduct: action.updatedProduct,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
     case PROMOTION_POST_REQUEST:
       return {
         ...state,

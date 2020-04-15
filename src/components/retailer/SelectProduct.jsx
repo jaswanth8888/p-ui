@@ -104,7 +104,6 @@ class SelectProduct extends Component {
                 />
               </FormControl>
               {productName === "" && <Link to="/selectproduct" />}
-
               <Link className="button-link" to="/assigntocluster">
                 <Button
                   type="button"
@@ -125,10 +124,21 @@ class SelectProduct extends Component {
                   variant="contained"
                   color="primary"
                   className="{classes.submit} submit-pad"
-                  onClick={this.handleSubmit}
                   id="assign-price-zone-submit"
                 >
                   Assign Price and Zone
+                </Button>
+              </Link>
+              <Link className="button-link" to="/editprice">
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit} submit-pad"
+                  id="assign-price-zone-submit"
+                >
+                  EditItemPrice
                 </Button>
               </Link>
             </form>

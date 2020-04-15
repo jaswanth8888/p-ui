@@ -14,9 +14,8 @@
     "invalidCredentials": "Invalid username/Password"
   },
   "welcome": {
-
-    "queryOnDateRange":"Query On Date Range",
-    "priceOnDate":"Price On Date",
+    "queryOnDateRange": "Query On Date Range",
+    "priceOnDate": "Price On Date",
     "createZone": "Create Zone",
     "createCluster": "Create Cluster",
     "createStore": "Create Store",
@@ -27,7 +26,8 @@
     "assignProductToClusterZone": "Assign Price to Zone/Cluster",
     "cancelNotEffectivePriceChange": "Cancel Not Effective Price Change",
     "applyPromotionInZoneLevel": "Apply Promotion in Zone Level",
-    "applyPromotionInClusterLevel": "Apply Promotion in Cluster Level"
+    "applyPromotionInClusterLevel": "Apply Promotion in Cluster Level",
+    "editpriceandquantity": "Edit Item Price and Quantity"
   },
   "zoneForm": {
     "lengthTooShort": "Zone has to be greater than 5 letters",
