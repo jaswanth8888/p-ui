@@ -35,6 +35,7 @@ import {
   ENDDATE_SAVE_VALUE,
   PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
   PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
 } from "../actions/types"
 
 const initialState = {
@@ -181,6 +182,13 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         priceChangeProductsList: action.priceChangeProductsList,
+      }
+    case PRODUCT_CANCEL_EFFECTIVEPRICECHANGE:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
       }
     default:
       return { ...state }

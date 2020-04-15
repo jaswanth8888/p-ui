@@ -8,6 +8,8 @@ import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import Button from "@material-ui/core/Button"
 import { priceChangeProductDetailsTable } from "./constants"
+import { cancelProductEffectivePriceChange } from "../../redux/actions/RetailerActions"
+import Message from "./Message"
 
 class PriceChangeProductDetailsTable extends Component {
   constructor(props) {
@@ -17,8 +19,11 @@ class PriceChangeProductDetailsTable extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
+  handleSubmit = (productName) => {
+    const {
+      cancelProductEffectivePriceChange: cancelProductEffectivePriceChangeAlt,
+    } = this.props
+    cancelProductEffectivePriceChangeAlt(productName)
   }
 
   render() {
@@ -49,7 +54,9 @@ class PriceChangeProductDetailsTable extends Component {
                       variant="contained"
                       color="primary"
                       className="{classes.submit} submit-pad"
-                      onClick={this.handleSubmit}
+                      onClick={() => {
+                        this.handleSubmit(product.productName)
+                      }}
                       id="assign-cluster-submit"
                     >
                       Cancel Price Change
@@ -60,6 +67,7 @@ class PriceChangeProductDetailsTable extends Component {
             </tbody>
           </Table>
         </TableContainer>
+        <Message />
       </div>
     )
   }
@@ -67,12 +75,15 @@ class PriceChangeProductDetailsTable extends Component {
 
 PriceChangeProductDetailsTable.propTypes = {
   priceChangeProductsList: PropTypes.arrayOf.isRequired,
+  cancelProductEffectivePriceChange: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({
   priceChangeProductsList: store.RetailerReducer.priceChangeProductsList,
 })
-const actionsAsProps = {}
+const actionsAsProps = {
+  cancelProductEffectivePriceChange,
+}
 export default connect(
   stateAsProps,
   actionsAsProps

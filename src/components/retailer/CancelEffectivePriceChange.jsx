@@ -31,16 +31,11 @@ class CancelEffectivePriceChange extends Component {
 }
 
 CancelEffectivePriceChange.propTypes = {
-  priceChangeProductsList: PropTypes.arrayOf.isRequired,
   getEffecticePriceChangeProducts: PropTypes.func.isRequired,
 }
-
-const stateAsProps = (store) => ({
-  priceChangeProductsList: store.RetailerReducer.priceChangeProductsList,
-})
 
 const actionAsProps = {
   getEffecticePriceChangeProducts,
 }
 
-export default connect(stateAsProps, actionAsProps)(CancelEffectivePriceChange)
+export default connect(null, actionAsProps)(CancelEffectivePriceChange)
