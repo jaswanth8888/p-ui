@@ -728,7 +728,8 @@ export const cancelProductEffectivePriceChange = (productName) => async (
 ) => {
   await axios
     .put(
-      `${RETAILER_BASE_URL}/product-management/product/effectivePrice/cancel${productName}`,
+      `${RETAILER_BASE_URL}/product-management/product/effectivePrice/cancel/${productName}`,
+      {},
       {
         headers: { Authorization: TOKEN() },
       }
