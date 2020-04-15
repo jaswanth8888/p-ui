@@ -33,6 +33,8 @@ import {
   GET_PROMOTIONS_CLUSTER,
   STARTDATE_SAVE_VALUE,
   ENDDATE_SAVE_VALUE,
+  PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
 } from "../actions/types"
 
 const initialState = {
@@ -65,6 +67,7 @@ const initialState = {
   startDate: "",
   endDate: "",
   levelOption: "",
+  priceChangeProductsList: [],
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -156,6 +159,16 @@ export default (state = initialState, action = {}) => {
       return { ...state, startDate: action.startDate }
     case ENDDATE_SAVE_VALUE:
       return { ...state, endDate: action.endDate }
+    case PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST:
+      return {
+        ...state,
+        priceChangeProductsList: action.priceChangeProductsList,
+      }
+    case PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST:
+      return {
+        ...state,
+        priceChangeProductsList: action.priceChangeProductsList,
+      }
     default:
       return { ...state }
   }

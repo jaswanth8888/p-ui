@@ -37,6 +37,8 @@ import {
   GET_PROMOTIONS_CLUSTER,
   STARTDATE_SAVE_VALUE,
   ENDDATE_SAVE_VALUE,
+  PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
 } from "./types"
 
 const TOKEN = () => {
@@ -686,4 +688,30 @@ export const saveStartDate = (start) => (dispatch) => {
 
 export const saveEndDate = (end) => (dispatch) => {
   dispatch({ type: ENDDATE_SAVE_VALUE, endDate: end })
+}
+
+export const getNotEffecticePriceChangeProducts = () => async (dispatch) => {
+  await axios
+    .get(`${RETAILER_BASE_URL}/product-management/products/names`, {
+      headers: { Authorization: TOKEN() },
+    })
+    .then((res) => {
+      dispatch({
+        type: PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
+        priceChangeProductsList: res.data,
+      })
+    })
+}
+
+export const getEffecticePriceChangeProducts = () => async (dispatch) => {
+  await axios
+    .get(`${RETAILER_BASE_URL}/product-management/products/names`, {
+      headers: { Authorization: TOKEN() },
+    })
+    .then((res) => {
+      dispatch({
+        type: PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
+        priceChangeProductsList: res.data,
+      })
+    })
 }
