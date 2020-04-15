@@ -11,13 +11,13 @@ class CancelNotEffectivePriceChange extends Component {
     this.state = {}
   }
 
-  // // eslint-disable-next-line camelcase
-  // UNSAFE_componentWillMount() {
-  //   const {
-  //     getNotEffecticePriceChangeProducts: getNotEffecticePriceChangeProductsAlt,
-  //   } = this.props
-  //   getNotEffecticePriceChangeProductsAlt()
-  // }
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
+    const {
+      getNotEffecticePriceChangeProducts: getNotEffecticePriceChangeProductsAlt,
+    } = this.props
+    getNotEffecticePriceChangeProductsAlt()
+  }
 
   render() {
     return (

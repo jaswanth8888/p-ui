@@ -692,9 +692,12 @@ export const saveEndDate = (end) => (dispatch) => {
 
 export const getNotEffecticePriceChangeProducts = () => async (dispatch) => {
   await axios
-    .get(`${RETAILER_BASE_URL}/product-management/`, {
-      headers: { Authorization: TOKEN() },
-    })
+    .get(
+      `${RETAILER_BASE_URL}/product-management/product/effectivePriceNotInEffect`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
     .then((res) => {
       dispatch({
         type: PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
@@ -705,9 +708,12 @@ export const getNotEffecticePriceChangeProducts = () => async (dispatch) => {
 
 export const getEffecticePriceChangeProducts = () => async (dispatch) => {
   await axios
-    .get(`${RETAILER_BASE_URL}/product-management/`, {
-      headers: { Authorization: TOKEN() },
-    })
+    .get(
+      `${RETAILER_BASE_URL}/product-management/product/effectivePriceInEffect`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
     .then((res) => {
       dispatch({
         type: PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,

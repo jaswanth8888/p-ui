@@ -68,18 +68,18 @@ const initialState = {
   endDate: "",
   levelOption: "",
   priceChangeProductsList: [
-    {
-      productId: "1",
-      productName: "Product 1",
-      startDate: "14th Nov, 2018",
-      endDate: "6th July, 2019",
-    },
-    {
-      productId: "1",
-      productName: "Product 1",
-      startDate: "14th Nov, 2018",
-      endDate: "6th July, 2019",
-    },
+    // {
+    //   productId: "1",
+    //   productName: "Product 1",
+    //   startDate: "14th Nov, 2018",
+    //   endDate: "6th July, 2019",
+    // },
+    // {
+    //   productId: "1",
+    //   productName: "Product 1",
+    //   startDate: "14th Nov, 2018",
+    //   endDate: "6th July, 2019",
+    // },
   ],
 }
 export default (state = initialState, action = {}) => {
