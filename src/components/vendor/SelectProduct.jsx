@@ -10,9 +10,8 @@ import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 import {
   getProductList,
-  saveProductValue,
   getProductDetails,
-} from "../../redux/actions/RetailerActions"
+} from "../../redux/actions/VendorActions"
 
 class SelectProduct extends Component {
   constructor(props) {
@@ -35,11 +34,11 @@ class SelectProduct extends Component {
   handleChangeProduct = (e, value) => {
     const productName = value
     const {
-      saveProductValue: saveProductValueAlt,
+      // saveProductValue: saveProductValueAlt,
       getProductDetails: getProductDetailsAlt,
     } = this.props
     this.setState({ productName })
-    saveProductValueAlt(productName)
+    // saveProductValueAlt(productName)
     getProductDetailsAlt(value)
   }
 
@@ -104,32 +103,7 @@ class SelectProduct extends Component {
                 />
               </FormControl>
               {productName === "" && <Link to="/selectproduct" />}
-              <Link className="button-link" to="/assigntocluster">
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                  id="selprods-submit"
-                >
-                  Assign Price and Cluster
-                </Button>
-              </Link>
-
-              <Link className="button-link" to="/assigntozone">
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                  id="assign-price-zone-submit"
-                >
-                  Assign Price and Zone
-                </Button>
-              </Link>
-              {/*               <Link className="button-link" to="/editprice">
+              <Link className="button-link" to="/vendor/editproduct">
                 <Button
                   type="button"
                   fullWidth
@@ -140,7 +114,7 @@ class SelectProduct extends Component {
                 >
                   EditItemPrice
                 </Button>
-              </Link> */}
+              </Link>
             </form>
           </div>
         </div>
@@ -152,15 +126,15 @@ class SelectProduct extends Component {
 SelectProduct.propTypes = {
   products: PropTypes.arrayOf.isRequired,
   getProductDetails: PropTypes.func.isRequired,
-  saveProductValue: PropTypes.func.isRequired,
+  // saveProductValue: PropTypes.func.isRequired,
   getProductList: PropTypes.func.isRequired,
 }
 const stateAsProps = (store) => ({
-  products: store.RetailerReducer.productList,
+  products: store.VendorReducer.productList,
 })
 const actionAsProps = {
   getProductList,
-  saveProductValue,
+  // saveProductValue,
   getProductDetails,
 }
 export default connect(stateAsProps, actionAsProps)(SelectProduct)

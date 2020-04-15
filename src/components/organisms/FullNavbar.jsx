@@ -149,20 +149,6 @@ function FullNavbar(props) {
           </Tooltip>
         </Link>
 
-        <Link to="/editprice">
-          <Tooltip title="Edit  item  Price/quantity" placement="right">
-            <ListItem button>
-              <ListItemIcon>
-                <AddShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.editpriceandquantity")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-
         <Link to="/products/store">
           <Tooltip title="Add Products to Store" placement="right">
             <ListItem button>
