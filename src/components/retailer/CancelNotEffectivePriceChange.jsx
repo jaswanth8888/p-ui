@@ -36,15 +36,15 @@ CancelNotEffectivePriceChange.propTypes = {
   getNotEffecticePriceChangeProducts: PropTypes.func.isRequired,
 }
 
-const stateAsProps = (store) => ({
-  priceChangeProductsList: store.RetailerReducer.priceChangeProductsList,
-})
+// const stateAsProps = (store) => ({
+//   // priceChangeProductsList: store.RetailerReducer.priceChangeProductsList,
+// })
 
 const actionAsProps = {
   getNotEffecticePriceChangeProducts,
 }
 
 export default connect(
-  stateAsProps,
+  // stateAsProps,
   actionAsProps
 )(CancelNotEffectivePriceChange)
