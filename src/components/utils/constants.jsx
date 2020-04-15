@@ -32,6 +32,7 @@ export const productDetailsTable = [
 export const selectProduct = "Select a product name"
 export const selectZone = "Select a zone name"
 export const selectCluster = "Select a cluster name"
+export const selectProductandZone = "Select product name and zone"
 export const viewZonePromotions = [
   "Promotion Applied Date",
   "Promotion Percentage",
@@ -42,3 +43,21 @@ export const viewZonePromotions = [
   "Promotion Cancelled Date",
 ]
 export const autoHideDuration = 4000
+export const product = ["Product Image", "Product Description"]
+export const zonePromotions = "Promotions in zone level"
+export const groupName = "Please provide a group name"
+export const addGroup = "Create a Group"
+export const addGroupFail =
+  "Group creation failed. Please match the requirements"
+export const addProduct = [
+  "Select",
+  "Product Name",
+  "Price",
+  "Vendor Name",
+  "Quantity Available",
+  "Quantity Required",
+]
+export const zoneCreated = "Zone created successfully!"
+export const zoneCreationFailed =
+  "Zone creation failed. Please match the requirements"
+export const addProductToStore = "Add a Product to the Store"

@@ -17,7 +17,7 @@ import {
   getClusters,
   saveClusterValue,
 } from "../../redux/actions/RetailerActions"
-import { selectProduct, selectZone, selectCluster } from "./../utils/constants"
+import { selectProduct, selectZone, selectCluster } from "../utils/constants"
 
 class WithdrawPromotionClusterForm extends Component {
   constructor(props) {
@@ -101,7 +101,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                  {selectProduct}
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
@@ -109,7 +109,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                  {selectZone}
+                    {selectZone}
                   </Typography>
                 </div>
               )}
@@ -117,7 +117,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                  {selectZone}
+                    {selectZone}
                   </Typography>
                 </div>
               )}
@@ -125,7 +125,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                  {selectCluster}
+                    {selectCluster}
                   </Typography>
                 </div>
               )}
@@ -133,7 +133,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                  {selectCluster}
+                    {selectCluster}
                   </Typography>
                 </div>
               )}

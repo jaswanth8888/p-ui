@@ -6,7 +6,7 @@ import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import PropTypes from "prop-types"
-import { productDetailsTable } from "./constants"
+import { productDetailsTable, product } from "./constants"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
 
 class ProductDetailsTable extends Component {
@@ -34,8 +34,11 @@ class ProductDetailsTable extends Component {
           <Table aria-label="a dense table">
             <TableHead>
               <TableRow>
-                <TableCell>Product Image</TableCell>
-                <TableCell>Product Description</TableCell>
+                {/* <TableCell>Product Image</TableCell>
+                <TableCell>Product Description</TableCell> */}
+                {product.map((tcell) => (
+                  <TableCell>{tcell}</TableCell>
+                ))}
               </TableRow>
             </TableHead>
             <tbody>

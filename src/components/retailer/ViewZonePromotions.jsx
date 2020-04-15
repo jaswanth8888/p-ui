@@ -9,7 +9,7 @@ import Table from "@material-ui/core/Table"
 import PropTypes from "prop-types"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
-import { viewZonePromotions } from "../utils/constants"
+import { viewZonePromotions, zonePromotions } from "../utils/constants"
 
 class ViewZonePromotions extends Component {
   constructor(props) {
@@ -79,7 +79,7 @@ class ViewZonePromotions extends Component {
               <ProductDetailsTable />
 
               <Typography className="card-header" variant="h6">
-                Promotions in zone level
+                {zonePromotions}
               </Typography>
 
               <TableContainer component={Paper}>
