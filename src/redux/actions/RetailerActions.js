@@ -37,6 +37,9 @@ import {
   GET_PROMOTIONS_CLUSTER,
   STARTDATE_SAVE_VALUE,
   ENDDATE_SAVE_VALUE,
+  FROMDATE_SAVE_VALUE,
+  TODATE_SAVE_VALUE,
+  PROFITPERCENT_SAVE_VALUE,
 } from "./types"
 
 const TOKEN = () => {
@@ -578,6 +581,27 @@ export const postPromotion = (
     })
 }
 
+export const getEffectivePrice = (
+  fromDate,
+  toDate,
+  currentDate,
+  profitPercentage
+) => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/products/data?filter=%7B%22fromDate%22:%22${fromDate}%22,%22toDate%22:%22${toDate}%22,%22currentDate%22:%22${currentDate}%22%7D,%22profitPercentage%22:%22${profitPercentage}%22`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: PRODUCTS_GET_REQUEST, products: res.data })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
+}
+
 export const getPricesInRange = (startDate, endDate, currentDate) => async (
   dispatch
 ) => {
@@ -686,4 +710,16 @@ export const saveStartDate = (start) => (dispatch) => {
 
 export const saveEndDate = (end) => (dispatch) => {
   dispatch({ type: ENDDATE_SAVE_VALUE, endDate: end })
+}
+
+export const saveFromDate = (from) => (dispatch) => {
+  dispatch({ type: FROMDATE_SAVE_VALUE, fromDate: from })
+}
+
+export const saveToDate = (to) => (dispatch) => {
+  dispatch({ type: TODATE_SAVE_VALUE, toDate: to })
+}
+
+export const saveProfitPercentage = (pp) => (dispatch) => {
+  dispatch({ type: PROFITPERCENT_SAVE_VALUE, profitPercentage: pp })
 }

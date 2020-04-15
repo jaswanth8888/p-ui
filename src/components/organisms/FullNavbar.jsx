@@ -21,6 +21,7 @@ import LocationCityIcon from "@material-ui/icons/LocationCity"
 import MenuIcon from "@material-ui/icons/Menu"
 import PublicIcon from "@material-ui/icons/Public"
 import StoreIcon from "@material-ui/icons/Store"
+import LocalOfferIcon from "@material-ui/icons/LocalOffer"
 import clsx from "clsx"
 import React from "react"
 import ReactFlagsSelect from "react-flags-select"
@@ -47,6 +48,8 @@ import WithdrawPromotionZoneRouter from "../retailer/WithdrawPromotionZoneRouter
 import ZoneClusterRouter from "../retailer/ZoneClusterRouter"
 import ZoneForm from "../retailer/ZoneForm"
 import ZonePromotionRouter from "../retailer/ZonePromotionRouter"
+import PriceOnDate from "../retailer/PriceOnDate"
+import AssignPriceToProduct from "../retailer/AssignPriceToProduct"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -226,6 +229,20 @@ function FullNavbar(props) {
               <ListItemText
                 className="list-item-text"
                 primary={t("welcome.createStore")}
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+        <Divider />
+        <Link to="/priceondate">
+          <Tooltip title="Price on date" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <LocalOfferIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Price on Date >>"
               />
             </ListItem>
           </Tooltip>
@@ -511,6 +528,12 @@ function FullNavbar(props) {
             exact
             path="/applypromotion/cluster"
             component={ClusterPromotionRouter}
+          />
+          <Route exact path="/priceondate" component={PriceOnDate} />
+          <Route
+            exact
+            path="/assignpricetoproduct"
+            component={AssignPriceToProduct}
           />
         </Switch>
       </Router>
