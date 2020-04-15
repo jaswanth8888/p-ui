@@ -2,6 +2,7 @@ import { Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import TextField from "@material-ui/core/TextField"
 import PropTypes from "prop-types"
 import ProductDetails from "../utils/ProductDetails"
 import Message from "../utils/Message"
@@ -51,6 +52,50 @@ class AssignPriceToProduct extends Component {
                 Assign Price To Product
               </Typography>
               <form className="{classes.form}" noValidate>
+                <TextField
+                  id="startDate-query"
+                  label="From Date"
+                  name="fromDate"
+                  fullWidth
+                  value={this.fromDate}
+                  type="date"
+                  variant="outlined"
+                  margin="normal"
+                  autoComplete="fromDate"
+                  required
+                  onChange={this.handleChange}
+                  autoFocus
+                  InputLabelProps={{ shrink: true, required: true }}
+                />
+                <TextField
+                  id="startDate-query"
+                  label="To Date"
+                  name="toDate"
+                  fullWidth
+                  value={this.toDate}
+                  type="date"
+                  variant="outlined"
+                  margin="normal"
+                  autoComplete="toDate"
+                  required
+                  onChange={this.handleChange}
+                  autoFocus
+                  InputLabelProps={{ shrink: true, required: true }}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="ProfitPercentage"
+                  label="ProfitPercentage"
+                  name="ProfitPercentage"
+                  type="number"
+                  onChange={this.handleChange}
+                  value={this.profitPercentage}
+                  autoFocus
+                />
+
                 <Button
                   fullWidth
                   type="button"
