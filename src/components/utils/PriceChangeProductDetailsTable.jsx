@@ -24,6 +24,9 @@ class PriceChangeProductDetailsTable extends Component {
       cancelProductEffectivePriceChange: cancelProductEffectivePriceChangeAlt,
     } = this.props
     cancelProductEffectivePriceChangeAlt(productName)
+    document
+      .getElementById("cancelprice-tbody")
+      .removeChild(document.getElementById(`row-${productName}`))
   }
 
   render() {
@@ -41,9 +44,9 @@ class PriceChangeProductDetailsTable extends Component {
                 <TableCell />
               </TableRow>
             </TableHead>
-            <tbody>
+            <tbody id="cancelprice-tbody">
               {priceChangeProductsList.map((product) => (
-                <TableRow>
+                <TableRow id={`row-${product.productName}`}>
                   <TableCell>{product.productName}</TableCell>
                   <TableCell>{product.startDate.substr(0, 10)}</TableCell>
                   <TableCell>{product.endDate.substr(0, 10)}</TableCell>
