@@ -62,7 +62,6 @@ export const zoneCreationFailed =
   "Zone creation failed. Please match the requirements"
 export const addProductToStore = "Add a Product to the Store"
 export const priceChangeProductDetailsTable = [
-  "Product ID",
   "Product Name",
   "Start Date",
   "End Date",

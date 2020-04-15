@@ -39,21 +39,22 @@ class PriceChangeProductDetailsTable extends Component {
             <tbody>
               {priceChangeProductsList.map((product) => (
                 <TableRow>
-                  <TableCell>{product.productId}</TableCell>
                   <TableCell>{product.productName}</TableCell>
-                  <TableCell>{product.startDate}</TableCell>
-                  <TableCell>{product.endDate}</TableCell>
-                  <Button
-                    fullWidth
-                    type="button"
-                    variant="contained"
-                    color="primary"
-                    className="{classes.submit} submit-pad"
-                    onClick={this.handleSubmit}
-                    id="assign-cluster-submit"
-                  >
-                    Cancel Price Change
-                  </Button>
+                  <TableCell>{product.startDate.substr(0, 10)}</TableCell>
+                  <TableCell>{product.endDate.substr(0, 10)}</TableCell>
+                  <TableCell>
+                    <Button
+                      fullWidth
+                      type="button"
+                      variant="contained"
+                      color="primary"
+                      className="{classes.submit} submit-pad"
+                      onClick={this.handleSubmit}
+                      id="assign-cluster-submit"
+                    >
+                      Cancel Price Change
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </tbody>
