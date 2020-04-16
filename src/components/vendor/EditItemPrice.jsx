@@ -112,6 +112,8 @@ class EditItemPrice extends Component {
                             className="thumbnail"
                             src={productDetails.productImagePath}
                             alt="none"
+                            width="600"
+                            height="400"
                           />
                         </a>
                       </TableCell>
