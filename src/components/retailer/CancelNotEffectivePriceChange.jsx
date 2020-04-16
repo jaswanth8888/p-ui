@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import { Typography } from "@material-ui/core"
 import PropTypes from "prop-types"
 import { getNotEffecticePriceChangeProducts } from "../../redux/actions/RetailerActions"
 import PriceChangeProductDetailsTable from "../utils/PriceChangeProductDetailsTable"
@@ -22,8 +23,15 @@ class CancelNotEffectivePriceChange extends Component {
   render() {
     return (
       <div className="box-container">
-        <div className="joint-form-large">
-          <PriceChangeProductDetailsTable />
+        <div className="joint-form-large-table">
+          <div className="form-center">
+            <div className="flex-grid">
+              <Typography className="card-header" variant="h4">
+                Cancel Not Effective Price Change
+              </Typography>
+              <PriceChangeProductDetailsTable />
+            </div>
+          </div>
         </div>
       </div>
     )
