@@ -242,7 +242,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Price on Date >>"
+                primary="Price on Date"
               />
             </ListItem>
           </Tooltip>

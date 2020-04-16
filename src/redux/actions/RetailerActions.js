@@ -581,24 +581,31 @@ export const postPromotion = (
     })
 }
 
-export const getEffectivePrice = (
-  fromDate,
-  toDate,
-  currentDate,
-  profitPercentage
-) => async (dispatch) => {
+export const getEffectivePrice = (parameter, productName) => async (
+  dispatch
+) => {
   await axios
-    .get(
-      `${RETAILER_BASE_URL}/product-management/products/data?filter=%7B%22fromDate%22:%22${fromDate}%22,%22toDate%22:%22${toDate}%22,%22currentDate%22:%22${currentDate}%22%7D,%22profitPercentage%22:%22${profitPercentage}%22`,
+    .put(
+      `${RETAILER_BASE_URL}/product-management/product/effectivePrice/${productName}`,
+      parameter,
       {
         headers: { Authorization: TOKEN() },
       }
     )
-    .then((res) => {
-      dispatch({ type: PRODUCTS_GET_REQUEST, products: res.data })
+    .then(() => {
+      dispatch({
+        msg: "Assigned Price Successfully",
+      })
     })
-    .catch(() => {
-      dispatch({ type: FAILURE })
+    .catch((err) => {
+      const { response } = err
+      if (response.status === 500) {
+        dispatch({
+          type: PRODUCT_POST_REQUEST,
+          msg: "Effective Price Already Exist",
+          msgSeverity: "error",
+        })
+      }
     })
 }
 
@@ -720,6 +727,6 @@ export const saveToDate = (to) => (dispatch) => {
   dispatch({ type: TODATE_SAVE_VALUE, toDate: to })
 }
 
-export const saveProfitPercentage = (pp) => (dispatch) => {
+export const saveEffectivePercentage = (pp) => (dispatch) => {
   dispatch({ type: PROFITPERCENT_SAVE_VALUE, profitPercentage: pp })
 }

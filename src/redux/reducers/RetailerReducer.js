@@ -156,6 +156,7 @@ export default (state = initialState, action = {}) => {
       return { ...state, startDate: action.startDate }
     case ENDDATE_SAVE_VALUE:
       return { ...state, endDate: action.endDate }
+
     default:
       return { ...state }
   }

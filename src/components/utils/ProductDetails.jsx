@@ -13,16 +13,21 @@ class ProductDetails extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      effectivePriceObjAlt: {},
+    }
   }
 
   componentDidMount() {
     const { productName, getProductDetails: getProductDetailsAlt } = this.props
     getProductDetailsAlt(productName)
+    const { productDetails } = this.props
+    this.state.effectivePriceObjAlt = productDetails.effectivePriceObj
   }
 
   render() {
     const { productDetails } = this.props
+    const { effectivePriceObjAlt } = this.state
     return (
       <div className="flex-grid">
         <div className="product-name">
@@ -64,6 +69,14 @@ class ProductDetails extends Component {
                   {productDetails.productCategory}
                 </TableCell>
               </TableRow>
+              <TableHead>
+                <TableRow className="product-details-row">
+                  <TableCell className="table-text">Effective Price</TableCell>
+                  <TableCell className="table-text">
+                    {effectivePriceObjAlt.effectivePrice}
+                  </TableCell>
+                </TableRow>
+              </TableHead>
             </Table>
           </TableContainer>
         </div>
