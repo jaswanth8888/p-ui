@@ -16,6 +16,7 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize"
 import Container from "@material-ui/core/Container"
 import Box from "@material-ui/core/Box"
 import { postProduct } from "../../redux/actions/VendorActions"
+import Home from "./Home"
 
 class AddProduct extends Component {
   constructor(props) {
@@ -85,267 +86,270 @@ class AddProduct extends Component {
         return <Redirect to="/vendor/home" />
       }
       return (
-        <Container
-          display="flex"
-          justifyContent="center"
-          borderRadius="borderRadius"
-          marginTop="50px"
-        >
-          <Box
+        <div>
+          <Home />
+          <Container
             display="flex"
             justifyContent="center"
             borderRadius="borderRadius"
+            marginTop="50px"
           >
-            <div className="validation-half">
-              <div className="validations">
-                {isSubmitted && <h3>Requirements</h3>}
+            <Box
+              display="flex"
+              justifyContent="center"
+              borderRadius="borderRadius"
+            >
+              <div className="validation-half">
+                <div className="validations">
+                  {isSubmitted && <h3>Requirements</h3>}
 
-                {isSubmitted && !productName && (
-                  <div>
-                    <ClearIcon className="icon-style" />
-                    <Typography variant="subtitle2" gutterBottom>
-                      name cannot be empty
-                    </Typography>
-                  </div>
-                )}
-                {isSubmitted && productBasePrice < 1 && (
-                  <div>
-                    <CheckIcon className="icon-style" />
-                    <Typography variant="subtitle2" gutterBottom>
-                      base price must be greater than 0
-                    </Typography>
-                  </div>
-                )}
-                {isSubmitted && initialQuantity < 1 && (
-                  <div>
-                    <CheckIcon className="icon-style" />
-                    <Typography variant="subtitle2" gutterBottom>
-                      minimum quantity should be 1
-                    </Typography>
-                  </div>
-                )}
-                {isSubmitted &&
-                  productCategory === "ALCOHOL_PROD" &&
-                  initialQuantity > 100 && (
+                  {isSubmitted && !productName && (
                     <div>
-                      <CheckIcon className="icon-style" />
+                      <ClearIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
-                        maximum quantity of ALCOHOL should be 100
+                        name cannot be empty
                       </Typography>
                     </div>
                   )}
-                {isSubmitted &&
-                  productCategory === "BABY_PROD" &&
-                  initialQuantity > 500 && (
+                  {isSubmitted && productBasePrice < 1 && (
                     <div>
                       <CheckIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
-                        maximum quantity of BabyProducts should be 500
+                        base price must be greater than 0
                       </Typography>
                     </div>
                   )}
-              </div>
-            </div>
-            <div className="form-half">
-              <form className="{classes.form}" noValidate>
-                <div>
-                  <div className="help-block">
-                    <Typography color="primary" component="h1" variant="h4">
-                      AddProduct
-                    </Typography>
-                  </div>
+                  {isSubmitted && initialQuantity < 1 && (
+                    <div>
+                      <CheckIcon className="icon-style" />
+                      <Typography variant="subtitle2" gutterBottom>
+                        minimum quantity should be 1
+                      </Typography>
+                    </div>
+                  )}
+                  {isSubmitted &&
+                    productCategory === "ALCOHOL_PROD" &&
+                    initialQuantity > 100 && (
+                      <div>
+                        <CheckIcon className="icon-style" />
+                        <Typography variant="subtitle2" gutterBottom>
+                          maximum quantity of ALCOHOL should be 100
+                        </Typography>
+                      </div>
+                    )}
+                  {isSubmitted &&
+                    productCategory === "BABY_PROD" &&
+                    initialQuantity > 500 && (
+                      <div>
+                        <CheckIcon className="icon-style" />
+                        <Typography variant="subtitle2" gutterBottom>
+                          maximum quantity of BabyProducts should be 500
+                        </Typography>
+                      </div>
+                    )}
                 </div>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="productName"
-                  label="ProductName"
-                  name="productName"
-                  autoComplete="productName"
-                  onChange={this.handleChange}
-                  value={productName}
-                  autoFocus
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="companyName"
-                  label="companyName"
-                  name="companyName"
-                  autoComplete="companyName"
-                  onChange={this.handleChange}
-                  value={companyName}
-                  autoFocus
-                />
-                <InputLabel htmlFor="outlined-age-native-simple">
-                  Product Category
-                </InputLabel>
-                <Select
-                  labelId="productCategory"
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  name="productCategory"
-                  label="productCategory"
-                  onChange={this.handleChange}
-                  id="select-product"
-                >
-                  <MenuItem value="ALCOHOL_PROD">ALCOHOL_PROD</MenuItem>
-                  <MenuItem value="BABY_PROD">BABY_PROD</MenuItem>
-                </Select>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  type="number"
-                  id="initialQuantity"
-                  label="quantity"
-                  name="initialQuantity"
-                  autoComplete="initialQuantity"
-                  onChange={this.handleChange}
-                  value={initialQuantity}
-                  autoFocus
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  type="number"
-                  id="productBasePrice"
-                  label="productBasePrice"
-                  name="productBasePrice"
-                  autoComplete="productBasePrice"
-                  onChange={this.handleChange}
-                  value={productBasePrice}
-                  startAdornment={
-                    <InputAdornment position="start">$</InputAdornment>
-                  }
-                  autoFocus
-                />
-
-                {productCategory === "ALCOHOL_PROD" && (
+              </div>
+              <div className="form-half">
+                <form className="{classes.form}" noValidate>
                   <div>
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      type="number"
-                      id="abv"
-                      label="abv"
-                      name="abv"
-                      autoComplete="abv"
-                      onChange={this.handleChange}
-                      value={abv}
-                      autoFocus
-                    />
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      type="number"
-                      id="volume"
-                      label="volume"
-                      name="volume"
-                      autoComplete="volume"
-                      onChange={this.handleChange}
-                      value={volume}
-                      autoFocus
-                    />
-                    <InputLabel htmlFor="outlined-age-native-simple">
-                      Units Of Measuremment
-                    </InputLabel>
-                    <Select
-                      labelId="uom"
-                      fullWidth
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      name="uom"
-                      label="uom"
-                      value={uom}
-                      id="alc-prod"
-                      onChange={this.handleChange}
-                    >
-                      <MenuItem value="Lts">LTS</MenuItem>
-                      <MenuItem value="GALLONs">GALLONS</MenuItem>
-                      <MenuItem value="ML">ML </MenuItem>
-                    </Select>
+                    <div className="help-block">
+                      <Typography color="primary" component="h1" variant="h4">
+                        AddProduct
+                      </Typography>
+                    </div>
                   </div>
-                )}
-                {productCategory === "BABY_PROD" && (
-                  <div>
-                    <InputLabel htmlFor="outlined-age-native-simple">
-                      Units Of Measuremment
-                    </InputLabel>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="productName"
+                    label="ProductName"
+                    name="productName"
+                    autoComplete="productName"
+                    onChange={this.handleChange}
+                    value={productName}
+                    autoFocus
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="companyName"
+                    label="companyName"
+                    name="companyName"
+                    autoComplete="companyName"
+                    onChange={this.handleChange}
+                    value={companyName}
+                    autoFocus
+                  />
+                  <InputLabel htmlFor="outlined-age-native-simple">
+                    Product Category
+                  </InputLabel>
+                  <Select
+                    labelId="productCategory"
+                    fullWidth
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    name="productCategory"
+                    label="productCategory"
+                    onChange={this.handleChange}
+                    id="select-product"
+                  >
+                    <MenuItem value="ALCOHOL_PROD">ALCOHOL_PROD</MenuItem>
+                    <MenuItem value="BABY_PROD">BABY_PROD</MenuItem>
+                  </Select>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    type="number"
+                    id="initialQuantity"
+                    label="quantity"
+                    name="initialQuantity"
+                    autoComplete="initialQuantity"
+                    onChange={this.handleChange}
+                    value={initialQuantity}
+                    autoFocus
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    type="number"
+                    id="productBasePrice"
+                    label="productBasePrice"
+                    name="productBasePrice"
+                    autoComplete="productBasePrice"
+                    onChange={this.handleChange}
+                    value={productBasePrice}
+                    startAdornment={
+                      <InputAdornment position="start">$</InputAdornment>
+                    }
+                    autoFocus
+                  />
 
-                    <Select
-                      labelId="uom"
-                      fullWidth
-                      name="uom"
-                      label="uom"
-                      onChange={this.handleChange}
-                      value={uom}
-                      id="baby-prod"
-                    >
-                      <MenuItem value="KGs">KGs</MenuItem>
-                      <MenuItem value="Pounds">Pounds</MenuItem>
-                    </Select>
-                  </div>
-                )}
+                  {productCategory === "ALCOHOL_PROD" && (
+                    <div>
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        type="number"
+                        id="abv"
+                        label="abv"
+                        name="abv"
+                        autoComplete="abv"
+                        onChange={this.handleChange}
+                        value={abv}
+                        autoFocus
+                      />
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        type="number"
+                        id="volume"
+                        label="volume"
+                        name="volume"
+                        autoComplete="volume"
+                        onChange={this.handleChange}
+                        value={volume}
+                        autoFocus
+                      />
+                      <InputLabel htmlFor="outlined-age-native-simple">
+                        Units Of Measuremment
+                      </InputLabel>
+                      <Select
+                        labelId="uom"
+                        fullWidth
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        name="uom"
+                        label="uom"
+                        value={uom}
+                        id="alc-prod"
+                        onChange={this.handleChange}
+                      >
+                        <MenuItem value="Lts">LTS</MenuItem>
+                        <MenuItem value="GALLONs">GALLONS</MenuItem>
+                        <MenuItem value="ML">ML </MenuItem>
+                      </Select>
+                    </div>
+                  )}
+                  {productCategory === "BABY_PROD" && (
+                    <div>
+                      <InputLabel htmlFor="outlined-age-native-simple">
+                        Units Of Measuremment
+                      </InputLabel>
 
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="productImagePath"
-                  label="productImagePath"
-                  name="productImagePath"
-                  autoComplete="productImagePath"
-                  onChange={this.handleChange}
-                  value={productImagePath}
-                  autoFocus
-                />
+                      <Select
+                        labelId="uom"
+                        fullWidth
+                        name="uom"
+                        label="uom"
+                        onChange={this.handleChange}
+                        value={uom}
+                        id="baby-prod"
+                      >
+                        <MenuItem value="KGs">KGs</MenuItem>
+                        <MenuItem value="Pounds">Pounds</MenuItem>
+                      </Select>
+                    </div>
+                  )}
 
-                <TextareaAutosize
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  label="productDescription"
-                  name="productDescription"
-                  autoComplete="productDescription"
-                  onChange={this.handleChange}
-                  value={productDescription}
-                  aria-label="minimum height"
-                  rowsMin={3}
-                  placeholder="product discription"
-                />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="productImagePath"
+                    label="productImagePath"
+                    name="productImagePath"
+                    autoComplete="productImagePath"
+                    onChange={this.handleChange}
+                    value={productImagePath}
+                    autoFocus
+                  />
 
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit}"
-                  onClick={this.handleSubmit}
-                  id="submit-prods"
-                >
-                  Save
-                </Button>
-              </form>
-            </div>
-          </Box>
-        </Container>
+                  <TextareaAutosize
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    label="productDescription"
+                    name="productDescription"
+                    autoComplete="productDescription"
+                    onChange={this.handleChange}
+                    value={productDescription}
+                    aria-label="minimum height"
+                    rowsMin={3}
+                    placeholder="product discription"
+                  />
+
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit}"
+                    onClick={this.handleSubmit}
+                    id="submit-prods"
+                  >
+                    Save
+                  </Button>
+                </form>
+              </div>
+            </Box>
+          </Container>
+        </div>
       )
     }
     return true

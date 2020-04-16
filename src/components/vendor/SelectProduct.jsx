@@ -12,6 +12,7 @@ import {
   getProductList,
   getProductDetails,
 } from "../../redux/actions/VendorActions"
+import Home from "./Home"
 
 class SelectProduct extends Component {
   constructor(props) {
@@ -47,75 +48,78 @@ class SelectProduct extends Component {
     const { products } = this.props
 
     return (
-      <div className="box-container">
-        <div className="joint-form">
-          <div className="validation-half">
-            <div className="validations">
-              <h3 className="center-h3">Requirements</h3>
-              {productName === "" && (
-                <div className="typo-div">
-                  <ClearIcon className="icon-style" />
-                  <Typography variant="subtitle2" gutterBottom>
-                    Please select a product name
-                  </Typography>
-                </div>
-              )}
-              {productName !== "" && (
-                <div className="approved-text">
-                  <CheckIcon className="icon-style" />
-                  <Typography variant="subtitle2" gutterBottom>
-                    Please select a product name
-                  </Typography>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="form-half">
-            <form className="{classes.form}" noValidate>
-              <div>
-                <div className="help-block">
-                  <Typography
-                    color="primary"
-                    component="h1"
-                    variant="h4"
-                    className="help-block-h4"
-                  >
-                    Select a Product
-                  </Typography>
-                </div>
+      <div>
+        <Home />
+        <div className="box-container">
+          <div className="joint-form">
+            <div className="validation-half">
+              <div className="validations">
+                <h3 className="center-h3">Requirements</h3>
+                {productName === "" && (
+                  <div className="typo-div">
+                    <ClearIcon className="icon-style" />
+                    <Typography variant="subtitle2" gutterBottom>
+                      Please select a product name
+                    </Typography>
+                  </div>
+                )}
+                {productName !== "" && (
+                  <div className="approved-text">
+                    <CheckIcon className="icon-style" />
+                    <Typography variant="subtitle2" gutterBottom>
+                      Please select a product name
+                    </Typography>
+                  </div>
+                )}
               </div>
-              <FormControl variant="outlined" fullWidth>
-                <Autocomplete
-                  id="product-list"
-                  fullWidth
-                  options={products}
-                  getOptionLabel={(option) => option}
-                  renderInput={(params) => (
-                    <TextField
-                      // eslint-disable-next-line react/jsx-props-no-spreading
-                      {...params}
-                      label="Product Name"
-                      variant="outlined"
-                    />
-                  )}
-                  onChange={this.handleChangeProduct}
-                  name="productName"
-                />
-              </FormControl>
-              {productName === "" && <Link to="/selectproduct" />}
-              <Link className="button-link" to="/vendor/editproduct">
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                  id="assign-price-zone-submit"
-                >
-                  EditItemPrice
-                </Button>
-              </Link>
-            </form>
+            </div>
+            <div className="form-half">
+              <form className="{classes.form}" noValidate>
+                <div>
+                  <div className="help-block">
+                    <Typography
+                      color="primary"
+                      component="h1"
+                      variant="h4"
+                      className="help-block-h4"
+                    >
+                      Select a Product
+                    </Typography>
+                  </div>
+                </div>
+                <FormControl variant="outlined" fullWidth>
+                  <Autocomplete
+                    id="product-list"
+                    fullWidth
+                    options={products}
+                    getOptionLabel={(option) => option}
+                    renderInput={(params) => (
+                      <TextField
+                        // eslint-disable-next-line react/jsx-props-no-spreading
+                        {...params}
+                        label="Product Name"
+                        variant="outlined"
+                      />
+                    )}
+                    onChange={this.handleChangeProduct}
+                    name="productName"
+                  />
+                </FormControl>
+                {productName === "" && <Link to="/selectproduct" />}
+                <Link className="button-link" to="/vendor/editproduct">
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit} submit-pad"
+                    id="assign-price-zone-submit"
+                  >
+                    EditItemPrice
+                  </Button>
+                </Link>
+              </form>
+            </div>
           </div>
         </div>
       </div>

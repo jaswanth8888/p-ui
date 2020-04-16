@@ -2,6 +2,11 @@ import React, { Component } from "react"
 
 import connect from "react-redux/es/connect/connect"
 import Button from "@material-ui/core/Button"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import Typography from "@material-ui/core/Typography"
+import MenuIcon from "@material-ui/icons/Menu"
+import AccountCircle from "@material-ui/icons/AccountCircle"
 import { Link } from "react-router-dom"
 import { vendorlogout } from "../../redux/actions/VendorActions"
 import Message from "./Message"
@@ -10,12 +15,7 @@ import Message from "./Message"
 class Home extends Component {
   constructor(props) {
     super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
-  }
-
-  handleSubmit() {
-    window.location.href = "./addproduct"
   }
 
   handleLogout() {
@@ -27,39 +27,47 @@ class Home extends Component {
     if (sessionStorage.getItem("token") != null) {
       return (
         <div>
-          <Link className="button-link" to="/assigntozone">
-            <Button
-              type="button"
-              variant="contained"
-              color="primary"
-              className="{classes.submit}"
-              onClick={this.handleSubmit}
-              id="add-prod-vendor"
-            >
-              addproduct
-            </Button>
-          </Link>
-          <Link to="./updateprice">
-            <Button
-              type="button"
-              variant="contained"
-              color="primary"
-              className="{classes.submit}"
-              id="update-prod-vendor"
-            >
-              Update Price/quantity
-            </Button>
-          </Link>
-          <Button
-            type="button"
-            variant="contained"
-            color="primary"
-            className="{classes.submit}"
-            onClick={this.handleLogout}
-            id="logout-vendor"
-          >
-            logout
-          </Button>
+          <AppBar position="static" elevation={0}>
+            <Toolbar>
+              <Link className="button-link" to="./addproduct">
+                <Button
+                  color="secondary"
+                  className="{classes.submit}"
+                  onClick={this.handleSubmit}
+                  id="add-prod-vendor"
+                  startIcon={<MenuIcon />}
+                >
+                  addproduct
+                </Button>
+              </Link>
+              <Link className="button-link" to="./updateprice">
+                <Button
+                  color="secondary"
+                  className="{classes.submit}"
+                  id="update-prod-vendor"
+                  startIcon={<MenuIcon />}
+                >
+                  Update Price/quantity
+                </Button>
+              </Link>
+
+              <Typography type="title" color="inherit">
+                Vendor App
+              </Typography>
+              <div>
+                <Button
+                  color="inherit"
+                  className="{classes.submit}"
+                  onClick={this.handleLogout}
+                  id="logout-vendor"
+                  startIcon={<AccountCircle />}
+                >
+                  logout
+                </Button>
+              </div>
+            </Toolbar>
+          </AppBar>
+
           <Message />
         </div>
       )
