@@ -13,7 +13,7 @@ import {
   withdrawPromotion,
 } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
-import { withdrawClusterPromotion } from "../utils/constants"
+import { withdrawClusterPromotion, clusterPromotion } from "../utils/constants"
 
 class WithdrawClusterPromotion extends Component {
   constructor(props) {
@@ -66,7 +66,7 @@ class WithdrawClusterPromotion extends Component {
             <div className="flex-grid">
               <ProductDetailsTable />
               <Typography className="card-header" variant="h6">
-                Promotions in cluster level
+                {clusterPromotion}
               </Typography>
 
               <TableContainer component={Paper}>

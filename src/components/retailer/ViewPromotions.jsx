@@ -8,7 +8,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { getPromotionsInRange } from "../../redux/actions/RetailerActions"
-import { viewPromotions } from "../utils/constants"
+import { viewPromotions, promotionDetails } from "../utils/constants"
 
 class ViewPromotions extends Component {
   constructor(props) {
@@ -89,13 +89,16 @@ class ViewPromotions extends Component {
                           <Table size="small" aria-label="a dense table">
                             <TableHead>
                               <TableRow>
-                                <TableCell size="small">
+                                {/* <TableCell size="small">
                                   Promotion Percentage
                                 </TableCell>
                                 <TableCell>Selling Price</TableCell>
                                 <TableCell>Start Date</TableCell>
                                 <TableCell>End Date</TableCell>
-                                <TableCell>Level Applied</TableCell>
+                                <TableCell>Level Applied</TableCell> */}
+                                {promotionDetails.map((tcell) => (
+                                  <TableCell>{tcell}</TableCell>
+                                ))}
                               </TableRow>
                             </TableHead>
                             <tbody>

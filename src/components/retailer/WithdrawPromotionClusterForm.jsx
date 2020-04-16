@@ -17,7 +17,12 @@ import {
   getClusters,
   saveClusterValue,
 } from "../../redux/actions/RetailerActions"
-import { selectProduct, selectZone, selectCluster } from "../utils/constants"
+import {
+  selectProduct,
+  selectZone,
+  selectCluster,
+  withdrawPromotionCluster,
+} from "../utils/constants"
 
 class WithdrawPromotionClusterForm extends Component {
   constructor(props) {
@@ -149,7 +154,7 @@ class WithdrawPromotionClusterForm extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    Withdraw Promotion Cluster
+                    {withdrawPromotionCluster}
                   </Typography>
                 </div>
               </div>
