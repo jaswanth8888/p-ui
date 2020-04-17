@@ -9,6 +9,7 @@ import Table from "@material-ui/core/Table"
 import PropTypes from "prop-types"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
+import { viewZonePromotions, zonePromotions } from "../utils/constants"
 
 class ViewZonePromotions extends Component {
   constructor(props) {
@@ -76,22 +77,25 @@ class ViewZonePromotions extends Component {
           <div className="form-center">
             <div className="flex-grid">
               <ProductDetailsTable />
-              <br />
+
               <Typography className="card-header" variant="h6">
-                Promotions in zone level
+                {zonePromotions}
               </Typography>
 
               <TableContainer component={Paper}>
                 <Table aria-label="a dense table">
                   <TableHead>
                     <TableRow>
-                      <TableCell>Promotion Applied Date</TableCell>
+                      {/* <TableCell>Promotion Applied Date</TableCell>
                       <TableCell>Promotion Percentage</TableCell>
                       <TableCell>Promotion Selling Price</TableCell>
                       <TableCell>Promotion From Date</TableCell>
                       <TableCell>Promotion To Date</TableCell>
                       <TableCell>Promotion Level</TableCell>
-                      <TableCell>Promotion Cancelled Date</TableCell>
+                      <TableCell>Promotion Cancelled Date</TableCell> */}
+                      {viewZonePromotions.map((tcell) => (
+                        <TableCell>{tcell}</TableCell>
+                      ))}
                     </TableRow>
                   </TableHead>
                   <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>

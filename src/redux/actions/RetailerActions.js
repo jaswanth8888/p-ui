@@ -40,6 +40,12 @@ import {
   FROMDATE_SAVE_VALUE,
   TODATE_SAVE_VALUE,
   PROFITPERCENT_SAVE_VALUE,
+  IS_PROMOTION_APPLLIED,
+  PRODUCT_UPDATE,
+  PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
+  POST_EFFECTIVE_PRICE,
 } from "./types"
 
 const TOKEN = () => {
@@ -376,6 +382,38 @@ export const getProductDetails = (productName) => async (dispatch) => {
       dispatch({ type: PRODUCT_GET_REQUEST, productDetails: res.data })
     })
 }
+export const isPromotionApplied = (productName) => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/${productName}/product/promotion`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: IS_PROMOTION_APPLLIED, isPromotion: res.data })
+    })
+}
+export const updateProduct = (updatedProduct, productName) => async (
+  dispatch
+) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/${productName}/product`,
+      updatedProduct,
+      { headers: { Authorization: TOKEN() } }
+    )
+    .then(() => {
+      dispatch({ type: PRODUCT_UPDATE, msg: "Updated Sucessfully" })
+    })
+    .catch(() => {
+      dispatch({
+        type: FAILURE,
+        msg: "try again",
+        msgSeverity: "error",
+      })
+    })
+}
 
 export const getZoneClusterNames = (clusterPattern) => async (dispatch) => {
   await axios
@@ -601,9 +639,10 @@ export const getEffectivePrice = (parameter, productName) => async (
       const { response } = err
       if (response.status === 500) {
         dispatch({
-          type: PRODUCT_POST_REQUEST,
+          type: POST_EFFECTIVE_PRICE,
           msg: "Effective Price Already Exist",
           msgSeverity: "error",
+          statusCode: response.status,
         })
       }
     })
@@ -729,4 +768,71 @@ export const saveToDate = (to) => (dispatch) => {
 
 export const saveEffectivePercentage = (pp) => (dispatch) => {
   dispatch({ type: PROFITPERCENT_SAVE_VALUE, profitPercentage: pp })
+}
+
+export const getNotEffecticePriceChangeProducts = () => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/product/effectivePriceNotInEffect`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
+        priceChangeProductsList: res.data,
+      })
+    })
+}
+
+export const getEffecticePriceChangeProducts = () => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/product/effectivePriceInEffect`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
+        priceChangeProductsList: res.data,
+      })
+    })
+}
+
+export const cancelProductEffectivePriceChange = (productName) => async (
+  dispatch
+) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/product/effectivePrice/cancel/${productName}`,
+      {},
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then(() => {
+      dispatch({
+        type: PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
+        msg: "Cancelled Product Price Change Successfully",
+      })
+    })
+    .catch((err) => {
+      const { response } = err
+      if (response.status === 403) {
+        dispatch({
+          type: PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning",
+        })
+      } else {
+        dispatch({
+          type: PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning",
+        })
+      }
+    })
 }

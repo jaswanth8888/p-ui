@@ -4,6 +4,7 @@ import MuiAlert from "@material-ui/lab/Alert"
 import Snackbar from "@material-ui/core/Snackbar"
 import PropTypes from "prop-types"
 import { messageSetNull } from "../../redux/actions/RetailerActions"
+import { autoHideDuration } from "./constants"
 
 class Message extends Component {
   constructor(props) {
@@ -21,12 +22,12 @@ class Message extends Component {
   render() {
     const { msg, msgSeverity } = this.props
     return (
-      <null>
+      <>
         {msg !== "" ? (
           <Snackbar
             open="true"
             onClose={this.closeAlert}
-            autoHideDuration={4000}
+            autoHideDuration={autoHideDuration}
             anchorOrigin={{ vertical: "top", horizontal: "right" }}
           >
             <MuiAlert
@@ -38,10 +39,8 @@ class Message extends Component {
               {msg}
             </MuiAlert>
           </Snackbar>
-        ) : (
-          ""
-        )}
-      </null>
+        ) : null}
+      </>
     )
   }
 }

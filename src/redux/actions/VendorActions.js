@@ -7,6 +7,12 @@ import {
   RETAILER_BASE_URL,
   MESSAGE_SET_NULL,
   CREATE_PRODUCT,
+  PRODUCT_GET_REQUEST,
+  IS_PROMOTION_APPLLIED,
+  PRODUCT_UPDATE,
+  FAILURE,
+  PRODUCTLIST_GET_REQUEST,
+  PRODUCT_SAVE_VALUE,
 } from "./types"
 
 const VTOKEN = () => {
@@ -101,4 +107,64 @@ export const vendorlogout = () => (dispatch) => {
 }
 export const messageSetNull = () => (dispatch) => {
   dispatch({ type: MESSAGE_SET_NULL })
+}
+export const getProductList = () => async (dispatch) => {
+  await axios
+    .get(`${RETAILER_BASE_URL}/product-management/products/names`, {
+      headers: { Authorization: VTOKEN() },
+    })
+    .then((res) => {
+      dispatch({ type: PRODUCTLIST_GET_REQUEST, productList: res.data })
+    })
+}
+export const getProductDetails = (productName) => async (dispatch) => {
+  await axios
+    .get(`${RETAILER_BASE_URL}/product-management/product/${productName}`, {
+      headers: { Authorization: VTOKEN() },
+    })
+    .then((res) => {
+      dispatch({ type: PRODUCT_GET_REQUEST, productDetails: res.data })
+    })
+}
+export const isPromotionApplied = (productName) => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/${productName}/product/promotion`,
+      {
+        headers: { Authorization: VTOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: IS_PROMOTION_APPLLIED, isPromotion: res.data })
+    })
+    .catch(() => {
+      dispatch({
+        type: FAILURE,
+        msg: "try again",
+        msgSeverity: "error",
+      })
+    })
+}
+export const updateProduct = (updatedProduct, productName) => async (
+  dispatch
+) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/${productName}/product`,
+      updatedProduct,
+      { headers: { Authorization: VTOKEN() } }
+    )
+    .then(() => {
+      dispatch({ type: PRODUCT_UPDATE, msg: "Updated Sucessfully" })
+    })
+    .catch(() => {
+      dispatch({
+        type: FAILURE,
+        msg: "try again",
+        msgSeverity: "error",
+      })
+    })
+}
+export const saveProductValue = (productValue) => (dispatch) => {
+  dispatch({ type: PRODUCT_SAVE_VALUE, productName: productValue })
 }

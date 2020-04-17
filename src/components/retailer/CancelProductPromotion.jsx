@@ -17,6 +17,7 @@ import {
   getProductDetails,
   cancelPromotion,
 } from "../../redux/actions/RetailerActions"
+import { cancelProductPromotion, promotions } from "../utils/constants"
 
 class CancelProductPromotion extends Component {
   constructor(props) {
@@ -110,29 +111,32 @@ class CancelProductPromotion extends Component {
                   </Alert>
                 </div>
               )}
-              <br />
+
               <ProductDetailsTable />
-              <br />
+
               {cancelStatus ? (
-                <null>
+                <>
                   <Typography className="card-header" variant="h5">
-                    Promotions
+                    {promotions}
                   </Typography>
-                  <br />
+
                   <TableContainer component={Paper}>
                     <Table aria-label="a dense table">
                       <TableHead>
                         <TableRow>
-                          <TableCell>Promotion Percentage</TableCell>
+                          {/* <TableCell>Promotion Percentage</TableCell>
                           <TableCell>Actual Price</TableCell>
                           <TableCell>Promotion From Date</TableCell>
-                          <TableCell>Promotion To Date</TableCell>
+                          <TableCell>Promotion To Date</TableCell> */}
+                          {cancelProductPromotion.map((tcell) => (
+                            <TableCell>{tcell}</TableCell>
+                          ))}
                         </TableRow>
                       </TableHead>
                       <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>
                     </Table>
                   </TableContainer>
-                  <br />
+
                   <Typography variant="subtitle1" gutterBottom>
                     <Button
                       type="button"
@@ -149,10 +153,8 @@ class CancelProductPromotion extends Component {
                       Cancel Promotion
                     </Button>
                   </Typography>
-                </null>
-              ) : (
-                <null />
-              )}
+                </>
+              ) : null}
             </div>
           </div>
         </div>

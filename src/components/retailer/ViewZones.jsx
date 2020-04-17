@@ -10,6 +10,7 @@ import TablePagination from "@material-ui/core/TablePagination"
 import TableBody from "@material-ui/core/TableBody"
 import PropTypes from "prop-types"
 import { getZoneList } from "../../redux/actions/RetailerActions"
+import { viewZones } from "../utils/constants"
 
 class ViewZones extends Component {
   constructor(props) {
@@ -43,8 +44,11 @@ class ViewZones extends Component {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Zone Name</TableCell>
-                  <TableCell>Number of Zones</TableCell>
+                  {/* <TableCell>Zone Name</TableCell>
+                  <TableCell>Number of Zones</TableCell> */}
+                  {viewZones.map((tcell) => (
+                    <TableCell>{tcell}</TableCell>
+                  ))}
                 </TableRow>
               </TableHead>
               <TableBody>

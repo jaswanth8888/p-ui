@@ -33,6 +33,12 @@ import {
   GET_PROMOTIONS_CLUSTER,
   STARTDATE_SAVE_VALUE,
   ENDDATE_SAVE_VALUE,
+  IS_PROMOTION_APPLLIED,
+  PRODUCT_UPDATE,
+  PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
+  POST_EFFECTIVE_PRICE,
 } from "../actions/types"
 
 const initialState = {
@@ -56,7 +62,7 @@ const initialState = {
   productList: [],
   productName: "",
   updatedPrice: "",
-  productDetails: {},
+  productDetails: { effectivePriceObj: {} },
   promotionDetails: {},
   zoneclusternames: [],
   statusCode: "",
@@ -65,6 +71,9 @@ const initialState = {
   startDate: "",
   endDate: "",
   levelOption: "",
+  isPromotion: false,
+  updatedProduct: {},
+  priceChangeProductsList: [],
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -121,6 +130,15 @@ export default (state = initialState, action = {}) => {
       return { ...state, productName: action.productName }
     case PRODUCT_GET_REQUEST:
       return { ...state, productDetails: action.productDetails }
+    case IS_PROMOTION_APPLLIED:
+      return { ...state, isPromotion: action.isPromotion }
+    case PRODUCT_UPDATE:
+      return {
+        ...state,
+        updatedProduct: action.updatedProduct,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
     case PROMOTION_POST_REQUEST:
       return {
         ...state,
@@ -157,6 +175,30 @@ export default (state = initialState, action = {}) => {
     case ENDDATE_SAVE_VALUE:
       return { ...state, endDate: action.endDate }
 
+    case PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST:
+      return {
+        ...state,
+        priceChangeProductsList: action.priceChangeProductsList,
+      }
+    case PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST:
+      return {
+        ...state,
+        priceChangeProductsList: action.priceChangeProductsList,
+      }
+    case PRODUCT_CANCEL_EFFECTIVEPRICECHANGE:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
+    case POST_EFFECTIVE_PRICE:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
     default:
       return { ...state }
   }

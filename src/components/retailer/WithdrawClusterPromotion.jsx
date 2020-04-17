@@ -13,6 +13,7 @@ import {
   withdrawPromotion,
 } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
+import { withdrawClusterPromotion, clusterPromotion } from "../utils/constants"
 
 class WithdrawClusterPromotion extends Component {
   constructor(props) {
@@ -64,20 +65,22 @@ class WithdrawClusterPromotion extends Component {
           <div className="form-center">
             <div className="flex-grid">
               <ProductDetailsTable />
-              <br />
               <Typography className="card-header" variant="h6">
-                Promotions in cluster level
+                {clusterPromotion}
               </Typography>
 
               <TableContainer component={Paper}>
                 <Table aria-label="a dense table">
                   <TableHead>
                     <TableRow>
-                      <TableCell>Promotion Percentage</TableCell>
+                      {/* <TableCell>Promotion Percentage</TableCell>
                       <TableCell>Actual Price</TableCell>
                       <TableCell>Promotion From Date</TableCell>
                       <TableCell>Promotion To Date</TableCell>
-                      <TableCell>Withdraw</TableCell>
+                      <TableCell>Withdraw</TableCell> */}
+                      {withdrawClusterPromotion.map((tcell) => (
+                        <TableCell>{tcell}</TableCell>
+                      ))}
                     </TableRow>
                   </TableHead>
                   <tbody id="withdraw-tbody">

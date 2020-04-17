@@ -10,6 +10,7 @@ import TablePagination from "@material-ui/core/TablePagination"
 import TableBody from "@material-ui/core/TableBody"
 import PropTypes from "prop-types"
 import { getClusterList } from "../../redux/actions/RetailerActions"
+import { viewClusters } from "../utils/constants"
 
 class ViewClusters extends Component {
   constructor(props) {
@@ -43,8 +44,11 @@ class ViewClusters extends Component {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Cluster Name</TableCell>
-                  <TableCell>Number of Stores</TableCell>
+                  {/* <TableCell>Cluster Name</TableCell>
+                  <TableCell>Number of Stores</TableCell> */}
+                  {viewClusters.map((tcell) => (
+                    <TableCell>{tcell}</TableCell>
+                  ))}
                 </TableRow>
               </TableHead>
               <TableBody>

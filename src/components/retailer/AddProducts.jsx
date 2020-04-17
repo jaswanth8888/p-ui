@@ -23,6 +23,7 @@ import {
   getProducts,
   postProductToStore,
 } from "../../redux/actions/RetailerActions"
+import { addProduct } from "../utils/constants"
 
 class AddProducts extends Component {
   constructor(props) {
@@ -126,12 +127,15 @@ class AddProducts extends Component {
                 <TableHead>
                   <TableRow>
                     {/* <TableCell>CheckBox</TableCell> */}
-                    <TableCell>Select</TableCell>
+                    {/* <TableCell>Select</TableCell>
                     <TableCell>Product Name</TableCell>
                     <TableCell>Price</TableCell>
                     <TableCell>Vendor Name</TableCell>
                     <TableCell>Quantity Available</TableCell>
-                    <TableCell>Quantity Required</TableCell>
+                    <TableCell>Quantity Required</TableCell> */}
+                    {addProduct.map((tcell) => (
+                      <TableCell>{tcell}</TableCell>
+                    ))}
                   </TableRow>
                 </TableHead>
 

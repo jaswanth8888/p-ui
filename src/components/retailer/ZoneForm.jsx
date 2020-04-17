@@ -9,6 +9,11 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { postZone } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
+import {
+  createZone,
+  zoneNameCheck,
+  zoneCreationFailed,
+} from "../utils/constants"
 
 class ZoneForm extends Component {
   constructor(props) {
@@ -64,7 +69,7 @@ class ZoneForm extends Component {
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Zone has to be greater than 5 letters
+                    {zoneNameCheck}
                   </Typography>
                 </div>
               )}
@@ -72,7 +77,7 @@ class ZoneForm extends Component {
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Zone has to be greater than 5 letters
+                    {zoneNameCheck}
                   </Typography>
                 </div>
               )}
@@ -88,7 +93,7 @@ class ZoneForm extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    Create a Zone
+                    {createZone}
                   </Typography>
                 </div>
               </div>
@@ -133,19 +138,17 @@ class ZoneForm extends Component {
             </form>
           </div>
         </div>
-        <null>
+        <>
           {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
-                  Zone creation failed. Please match the requirements
+                  {zoneCreationFailed}
                 </MuiAlert>
               </Snackbar>
             </div>
-          ) : (
-            <div />
-          )}
-        </null>
+          ) : null}
+        </>
         <Message />
       </div>
     )

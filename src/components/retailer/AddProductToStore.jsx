@@ -15,6 +15,11 @@ import {
   saveStoreValue,
   saveZoneValue,
 } from "../../redux/actions/RetailerActions"
+import {
+  zoneCreated,
+  zoneCreationFailed,
+  addProductToStore,
+} from "../utils/constants"
 
 class AddProductToStore extends Component {
   constructor(props) {
@@ -97,7 +102,7 @@ class AddProductToStore extends Component {
                     className="help-block-h4"
                     id="special-add-prods-help"
                   >
-                    Add a Product to the Store
+                    {addProductToStore}
                   </Typography>
                 </div>
               </div>
@@ -219,32 +224,28 @@ class AddProductToStore extends Component {
             </form>
           </div>
         </div>
-        <null>
+        <>
           {status === 1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert elevation={6} variant="filled">
-                  Zone created successfully!
+                  {zoneCreated}
                 </MuiAlert>
               </Snackbar>
             </div>
-          ) : (
-            <div />
-          )}
-        </null>
-        <null>
+          ) : null}
+        </>
+        <>
           {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
-                  Zone creation failed. Please match the requirements
+                  {zoneCreationFailed}
                 </MuiAlert>
               </Snackbar>
             </div>
-          ) : (
-            <div />
-          )}
-        </null>
+          ) : null}
+        </>
       </div>
     )
   }

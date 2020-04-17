@@ -92,7 +92,7 @@ class Login extends Component {
     const { t, loginStatus, history } = this.props
     const { userCredentials, error } = this.state
     return (
-      <null>
+      <>
         {loginStatus.success ? (
           history.push("/group")
         ) : (
@@ -177,7 +177,7 @@ class Login extends Component {
             <Message />
           </div>
         )}
-      </null>
+      </>
     )
   }
 }

@@ -3,6 +3,7 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import Divider from "@material-ui/core/Divider"
 import Drawer from "@material-ui/core/Drawer"
 import Hidden from "@material-ui/core/Hidden"
+import Button from "@material-ui/core/Button"
 import IconButton from "@material-ui/core/IconButton"
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
@@ -27,10 +28,10 @@ import React from "react"
 import ReactFlagsSelect from "react-flags-select"
 import "react-flags-select/css/react-flags-select.css"
 import "react-flags-select/scss/react-flags-select.scss"
-import PropTypes from "prop-types"
 import { useTranslation } from "react-i18next"
 import { connect } from "react-redux"
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom"
+import PropTypes from "prop-types"
 import { logout } from "../../redux/actions/RetailerActions"
 import Login from "../Login"
 import AddGroup from "../retailer/AddGroup"
@@ -50,6 +51,8 @@ import ZoneForm from "../retailer/ZoneForm"
 import ZonePromotionRouter from "../retailer/ZonePromotionRouter"
 import PriceOnDate from "../retailer/PriceOnDate"
 import AssignPriceToProduct from "../retailer/AssignPriceToProduct"
+import CancelNotEffectivePriceChange from "../retailer/CancelNotEffectivePriceChange"
+import CancelEffectivePriceChange from "../retailer/CancelEffectivePriceChange"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -290,6 +293,32 @@ function FullNavbar(props) {
             </ListItem>
           </Tooltip>
         </Link>
+        <Link to="/product/pricechange/cancelnoteffective">
+          <Tooltip title="Cancel Not Effective Price Change" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <EventBusyIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Cancel Not Effective Price Change"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+        <Link to="/product/pricechange/canceleffective">
+          <Tooltip title="Cancel Effective Price Change" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <EventBusyIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Cancel Effective Price Change"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
         <Divider />
         <Link to="/view/products/daterange">
           <Tooltip title="Cancel Effective Price Range" placement="right">
@@ -312,7 +341,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Query on Date Range"
+                primary="Query Promotions on Date Range"
               />
             </ListItem>
           </Tooltip>
@@ -363,6 +392,17 @@ function FullNavbar(props) {
           }}
         >
           <Toolbar>
+            {!sessionStorage.getItem("token") && (
+              <Link className="button-link" to="/vendor">
+                <Button
+                  color="default"
+                  className="{classes.link}"
+                  id="reg-vendor"
+                >
+                  Login As Vendor
+                </Button>
+              </Link>
+            )}
             {sessionStorage.getItem("token") &&
             sessionStorage.getItem("token").length > 10 ? (
               <>
@@ -480,6 +520,16 @@ function FullNavbar(props) {
           <Route exact path="/view/clusters" component={ViewClusters} />
           <Route
             exact
+            path="/product/pricechange/cancelnoteffective"
+            component={CancelNotEffectivePriceChange}
+          />
+          <Route
+            exact
+            path="/product/pricechange/canceleffective"
+            component={CancelEffectivePriceChange}
+          />
+          <Route
+            exact
             path="/cancel/promotion"
             component={CancelPromotionRouter}
           />
@@ -501,6 +551,7 @@ function FullNavbar(props) {
               "/assigntozone",
               "/view/assigned/zones",
               "/view/assigned/clusters",
+              "/editprice",
             ]}
             component={ZoneClusterRouter}
           />
@@ -544,9 +595,10 @@ FullNavbar.propTypes = {
   logout: PropTypes.func.isRequired,
   container: PropTypes.shape.isRequired,
 }
+
 const stateAsProps = (store) => ({
   loggedInUser: store.RetailerReducer.loggedInUser,
-  login_status: store.RetailerReducer.login_status,
+  loginStatus: store.RetailerReducer.loginStatus,
 })
 const actionsAsProps = {
   logout,

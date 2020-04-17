@@ -59,7 +59,7 @@ class AssignToZone extends Component {
     const { statusCode, history, zones } = this.props
     const { zoneDetails } = this.state
     return (
-      <null>
+      <>
         {statusCode === 200 ? (
           history.push("/view/assigned/zones")
         ) : (
@@ -137,7 +137,7 @@ class AssignToZone extends Component {
             <Message />
           </div>
         )}
-      </null>
+      </>
     )
   }
 }

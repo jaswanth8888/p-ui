@@ -13,6 +13,7 @@ import {
   saveProductValue,
   getProductDetails,
 } from "../../redux/actions/RetailerActions"
+import { selectProduct, selectproduct } from "../utils/constants"
 
 class SelectProduct extends Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class SelectProduct extends Component {
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Please select a product name
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
@@ -65,7 +66,7 @@ class SelectProduct extends Component {
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Please select a product name
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
@@ -81,7 +82,7 @@ class SelectProduct extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    Select a Product
+                    {selectproduct}
                   </Typography>
                 </div>
               </div>
@@ -104,7 +105,6 @@ class SelectProduct extends Component {
                 />
               </FormControl>
               {productName === "" && <Link to="/selectproduct" />}
-
               <Link className="button-link" to="/assigntocluster">
                 <Button
                   type="button"
@@ -125,12 +125,23 @@ class SelectProduct extends Component {
                   variant="contained"
                   color="primary"
                   className="{classes.submit} submit-pad"
-                  onClick={this.handleSubmit}
                   id="assign-price-zone-submit"
                 >
                   Assign Price and Zone
                 </Button>
               </Link>
+              {/*               <Link className="button-link" to="/editprice">
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit} submit-pad"
+                  id="assign-price-zone-submit"
+                >
+                  EditItemPrice
+                </Button>
+              </Link> */}
             </form>
           </div>
         </div>

@@ -20,24 +20,24 @@ class AssignPriceToProduct extends Component {
     super(props)
     const newDate = new Date()
     this.state = {
-      fromDate: "",
-      toDate: "",
+      startDate: "",
+      endDate: "",
       effectivePercentage: "",
       parameter: {},
-      status: 1,
       day: newDate.getDate(),
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {}
 
   handleChange1 = (e) => {
-    this.setState({ fromDate: e.target.value })
+    this.setState({ startDate: e.target.value })
   }
 
   handleChange2 = (e) => {
-    this.setState({ toDate: e.target.value })
+    this.setState({ endDate: e.target.value })
   }
 
   handleChange3 = (e) => {
@@ -53,20 +53,21 @@ class AssignPriceToProduct extends Component {
       history,
       productDetails,
     } = this.props
-    const { fromDate, toDate, effectivePercentage, parameter } = this.state
+    const { startDate, endDate, effectivePercentage, parameter } = this.state
     saveEffectivePercentageAlt(effectivePercentage)
-    saveFromDateAlt(fromDate)
-    saveToDateAlt(toDate)
-    parameter.fromDate = fromDate
-    parameter.toDate = toDate
+    saveFromDateAlt(startDate)
+    saveToDateAlt(endDate)
+    parameter.startDate = startDate
+    parameter.endDate = endDate
     parameter.effectivePercentage = effectivePercentage
     getEffectivePriceAlt(parameter, productDetails.productName)
+    console.log(productDetails)
     history.push("/assignpricetoproduct")
   }
 
   render() {
-    const { fromDate, toDate, effectivePercentage,day } = this.state
-    const dayval = fromDate.slice(8, fromDate.length)
+    const { startDate, endDate, effectivePercentage, day } = this.state
+    const dayval = startDate.slice(8, endDate.length)
     return (
       <div>
         <div className="box-container">
@@ -117,21 +118,26 @@ class AssignPriceToProduct extends Component {
                   onChange={this.handleChange3}
                   autoFocus
                 />
-                 <null>
-            {dayval<day && (
-              <div>
-                <Snackbar open="true" autoHideDuration={2000}>
-                  <MuiAlert severity="error" elevation={6} variant="filled">
-                    Enter Valid Start Date
-                  </MuiAlert>
-                </Snackbar>
-              </div>
-            )}
-            
-          </null>
-                {fromDate.length > 0 &&
-                  toDate.length > 0 &&
-                  effectivePercentage > 0 && fromDate<toDate && dayval>=day && (
+                <null>
+                  {dayval < day && (
+                    <div>
+                      <Snackbar open="true" autoHideDuration={2000}>
+                        <MuiAlert
+                          severity="error"
+                          elevation={6}
+                          variant="filled"
+                        >
+                          Enter Valid Start Date
+                        </MuiAlert>
+                      </Snackbar>
+                    </div>
+                  )}
+                </null>
+                {startDate.length > 0 &&
+                  endDate.length > 0 &&
+                  effectivePercentage > 0 &&
+                  startDate < endDate &&
+                  dayval >= day && (
                     <Button
                       fullWidth
                       type="button"
@@ -147,8 +153,6 @@ class AssignPriceToProduct extends Component {
               </form>
             </div>
           </div>
-
-         
           <Message />
         </div>
       </div>
