@@ -126,3 +126,5 @@ export const withdrawZonePromotion = [
 ]
 export const zoneNameCheck = "Zone has to be greater than 5 letters"
 export const createZone = "Create a Zone"
+export const cancelNotEffectivePriceChange = "Cancel Not Effective Price Change"
+export const cancelEffectivePriceChange = "Cancel Effective Price Change"

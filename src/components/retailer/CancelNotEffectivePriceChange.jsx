@@ -4,6 +4,7 @@ import { Typography } from "@material-ui/core"
 import PropTypes from "prop-types"
 import { getNotEffecticePriceChangeProducts } from "../../redux/actions/RetailerActions"
 import PriceChangeProductDetailsTable from "../utils/PriceChangeProductDetailsTable"
+import { cancelNotEffectivePriceChange } from "../utils/constants"
 
 class CancelNotEffectivePriceChange extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class CancelNotEffectivePriceChange extends Component {
           <div className="form-center">
             <div className="flex-grid">
               <Typography className="card-header" variant="h4">
-                Cancel Not Effective Price Change
+                {cancelNotEffectivePriceChange}
               </Typography>
               <PriceChangeProductDetailsTable />
             </div>
