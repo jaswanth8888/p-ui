@@ -46,6 +46,8 @@ const App = () => {
     "/applypromotion/cluster",
     "/definepromotion/cluster",
     "/view/promotions/cluster",
+    "/product/pricechange/canceleffective",
+    "/product/pricechange/cancelnoteffective",
   ]
   return (
     <Provider store={store}>

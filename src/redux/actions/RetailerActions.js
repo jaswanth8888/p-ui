@@ -37,6 +37,9 @@ import {
   GET_PROMOTIONS_CLUSTER,
   STARTDATE_SAVE_VALUE,
   ENDDATE_SAVE_VALUE,
+  PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
 } from "./types"
 
 const TOKEN = () => {
@@ -686,4 +689,71 @@ export const saveStartDate = (start) => (dispatch) => {
 
 export const saveEndDate = (end) => (dispatch) => {
   dispatch({ type: ENDDATE_SAVE_VALUE, endDate: end })
+}
+
+export const getNotEffecticePriceChangeProducts = () => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/product/effectivePriceNotInEffect`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
+        priceChangeProductsList: res.data,
+      })
+    })
+}
+
+export const getEffecticePriceChangeProducts = () => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/product/effectivePriceInEffect`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
+        priceChangeProductsList: res.data,
+      })
+    })
+}
+
+export const cancelProductEffectivePriceChange = (productName) => async (
+  dispatch
+) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/product/effectivePrice/cancel/${productName}`,
+      {},
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then(() => {
+      dispatch({
+        type: PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
+        msg: "Cancelled Product Price Change Successfully",
+      })
+    })
+    .catch((err) => {
+      const { response } = err
+      if (response.status === 403) {
+        dispatch({
+          type: PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning",
+        })
+      } else {
+        dispatch({
+          type: PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning",
+        })
+      }
+    })
 }

@@ -92,6 +92,11 @@ export const zoneCreated = "Zone created successfully!"
 export const zoneCreationFailed =
   "Zone creation failed. Please match the requirements"
 export const addProductToStore = "Add a Product to the Store"
+export const priceChangeProductDetailsTable = [
+  "Product Name",
+  "Start Date",
+  "End Date",
+]
 export const zoneLevelPromotions = "Promotions in Zone Level"
 export const promotions = "Promotions"
 export const cancelProductPromotion = [
