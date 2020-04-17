@@ -33,7 +33,7 @@ node{
         stage('npm-build')
         {
                 sh'''
-                npm run-script buils
+                npm run-script build
                 '''
         }
         stage('deploy')
