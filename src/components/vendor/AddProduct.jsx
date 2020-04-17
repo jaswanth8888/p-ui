@@ -7,7 +7,7 @@ import {
   TextareaAutosize,
   MenuItem,
 } from "@material-ui/core"
-import { CheckIcon } from "@material-ui/icons/Check"
+import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import PropTypes from "prop-types"
 import React, { Component } from "react"

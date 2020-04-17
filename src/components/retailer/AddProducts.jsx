@@ -1,20 +1,20 @@
 import {
   InputLabel,
   Select,
-  Table,
   TextField,
   Typography,
+  Button,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  Paper,
+  TableCell,
+  TableContainer,
+  TableHead,
+  Table,
+  TableRow,
 } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import Checkbox from "@material-ui/core/Checkbox"
-import FormControl from "@material-ui/core/FormControl"
-import FormControlLabel from "@material-ui/core/FormControlLabel"
 import PropTypes from "prop-types"
-import Paper from "@material-ui/core/Paper"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"

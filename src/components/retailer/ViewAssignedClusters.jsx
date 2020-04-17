@@ -1,9 +1,12 @@
-import { Table, Typography } from "@material-ui/core"
-import Paper from "@material-ui/core/Paper"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
+import {
+  Table,
+  Typography,
+  Paper,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"

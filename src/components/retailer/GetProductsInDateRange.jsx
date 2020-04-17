@@ -1,5 +1,4 @@
-import { TextField, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
+import { TextField, Typography, Button } from "@material-ui/core"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import React, { Component } from "react"

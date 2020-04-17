@@ -1,6 +1,4 @@
-import { TextField, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import Snackbar from "@material-ui/core/Snackbar"
+import { TextField, Typography, Button, Snackbar } from "@material-ui/core"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import MuiAlert from "@material-ui/lab/Alert"

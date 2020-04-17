@@ -1,13 +1,16 @@
 import React, { Component } from "react"
 import connect from "react-redux/es/connect/connect"
 import PropTypes from "prop-types"
-import { Paper, Table } from "@material-ui/core"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
-import TablePagination from "@material-ui/core/TablePagination"
-import Button from "@material-ui/core/Button"
+import {
+  Paper,
+  Table,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
+  Button,
+} from "@material-ui/core"
 import { priceChangeProductDetailsTable } from "./constants"
 import { cancelProductEffectivePriceChange } from "../../redux/actions/RetailerActions"
 import Message from "./Message"

@@ -1,13 +1,15 @@
-import { Table } from "@material-ui/core"
-import Paper from "@material-ui/core/Paper"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
+import {
+  Table,
+  Paper,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
+  TableBody,
+} from "@material-ui/core"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import TablePagination from "@material-ui/core/TablePagination"
-import TableBody from "@material-ui/core/TableBody"
 import PropTypes from "prop-types"
 import { getClusterList } from "../../redux/actions/RetailerActions"
 import { viewClusters } from "../utils/constants"

@@ -1,13 +1,16 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from "react"
-import { Table, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import Paper from "@material-ui/core/Paper"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
+import {
+  Table,
+  Typography,
+  Button,
+  Paper,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core"
 import { connect } from "react-redux"
 import { cancelEffectivePrice } from "../../redux/actions/RetailerActions"
 import {

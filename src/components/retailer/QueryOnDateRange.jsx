@@ -1,12 +1,14 @@
-import { Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import TextField from "@material-ui/core/TextField"
+import {
+  Typography,
+  Button,
+  TextField,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+} from "@material-ui/core"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
-import Radio from "@material-ui/core/Radio"
-import RadioGroup from "@material-ui/core/RadioGroup"
-import FormControlLabel from "@material-ui/core/FormControlLabel"
-import FormControl from "@material-ui/core/FormControl"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"

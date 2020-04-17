@@ -1,7 +1,11 @@
-import { InputLabel, Select, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import FormControl from "@material-ui/core/FormControl"
-import Snackbar from "@material-ui/core/Snackbar"
+import {
+  InputLabel,
+  Select,
+  Typography,
+  Button,
+  FormControl,
+  Snackbar,
+} from "@material-ui/core"
 import MuiAlert from "@material-ui/lab/Alert"
 import React, { Component } from "react"
 import PropTypes from "prop-types"
