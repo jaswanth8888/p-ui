@@ -33,7 +33,7 @@ node{
         stage('npm-build')
         {
                 sh'''
-                npm react-scripts buils
+                npm react-script buils
                 '''
         }
         stage('deploy')
