@@ -6,6 +6,12 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { getPricesInRange } from "../../redux/actions/RetailerActions"
+import {
+  startdate,
+  enddate,
+  datecheck,
+  startDateToBeFutureDate,
+} from "../utils/constants"
 
 class GetProductsInDateRange extends Component {
   constructor(props) {
@@ -45,7 +51,7 @@ class GetProductsInDateRange extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Enter a valid Start Date
+                    {startdate}
                   </Typography>
                 </div>
               )}
@@ -53,7 +59,7 @@ class GetProductsInDateRange extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Enter a valid Start Date
+                    {startdate}
                   </Typography>
                 </div>
               )}
@@ -61,7 +67,7 @@ class GetProductsInDateRange extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Enter a valid End Date
+                    {enddate}
                   </Typography>
                 </div>
               )}
@@ -69,7 +75,7 @@ class GetProductsInDateRange extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Enter a valid End Date
+                    {enddate}
                   </Typography>
                 </div>
               )}
@@ -77,7 +83,7 @@ class GetProductsInDateRange extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Start date has to be a future Date
+                    {startDateToBeFutureDate}
                   </Typography>
                 </div>
               )}
@@ -85,7 +91,7 @@ class GetProductsInDateRange extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Start date has to be a future Date
+                    {startDateToBeFutureDate}
                   </Typography>
                 </div>
               )}
@@ -93,7 +99,7 @@ class GetProductsInDateRange extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    End Date has to be greater than Start Date
+                    {datecheck}
                   </Typography>
                 </div>
               )}
@@ -101,7 +107,7 @@ class GetProductsInDateRange extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    End Date has to be greater than Start Date
+                    {datecheck}
                   </Typography>
                 </div>
               )}

@@ -13,6 +13,7 @@ import {
   getZones,
   postStore,
 } from "../../redux/actions/RetailerActions"
+import { createstore, storenamecheck } from "../utils/constants"
 
 class StoreForm extends Component {
   constructor(props) {
@@ -95,7 +96,7 @@ class StoreForm extends Component {
               <div className="typo-div">
                 <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
-                  Store name has to be greater than 5 letters
+                  {storenamecheck}
                 </Typography>
               </div>
             )}
@@ -103,7 +104,7 @@ class StoreForm extends Component {
               <div className="approved-text">
                 <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
-                  Store name has to be greater than 5 letters
+                  {storenamecheck}
                 </Typography>
               </div>
             )}
@@ -117,7 +118,7 @@ class StoreForm extends Component {
                   variant="h4"
                   className="special-store-help"
                 >
-                  Create a Store
+                  {createstore}
                 </Typography>
               </div>
             </div>

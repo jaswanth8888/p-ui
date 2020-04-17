@@ -13,6 +13,7 @@ import {
   saveProductValue,
   getProductDetails,
 } from "../../redux/actions/RetailerActions"
+import { selectProduct, selectproduct } from "../utils/constants"
 
 class SelectProduct extends Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class SelectProduct extends Component {
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Please select a product name
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
@@ -65,7 +66,7 @@ class SelectProduct extends Component {
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Please select a product name
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
@@ -81,7 +82,7 @@ class SelectProduct extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    Select a Product
+                    {selectproduct}
                   </Typography>
                 </div>
               </div>

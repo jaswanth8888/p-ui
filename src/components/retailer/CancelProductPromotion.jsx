@@ -17,6 +17,7 @@ import {
   getProductDetails,
   cancelPromotion,
 } from "../../redux/actions/RetailerActions"
+import { cancelProductPromotion, promotions } from "../utils/constants"
 
 class CancelProductPromotion extends Component {
   constructor(props) {
@@ -116,17 +117,20 @@ class CancelProductPromotion extends Component {
               {cancelStatus ? (
                 <>
                   <Typography className="card-header" variant="h5">
-                    Promotions
+                    {promotions}
                   </Typography>
 
                   <TableContainer component={Paper}>
                     <Table aria-label="a dense table">
                       <TableHead>
                         <TableRow>
-                          <TableCell>Promotion Percentage</TableCell>
+                          {/* <TableCell>Promotion Percentage</TableCell>
                           <TableCell>Actual Price</TableCell>
                           <TableCell>Promotion From Date</TableCell>
-                          <TableCell>Promotion To Date</TableCell>
+                          <TableCell>Promotion To Date</TableCell> */}
+                          {cancelProductPromotion.map((tcell) => (
+                            <TableCell>{tcell}</TableCell>
+                          ))}
                         </TableRow>
                       </TableHead>
                       <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>

@@ -15,6 +15,11 @@ import {
   saveZoneValue,
   getProductDetails,
 } from "../../redux/actions/RetailerActions"
+import {
+  withdrawPromotionZone,
+  selectZone,
+  selectProduct,
+} from "../utils/constants"
 
 class WithdrawPromotionZoneForm extends Component {
   constructor(props) {
@@ -74,7 +79,7 @@ class WithdrawPromotionZoneForm extends Component {
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a Zone Name
+                    {selectZone}
                   </Typography>
                 </div>
               )}
@@ -82,7 +87,7 @@ class WithdrawPromotionZoneForm extends Component {
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a Zone Name
+                    {selectZone}
                   </Typography>
                 </div>
               )}
@@ -90,7 +95,7 @@ class WithdrawPromotionZoneForm extends Component {
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a Product Name
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
@@ -98,7 +103,7 @@ class WithdrawPromotionZoneForm extends Component {
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a Product Name
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
@@ -114,7 +119,7 @@ class WithdrawPromotionZoneForm extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    Withdraw Promotion Zone
+                    {withdrawPromotionZone}
                   </Typography>
                 </div>
               </div>

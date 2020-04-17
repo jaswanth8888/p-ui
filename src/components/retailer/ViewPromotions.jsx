@@ -9,7 +9,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { getPromotionsInRange } from "../../redux/actions/RetailerActions"
-import { viewPromotions } from "../utils/constants"
+import { viewPromotions, promotionDetails } from "../utils/constants"
 
 class ViewPromotions extends Component {
   constructor(props) {
@@ -56,9 +56,131 @@ class ViewPromotions extends Component {
                       {/* <TableCell>Product</TableCell>
                   <TableCell>Product Details</TableCell>
                   <TableCell>Promotions</TableCell> */}
+<<<<<<< HEAD
                       {viewPromotions.map((tcell) => (
                         <TableCell>{tcell}</TableCell>
                       ))}
+=======
+                  {viewPromotions.map((tcell) => (
+                    <TableCell>{tcell}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <tbody>
+                {promotions.map((product) => {
+                  return (
+                    <TableRow>
+                      <TableCell>
+                        <Typography variant="subtitle1" gutterBottom>
+                          {product.productName}
+                        </Typography>
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={product.image}
+                        >
+                          <img
+                            className="thumbnail"
+                            src={product.image}
+                            alt="none"
+                          />
+                        </a>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="subtitle1" gutterBottom>
+                          Vendor Name : {product.vendorName}
+                        </Typography>
+                        <Typography variant="subtitle1" gutterBottom>
+                          Base Price : {product.vendorPrice}
+                        </Typography>
+                        <Typography variant="subtitle1" gutterBottom>
+                          Effective Price : {product.effectivePrice}
+                        </Typography>
+                        <Typography variant="subtitle1" gutterBottom>
+                          Initial Quantity : {product.initialQty}
+                        </Typography>
+                        <Typography variant="subtitle1" gutterBottom>
+                          Remaining Quantity : {product.remainingQty}
+                        </Typography>
+                        <Typography variant="subtitle1" gutterBottom>
+                          Product Category : {product.category}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="subtitle1" gutterBottom>
+                          <Table size="small" aria-label="a dense table">
+                            <TableHead>
+                              <TableRow>
+                                {/* <TableCell size="small">
+                                  Promotion Percentage
+                                </TableCell>
+                                <TableCell>Selling Price</TableCell>
+                                <TableCell>Start Date</TableCell>
+                                <TableCell>End Date</TableCell>
+                                <TableCell>Level Applied</TableCell> */}
+                                {promotionDetails.map((tcell) => (
+                                  <TableCell>{tcell}</TableCell>
+                                ))}
+                              </TableRow>
+                            </TableHead>
+                            <tbody>
+                              {product.list.map((promotion) => {
+                                return (
+                                  <TableRow key={promotion.promotionId}>
+                                    <TableCell>
+                                      <Typography
+                                        variant="subtitle1"
+                                        gutterBottom
+                                      >
+                                        {promotion.promotionPercentage}
+                                      </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                      <Typography
+                                        variant="subtitle1"
+                                        gutterBottom
+                                      >
+                                        {promotion.promotionSellingPrice}
+                                      </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                      <Typography
+                                        variant="subtitle1"
+                                        gutterBottom
+                                      >
+                                        {promotion.startDate.slice(0, 10)}
+                                      </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                      <Typography
+                                        variant="subtitle1"
+                                        gutterBottom
+                                      >
+                                        {promotion.endDate.slice(0, 10)}
+                                      </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                      <Typography
+                                        variant="subtitle1"
+                                        gutterBottom
+                                      >
+                                        {levelOption}
+                                      </Typography>
+                                      <Typography
+                                        variant="subtitle1"
+                                        gutterBottom
+                                      >
+                                        {promotion.zoneCluster}
+                                      </Typography>
+                                    </TableCell>
+                                  </TableRow>
+                                )
+                              })}
+                            </tbody>
+                          </Table>
+                        </Typography>
+                      </TableCell>
+>>>>>>> 8f9d1a246f67692dd5fdcb37a1a01393d67be7de
                     </TableRow>
                   </TableHead>
                   <tbody>

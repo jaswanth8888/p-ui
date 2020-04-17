@@ -12,6 +12,7 @@ import {
   resetStatusCode,
 } from "../../redux/actions/RetailerActions"
 import ProductDetails from "../utils/ProductDetails"
+import { viewAssignedClusters } from "../utils/constants"
 
 class ViewAssignedClusters extends Component {
   constructor(props) {
@@ -76,10 +77,13 @@ class ViewAssignedClusters extends Component {
           <Table aria-label="a dense table">
             <TableHead>
               <TableRow>
-                <TableCell>Cluster Name</TableCell>
+                {/* <TableCell>Cluster Name</TableCell>
                 <TableCell>Quantity Assigned</TableCell>
                 <TableCell>Profit Percentage</TableCell>
-                <TableCell>Price</TableCell>
+                <TableCell>Price</TableCell> */}
+                {viewAssignedClusters.map((tcell) => (
+                  <TableCell>{tcell}</TableCell>
+                ))}
               </TableRow>
             </TableHead>
             <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>
