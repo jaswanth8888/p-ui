@@ -1,22 +1,20 @@
 import React, { Component } from "react"
 
 import connect from "react-redux/es/connect/connect"
-import Button from "@material-ui/core/Button"
-import AppBar from "@material-ui/core/AppBar"
-import Toolbar from "@material-ui/core/Toolbar"
-import MenuIcon from "@material-ui/icons/Menu"
+import { Button, AppBar, Toolbar } from "@material-ui/core"
+import { MenuIcon } from "@material-ui/icons/Menu"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 import { Link } from "react-router-dom"
 import { vendorlogout } from "../../redux/actions/VendorActions"
 import Message from "./Message"
 
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["handleSubmit","handleLogout"] }] */
 class Home extends Component {
   constructor(props) {
     super(props)
     this.handleLogout = this.handleLogout.bind(this)
   }
 
+  // eslint-disable-next-line class-methods-use-this
   handleLogout() {
     sessionStorage.removeItem("token")
     window.location.href = "./"

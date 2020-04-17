@@ -1,6 +1,4 @@
-import { TextField } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import InputAdornment from "@material-ui/core/InputAdornment"
+import { TextField, Button, InputAdornment } from "@material-ui/core"
 import Lock from "@material-ui/icons/Lock"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import PersonIcon from "@material-ui/icons/Person"

@@ -61,7 +61,6 @@ class AssignPriceToProduct extends Component {
     parameter.endDate = endDate
     parameter.effectivePercentage = effectivePercentage
     getEffectivePriceAlt(parameter, productDetails.productName)
-    console.log(productDetails)
     history.push("/assignpricetoproduct")
   }
 
