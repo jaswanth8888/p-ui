@@ -1,15 +1,21 @@
 // vendor login
-import { Avatar, Box, Grid, TextField, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import InputAdornment from "@material-ui/core/InputAdornment"
+import {
+  Avatar,
+  Box,
+  Grid,
+  TextField,
+  Typography,
+  Button,
+  InputAdornment,
+  AppBar,
+  Toolbar,
+} from "@material-ui/core"
 import Lock from "@material-ui/icons/Lock"
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import PersonIcon from "@material-ui/icons/Person"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import AppBar from "@material-ui/core/AppBar"
-import Toolbar from "@material-ui/core/Toolbar"
 import MenuIcon from "@material-ui/icons/Menu"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 import { Link } from "react-router-dom"

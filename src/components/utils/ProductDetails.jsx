@@ -1,10 +1,14 @@
 import React, { Component } from "react"
 import connect from "react-redux/es/connect/connect"
-import { Typography, Paper, Table } from "@material-ui/core"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
+import {
+  Typography,
+  Paper,
+  Table,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core"
 import PropTypes from "prop-types"
 
 import { getProductDetails } from "../../redux/actions/RetailerActions"

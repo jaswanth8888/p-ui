@@ -1,10 +1,7 @@
-import { Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
+import { Typography, Button, Snackbar, TextField } from "@material-ui/core"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import Snackbar from "@material-ui/core/Snackbar"
 import MuiAlert from "@material-ui/lab/Alert"
-import TextField from "@material-ui/core/TextField"
 import PropTypes from "prop-types"
 import ProductDetails from "../utils/ProductDetails"
 import {
@@ -61,7 +58,6 @@ class AssignPriceToProduct extends Component {
     parameter.endDate = endDate
     parameter.effectivePercentage = effectivePercentage
     getEffectivePriceAlt(parameter, productDetails.productName)
-    console.log(productDetails)
     history.push("/assignpricetoproduct")
   }
 

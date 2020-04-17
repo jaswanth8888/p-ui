@@ -1,9 +1,7 @@
 import React, { Component } from "react"
 
 import connect from "react-redux/es/connect/connect"
-import Button from "@material-ui/core/Button"
-import AppBar from "@material-ui/core/AppBar"
-import Toolbar from "@material-ui/core/Toolbar"
+import { Button, AppBar, Toolbar } from "@material-ui/core"
 import MenuIcon from "@material-ui/icons/Menu"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 import { Link } from "react-router-dom"

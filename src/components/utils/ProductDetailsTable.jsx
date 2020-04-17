@@ -1,10 +1,14 @@
 import React, { Component } from "react"
 import connect from "react-redux/es/connect/connect"
-import { Typography, Paper, Table } from "@material-ui/core"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
+import {
+  Typography,
+  Paper,
+  Table,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core"
 import PropTypes from "prop-types"
 import { productDetailsTable, product } from "./constants"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
@@ -65,13 +69,6 @@ class ProductDetailsTable extends Component {
           <Table aria-label="a dense table">
             <TableHead>
               <TableRow>
-                {/* <TableCell>Vendor Name</TableCell>
-                <TableCell>Vendor Price(Base)</TableCell>
-                <TableCell>Product Price</TableCell>
-                <TableCell>Initial Quantity</TableCell>
-                <TableCell>Existing Quantity</TableCell>
-                <TableCell>Category</TableCell>
-                <TableCell>UOM</TableCell> */}
                 {productDetailsTable.map((tcell) => (
                   <TableCell>{tcell}</TableCell>
                 ))}
@@ -81,7 +78,9 @@ class ProductDetailsTable extends Component {
               <TableRow>
                 <TableCell>{productDetails.companyName}</TableCell>
                 <TableCell>{productDetails.productBasePrice}</TableCell>
-                <TableCell>{productDetails.effectivePrice}</TableCell>
+                <TableCell>
+                  {productDetails.effectivePriceObj.effectivePrice}
+                </TableCell>
                 <TableCell>{productDetails.initialQuantity}</TableCell>
                 <TableCell>{productDetails.remainingQuantity}</TableCell>
                 <TableCell>{productDetails.productCategory}</TableCell>

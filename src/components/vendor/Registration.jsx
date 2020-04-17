@@ -11,14 +11,13 @@ import {
   MenuItem,
   FormLabel,
   FormHelperText,
+  Button,
+  AppBar,
+  Toolbar,
 } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import AppBar from "@material-ui/core/AppBar"
-import Toolbar from "@material-ui/core/Toolbar"
-
 import AccountCircle from "@material-ui/icons/AccountCircle"
 import { Link } from "react-router-dom"
 import Message from "./Message"
@@ -73,9 +72,8 @@ export class Registration extends Component {
   }
 
   isValidEmail = () => {
-    const { vendorDetails } = this.state
+    const { vendorDetails, error } = this.state
     const { email } = vendorDetails
-    const { error } = this.state
     // eslint-disable-next-line no-useless-escape
     const re = /^(([^<>()[\]\\.,:\s@\"]+(\.[^<>()[\]\\.,:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (!re.test(email)) {

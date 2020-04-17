@@ -1,17 +1,21 @@
-import { InputLabel, TextField, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
+import {
+  InputLabel,
+  TextField,
+  Typography,
+  Button,
+  InputAdornment,
+  TextareaAutosize,
+  MenuItem,
+} from "@material-ui/core"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
-import MenuItem from "@material-ui/core/MenuItem"
 
 import Select from "@material-ui/core/Select"
-import InputAdornment from "@material-ui/core/InputAdornment"
 
-import TextareaAutosize from "@material-ui/core/TextareaAutosize"
 import { postProduct } from "../../redux/actions/VendorActions"
 import Home from "./Home"
 import "./style.css"
@@ -48,9 +52,7 @@ class AddProduct extends Component {
 
   handleSubmit() {
     const { product } = this.state
-    const { productName } = product
-    const { productBasePrice } = product
-    const { initialQuantity } = product
+    const { productName, productBasePrice, initialQuantity } = product
     const test = this.props
     if (
       productName &&
@@ -65,18 +67,19 @@ class AddProduct extends Component {
 
   render() {
     if (sessionStorage.getItem("token") != null) {
-      const { isPosted } = this.state
-      const { product } = this.state
-      const { productName } = product
-      const { productBasePrice } = product
-      const { initialQuantity } = product
-      const { productCategory } = product
-      const { productDescription } = product
-      const { productImagePath } = product
-      const { abv } = product
-      const { volume } = product
-      const { companyName } = product
-      const { uom } = product
+      const { isPosted, product } = this.state
+      const {
+        productName,
+        productBasePrice,
+        initialQuantity,
+        productCategory,
+        productDescription,
+        productImagePath,
+        abv,
+        volume,
+        companyName,
+        uom,
+      } = product
       if (isPosted) {
         return <Redirect to="/vendor/home" />
       }

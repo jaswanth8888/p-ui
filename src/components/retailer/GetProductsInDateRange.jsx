@@ -1,57 +1,36 @@
-import {
-  Typography,
-  Button,
-  TextField,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-} from "@material-ui/core"
+import { TextField, Typography, Button } from "@material-ui/core"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import {
-  getPromotionsInRange,
-  saveLevelValue,
-  saveStartDate,
-  saveEndDate,
-} from "../../redux/actions/RetailerActions"
+import { getPricesInRange } from "../../redux/actions/RetailerActions"
 import {
   startdate,
   enddate,
   datecheck,
-  selectLevel,
-  queryPromotionsForProducts,
+  startDateToBeFutureDate,
 } from "../utils/constants"
 
-class QueryOnDateRange extends Component {
+class GetProductsInDateRange extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
+      currentDate: new Date().toISOString().slice(0, 10),
       startDate: "",
       endDate: "",
-      levelOption: "",
     }
+
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit = () => {
-    const {
-      saveLevelValue: saveLevelValueAlt,
-      saveStartDate: saveStartDateAlt,
-      saveEndDate: saveEndDateAlt,
-      getPromotionsInRange: getPromotionsInRangeAlt,
-      history,
-    } = this.props
-    const { startDate, endDate, levelOption } = this.state
-    saveLevelValueAlt(levelOption)
-    saveStartDateAlt(startDate)
-    saveEndDateAlt(endDate)
-    getPromotionsInRangeAlt(startDate, endDate, levelOption)
-    history.push("/view/promotions")
+    const { startDate, endDate, currentDate } = this.state
+    const { history, getPricesInRange: getPricesInRangeAlt } = this.props
+    getPricesInRangeAlt(startDate, endDate, currentDate)
+    history.push("/view/effectiveprices")
   }
 
   handleChange(e) {
@@ -60,7 +39,7 @@ class QueryOnDateRange extends Component {
   }
 
   render() {
-    const { startDate, endDate, levelOption } = this.state
+    const { startDate, endDate, currentDate } = this.state
     return (
       <div className="box-container">
         <div className="joint-form">
@@ -99,6 +78,22 @@ class QueryOnDateRange extends Component {
                   </Typography>
                 </div>
               )}
+              {startDate <= currentDate && (
+                <div>
+                  <ClearIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    {startDateToBeFutureDate}
+                  </Typography>
+                </div>
+              )}
+              {startDate >= currentDate && (
+                <div>
+                  <CheckIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    {startDateToBeFutureDate}
+                  </Typography>
+                </div>
+              )}
               {endDate <= startDate && (
                 <div>
                   <ClearIcon className="icon-style" />
@@ -115,22 +110,6 @@ class QueryOnDateRange extends Component {
                   </Typography>
                 </div>
               )}
-              {levelOption === "" && (
-                <div>
-                  <ClearIcon className="icon-style" />
-                  <Typography variant="subtitle2" gutterBottom>
-                    {selectLevel}
-                  </Typography>
-                </div>
-              )}
-              {levelOption !== "" && (
-                <div>
-                  <CheckIcon className="icon-style" />
-                  <Typography variant="subtitle2" gutterBottom>
-                    {selectLevel}
-                  </Typography>
-                </div>
-              )}
             </div>
           </div>
           <div className="form-half">
@@ -138,79 +117,51 @@ class QueryOnDateRange extends Component {
               <div>
                 <div className="help-block">
                   <Typography color="primary" component="h1" variant="h4">
-                    {queryPromotionsForProducts}
+                    Prices for Products
                   </Typography>
                 </div>
               </div>
-
               <TextField
-                id="startDate-query"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                type="date"
+                id="startDate-in-range"
                 label="Start Date"
+                InputLabelProps={{ shrink: true, required: true }}
                 name="startDate"
-                fullWidth
-                value={startDate}
-                type="date"
-                variant="outlined"
-                margin="normal"
                 autoComplete="startDate"
-                required
                 onChange={this.handleChange}
                 autoFocus
-                InputLabelProps={{ shrink: true, required: true }}
               />
               <TextField
-                id="endDate-query"
-                name="endDate"
-                label="End Date"
-                fullWidth
-                value={endDate}
-                type="date"
                 variant="outlined"
                 margin="normal"
-                autoComplete="endDate"
                 required
+                fullWidth
+                type="date"
+                // defaultValue={new Date().toISOString().slice(0,10)}
+                step="0.01"
+                id="endDate-in-range"
+                label="End Date"
+                InputLabelProps={{ shrink: true, required: true }}
+                name="endDate"
+                autoComplete="endDate"
                 onChange={this.handleChange}
                 autoFocus
-                InputLabelProps={{ shrink: true, required: true }}
               />
-
-              <FormControl>
-                <Typography variant="h6">Level Option</Typography>
-                <RadioGroup
-                  row
-                  aria-label="condition"
-                  name="levelOption"
-                  value={levelOption}
-                  onChange={this.handleChange}
-                >
-                  <FormControlLabel
-                    value="zone"
-                    control={<Radio />}
-                    label="Zone"
-                  />
-                  <FormControlLabel
-                    value="cluster"
-                    control={<Radio />}
-                    label="Cluster"
-                  />
-                </RadioGroup>
-              </FormControl>
-
-              {endDate > startDate && levelOption !== "" && (
+              {startDate >= currentDate && endDate > startDate && (
                 <Button
                   type="button"
                   fullWidth
                   variant="contained"
                   color="primary"
-                  className="{classes.submit}"
-                  style={{
-                    marginTop: "30px",
-                    marginBottom: "30px",
-                  }}
-                  id="query-submit"
+                  className="{classes.submit} submit-pad"
                   onClick={this.handleSubmit}
+                  id="get-prods-in-range-submit"
                 >
-                  Show Promotions
+                  Show
                 </Button>
               )}
             </form>
@@ -221,19 +172,17 @@ class QueryOnDateRange extends Component {
   }
 }
 
-QueryOnDateRange.propTypes = {
-  getPromotionsInRange: PropTypes.func.isRequired,
-  saveLevelValue: PropTypes.func.isRequired,
-  saveStartDate: PropTypes.func.isRequired,
-  saveEndDate: PropTypes.func.isRequired,
+GetProductsInDateRange.propTypes = {
+  getPricesInRange: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
 }
 
+const stateAsProps = (store) => ({
+  products: store.RetailerReducer.products,
+})
+
 const actionAsProps = {
-  getPromotionsInRange,
-  saveLevelValue,
-  saveStartDate,
-  saveEndDate,
+  getPricesInRange,
 }
 
-export default connect(null, actionAsProps)(QueryOnDateRange)
+export default connect(stateAsProps, actionAsProps)(GetProductsInDateRange)

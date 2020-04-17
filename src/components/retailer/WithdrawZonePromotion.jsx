@@ -1,15 +1,17 @@
-import { Table, Typography } from "@material-ui/core"
-import Paper from "@material-ui/core/Paper"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
+import {
+  Table,
+  Typography,
+  Paper,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Button,
+  IconButton,
+} from "@material-ui/core"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-
-import Button from "@material-ui/core/Button"
 import Alert from "@material-ui/lab/Alert"
-import IconButton from "@material-ui/core/IconButton"
 import CloseIcon from "@material-ui/icons/Close"
 import PropTypes from "prop-types"
 import ProductDetailsTable from "../utils/ProductDetailsTable"

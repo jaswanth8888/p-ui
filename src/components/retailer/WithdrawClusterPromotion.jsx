@@ -1,12 +1,15 @@
-import { Typography, Paper } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
+import {
+  Typography,
+  Paper,
+  Button,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Table,
+} from "@material-ui/core"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
-import Table from "@material-ui/core/Table"
 import PropTypes from "prop-types"
 import {
   getPromotionsIncluster,

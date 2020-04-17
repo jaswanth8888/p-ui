@@ -1,16 +1,19 @@
-/* eslint-disable react/no-unused-state */
-/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { Typography, Paper, Table, TextField } from "@material-ui/core"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
-import Button from "@material-ui/core/Button"
+import {
+  Typography,
+  Paper,
+  Table,
+  TextField,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Button,
+  IconButton,
+} from "@material-ui/core"
 import Alert from "@material-ui/lab/Alert"
-import IconButton from "@material-ui/core/IconButton"
 import CloseIcon from "@material-ui/icons/Close"
 import {
   getProductDetails,
@@ -80,8 +83,7 @@ class EditItemPrice extends Component {
   }
 
   render() {
-    const { productDetails } = this.props
-    const { isPromotion } = this.props
+    const { productDetails, isPromotion } = this.props
     const { updatedProduct } = this.state
     return (
       <div>
