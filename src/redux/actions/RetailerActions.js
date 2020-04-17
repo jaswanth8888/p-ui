@@ -632,7 +632,9 @@ export const getEffectivePrice = (parameter, productName) => async (
     )
     .then(() => {
       dispatch({
+        type: POST_EFFECTIVE_PRICE,
         msg: "Assigned Price Successfully",
+        msgSeverity: "success",
       })
     })
     .catch((err) => {
