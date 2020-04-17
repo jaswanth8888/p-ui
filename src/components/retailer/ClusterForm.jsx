@@ -11,6 +11,7 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { getZones, postCluster } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
+import { createCluster, clusterCondition } from "../utils/constants"
 
 class ClusterForm extends Component {
   constructor(props) {
@@ -70,7 +71,7 @@ class ClusterForm extends Component {
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Cluster has to be greater than 5 letters
+                    {clusterCondition}
                   </Typography>
                 </div>
               )}
@@ -78,7 +79,7 @@ class ClusterForm extends Component {
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Cluster has to be greater than 5 letters
+                    {clusterCondition}
                   </Typography>
                 </div>
               )}
@@ -94,7 +95,7 @@ class ClusterForm extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    Create a cluster
+                    {createCluster}
                   </Typography>
                 </div>
               </div>

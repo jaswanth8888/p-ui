@@ -35,6 +35,9 @@ import {
   ENDDATE_SAVE_VALUE,
   IS_PROMOTION_APPLLIED,
   PRODUCT_UPDATE,
+  PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
 } from "../actions/types"
 
 const initialState = {
@@ -69,6 +72,7 @@ const initialState = {
   levelOption: "",
   isPromotion: false,
   updatedProduct: {},
+  priceChangeProductsList: [],
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -169,6 +173,23 @@ export default (state = initialState, action = {}) => {
       return { ...state, startDate: action.startDate }
     case ENDDATE_SAVE_VALUE:
       return { ...state, endDate: action.endDate }
+    case PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST:
+      return {
+        ...state,
+        priceChangeProductsList: action.priceChangeProductsList,
+      }
+    case PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST:
+      return {
+        ...state,
+        priceChangeProductsList: action.priceChangeProductsList,
+      }
+    case PRODUCT_CANCEL_EFFECTIVEPRICECHANGE:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
     default:
       return { ...state }
   }

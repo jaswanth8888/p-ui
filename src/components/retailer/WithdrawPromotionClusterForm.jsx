@@ -17,6 +17,12 @@ import {
   getClusters,
   saveClusterValue,
 } from "../../redux/actions/RetailerActions"
+import {
+  selectProduct,
+  selectZone,
+  selectCluster,
+  withdrawPromotionCluster,
+} from "../utils/constants"
 
 class WithdrawPromotionClusterForm extends Component {
   constructor(props) {
@@ -92,7 +98,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a product name
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
@@ -100,7 +106,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a product name
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
@@ -108,7 +114,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a zone name
+                    {selectZone}
                   </Typography>
                 </div>
               )}
@@ -116,7 +122,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a zone name
+                    {selectZone}
                   </Typography>
                 </div>
               )}
@@ -124,7 +130,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a cluster name
+                    {selectCluster}
                   </Typography>
                 </div>
               )}
@@ -132,7 +138,7 @@ class WithdrawPromotionClusterForm extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a cluster name
+                    {selectCluster}
                   </Typography>
                 </div>
               )}
@@ -148,7 +154,7 @@ class WithdrawPromotionClusterForm extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    Withdraw Promotion Cluster
+                    {withdrawPromotionCluster}
                   </Typography>
                 </div>
               </div>

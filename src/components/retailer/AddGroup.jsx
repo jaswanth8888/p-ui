@@ -9,6 +9,7 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { postGroup } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
+import { groupName, addGroup, addGroupFail } from "../utils/constants"
 
 class AddGroup extends Component {
   constructor(props) {
@@ -63,7 +64,7 @@ class AddGroup extends Component {
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Please provide a group name
+                    {groupName}
                   </Typography>
                 </div>
               )}
@@ -71,7 +72,7 @@ class AddGroup extends Component {
                 <div className="approved-div">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Please provide a group name
+                    {groupName}
                   </Typography>
                 </div>
               )}
@@ -87,7 +88,7 @@ class AddGroup extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    Create a Group
+                    {addGroup}
                   </Typography>
                 </div>
               </div>
@@ -124,7 +125,7 @@ class AddGroup extends Component {
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
-                  Group creation failed. Please match the requirements
+                  {addGroupFail}
                 </MuiAlert>
               </Snackbar>
             </div>

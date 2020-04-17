@@ -48,6 +48,8 @@ import WithdrawPromotionZoneRouter from "../retailer/WithdrawPromotionZoneRouter
 import ZoneClusterRouter from "../retailer/ZoneClusterRouter"
 import ZoneForm from "../retailer/ZoneForm"
 import ZonePromotionRouter from "../retailer/ZonePromotionRouter"
+import CancelNotEffectivePriceChange from "../retailer/CancelNotEffectivePriceChange"
+import CancelEffectivePriceChange from "../retailer/CancelEffectivePriceChange"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -274,6 +276,32 @@ function FullNavbar(props) {
             </ListItem>
           </Tooltip>
         </Link>
+        <Link to="/product/pricechange/cancelnoteffective">
+          <Tooltip title="Cancel Not Effective Price Change" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <EventBusyIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Cancel Not Effective Price Change"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+        <Link to="/product/pricechange/canceleffective">
+          <Tooltip title="Cancel Effective Price Change" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <EventBusyIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Cancel Effective Price Change"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
         <Divider />
         <Link to="/view/products/daterange">
           <Tooltip title="Cancel Effective Price Range" placement="right">
@@ -296,7 +324,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Query on Date Range"
+                primary="Query Promotions on Date Range"
               />
             </ListItem>
           </Tooltip>
@@ -473,6 +501,16 @@ function FullNavbar(props) {
           <Route exact path="/store" component={StoreForm} />
           <Route exact path="/view/zones" component={ViewZones} />
           <Route exact path="/view/clusters" component={ViewClusters} />
+          <Route
+            exact
+            path="/product/pricechange/cancelnoteffective"
+            component={CancelNotEffectivePriceChange}
+          />
+          <Route
+            exact
+            path="/product/pricechange/canceleffective"
+            component={CancelEffectivePriceChange}
+          />
           <Route
             exact
             path="/cancel/promotion"

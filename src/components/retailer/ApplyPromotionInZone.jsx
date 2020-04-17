@@ -16,6 +16,11 @@ import {
   getZones,
   saveZoneValue,
 } from "../../redux/actions/RetailerActions"
+import {
+  selectProduct,
+  selectZone,
+  selectProductandZone,
+} from "../utils/constants"
 
 class ApplyPromotionInZone extends Component {
   constructor(props) {
@@ -72,7 +77,7 @@ class ApplyPromotionInZone extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a product name
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
@@ -80,7 +85,7 @@ class ApplyPromotionInZone extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a product name
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
@@ -88,7 +93,7 @@ class ApplyPromotionInZone extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a zone name
+                    {selectZone}
                   </Typography>
                 </div>
               )}
@@ -96,7 +101,7 @@ class ApplyPromotionInZone extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a zone name
+                    {selectZone}
                   </Typography>
                 </div>
               )}
@@ -112,7 +117,7 @@ class ApplyPromotionInZone extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    Select product name and zone
+                    {selectProductandZone}
                   </Typography>
                 </div>
               </div>

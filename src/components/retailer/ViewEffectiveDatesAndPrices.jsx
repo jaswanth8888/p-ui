@@ -10,6 +10,10 @@ import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
 import { connect } from "react-redux"
 import { cancelEffectivePrice } from "../../redux/actions/RetailerActions"
+import {
+  viewEffectiveDatesAndPrices,
+  PromotionDetails,
+} from "../utils/constants"
 
 class ViewEffectiveDatesAndPrices extends Component {
   constructor(props) {
@@ -27,9 +31,12 @@ class ViewEffectiveDatesAndPrices extends Component {
               <Table aria-label="a dense table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Product Name</TableCell>
+                    {/* <TableCell>Product Name</TableCell>
                     <TableCell>Base Price</TableCell>
-                    <TableCell>Promotions</TableCell>
+                    <TableCell>Promotions</TableCell> */}
+                    {viewEffectiveDatesAndPrices.map((tcell) => (
+                      <TableCell>{tcell}</TableCell>
+                    ))}
                   </TableRow>
                 </TableHead>
                 <tbody>
@@ -52,12 +59,15 @@ class ViewEffectiveDatesAndPrices extends Component {
                             <Table size="small" aria-label="a dense table">
                               <TableHead>
                                 <TableRow>
-                                  <TableCell>Profit Percentage</TableCell>
+                                  {/* <TableCell>Profit Percentage</TableCell>
                                   <TableCell>Zone/Cluster</TableCell>
                                   <TableCell>Effective price</TableCell>
                                   <TableCell>Start Date</TableCell>
                                   <TableCell>End Date</TableCell>
-                                  <TableCell>Promotion Id</TableCell>
+                                  <TableCell>Promotion Id</TableCell> */}
+                                  {PromotionDetails.map((tcell) => (
+                                    <TableCell>{tcell}</TableCell>
+                                  ))}
                                 </TableRow>
                               </TableHead>
                               <tbody>

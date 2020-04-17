@@ -16,6 +16,7 @@ import {
   saveStartDate,
   saveEndDate,
 } from "../../redux/actions/RetailerActions"
+import { startdate, enddate, datecheck, selectLevel } from "../utils/constants"
 
 class QueryOnDateRange extends Component {
   constructor(props) {
@@ -62,7 +63,7 @@ class QueryOnDateRange extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Enter a valid Start Date
+                    {startdate}
                   </Typography>
                 </div>
               )}
@@ -70,7 +71,7 @@ class QueryOnDateRange extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Enter a valid Start Date
+                    {startdate}
                   </Typography>
                 </div>
               )}
@@ -78,7 +79,7 @@ class QueryOnDateRange extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Enter a valid End Date
+                    {enddate}
                   </Typography>
                 </div>
               )}
@@ -86,7 +87,7 @@ class QueryOnDateRange extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Enter a valid End Date
+                    {enddate}
                   </Typography>
                 </div>
               )}
@@ -94,7 +95,7 @@ class QueryOnDateRange extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    End Date has to be greater than Start Date
+                    {datecheck}
                   </Typography>
                 </div>
               )}
@@ -102,7 +103,7 @@ class QueryOnDateRange extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    End Date has to be greater than Start Date
+                    {datecheck}
                   </Typography>
                 </div>
               )}
@@ -110,7 +111,7 @@ class QueryOnDateRange extends Component {
                 <div>
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select level option
+                    {selectLevel}
                   </Typography>
                 </div>
               )}
@@ -118,7 +119,7 @@ class QueryOnDateRange extends Component {
                 <div>
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select level option
+                    {selectLevel}
                   </Typography>
                 </div>
               )}

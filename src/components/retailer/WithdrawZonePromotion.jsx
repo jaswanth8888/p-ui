@@ -17,6 +17,7 @@ import {
   getProductDetails,
   withdrawPromotion,
 } from "../../redux/actions/RetailerActions"
+import { withdrawZonePromotion, zoneLevelPromotions } from "../utils/constants"
 
 class WithdrawZonePromotion extends Component {
   constructor(props) {
@@ -134,17 +135,20 @@ class WithdrawZonePromotion extends Component {
               {productDetails.assignProduct.length > 0 ? (
                 <>
                   <Typography className="card-header" variant="h5">
-                    Promotions in Zone Level
+                    {zoneLevelPromotions}
                   </Typography>
                   <TableContainer component={Paper}>
                     <Table aria-label="a dense table">
                       <TableHead>
                         <TableRow>
-                          <TableCell>Promotion Percentage</TableCell>
+                          {/* <TableCell>Promotion Percentage</TableCell>
                           <TableCell>Actual Price</TableCell>
                           <TableCell>Promotion From Date</TableCell>
                           <TableCell>Promotion To Date</TableCell>
-                          <TableCell>Withdraw</TableCell>
+                          <TableCell>Withdraw</TableCell> */}
+                          {withdrawZonePromotion.map((tcell) => (
+                            <TableCell>{tcell}</TableCell>
+                          ))}
                         </TableRow>
                       </TableHead>
                       <tbody id="withdraw-tbody">

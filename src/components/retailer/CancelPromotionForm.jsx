@@ -15,6 +15,7 @@ import {
   saveZoneValue,
   getProductDetails,
 } from "../../redux/actions/RetailerActions"
+import { selectZone, selectProduct } from "../utils/constants"
 
 class CancelPromotionForm extends Component {
   constructor(props) {
@@ -74,7 +75,7 @@ class CancelPromotionForm extends Component {
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a Zone Name
+                    {selectZone}
                   </Typography>
                 </div>
               )}
@@ -82,7 +83,7 @@ class CancelPromotionForm extends Component {
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a Zone Name
+                    {selectZone}
                   </Typography>
                 </div>
               )}
@@ -90,7 +91,7 @@ class CancelPromotionForm extends Component {
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a Product Name
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
@@ -98,7 +99,7 @@ class CancelPromotionForm extends Component {
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Select a Product Name
+                    {selectProduct}
                   </Typography>
                 </div>
               )}
