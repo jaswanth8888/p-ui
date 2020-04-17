@@ -92,13 +92,11 @@ export const zoneCreated = "Zone created successfully!"
 export const zoneCreationFailed =
   "Zone creation failed. Please match the requirements"
 export const addProductToStore = "Add a Product to the Store"
-<<<<<<< HEAD
 export const priceChangeProductDetailsTable = [
   "Product Name",
   "Start Date",
   "End Date",
 ]
-=======
 export const zoneLevelPromotions = "Promotions in Zone Level"
 export const promotions = "Promotions"
 export const cancelProductPromotion = [
@@ -128,4 +126,3 @@ export const withdrawZonePromotion = [
 ]
 export const zoneNameCheck = "Zone has to be greater than 5 letters"
 export const createZone = "Create a Zone"
->>>>>>> 8f9d1a246f67692dd5fdcb37a1a01393d67be7de
