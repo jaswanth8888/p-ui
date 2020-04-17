@@ -48,6 +48,8 @@ const App = () => {
     "/applypromotion/cluster",
     "/definepromotion/cluster",
     "/view/promotions/cluster",
+    "/priceondate",
+    "/assignpricetoproduct",
     "/editprice",
     "/product/pricechange/canceleffective",
     "/product/pricechange/cancelnoteffective",

@@ -38,6 +38,7 @@ import {
   PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
   PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
   PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
+  POST_EFFECTIVE_PRICE,
 } from "../actions/types"
 
 const initialState = {
@@ -61,7 +62,7 @@ const initialState = {
   productList: [],
   productName: "",
   updatedPrice: "",
-  productDetails: {},
+  productDetails: { effectivePriceObj: {} },
   promotionDetails: {},
   zoneclusternames: [],
   statusCode: "",
@@ -173,6 +174,7 @@ export default (state = initialState, action = {}) => {
       return { ...state, startDate: action.startDate }
     case ENDDATE_SAVE_VALUE:
       return { ...state, endDate: action.endDate }
+
     case PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST:
       return {
         ...state,
@@ -184,6 +186,13 @@ export default (state = initialState, action = {}) => {
         priceChangeProductsList: action.priceChangeProductsList,
       }
     case PRODUCT_CANCEL_EFFECTIVEPRICECHANGE:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
+    case POST_EFFECTIVE_PRICE:
       return {
         ...state,
         msg: action.msg,

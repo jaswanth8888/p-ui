@@ -37,11 +37,15 @@ import {
   GET_PROMOTIONS_CLUSTER,
   STARTDATE_SAVE_VALUE,
   ENDDATE_SAVE_VALUE,
+  FROMDATE_SAVE_VALUE,
+  TODATE_SAVE_VALUE,
+  PROFITPERCENT_SAVE_VALUE,
   IS_PROMOTION_APPLLIED,
   PRODUCT_UPDATE,
   PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
   PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
   PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
+  POST_EFFECTIVE_PRICE,
 } from "./types"
 
 const TOKEN = () => {
@@ -615,6 +619,35 @@ export const postPromotion = (
     })
 }
 
+export const getEffectivePrice = (parameter, productName) => async (
+  dispatch
+) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/product/effectivePrice/${productName}`,
+      parameter,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then(() => {
+      dispatch({
+        msg: "Assigned Price Successfully",
+      })
+    })
+    .catch((err) => {
+      const { response } = err
+      if (response.status === 500) {
+        dispatch({
+          type: POST_EFFECTIVE_PRICE,
+          msg: "Effective Price Already Exist",
+          msgSeverity: "error",
+          statusCode: response.status,
+        })
+      }
+    })
+}
+
 export const getPricesInRange = (startDate, endDate, currentDate) => async (
   dispatch
 ) => {
@@ -723,6 +756,18 @@ export const saveStartDate = (start) => (dispatch) => {
 
 export const saveEndDate = (end) => (dispatch) => {
   dispatch({ type: ENDDATE_SAVE_VALUE, endDate: end })
+}
+
+export const saveFromDate = (from) => (dispatch) => {
+  dispatch({ type: FROMDATE_SAVE_VALUE, fromDate: from })
+}
+
+export const saveToDate = (to) => (dispatch) => {
+  dispatch({ type: TODATE_SAVE_VALUE, toDate: to })
+}
+
+export const saveEffectivePercentage = (pp) => (dispatch) => {
+  dispatch({ type: PROFITPERCENT_SAVE_VALUE, profitPercentage: pp })
 }
 
 export const getNotEffecticePriceChangeProducts = () => async (dispatch) => {

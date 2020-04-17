@@ -64,6 +64,16 @@ class ProductDetails extends Component {
                   {productDetails.productCategory}
                 </TableCell>
               </TableRow>
+              <TableHead>
+                <TableRow className="product-details-row">
+                  <TableCell className="table-text">Effective Price</TableCell>
+                  <TableCell className="table-text">
+                    {productDetails.effectivePriceObj !== null
+                      ? productDetails.effectivePriceObj.effectivePrice
+                      : "NO EFFECTIVE PRICE"}
+                  </TableCell>
+                </TableRow>
+              </TableHead>
             </Table>
           </TableContainer>
         </div>
