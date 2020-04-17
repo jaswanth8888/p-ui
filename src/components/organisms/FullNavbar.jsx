@@ -3,6 +3,7 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import Divider from "@material-ui/core/Divider"
 import Drawer from "@material-ui/core/Drawer"
 import Hidden from "@material-ui/core/Hidden"
+import Button from "@material-ui/core/Button"
 import IconButton from "@material-ui/core/IconButton"
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
@@ -346,6 +347,17 @@ function FullNavbar(props) {
           }}
         >
           <Toolbar>
+            {!sessionStorage.getItem("token") && (
+              <Link className="button-link" to="/vendor">
+                <Button
+                  color="default"
+                  className="{classes.link}"
+                  id="reg-vendor"
+                >
+                  Login As Vendor
+                </Button>
+              </Link>
+            )}
             {sessionStorage.getItem("token") &&
             sessionStorage.getItem("token").length > 10 ? (
               <>

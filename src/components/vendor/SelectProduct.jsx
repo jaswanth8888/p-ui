@@ -8,11 +8,13 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
+import Home from "./Home"
 import {
   getProductList,
   getProductDetails,
+  saveProductValue,
 } from "../../redux/actions/VendorActions"
-import Home from "./Home"
+import "./style.css"
 
 class SelectProduct extends Component {
   constructor(props) {
@@ -35,11 +37,11 @@ class SelectProduct extends Component {
   handleChangeProduct = (e, value) => {
     const productName = value
     const {
-      // saveProductValue: saveProductValueAlt,
+      saveProductValue: saveProductValueAlt,
       getProductDetails: getProductDetailsAlt,
     } = this.props
     this.setState({ productName })
-    // saveProductValueAlt(productName)
+    saveProductValueAlt(productName)
     getProductDetailsAlt(value)
   }
 
@@ -130,7 +132,7 @@ class SelectProduct extends Component {
 SelectProduct.propTypes = {
   products: PropTypes.arrayOf.isRequired,
   getProductDetails: PropTypes.func.isRequired,
-  // saveProductValue: PropTypes.func.isRequired,
+  saveProductValue: PropTypes.func.isRequired,
   getProductList: PropTypes.func.isRequired,
 }
 const stateAsProps = (store) => ({
@@ -138,7 +140,7 @@ const stateAsProps = (store) => ({
 })
 const actionAsProps = {
   getProductList,
-  // saveProductValue,
+  saveProductValue,
   getProductDetails,
 }
 export default connect(stateAsProps, actionAsProps)(SelectProduct)

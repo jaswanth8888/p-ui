@@ -16,9 +16,13 @@ import Button from "@material-ui/core/Button"
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import md5 from "md5"
-import { registration } from "../../redux/actions/VendorActions"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+
+import AccountCircle from "@material-ui/icons/AccountCircle"
+import { Link } from "react-router-dom"
 import Message from "./Message"
+import { registration } from "../../redux/actions/VendorActions"
 
 const categoryList = ["Baby", "Liquor"]
 export class Registration extends Component {
@@ -145,7 +149,6 @@ export class Registration extends Component {
       this.isValidCheckBox()
     ) {
       delete vendorDetails.confirmPassword
-      vendorDetails.password = md5(vendorDetails.password)
       const { registration: registrationAlt } = this.props
       registrationAlt({ ...vendorDetails })
       let { submitted } = this.state
@@ -183,6 +186,20 @@ export class Registration extends Component {
           alignItems="center"
           justify="center"
         >
+          <AppBar position="static" elevation={0}>
+            <Toolbar>
+              <Link className="button-link" to="/vendor">
+                <Button
+                  color="default"
+                  className="{classes.link}"
+                  id="reg-vendor"
+                  startIcon={<AccountCircle />}
+                >
+                  Vendor Login
+                </Button>
+              </Link>
+            </Toolbar>
+          </AppBar>
           <Grid item xs={3}>
             <Box diasplay="flex" flexDirection="row" justifyContent="center">
               <Box p={1}>

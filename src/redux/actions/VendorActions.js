@@ -138,7 +138,6 @@ export const isPromotionApplied = (productName) => async (dispatch) => {
       dispatch({ type: IS_PROMOTION_APPLLIED, isPromotion: res.data })
     })
     .catch(() => {
-      alert("not sucess")
       dispatch({
         type: FAILURE,
         msg: "try again",

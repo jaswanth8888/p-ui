@@ -19,6 +19,7 @@ import {
 } from "../../redux/actions/VendorActions"
 import Message from "../utils/Message"
 import Home from "./Home"
+import "./style.css"
 
 class EditItemPrice extends Component {
   constructor(props) {
@@ -89,6 +90,17 @@ class EditItemPrice extends Component {
           <div className="joint-form-large-table">
             <div className="form-center">
               <div className="flex-grid">
+                <div className="help-block">
+                  <Typography
+                    color="primary"
+                    component="h1"
+                    variant="h4"
+                    className="help-block-h4"
+                  >
+                    Update Product Price and Quantity
+                  </Typography>
+                </div>
+
                 <div className="product-name">
                   <Message />
                   <Typography className="card-header" variant="h5">
@@ -115,8 +127,6 @@ class EditItemPrice extends Component {
                               className="thumbnail"
                               src={productDetails.productImagePath}
                               alt="none"
-                              width="600"
-                              height="400"
                             />
                           </a>
                         </TableCell>
@@ -168,10 +178,10 @@ class EditItemPrice extends Component {
                     onChange={this.handlePriceChange}
                   />
                 )}
-                <Typography className="card-header" variant="h5">
+                <Typography className="card-header" variant="h6">
                   Units of Measurement: {productDetails.uom}
                 </Typography>
-                <Typography className="card-header" variant="h5">
+                <Typography className="card-header" variant="h6">
                   Quantity: {productDetails.initialQuantity}
                 </Typography>
                 <TextField

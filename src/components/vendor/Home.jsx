@@ -4,7 +4,6 @@ import connect from "react-redux/es/connect/connect"
 import Button from "@material-ui/core/Button"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
-import Typography from "@material-ui/core/Typography"
 import MenuIcon from "@material-ui/icons/Menu"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 import { Link } from "react-router-dom"
@@ -50,10 +49,6 @@ class Home extends Component {
                   Update Price/quantity
                 </Button>
               </Link>
-
-              <Typography type="title" color="inherit">
-                Vendor App
-              </Typography>
               <div>
                 <Button
                   color="inherit"
