@@ -90,7 +90,7 @@ class DefinePromotionInCluster extends Component {
           <div className="store-requirement">
             <h3 className="center-h3">Requirements</h3>
             {promotionDetails.startDate.length === 0 && (
-              <div>
+              <div className="unapproved-text">
                 <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   {startdate}
@@ -98,7 +98,7 @@ class DefinePromotionInCluster extends Component {
               </div>
             )}
             {promotionDetails.startDate.length !== 0 && (
-              <div>
+              <div className="approved-text">
                 <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   {startdate}
@@ -106,7 +106,7 @@ class DefinePromotionInCluster extends Component {
               </div>
             )}
             {promotionDetails.endDate.length === 0 && (
-              <div>
+              <div className="unapproved-text">
                 <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   {enddate}
@@ -114,7 +114,7 @@ class DefinePromotionInCluster extends Component {
               </div>
             )}
             {promotionDetails.endDate.length !== 0 && (
-              <div>
+              <div className="approved-text">
                 <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   {enddate}
@@ -122,7 +122,7 @@ class DefinePromotionInCluster extends Component {
               </div>
             )}
             {promotionDetails.endDate <= promotionDetails.startDate && (
-              <div>
+              <div className="unapproved-text">
                 <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   {datecheck}
@@ -130,7 +130,7 @@ class DefinePromotionInCluster extends Component {
               </div>
             )}
             {promotionDetails.endDate > promotionDetails.startDate && (
-              <div>
+              <div className="approved-text">
                 <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   {datecheck}
@@ -138,7 +138,7 @@ class DefinePromotionInCluster extends Component {
               </div>
             )}
             {promotionDetails.promotionPercentage >= 0 && (
-              <div>
+              <div className="unapproved-text">
                 <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   {promotioncheck}
@@ -146,7 +146,7 @@ class DefinePromotionInCluster extends Component {
               </div>
             )}
             {promotionDetails.promotionPercentage < 0 && (
-              <div>
+              <div className="approved-text">
                 <CheckIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
                   {promotioncheck}
