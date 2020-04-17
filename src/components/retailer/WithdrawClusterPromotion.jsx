@@ -13,7 +13,11 @@ import {
   withdrawPromotion,
 } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
-import { withdrawClusterPromotion, clusterPromotion } from "../utils/constants"
+import {
+  withdrawClusterPromotion,
+  clusterPromotion,
+  withdrawPromotionClusterConst,
+} from "../utils/constants"
 
 class WithdrawClusterPromotion extends Component {
   constructor(props) {
@@ -64,6 +68,9 @@ class WithdrawClusterPromotion extends Component {
         <div className="joint-form-large-table">
           <div className="form-center">
             <div className="flex-grid">
+              <Typography className="card-header" variant="h4">
+                {withdrawPromotionClusterConst}
+              </Typography>
               <ProductDetailsTable />
               <Typography className="card-header" variant="h6">
                 {clusterPromotion}

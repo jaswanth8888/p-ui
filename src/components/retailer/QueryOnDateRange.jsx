@@ -16,7 +16,13 @@ import {
   saveStartDate,
   saveEndDate,
 } from "../../redux/actions/RetailerActions"
-import { startdate, enddate, datecheck, selectLevel } from "../utils/constants"
+import {
+  startdate,
+  enddate,
+  datecheck,
+  selectLevel,
+  queryPromotionsForProducts,
+} from "../utils/constants"
 
 class QueryOnDateRange extends Component {
   constructor(props) {
@@ -130,7 +136,7 @@ class QueryOnDateRange extends Component {
               <div>
                 <div className="help-block">
                   <Typography color="primary" component="h1" variant="h4">
-                    Promotions for Products
+                    {queryPromotionsForProducts}
                   </Typography>
                 </div>
               </div>

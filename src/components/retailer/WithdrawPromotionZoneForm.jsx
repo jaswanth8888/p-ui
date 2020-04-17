@@ -16,7 +16,7 @@ import {
   getProductDetails,
 } from "../../redux/actions/RetailerActions"
 import {
-  withdrawPromotionZone,
+  withdrawPromotionZoneConst,
   selectZone,
   selectProduct,
 } from "../utils/constants"
@@ -119,7 +119,7 @@ class WithdrawPromotionZoneForm extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    {withdrawPromotionZone}
+                    {withdrawPromotionZoneConst}
                   </Typography>
                 </div>
               </div>

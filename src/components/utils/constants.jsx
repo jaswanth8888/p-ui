@@ -115,8 +115,8 @@ export const promotionDetails = [
 export const clusterCondition = "Cluster has to be greater than 5 letters"
 export const createCluster = "Create a cluster"
 export const clusterPromotion = "Promotions in cluster level"
-export const withdrawPromotionCluster = "Withdraw Promotion Cluster"
-export const withdrawPromotionZone = "Withdraw Promotion Zone"
+export const withdrawPromotionClusterConst = "Withdraw Promotion from Cluster"
+export const withdrawPromotionZoneConst = "Withdraw Promotion from Zone"
 export const withdrawZonePromotion = [
   "Promotion Percentage",
   "Actual Price",
@@ -128,3 +128,7 @@ export const zoneNameCheck = "Zone has to be greater than 5 letters"
 export const createZone = "Create a Zone"
 export const cancelNotEffectivePriceChange = "Cancel Not Effective Price Change"
 export const cancelEffectivePriceChange = "Cancel Effective Price Change"
+export const cancelPromotionConst = "Cancel Promotion Percentage"
+export const queryPromotionsForProducts = "Promotions on Date Range"
+export const viewZonesConst = "Showing All Zones"
+export const viewClustersConst = "Showing All Clusters"

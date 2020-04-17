@@ -1,4 +1,4 @@
-import { Table } from "@material-ui/core"
+import { Table, Typography } from "@material-ui/core"
 import Paper from "@material-ui/core/Paper"
 import TableCell from "@material-ui/core/TableCell"
 import TableContainer from "@material-ui/core/TableContainer"
@@ -10,7 +10,7 @@ import TablePagination from "@material-ui/core/TablePagination"
 import TableBody from "@material-ui/core/TableBody"
 import PropTypes from "prop-types"
 import { getZoneList } from "../../redux/actions/RetailerActions"
-import { viewZones } from "../utils/constants"
+import { viewZones, viewZonesConst } from "../utils/constants"
 
 class ViewZones extends Component {
   constructor(props) {
@@ -39,47 +39,52 @@ class ViewZones extends Component {
     const rows = zoneList
     return (
       <div className="box-container-table data-tables">
-        <Paper className={classes.root}>
-          <TableContainer className={classes.container}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {/* <TableCell>Zone Name</TableCell>
+        <div className="flex-grid">
+          <Typography className="card-header" variant="h4">
+            {viewZonesConst}
+          </Typography>
+          <Paper className={classes.root}>
+            <TableContainer className={classes.container}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {/* <TableCell>Zone Name</TableCell>
                   <TableCell>Number of Zones</TableCell> */}
-                  {viewZones.map((tcell) => (
-                    <TableCell>{tcell}</TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Object.keys(rows)
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                    return (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.code}
-                      >
-                        <TableCell>{row}</TableCell>
-                        <TableCell>{rows[row]}</TableCell>
-                      </TableRow>
-                    )
-                  })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={Object.keys(rows).length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={this.handleChangePage}
-            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-          />
-        </Paper>
+                    {viewZones.map((tcell) => (
+                      <TableCell>{tcell}</TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {Object.keys(rows)
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.code}
+                        >
+                          <TableCell>{row}</TableCell>
+                          <TableCell>{rows[row]}</TableCell>
+                        </TableRow>
+                      )
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={Object.keys(rows).length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={this.handleChangePage}
+              onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            />
+          </Paper>
+        </div>
       </div>
     )
   }

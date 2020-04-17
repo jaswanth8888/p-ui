@@ -17,7 +17,11 @@ import {
   getProductDetails,
   withdrawPromotion,
 } from "../../redux/actions/RetailerActions"
-import { withdrawZonePromotion, zoneLevelPromotions } from "../utils/constants"
+import {
+  withdrawZonePromotion,
+  zoneLevelPromotions,
+  withdrawPromotionZoneConst,
+} from "../utils/constants"
 
 class WithdrawZonePromotion extends Component {
   constructor(props) {
@@ -131,6 +135,9 @@ class WithdrawZonePromotion extends Component {
                   </Alert>
                 </div>
               )}
+              <Typography className="card-header" variant="h4">
+                {withdrawPromotionZoneConst}
+              </Typography>
               <ProductDetailsTable />
               {productDetails.assignProduct.length > 0 ? (
                 <>

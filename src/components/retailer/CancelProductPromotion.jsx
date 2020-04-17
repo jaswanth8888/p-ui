@@ -17,7 +17,11 @@ import {
   getProductDetails,
   cancelPromotion,
 } from "../../redux/actions/RetailerActions"
-import { cancelProductPromotion, promotions } from "../utils/constants"
+import {
+  cancelProductPromotion,
+  promotions,
+  cancelPromotionConst,
+} from "../utils/constants"
 
 class CancelProductPromotion extends Component {
   constructor(props) {
@@ -112,6 +116,9 @@ class CancelProductPromotion extends Component {
                 </div>
               )}
 
+              <Typography className="card-header" variant="h4">
+                {cancelPromotionConst}
+              </Typography>
               <ProductDetailsTable />
 
               {cancelStatus ? (

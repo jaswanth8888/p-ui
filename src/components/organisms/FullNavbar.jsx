@@ -38,7 +38,6 @@ import AddGroup from "../retailer/AddGroup"
 import CancelPromotionRouter from "../retailer/CancelPromotionRouter"
 import ClusterForm from "../retailer/ClusterForm"
 import ClusterPromotionRouter from "../retailer/ClusterPromotionRouter"
-import EffectivePriceRouter from "../retailer/EffectivePriceRouter"
 import ProductRouter from "../retailer/ProductRouter"
 import QueryOnDateRouter from "../retailer/QueryOnDateRouter"
 import StoreForm from "../retailer/StoreForm"
@@ -320,19 +319,6 @@ function FullNavbar(props) {
           </Tooltip>
         </Link>
         <Divider />
-        <Link to="/view/products/daterange">
-          <Tooltip title="Cancel Effective Price Range" placement="right">
-            <ListItem button>
-              <ListItemIcon>
-                <EventBusyIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary="Cancel Effective Price"
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
         <Link to="/queryondaterange">
           <Tooltip title="Query on Date Range" placement="right">
             <ListItem button>
@@ -554,11 +540,6 @@ function FullNavbar(props) {
               "/editprice",
             ]}
             component={ZoneClusterRouter}
-          />
-          <Route
-            exact
-            path={["/view/effectiveprices", "/view/products/daterange"]}
-            component={EffectivePriceRouter}
           />
           <Route
             exact

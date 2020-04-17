@@ -21,7 +21,7 @@ import {
   selectProduct,
   selectZone,
   selectCluster,
-  withdrawPromotionCluster,
+  withdrawPromotionClusterConst,
 } from "../utils/constants"
 
 class WithdrawPromotionClusterForm extends Component {
@@ -154,7 +154,7 @@ class WithdrawPromotionClusterForm extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    {withdrawPromotionCluster}
+                    {withdrawPromotionClusterConst}
                   </Typography>
                 </div>
               </div>

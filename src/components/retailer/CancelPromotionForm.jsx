@@ -15,7 +15,11 @@ import {
   saveZoneValue,
   getProductDetails,
 } from "../../redux/actions/RetailerActions"
-import { selectZone, selectProduct } from "../utils/constants"
+import {
+  selectZone,
+  selectProduct,
+  cancelPromotionConst,
+} from "../utils/constants"
 
 class CancelPromotionForm extends Component {
   constructor(props) {
@@ -115,7 +119,7 @@ class CancelPromotionForm extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    Cancel Promotion
+                    {cancelPromotionConst}
                   </Typography>
                 </div>
               </div>

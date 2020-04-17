@@ -1,4 +1,4 @@
-import { Table } from "@material-ui/core"
+import { Table, Typography } from "@material-ui/core"
 import Paper from "@material-ui/core/Paper"
 import TableCell from "@material-ui/core/TableCell"
 import TableContainer from "@material-ui/core/TableContainer"
@@ -10,7 +10,7 @@ import TablePagination from "@material-ui/core/TablePagination"
 import TableBody from "@material-ui/core/TableBody"
 import PropTypes from "prop-types"
 import { getClusterList } from "../../redux/actions/RetailerActions"
-import { viewClusters } from "../utils/constants"
+import { viewClusters, viewClustersConst } from "../utils/constants"
 
 class ViewClusters extends Component {
   constructor(props) {
@@ -39,47 +39,53 @@ class ViewClusters extends Component {
     const rows = clusterList
     return (
       <div className="box-container-table data-tables">
-        <Paper className={classes.root}>
-          <TableContainer className={classes.container}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {/* <TableCell>Cluster Name</TableCell>
+        <div className="flex-grid">
+          <Typography className="card-header" variant="h4">
+            {viewClustersConst}
+          </Typography>
+
+          <Paper className={classes.root}>
+            <TableContainer className={classes.container}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {/* <TableCell>Cluster Name</TableCell>
                   <TableCell>Number of Stores</TableCell> */}
-                  {viewClusters.map((tcell) => (
-                    <TableCell>{tcell}</TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Object.keys(rows)
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                    return (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.code}
-                      >
-                        <TableCell>{row}</TableCell>
-                        <TableCell>{rows[row]}</TableCell>
-                      </TableRow>
-                    )
-                  })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={Object.keys(rows).length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={this.handleChangePage}
-            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-          />
-        </Paper>
+                    {viewClusters.map((tcell) => (
+                      <TableCell>{tcell}</TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {Object.keys(rows)
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.code}
+                        >
+                          <TableCell>{row}</TableCell>
+                          <TableCell>{rows[row]}</TableCell>
+                        </TableRow>
+                      )
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={Object.keys(rows).length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={this.handleChangePage}
+              onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            />
+          </Paper>
+        </div>
       </div>
     )
   }
