@@ -30,28 +30,7 @@ class AssignPriceToProduct extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {}
-
-  //   isValidDate = (e) => {
-  //     // eslint-disable-next-line no-console
-  //     console.log(getCurrentDate())
-  //   }
-  isValidDate = () => {
-    const { day, fromDate, toDate } = this.state
-    const dayval = fromDate.slice(8, fromDate.length)
-    const dayval2 = toDate.slice(8, toDate.length)
-    if (dayval < day) {
-      this.setState({ status: 100 })
-    } else if (dayval > dayval2) {
-      this.setState({ status: 200 })
-    }
-    // console.log(day)
-    // console.log(month)
-    // console.log(fromDate)
-    // console.log(dayval)
-    // console.log(this.state.status)
-  }
 
   handleChange1 = (e) => {
     this.setState({ fromDate: e.target.value })
@@ -83,11 +62,11 @@ class AssignPriceToProduct extends Component {
     parameter.effectivePercentage = effectivePercentage
     getEffectivePriceAlt(parameter, productDetails.productName)
     history.push("/assignpricetoproduct")
-    this.isValidDate()
   }
 
   render() {
-    const { status, fromDate, toDate, effectivePercentage } = this.state
+    const { fromDate, toDate, effectivePercentage,day } = this.state
+    const dayval = fromDate.slice(8, fromDate.length)
     return (
       <div>
         <div className="box-container">
@@ -138,9 +117,21 @@ class AssignPriceToProduct extends Component {
                   onChange={this.handleChange3}
                   autoFocus
                 />
+                 <null>
+            {dayval<day && (
+              <div>
+                <Snackbar open="true" autoHideDuration={2000}>
+                  <MuiAlert severity="error" elevation={6} variant="filled">
+                    Enter Valid Start Date
+                  </MuiAlert>
+                </Snackbar>
+              </div>
+            )}
+            
+          </null>
                 {fromDate.length > 0 &&
                   toDate.length > 0 &&
-                  effectivePercentage > 0 && (
+                  effectivePercentage > 0 && fromDate<toDate && dayval>=day && (
                     <Button
                       fullWidth
                       type="button"
@@ -157,30 +148,7 @@ class AssignPriceToProduct extends Component {
             </div>
           </div>
 
-          <null>
-            {status === 100 ? (
-              <div>
-                <Snackbar open="true" autoHideDuration={2000}>
-                  <MuiAlert severity="error" elevation={6} variant="filled">
-                    Enter Valid Start Date
-                  </MuiAlert>
-                </Snackbar>
-              </div>
-            ) : (
-              <div />
-            )}
-            {status === 200 ? (
-              <div>
-                <Snackbar open="true" autoHideDuration={2000}>
-                  <MuiAlert severity="error" elevation={6} variant="filled">
-                    Enter Valid End Date
-                  </MuiAlert>
-                </Snackbar>
-              </div>
-            ) : (
-              <div />
-            )}
-          </null>
+         
           <Message />
         </div>
       </div>
