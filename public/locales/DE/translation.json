@@ -21,12 +21,13 @@
     "viewClusters": "CLUSTER ANZEIGEN",
     "addGroup": "Gruppe hinzufügen",
     "addProducttoStore": "Produkt zum Store hinzufügen",
-    "queryOnDateRange":"Abfrage zum Datumsbereich",
-    "PriceOnDate":"Preis am Datum",
+    "queryOnDateRange": "Abfrage zum Datumsbereich",
+    "PriceOnDate": "Preis am Datum",
     "assignProductToClusterZone": "Produkt dem Cluster / der Zone zuweisen",
     "cancelNotEffectivePriceChange": "Nicht effektive Preisänderung abbrechen",
     "applyPromotionInZoneLevel": "Bewerben Sie sich in Zonenebene",
-    "applyPromotionInClusterLevel": "Bewerben Sie sich auf Cluster-Ebene"
+    "applyPromotionInClusterLevel": "Bewerben Sie sich auf Cluster-Ebene",
+    "editpriceandquantity": "Artikelprijs en hoeveelheid bewerken"
   },
   "zoneForm": {
     "lengthTooShort": "Die Zone muss größer als 5 Buchstaben sein",

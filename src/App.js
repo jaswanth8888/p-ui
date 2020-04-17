@@ -9,6 +9,8 @@ import Home from "./components/vendor/Home"
 import Addproduct from "./components/vendor/AddProduct"
 import PrivateRoute from "./components/utils/privateRoute"
 import store from "./redux/store"
+import SelectProduct from "./components/vendor/SelectProduct"
+import EditItemPrice from "./components/vendor/EditItemPrice"
 
 const App = () => {
   const retailerRoutes = [
@@ -46,6 +48,7 @@ const App = () => {
     "/applypromotion/cluster",
     "/definepromotion/cluster",
     "/view/promotions/cluster",
+    "/editprice",
     "/product/pricechange/canceleffective",
     "/product/pricechange/cancelnoteffective",
   ]
@@ -62,6 +65,8 @@ const App = () => {
             <Route exact path="/vendor/reg" component={Registration} />
             <Route exact path="/vendor/home" component={Home} />
             <Route exact path="/vendor/addproduct" component={Addproduct} />
+            <Route exact path="/vendor/updateprice" component={SelectProduct} />
+            <Route exact path="/vendor/editproduct" component={EditItemPrice} />
           </Switch>
         </Router>
       </div>

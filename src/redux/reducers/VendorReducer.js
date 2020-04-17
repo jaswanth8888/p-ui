@@ -4,6 +4,11 @@ import {
   VENDOR_LOGOUT,
   MESSAGE_SET_NULL,
   CREATE_PRODUCT,
+  IS_PROMOTION_APPLLIED,
+  PRODUCT_UPDATE,
+  PRODUCT_GET_REQUEST,
+  PRODUCTLIST_GET_REQUEST,
+  PRODUCT_SAVE_VALUE,
 } from "../actions/types"
 import { registerconstants } from "../actions/registrationtypes"
 
@@ -16,6 +21,11 @@ const initialState = {
   },
   registerStatus: { registered: false },
   product: [],
+  productName: "",
+  isPromotion: false,
+  updatedProduct: {},
+  productDetails: {},
+  productList: [],
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -49,6 +59,21 @@ export default (state = initialState, action = {}) => {
         msgSeverity: action.msgSeverity,
         loginStatus: action.loginStatus,
       }
+    case PRODUCT_GET_REQUEST:
+      return { ...state, productDetails: action.productDetails }
+    case IS_PROMOTION_APPLLIED:
+      return { ...state, isPromotion: action.isPromotion }
+    case PRODUCT_UPDATE:
+      return {
+        ...state,
+        updatedProduct: action.updatedProduct,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
+    case PRODUCTLIST_GET_REQUEST:
+      return { ...state, productList: action.productList }
+    case PRODUCT_SAVE_VALUE:
+      return { ...state, productName: action.productName }
     default:
       return { ...state }
   }

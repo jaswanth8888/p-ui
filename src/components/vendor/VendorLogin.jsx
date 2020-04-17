@@ -8,8 +8,14 @@ import PersonIcon from "@material-ui/icons/Person"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import MenuIcon from "@material-ui/icons/Menu"
+import AccountCircle from "@material-ui/icons/AccountCircle"
+import { Link } from "react-router-dom"
 import { vendorLogin } from "../../redux/actions/VendorActions"
 import Message from "./Message"
+import "./style.css"
 
 class VendorLogin extends Component {
   constructor(props) {
@@ -90,99 +96,121 @@ class VendorLogin extends Component {
     const { error } = this.state
     return (
       <div>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-        >
-          <Grid item xs={3}>
-            <Box
-              display="flex"
-              flexDirection="row"
-              justifyContent="center"
+        <div>
+          <AppBar position="static" elevation={0}>
+            <Toolbar>
+              <Link className="button-link" to="./vendor/reg">
+                <Button
+                  className="{classes.submit}"
+                  color="default"
+                  id="reg-vendor"
+                  startIcon={<MenuIcon />}
+                >
+                  Sign UP
+                </Button>
+              </Link>
+              <Typography type="title" color="inherit">
+                <AccountCircle />
+                Vendor Login
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <div className="box-container">
+            <Grid
+              container
+              spacing={0}
+              direction="column"
               alignItems="center"
-              pt={4}
+              justify="center"
             >
-              <Box p={1}>
-                <Avatar>
-                  <LockOutlinedIcon color="white" />
-                </Avatar>
-              </Box>
-              <Typography color="primary" component="h1" variant="h4">
-                Login
-              </Typography>
-              <Typography component="span" color="error" variant="h5">
-                {loginStatus.errorMsg}
-              </Typography>
-            </Box>
-            <form>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                error={error.usernameError}
-                helperText={error.usernameErrorMsg}
-                id="username-vendor"
-                label="User Name"
-                name="username"
-                autoComplete="username"
-                onChange={this.handleChange}
-                autoFocus
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PersonIcon
-                        color="primary"
-                        borderColor="primary.main"
-                        borderRight={1}
-                      />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                error={error.passwordError}
-                helperText={error.passwordErrorMsg}
-                name="password"
-                label="Password"
-                type="password"
-                id="password-vendor"
-                onChange={this.handleChange}
-                autoComplete="current-password"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Lock
-                        color="primary"
-                        borderColor="primary.main"
-                        borderRight={1}
-                      />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className="{classes.submit} submit-pad"
-                id="login-vendor"
-                onClick={this.handleSubmit}
-              >
-                Login
-              </Button>
-            </form>
-          </Grid>
-        </Grid>
-        <Message />
+              <Grid item xs={3}>
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  pt={4}
+                >
+                  <Box p={1}>
+                    <Avatar>
+                      <LockOutlinedIcon color="white" />
+                    </Avatar>
+                  </Box>
+                  <Typography color="primary" component="h1" variant="h4">
+                    Login
+                  </Typography>
+                  <Typography component="span" color="error" variant="h5">
+                    {loginStatus.errorMsg}
+                  </Typography>
+                </Box>
+                <form>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    error={error.usernameError}
+                    helperText={error.usernameErrorMsg}
+                    id="username-vendor"
+                    label="User Name"
+                    name="username"
+                    autoComplete="username"
+                    onChange={this.handleChange}
+                    autoFocus
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PersonIcon
+                            color="primary"
+                            borderColor="primary.main"
+                            borderRight={1}
+                          />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    error={error.passwordError}
+                    helperText={error.passwordErrorMsg}
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password-vendor"
+                    onChange={this.handleChange}
+                    autoComplete="current-password"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Lock
+                            color="primary"
+                            borderColor="primary.main"
+                            borderRight={1}
+                          />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit} submit-pad"
+                    id="login-vendor"
+                    onClick={this.handleSubmit}
+                  >
+                    Login
+                  </Button>
+                </form>
+              </Grid>
+            </Grid>
+            <Message />
+          </div>
+        </div>
       </div>
     )
   }

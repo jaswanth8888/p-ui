@@ -14,7 +14,7 @@ export const FAILURE = "FAILURE"
 // export const RETAILER_BASE_URL = "http://10.102.130.31:8765"  //Prerana system
 // export const RETAILER_BASE_URL = "http://10.150.16.126:8765" // centOS
 export const RETAILER_BASE_URL =
-  "http://pps-blr-microservices-balancer-98019398.us-east-1.elb.amazonaws.com" // cloud
+  "http://pps-blr-microservices-balancer-98019398.us-east-1.elb.amazonaws.com" // cloud */
 // export const RETAILER_BASE_URL = "http://10.150.222.113:8765";  //saahil
 // export const RETAILER_BASE_URL = "http://10.102.137.146:8765";
 // export const RETAILER_BASE_URL = "http://10.102.143.225:8765";
@@ -62,6 +62,8 @@ export const STARTDATE_SAVE_VALUE = "STARTDATE_SAVE_VALUE"
 export const ENDDATE_SAVE_VALUE = "ENDDATE_SAVE_VALUE"
 export const PROMOTIONS_GET_BYRANGE = "PROMOTIONS_GET_BYRANGE"
 export const GET_PROMOTIONS_CLUSTER = "GET_PROMOTIONS_CLUSTER"
+export const IS_PROMOTION_APPLLIED = "IS_PROMOTION_APPLLIED"
+export const PRODUCT_UPDATE = "PRODUCT_UPDATE"
 
 export const TOKEN = `BearerR ${sessionStorage.getItem("token")}`
 

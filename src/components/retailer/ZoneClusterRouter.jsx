@@ -6,12 +6,14 @@ import AssignToZone from "./AssignToZone"
 import AssignToCluster from "./AssignToCluster"
 import ViewAssignedZones from "./ViewAssignedZones"
 import ViewAssignedClusters from "./ViewAssignedClusters"
+import EditItemPrice from "./EditItemPrice"
 
 const ZoneClusterRouter = () => {
   return (
     <Router>
       <Switch>
         <PrivateRoute exact path="/selectproduct" component={SelectProduct} />
+        <PrivateRoute exact path="/editprice" component={EditItemPrice} />
         <PrivateRoute
           exact
           path="/assigntocluster"
