@@ -68,7 +68,7 @@ class QueryOnDateRange extends Component {
             <div className="validations">
               <h3>Requirements</h3>
               {startDate.length === 0 && (
-                <div>
+                <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {startdate}
@@ -76,7 +76,7 @@ class QueryOnDateRange extends Component {
                 </div>
               )}
               {startDate.length !== 0 && (
-                <div>
+                <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {startdate}
@@ -84,7 +84,7 @@ class QueryOnDateRange extends Component {
                 </div>
               )}
               {endDate.length === 0 && (
-                <div>
+                <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {enddate}
@@ -92,7 +92,7 @@ class QueryOnDateRange extends Component {
                 </div>
               )}
               {endDate.length !== 0 && (
-                <div>
+                <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {enddate}
@@ -100,7 +100,7 @@ class QueryOnDateRange extends Component {
                 </div>
               )}
               {endDate <= startDate && (
-                <div>
+                <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {datecheck}
@@ -108,7 +108,7 @@ class QueryOnDateRange extends Component {
                 </div>
               )}
               {endDate > startDate && (
-                <div>
+                <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {datecheck}
@@ -116,7 +116,7 @@ class QueryOnDateRange extends Component {
                 </div>
               )}
               {levelOption === "" && (
-                <div>
+                <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {selectLevel}
@@ -124,7 +124,7 @@ class QueryOnDateRange extends Component {
                 </div>
               )}
               {levelOption !== "" && (
-                <div>
+                <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {selectLevel}

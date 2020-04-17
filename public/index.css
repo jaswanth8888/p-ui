@@ -212,6 +212,11 @@ a {
   display: flex;
 }
 
+.unapproved-text {
+  display: flex;
+  color: #ffffff;
+}
+
 .approved-text {
   display: flex;
   color: #ffc107;
@@ -426,21 +431,20 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
-
   body {
-    font-size: 12px !important; 
+    font-size: 12px !important;
   }
 
   .joint-form,
-  .joint-form-assign{
+  .joint-form-assign {
     display: table-row;
     box-shadow: none;
     border: 1px solid rgba(0, 0, 0, 0.1);
     width: 90vw;
   }
 
-  .joint-form-large-table{
-    margin-top:60px;
+  .joint-form-large-table {
+    margin-top: 60px;
     box-shadow: none;
     border: 1px solid rgba(0, 0, 0, 0.1);
     width: 90vw;

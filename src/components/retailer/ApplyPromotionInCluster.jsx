@@ -89,7 +89,7 @@ class ApplyPromotionInCluster extends Component {
               <h3 className="center-h3">Requirements</h3>
 
               {productName === "" && (
-                <div>
+                <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a product name
@@ -97,7 +97,7 @@ class ApplyPromotionInCluster extends Component {
                 </div>
               )}
               {productName !== "" && (
-                <div>
+                <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a product name
@@ -105,7 +105,7 @@ class ApplyPromotionInCluster extends Component {
                 </div>
               )}
               {zone === "" && (
-                <div>
+                <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a zone name
@@ -113,7 +113,7 @@ class ApplyPromotionInCluster extends Component {
                 </div>
               )}
               {zone !== "" && (
-                <div>
+                <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a zone name
@@ -121,7 +121,7 @@ class ApplyPromotionInCluster extends Component {
                 </div>
               )}
               {cluster === "" && (
-                <div>
+                <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a cluster name
@@ -129,7 +129,7 @@ class ApplyPromotionInCluster extends Component {
                 </div>
               )}
               {cluster !== "" && (
-                <div>
+                <div className="approved-text">
                   <CheckIcon />
                   <Typography variant="subtitle2" gutterBottom>
                     Select a cluster name

@@ -99,7 +99,7 @@ class WithdrawPromotionClusterForm extends Component {
               <h3 className="center-h3">Requirements</h3>
 
               {productName === "" && (
-                <div>
+                <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {selectProduct}
@@ -107,7 +107,7 @@ class WithdrawPromotionClusterForm extends Component {
                 </div>
               )}
               {productName !== "" && (
-                <div>
+                <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {selectProduct}
@@ -115,7 +115,7 @@ class WithdrawPromotionClusterForm extends Component {
                 </div>
               )}
               {zone === "" && (
-                <div>
+                <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {selectZone}
@@ -123,7 +123,7 @@ class WithdrawPromotionClusterForm extends Component {
                 </div>
               )}
               {zone !== "" && (
-                <div>
+                <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {selectZone}
@@ -131,7 +131,7 @@ class WithdrawPromotionClusterForm extends Component {
                 </div>
               )}
               {cluster === "" && (
-                <div>
+                <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {selectCluster}
@@ -139,7 +139,7 @@ class WithdrawPromotionClusterForm extends Component {
                 </div>
               )}
               {cluster !== "" && (
-                <div>
+                <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     {selectCluster}
