@@ -138,7 +138,7 @@ export class Registration extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const { vendorDetails } = this.state
+    const { history, vendorDetails } = this.state
     if (
       this.isValidEmail() &&
       this.isValidPassword() &&
@@ -152,7 +152,7 @@ export class Registration extends Component {
       let { submitted } = this.state
       submitted = true
       this.setState({ submitted })
-      this.props.history.push("/vendor")
+      history.push("/vendor")
     }
   }
 
@@ -331,8 +331,6 @@ export class Registration extends Component {
 Registration.propTypes = {
   registerStatus: PropTypes.shape.isRequired,
   registration: PropTypes.func.isRequired,
-  history: PropTypes.shape.isRequired,
-  t: PropTypes.shape.isRequired,
 }
 const stateAsProps = (store) => {
   if ("registerStatus" in store.VendorReducer) {

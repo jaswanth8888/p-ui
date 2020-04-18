@@ -95,7 +95,7 @@ class AddProduct extends Component {
                     <div className="typo-div">
                       <ClearIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
-                        name cannot be empty
+                        Name cannot be empty
                       </Typography>
                     </div>
                   )}
@@ -103,7 +103,7 @@ class AddProduct extends Component {
                     <div className="approved-text">
                       <CheckIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
-                        name cannot be empty
+                        Name cannot be empty
                       </Typography>
                     </div>
                   )}
@@ -111,7 +111,7 @@ class AddProduct extends Component {
                     <div className="typo-div">
                       <ClearIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
-                        base price must be greater than 0
+                        Base price must be greater than 0
                       </Typography>
                     </div>
                   )}
@@ -119,7 +119,7 @@ class AddProduct extends Component {
                     <div className="approved-text">
                       <CheckIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
-                        base price must be greater than 0
+                        Base price must be greater than 0
                       </Typography>
                     </div>
                   )}
@@ -127,7 +127,7 @@ class AddProduct extends Component {
                     <div className="typo-div">
                       <ClearIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
-                        minimum quantity should be 1
+                        Minimum quantity should be 1
                       </Typography>
                     </div>
                   )}
@@ -135,7 +135,7 @@ class AddProduct extends Component {
                     <div className="approved-text">
                       <CheckIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
-                        minimum quantity should be 1
+                        Minimum quantity should be 1
                       </Typography>
                     </div>
                   )}
@@ -144,7 +144,7 @@ class AddProduct extends Component {
                       <div className="approved-text">
                         <CheckIcon className="icon-style" />
                         <Typography variant="subtitle2" gutterBottom>
-                          maximum quantity of ALCOHOL should be 100
+                          Maximum quantity of ALCOHOL should be 100
                         </Typography>
                       </div>
                     )}
@@ -153,7 +153,7 @@ class AddProduct extends Component {
                       <div className="typo-div">
                         <ClearIcon className="icon-style" />
                         <Typography variant="subtitle2" gutterBottom>
-                          maximum quantity of ALCOHOL should be 100
+                          Maximum quantity of ALCOHOL should be 100
                         </Typography>
                       </div>
                     )}
@@ -171,7 +171,7 @@ class AddProduct extends Component {
                       <div className="typo-div">
                         <ClearIcon className="icon-style" />
                         <Typography variant="subtitle2" gutterBottom>
-                          ABV Should be greater than 0
+                          ABV should be greater than 0
                         </Typography>
                       </div>
                     )}
@@ -180,7 +180,7 @@ class AddProduct extends Component {
                       <div className="approved-text">
                         <CheckIcon className="icon-style" />
                         <Typography variant="subtitle2" gutterBottom>
-                          volume Should be greater than 0
+                          Volume should be greater than 0
                         </Typography>
                       </div>
                     )}
@@ -189,7 +189,7 @@ class AddProduct extends Component {
                       <div className="typo-div">
                         <ClearIcon className="icon-style" />
                         <Typography variant="subtitle2" gutterBottom>
-                          Volume Should be greater than 0
+                          Volume should be greater than 0
                         </Typography>
                       </div>
                     )}
@@ -198,7 +198,7 @@ class AddProduct extends Component {
                       <div className="approved-text">
                         <CheckIcon className="icon-style" />
                         <Typography variant="subtitle2" gutterBottom>
-                          maximum quantity of BabyProducts should be 500
+                          Maximum quantity of BabyProducts should be 500
                         </Typography>
                       </div>
                     )}
@@ -207,7 +207,7 @@ class AddProduct extends Component {
                       <div className="typo-div">
                         <ClearIcon className="icon-style" />
                         <Typography variant="subtitle2" gutterBottom>
-                          maximum quantity of BabyProducts should be 500
+                          Maximum quantity of BabyProducts should be 500
                         </Typography>
                       </div>
                     )}

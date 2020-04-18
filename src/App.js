@@ -2,15 +2,9 @@ import React from "react"
 import { Provider } from "react-redux"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import FullNavbar from "./components/organisms/FullNavbar"
-import VendorLogin from "./components/vendor/VendorLogin"
 // eslint-disable-next-line import/no-named-as-default
-import Registration from "./components/vendor/Registration"
-import Home from "./components/vendor/Home"
-import Addproduct from "./components/vendor/AddProduct"
 import PrivateRoute from "./components/utils/privateRoute"
 import store from "./redux/store"
-import SelectProduct from "./components/vendor/SelectProduct"
-import EditItemPrice from "./components/vendor/EditItemPrice"
 
 const App = () => {
   const retailerRoutes = [

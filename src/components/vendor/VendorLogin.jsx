@@ -7,8 +7,6 @@ import {
   Typography,
   Button,
   InputAdornment,
-  AppBar,
-  Toolbar,
 } from "@material-ui/core"
 import Lock from "@material-ui/icons/Lock"
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
@@ -16,9 +14,6 @@ import PersonIcon from "@material-ui/icons/Person"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import MenuIcon from "@material-ui/icons/Menu"
-import AccountCircle from "@material-ui/icons/AccountCircle"
-import { Link } from "react-router-dom"
 import { vendorLogin } from "../../redux/actions/VendorActions"
 import Message from "./Message"
 import "./style.css"
@@ -39,7 +34,8 @@ class VendorLogin extends Component {
       },
     }
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmitLogin = this.handleSubmitLogin.bind(this)
+    this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this)
   }
 
   isValidusername = () => {
@@ -80,7 +76,7 @@ class VendorLogin extends Component {
     this.setState({ userCredentials })
   }
 
-  handleSubmit(e) {
+  handleSubmitLogin(e) {
     e.preventDefault()
     const { userCredentials } = this.state
     const { vendorLogin: vendorLoginAlt } = this.props
@@ -90,14 +86,19 @@ class VendorLogin extends Component {
     }
   }
 
+  handleSubmitSignUp() {
+    const { history } = this.props
+    history.push("/vendor/reg")
+  }
+
   isAuthenticated() {
     this.token = sessionStorage.getItem("token")
     return this.token && this.token.length > 10
   }
 
   render() {
-    const { t, loginStatus, history } = this.props
-    const { userCredentials, error } = this.state
+    const { loginStatus, history } = this.props
+    const { error } = this.state
     return (
       <>
         {loginStatus.success ? (
@@ -191,9 +192,20 @@ class VendorLogin extends Component {
                         color="primary"
                         className="{classes.submit} submit-pad"
                         id="login-vendor"
-                        onClick={this.handleSubmit}
+                        onClick={this.handleSubmitLogin}
                       >
                         Login
+                      </Button>
+                      <Button
+                        type="button"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className="{classes.submit} submit-pad"
+                        id="login-vendor"
+                        onClick={this.handleSubmitSignUp}
+                      >
+                        Not a Vendor? Sign Up
                       </Button>
                     </form>
                   </Grid>
@@ -212,7 +224,6 @@ VendorLogin.propTypes = {
   loginStatus: PropTypes.shape.isRequired,
   vendorLogin: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
-  t: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => {
