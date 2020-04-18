@@ -21,52 +21,48 @@ class Home extends Component {
   }
 
   render() {
-    if (sessionStorage.getItem("token") != null) {
-      return (
-        <div>
-          <AppBar position="static" elevation={0}>
-            <Toolbar>
-              <Link className="button-link" to="./addproduct">
-                <Button
-                  color="secondary"
-                  className="{classes.submit}"
-                  onClick={this.handleSubmit}
-                  id="add-prod-vendor"
-                  startIcon={<MenuIcon />}
-                >
-                  addproduct
-                </Button>
-              </Link>
-              <Link className="button-link" to="./updateprice">
-                <Button
-                  color="secondary"
-                  className="{classes.submit}"
-                  id="update-prod-vendor"
-                  startIcon={<MenuIcon />}
-                >
-                  Update Price/quantity
-                </Button>
-              </Link>
-              <div>
-                <Button
-                  color="inherit"
-                  className="{classes.submit}"
-                  onClick={this.handleLogout}
-                  id="logout-vendor"
-                  startIcon={<AccountCircle />}
-                >
-                  logout
-                </Button>
-              </div>
-            </Toolbar>
-          </AppBar>
+    return (
+      <div>
+        <AppBar position="static" elevation={0}>
+          <Toolbar>
+            <Link className="button-link" to="./addproduct">
+              <Button
+                color="secondary"
+                className="{classes.submit}"
+                onClick={this.handleSubmit}
+                id="add-prod-vendor"
+                startIcon={<MenuIcon />}
+              >
+                addproduct
+              </Button>
+            </Link>
+            <Link className="button-link" to="./updateprice">
+              <Button
+                color="secondary"
+                className="{classes.submit}"
+                id="update-prod-vendor"
+                startIcon={<MenuIcon />}
+              >
+                Update Price/quantity
+              </Button>
+            </Link>
+            <div>
+              <Button
+                color="inherit"
+                className="{classes.submit}"
+                onClick={this.handleLogout}
+                id="logout-vendor"
+                startIcon={<AccountCircle />}
+              >
+                logout
+              </Button>
+            </div>
+          </Toolbar>
+        </AppBar>
 
-          <Message />
-        </div>
-      )
-    }
-    window.location.href = "./"
-    return true
+        <Message />
+      </div>
+    )
   }
 }
 const stateAsProps = (store) => ({

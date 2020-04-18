@@ -152,6 +152,7 @@ export class Registration extends Component {
       let { submitted } = this.state
       submitted = true
       this.setState({ submitted })
+      this.props.history.push("/vendor")
     }
   }
 
@@ -330,6 +331,8 @@ export class Registration extends Component {
 Registration.propTypes = {
   registerStatus: PropTypes.shape.isRequired,
   registration: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
+  t: PropTypes.shape.isRequired,
 }
 const stateAsProps = (store) => {
   if ("registerStatus" in store.VendorReducer) {

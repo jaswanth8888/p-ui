@@ -53,6 +53,9 @@ const App = () => {
     "/editprice",
     "/product/pricechange/canceleffective",
     "/product/pricechange/cancelnoteffective",
+    "/vendor/addproduct",
+    "/vendor/updateprice",
+    "/vendor/editproduct",
   ]
   return (
     <Provider store={store}>
@@ -63,12 +66,6 @@ const App = () => {
             {retailerRoutes.map((route) => {
               return <PrivateRoute component={FullNavbar} path={route} />
             })}
-            <Route exact path="/vendor" component={VendorLogin} />
-            <Route exact path="/vendor/reg" component={Registration} />
-            <Route exact path="/vendor/home" component={Home} />
-            <Route exact path="/vendor/addproduct" component={Addproduct} />
-            <Route exact path="/vendor/updateprice" component={SelectProduct} />
-            <Route exact path="/vendor/editproduct" component={EditItemPrice} />
           </Switch>
         </Router>
       </div>

@@ -52,6 +52,11 @@ import PriceOnDate from "../retailer/PriceOnDate"
 import AssignPriceToProduct from "../retailer/AssignPriceToProduct"
 import CancelNotEffectivePriceChange from "../retailer/CancelNotEffectivePriceChange"
 import CancelEffectivePriceChange from "../retailer/CancelEffectivePriceChange"
+import AddProduct from "../vendor/AddProduct"
+import EditItemPrice from "../vendor/EditItemPrice"
+import SelectProduct from "../vendor/SelectProduct"
+import VendorLogin from "../vendor/VendorLogin"
+import Registration from "../vendor/Registration"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -107,7 +112,7 @@ function FullNavbar(props) {
     setMobileOpen(!mobileOpen)
   }
 
-  const drawer = (
+  const Retailerdrawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
@@ -363,6 +368,54 @@ function FullNavbar(props) {
     </div>
   )
 
+  const Vendordrawer = (
+    <div>
+      <div className={classes.toolbar} />
+      <Divider />
+      <List>
+        <Link to="/vendor/addproduct">
+          <Tooltip title="Add a Product" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <AddShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Add a Product"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+        <Link to="/vendor/updateprice">
+          <Tooltip title="Update the price of a Product" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <AddShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Update the price of a Product"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+        <Link to="/vendor/editproduct">
+          <Tooltip title="Edit the Price of a Product" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <AddShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Edit the Price of a Product"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+      </List>
+    </div>
+  )
+
   return (
     <div className={classes.root}>
       <Router>
@@ -379,15 +432,26 @@ function FullNavbar(props) {
         >
           <Toolbar>
             {!sessionStorage.getItem("token") && (
-              <Link className="button-link" to="/vendor">
-                <Button
-                  color="default"
-                  className="{classes.link}"
-                  id="reg-vendor"
-                >
-                  Login As Vendor
-                </Button>
-              </Link>
+              <>
+                <Link className="button-link" to="/vendor">
+                  <Button
+                    color="default"
+                    className="{classes.link}"
+                    id="reg-vendor"
+                  >
+                    Login As Vendor
+                  </Button>
+                </Link>
+                <Link className="button-link" to="/vendor/reg">
+                  <Button
+                    color="default"
+                    className="{classes.link}"
+                    id="reg-vendor"
+                  >
+                    Register As Vendor
+                  </Button>
+                </Link>
+              </>
             )}
             {sessionStorage.getItem("token") &&
             sessionStorage.getItem("token").length > 10 ? (
@@ -430,6 +494,7 @@ function FullNavbar(props) {
                       label={t("header.logOut")}
                       onClick={() => {
                         sessionStorage.removeItem("token")
+                        sessionStorage.removeItem("loginType")
                         props.logout()
                       }}
                     />
@@ -475,7 +540,9 @@ function FullNavbar(props) {
                   keepMounted: true, // Better open performance on mobile.
                 }}
               >
-                {drawer}
+                {sessionStorage.getItem("loginType") === "vendor"
+                  ? Vendordrawer
+                  : Retailerdrawer}
               </Drawer>
             </Hidden>
             <Hidden xsDown implementation="css">
@@ -486,7 +553,9 @@ function FullNavbar(props) {
                 variant="permanent"
                 open
               >
-                {drawer}
+                {sessionStorage.getItem("loginType") === "vendor"
+                  ? Vendordrawer
+                  : Retailerdrawer}
               </Drawer>
             </Hidden>
           </nav>
@@ -567,6 +636,11 @@ function FullNavbar(props) {
             path="/assignpricetoproduct"
             component={AssignPriceToProduct}
           />
+          <Route exact path="/vendor" component={VendorLogin} />
+          <Route exact path="/vendor/reg" component={Registration} />
+          <Route exact path="/vendor/addproduct" component={AddProduct} />
+          <Route exact path="/vendor/updateprice" component={SelectProduct} />
+          <Route exact path="/vendor/editproduct" component={EditItemPrice} />
         </Switch>
       </Router>
     </div>

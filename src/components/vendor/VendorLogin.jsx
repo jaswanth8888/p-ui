@@ -86,9 +86,8 @@ class VendorLogin extends Component {
     const { vendorLogin: vendorLoginAlt } = this.props
     if (this.isValidusername() && this.isValidPassword()) {
       vendorLoginAlt({ ...userCredentials }) // thunk action
-      if (this.isAuthenticated()) {
-        window.location.href = "/vendor/home"
-      }
+      sessionStorage.setItem("loginType", "vendor")
+      this.props.history.push("/vendor/addproduct")
     }
   }
 
@@ -103,24 +102,6 @@ class VendorLogin extends Component {
     return (
       <div>
         <div>
-          <AppBar position="static" elevation={0}>
-            <Toolbar>
-              <Link className="button-link" to="./vendor/reg">
-                <Button
-                  className="{classes.submit}"
-                  color="default"
-                  id="reg-vendor"
-                  startIcon={<MenuIcon />}
-                >
-                  Sign UP
-                </Button>
-              </Link>
-              <Typography type="title" color="inherit">
-                <AccountCircle />
-                Vendor Login
-              </Typography>
-            </Toolbar>
-          </AppBar>
           <div className="box-container">
             <Grid
               container
@@ -225,6 +206,8 @@ class VendorLogin extends Component {
 VendorLogin.propTypes = {
   loginStatus: PropTypes.shape.isRequired,
   vendorLogin: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
+  t: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => {
