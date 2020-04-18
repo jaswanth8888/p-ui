@@ -23,7 +23,7 @@ import {
   getProducts,
   postProductToStore,
 } from "../../redux/actions/RetailerActions"
-import { addProduct } from "../utils/constants"
+import { addProduct, addProductToStore } from "../utils/constants"
 
 class AddProducts extends Component {
   constructor(props) {
@@ -98,6 +98,9 @@ class AddProducts extends Component {
     const { category, numberBoxInputValue, quantityCheck } = this.state
     return (
       <div className="box-container add-prods">
+        <Typography className="card-header" variant="h4">
+          {addProductToStore}
+        </Typography>
         <div className="product-form-header">
           <FormControl variant="outlined" fullWidth>
             <InputLabel htmlFor="category">Enter Category</InputLabel>
