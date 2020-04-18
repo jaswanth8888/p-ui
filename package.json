@@ -43,7 +43,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy":"aws s3 sync build/ s3://pps-blr-react-app",
+    "deploy":"aws s3 sync build/ s3://pps-blr-react",
     "test": "react-scripts test",
     "test:coverage": "set CI=true && react-scripts test --coverage",
     "eject": "react-scripts eject",
