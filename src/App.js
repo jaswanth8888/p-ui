@@ -66,6 +66,8 @@ const App = () => {
             {retailerRoutes.map((route) => {
               return <PrivateRoute component={FullNavbar} path={route} />
             })}
+            <Route exact path="/vendor" component={FullNavbar} />
+            <Route exact path="/vendor/reg" component={FullNavbar} />
           </Switch>
         </Router>
       </div>

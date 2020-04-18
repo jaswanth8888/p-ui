@@ -172,21 +172,6 @@ function FullNavbar(props) {
             </ListItem>
           </Tooltip>
         </Link>
-
-        {/* <Link to="/selectproductname">
-          <Tooltip title="Price on Date" placement="right">
-            <ListItem button>
-              <ListItemIcon>
-                <AttachMoneyIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary="Price on Date"
-              />
-            </ListItem>
-          </Tooltip>
-        </Link> */}
-
         <Divider />
         <Link to="/group">
           <Tooltip title="Create a Group" placement="right">

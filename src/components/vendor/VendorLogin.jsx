@@ -87,7 +87,6 @@ class VendorLogin extends Component {
     if (this.isValidusername() && this.isValidPassword()) {
       vendorLoginAlt({ ...userCredentials }) // thunk action
       sessionStorage.setItem("loginType", "vendor")
-      this.props.history.push("/vendor/addproduct")
     }
   }
 
@@ -97,108 +96,114 @@ class VendorLogin extends Component {
   }
 
   render() {
-    const { loginStatus } = this.props
-    const { error } = this.state
+    const { t, loginStatus, history } = this.props
+    const { userCredentials, error } = this.state
     return (
-      <div>
-        <div>
-          <div className="box-container">
-            <Grid
-              container
-              spacing={0}
-              direction="column"
-              alignItems="center"
-              justify="center"
-            >
-              <Grid item xs={3}>
-                <Box
-                  display="flex"
-                  flexDirection="row"
-                  justifyContent="center"
+      <>
+        {loginStatus.success ? (
+          history.push("/vendor/editproduct")
+        ) : (
+          <div>
+            <div>
+              <div className="box-container">
+                <Grid
+                  container
+                  spacing={0}
+                  direction="column"
                   alignItems="center"
-                  pt={4}
+                  justify="center"
                 >
-                  <Box p={1}>
-                    <Avatar>
-                      <LockOutlinedIcon color="white" />
-                    </Avatar>
-                  </Box>
-                  <Typography color="primary" component="h1" variant="h4">
-                    Login
-                  </Typography>
-                  <Typography component="span" color="error" variant="h5">
-                    {loginStatus.errorMsg}
-                  </Typography>
-                </Box>
-                <form>
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    error={error.usernameError}
-                    helperText={error.usernameErrorMsg}
-                    id="username-vendor"
-                    label="User Name"
-                    name="username"
-                    autoComplete="username"
-                    onChange={this.handleChange}
-                    autoFocus
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <PersonIcon
-                            color="primary"
-                            borderColor="primary.main"
-                            borderRight={1}
-                          />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    error={error.passwordError}
-                    helperText={error.passwordErrorMsg}
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password-vendor"
-                    onChange={this.handleChange}
-                    autoComplete="current-password"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <Lock
-                            color="primary"
-                            borderColor="primary.main"
-                            borderRight={1}
-                          />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                  <Button
-                    type="button"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className="{classes.submit} submit-pad"
-                    id="login-vendor"
-                    onClick={this.handleSubmit}
-                  >
-                    Login
-                  </Button>
-                </form>
-              </Grid>
-            </Grid>
-            <Message />
+                  <Grid item xs={3}>
+                    <Box
+                      display="flex"
+                      flexDirection="row"
+                      justifyContent="center"
+                      alignItems="center"
+                      pt={4}
+                    >
+                      <Box p={1}>
+                        <Avatar>
+                          <LockOutlinedIcon color="white" />
+                        </Avatar>
+                      </Box>
+                      <Typography color="primary" component="h1" variant="h4">
+                        Login
+                      </Typography>
+                      <Typography component="span" color="error" variant="h5">
+                        {loginStatus.errorMsg}
+                      </Typography>
+                    </Box>
+                    <form>
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        error={error.usernameError}
+                        helperText={error.usernameErrorMsg}
+                        id="username-vendor"
+                        label="User Name"
+                        name="username"
+                        autoComplete="username"
+                        onChange={this.handleChange}
+                        autoFocus
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <PersonIcon
+                                color="primary"
+                                borderColor="primary.main"
+                                borderRight={1}
+                              />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        error={error.passwordError}
+                        helperText={error.passwordErrorMsg}
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password-vendor"
+                        onChange={this.handleChange}
+                        autoComplete="current-password"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <Lock
+                                color="primary"
+                                borderColor="primary.main"
+                                borderRight={1}
+                              />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <Button
+                        type="button"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className="{classes.submit} submit-pad"
+                        id="login-vendor"
+                        onClick={this.handleSubmit}
+                      >
+                        Login
+                      </Button>
+                    </form>
+                  </Grid>
+                </Grid>
+                <Message />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        )}
+      </>
     )
   }
 }
