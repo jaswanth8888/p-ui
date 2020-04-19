@@ -30,7 +30,13 @@ import "react-flags-select/css/react-flags-select.css"
 import "react-flags-select/scss/react-flags-select.scss"
 import { useTranslation } from "react-i18next"
 import { connect } from "react-redux"
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom"
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom"
 import PropTypes from "prop-types"
 import { logout } from "../../redux/actions/RetailerActions"
 import Login from "../Login"
@@ -416,8 +422,7 @@ function FullNavbar(props) {
                 </Link>
               </>
             )}
-            {sessionStorage.getItem("token") &&
-            sessionStorage.getItem("token").length > 10 ? (
+            {sessionStorage.getItem("token") ? (
               <>
                 <IconButton
                   color="inherit"
@@ -599,6 +604,7 @@ function FullNavbar(props) {
             path="/assignpricetoproduct"
             component={AssignPriceToProduct}
           />
+
           <Route exact path="/vendor" component={VendorLogin} />
           <Route exact path="/vendor/reg" component={Registration} />
           <Route exact path="/vendor/addproduct" component={AddProduct} />

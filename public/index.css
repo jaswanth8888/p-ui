@@ -78,6 +78,17 @@ h5 {
   padding: 40px;
 }
 
+.box-container-login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 64px;
+  margin-bottom: 64px;
+  width: 100vw;
+  height: 80vh;
+  padding: 40px;
+}
+
 .validation-half {
   flex: 0.4;
   display: flex;
@@ -161,15 +172,10 @@ p {
   padding: 20px;
 }
 
-.add-prods {
-  justify-content: flex-start;
-  flex-direction: column;
-}
 
 .product-form-header {
-  width: 95%;
-  margin: 40px;
-  margin-bottom: 0px;
+  width: 100%;
+  margin:20px 0px;
 }
 
 .product-form-body {
@@ -252,7 +258,7 @@ a {
 }
 
 .space-margin-top {
-  margin-top: 30px !important;
+  margin-top: 20px !important;
 }
 
 .special-href {
@@ -311,7 +317,6 @@ a {
 .product-name {
   height: 10%;
   width: 100%;
-  padding-left: 20px;
   padding-top: 20px;
   color: #3f51b5 !important;
 }
@@ -356,6 +361,7 @@ a {
 }
 
 .card-header {
+  margin: 10px 0px !important;
   color: #3f51b5 !important;
 }
 
@@ -431,6 +437,14 @@ a {
   padding: 20px;
 }
 
+.joint-products-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
 @media only screen and (max-width: 600px) {
   body {
     font-size: 12px !important;
@@ -442,6 +456,10 @@ a {
     box-shadow: none;
     border: 1px solid rgba(0, 0, 0, 0.1);
     width: 90vw;
+  }
+
+  .joint-products-form{
+    width:90vw !important;
   }
 
   .joint-form-large-table {

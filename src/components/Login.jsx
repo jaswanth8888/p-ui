@@ -1,13 +1,13 @@
-import { TextField, Button, InputAdornment } from "@material-ui/core"
+import { Button, InputAdornment, TextField } from "@material-ui/core"
 import Lock from "@material-ui/icons/Lock"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import PersonIcon from "@material-ui/icons/Person"
 import i18n from "i18next"
 import md5 from "md5"
+import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { withTranslation } from "react-i18next"
 import { connect } from "react-redux"
-import PropTypes from "prop-types"
 import { login } from "../redux/actions/RetailerActions"
 import Message from "./utils/Message"
 
@@ -91,10 +91,10 @@ class Login extends Component {
     const { userCredentials, error } = this.state
     return (
       <>
-        {loginStatus.success ? (
+        {loginStatus.success || sessionStorage.getItem("token") ? (
           history.push("/group")
         ) : (
-          <div className="box-container">
+          <div className="box-container-login">
             <div className="joint-form" id="login-joint-form">
               <div className="login-full">
                 {userCredentials.password.length <= 0 ? (
