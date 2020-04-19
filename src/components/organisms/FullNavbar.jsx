@@ -56,7 +56,7 @@ import AddProduct from "../vendor/AddProduct"
 import EditItemPrice from "../vendor/EditItemPrice"
 import SelectProduct from "../vendor/SelectProduct"
 import VendorLogin from "../vendor/VendorLogin"
-import { Registration } from "../vendor/Registration"
+import Registration from "../vendor/Registration"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
