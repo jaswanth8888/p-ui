@@ -161,15 +161,10 @@ p {
   padding: 20px;
 }
 
-.add-prods {
-  justify-content: flex-start;
-  flex-direction: column;
-}
 
 .product-form-header {
-  width: 95%;
-  margin: 40px;
-  margin-bottom: 0px;
+  width: 100%;
+  margin:20px 0px;
 }
 
 .product-form-body {
@@ -431,6 +426,14 @@ a {
   padding: 20px;
 }
 
+.joint-products-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
 @media only screen and (max-width: 600px) {
   body {
     font-size: 12px !important;
@@ -442,6 +445,10 @@ a {
     box-shadow: none;
     border: 1px solid rgba(0, 0, 0, 0.1);
     width: 90vw;
+  }
+
+  .joint-products-form{
+    width:90vw !important;
   }
 
   .joint-form-large-table {
