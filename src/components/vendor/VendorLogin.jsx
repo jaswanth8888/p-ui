@@ -1,19 +1,10 @@
 // vendor login
-import {
-  Avatar,
-  Box,
-  Grid,
-  TextField,
-  Typography,
-  Button,
-  InputAdornment,
-} from "@material-ui/core"
+import { Button, InputAdornment, TextField } from "@material-ui/core"
 import Lock from "@material-ui/icons/Lock"
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import PersonIcon from "@material-ui/icons/Person"
+import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import PropTypes from "prop-types"
 import { vendorLogin } from "../../redux/actions/VendorActions"
 import Message from "./Message"
 
@@ -104,115 +95,95 @@ class VendorLogin extends Component {
         loginStatus.success ? (
           history.push("/vendor/editproduct")
         ) : (
-          <div>
-            <div>
-              <div className="box-container">
-                <Grid
-                  container
-                  spacing={0}
-                  direction="column"
-                  alignItems="center"
-                  justify="center"
-                >
-                  <Grid item xs={3}>
-                    <Box
-                      display="flex"
-                      flexDirection="row"
-                      justifyContent="center"
-                      alignItems="center"
-                      pt={4}
-                    >
-                      <Box p={1}>
-                        <Avatar>
-                          <LockOutlinedIcon color="white" />
-                        </Avatar>
-                      </Box>
-                      <Typography color="primary" component="h1" variant="h4">
-                        Login
-                      </Typography>
-                      <Typography component="span" color="error" variant="h5">
-                        {loginStatus.errorMsg}
-                      </Typography>
-                    </Box>
-                    <form>
-                      <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        error={error.usernameError}
-                        helperText={error.usernameErrorMsg}
-                        id="username-vendor"
-                        label="User Name"
-                        name="username"
-                        autoComplete="username"
-                        onChange={this.handleChange}
-                        autoFocus
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <PersonIcon
-                                color="primary"
-                                borderColor="primary.main"
-                                borderRight={1}
-                              />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        error={error.passwordError}
-                        helperText={error.passwordErrorMsg}
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password-vendor"
-                        onChange={this.handleChange}
-                        autoComplete="current-password"
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <Lock
-                                color="primary"
-                                borderColor="primary.main"
-                                borderRight={1}
-                              />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <Button
-                        type="button"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className="{classes.submit} submit-pad"
-                        id="login-vendor"
-                        onClick={this.handleSubmitLogin}
-                      >
-                        Login
-                      </Button>
-                      <Button
-                        type="button"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className="{classes.submit} submit-pad"
-                        id="login-vendor"
-                        onClick={this.handleSubmitSignUp}
-                      >
-                        Not a Vendor? Sign Up
-                      </Button>
-                    </form>
-                  </Grid>
-                </Grid>
-                <Message />
+          <div className="box-container-login">
+            <div className="joint-form" id="login-joint-form">
+              <div className="login-full">
+                {/* {userCredentials.password.length <= 0 ? (
+                  <div className="help-block">
+                    <Lock className="login-icon" />
+                  </div>
+                ) : (
+                  <div className="help-block">
+                    <LockOpenIcon className="login-icon" />
+                  </div>
+                )} */}
+                <form className="{classes.form}" noValidate>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    error={error.usernameError}
+                    helperText={error.usernameErrorMsg}
+                    id="username-vendor"
+                    label="User Name"
+                    name="username"
+                    autoComplete="username"
+                    onChange={this.handleChange}
+                    autoFocus
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PersonIcon
+                            color="primary"
+                            borderColor="primary.main"
+                            borderRight={1}
+                          />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    error={error.passwordError}
+                    helperText={error.passwordErrorMsg}
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password-vendor"
+                    onChange={this.handleChange}
+                    autoComplete="current-password"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Lock
+                            color="primary"
+                            borderColor="primary.main"
+                            borderRight={1}
+                          />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit} submit-pad"
+                    onClick={this.handleSubmit}
+                  >
+                    {/* {t("header.logIn")} */}
+                    Login
+                  </Button>
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit} submit-pad"
+                    id="login-vendor"
+                    onClick={this.handleSubmitSignUp}
+                  >
+                    Not a Vendor? Sign Up
+                  </Button>
+                </form>
               </div>
             </div>
+            <Message />
           </div>
         )}
       </>
