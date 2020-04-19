@@ -23,6 +23,12 @@ class ViewAssignedClusters extends Component {
     this.state = {}
   }
 
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
+    const { getProductDetails: getProductDetailsAlt, productName } = this.props
+    getProductDetailsAlt(productName)
+  }
+
   render() {
     const { productDetails, resetStatusCode: resetStatusCodeAlt } = this.props
     const zoneData = productDetails.assignProduct // Swap with the actual prop while integrating: this.props.productDetails.assignProduct
@@ -71,25 +77,28 @@ class ViewAssignedClusters extends Component {
     }
 
     return (
-      <div className="box-container-start">
+      <div className="box-container">
         {resetStatusCodeAlt()}
-        <ProductDetails />
-        <TableContainer component={Paper}>
-          <Table aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                {/* <TableCell>Cluster Name</TableCell>
-                <TableCell>Quantity Assigned</TableCell>
-                <TableCell>Profit Percentage</TableCell>
-                <TableCell>Price</TableCell> */}
-                {viewAssignedClusters.map((tcell) => (
-                  <TableCell>{tcell}</TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>
-          </Table>
-        </TableContainer>
+        <div className="joint-form-large">
+          <ProductDetails />
+          <div className="product-form-body">
+            <Typography className="card-header" variant="h4">
+              Assign to Zone
+            </Typography>
+            <TableContainer component={Paper}>
+              <Table aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    {viewAssignedClusters.map((tcell) => (
+                      <TableCell>{tcell}</TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>
+              </Table>
+            </TableContainer>
+          </div>
+        </div>
       </div>
     )
   }
@@ -98,11 +107,17 @@ class ViewAssignedClusters extends Component {
 ViewAssignedClusters.propTypes = {
   resetStatusCode: PropTypes.func.isRequired,
   productDetails: PropTypes.shape.isRequired,
+  productName: PropTypes.string.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
 }
 
+const stateAsProps = (store) => ({
+  productDetails: store.RetailerReducer.productDetails,
+  productName: store.RetailerReducer.productName,
+})
 const actionAsProps = {
   getProductDetails,
   resetStatusCode,
 }
 
-export default connect(null, actionAsProps)(ViewAssignedClusters)
+export default connect(stateAsProps, actionAsProps)(ViewAssignedClusters)

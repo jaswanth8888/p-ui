@@ -45,10 +45,6 @@ class ViewAssignedZones extends Component {
               <Table aria-label="a dense table">
                 <TableHead>
                   <TableRow>
-                    {/* <TableCell>Zone Name</TableCell>
-                <TableCell>Quantity Assigned</TableCell>
-                <TableCell>Profit Percentage</TableCell>
-                <TableCell>Price</TableCell> */}
                     {viewAssignedZones.map((tcell) => (
                       <TableCell>{tcell}</TableCell>
                     ))}
