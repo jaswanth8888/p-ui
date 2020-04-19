@@ -24,7 +24,7 @@ import Message from "./Message"
 import { registration } from "../../redux/actions/VendorActions"
 
 const categoryList = ["Baby", "Liquor"]
-export class Registration extends Component {
+class Registration extends Component {
   constructor(props) {
     super(props)
 
@@ -138,7 +138,7 @@ export class Registration extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const { history, vendorDetails } = this.state
+    const { vendorDetails } = this.state
     if (
       this.isValidEmail() &&
       this.isValidPassword() &&
@@ -147,8 +147,8 @@ export class Registration extends Component {
       this.isValidCheckBox()
     ) {
       delete vendorDetails.confirmPassword
-      //const { registration: registrationAlt } = this.props
-      this.props.registration({ ...vendorDetails })
+      const { registration: registrationAlt, history } = this.props
+      registrationAlt({ ...vendorDetails })
       let { submitted } = this.state
       submitted = true
       this.setState({ submitted })
@@ -327,9 +327,10 @@ export class Registration extends Component {
     )
   }
 }
-// Registration.propTypes = {
-//   registration: PropTypes.func.isRequired,
-// }
+Registration.propTypes = {
+  registration: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
+}
 const stateAsProps = (store) => {
   if ("registerStatus" in store.VendorReducer) {
     return {
