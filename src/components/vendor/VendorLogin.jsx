@@ -164,7 +164,7 @@ class VendorLogin extends Component {
                     variant="contained"
                     color="primary"
                     className="{classes.submit} submit-pad"
-                    onClick={this.handleSubmit}
+                    onClick={this.handleSubmitLogin}
                   >
                     {/* {t("header.logIn")} */}
                     Login

@@ -83,7 +83,7 @@ class ViewAssignedClusters extends Component {
           <ProductDetails />
           <div className="product-form-body">
             <Typography className="card-header" variant="h4">
-              Assign to Zone
+              Assign to Cluster
             </Typography>
             <TableContainer component={Paper}>
               <Table aria-label="a dense table">
