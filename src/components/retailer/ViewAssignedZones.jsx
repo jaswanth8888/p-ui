@@ -33,55 +33,59 @@ class ViewAssignedZones extends Component {
   render() {
     const { productDetails, resetStatusCode: resetStatusCodeAlt } = this.props
     return (
-      <div className="box-container-start">
+      <div className="box-container">
         {resetStatusCodeAlt()}
-        <div className="">
+        <div className="joint-form-large">
           <ProductDetails />
-        </div>
-
-        <TableContainer component={Paper}>
-          <Table aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                {/* <TableCell>Zone Name</TableCell>
+          <div className="product-form-body">
+            <Typography className="card-header" variant="h4">
+              Assign to Zone
+            </Typography>
+            <TableContainer component={Paper}>
+              <Table aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    {/* <TableCell>Zone Name</TableCell>
                 <TableCell>Quantity Assigned</TableCell>
                 <TableCell>Profit Percentage</TableCell>
                 <TableCell>Price</TableCell> */}
-                {viewAssignedZones.map((tcell) => (
-                  <TableCell>{tcell}</TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <tbody>
-              {productDetails.assignProduct.map((zone) => {
-                return (
-                  <TableRow>
-                    <TableCell>
-                      <Typography variant="subtitle1" gutterBottom>
-                        {zone.zoneName}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="subtitle1" gutterBottom>
-                        {zone.quantityAssigned}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="subtitle1" gutterBottom>
-                        {zone.profitPercentage}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="subtitle1" gutterBottom>
-                        {zone.price}
-                      </Typography>
-                    </TableCell>
+                    {viewAssignedZones.map((tcell) => (
+                      <TableCell>{tcell}</TableCell>
+                    ))}
                   </TableRow>
-                )
-              })}
-            </tbody>
-          </Table>
-        </TableContainer>
+                </TableHead>
+                <tbody>
+                  {productDetails.assignProduct.map((zone) => {
+                    return (
+                      <TableRow>
+                        <TableCell>
+                          <Typography variant="subtitle1" gutterBottom>
+                            {zone.zoneName}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="subtitle1" gutterBottom>
+                            {zone.quantityAssigned}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="subtitle1" gutterBottom>
+                            {zone.profitPercentage}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="subtitle1" gutterBottom>
+                            {zone.price}
+                          </Typography>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
+                </tbody>
+              </Table>
+            </TableContainer>
+          </div>
+        </div>
       </div>
     )
   }

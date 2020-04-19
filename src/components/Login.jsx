@@ -95,19 +95,17 @@ class Login extends Component {
           history.push("/group")
         ) : (
           <div className="box-container">
-            <div className="joint-form">
+            <div className="joint-form" id="login-joint-form">
               <div className="login-full">
-                <div>
-                  {userCredentials.password.length <= 0 ? (
-                    <div className="help-block">
-                      <Lock className="login-icon" />
-                    </div>
-                  ) : (
-                    <div className="help-block">
-                      <LockOpenIcon className="login-icon" />
-                    </div>
-                  )}
-                </div>
+                {userCredentials.password.length <= 0 ? (
+                  <div className="help-block">
+                    <Lock className="login-icon" />
+                  </div>
+                ) : (
+                  <div className="help-block">
+                    <LockOpenIcon className="login-icon" />
+                  </div>
+                )}
                 <form className="{classes.form}" noValidate>
                   <TextField
                     variant="outlined"

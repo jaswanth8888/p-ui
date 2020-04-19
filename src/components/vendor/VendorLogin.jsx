@@ -16,7 +16,6 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { vendorLogin } from "../../redux/actions/VendorActions"
 import Message from "./Message"
-import "./style.css"
 
 class VendorLogin extends Component {
   constructor(props) {

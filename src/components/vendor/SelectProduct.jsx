@@ -12,7 +12,6 @@ import {
   getProductDetails,
   saveProductValue,
 } from "../../redux/actions/VendorActions"
-import "./style.css"
 
 class SelectProduct extends Component {
   constructor(props) {

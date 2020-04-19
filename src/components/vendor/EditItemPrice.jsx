@@ -22,7 +22,6 @@ import {
 } from "../../redux/actions/VendorActions"
 import Message from "../utils/Message"
 import Home from "./Home"
-import "./style.css"
 
 class EditItemPrice extends Component {
   constructor(props) {

@@ -18,7 +18,6 @@ import Select from "@material-ui/core/Select"
 
 import { postProduct } from "../../redux/actions/VendorActions"
 import Home from "./Home"
-import "./style.css"
 
 class AddProduct extends Component {
   constructor(props) {

@@ -73,9 +73,7 @@ class ViewAssignedClusters extends Component {
     return (
       <div className="box-container-start">
         {resetStatusCodeAlt()}
-        <div className="">
-          <ProductDetails />
-        </div>
+        <ProductDetails />
         <TableContainer component={Paper}>
           <Table aria-label="a dense table">
             <TableHead>
