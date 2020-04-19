@@ -103,7 +103,7 @@ class SelectProduct extends Component {
                 />
               </FormControl>
               {productName === "" && <Link to="/selectproduct" />}
-              <Link className="button-link" to="/assigntocluster">
+              {/* <Link className="button-link" to="/assigntocluster">
                 <Button
                   type="button"
                   fullWidth
@@ -114,7 +114,7 @@ class SelectProduct extends Component {
                 >
                   Assign Price and Cluster
                 </Button>
-              </Link>
+              </Link> */}
 
               <Link className="button-link" to="/assigntozone">
                 <Button

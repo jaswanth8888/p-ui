@@ -81,7 +81,7 @@ class AssignToCluster extends Component {
     const { statusCode, history, zoneclusternames } = this.props
     const { zonecluster, zoneclustername, clusterDetails } = this.state
     return (
-      <div>
+      <>
         {statusCode === 200 ? (
           history.push("/view/assigned/clusters")
         ) : (
@@ -173,7 +173,7 @@ class AssignToCluster extends Component {
             <Message />
           </div>
         )}
-      </div>
+      </>
     )
   }
 }

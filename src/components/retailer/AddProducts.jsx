@@ -281,7 +281,7 @@ class AddProducts extends Component {
               </Table>
             </TableContainer>
             {quantityCheck && (
-              <Link to="/addproducts">
+              <Link to="/addproducts" className="special-href" id="top-pad">
                 <Button
                   type="button"
                   fullWidth
