@@ -14,7 +14,15 @@ import Tab from "@material-ui/core/Tab"
 import Toolbar from "@material-ui/core/Toolbar"
 import Tooltip from "@material-ui/core/Tooltip"
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
+import DateRangeIcon from "@material-ui/icons/DateRange"
+import EventBusyIcon from "@material-ui/icons/EventBusy"
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted"
+import GroupIcon from "@material-ui/icons/Group"
+import LocationCityIcon from "@material-ui/icons/LocationCity"
 import MenuIcon from "@material-ui/icons/Menu"
+import PublicIcon from "@material-ui/icons/Public"
+import StoreIcon from "@material-ui/icons/Store"
+import LocalOfferIcon from "@material-ui/icons/LocalOffer"
 import clsx from "clsx"
 import React from "react"
 import ReactFlagsSelect from "react-flags-select"
@@ -25,8 +33,30 @@ import { connect } from "react-redux"
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom"
 import PropTypes from "prop-types"
 import { logout } from "../../redux/actions/RetailerActions"
+import Login from "../Login"
+import AddGroup from "../retailer/AddGroup"
+import CancelPromotionRouter from "../retailer/CancelPromotionRouter"
+import ClusterForm from "../retailer/ClusterForm"
+import ClusterPromotionRouter from "../retailer/ClusterPromotionRouter"
+import ProductRouter from "../retailer/ProductRouter"
+import QueryOnDateRouter from "../retailer/QueryOnDateRouter"
+import StoreForm from "../retailer/StoreForm"
+import ViewClusters from "../retailer/ViewClusters"
+import ViewZones from "../retailer/ViewZones"
+import WithdrawPromotionClusterRouter from "../retailer/WithdrawPromotionClusterRouter"
+import WithdrawPromotionZoneRouter from "../retailer/WithdrawPromotionZoneRouter"
+import ZoneClusterRouter from "../retailer/ZoneClusterRouter"
+import ZoneForm from "../retailer/ZoneForm"
+import ZonePromotionRouter from "../retailer/ZonePromotionRouter"
+import PriceOnDate from "../retailer/PriceOnDate"
+import AssignPriceToProduct from "../retailer/AssignPriceToProduct"
+import CancelNotEffectivePriceChange from "../retailer/CancelNotEffectivePriceChange"
+import CancelEffectivePriceChange from "../retailer/CancelEffectivePriceChange"
+import AddProduct from "../vendor/AddProduct"
+import EditItemPrice from "../vendor/EditItemPrice"
+import SelectProduct from "../vendor/SelectProduct"
 import VendorLogin from "../vendor/VendorLogin"
-import Home from "../vendor/Home"
+import { Registration } from "../vendor/Registration"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -82,20 +112,46 @@ function VendorNavbar(props) {
     setMobileOpen(!mobileOpen)
   }
 
-  const drawer = (
+  const Vendordrawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        <Link to="/applypromotion/zone">
-          <Tooltip title="Apply Promotion in Zone Level" placement="right">
+        <Link to="/vendor/addproduct">
+          <Tooltip title="Add a Product" placement="right">
             <ListItem button>
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary={t("welcome.applyPromotionInZoneLevel")}
+                primary="Add a Product"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+        <Link to="/vendor/updateprice">
+          <Tooltip title="Update the price of a Product" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <AddShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Update the price of a Product"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+        <Link to="/vendor/editproduct">
+          <Tooltip title="Edit the Price of a Product" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <AddShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Edit the Price of a Product"
               />
             </ListItem>
           </Tooltip>
@@ -120,15 +176,17 @@ function VendorNavbar(props) {
         >
           <Toolbar>
             {!sessionStorage.getItem("token") && (
-              <Link className="button-link" to="/vendor">
-                <Button
-                  color="default"
-                  className="{classes.link}"
-                  id="reg-vendor"
-                >
-                  Login As Vendor
-                </Button>
-              </Link>
+              <>
+                <Link className="button-link" to="/vendor">
+                  <Button
+                    color="default"
+                    className="{classes.link}"
+                    id="reg-vendor"
+                  >
+                    Login As Vendor
+                  </Button>
+                </Link>
+              </>
             )}
             {sessionStorage.getItem("token") &&
             sessionStorage.getItem("token").length > 10 ? (
@@ -148,7 +206,7 @@ function VendorNavbar(props) {
                   label={t("header.home")}
                   component={Link}
                   id="app-header"
-                  to="/group"
+                  to="/vendor/editproduct"
                 />
                 <div className="right-nav-btn">
                   <ReactFlagsSelect
@@ -171,6 +229,7 @@ function VendorNavbar(props) {
                       label={t("header.logOut")}
                       onClick={() => {
                         sessionStorage.removeItem("token")
+                        sessionStorage.removeItem("loginType")
                         props.logout()
                       }}
                     />
@@ -216,7 +275,7 @@ function VendorNavbar(props) {
                   keepMounted: true, // Better open performance on mobile.
                 }}
               >
-                {drawer}
+                {Vendordrawer}
               </Drawer>
             </Hidden>
             <Hidden xsDown implementation="css">
@@ -227,14 +286,18 @@ function VendorNavbar(props) {
                 variant="permanent"
                 open
               >
-                {drawer}
+                {Vendordrawer}
               </Drawer>
             </Hidden>
           </nav>
         )}
         <Switch>
+          <Route exact path="/" component={Login} />
           <Route exact path="/vendor" component={VendorLogin} />
-          <Route exact path="/vendor/home" component={Home} />
+          <Route exact path="/vendor/reg" component={Registration} />
+          <Route exact path="/vendor/addproduct" component={AddProduct} />
+          <Route exact path="/vendor/updateprice" component={SelectProduct} />
+          <Route exact path="/vendor/editproduct" component={EditItemPrice} />
         </Switch>
       </Router>
     </div>

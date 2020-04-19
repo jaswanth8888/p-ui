@@ -76,7 +76,7 @@ class CancelProductPromotion extends Component {
               </TableCell>
               <TableCell>
                 <Typography variant="subtitle1" gutterBottom>
-                  {productDetails.effectivePrice}
+                  {productDetails.effectivePriceObj.effectivePrice}
                 </Typography>
               </TableCell>
               <TableCell>

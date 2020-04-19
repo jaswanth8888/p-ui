@@ -101,7 +101,8 @@ class VendorLogin extends Component {
     const { error } = this.state
     return (
       <>
-        {loginStatus.success ? (
+        {sessionStorage.getItem("loginType") === "vendor" &&
+        loginStatus.success ? (
           history.push("/vendor/editproduct")
         ) : (
           <div>

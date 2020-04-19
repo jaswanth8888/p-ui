@@ -54,7 +54,7 @@ class ClusterForm extends Component {
       clusterName,
       taxRate,
     }
-    if (clusterName.length > 6) {
+    if (clusterName.length > 5) {
       postClusterAlt(cluster, zone)
       this.setState({ status: 1 })
     } else {

@@ -79,9 +79,9 @@ class ViewPromotions extends Component {
                           <Typography variant="subtitle1" gutterBottom>
                             Base Price : {product.vendorPrice}
                           </Typography>
-                          <Typography variant="subtitle1" gutterBottom>
+                          {/* <Typography variant="subtitle1" gutterBottom>
                             Effective Price : {product.effectivePrice}
-                          </Typography>
+                          </Typography> */}
                           <Typography variant="subtitle1" gutterBottom>
                             Initial Quantity : {product.initialQty}
                           </Typography>

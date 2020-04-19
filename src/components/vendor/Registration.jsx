@@ -147,8 +147,8 @@ export class Registration extends Component {
       this.isValidCheckBox()
     ) {
       delete vendorDetails.confirmPassword
-      const { registration: registrationAlt } = this.props
-      registrationAlt({ ...vendorDetails })
+      //const { registration: registrationAlt } = this.props
+      this.props.registration({ ...vendorDetails })
       let { submitted } = this.state
       submitted = true
       this.setState({ submitted })
@@ -175,7 +175,6 @@ export class Registration extends Component {
 
   render() {
     const { error, vendorDetails } = this.state
-    const { registerStatus } = this.props
     return (
       <>
         <Grid
@@ -210,9 +209,9 @@ export class Registration extends Component {
               <Typography component="h1" variant="h5">
                 Sign Up
               </Typography>
-              <Typography component="span" color="error" variant="h5">
+              {/* <Typography component="span" color="error" variant="h5">
                 {registerStatus.msg}
-              </Typography>
+              </Typography> */}
             </Box>
 
             <form className="{classes.form}">
@@ -328,10 +327,9 @@ export class Registration extends Component {
     )
   }
 }
-Registration.propTypes = {
-  registerStatus: PropTypes.shape.isRequired,
-  registration: PropTypes.func.isRequired,
-}
+// Registration.propTypes = {
+//   registration: PropTypes.func.isRequired,
+// }
 const stateAsProps = (store) => {
   if ("registerStatus" in store.VendorReducer) {
     return {
@@ -340,5 +338,7 @@ const stateAsProps = (store) => {
   }
   return { registerStatus: { errorMsg: "Registration Failed" } }
 }
-
-export default connect(stateAsProps, { registration })(Registration)
+const actionsAsProps = {
+  registration,
+}
+export default connect(stateAsProps, actionsAsProps)(Registration)
