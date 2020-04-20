@@ -12,9 +12,8 @@ import ClearIcon from "@material-ui/icons/Clear"
 import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { Redirect } from "react-router-dom"
-
 import Select from "@material-ui/core/Select"
+import Message from "./Message"
 
 import { postProduct } from "../../redux/actions/VendorActions"
 
@@ -35,7 +34,6 @@ class AddProduct extends Component {
         volume: "",
         productImagePath: "",
       },
-      isPosted: false,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -59,13 +57,12 @@ class AddProduct extends Component {
       initialQuantity < 100
     ) {
       test.postProduct(product)
-      this.setState({ isPosted: true })
     }
   }
 
   render() {
     if (sessionStorage.getItem("token") != null) {
-      const { isPosted, product } = this.state
+      const { product } = this.state
       const {
         productName,
         productBasePrice,
@@ -78,9 +75,6 @@ class AddProduct extends Component {
         companyName,
         uom,
       } = product
-      if (isPosted) {
-        return <Redirect to="/vendor/home" />
-      }
       return (
         <div className="box-container">
           <div className="joint-form">
@@ -419,6 +413,7 @@ class AddProduct extends Component {
                   Save
                 </Button>
               </form>
+              <Message />
             </div>
           </div>
         </div>
