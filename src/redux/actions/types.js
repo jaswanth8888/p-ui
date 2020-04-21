@@ -79,3 +79,10 @@ export const VENDOR_FAILURE = "VENDOR-FAILURE"
 
 export const CREATE_PRODUCT = "CREATE_PRODUCT"
 export const VTOKEN = `BearerV ${sessionStorage.getItem("token")}`
+
+// admin constants
+export const CREATE_ADMIN = "CREATE_ADMIN"
+export const ADMIN_LOGIN = "ADMIN_LOGIN"
+export const ADMIN_LOGIN_FAILURE = "ADMIN_LOGIN_FAILURE"
+export const ADMIN_LOGOUT = "ADMIN_LOGOUT"
+export const ATOKEN = `BearerA ${sessionStorage.getItem("token")}`

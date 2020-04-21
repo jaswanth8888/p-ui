@@ -46,6 +46,7 @@ import {
   PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
   PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
   POST_EFFECTIVE_PRICE,
+  CREATE_ADMIN,
 } from "./types"
 
 const TOKEN = () => {
@@ -249,6 +250,44 @@ export const postGroup = (groupDetails) => async (dispatch) => {
       } else {
         dispatch({
           type: CREATE_ZONE,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning",
+        })
+      }
+    })
+}
+
+// admin
+
+export const createAdmin = (adminDetails) => async (dispatch) => {
+  await axios
+    .post(`${RETAILER_BASE_URL}/admin`, adminDetails, {
+      headers: { Authorization: TOKEN() },
+    })
+    .then(() => {
+      dispatch({
+        type: CREATE_ADMIN,
+        msg: "User Created Succesfully",
+        msgSeverity: "success",
+      })
+    })
+    .catch((err) => {
+      const { response } = err
+      if (response.status === 400) {
+        dispatch({
+          type: CREATE_ADMIN,
+          msg: "Sorry username already exists",
+          msgSeverity: "error",
+        })
+      } else if (response.status === 403) {
+        dispatch({
+          type: CREATE_ADMIN,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning",
+        })
+      } else {
+        dispatch({
+          type: CREATE_ADMIN,
           msg: "Something went wrong ,please  try again",
           msgSeverity: "warning",
         })

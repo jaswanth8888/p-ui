@@ -57,6 +57,8 @@ import EditItemPrice from "../vendor/EditItemPrice"
 import SelectProduct from "../vendor/SelectProduct"
 import VendorLogin from "../vendor/VendorLogin"
 import Registration from "../vendor/Registration"
+import CreateAdmin from "../retailer/CreateAdmin"
+import AdminLogin from "../admin/AdminLogin"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -117,6 +119,20 @@ function FullNavbar(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
+        <Link to="/admin">
+          <Tooltip title="Create Admin" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <AddShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary={t("Create Admin")}
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+
         <Link to="/applypromotion/zone">
           <Tooltip title="Apply Promotion in Zone Level" placement="right">
             <ListItem button>
@@ -416,6 +432,21 @@ function FullNavbar(props) {
                 </Link>
               </>
             )}
+
+            {!sessionStorage.getItem("token") && (
+              <>
+                <Link className="button-link" to="/admin/login">
+                  <Button
+                    color="default"
+                    className="{classes.link}"
+                    id="admin-login"
+                  >
+                    Login As Admin
+                  </Button>
+                </Link>
+              </>
+            )}
+
             {sessionStorage.getItem("token") ? (
               <>
                 <IconButton
@@ -604,6 +635,8 @@ function FullNavbar(props) {
           <Route exact path="/vendor/addproduct" component={AddProduct} />
           <Route exact path="/vendor/updateprice" component={SelectProduct} />
           <Route exact path="/vendor/editproduct" component={EditItemPrice} />
+          <Route exact path="/admin" component={CreateAdmin} />
+          <Route exact path="/admin/login" component={AdminLogin} />
         </Switch>
       </Router>
     </div>

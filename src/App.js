@@ -50,6 +50,7 @@ const App = () => {
     "/vendor/addproduct",
     "/vendor/updateprice",
     "/vendor/editproduct",
+    "/admin/login",
   ]
   return (
     <Provider store={store}>
@@ -62,6 +63,7 @@ const App = () => {
             })}
             <Route exact path="/vendor" component={FullNavbar} />
             <Route exact path="/vendor/reg" component={FullNavbar} />
+            <Route exact path="/admin/login" component={FullNavbar} />
           </Switch>
         </Router>
       </div>

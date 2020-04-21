@@ -39,6 +39,7 @@ import {
   PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
   PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
   POST_EFFECTIVE_PRICE,
+  CREATE_ADMIN,
 } from "../actions/types"
 
 const initialState = {
@@ -193,6 +194,13 @@ export default (state = initialState, action = {}) => {
         statusCode: action.statusCode,
       }
     case POST_EFFECTIVE_PRICE:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
+    case CREATE_ADMIN:
       return {
         ...state,
         msg: action.msg,
