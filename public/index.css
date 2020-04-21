@@ -78,7 +78,7 @@ h5 {
   padding: 40px;
 }
 
-.box-container-login{
+.box-container-login {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -172,10 +172,9 @@ p {
   padding: 20px;
 }
 
-
 .product-form-header {
   width: 100%;
-  margin:20px 0px;
+  margin: 20px 0px;
 }
 
 .product-form-body {
@@ -183,7 +182,7 @@ p {
   justify-content: flex-start;
   align-items: flex-start;
   padding: 20px;
-  width:99%;
+  width: 99%;
   flex-direction: column;
 }
 
@@ -437,13 +436,12 @@ a {
   padding: 20px;
 }
 
-.joint-products-form{
+.joint-products-form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-
 
 @media only screen and (max-width: 600px) {
   body {
@@ -458,8 +456,8 @@ a {
     width: 90vw;
   }
 
-  .joint-products-form{
-    width:90vw !important;
+  .joint-products-form {
+    width: 90vw !important;
   }
 
   .joint-form-large-table {
@@ -484,6 +482,11 @@ a {
     box-shadow: none;
     border: 1px solid rgba(0, 0, 0, 0.1);
     width: 90vw;
+  }
+
+  #login-joint-form-vendor {
+    box-shadow: none;
+    width: 100% !important;
   }
 
   .product-form-body {
@@ -520,12 +523,17 @@ a {
   }
 }
 
-#reg-vendor{
-  color:white !important;
+#reg-vendor {
+  color: white !important;
 }
 
-#login-joint-form{
+#login-joint-form {
   box-shadow: none;
+}
+
+#login-joint-form-vendor {
+  box-shadow: none;
+  width: 40%;
 }
 
 .thumbnail {
@@ -540,6 +548,6 @@ a {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
-#top-pad{
-  margin-top:20px;
+#top-pad {
+  margin-top: 20px;
 }

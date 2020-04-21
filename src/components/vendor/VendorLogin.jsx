@@ -96,7 +96,7 @@ class VendorLogin extends Component {
           history.push("/vendor/editproduct")
         ) : (
           <div className="box-container-login">
-            <div className="joint-form" id="login-joint-form">
+            <div className="joint-form" id="login-joint-form-vendor">
               <div className="login-full">
                 {/* {userCredentials.password.length <= 0 ? (
                   <div className="help-block">
