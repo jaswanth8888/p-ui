@@ -14,7 +14,7 @@ class CreateAdmin extends Component {
 
     this.state = {
       admin: {
-        username: "",
+        userName: "",
         password: "",
       },
       status: 0,
@@ -38,7 +38,7 @@ class CreateAdmin extends Component {
   handleChangeUserName(e) {
     const { admin } = this.state
     console.log(e.target.value)
-    admin.username = e.target.value
+    admin.userName = e.target.value
     console.log(admin)
   }
 
@@ -66,7 +66,7 @@ class CreateAdmin extends Component {
           <div className="validation-half">
             <div className="validations">
               <h3>Requirements</h3>
-              {admin.username.length <= 0 && (
+              {admin.userName.length <= 0 && (
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -74,7 +74,7 @@ class CreateAdmin extends Component {
                   </Typography>
                 </div>
               )}
-              {admin.username.length > 0 && (
+              {admin.userName.length > 0 && (
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -120,8 +120,8 @@ class CreateAdmin extends Component {
                 required
                 fullWidth
                 id="admin-input"
-                label="username"
-                name="username"
+                label="userName"
+                name="userName"
                 onChange={this.handleChangeUserName}
                 autoFocus
               />

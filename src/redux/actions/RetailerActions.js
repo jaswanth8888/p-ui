@@ -47,6 +47,7 @@ import {
   PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
   POST_EFFECTIVE_PRICE,
   CREATE_ADMIN,
+  centOS,
 } from "./types"
 
 const TOKEN = () => {
@@ -261,7 +262,7 @@ export const postGroup = (groupDetails) => async (dispatch) => {
 
 export const createAdmin = (adminDetails) => async (dispatch) => {
   await axios
-    .post(`${RETAILER_BASE_URL}/admin`, adminDetails, {
+    .post(`${centOS}/vendor-retailer-management/admin`, adminDetails, {
       headers: { Authorization: TOKEN() },
     })
     .then(() => {

@@ -22,7 +22,7 @@ export const FAILURE = "FAILURE"
 export const RETAILER_BASE_URL = "http://compute.price-and-promotions.com"
 
 export const RETAILER_URL = "http://10.155.236.236:9300"
-
+export const centOS = "http://10.150.16.126:8765"
 export const MESSAGE_SET_NULL = "MESSAGE_SET_NULL"
 export const CREATE_ZONE = "CREATE_ZONE"
 export const CREATE_CLUSTER = "CREATE_CLUSTER"

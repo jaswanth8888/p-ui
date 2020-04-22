@@ -1,6 +1,6 @@
 import axios from "axios"
 import i18n from "i18next"
-import { ADMIN_LOGIN, ADMIN_LOGIN_FAILURE, RETAILER_BASE_URL } from "./types"
+import { ADMIN_LOGIN, ADMIN_LOGIN_FAILURE, RETAILER_BASE_URL, centOS } from "./types"
 
 const ATOKEN = () => {
   return `BearerA ${sessionStorage.getItem("token")}`
@@ -8,7 +8,7 @@ const ATOKEN = () => {
 
 export const login = (loginDetails) => async (dispatch) => {
   await axios
-    .post(`${RETAILER_BASE_URL}/admin/authenticate`, loginDetails)
+    .post(`${centOS}/admin/authenticate`, loginDetails)
     .then((res) => {
       sessionStorage.setItem("token", res.data.jwt)
       dispatch({
