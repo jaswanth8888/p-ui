@@ -46,6 +46,9 @@ import {
   PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
   PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
   POST_EFFECTIVE_PRICE,
+  PRODUCTLIST_NONALCOHOLIC_GET_REQUEST,
+  SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
+  CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
 } from "./types"
 
 const TOKEN = () => {
@@ -832,6 +835,106 @@ export const cancelProductEffectivePriceChange = (productName) => async (
       } else {
         dispatch({
           type: PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning",
+        })
+      }
+    })
+}
+
+export const getNonAlcoholicProductList = () => async (dispatch) => {
+  await axios
+    .get(`${RETAILER_BASE_URL}/product-management/product-list`, {
+      headers: { Authorization: TOKEN() },
+    })
+    .then((res) => {
+      dispatch({
+        type: PRODUCTLIST_NONALCOHOLIC_GET_REQUEST,
+        nonAlcoholicProductList: res.data,
+      })
+    })
+}
+
+export const sellProductFixedPrice = (productName) => async (dispatch) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/${productName}/product/makeFixed`,
+      {},
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then(() => {
+      dispatch({
+        type: SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
+        msg: "Set To Sell At Fixed Price Successfully",
+      })
+    })
+    .catch((err) => {
+      const { response } = err
+      if (
+        response.status === 400 &&
+        response.data.message === "This product already has a fixed price"
+      ) {
+        dispatch({
+          type: SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
+          msg: "Product is being sold at fixed price",
+          msgSeverity: "error",
+          statusCode: response.status,
+        })
+      } else if (response.status === 403) {
+        dispatch({
+          type: SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning",
+        })
+      } else {
+        dispatch({
+          type: SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning",
+        })
+      }
+    })
+}
+
+export const cancelProductFixedPrice = (productName) => async (dispatch) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/${productName}/product/cancelFixed`,
+      {},
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then(() => {
+      dispatch({
+        type: CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
+        msg: "Fixed Price Cancelled, Promotions Can Be Applied",
+      })
+    })
+    .catch((err) => {
+      const { response } = err
+      if (
+        response.status === 400 &&
+        response.data.message ===
+          "This product's fixed price has already been cancelled"
+      ) {
+        dispatch({
+          type: CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
+          msg: "Fixed Price has already been cancelled",
+          msgSeverity: "error",
+          statusCode: response.status,
+        })
+      } else if (response.status === 403) {
+        dispatch({
+          type: CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning",
+        })
+      } else {
+        dispatch({
+          type: CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
           msg: "Something went wrong ,please  try again",
           msgSeverity: "warning",
         })

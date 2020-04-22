@@ -57,6 +57,7 @@ import EditItemPrice from "../vendor/EditItemPrice"
 import SelectProduct from "../vendor/SelectProduct"
 import VendorLogin from "../vendor/VendorLogin"
 import Registration from "../vendor/Registration"
+import SellCancelProductFixedPriceRouter from "../retailer/SellCancelProductFixedPriceRouter"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -308,6 +309,22 @@ function FullNavbar(props) {
             </ListItem>
           </Tooltip>
         </Link>
+        <Link to="/sellcancel/fixedprice">
+          <Tooltip
+            title="Sell/ Cancel Product at Fixed Price"
+            placement="right"
+          >
+            <ListItem button>
+              <ListItemIcon>
+                <EventBusyIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Sell/ Cancel Product at Fixed Price"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
         <Divider />
         <Link to="/queryondaterange">
           <Tooltip title="Query on Date Range" placement="right">
@@ -544,6 +561,11 @@ function FullNavbar(props) {
             exact
             path="/product/pricechange/canceleffective"
             component={CancelEffectivePriceChange}
+          />
+          <Route
+            exact
+            path="/sellcancel/fixedprice"
+            component={SellCancelProductFixedPriceRouter}
           />
           <Route
             exact

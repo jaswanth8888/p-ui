@@ -39,6 +39,9 @@ import {
   PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
   PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
   POST_EFFECTIVE_PRICE,
+  PRODUCTLIST_NONALCOHOLIC_GET_REQUEST,
+  SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
+  CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
 } from "../actions/types"
 
 const initialState = {
@@ -74,6 +77,7 @@ const initialState = {
   isPromotion: false,
   updatedProduct: {},
   priceChangeProductsList: [],
+  nonAlcoholicProductList: [],
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -199,6 +203,25 @@ export default (state = initialState, action = {}) => {
         msgSeverity: action.msgSeverity,
         statusCode: action.statusCode,
       }
+    case PRODUCTLIST_NONALCOHOLIC_GET_REQUEST:
+      return {
+          ...state,
+          nonAlcoholicProductList: action.nonAlcoholicProductList,
+      }
+    case SELLPRODUCT_FIXEDPRICE_PUTREQUEST:
+      return {
+          ...state,
+          msg: action.msg,
+          msgSeverity: action.msgSeverity,
+          statusCode: action.statusCode,
+      }
+    case CANCELPRODUCT_FIXEDPRICE_PUTREQUEST:
+      return {
+          ...state,
+          msg: action.msg,
+          msgSeverity: action.msgSeverity,
+          statusCode: action.statusCode,
+      }  
     default:
       return { ...state }
   }
