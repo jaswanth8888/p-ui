@@ -8,6 +8,7 @@ if (state) {
   state = JSON.parse(state)
 }
 
+// eslint-disable-next-line import/no-mutable-exports
 let store = null
 if (state) {
   store = createStore
