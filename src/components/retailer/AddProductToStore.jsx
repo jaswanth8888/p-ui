@@ -11,6 +11,8 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import CheckIcon from "@material-ui/icons/Check"
+import ClearIcon from "@material-ui/icons/Clear"
 import {
   getClusters,
   getStores,
@@ -93,6 +95,54 @@ class AddProductToStore extends Component {
           <div className="validation-half">
             <div className="validations">
               <h3>Requirements</h3>
+              {store === "" && (
+                <div className="unapproved-text">
+                  <ClearIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select Zone
+                  </Typography>
+                </div>
+              )}
+              {store !== "" && (
+                <div className="approved-text">
+                  <CheckIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select Zone
+                  </Typography>
+                </div>
+              )}
+              {cluster === "" && (
+                <div className="unapproved-text">
+                  <ClearIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select Cluster
+                  </Typography>
+                </div>
+              )}
+              {cluster !== "" && (
+                <div className="approved-text">
+                  <CheckIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select Cluster
+                  </Typography>
+                </div>
+              )}
+              {store === "" && (
+                <div className="unapproved-text">
+                  <ClearIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select Store
+                  </Typography>
+                </div>
+              )}
+              {store !== "" && (
+                <div className="approved-text">
+                  <CheckIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select Store
+                  </Typography>
+                </div>
+              )}
             </div>
           </div>
           <div className="form-half">
