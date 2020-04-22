@@ -158,6 +158,7 @@ class Login extends Component {
                     }}
                   />
                   <Button
+                    id="retailer-login-btn"
                     type="button"
                     fullWidth
                     variant="contained"

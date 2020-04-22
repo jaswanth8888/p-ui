@@ -102,14 +102,14 @@ class SelectProduct extends Component {
               {productName === "" && <Link to="/selectproduct" />}
               <Link className="button-link" to="/vendor/editproduct">
                 <Button
+                  id="edit-price-btn"
                   type="button"
                   fullWidth
                   variant="contained"
                   color="primary"
                   className="{classes.submit} submit-pad"
-                  id="assign-price-zone-submit"
                 >
-                  EditItemPrice
+                  Edit Item Price
                 </Button>
               </Link>
             </form>

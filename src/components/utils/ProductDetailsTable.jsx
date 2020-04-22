@@ -79,7 +79,9 @@ class ProductDetailsTable extends Component {
                 <TableCell>{productDetails.companyName}</TableCell>
                 <TableCell>{productDetails.productBasePrice}</TableCell>
                 <TableCell>
-                  {productDetails.effectivePriceObj.effectivePrice}
+                  {productDetails.effectivePriceObj !== null
+                    ? productDetails.effectivePriceObj.effectivePrice
+                    : "NO EFFECTIVE PRICE"}
                 </TableCell>
                 <TableCell>{productDetails.initialQuantity}</TableCell>
                 <TableCell>{productDetails.remainingQuantity}</TableCell>

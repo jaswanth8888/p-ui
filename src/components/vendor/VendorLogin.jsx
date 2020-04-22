@@ -95,7 +95,7 @@ class VendorLogin extends Component {
           history.push("/vendor/addproduct")
         ) : (
           <div className="box-container-login">
-            <div className="joint-form" id="login-joint-form">
+            <div className="joint-form" id="login-joint-form-vendor">
               <div className="login-full">
                 {/* {userCredentials.password.length <= 0 ? (
                   <div className="help-block">
@@ -163,6 +163,7 @@ class VendorLogin extends Component {
                     variant="contained"
                     color="primary"
                     className="{classes.submit} submit-pad"
+                    id="vendor-login-btn"
                     onClick={this.handleSubmitLogin}
                   >
                     {/* {t("header.logIn")} */}
@@ -174,7 +175,7 @@ class VendorLogin extends Component {
                     variant="contained"
                     color="primary"
                     className="{classes.submit} submit-pad"
-                    id="login-vendor"
+                    id="vendor-signup-btn"
                     onClick={this.handleSubmitSignUp}
                   >
                     Not a Vendor? Sign Up
