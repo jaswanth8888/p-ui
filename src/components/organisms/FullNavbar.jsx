@@ -119,7 +119,7 @@ function FullNavbar(props) {
       <List>
         <Link to="/applypromotion/zone">
           <Tooltip title="Apply Promotion in Zone Level" placement="right">
-            <ListItem button>
+            <ListItem button id="apply-promotion-zone-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
@@ -133,7 +133,7 @@ function FullNavbar(props) {
 
         <Link to="/applypromotion/cluster">
           <Tooltip title="Apply Promotion in Cluster Level" placement="right">
-            <ListItem button>
+            <ListItem button id="apply-promotion-cluster-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
@@ -147,7 +147,7 @@ function FullNavbar(props) {
 
         <Link to="/selectproduct">
           <Tooltip title="Assign Price to Zone/Cluster" placement="right">
-            <ListItem button>
+            <ListItem button id="assign-price-zone-cluster-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
@@ -161,7 +161,7 @@ function FullNavbar(props) {
 
         <Link to="/products/store">
           <Tooltip title="Add Products to Store" placement="right">
-            <ListItem button>
+            <ListItem button id="add-product-store-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
@@ -175,7 +175,7 @@ function FullNavbar(props) {
         <Divider />
         <Link to="/group">
           <Tooltip title="Create a Group" placement="right">
-            <ListItem button>
+            <ListItem button id="create-group-btn">
               <ListItemIcon>
                 <GroupIcon />
               </ListItemIcon>
@@ -188,7 +188,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/zone">
           <Tooltip title="Create a Zone" placement="right">
-            <ListItem button>
+            <ListItem button id="create-zone-btn">
               <ListItemIcon>
                 <PublicIcon />
               </ListItemIcon>
@@ -201,7 +201,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/cluster">
           <Tooltip title="Create a Cluster" placement="right">
-            <ListItem button>
+            <ListItem button id="create-cluster-btn">
               <ListItemIcon>
                 <LocationCityIcon />
               </ListItemIcon>
@@ -214,7 +214,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/store">
           <Tooltip title="Create a Store" placement="right">
-            <ListItem button>
+            <ListItem button id="create-store-btn">
               <ListItemIcon>
                 <StoreIcon />
               </ListItemIcon>
@@ -228,7 +228,7 @@ function FullNavbar(props) {
         <Divider />
         <Link to="/priceondate">
           <Tooltip title="Price on date" placement="right">
-            <ListItem button>
+            <ListItem button id="price-on-date-btn">
               <ListItemIcon>
                 <LocalOfferIcon />
               </ListItemIcon>
@@ -242,7 +242,7 @@ function FullNavbar(props) {
         <Divider />
         <Link to="/cancel/promotion">
           <Tooltip title="Cancel Percentage Promotion" placement="right">
-            <ListItem button>
+            <ListItem button id="cancel-promotion-btn">
               <ListItemIcon>
                 <EventBusyIcon />
               </ListItemIcon>
@@ -255,7 +255,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/withdraw/zonepromotion">
           <Tooltip title="Withdraw Percentage Promotion Zone" placement="right">
-            <ListItem button>
+            <ListItem button id="withdraw-zone-promotion-btn">
               <ListItemIcon>
                 <EventBusyIcon />
               </ListItemIcon>
@@ -271,7 +271,7 @@ function FullNavbar(props) {
             title="Withdraw Percentage Promotion Cluster"
             placement="right"
           >
-            <ListItem button>
+            <ListItem button id="withdraw-cluster-promotion-btn">
               <ListItemIcon>
                 <EventBusyIcon />
               </ListItemIcon>
@@ -284,7 +284,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/product/pricechange/cancelnoteffective">
           <Tooltip title="Cancel Not Effective Price Change" placement="right">
-            <ListItem button>
+            <ListItem button id="cancel-not-effective-price-btn">
               <ListItemIcon>
                 <EventBusyIcon />
               </ListItemIcon>
@@ -297,7 +297,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/product/pricechange/canceleffective">
           <Tooltip title="Cancel Effective Price Change" placement="right">
-            <ListItem button>
+            <ListItem button id="cancel-effective-price-btn">
               <ListItemIcon>
                 <EventBusyIcon />
               </ListItemIcon>
@@ -311,7 +311,7 @@ function FullNavbar(props) {
         <Divider />
         <Link to="/queryondaterange">
           <Tooltip title="Query on Date Range" placement="right">
-            <ListItem button>
+            <ListItem button id="query-on-date-btn">
               <ListItemIcon>
                 <DateRangeIcon />
               </ListItemIcon>
@@ -325,7 +325,7 @@ function FullNavbar(props) {
         <Divider />
         <Link to="/view/zones">
           <Tooltip title="View Zones" placement="right">
-            <ListItem button>
+            <ListItem button id="view-zones-btn">
               <ListItemIcon>
                 <FormatListBulletedIcon />
               </ListItemIcon>
@@ -338,7 +338,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/view/clusters">
           <Tooltip title="View Clusters" placement="right">
-            <ListItem button>
+            <ListItem button id="view-clusters-btn">
               <ListItemIcon>
                 <FormatListBulletedIcon />
               </ListItemIcon>
@@ -360,7 +360,7 @@ function FullNavbar(props) {
       <List>
         <Link to="/vendor/addproduct">
           <Tooltip title="Add a Product" placement="right">
-            <ListItem button>
+            <ListItem button id="add-product-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
@@ -373,7 +373,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/vendor/updateprice">
           <Tooltip title="Update the price of a Product" placement="right">
-            <ListItem button>
+            <ListItem buttonid="update-price-product-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>

@@ -164,6 +164,7 @@ class VendorLogin extends Component {
                     variant="contained"
                     color="primary"
                     className="{classes.submit} submit-pad"
+                    id="vendor-login-btn"
                     onClick={this.handleSubmitLogin}
                   >
                     {/* {t("header.logIn")} */}
@@ -175,7 +176,7 @@ class VendorLogin extends Component {
                     variant="contained"
                     color="primary"
                     className="{classes.submit} submit-pad"
-                    id="login-vendor"
+                    id="vendor-signup-btn"
                     onClick={this.handleSubmitSignUp}
                   >
                     Not a Vendor? Sign Up

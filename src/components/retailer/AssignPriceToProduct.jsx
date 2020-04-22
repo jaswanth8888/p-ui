@@ -103,7 +103,7 @@ class AssignPriceToProduct extends Component {
                       InputLabelProps={{ shrink: true, required: true }}
                     />
                     <TextField
-                      id="startDate-query"
+                      id="endDate-query"
                       label="To Date"
                       name="toDate"
                       fullWidth

@@ -201,7 +201,10 @@ class DefinePromotionInCluster extends Component {
                 autoFocus
               />
               <Typography className="card-header" variant="h6">
-                Actual Price : {productDetails.effectivePriceObj.effectivePrice}
+                Actual Price :{" "}
+                {productDetails.effectivePriceObj !== null
+                  ? productDetails.effectivePriceObj.effectivePrice
+                  : productDetails.productBasePrice}
               </Typography>
 
               <TextField

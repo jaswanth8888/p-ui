@@ -197,13 +197,13 @@ class EditItemPrice extends Component {
               />
               <Button
                 halfWidth
+                id="update-btn"
                 type="button"
                 variant="contained"
                 color="primary"
                 className="{classes.submit}"
                 onClick={this.handleSubmit}
                 style={{ marginTop: "10px" }}
-                id="apply-zone-percentage"
               >
                 Update
               </Button>
