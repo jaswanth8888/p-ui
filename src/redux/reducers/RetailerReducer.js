@@ -42,6 +42,7 @@ import {
   PRODUCTLIST_NONALCOHOLIC_GET_REQUEST,
   SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
   CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
+  CLEAR_PRODUCT_LIST,
 } from "../actions/types"
 
 const initialState = {
@@ -205,23 +206,25 @@ export default (state = initialState, action = {}) => {
       }
     case PRODUCTLIST_NONALCOHOLIC_GET_REQUEST:
       return {
-          ...state,
-          nonAlcoholicProductList: action.nonAlcoholicProductList,
+        ...state,
+        nonAlcoholicProductList: action.nonAlcoholicProductList,
       }
     case SELLPRODUCT_FIXEDPRICE_PUTREQUEST:
       return {
-          ...state,
-          msg: action.msg,
-          msgSeverity: action.msgSeverity,
-          statusCode: action.statusCode,
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
       }
     case CANCELPRODUCT_FIXEDPRICE_PUTREQUEST:
       return {
-          ...state,
-          msg: action.msg,
-          msgSeverity: action.msgSeverity,
-          statusCode: action.statusCode,
-      }  
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
+    case CLEAR_PRODUCT_LIST:
+      return { ...state, products: initialState.products }
     default:
       return { ...state }
   }

@@ -22,6 +22,7 @@ import {
   getCategories,
   getProducts,
   postProductToStore,
+  clearProductList,
 } from "../../redux/actions/RetailerActions"
 import { addProduct, addProductToStore } from "../utils/constants"
 
@@ -39,16 +40,13 @@ class AddProducts extends Component {
     this.handleChangeCategory = this.handleChangeCategory.bind(this)
     this.loopForm = this.loopForm.bind(this)
     this.updateInputValue = this.updateInputValue.bind(this)
-    this.getAllCategories = this.getAllCategories.bind(this)
   }
 
   componentDidMount() {
-    this.getAllCategories()
-  }
-
-  getAllCategories() {
-    const { getAllCategories } = this.props
-    getAllCategories()
+    const { clearProductList: clearProductListAlt } = this.props
+    clearProductListAlt()
+    const { getAllCategories: getAllCategoriesAlt } = this.props
+    getAllCategoriesAlt()
   }
 
   updateInputValue(e) {
@@ -314,6 +312,7 @@ AddProducts.propTypes = {
   cluster: PropTypes.string.isRequired,
   store: PropTypes.string.isRequired,
   products: PropTypes.shape.isRequired,
+  clearProductList: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({
@@ -328,6 +327,7 @@ const actionAsProps = {
   getAllCategories: getCategories,
   getAllProducts: getProducts,
   postProductToStore,
+  clearProductList,
 }
 
 export default connect(stateAsProps, actionAsProps)(AddProducts)

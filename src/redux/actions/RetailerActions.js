@@ -49,6 +49,7 @@ import {
   PRODUCTLIST_NONALCOHOLIC_GET_REQUEST,
   SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
   CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
+  CLEAR_PRODUCT_LIST,
 } from "./types"
 
 const TOKEN = () => {
@@ -940,4 +941,8 @@ export const cancelProductFixedPrice = (productName) => async (dispatch) => {
         })
       }
     })
+}
+
+export const clearProductList = (productList) => (dispatch) => {
+  dispatch({ type: CLEAR_PRODUCT_LIST, products: productList })
 }
