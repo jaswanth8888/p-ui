@@ -51,7 +51,7 @@ class SellCancelProductFixedPriceForm extends Component {
             <div className="validations">
               <h3 className="center-h3">Requirements</h3>
               {productName === "" && (
-                <div className="typo-div">
+                <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Please select a product name
@@ -78,7 +78,7 @@ class SellCancelProductFixedPriceForm extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    Select a Product
+                    Select from Baby Products
                   </Typography>
                 </div>
               </div>

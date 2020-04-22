@@ -102,32 +102,35 @@ class SelectProduct extends Component {
                   name="productName"
                 />
               </FormControl>
-              {productName === "" && <Link to="/selectproduct" />}
-              <Link className="button-link" to="/assigntocluster">
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                  id="selprods-submit"
-                >
-                  Assign Price to Cluster
-                </Button>
-              </Link>
-
-              <Link className="button-link" to="/assigntozone">
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                  id="assign-price-zone-submit"
-                >
-                  Assign Price to Zone
-                </Button>
-              </Link>
+              {productName !== "" && (
+                <>
+                  {" "}
+                  <Link className="button-link" to="/assigntocluster">
+                    <Button
+                      type="button"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className="{classes.submit} submit-pad"
+                      id="selprods-submit"
+                    >
+                      Assign Price to Cluster
+                    </Button>
+                  </Link>
+                  <Link className="button-link" to="/assigntozone">
+                    <Button
+                      type="button"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className="{classes.submit} submit-pad"
+                      id="assign-price-zone-submit"
+                    >
+                      Assign Price to Zone
+                    </Button>
+                  </Link>
+                </>
+              )}
             </form>
           </div>
         </div>
