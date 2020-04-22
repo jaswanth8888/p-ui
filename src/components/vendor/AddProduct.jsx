@@ -48,15 +48,20 @@ class AddProduct extends Component {
 
   handleSubmit() {
     const { product } = this.state
-    const { productName, productBasePrice, initialQuantity } = product
+    const {
+      productName,
+      productBasePrice,
+      initialQuantity,
+      productCategory,
+    } = product
     const test = this.props
-    if (
-      productName &&
-      productBasePrice > 0 &&
-      initialQuantity > 1 &&
-      initialQuantity < 100
-    ) {
-      test.postProduct(product)
+    if (productName && productBasePrice > 0 && initialQuantity > 1) {
+      if (
+        (productCategory === "ALCOHOL_PROD" && initialQuantity < 101) ||
+        (productCategory === "BABY_PROD" && initialQuantity < 501)
+      ) {
+        test.postProduct(product)
+      }
     }
   }
 
