@@ -314,7 +314,7 @@ function FullNavbar(props) {
             title="Sell/ Cancel Product at Fixed Price"
             placement="right"
           >
-            <ListItem button>
+            <ListItem button id="sell-cancel-fixed-price-btn">
               <ListItemIcon>
                 <EventBusyIcon />
               </ListItemIcon>
