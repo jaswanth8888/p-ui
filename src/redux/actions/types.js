@@ -12,14 +12,14 @@ export const PRODUCTTOSTORE_POST_REQUEST = "PRODUCTTOSTORE_POST_REQUEST"
 export const FAILURE = "FAILURE"
 
 // export const RETAILER_BASE_URL = "http://10.102.130.31:8765"  //Prerana system
-// export const RETAILER_BASE_URL = "http://10.150.16.126:8765" // centOS
+export const RETAILER_BASE_URL = "http://10.150.16.126:8765" // centOS
 //   "http://pps-blr-microservices-balancer-98019398.us-east-1.elb.amazonaws.com" // cloud */
 // export const RETAILER_BASE_URL = "http://10.150.222.113:8765";  //saahil
 // export const RETAILER_BASE_URL = "http://10.102.137.146:8765";
 // export const RETAILER_BASE_URL = "http://10.102.143.225:8765";
 // export const RETAILER_BASE_URL = "http://10.102.130.66:8765";    //karteek system
 
-export const RETAILER_BASE_URL = "https://compute.price-and-promotions.com"
+// export const RETAILER_BASE_URL = "https://compute.price-and-promotions.com"
 
 export const RETAILER_URL = "http://10.155.236.236:9300"
 
@@ -58,6 +58,8 @@ export const PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST =
 export const PRODUCT_CANCEL_EFFECTIVEPRICECHANGE =
   "PRODUCT_CANCEL_EFFECTIVEPRICECHANGE"
 
+export const PRODUCTLIST_NONALCOHOLIC_GET_REQUEST =
+  "PRODUCTLIST_NONALCOHOLIC_GET_REQUEST"
 export const SELLPRODUCT_FIXEDPRICE_PUTREQUEST =
   "SELLPRODUCT_FIXEDPRICE_PUTREQUEST"
 export const CANCELPRODUCT_FIXEDPRICE_PUTREQUEST =
