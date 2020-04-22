@@ -40,10 +40,15 @@ import {
   PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
   POST_EFFECTIVE_PRICE,
   CREATE_ADMIN,
+  USER_TYPE,
 } from "../actions/types"
 
 const initialState = {
-  loggedInUser: null,
+  loggedInUser: {
+    token: "",
+    userType: "",
+    userName: "",
+  },
   zones: [],
   clusters: [],
   stores: [],
@@ -78,8 +83,13 @@ const initialState = {
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
+    case USER_TYPE:
+      return { ...state, loggedInUser: action.loggedInUser }
     case LOGIN_USER:
-      return { ...state, loginStatus: action.loginStatus }
+      return {
+        ...state,
+        loginStatus: action.loginStatus,
+      }
     case LOGOUT:
       return { ...initialState }
     case WELCOME_USER:

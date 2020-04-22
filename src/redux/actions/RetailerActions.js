@@ -47,11 +47,17 @@ import {
   PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
   POST_EFFECTIVE_PRICE,
   CREATE_ADMIN,
-  centOS,
+  USER_TYPE,
+  VENDOR_LOGOUT,
+  ADMIN_LOGOUT,
 } from "./types"
 
 const TOKEN = () => {
-  return `BearerR ${sessionStorage.getItem("token")}`
+  if (sessionStorage.getItem("userType") === "Retailer") {
+    return `BearerR ${sessionStorage.getItem("token")}`
+  }
+
+  return `BearerA ${sessionStorage.getItem("token")}`
 }
 
 export const login = (loginDetails) => async (dispatch) => {
@@ -59,6 +65,15 @@ export const login = (loginDetails) => async (dispatch) => {
     .post(`${RETAILER_BASE_URL}/retailer/authenticate`, loginDetails)
     .then((res) => {
       sessionStorage.setItem("token", res.data.jwt)
+      sessionStorage.setItem("userType", "Retailer")
+      dispatch({
+        type: USER_TYPE,
+        loggedInUser: {
+          token: res.data.jwt,
+          userType: "Retailer",
+          userName: res.data.userName,
+        },
+      })
       dispatch({
         type: LOGIN_USER,
         loginStatus: { success: true, errorMsg: "", data: res.data },
@@ -195,6 +210,8 @@ export const postStore = (store, zone, cluster) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT })
+  dispatch({ type: VENDOR_LOGOUT })
+  dispatch({ type: ADMIN_LOGOUT })
 }
 
 export const messageSetNull = () => (dispatch) => {
@@ -262,9 +279,13 @@ export const postGroup = (groupDetails) => async (dispatch) => {
 
 export const createAdmin = (adminDetails) => async (dispatch) => {
   await axios
-    .post(`${centOS}/vendor-retailer-management/admin`, adminDetails, {
-      headers: { Authorization: TOKEN() },
-    })
+    .post(
+      `${RETAILER_BASE_URL}/vendor-retailer-management/admin`,
+      adminDetails,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
     .then(() => {
       dispatch({
         type: CREATE_ADMIN,

@@ -13,6 +13,7 @@ import {
   FAILURE,
   PRODUCTLIST_GET_REQUEST,
   PRODUCT_SAVE_VALUE,
+  USER_TYPE,
 } from "./types"
 
 const VTOKEN = () => {
@@ -84,6 +85,15 @@ export const vendorLogin = (loginDetails) => async (dispatch) => {
     .post(`${RETAILER_BASE_URL}/vendor/authenticate`, loginDetails)
     .then((res) => {
       sessionStorage.setItem("token", res.data.jwt)
+      sessionStorage.setItem("userType", "vendor")
+      dispatch({
+        type: USER_TYPE,
+        loggedInUser: {
+          token: res.data.jwt,
+          userType: "vendor",
+          userName: res.data.userName,
+        },
+      })
       dispatch({
         type: VENDOR_LOGIN_USER,
         loginStatus: { success: true, msg: "", data: res.data },

@@ -5,6 +5,7 @@ import MuiAlert from "@material-ui/lab/Alert"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
+import md5 from "md5"
 import { createAdmin } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
 
@@ -37,16 +38,12 @@ class CreateAdmin extends Component {
 
   handleChangeUserName(e) {
     const { admin } = this.state
-    console.log(e.target.value)
     admin.userName = e.target.value
-    console.log(admin)
   }
 
   handleChangePassword(e) {
     const { admin } = this.state
-    console.log(e.target.value)
-    admin.password = e.target.value
-    console.log(admin)
+    admin.password = md5(e.target.value)
   }
 
   handleSubmit(e) {

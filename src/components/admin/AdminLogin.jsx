@@ -196,9 +196,9 @@ AdminLogin.propTypes = {
   t: PropTypes.shape.isRequired,
 }
 const stateAsProps = (store) => {
-  if ("loginStatus" in store.RetailerReducer) {
+  if ("loginStatus" in store.AdminReducer) {
     return {
-      loginStatus: store.RetailerReducer.loginStatus,
+      loginStatus: store.AdminReducer.loginStatus,
     }
   }
   return { loginStatus: { errorMsg: "" } }

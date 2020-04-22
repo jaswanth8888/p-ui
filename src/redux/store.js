@@ -7,9 +7,24 @@ let state = window.sessionStorage.reduxstate
 if (state) {
   state = JSON.parse(state)
 }
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
-)
+
+let store = null
+if (state) {
+  store = createStore
+  store = createStore(
+    rootReducer,
+    state,
+    composeWithDevTools(applyMiddleware(thunk))
+  )
+} else {
+  store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+}
+
+// the callback to subscribe is executed everytime the state changes
+// in the store
+// this is there to make the store persistent
+store.subscribe(() => {
+  window.sessionStorage.reduxstate = JSON.stringify(store.getState())
+})
 
 export default store

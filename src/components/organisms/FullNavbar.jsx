@@ -107,7 +107,7 @@ function FullNavbar(props) {
   const { t, i18n } = useTranslation()
   const theme = useTheme()
   const [open] = React.useState(false)
-  const { container } = props
+  const { container, loggedInUser } = props
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
@@ -119,23 +119,25 @@ function FullNavbar(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        <Link to="/admin">
-          <Tooltip title="Create Admin" placement="right">
-            <ListItem button>
-              <ListItemIcon>
-                <AddShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("Create Admin")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
+        {loggedInUser.userType === "Retailer" && (
+          <Link to="/admin">
+            <Tooltip title="Create Admin" placement="right">
+              <ListItem button id="create-admin-btn">
+                <ListItemIcon>
+                  <AddShoppingCartIcon />
+                </ListItemIcon>
+                <ListItemText
+                  className="list-item-text"
+                  primary={t("Create Admin")}
+                />
+              </ListItem>
+            </Tooltip>
+          </Link>
+        )}
 
         <Link to="/applypromotion/zone">
           <Tooltip title="Apply Promotion in Zone Level" placement="right">
-            <ListItem button>
+            <ListItem button id="apply-promotion-zone-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
@@ -149,7 +151,7 @@ function FullNavbar(props) {
 
         <Link to="/applypromotion/cluster">
           <Tooltip title="Apply Promotion in Cluster Level" placement="right">
-            <ListItem button>
+            <ListItem button id="apply-promotion-cluster-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
@@ -163,7 +165,7 @@ function FullNavbar(props) {
 
         <Link to="/selectproduct">
           <Tooltip title="Assign Price to Zone/Cluster" placement="right">
-            <ListItem button>
+            <ListItem button id="assign-price-zone-cluster-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
@@ -177,7 +179,7 @@ function FullNavbar(props) {
 
         <Link to="/products/store">
           <Tooltip title="Add Products to Store" placement="right">
-            <ListItem button>
+            <ListItem button id="add-product-store-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
@@ -191,7 +193,7 @@ function FullNavbar(props) {
         <Divider />
         <Link to="/group">
           <Tooltip title="Create a Group" placement="right">
-            <ListItem button>
+            <ListItem button id="create-group-btn">
               <ListItemIcon>
                 <GroupIcon />
               </ListItemIcon>
@@ -204,7 +206,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/zone">
           <Tooltip title="Create a Zone" placement="right">
-            <ListItem button>
+            <ListItem button id="create-zone-btn">
               <ListItemIcon>
                 <PublicIcon />
               </ListItemIcon>
@@ -217,7 +219,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/cluster">
           <Tooltip title="Create a Cluster" placement="right">
-            <ListItem button>
+            <ListItem button id="create-cluster-btn">
               <ListItemIcon>
                 <LocationCityIcon />
               </ListItemIcon>
@@ -230,7 +232,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/store">
           <Tooltip title="Create a Store" placement="right">
-            <ListItem button>
+            <ListItem button id="create-store-btn">
               <ListItemIcon>
                 <StoreIcon />
               </ListItemIcon>
@@ -244,7 +246,7 @@ function FullNavbar(props) {
         <Divider />
         <Link to="/priceondate">
           <Tooltip title="Price on date" placement="right">
-            <ListItem button>
+            <ListItem button id="price-on-date-btn">
               <ListItemIcon>
                 <LocalOfferIcon />
               </ListItemIcon>
@@ -258,7 +260,7 @@ function FullNavbar(props) {
         <Divider />
         <Link to="/cancel/promotion">
           <Tooltip title="Cancel Percentage Promotion" placement="right">
-            <ListItem button>
+            <ListItem button id="cancel-promotion-btn">
               <ListItemIcon>
                 <EventBusyIcon />
               </ListItemIcon>
@@ -271,7 +273,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/withdraw/zonepromotion">
           <Tooltip title="Withdraw Percentage Promotion Zone" placement="right">
-            <ListItem button>
+            <ListItem button id="withdraw-zone-promotion-btn">
               <ListItemIcon>
                 <EventBusyIcon />
               </ListItemIcon>
@@ -287,7 +289,7 @@ function FullNavbar(props) {
             title="Withdraw Percentage Promotion Cluster"
             placement="right"
           >
-            <ListItem button>
+            <ListItem button id="withdraw-cluster-promotion-btn">
               <ListItemIcon>
                 <EventBusyIcon />
               </ListItemIcon>
@@ -300,7 +302,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/product/pricechange/cancelnoteffective">
           <Tooltip title="Cancel Not Effective Price Change" placement="right">
-            <ListItem button>
+            <ListItem button id="cancel-not-effective-price-btn">
               <ListItemIcon>
                 <EventBusyIcon />
               </ListItemIcon>
@@ -313,7 +315,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/product/pricechange/canceleffective">
           <Tooltip title="Cancel Effective Price Change" placement="right">
-            <ListItem button>
+            <ListItem button id="cancel-effective-price-btn">
               <ListItemIcon>
                 <EventBusyIcon />
               </ListItemIcon>
@@ -327,7 +329,7 @@ function FullNavbar(props) {
         <Divider />
         <Link to="/queryondaterange">
           <Tooltip title="Query on Date Range" placement="right">
-            <ListItem button>
+            <ListItem button id="query-on-date-btn">
               <ListItemIcon>
                 <DateRangeIcon />
               </ListItemIcon>
@@ -341,7 +343,7 @@ function FullNavbar(props) {
         <Divider />
         <Link to="/view/zones">
           <Tooltip title="View Zones" placement="right">
-            <ListItem button>
+            <ListItem button id="view-zones-btn">
               <ListItemIcon>
                 <FormatListBulletedIcon />
               </ListItemIcon>
@@ -354,7 +356,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/view/clusters">
           <Tooltip title="View Clusters" placement="right">
-            <ListItem button>
+            <ListItem button id="view-clusters-btn">
               <ListItemIcon>
                 <FormatListBulletedIcon />
               </ListItemIcon>
@@ -376,7 +378,7 @@ function FullNavbar(props) {
       <List>
         <Link to="/vendor/addproduct">
           <Tooltip title="Add a Product" placement="right">
-            <ListItem button>
+            <ListItem button id="add-product-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
@@ -389,7 +391,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/vendor/updateprice">
           <Tooltip title="Update the price of a Product" placement="right">
-            <ListItem button>
+            <ListItem buttonid="update-price-product-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
@@ -419,7 +421,7 @@ function FullNavbar(props) {
           }}
         >
           <Toolbar>
-            {!sessionStorage.getItem("token") && (
+            {loggedInUser.token === "" && (
               <>
                 <Link className="button-link" to="/vendor">
                   <Button
@@ -430,11 +432,6 @@ function FullNavbar(props) {
                     Login As Vendor
                   </Button>
                 </Link>
-              </>
-            )}
-
-            {!sessionStorage.getItem("token") && (
-              <>
                 <Link className="button-link" to="/admin/login">
                   <Button
                     color="default"
@@ -446,7 +443,6 @@ function FullNavbar(props) {
                 </Link>
               </>
             )}
-
             {sessionStorage.getItem("token") ? (
               <>
                 <IconButton
@@ -487,7 +483,8 @@ function FullNavbar(props) {
                       label={t("header.logOut")}
                       onClick={() => {
                         sessionStorage.removeItem("token")
-                        sessionStorage.removeItem("loginType")
+                        sessionStorage.removeItem("userType")
+                        // sessionStorage.removeItem()
                         props.logout()
                       }}
                     />
@@ -516,7 +513,7 @@ function FullNavbar(props) {
             )}
           </Toolbar>
         </AppBar>
-        {sessionStorage.getItem("token") && (
+        {loggedInUser.token !== "" && (
           <nav className={classes.drawer} aria-label="mailbox folders">
             {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
             <Hidden smUp implementation="css">
@@ -533,7 +530,7 @@ function FullNavbar(props) {
                   keepMounted: true, // Better open performance on mobile.
                 }}
               >
-                {sessionStorage.getItem("loginType") === "vendor"
+                {loggedInUser.userType === "vendor"
                   ? Vendordrawer
                   : Retailerdrawer}
               </Drawer>
@@ -546,7 +543,7 @@ function FullNavbar(props) {
                 variant="permanent"
                 open
               >
-                {sessionStorage.getItem("loginType") === "vendor"
+                {loggedInUser.userType === "vendor"
                   ? Vendordrawer
                   : Retailerdrawer}
               </Drawer>
@@ -645,6 +642,7 @@ function FullNavbar(props) {
 FullNavbar.propTypes = {
   logout: PropTypes.func.isRequired,
   container: PropTypes.shape.isRequired,
+  loggedInUser: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({

@@ -1,16 +1,27 @@
 import axios from "axios"
 import i18n from "i18next"
-import { ADMIN_LOGIN, ADMIN_LOGIN_FAILURE, RETAILER_BASE_URL, centOS } from "./types"
+import {
+  ADMIN_LOGIN,
+  ADMIN_LOGIN_FAILURE,
+  RETAILER_BASE_URL,
+  USER_TYPE,
+} from "./types"
 
-const ATOKEN = () => {
-  return `BearerA ${sessionStorage.getItem("token")}`
-}
-
+// eslint-disable-next-line import/prefer-default-export
 export const login = (loginDetails) => async (dispatch) => {
   await axios
-    .post(`${centOS}/admin/authenticate`, loginDetails)
+    .post(`${RETAILER_BASE_URL}/admin/authenticate`, loginDetails)
     .then((res) => {
       sessionStorage.setItem("token", res.data.jwt)
+      sessionStorage.setItem("userType", "admin")
+      dispatch({
+        type: USER_TYPE,
+        loggedInUser: {
+          token: res.data.jwt,
+          userType: "admin",
+          userName: res.data.userName,
+        },
+      })
       dispatch({
         type: ADMIN_LOGIN,
         loginStatus: { success: true, errorMsg: "", data: res.data },

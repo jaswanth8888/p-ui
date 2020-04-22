@@ -25,5 +25,7 @@ export default (state = initialState, action = {}) => {
         msg: action.msg,
         msgSeverity: action.msgSeverity,
       }
+    default:
+      return { ...state }
   }
 }

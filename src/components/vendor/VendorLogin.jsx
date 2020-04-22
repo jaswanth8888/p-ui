@@ -72,7 +72,6 @@ class VendorLogin extends Component {
     const { vendorLogin: vendorLoginAlt } = this.props
     if (this.isValidusername() && this.isValidPassword()) {
       vendorLoginAlt({ ...userCredentials }) // thunk action
-      sessionStorage.setItem("loginType", "vendor")
     }
   }
 
@@ -91,9 +90,9 @@ class VendorLogin extends Component {
     const { error } = this.state
     return (
       <>
-        {sessionStorage.getItem("loginType") === "vendor" &&
+        {sessionStorage.getItem("userType") === "vendor" &&
         loginStatus.success ? (
-          history.push("/vendor/editproduct")
+          history.push("/vendor/addproduct")
         ) : (
           <div className="box-container-login">
             <div className="joint-form" id="login-joint-form">
