@@ -33,14 +33,24 @@ class SellCancelProductFixedPrice extends Component {
     getProductDetailsAlt(productName)
   }
 
-  handleSubmitSell = (productName) => {
-    const { sellProductFixedPrice: sellProductFixedPriceAlt } = this.props
-    sellProductFixedPriceAlt(productName)
+  handleSubmitSell = (productNameAlt) => {
+    const {
+      productName,
+      getProductDetails: getProductDetailsAlt,
+      sellProductFixedPrice: sellProductFixedPriceAlt,
+    } = this.props
+    sellProductFixedPriceAlt(productNameAlt)
+    getProductDetailsAlt(productName)
   }
 
-  handleSubmitCancel = (productName) => {
-    const { cancelProductFixedPrice: cancelProductFixedPriceAlt } = this.props
-    cancelProductFixedPriceAlt(productName)
+  handleSubmitCancel = (productNameAlt) => {
+    const {
+      productName,
+      getProductDetails: getProductDetailsAlt,
+      cancelProductFixedPrice: cancelProductFixedPriceAlt,
+    } = this.props
+    cancelProductFixedPriceAlt(productNameAlt)
+    getProductDetailsAlt(productName)
   }
 
   render() {

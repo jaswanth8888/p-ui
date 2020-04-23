@@ -25,6 +25,7 @@ import {
   clearProductList,
 } from "../../redux/actions/RetailerActions"
 import { addProduct, addProductToStore } from "../utils/constants"
+import Message from "../utils/Message"
 
 class AddProducts extends Component {
   constructor(props) {
@@ -89,6 +90,8 @@ class AddProducts extends Component {
     })
 
     postProductToStoreAlt(zone, cluster, store, productList)
+    this.setState({ category: "" })
+    this.setState({ productList: [] })
   }
 
   render() {
@@ -295,6 +298,7 @@ class AddProducts extends Component {
                 </Link>
               )}
             </form>
+            <Message />
           </div>
         </div>
       </div>

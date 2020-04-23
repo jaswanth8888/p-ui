@@ -321,12 +321,14 @@ export const postProductToStore = (zone, cluster, store, products) => async (
       dispatch({
         type: PRODUCTTOSTORE_POST_REQUEST,
         msg: "Product Added to Store Succesfully",
+        msgSeverity: "success",
       })
     })
     .catch(() => {
       dispatch({
         type: PRODUCTTOSTORE_POST_REQUEST,
         msg: "Sorry Products already exists in Store",
+        msgSeverity: "warning",
       })
     })
 }
@@ -655,7 +657,7 @@ export const getEffectivePrice = (parameter, productName) => async (
           statusCode: response.status,
         })
       } else if (
-        response.status === 500 &&
+        response.status === 400 &&
         response.data.message ===
           "Sorry cannot change price of product in given date range"
       ) {
