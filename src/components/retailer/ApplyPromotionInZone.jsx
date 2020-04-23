@@ -79,132 +79,133 @@ class ApplyPromotionInZone extends Component {
     const {
       zone,
       productName,
-      history,
-      assignedPrice,
       checkAssignedZone: checkAssignedZoneAlt,
     } = this.props
     checkAssignedZoneAlt(productName, zone)
-    if (assignedPrice !== "") {
-      history.push("/definepromotion/zone")
-    }
   }
 
   render() {
-    const { zones, products } = this.props
+    const { zones, products, assignedPrice, history } = this.props
     const { productName, zone } = this.state
     return (
-      <div className="box-container">
-        <div className="joint-form">
-          <div className="validation-half">
-            <div className="validations">
-              <h3 className="center-h3">Requirements</h3>
+      <>
+        {assignedPrice !== "" ? (
+          history.push("/definepromotion/zone")
+        ) : (
+          <div className="box-container">
+            <div className="joint-form">
+              <div className="validation-half">
+                <div className="validations">
+                  <h3 className="center-h3">Requirements</h3>
 
-              {productName === "" && (
-                <div className="unapproved-text">
-                  <ClearIcon className="icon-style" />
-                  <Typography variant="subtitle2" gutterBottom>
-                    {selectProduct}
-                  </Typography>
-                </div>
-              )}
-              {productName !== "" && (
-                <div className="approved-text">
-                  <CheckIcon className="icon-style" />
-                  <Typography variant="subtitle2" gutterBottom>
-                    {selectProduct}
-                  </Typography>
-                </div>
-              )}
-              {zone === "" && (
-                <div className="unapproved-text">
-                  <ClearIcon className="icon-style" />
-                  <Typography variant="subtitle2" gutterBottom>
-                    {selectZone}
-                  </Typography>
-                </div>
-              )}
-              {zone !== "" && (
-                <div className="approved-text">
-                  <CheckIcon className="icon-style" />
-                  <Typography variant="subtitle2" gutterBottom>
-                    {selectZone}
-                  </Typography>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="form-half">
-            <form className="{classes.form}" noValidate>
-              <div>
-                <div className="help-block">
-                  <Typography
-                    color="primary"
-                    component="h1"
-                    variant="h4"
-                    className="help-block-h4"
-                  >
-                    {selectProductandZone}
-                  </Typography>
+                  {productName === "" && (
+                    <div className="unapproved-text">
+                      <ClearIcon className="icon-style" />
+                      <Typography variant="subtitle2" gutterBottom>
+                        {selectProduct}
+                      </Typography>
+                    </div>
+                  )}
+                  {productName !== "" && (
+                    <div className="approved-text">
+                      <CheckIcon className="icon-style" />
+                      <Typography variant="subtitle2" gutterBottom>
+                        {selectProduct}
+                      </Typography>
+                    </div>
+                  )}
+                  {zone === "" && (
+                    <div className="unapproved-text">
+                      <ClearIcon className="icon-style" />
+                      <Typography variant="subtitle2" gutterBottom>
+                        {selectZone}
+                      </Typography>
+                    </div>
+                  )}
+                  {zone !== "" && (
+                    <div className="approved-text">
+                      <CheckIcon className="icon-style" />
+                      <Typography variant="subtitle2" gutterBottom>
+                        {selectZone}
+                      </Typography>
+                    </div>
+                  )}
                 </div>
               </div>
-              <FormControl variant="outlined" fullWidth>
-                <Autocomplete
-                  id="product-list"
-                  fullWidth
-                  options={products}
-                  getOptionLabel={(option) => option}
-                  renderInput={(params) => (
-                    <TextField
-                      // eslint-disable-next-line react/jsx-props-no-spreading
-                      {...params}
-                      label="Product Name"
-                      variant="outlined"
+              <div className="form-half">
+                <form className="{classes.form}" noValidate>
+                  <div>
+                    <div className="help-block">
+                      <Typography
+                        color="primary"
+                        component="h1"
+                        variant="h4"
+                        className="help-block-h4"
+                      >
+                        {selectProductandZone}
+                      </Typography>
+                    </div>
+                  </div>
+                  <FormControl variant="outlined" fullWidth>
+                    <Autocomplete
+                      id="product-list"
+                      fullWidth
+                      options={products}
+                      getOptionLabel={(option) => option}
+                      renderInput={(params) => (
+                        <TextField
+                          // eslint-disable-next-line react/jsx-props-no-spreading
+                          {...params}
+                          label="Product Name"
+                          variant="outlined"
+                        />
+                      )}
+                      onChange={this.handleChangeProduct}
+                      name="productName"
                     />
-                  )}
-                  onChange={this.handleChangeProduct}
-                  name="productName"
-                />
-              </FormControl>
-              <FormControl margin="normal" variant="outlined" fullWidth>
-                <InputLabel htmlFor="outlined-age-native-simple">
-                  Zone
-                </InputLabel>
-                <Select
-                  fullWidth
-                  native
-                  value={zone}
-                  onChange={this.handleChangeZone}
-                  label="Zone"
-                  inputProps={{
-                    name: "zone",
-                    id: "zone",
-                  }}
-                >
-                  <option aria-label="None" value="" />
-                  {zones.map((zoneValue) => {
-                    return <option value={zoneValue}>{zoneValue}</option>
-                  })}
-                </Select>
-              </FormControl>
+                  </FormControl>
+                  <FormControl margin="normal" variant="outlined" fullWidth>
+                    <InputLabel htmlFor="outlined-age-native-simple">
+                      Zone
+                    </InputLabel>
+                    <Select
+                      fullWidth
+                      native
+                      value={zone}
+                      onChange={this.handleChangeZone}
+                      label="Zone"
+                      inputProps={{
+                        name: "zone",
+                        id: "zone",
+                      }}
+                    >
+                      <option aria-label="None" value="" />
+                      {zones.map((zoneValue) => {
+                        return <option value={zoneValue}>{zoneValue}</option>
+                      })}
+                    </Select>
+                  </FormControl>
 
-              {productName !== "" && zone !== "" && (
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                  onClick={this.handleSubmit}
-                  id="apply-promotion-zone-submit"
-                >
-                  Go
-                </Button>
-              )}
-            </form>
+                  {productName !== "" && zone !== "" && (
+                    <Button
+                      type="button"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className="{classes.submit} submit-pad"
+                      onClick={this.handleSubmit}
+                      id="apply-promotion-zone-submit"
+                    >
+                      Go
+                    </Button>
+                  )}
+                </form>
+              </div>
+              <Message />
+            </div>
           </div>
-          <Message />
-        </div>
-      </div>
+        )}
+      </>
     )
   }
 }

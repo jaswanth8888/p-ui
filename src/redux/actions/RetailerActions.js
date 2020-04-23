@@ -1069,8 +1069,6 @@ export const checkAssignedZone = (productName, zoneName) => async (
       dispatch({
         type: CHECK_ASSIGNED_ZONE,
         assignedPrice: res.data,
-        msg: "Product is assigned to Zone",
-        msgSeverity: "success",
       })
     })
     .catch((err) => {
