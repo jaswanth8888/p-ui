@@ -46,7 +46,7 @@ class AddGroup extends Component {
     if (this.isValidGroupName()) {
       const { group } = this.state
       const { postGroup: postGroupAlt } = this.props
-      postGroupAlt({ ...group }) // thunk action
+      postGroupAlt(group) // thunk action
     }
   }
 

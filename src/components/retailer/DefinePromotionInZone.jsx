@@ -82,7 +82,7 @@ class DefinePromotionInZone extends Component {
 
   render() {
     const { promotionDetails } = this.state
-    const { productDetails, zone } = this.props
+    const { productDetails, zone, assignedPrice } = this.props
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
@@ -206,10 +206,7 @@ class DefinePromotionInZone extends Component {
                 autoFocus
               />
               <Typography className="card-header" variant="h6">
-                Actual Price :{" "}
-                {productDetails.effectivePriceObj !== null
-                  ? productDetails.effectivePriceObj.effectivePrice
-                  : productDetails.productBasePrice}
+                Actual Price : {assignedPrice}
               </Typography>
 
               <TextField
@@ -270,11 +267,13 @@ DefinePromotionInZone.propTypes = {
   zone: PropTypes.string.isRequired,
   postPromotion: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
+  assignedPrice: PropTypes.string.isRequired,
 }
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
   zone: store.RetailerReducer.zone,
+  assignedPrice: store.RetailerReducer.assignedPrice,
 })
 
 const actionAsProps = {

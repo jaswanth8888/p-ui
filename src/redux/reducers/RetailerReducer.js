@@ -269,15 +269,11 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         assignedPrice: action.assignedPrice,
-        msg: action.msg,
-        msgSeverity: action.msgSeverity,
       }
     case CHECK_ASSIGNED_CLUSTER:
       return {
         ...state,
         assignedPrice: action.assignedPrice,
-        msg: action.msg,
-        msgSeverity: action.msgSeverity,
       }
     case CLEAR_ASSIGNED_PRICE:
       return { ...state, assignedPrice: initialState.assignedPrice }

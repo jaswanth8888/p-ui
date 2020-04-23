@@ -13,6 +13,7 @@ import PropTypes from "prop-types"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 import { viewZonePromotions, zonePromotions } from "../utils/constants"
+import Message from "../utils/Message"
 
 class ViewZonePromotions extends Component {
   constructor(props) {
@@ -107,6 +108,7 @@ class ViewZonePromotions extends Component {
             </div>
           </div>
         </div>
+        <Message />
       </div>
     )
   }

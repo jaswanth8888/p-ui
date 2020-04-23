@@ -58,6 +58,7 @@ import {
   CHECK_ASSIGNED_ZONE,
   CHECK_ASSIGNED_CLUSTER,
   CLEAR_ASSIGNED_PRICE,
+  MESSAGE_SET,
 } from "./types"
 
 const TOKEN = () => {
@@ -1079,10 +1080,13 @@ export const checkAssignedZone = (productName, zoneName) => async (
       ) {
         dispatch({
           type: CHECK_ASSIGNED_ZONE,
-          msg: "Product is not assigned to this zone",
-          msgSeverity: "error",
           statusCode: response.status,
           assignedPrice: "",
+        })
+        dispatch({
+          type: MESSAGE_SET,
+          msg: "Product is not assigned to the zone",
+          msgSeverity: "error",
         })
       } else if (
         response.status === 400 &&
@@ -1091,10 +1095,13 @@ export const checkAssignedZone = (productName, zoneName) => async (
       ) {
         dispatch({
           type: CHECK_ASSIGNED_ZONE,
-          msg: "Product is not assigned to this zone, but to cluster",
-          msgSeverity: "error",
           statusCode: response.status,
           assignedPrice: "",
+        })
+        dispatch({
+          type: MESSAGE_SET,
+          msg: "Product is not assigned to this zone, but to cluster",
+          msgSeverity: "error",
         })
       } else if (response.status === 403) {
         dispatch({
@@ -1106,9 +1113,12 @@ export const checkAssignedZone = (productName, zoneName) => async (
       } else {
         dispatch({
           type: CHECK_ASSIGNED_ZONE,
-          msg: "Something went wrong ,please  try again",
-          msgSeverity: "warning",
           assignedPrice: "",
+        })
+        dispatch({
+          type: MESSAGE_SET,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "error",
         })
       }
     })
@@ -1142,10 +1152,13 @@ export const checkAssignedCluster = (
       ) {
         dispatch({
           type: CHECK_ASSIGNED_CLUSTER,
-          msg: "Product is not assigned to the cluster",
-          msgSeverity: "error",
           statusCode: response.status,
           assignedPrice: "",
+        })
+        dispatch({
+          type: MESSAGE_SET,
+          msg: "Product is not assigned to the cluster",
+          msgSeverity: "error",
         })
       } else if (response.status === 403) {
         dispatch({
@@ -1157,9 +1170,12 @@ export const checkAssignedCluster = (
       } else {
         dispatch({
           type: CHECK_ASSIGNED_CLUSTER,
-          msg: "Something went wrong ,please  try again",
-          msgSeverity: "warning",
           assignedPrice: "",
+        })
+        dispatch({
+          type: MESSAGE_SET,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "error",
         })
       }
     })

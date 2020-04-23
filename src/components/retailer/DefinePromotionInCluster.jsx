@@ -83,7 +83,7 @@ class DefinePromotionInCluster extends Component {
 
   render() {
     const { promotionDetails } = this.state
-    const { productDetails, zone, cluster } = this.props
+    const { productDetails, zone, cluster, assignedPrice } = this.props
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
@@ -201,10 +201,7 @@ class DefinePromotionInCluster extends Component {
                 autoFocus
               />
               <Typography className="card-header" variant="h6">
-                Actual Price :{" "}
-                {productDetails.effectivePriceObj !== null
-                  ? productDetails.effectivePriceObj.effectivePrice
-                  : productDetails.productBasePrice}
+                Actual Price : {assignedPrice}
               </Typography>
 
               <TextField
@@ -265,12 +262,14 @@ DefinePromotionInCluster.propTypes = {
   cluster: PropTypes.string.isRequired,
   postPromotion: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
+  assignedPrice: PropTypes.string.isRequired,
 }
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
   zone: store.RetailerReducer.zone,
   cluster: store.RetailerReducer.cluster,
+  assignedPrice: store.RetailerReducer.assignedPrice,
 })
 
 const actionAsProps = {
