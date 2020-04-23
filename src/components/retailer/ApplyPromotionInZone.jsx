@@ -11,7 +11,7 @@ import ClearIcon from "@material-ui/icons/Clear"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 import {
   getProductList,
@@ -37,6 +37,7 @@ class ApplyPromotionInZone extends Component {
     }
     this.handleChangeProduct = this.handleChangeProduct.bind(this)
     this.handleChangeZone = this.handleChangeZone.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   // eslint-disable-next-line camelcase
@@ -65,6 +66,13 @@ class ApplyPromotionInZone extends Component {
     this.setState({ zone: value })
     const { saveZoneValue: saveZoneValueAlt } = this.props
     saveZoneValueAlt(value)
+  }
+
+  handleSubmit() {
+    const { zone, productName, history } = this.props
+    console.log(zone)
+    console.log(productName)
+    history.push("/definepromotion/zone")
   }
 
   render() {
@@ -166,19 +174,17 @@ class ApplyPromotionInZone extends Component {
               </FormControl>
 
               {productName !== "" && zone !== "" && (
-                <Link className="button-link" to="/definepromotion/zone">
-                  <Button
-                    type="button"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className="{classes.submit} submit-pad"
-                    onClick={this.handleSubmit}
-                    id="apply-promotion-zone-submit"
-                  >
-                    Go
-                  </Button>
-                </Link>
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit} submit-pad"
+                  onClick={this.handleSubmit}
+                  id="apply-promotion-zone-submit"
+                >
+                  Go
+                </Button>
               )}
             </form>
           </div>
@@ -196,11 +202,16 @@ ApplyPromotionInZone.propTypes = {
   getProductList: PropTypes.func.isRequired,
   getZones: PropTypes.func.isRequired,
   saveZoneValue: PropTypes.func.isRequired,
+  zone: PropTypes.string.isRequired,
+  productName: PropTypes.string.isRequired,
+  history: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
   zones: store.RetailerReducer.zones,
+  zone: store.RetailerReducer.zone,
+  productName: store.RetailerReducer.productName,
 })
 const actionAsProps = {
   getProductList,
