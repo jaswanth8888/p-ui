@@ -523,7 +523,7 @@ a {
   }
 }
 
-#reg-vendor {
+#reg-vendor,#admin-login {
   color: white !important;
 }
 
