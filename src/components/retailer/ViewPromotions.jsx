@@ -4,6 +4,7 @@ import {
   Paper,
   TableCell,
   TableContainer,
+  TablePagination,
   TableHead,
   TableRow,
 } from "@material-ui/core"
@@ -20,7 +21,10 @@ import {
 class ViewPromotions extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      page: 0,
+      rowsPerPage: 3,
+    }
   }
 
   // eslint-disable-next-line camelcase
@@ -34,8 +38,17 @@ class ViewPromotions extends Component {
     getPromotionsInRangeAlt(startDate, endDate, levelOption)
   }
 
+  handleChangePage = (event, newPage) => {
+    this.setState({ page: +newPage })
+  }
+
+  handleChangeRowsPerPage = (event) => {
+    this.setState({ rowsPerPage: +event.target.value })
+  }
+
   render() {
     const { promotions, levelOption } = this.props
+    const { page, rowsPerPage } = this.state
     return (
       <div className="box-container">
         <div className="center-body">
@@ -53,125 +66,129 @@ class ViewPromotions extends Component {
                   </TableRow>
                 </TableHead>
                 <tbody>
-                  {promotions.map((product) => {
-                    return (
-                      <TableRow>
-                        <TableCell>
-                          <Typography variant="subtitle1" gutterBottom>
-                            {product.productName}
-                          </Typography>
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={product.image}
-                          >
-                            <img
-                              className="thumbnail"
-                              src={product.image}
-                              alt="none"
-                            />
-                          </a>
-                        </TableCell>
-                        <TableCell>
-                          <Typography variant="subtitle1" gutterBottom>
-                            Vendor Name : {product.vendorName}
-                          </Typography>
-                          <Typography variant="subtitle1" gutterBottom>
-                            Base Price : {product.vendorPrice}
-                          </Typography>
-                          {/* <Typography variant="subtitle1" gutterBottom>
+                  {promotions
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((product) => {
+                      return (
+                        <TableRow>
+                          <TableCell>
+                            <Typography variant="subtitle1" gutterBottom>
+                              {product.productName}
+                            </Typography>
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={product.image}
+                            >
+                              <img
+                                className="thumbnail"
+                                src={product.image}
+                                alt="none"
+                              />
+                            </a>
+                          </TableCell>
+                          <TableCell>
+                            <Typography variant="subtitle1" gutterBottom>
+                              Vendor Name : {product.vendorName}
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom>
+                              Base Price : {product.vendorPrice}
+                            </Typography>
+                            {/* <Typography variant="subtitle1" gutterBottom>
                             Effective Price : {product.effectivePrice}
                           </Typography> */}
-                          <Typography variant="subtitle1" gutterBottom>
-                            Initial Quantity : {product.initialQty}
-                          </Typography>
-                          <Typography variant="subtitle1" gutterBottom>
-                            Remaining Quantity : {product.remainingQty}
-                          </Typography>
-                          <Typography variant="subtitle1" gutterBottom>
-                            Product Category : {product.category}
-                          </Typography>
-                        </TableCell>
-                        <TableCell>
-                          <Typography variant="subtitle1" gutterBottom>
-                            <Table size="small" aria-label="a dense table">
-                              <TableHead>
-                                <TableRow>
-                                  {/* <TableCell size="small">
-                                  Promotion Percentage
-                                </TableCell>
-                                <TableCell>Selling Price</TableCell>
-                                <TableCell>Start Date</TableCell>
-                                <TableCell>End Date</TableCell>
-                                <TableCell>Level Applied</TableCell> */}
-                                  {promotionDetails.map((tcell) => (
-                                    <TableCell>{tcell}</TableCell>
-                                  ))}
-                                </TableRow>
-                              </TableHead>
-                              <tbody>
-                                {product.list.map((promotion) => {
-                                  return (
-                                    <TableRow key={promotion.promotionId}>
-                                      <TableCell>
-                                        <Typography
-                                          variant="subtitle1"
-                                          gutterBottom
-                                        >
-                                          {promotion.promotionPercentage}
-                                        </Typography>
-                                      </TableCell>
-                                      <TableCell>
-                                        <Typography
-                                          variant="subtitle1"
-                                          gutterBottom
-                                        >
-                                          {promotion.promotionSellingPrice}
-                                        </Typography>
-                                      </TableCell>
-                                      <TableCell>
-                                        <Typography
-                                          variant="subtitle1"
-                                          gutterBottom
-                                        >
-                                          {promotion.startDate.slice(0, 10)}
-                                        </Typography>
-                                      </TableCell>
-                                      <TableCell>
-                                        <Typography
-                                          variant="subtitle1"
-                                          gutterBottom
-                                        >
-                                          {promotion.endDate.slice(0, 10)}
-                                        </Typography>
-                                      </TableCell>
-                                      <TableCell>
-                                        <Typography
-                                          variant="subtitle1"
-                                          gutterBottom
-                                        >
-                                          {levelOption}
-                                        </Typography>
-                                        <Typography
-                                          variant="subtitle1"
-                                          gutterBottom
-                                        >
-                                          {promotion.zoneCluster}
-                                        </Typography>
-                                      </TableCell>
-                                    </TableRow>
-                                  )
-                                })}
-                              </tbody>
-                            </Table>
-                          </Typography>
-                        </TableCell>
-                      </TableRow>
-                    )
-                  })}
+                            <Typography variant="subtitle1" gutterBottom>
+                              Initial Quantity : {product.initialQty}
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom>
+                              Remaining Quantity : {product.remainingQty}
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom>
+                              Product Category : {product.category}
+                            </Typography>
+                          </TableCell>
+                          <TableCell>
+                            <Typography variant="subtitle1" gutterBottom>
+                              <Table size="small" aria-label="a dense table">
+                                <TableHead>
+                                  <TableRow>
+                                    {promotionDetails.map((tcell) => (
+                                      <TableCell>{tcell}</TableCell>
+                                    ))}
+                                  </TableRow>
+                                </TableHead>
+                                <tbody>
+                                  {product.list.map((promotion) => {
+                                    return (
+                                      <TableRow key={promotion.promotionId}>
+                                        <TableCell>
+                                          <Typography
+                                            variant="subtitle1"
+                                            gutterBottom
+                                          >
+                                            {promotion.promotionPercentage}
+                                          </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                          <Typography
+                                            variant="subtitle1"
+                                            gutterBottom
+                                          >
+                                            {promotion.promotionSellingPrice}
+                                          </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                          <Typography
+                                            variant="subtitle1"
+                                            gutterBottom
+                                          >
+                                            {promotion.startDate.slice(0, 10)}
+                                          </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                          <Typography
+                                            variant="subtitle1"
+                                            gutterBottom
+                                          >
+                                            {promotion.endDate.slice(0, 10)}
+                                          </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                          <Typography
+                                            variant="subtitle1"
+                                            gutterBottom
+                                          >
+                                            {levelOption}
+                                          </Typography>
+                                          <Typography
+                                            variant="subtitle1"
+                                            gutterBottom
+                                          >
+                                            {promotion.zoneCluster}
+                                          </Typography>
+                                        </TableCell>
+                                      </TableRow>
+                                    )
+                                  })}
+                                </tbody>
+                              </Table>
+                            </Typography>
+                          </TableCell>
+                        </TableRow>
+                      )
+                    })}
                 </tbody>
               </Table>
             </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[3, 5, 10]}
+              component="div"
+              count={promotions.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={this.handleChangePage}
+              onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            />
           </div>
         </div>
       </div>

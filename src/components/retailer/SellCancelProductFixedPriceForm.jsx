@@ -1,51 +1,49 @@
-import { TextField, Typography, Button, FormControl } from "@material-ui/core"
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import Autocomplete from "@material-ui/lab/Autocomplete"
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-import PropTypes from "prop-types"
+import { TextField, Typography, Button, FormControl } from "@material-ui/core"
 import {
-  getProductList,
+  getNonAlcoholicProductList,
   saveProductValue,
-  getProductDetails,
 } from "../../redux/actions/RetailerActions"
-import { selectProduct, selectproduct } from "../utils/constants"
 
-class SelectProduct extends Component {
+class SellCancelProductFixedPriceForm extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       productName: "",
-      // status: 0
     }
     this.handleChangeProduct = this.handleChangeProduct.bind(this)
-    //  this.productNameNotSelected = this.productNameNotSelected.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
-    const { getProductList: getProductListAlt } = this.props
-    getProductListAlt()
+    const {
+      getNonAlcoholicProductList: getNonAlcoholicProductListAlt,
+    } = this.props
+    getNonAlcoholicProductListAlt()
   }
 
   handleChangeProduct = (e, value) => {
     const productName = value
-    const {
-      saveProductValue: saveProductValueAlt,
-      getProductDetails: getProductDetailsAlt,
-    } = this.props
     this.setState({ productName })
+    const { saveProductValue: saveProductValueAlt } = this.props
     saveProductValueAlt(productName)
-    getProductDetailsAlt(value)
+  }
+
+  handleSubmit() {
+    const { history } = this.props
+    history.push("/sellcancel/fixedprice/product")
   }
 
   render() {
     const { productName } = this.state
     const { products } = this.props
-
     return (
       <div className="box-container">
         <div className="joint-form">
@@ -53,10 +51,10 @@ class SelectProduct extends Component {
             <div className="validations">
               <h3 className="center-h3">Requirements</h3>
               {productName === "" && (
-                <div className="typo-div">
+                <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    {selectProduct}
+                    Please select a product name
                   </Typography>
                 </div>
               )}
@@ -64,7 +62,7 @@ class SelectProduct extends Component {
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    {selectProduct}
+                    Please select a product name
                   </Typography>
                 </div>
               )}
@@ -80,7 +78,7 @@ class SelectProduct extends Component {
                     variant="h4"
                     className="help-block-h4"
                   >
-                    {selectproduct}
+                    Select from Baby Products
                   </Typography>
                 </div>
               </div>
@@ -103,33 +101,17 @@ class SelectProduct extends Component {
                 />
               </FormControl>
               {productName !== "" && (
-                <>
-                  {" "}
-                  <Link className="button-link" to="/assigntocluster">
-                    <Button
-                      type="button"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      className="{classes.submit} submit-pad"
-                      id="selprods-submit"
-                    >
-                      Assign Price to Cluster
-                    </Button>
-                  </Link>
-                  <Link className="button-link" to="/assigntozone">
-                    <Button
-                      type="button"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      className="{classes.submit} submit-pad"
-                      id="assign-price-zone-submit"
-                    >
-                      Assign Price to Zone
-                    </Button>
-                  </Link>
-                </>
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit} submit-pad"
+                  onClick={this.handleSubmit}
+                  id="cluster-form-submit"
+                >
+                  Go
+                </Button>
               )}
             </form>
           </div>
@@ -139,18 +121,20 @@ class SelectProduct extends Component {
   }
 }
 
-SelectProduct.propTypes = {
+SellCancelProductFixedPriceForm.propTypes = {
   products: PropTypes.arrayOf.isRequired,
-  getProductDetails: PropTypes.func.isRequired,
+  getNonAlcoholicProductList: PropTypes.func.isRequired,
   saveProductValue: PropTypes.func.isRequired,
-  getProductList: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
 }
 const stateAsProps = (store) => ({
-  products: store.RetailerReducer.productList,
+  products: store.RetailerReducer.nonAlcoholicProductList,
 })
 const actionAsProps = {
-  getProductList,
+  getNonAlcoholicProductList,
   saveProductValue,
-  getProductDetails,
 }
-export default connect(stateAsProps, actionAsProps)(SelectProduct)
+export default connect(
+  stateAsProps,
+  actionAsProps
+)(SellCancelProductFixedPriceForm)

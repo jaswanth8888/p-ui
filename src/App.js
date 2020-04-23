@@ -51,6 +51,22 @@ const App = () => {
     "/vendor/updateprice",
     "/vendor/editproduct",
     "/admin/login",
+    "/sellcancel/fixedprice/product",
+    "/sellcancel/fixedprice",
+    "/cancel/productdetails",
+    "/withdraw/zoneproduct",
+    "/cancel/promotion",
+    "/withdraw/zonepromotion",
+    "/withdraw/zoneproduct",
+    "/withdraw/clusterpromotion",
+    "/withdraw/clusterproduct",
+    "/applypromotion/zone",
+    "/definepromotion/zone",
+    "/view/promotions/zone",
+    "/applypromotion/cluster",
+    "/definepromotion/cluster",
+    "/view/promotions/cluster",
+    "/admin",
   ]
   return (
     <Provider store={store}>

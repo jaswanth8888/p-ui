@@ -223,7 +223,7 @@ class WithdrawPromotionClusterForm extends Component {
                   })}
                 </Select>
               </FormControl>
-              {productName !== "" && zone !== "" && (
+              {productName !== "" && zone !== "" && cluster !== "" && (
                 <Button
                   type="button"
                   fullWidth

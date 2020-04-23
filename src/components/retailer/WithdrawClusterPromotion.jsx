@@ -105,10 +105,10 @@ class WithdrawClusterPromotion extends Component {
                             </TableCell>
                             <TableCell>
                               <Typography variant="subtitle1" gutterBottom>
-                                {
-                                  productDetails.effectivePriceObj
-                                    .effectivePrice
-                                }
+                                {productDetails.effectivePriceObj !== null
+                                  ? productDetails.effectivePriceObj
+                                      .effectivePrice
+                                  : productDetails.productBasePrice}
                               </Typography>
                             </TableCell>
                             <TableCell>

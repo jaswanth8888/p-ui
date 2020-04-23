@@ -60,6 +60,7 @@ import VendorLogin from "../vendor/VendorLogin"
 import Registration from "../vendor/Registration"
 import CreateAdmin from "../retailer/CreateAdmin"
 import AdminLogin from "../admin/AdminLogin"
+import SellCancelProductFixedPriceRouter from "../retailer/SellCancelProductFixedPriceRouter"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -327,6 +328,22 @@ function FullNavbar(props) {
             </ListItem>
           </Tooltip>
         </Link>
+        <Link to="/sellcancel/fixedprice">
+          <Tooltip
+            title="Sell/ Cancel Product at Fixed Price"
+            placement="right"
+          >
+            <ListItem button id="sell-cancel-fixed-price-btn">
+              <ListItemIcon>
+                <EventBusyIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Sell/ Cancel Product at Fixed Price"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
         <Divider />
         <Link to="/queryondaterange">
           <Tooltip title="Query on Date Range" placement="right">
@@ -578,17 +595,22 @@ function FullNavbar(props) {
           />
           <Route
             exact
-            path="/cancel/promotion"
+            path={["/sellcancel/fixedprice", "/sellcancel/fixedprice/product"]}
+            component={SellCancelProductFixedPriceRouter}
+          />
+          <Route
+            exact
+            path={["/cancel/promotion", "/cancel/productdetails"]}
             component={CancelPromotionRouter}
           />
           <Route
             exact
-            path="/withdraw/zonepromotion"
+            path={["/withdraw/zonepromotion", "/withdraw/zoneproduct"]}
             component={WithdrawPromotionZoneRouter}
           />
           <Route
             exact
-            path="/withdraw/clusterpromotion"
+            path={["/withdraw/clusterpromotion", "/withdraw/clusterproduct"]}
             component={WithdrawPromotionClusterRouter}
           />
           <Route
@@ -615,12 +637,20 @@ function FullNavbar(props) {
           /> */}
           <Route
             exact
-            path="/applypromotion/zone"
+            path={[
+              "/applypromotion/zone",
+              "/definepromotion/zone",
+              "/view/promotions/zone",
+            ]}
             component={ZonePromotionRouter}
           />
           <Route
             exact
-            path="/applypromotion/cluster"
+            path={[
+              "/applypromotion/cluster",
+              "/definepromotion/cluster",
+              "/view/promotions/cluster",
+            ]}
             component={ClusterPromotionRouter}
           />
           <Route exact path="/priceondate" component={PriceOnDate} />

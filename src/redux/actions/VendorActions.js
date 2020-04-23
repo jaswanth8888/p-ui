@@ -72,12 +72,24 @@ export const postProduct = (productDetails) => async (dispatch) => {
         msgSeverity: "success",
       })
     })
-    .catch(() => {
-      dispatch({
-        type: CREATE_PRODUCT,
-        msg: "Sorry try again",
-        msgSeverity: "error",
-      })
+    .catch((err) => {
+      const { response } = err
+      if (
+        response.status === 400 &&
+        response.data.message === "Product with name already exists"
+      ) {
+        dispatch({
+          type: CREATE_PRODUCT,
+          msg: "Product with name already exists, try again",
+          msgSeverity: "error",
+        })
+      } else {
+        dispatch({
+          type: CREATE_PRODUCT,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning",
+        })
+      }
     })
 }
 export const vendorLogin = (loginDetails) => async (dispatch) => {

@@ -41,6 +41,10 @@ import {
   POST_EFFECTIVE_PRICE,
   CREATE_ADMIN,
   USER_TYPE,
+  PRODUCTLIST_NONALCOHOLIC_GET_REQUEST,
+  SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
+  CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
+  CLEAR_PRODUCT_LIST,
 } from "../actions/types"
 
 const initialState = {
@@ -80,6 +84,7 @@ const initialState = {
   isPromotion: false,
   updatedProduct: {},
   priceChangeProductsList: [],
+  nonAlcoholicProductList: [],
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -134,7 +139,7 @@ export default (state = initialState, action = {}) => {
     case STORE_SAVE_VALUE:
       return { ...state, store: action.store }
     case PRODUCTTOSTORE_POST_REQUEST:
-      return { ...state, msg: action.msg }
+      return { ...state, msg: action.msg, msgSeverity: action.msgSeverity }
     case PRODUCTLIST_GET_REQUEST:
       return { ...state, productList: action.productList }
     case PRODUCT_SAVE_VALUE:
@@ -217,6 +222,27 @@ export default (state = initialState, action = {}) => {
         msgSeverity: action.msgSeverity,
         statusCode: action.statusCode,
       }
+    case PRODUCTLIST_NONALCOHOLIC_GET_REQUEST:
+      return {
+        ...state,
+        nonAlcoholicProductList: action.nonAlcoholicProductList,
+      }
+    case SELLPRODUCT_FIXEDPRICE_PUTREQUEST:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
+    case CANCELPRODUCT_FIXEDPRICE_PUTREQUEST:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
+    case CLEAR_PRODUCT_LIST:
+      return { ...state, products: initialState.products }
     default:
       return { ...state }
   }
