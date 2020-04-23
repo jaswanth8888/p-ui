@@ -643,12 +643,40 @@ export const getEffectivePrice = (parameter, productName) => async (
     })
     .catch((err) => {
       const { response } = err
-      if (response.status === 500) {
+      if (
+        response.status === 400 &&
+        response.data.message ===
+          "Effective price is already defined for this product"
+      ) {
         dispatch({
           type: POST_EFFECTIVE_PRICE,
           msg: "Effective Price Already Exist",
           msgSeverity: "error",
           statusCode: response.status,
+        })
+      } else if (
+        response.status === 400 &&
+        response.data.message ===
+          "Sorry cannot change price of product in given date range"
+      ) {
+        dispatch({
+          type: POST_EFFECTIVE_PRICE,
+          msg:
+            "Promotion already in effect for date range, cannot change effective price",
+          msgSeverity: "error",
+          statusCode: response.status,
+        })
+      } else if (response.status === 403) {
+        dispatch({
+          type: POST_EFFECTIVE_PRICE,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning",
+        })
+      } else {
+        dispatch({
+          type: POST_EFFECTIVE_PRICE,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning",
         })
       }
     })

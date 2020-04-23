@@ -126,7 +126,13 @@ class SellCancelProductFixedPrice extends Component {
                 color="primary"
                 className="{classes.submit} submit-pad"
                 onClick={() => {
-                  this.handleSubmitSell(productDetails.productName)
+                  if (
+                    // eslint-disable-next-line no-alert
+                    window.confirm(
+                      "Are you sure you wish sell it at fixed price?"
+                    )
+                  )
+                    this.handleSubmitSell(productDetails.productName)
                 }}
                 id="assign-cluster-submit"
               >
@@ -139,7 +145,13 @@ class SellCancelProductFixedPrice extends Component {
                 color="primary"
                 className="{classes.submit} submit-pad"
                 onClick={() => {
-                  this.handleSubmitCancel(productDetails.productName)
+                  if (
+                    // eslint-disable-next-line no-alert
+                    window.confirm(
+                      "Are you sure you wish to cancel selling at fixed price?"
+                    )
+                  )
+                    this.handleSubmitCancel(productDetails.productName)
                 }}
                 id="assign-cluster-submit"
               >

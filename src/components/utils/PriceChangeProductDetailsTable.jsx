@@ -76,7 +76,13 @@ class PriceChangeProductDetailsTable extends Component {
                         color="primary"
                         className="{classes.submit} submit-pad"
                         onClick={() => {
-                          this.handleSubmit(product.productName)
+                          if (
+                            // eslint-disable-next-line no-alert
+                            window.confirm(
+                              "Are you sure you wish sell it at fixed price?"
+                            )
+                          )
+                            this.handleSubmit(product.productName)
                         }}
                         id="assign-cluster-submit"
                       >
