@@ -463,9 +463,9 @@ a {
   padding: 40px;
 }
 
-.button-link {
+/* .button-link {
   width: 100% !important;
-}
+} */
 
 .center-body {
   display: flex;
@@ -593,6 +593,12 @@ a {
   .help-block-h4 {
     margin-bottom: 20px !important;
   }
+}
+
+#admin-login-name {
+  color: white !important;
+  font-size: larger;
+  
 }
 
 #reg-vendor,
