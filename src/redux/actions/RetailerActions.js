@@ -644,7 +644,7 @@ export const getEffectivePrice = (parameter, productName) => async (
     .catch((err) => {
       const { response } = err
       if (
-        response.status === 400 &&
+        response.status === 500 &&
         response.data.message ===
           "Effective price is already defined for this product"
       ) {
@@ -655,7 +655,7 @@ export const getEffectivePrice = (parameter, productName) => async (
           statusCode: response.status,
         })
       } else if (
-        response.status === 400 &&
+        response.status === 500 &&
         response.data.message ===
           "Sorry cannot change price of product in given date range"
       ) {
