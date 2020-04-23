@@ -47,6 +47,9 @@ import {
   CLEAR_PRODUCT_LIST,
   MESSAGE_SET,
   GET_DASHBOARD_DATA,
+  CHECK_ASSIGNED_ZONE,
+  CHECK_ASSIGNED_CLUSTER,
+  CLEAR_ASSIGNED_PRICE,
 } from "../actions/types"
 
 const initialState = {
@@ -99,6 +102,7 @@ const initialState = {
     totalNoOfBabyProducts: 0,
     ZoneNames: [],
   },
+  assignedPrice: "",
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -261,6 +265,22 @@ export default (state = initialState, action = {}) => {
       return { ...state, msgSeverity: action.msgSeverity, msg: action.msg }
     case GET_DASHBOARD_DATA:
       return { ...state, dashboardData: action.dashboardData }
+    case CHECK_ASSIGNED_ZONE:
+      return {
+        ...state,
+        assignedPrice: action.assignedPrice,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
+    case CHECK_ASSIGNED_CLUSTER:
+      return {
+        ...state,
+        assignedPrice: action.assignedPrice,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
+    case CLEAR_ASSIGNED_PRICE:
+      return { ...state, assignedPrice: initialState.assignedPrice }
     default:
       return { ...state }
   }
