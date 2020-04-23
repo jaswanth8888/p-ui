@@ -9,6 +9,7 @@ import {
   saveToDate,
   saveEffectivePercentage,
   getEffectivePrice,
+  getProductDetails,
 } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
 
@@ -49,6 +50,7 @@ class AssignPriceToProduct extends Component {
       saveEffectivePercentage: saveEffectivePercentageAlt,
       getEffectivePrice: getEffectivePriceAlt,
       productDetails,
+      getProductDetails: getProductDetailsAlt,
     } = this.props
     const { startDate, endDate, effectivePercentage, parameter } = this.state
     saveEffectivePercentageAlt(effectivePercentage)
@@ -58,13 +60,7 @@ class AssignPriceToProduct extends Component {
     parameter.endDate = endDate
     parameter.effectivePercentage = effectivePercentage
     getEffectivePriceAlt(parameter, productDetails.productName)
-    setTimeout(
-      // eslint-disable-next-line func-names
-      function () {
-        this.setState({ saveStatus: 0 })
-      }.bind(this),
-      3000
-    )
+    getProductDetailsAlt(productDetails.productName)
   }
 
   render() {
@@ -261,6 +257,7 @@ AssignPriceToProduct.propTypes = {
   saveFromDate: PropTypes.func.isRequired,
   saveToDate: PropTypes.func.isRequired,
   productDetails: PropTypes.shape.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({
@@ -272,6 +269,7 @@ const actionAsProps = {
   saveToDate,
   saveEffectivePercentage,
   getEffectivePrice,
+  getProductDetails,
 }
 
 export default connect(stateAsProps, actionAsProps)(AssignPriceToProduct)
