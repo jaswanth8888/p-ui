@@ -524,7 +524,8 @@ a {
 }
 
 #reg-vendor,
-#admin-login{
+#admin-login,
+.flag-select__option--placeholder {
   color: white !important;
 }
 
