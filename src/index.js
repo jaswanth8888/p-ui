@@ -10,6 +10,7 @@ import indigo from "@material-ui/core/colors/indigo"
 import amber from "@material-ui/core/colors/amber"
 import App from "./App"
 import "./i18n"
+import "./css/index.css"
 
 let theme = createMuiTheme({
   palette: {
