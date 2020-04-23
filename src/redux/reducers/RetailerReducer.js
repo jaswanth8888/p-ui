@@ -46,6 +46,9 @@ import {
   CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
   CLEAR_PRODUCT_LIST,
   MESSAGE_SET,
+  CHECK_ASSIGNED_ZONE,
+  CHECK_ASSIGNED_CLUSTER,
+  CLEAR_ASSIGNED_PRICE,
 } from "../actions/types"
 
 const initialState = {
@@ -86,6 +89,7 @@ const initialState = {
   updatedProduct: {},
   priceChangeProductsList: [],
   nonAlcoholicProductList: [],
+  assignedPrice: "",
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -246,6 +250,22 @@ export default (state = initialState, action = {}) => {
       return { ...state, products: initialState.products }
     case MESSAGE_SET:
       return { ...state, msgSeverity: action.msgSeverity, msg: action.msg }
+    case CHECK_ASSIGNED_ZONE:
+      return {
+        ...state,
+        assignedPrice: action.assignedPrice,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
+    case CHECK_ASSIGNED_CLUSTER:
+      return {
+        ...state,
+        assignedPrice: action.assignedPrice,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
+    case CLEAR_ASSIGNED_PRICE:
+      return { ...state, assignedPrice: initialState.assignedPrice }
     default:
       return { ...state }
   }

@@ -19,12 +19,15 @@ import {
   getProductDetails,
   getZones,
   saveZoneValue,
+  checkAssignedZone,
+  clearAssignedPrice,
 } from "../../redux/actions/RetailerActions"
 import {
   selectProduct,
   selectZone,
   selectProductandZone,
 } from "../utils/constants"
+import Message from "../utils/Message"
 
 class ApplyPromotionInZone extends Component {
   constructor(props) {
@@ -33,6 +36,7 @@ class ApplyPromotionInZone extends Component {
     this.state = {
       productName: "",
       zone: "",
+      assignedPriceState: "",
       // status: 0
     }
     this.handleChangeProduct = this.handleChangeProduct.bind(this)
@@ -45,9 +49,12 @@ class ApplyPromotionInZone extends Component {
     const {
       getZones: getZonesAlt,
       getProductList: getProductListAlt,
+      clearAssignedPrice: clearAssignedPriceAlt,
     } = this.props
+    const { assignedPriceState } = this.state
     getProductListAlt()
     getZonesAlt()
+    clearAssignedPriceAlt(assignedPriceState)
   }
 
   handleChangeProduct = (e, value) => {
@@ -69,10 +76,17 @@ class ApplyPromotionInZone extends Component {
   }
 
   handleSubmit() {
-    const { zone, productName, history } = this.props
-    console.log(zone)
-    console.log(productName)
-    history.push("/definepromotion/zone")
+    const {
+      zone,
+      productName,
+      history,
+      assignedPrice,
+      checkAssignedZone: checkAssignedZoneAlt,
+    } = this.props
+    checkAssignedZoneAlt(productName, zone)
+    if (assignedPrice !== "") {
+      history.push("/definepromotion/zone")
+    }
   }
 
   render() {
@@ -188,6 +202,7 @@ class ApplyPromotionInZone extends Component {
               )}
             </form>
           </div>
+          <Message />
         </div>
       </div>
     )
@@ -205,6 +220,9 @@ ApplyPromotionInZone.propTypes = {
   zone: PropTypes.string.isRequired,
   productName: PropTypes.string.isRequired,
   history: PropTypes.shape.isRequired,
+  assignedPrice: PropTypes.string.isRequired,
+  clearAssignedPrice: PropTypes.func.isRequired,
+  checkAssignedZone: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({
@@ -212,6 +230,7 @@ const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
   zone: store.RetailerReducer.zone,
   productName: store.RetailerReducer.productName,
+  assignedPrice: store.RetailerReducer.assignedPrice,
 })
 const actionAsProps = {
   getProductList,
@@ -219,5 +238,7 @@ const actionAsProps = {
   getProductDetails,
   getZones,
   saveZoneValue,
+  checkAssignedZone,
+  clearAssignedPrice,
 }
 export default connect(stateAsProps, actionAsProps)(ApplyPromotionInZone)

@@ -54,6 +54,9 @@ import {
   SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
   CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
   CLEAR_PRODUCT_LIST,
+  CHECK_ASSIGNED_ZONE,
+  CHECK_ASSIGNED_CLUSTER,
+  CLEAR_ASSIGNED_PRICE,
 } from "./types"
 
 const TOKEN = () => {
@@ -1037,4 +1040,120 @@ export const cancelProductFixedPrice = (productName) => async (dispatch) => {
 
 export const clearProductList = (productList) => (dispatch) => {
   dispatch({ type: CLEAR_PRODUCT_LIST, products: productList })
+}
+
+export const checkAssignedZone = (productName, zoneName) => async (
+  dispatch
+) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/product/price/${productName}/${zoneName}`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: CHECK_ASSIGNED_ZONE,
+        assignedPrice: res.data,
+        msg: "Product is assigned to Zone",
+        msgSeverity: "success",
+      })
+    })
+    .catch((err) => {
+      const { response } = err
+      if (
+        response.status === 400 &&
+        response.data.message === "Product is not assigned to this zone"
+      ) {
+        dispatch({
+          type: CHECK_ASSIGNED_ZONE,
+          msg: "Product is not assigned to this zone",
+          msgSeverity: "error",
+          statusCode: response.status,
+          assignedPrice: "",
+        })
+      } else if (
+        response.status === 400 &&
+        response.data.message ===
+          "Product is not assigned to this zone, but to cluster"
+      ) {
+        dispatch({
+          type: CHECK_ASSIGNED_ZONE,
+          msg: "Product is not assigned to this zone, but to cluster",
+          msgSeverity: "error",
+          statusCode: response.status,
+          assignedPrice: "",
+        })
+      } else if (response.status === 403) {
+        dispatch({
+          type: CHECK_ASSIGNED_ZONE,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning",
+          assignedPrice: "",
+        })
+      } else {
+        dispatch({
+          type: CHECK_ASSIGNED_ZONE,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning",
+          assignedPrice: "",
+        })
+      }
+    })
+}
+
+export const checkAssignedCluster = (
+  productName,
+  zoneName,
+  clusterName
+) => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/product/price/${productName}/${zoneName}/${clusterName}`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: CHECK_ASSIGNED_CLUSTER,
+        assignedPrice: res.data,
+        msg: "Product is assigned to Cluster",
+        msgSeverity: "success",
+      })
+    })
+    .catch((err) => {
+      const { response } = err
+      if (
+        response.status === 400 &&
+        response.data.message === "Product is not assigned to the cluster"
+      ) {
+        dispatch({
+          type: CHECK_ASSIGNED_CLUSTER,
+          msg: "Product is not assigned to the cluster",
+          msgSeverity: "error",
+          statusCode: response.status,
+          assignedPrice: "",
+        })
+      } else if (response.status === 403) {
+        dispatch({
+          type: CHECK_ASSIGNED_CLUSTER,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning",
+          assignedPrice: "",
+        })
+      } else {
+        dispatch({
+          type: CHECK_ASSIGNED_CLUSTER,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning",
+          assignedPrice: "",
+        })
+      }
+    })
+}
+
+export const clearAssignedPrice = (assignedPriceAlt) => (dispatch) => {
+  dispatch({ type: CLEAR_ASSIGNED_PRICE, assignedPrice: assignedPriceAlt })
 }
