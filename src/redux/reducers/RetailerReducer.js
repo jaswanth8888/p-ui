@@ -45,6 +45,7 @@ import {
   SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
   CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
   CLEAR_PRODUCT_LIST,
+  MESSAGE_SET,
 } from "../actions/types"
 
 const initialState = {
@@ -243,6 +244,8 @@ export default (state = initialState, action = {}) => {
       }
     case CLEAR_PRODUCT_LIST:
       return { ...state, products: initialState.products }
+    case MESSAGE_SET:
+      return { ...state, msgSeverity: action.msgSeverity, msg: action.msg }
     default:
       return { ...state }
   }

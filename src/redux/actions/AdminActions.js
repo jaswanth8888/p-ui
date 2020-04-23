@@ -1,11 +1,6 @@
 import axios from "axios"
 import i18n from "i18next"
-import {
-  ADMIN_LOGIN,
-  ADMIN_LOGIN_FAILURE,
-  RETAILER_BASE_URL,
-  USER_TYPE,
-} from "./types"
+import { ADMIN_LOGIN, RETAILER_BASE_URL, USER_TYPE, MESSAGE_SET } from "./types"
 
 // eslint-disable-next-line import/prefer-default-export
 export const login = (loginDetails) => async (dispatch) => {
@@ -30,11 +25,7 @@ export const login = (loginDetails) => async (dispatch) => {
     })
     .catch(() => {
       dispatch({
-        type: ADMIN_LOGIN_FAILURE,
-        loginStatus: {
-          success: false,
-          errorMsg: i18n.t("login.invalidCredentials"),
-        },
+        type: MESSAGE_SET,
         msg: i18n.t("login.invalidCredentials"),
         msgSeverity: "error",
       })

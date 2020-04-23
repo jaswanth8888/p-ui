@@ -522,6 +522,7 @@ function FullNavbar(props) {
                     DE: " ",
                   }}
                   className="right-nav-btn"
+                  id="flag-select"
                   placeholder="Select Language"
                   defaultCountry={sessionStorage.getItem("countryCode")}
                   onSelect={(countryCode) => {

@@ -94,4 +94,5 @@ export const CREATE_ADMIN = "CREATE_ADMIN"
 export const ADMIN_LOGIN = "ADMIN_LOGIN"
 export const ADMIN_LOGIN_FAILURE = "ADMIN_LOGIN_FAILURE"
 export const ADMIN_LOGOUT = "ADMIN_LOGOUT"
+export const MESSAGE_SET = "MESSAGE_SET"
 export const ATOKEN = `BearerA ${sessionStorage.getItem("token")}`
