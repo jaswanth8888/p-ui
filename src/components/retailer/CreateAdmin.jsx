@@ -121,7 +121,7 @@ class CreateAdmin extends Component {
                 margin="normal"
                 required
                 fullWidth
-                id="admin-input"
+                id="admin-input-username"
                 label="userName"
                 name="userName"
                 onChange={this.handleChangeUserName}
@@ -134,7 +134,7 @@ class CreateAdmin extends Component {
                 type="password"
                 required
                 fullWidth
-                id="admin-input"
+                id="admin-input-password"
                 label="password"
                 name="password"
                 onChange={this.handleChangePassword}
