@@ -92,7 +92,7 @@ class Login extends Component {
     return (
       <>
         {loginStatus.success || sessionStorage.getItem("token") ? (
-          history.push("/group")
+          history.push("/dashboard")
         ) : (
           <div className="box-container-login">
             <div className="joint-form" id="login-joint-form">

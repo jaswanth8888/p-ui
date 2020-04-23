@@ -96,3 +96,6 @@ export const ADMIN_LOGIN_FAILURE = "ADMIN_LOGIN_FAILURE"
 export const ADMIN_LOGOUT = "ADMIN_LOGOUT"
 export const MESSAGE_SET = "MESSAGE_SET"
 export const ATOKEN = `BearerA ${sessionStorage.getItem("token")}`
+
+// Dashboard constant
+export const GET_DASHBOARD_DATA = "GET_DASHBOARD_DATA"

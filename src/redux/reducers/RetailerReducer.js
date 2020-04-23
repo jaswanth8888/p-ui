@@ -46,6 +46,7 @@ import {
   CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
   CLEAR_PRODUCT_LIST,
   MESSAGE_SET,
+  GET_DASHBOARD_DATA,
 } from "../actions/types"
 
 const initialState = {
@@ -86,6 +87,18 @@ const initialState = {
   updatedProduct: {},
   priceChangeProductsList: [],
   nonAlcoholicProductList: [],
+  dashboardData: {
+    noOfBabyProductsPerZone: [],
+    NoOfZones: 0,
+    NoOfProducts: 0,
+    totalNoOfActivePromotions: [],
+    NoOfVendors: 0,
+    NoOfClusters: 0,
+    noOfAlcoholProductsPerZone: [],
+    totalNoOfAlcoholProducts: 0,
+    totalNoOfBabyProducts: 0,
+    ZoneNames: [],
+  },
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -246,6 +259,8 @@ export default (state = initialState, action = {}) => {
       return { ...state, products: initialState.products }
     case MESSAGE_SET:
       return { ...state, msgSeverity: action.msgSeverity, msg: action.msg }
+    case GET_DASHBOARD_DATA:
+      return { ...state, dashboardData: action.dashboardData }
     default:
       return { ...state }
   }

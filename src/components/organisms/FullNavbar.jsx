@@ -37,6 +37,7 @@ import { logout } from "../../redux/actions/RetailerActions"
 import Login from "../Login"
 import AddGroup from "../retailer/AddGroup"
 import CancelPromotionRouter from "../retailer/CancelPromotionRouter"
+import Dashboard from "../utils/Dashboard"
 import ClusterForm from "../retailer/ClusterForm"
 import ClusterPromotionRouter from "../retailer/ClusterPromotionRouter"
 import ProductRouter from "../retailer/ProductRouter"
@@ -121,6 +122,16 @@ function FullNavbar(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
+        <Link to="/dashboard">
+          <Tooltip title="Dashboard" placement="right">
+            <ListItem button>
+              <ListItemIcon>
+                <DateRangeIcon />
+              </ListItemIcon>
+              <ListItemText className="list-item-text" primary="Dashboard" />
+            </ListItem>
+          </Tooltip>
+        </Link>
         {loggedInUser.userType === "Retailer" && (
           <Link to="/admin">
             <Tooltip title="Create Admin" placement="right">
@@ -574,6 +585,7 @@ function FullNavbar(props) {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/group" component={AddGroup} />
+          <Route exact path="/dashboard" component={Dashboard} />
           <Route
             exact
             path={["/products/store", "/addproducts"]}

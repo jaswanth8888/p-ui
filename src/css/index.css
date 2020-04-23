@@ -78,6 +78,11 @@ h5 {
   padding: 40px;
 }
 
+#dashboard-box-container {
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  background: whitesmoke !important;
+}
+
 .box-container-login {
   display: flex;
   justify-content: center;
@@ -125,6 +130,43 @@ p {
   height: 170px;
   color: white;
   background-color: #3f51b5;
+}
+
+.dashboard-top-half {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  background-color: inherit;
+}
+
+.dashboard-bottom-half {
+  border-top: 1px solid rgba(0, 0, 0, 0.24);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  color: white;
+  background-color: inherit;
+  padding: 20px;
+}
+
+.dashboard-button {
+  width: 40px;
+  height: 10px;
+  position: absolute;
+  bottom: 30px;
+  right: 0px;
+}
+
+.apexcharts-tooltip {
+  background: #f3f3f3;
+  color: #292929;
+}
+
+.donut {
+  border-left: 1px solid rgba(0, 0, 0, 0.24);
 }
 
 p {
@@ -269,12 +311,42 @@ a {
   justify-content: space-evenly;
 }
 
+.advanced-card-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.advanced-chart-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
 .form-first-half {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex: 0.5;
   padding: 20px;
+}
+
+.card-container {
+  background: white;
+  color: #3f51b5 !important;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  margin: 30px 20px;
+  padding: 20px;
+  transition: 0.5s ease all;
+  position: relative;
+}
+
+.card-container:hover {
+  border-color: #3f51b5;
 }
 
 .form-first-half form {

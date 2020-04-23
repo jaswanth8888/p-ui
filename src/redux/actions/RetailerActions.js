@@ -54,6 +54,7 @@ import {
   SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
   CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
   CLEAR_PRODUCT_LIST,
+  GET_DASHBOARD_DATA,
 } from "./types"
 
 const TOKEN = () => {
@@ -1037,4 +1038,18 @@ export const cancelProductFixedPrice = (productName) => async (dispatch) => {
 
 export const clearProductList = (productList) => (dispatch) => {
   dispatch({ type: CLEAR_PRODUCT_LIST, products: productList })
+}
+
+export const getDashboardData = () => async (dispatch) => {
+  console.log("dashboard action")
+  await axios
+    .get(`${RETAILER_BASE_URL}/product-management/dashboard`, {
+      headers: { Authorization: TOKEN() },
+    })
+    .then((res) => {
+      dispatch({ type: GET_DASHBOARD_DATA, dashboardData: res.data })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
 }
