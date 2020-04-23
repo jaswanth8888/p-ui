@@ -22,6 +22,7 @@ import LocationCityIcon from "@material-ui/icons/LocationCity"
 import MenuIcon from "@material-ui/icons/Menu"
 import PublicIcon from "@material-ui/icons/Public"
 import StoreIcon from "@material-ui/icons/Store"
+import PersonAddIcon from "@material-ui/icons/PersonAdd"
 import LocalOfferIcon from "@material-ui/icons/LocalOffer"
 import clsx from "clsx"
 import React from "react"
@@ -124,7 +125,7 @@ function FullNavbar(props) {
             <Tooltip title="Create Admin" placement="right">
               <ListItem button id="create-admin-btn">
                 <ListItemIcon>
-                  <AddShoppingCartIcon />
+                  <PersonAddIcon />
                 </ListItemIcon>
                 <ListItemText
                   className="list-item-text"
