@@ -144,7 +144,7 @@ class SellCancelProductFixedPrice extends Component {
                   )
                     this.handleSubmitSell(productDetails.productName)
                 }}
-                id="assign-cluster-submit"
+                id="sell-price-change-btn"
               >
                 Sell Only At Fixed Price
               </Button>
@@ -163,7 +163,7 @@ class SellCancelProductFixedPrice extends Component {
                   )
                     this.handleSubmitCancel(productDetails.productName)
                 }}
-                id="assign-cluster-submit"
+                id="cancel-price-change-btn"
               >
                 Cancel Selling At Fixed Price
               </Button>
