@@ -83,6 +83,12 @@ h5 {
   background: whitesmoke !important;
 }
 
+#iframe-container {
+  width: 100%;
+  margin-top: 650px;
+  position: absolute;
+}
+
 .box-container-login {
   display: flex;
   justify-content: center;
