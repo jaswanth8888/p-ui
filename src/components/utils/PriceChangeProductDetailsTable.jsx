@@ -79,7 +79,7 @@ class PriceChangeProductDetailsTable extends Component {
                           if (
                             // eslint-disable-next-line no-alert
                             window.confirm(
-                              "Are you sure you wish sell it at fixed price?"
+                              "Are you sure you wish to price change?"
                             )
                           )
                             this.handleSubmit(product.productName)
