@@ -39,18 +39,23 @@ class CreateAdmin extends Component {
   handleChangeUserName(e) {
     const { admin } = this.state
     admin.userName = e.target.value
+    this.setState({ admin })
   }
 
   handleChangePassword(e) {
     const { admin } = this.state
-    admin.password = md5(e.target.value)
+    admin.password = e.target.value
+    this.setState({ admin })
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    {
-      const { admin } = this.state
-      const { createAdmin: createAdminAlt } = this.props
+    const { admin } = this.state
+    const { createAdmin: createAdminAlt } = this.props
+    if (admin.userName === "" || admin.password === "") {
+      this.setState({ status: -1 })
+    } else {
+      admin.password = md5(admin.password)
       createAdminAlt({ ...admin }) // thunk action
     }
   }
@@ -126,6 +131,7 @@ class CreateAdmin extends Component {
               <TextField
                 variant="outlined"
                 margin="normal"
+                type="password"
                 required
                 fullWidth
                 id="admin-input"
@@ -155,7 +161,7 @@ class CreateAdmin extends Component {
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
-                  Sorry admin not created
+                  Please fill required fields
                 </MuiAlert>
               </Snackbar>
             </div>

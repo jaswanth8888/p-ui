@@ -479,6 +479,8 @@ function FullNavbar(props) {
                       sessionStorage.setItem("countryCode", countryCode)
                     }}
                   />
+                  &emsp;
+                  <text id="admin-login">{loggedInUser.userName}</text>
                   <Link to="/" id="logout-btn">
                     <StyledTab
                       label={t("header.logOut")}
