@@ -66,6 +66,7 @@ class WithdrawClusterPromotion extends Component {
 
   render() {
     const { clusterPromotions, productDetails } = this.props
+    const { date } = this.state
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
@@ -118,27 +119,33 @@ class WithdrawClusterPromotion extends Component {
                             </TableCell>
                             <TableCell>
                               <Typography variant="subtitle1" gutterBottom>
-                                <Button
-                                  type="button"
-                                  halfWidth
-                                  variant="contained"
-                                  color="primary"
-                                  className="{classes.submit}"
-                                  onClick={(e) => {
-                                    if (
-                                      // eslint-disable-next-line no-alert
-                                      window.confirm(
-                                        "Are you sure you wish to withdraw the promotion?"
+                                {promotion.startDate > date ? (
+                                  <Button
+                                    type="button"
+                                    halfWidth
+                                    variant="contained"
+                                    color="primary"
+                                    className="{classes.submit}"
+                                    onClick={(e) => {
+                                      if (
+                                        // eslint-disable-next-line no-alert
+                                        window.confirm(
+                                          "Are you sure you wish to withdraw the promotion?"
+                                        )
                                       )
-                                    )
-                                      this.handleSubmit(
-                                        e,
-                                        promotion.promotionId
-                                      )
-                                  }}
-                                >
-                                  Withdraw
-                                </Button>
+                                        this.handleSubmit(
+                                          e,
+                                          promotion.promotionId
+                                        )
+                                    }}
+                                  >
+                                    Withdraw
+                                  </Button>
+                                ) : (
+                                  <Typography variant="subtitle1" gutterBottom>
+                                    Active Promotion
+                                  </Typography>
+                                )}
                               </Typography>
                             </TableCell>
                           </TableRow>

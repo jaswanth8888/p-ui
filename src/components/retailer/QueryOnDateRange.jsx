@@ -135,14 +135,11 @@ class QueryOnDateRange extends Component {
           </div>
           <div className="form-half">
             <form className="{classes.form}" noValidate>
-              <div>
-                <div className="help-block">
-                  <Typography color="primary" component="h1" variant="h4">
-                    {queryPromotionsForProducts}
-                  </Typography>
-                </div>
+              <div className="help-block">
+                <Typography color="primary" component="h1" variant="h4">
+                  {queryPromotionsForProducts}
+                </Typography>
               </div>
-
               <TextField
                 id="startDate-query"
                 label="Start Date"

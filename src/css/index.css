@@ -520,6 +520,12 @@ a {
   flex-direction: column;
 }
 
+.help-block {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.login-help-block,
 @media only screen and (max-width: 600px) {
   body {
     font-size: 12px !important;
@@ -603,7 +609,6 @@ a {
 #admin-login-name {
   color: white !important;
   font-size: larger;
-  
 }
 
 #reg-vendor,
