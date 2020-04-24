@@ -47,7 +47,9 @@ class AddProduct extends Component {
   }
 
   handleSubmit() {
+    const { loggedInUser } = this.props
     const { product } = this.state
+    product.companyName = loggedInUser.userName
     const {
       productName,
       productBasePrice,
@@ -77,7 +79,6 @@ class AddProduct extends Component {
         productImagePath,
         abv,
         volume,
-        companyName,
         uom,
       } = product
       return (
@@ -232,19 +233,6 @@ class AddProduct extends Component {
                   autoComplete="productName"
                   onChange={this.handleChange}
                   value={productName}
-                  autoFocus
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="companyName"
-                  label="companyName"
-                  name="companyName"
-                  autoComplete="companyName"
-                  onChange={this.handleChange}
-                  value={companyName}
                   autoFocus
                 />
                 <FormControl
@@ -430,9 +418,12 @@ class AddProduct extends Component {
 
 AddProduct.propTypes = {
   postProduct: PropTypes.func.isRequired,
+  loggedInUser: PropTypes.shape.isRequired,
 }
-
+const stateAsProps = (store) => ({
+  loggedInUser: store.RetailerReducer.loggedInUser,
+})
 const actionAsProps = {
   postProduct,
 }
-export default connect(null, actionAsProps)(AddProduct)
+export default connect(stateAsProps, actionAsProps)(AddProduct)
