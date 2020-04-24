@@ -87,12 +87,16 @@ class Login extends Component {
   }
 
   render() {
-    const { t, loginStatus, history } = this.props
+    const { t, loginStatus, history, loggedInUser } = this.props
     const { userCredentials, error } = this.state
     return (
       <>
         {loginStatus.success || sessionStorage.getItem("token") ? (
-          history.push("/dashboard")
+          <>
+            {loggedInUser.userType === "vendor"
+              ? history.push("/vendor/addproduct")
+              : history.push("/dashboard")}
+          </>
         ) : (
           <div className="box-container-login">
             <div className="joint-form" id="login-joint-form">
@@ -182,12 +186,14 @@ Login.propTypes = {
   loginStatus: PropTypes.shape.isRequired,
   login: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
+  loggedInUser: PropTypes.shape.isRequired,
   t: PropTypes.shape.isRequired,
 }
 const stateAsProps = (store) => {
   if ("loginStatus" in store.RetailerReducer) {
     return {
       loginStatus: store.RetailerReducer.loginStatus,
+      loggedInUser: store.RetailerReducer.loggedInUser,
     }
   }
   return { loginStatus: { errorMsg: "" } }
