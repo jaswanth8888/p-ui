@@ -31,6 +31,7 @@ import {
   LEVEL_SAVE_VALUE,
   PROMOTIONS_GET_BYRANGE,
   GET_PROMOTIONS_CLUSTER,
+  GET_PROMOTIONS_ZONE,
   STARTDATE_SAVE_VALUE,
   ENDDATE_SAVE_VALUE,
   IS_PROMOTION_APPLLIED,
@@ -83,6 +84,7 @@ const initialState = {
   statusCode: "",
   promotions: [],
   clusterPromotions: [],
+  zonePromotions: [],
   startDate: "",
   endDate: "",
   levelOption: "",
@@ -204,6 +206,8 @@ export default (state = initialState, action = {}) => {
       return { ...state, promotions: action.promotions }
     case GET_PROMOTIONS_CLUSTER:
       return { ...state, clusterPromotions: action.clusterPromotions }
+    case GET_PROMOTIONS_ZONE:
+      return { ...state, zonePromotions: action.zonePromotions }
     case STARTDATE_SAVE_VALUE:
       return { ...state, startDate: action.startDate }
     case ENDDATE_SAVE_VALUE:

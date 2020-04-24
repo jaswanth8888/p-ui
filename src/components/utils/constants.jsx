@@ -75,7 +75,7 @@ export const viewZonePromotions = [
 ]
 export const autoHideDuration = 4000
 export const product = ["Product Image", "Product Description"]
-export const zonePromotions = "Promotions in zone level"
+export const zonePromotionsConst = "Promotions in zone level"
 export const groupName = "Please provide a group name"
 export const addGroup = "Create a Group"
 export const addGroupFail =

@@ -16,6 +16,7 @@ import {
 } from "../../redux/actions/RetailerActions"
 import ProductDetails from "../utils/ProductDetails"
 import { viewAssignedClusters } from "../utils/constants"
+import Message from "../utils/Message"
 
 class ViewAssignedClusters extends Component {
   constructor(props) {
@@ -99,6 +100,7 @@ class ViewAssignedClusters extends Component {
             </TableContainer>
           </div>
         </div>
+        <Message />
       </div>
     )
   }

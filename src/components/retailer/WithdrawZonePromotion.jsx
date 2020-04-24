@@ -7,16 +7,13 @@ import {
   TableHead,
   TableRow,
   Button,
-  IconButton,
 } from "@material-ui/core"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import Alert from "@material-ui/lab/Alert"
-import CloseIcon from "@material-ui/icons/Close"
 import PropTypes from "prop-types"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 import {
-  getProductDetails,
+  getPromotionsInzone,
   withdrawPromotion,
 } from "../../redux/actions/RetailerActions"
 import {
@@ -37,8 +34,12 @@ class WithdrawZonePromotion extends Component {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
-    const { productName, getProductDetails: getProductDetailsAlt } = this.props
-    getProductDetailsAlt(productName)
+    const {
+      productName,
+      zone,
+      getPromotionsInzone: getPromotionsInzoneAlt,
+    } = this.props
+    getPromotionsInzoneAlt(productName, zone)
   }
 
   handleSubmit = (e, promoId) => {
@@ -59,116 +60,87 @@ class WithdrawZonePromotion extends Component {
   }
 
   render() {
-    const { productDetails } = this.props
-    const zoneData = productDetails.assignProduct
-    const tableRowElm = (zone) => {
-      return zone.promotions.map(
-        (promotion) =>
-          promotion.withDrawnDate === null && (
-            <TableRow id={`row${promotion.promotionId}`}>
-              <TableCell>
-                <Typography variant="subtitle1" gutterBottom>
-                  {promotion.promotionPercentage}
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <Typography variant="subtitle1" gutterBottom>
-                  {productDetails.effectivePriceObj !== null
-                    ? productDetails.effectivePriceObj.effectivePrice
-                    : productDetails.productBasePrice}
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <Typography variant="subtitle1" gutterBottom>
-                  {promotion.startDate}
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <Typography variant="subtitle1" gutterBottom>
-                  {promotion.endDate}
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <Typography variant="subtitle1" gutterBottom>
-                  <Button
-                    type="button"
-                    halfWidth
-                    variant="contained"
-                    color="primary"
-                    className="{classes.submit}"
-                    onClick={(e) => {
-                      if (
-                        // eslint-disable-next-line no-alert
-                        window.confirm(
-                          "Are you sure you wish to withdraw the promotion?"
-                        )
-                      )
-                        this.handleSubmit(e, promotion.promotionId)
-                    }}
-                  >
-                    Withdraw
-                  </Button>
-                </Typography>
-              </TableCell>
-            </TableRow>
-          )
-      )
-    }
-
+    const { zonePromotions, productDetails } = this.props
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
           <div className="form-center">
             <div className="flex-grid">
-              {productDetails.assignProduct.length <= 0 && (
-                <div>
-                  <Alert
-                    severity="info"
-                    action={
-                      <IconButton
-                        aria-label="close"
-                        color="inherit"
-                        size="small"
-                      >
-                        <CloseIcon fontSize="inherit" />
-                      </IconButton>
-                    }
-                  >
-                    Sorry No Promotions are applied on this Product:{" "}
-                    {productDetails.productName}
-                  </Alert>
-                </div>
-              )}
               <Typography className="card-header" variant="h4">
                 {withdrawPromotionZoneConst}
               </Typography>
               <ProductDetailsTable />
-              {productDetails.assignProduct.length > 0 ? (
-                <>
-                  <Typography className="card-header" variant="h5">
-                    {zoneLevelPromotions}
-                  </Typography>
-                  <TableContainer component={Paper}>
-                    <Table aria-label="a dense table">
-                      <TableHead>
-                        <TableRow>
-                          {/* <TableCell>Promotion Percentage</TableCell>
-                          <TableCell>Actual Price</TableCell>
-                          <TableCell>Promotion From Date</TableCell>
-                          <TableCell>Promotion To Date</TableCell>
-                          <TableCell>Withdraw</TableCell> */}
-                          {withdrawZonePromotion.map((tcell) => (
-                            <TableCell>{tcell}</TableCell>
-                          ))}
-                        </TableRow>
-                      </TableHead>
-                      <tbody id="withdraw-tbody">
-                        {zoneData.map((zone) => tableRowElm(zone))}
-                      </tbody>
-                    </Table>
-                  </TableContainer>
-                </>
-              ) : null}
+              <Typography className="card-header" variant="h5">
+                {zoneLevelPromotions}
+              </Typography>
+              <TableContainer component={Paper}>
+                <Table aria-label="a dense table">
+                  <TableHead>
+                    <TableRow>
+                      {withdrawZonePromotion.map((tcell) => (
+                        <TableCell>{tcell}</TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <tbody id="withdraw-tbody">
+                    {zonePromotions.map(
+                      (promotion) =>
+                        promotion.withDrawnDate === null && (
+                          <TableRow id={`row${promotion.promotionId}`}>
+                            <TableCell>
+                              <Typography variant="subtitle1" gutterBottom>
+                                {promotion.promotionPercentage}
+                              </Typography>
+                            </TableCell>
+                            <TableCell>
+                              <Typography variant="subtitle1" gutterBottom>
+                                {productDetails.effectivePriceObj !== null
+                                  ? productDetails.effectivePriceObj
+                                      .effectivePrice
+                                  : productDetails.productBasePrice}
+                              </Typography>
+                            </TableCell>
+                            <TableCell>
+                              <Typography variant="subtitle1" gutterBottom>
+                                {promotion.startDate.slice(0, 10)}
+                              </Typography>
+                            </TableCell>
+                            <TableCell>
+                              <Typography variant="subtitle1" gutterBottom>
+                                {promotion.endDate.slice(0, 10)}
+                              </Typography>
+                            </TableCell>
+                            <TableCell>
+                              <Typography variant="subtitle1" gutterBottom>
+                                <Button
+                                  type="button"
+                                  halfWidth
+                                  variant="contained"
+                                  color="primary"
+                                  className="{classes.submit}"
+                                  onClick={(e) => {
+                                    if (
+                                      // eslint-disable-next-line no-alert
+                                      window.confirm(
+                                        "Are you sure you wish to withdraw the promotion?"
+                                      )
+                                    )
+                                      this.handleSubmit(
+                                        e,
+                                        promotion.promotionId
+                                      )
+                                  }}
+                                >
+                                  Withdraw
+                                </Button>
+                              </Typography>
+                            </TableCell>
+                          </TableRow>
+                        )
+                    )}
+                  </tbody>
+                </Table>
+              </TableContainer>
             </div>
           </div>
         </div>
@@ -179,20 +151,21 @@ class WithdrawZonePromotion extends Component {
 
 WithdrawZonePromotion.propTypes = {
   productDetails: PropTypes.shape.isRequired,
+  zonePromotions: PropTypes.shape.isRequired,
   productName: PropTypes.string.isRequired,
   zone: PropTypes.string.isRequired,
-
-  getProductDetails: PropTypes.func.isRequired,
+  getPromotionsInzone: PropTypes.shape.isRequired,
   withdrawPromotion: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
+  zonePromotions: store.RetailerReducer.zonePromotions,
   productName: store.RetailerReducer.productName,
   zone: store.RetailerReducer.zone,
 })
 const actionAsProps = {
-  getProductDetails,
   withdrawPromotion,
+  getPromotionsInzone,
 }
 export default connect(stateAsProps, actionAsProps)(WithdrawZonePromotion)

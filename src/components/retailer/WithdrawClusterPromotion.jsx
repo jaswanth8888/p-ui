@@ -83,11 +83,6 @@ class WithdrawClusterPromotion extends Component {
                 <Table aria-label="a dense table">
                   <TableHead>
                     <TableRow>
-                      {/* <TableCell>Promotion Percentage</TableCell>
-                      <TableCell>Actual Price</TableCell>
-                      <TableCell>Promotion From Date</TableCell>
-                      <TableCell>Promotion To Date</TableCell>
-                      <TableCell>Withdraw</TableCell> */}
                       {withdrawClusterPromotion.map((tcell) => (
                         <TableCell>{tcell}</TableCell>
                       ))}
