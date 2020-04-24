@@ -3,6 +3,7 @@
   "please fill password": "please fill password",
   "loginAsVendor":"Login As Vendor",
   "loginAsAdmin":"Login As Admin",
+  "welcomeMain": "Welcome",
   "header": {
     "logIn": "Login",
     "logOut": "Logout",
@@ -38,6 +39,10 @@
     "cancelEffectivePriceChange": "Cancel Effective Price Change",
     "sellCancelProductFixedPrice": "Sell/ Cancel Product At Fixed Price",
     "queryPromotionsOnDateRange": "Query Promotions On Date Range"
+  },
+  "vendorWelcome": {
+    "addProduct":"Add a Product",
+    "updatePriceOfProduct": "Update Price of a Product"
   },
   "zoneForm": {
     "lengthTooShort": "Zone has to be greater than 5 letters",

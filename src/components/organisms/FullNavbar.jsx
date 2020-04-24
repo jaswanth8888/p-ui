@@ -416,7 +416,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Add a Product"
+                primary={t("vendorWelcome.addProduct")}
               />
             </ListItem>
           </Tooltip>
@@ -429,7 +429,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Update the price of a Product"
+                primary={t("vendorWelcome.updatePriceOfProduct")}
               />
             </ListItem>
           </Tooltip>
@@ -490,7 +490,7 @@ function FullNavbar(props) {
                   />
                   &emsp;
                   <text id="admin-login-name">
-                    Welcome {loggedInUser.userName}
+                    {t("welcomeMain")} {loggedInUser.userName}
                   </text>
                   <Link to="/" id="logout-btn">
                     <StyledTab
