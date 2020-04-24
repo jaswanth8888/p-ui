@@ -8,7 +8,6 @@ import {
   MESSAGE_SET_NULL,
   CREATE_PRODUCT,
   PRODUCT_GET_REQUEST,
-  IS_PROMOTION_APPLLIED,
   PRODUCT_UPDATE,
   FAILURE,
   PRODUCTLIST_GET_REQUEST,
@@ -141,32 +140,17 @@ export const getProductList = () => async (dispatch) => {
 }
 export const getProductDetails = (productName) => async (dispatch) => {
   await axios
-    .get(`${RETAILER_BASE_URL}/product-management/product/${productName}`, {
-      headers: { Authorization: VTOKEN() },
-    })
-    .then((res) => {
-      dispatch({ type: PRODUCT_GET_REQUEST, productDetails: res.data })
-    })
-}
-export const isPromotionApplied = (productName) => async (dispatch) => {
-  await axios
     .get(
-      `${RETAILER_BASE_URL}/product-management/${productName}/product/promotion`,
+      `${RETAILER_BASE_URL}/product-management/${productName}/product/vendor`,
       {
         headers: { Authorization: VTOKEN() },
       }
     )
     .then((res) => {
-      dispatch({ type: IS_PROMOTION_APPLLIED, isPromotion: res.data })
-    })
-    .catch(() => {
-      dispatch({
-        type: FAILURE,
-        msg: "try again",
-        msgSeverity: "error",
-      })
+      dispatch({ type: PRODUCT_GET_REQUEST, productDetails: res.data })
     })
 }
+
 export const updateProduct = (updatedProduct, productName) => async (
   dispatch
 ) => {

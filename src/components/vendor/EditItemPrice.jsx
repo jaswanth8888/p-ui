@@ -17,7 +17,6 @@ import Alert from "@material-ui/lab/Alert"
 import CloseIcon from "@material-ui/icons/Close"
 import {
   getProductDetails,
-  isPromotionApplied,
   updateProduct,
 } from "../../redux/actions/VendorActions"
 import Message from "../utils/Message"
@@ -39,14 +38,8 @@ class EditItemPrice extends Component {
   }
 
   componentDidMount() {
-    const {
-      productName,
-      getProductDetails: getProductDetailsAlt,
-      isPromotionApplied: promotionapplied,
-    } = this.props
-    const { productDetails } = this.props
+    const { productName, getProductDetails: getProductDetailsAlt } = this.props
     getProductDetailsAlt(productName)
-    promotionapplied(productDetails.productName)
   }
 
   handleQuantityChange(e) {
@@ -77,11 +70,14 @@ class EditItemPrice extends Component {
     e.preventDefault()
     const { updatedProduct } = this.state
     const { updateProduct: updateProductAlt } = this.props
-    updateProductAlt(updatedProduct, updatedProduct.productName)
+    const { productDetails } = this.props
+    if (updatedProduct.newBasePrice > productDetails.minimumBasePrice) {
+      updateProductAlt(updatedProduct, updatedProduct.productName)
+    }
   }
 
   render() {
-    const { productDetails, isPromotion } = this.props
+    const { productDetails } = this.props
     const { updatedProduct } = this.state
     return (
       <div className="box-container">
@@ -119,11 +115,11 @@ class EditItemPrice extends Component {
                         <a
                           target="_blank"
                           rel="noopener noreferrer"
-                          href={productDetails.productImagePath}
+                          href={productDetails.productImage}
                         >
                           <img
                             className="thumbnail"
-                            src={productDetails.productImagePath}
+                            src={productDetails.productImage}
                             alt="none"
                           />
                         </a>
@@ -138,8 +134,12 @@ class EditItemPrice extends Component {
               </Typography>
               <Typography className="card-header" variant="h6">
                 productBasePrice: {productDetails.productBasePrice}
+                <Typography className="card" id="span-warning">
+                  product base price should be greater than{" "}
+                  {productDetails.minimumBasePrice.toFixed(2)}
+                </Typography>
               </Typography>
-              {isPromotion && (
+              {productDetails.isPromotionRunning && (
                 <div>
                   <Alert
                     severity="info"
@@ -157,7 +157,7 @@ class EditItemPrice extends Component {
                   </Alert>
                 </div>
               )}
-              {!isPromotion && (
+              {!productDetails.isPromotionRunning && (
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -175,7 +175,7 @@ class EditItemPrice extends Component {
                 />
               )}
               <Typography className="card-header" variant="h6">
-                Units of Measurement: {productDetails.uom}
+                Units of Measurement: {productDetails.productUOM}
               </Typography>
               <Typography className="card-header" variant="h6">
                 Quantity: {productDetails.initialQuantity}
@@ -217,21 +217,19 @@ class EditItemPrice extends Component {
 
 EditItemPrice.propTypes = {
   getProductDetails: PropTypes.func.isRequired,
-  isPromotionApplied: PropTypes.func.isRequired,
   updateProduct: PropTypes.func.isRequired,
   productName: PropTypes.string.isRequired,
   productDetails: PropTypes.shape.isRequired,
-  isPromotion: PropTypes.bool.isRequired,
 }
 
 const stateAsProps = (store) => ({
   productDetails: store.VendorReducer.productDetails,
   productName: store.VendorReducer.productName,
   isPromotion: store.VendorReducer.isPromotion,
+  minimumsellingprice: store.VendorReducer.minimumsellingprice,
 })
 const actionsAsProps = {
   getProductDetails,
-  isPromotionApplied,
   updateProduct,
 }
 export default connect(stateAsProps, actionsAsProps)(EditItemPrice)

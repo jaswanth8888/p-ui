@@ -611,6 +611,10 @@ a {
   box-shadow: none;
 }
 
+#span-warning {
+  color: red !important;
+}
+
 #login-joint-form-vendor {
   box-shadow: none;
   width: 40%;
