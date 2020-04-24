@@ -10,9 +10,9 @@ import {
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { getProductDetails } from "../../redux/actions/RetailerActions"
+import { getPromotionsInzone } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
-import { viewZonePromotions, zonePromotions } from "../utils/constants"
+import { viewZonePromotions, zonePromotionsConst } from "../utils/constants"
 import Message from "../utils/Message"
 
 class ViewZonePromotions extends Component {
@@ -24,85 +24,78 @@ class ViewZonePromotions extends Component {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
-    const { getProductDetails: getProductDetailsAlt, productName } = this.props
-    getProductDetailsAlt(productName)
+    const {
+      getPromotionsInzone: getPromotionsInzoneAlt,
+      productName,
+      zone,
+    } = this.props
+    getPromotionsInzoneAlt(productName, zone)
   }
 
   render() {
-    const { productDetails } = this.props
-    const zoneData = productDetails.assignProduct
-    const tableRowElm = (zone) => {
-      return zone.promotions.map((promotion) => (
-        <TableRow key={promotion.promotionId}>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.appliedDate.slice(0, 10)}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.promotionPercentage}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.promotionSellingPrice}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.startDate.slice(0, 10)}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              {promotion.endDate.slice(0, 10)}
-            </Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="subtitle1" gutterBottom>
-              Zone
-            </Typography>
-          </TableCell>
-          <TableCell>
-            {promotion.cancelledDate !== null && (
-              <Typography variant="subtitle1" gutterBottom>
-                {promotion.cancelledDate.slice(0, 10)}
-              </Typography>
-            )}
-          </TableCell>
-        </TableRow>
-      ))
-    }
-
+    const { zonePromotions } = this.props
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
           <div className="form-center">
             <div className="flex-grid">
               <ProductDetailsTable />
-
               <Typography className="card-header" variant="h6">
-                {zonePromotions}
+                {zonePromotionsConst}
               </Typography>
 
               <TableContainer component={Paper}>
                 <Table aria-label="a dense table">
                   <TableHead>
                     <TableRow>
-                      {/* <TableCell>Promotion Applied Date</TableCell>
-                      <TableCell>Promotion Percentage</TableCell>
-                      <TableCell>Promotion Selling Price</TableCell>
-                      <TableCell>Promotion From Date</TableCell>
-                      <TableCell>Promotion To Date</TableCell>
-                      <TableCell>Promotion Level</TableCell>
-                      <TableCell>Promotion Cancelled Date</TableCell> */}
                       {viewZonePromotions.map((tcell) => (
                         <TableCell>{tcell}</TableCell>
                       ))}
                     </TableRow>
                   </TableHead>
-                  <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>
+                  <tbody>
+                    {zonePromotions.map((promotion) => (
+                      <TableRow key={promotion.promotionId}>
+                        <TableCell>
+                          <Typography variant="subtitle1" gutterBottom>
+                            {promotion.appliedDate.slice(0, 10)}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="subtitle1" gutterBottom>
+                            {promotion.promotionPercentage}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="subtitle1" gutterBottom>
+                            {promotion.promotionSellingPrice}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="subtitle1" gutterBottom>
+                            {promotion.startDate.slice(0, 10)}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="subtitle1" gutterBottom>
+                            {promotion.endDate.slice(0, 10)}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="subtitle1" gutterBottom>
+                            Zone
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          {promotion.cancelledDate !== null && (
+                            <Typography variant="subtitle1" gutterBottom>
+                              {promotion.cancelledDate.slice(0, 10)}
+                            </Typography>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </tbody>
                 </Table>
               </TableContainer>
             </div>
@@ -116,16 +109,18 @@ class ViewZonePromotions extends Component {
 
 ViewZonePromotions.propTypes = {
   productName: PropTypes.string.isRequired,
-  productDetails: PropTypes.shape.isRequired,
-  getProductDetails: PropTypes.func.isRequired,
+  zone: PropTypes.string.isRequired,
+  zonePromotions: PropTypes.shape.isRequired,
+  getPromotionsInzone: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({
-  productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
+  zone: store.RetailerReducer.zone,
+  zonePromotions: store.RetailerReducer.zonePromotions,
 })
 
 const actionAsProps = {
-  getProductDetails,
+  getPromotionsInzone,
 }
 export default connect(stateAsProps, actionAsProps)(ViewZonePromotions)

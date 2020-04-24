@@ -35,6 +35,7 @@ import {
   LEVEL_SAVE_VALUE,
   PROMOTIONS_GET_BYRANGE,
   GET_PROMOTIONS_CLUSTER,
+  GET_PROMOTIONS_ZONE,
   STARTDATE_SAVE_VALUE,
   ENDDATE_SAVE_VALUE,
   FROMDATE_SAVE_VALUE,
@@ -851,6 +852,23 @@ export const getPromotionsIncluster = (
     )
     .then((res) => {
       dispatch({ type: GET_PROMOTIONS_CLUSTER, clusterPromotions: res.data })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
+}
+export const getPromotionsInzone = (productName, zoneName) => async (
+  dispatch
+) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/product/promotions/${productName}/${zoneName}`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: GET_PROMOTIONS_ZONE, zonePromotions: res.data })
     })
     .catch(() => {
       dispatch({ type: FAILURE })

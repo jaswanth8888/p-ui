@@ -229,8 +229,7 @@ p {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 20px;
-  width: 99%;
+  width: 100%;
   flex-direction: column;
 }
 

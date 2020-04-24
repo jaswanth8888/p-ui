@@ -124,7 +124,7 @@ function FullNavbar(props) {
       <List>
         <Link to="/dashboard">
           <Tooltip title="Dashboard" placement="right">
-            <ListItem button>
+            <ListItem button id="dashboard-btn">
               <ListItemIcon>
                 <DateRangeIcon />
               </ListItemIcon>
@@ -489,7 +489,7 @@ function FullNavbar(props) {
                   label={t("header.home")}
                   component={Link}
                   id="app-header"
-                  to="/group"
+                  to="/dashboard"
                 />
                 <div className="right-nav-btn">
                   <ReactFlagsSelect

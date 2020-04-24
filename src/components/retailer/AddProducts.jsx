@@ -65,34 +65,51 @@ class AddProducts extends Component {
   }
 
   loopForm() {
-    const { object, productList } = this.state
+    const { productList } = this.state
     const {
       postProductToStore: postProductToStoreAlt,
       zone,
       cluster,
       store,
     } = this.props
-    const tabledata = document.querySelectorAll("tr")
-
-    tabledata.forEach((ele, ind) => {
-      if (
-        ind &&
-        ele.childNodes[0].childNodes[0].childNodes[0].childNodes[0]
-          .childNodes[0].checked
-      ) {
-        object.productName = ele.childNodes[1].childNodes[0].textContent
-        object.quantityAssigned = parseInt(
-          ele.childNodes[5].childNodes[0].childNodes[1].childNodes[0].value,
-          10
-        )
-        productList.push(object)
-      }
-    })
 
     postProductToStoreAlt(zone, cluster, store, productList)
     this.setState({ category: "" })
     this.setState({ productList: [] })
     this.setState({ quantityCheck: false })
+  }
+
+  handleQtyChange = (e) => {
+
+  }
+  
+  handleCheckBoxChange = (e) =>{
+
+    if(!e.target.closest("tr").querySelectorAll("input")[1].value){
+      alert("Please enter a value before selecting")
+      e.target.checked = false
+      return
+    }
+
+    const tempObj = JSON.parse(e.target.value)
+    const prod = {
+      productName : tempObj.productName,
+      quantityAssigned : e.target.closest("tr").querySelectorAll("input")[1].value
+    }
+    const keyArr = this.state.productList.map((ele)=> ele.productName)
+
+    if(keyArr.indexOf(prod.productName) === -1){
+      this.setState({productList : [...this.state.productList, prod]})
+      e.target.closest("tr").querySelectorAll("input")[1].readOnly = true
+      e.target.closest("tr").querySelectorAll("input")[1].style.color = "#999999"
+    }
+    else{
+      this.state.productList.splice(keyArr.indexOf(prod.productName))
+      e.target.closest("tr").querySelectorAll("input")[1].readOnly = false
+      e.target.closest("tr").querySelectorAll("input")[1].style.color = "#000"
+    }
+    
+    
   }
 
   render() {
@@ -159,6 +176,7 @@ class AddProducts extends Component {
                                     id={product.id}
                                     name="checkedB"
                                     color="primary"
+                                    onClick = {this.handleCheckBoxChange}
                                     value={JSON.stringify(product)}
                                   />
                                 }
