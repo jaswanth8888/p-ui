@@ -525,7 +525,7 @@ a {
   margin-bottom: 20px;
 }
 
-.login-help-block,
+/* .login-help-block, */
 @media only screen and (max-width: 600px) {
   body {
     font-size: 12px !important;
