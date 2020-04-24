@@ -1,6 +1,8 @@
 {
   "please fill username": "veuillez remplir le nom d'utilisateur",
   "please fill password": "veuillez remplir le mot de passe",
+  "loginAsVendor":"Connectez-vous en tant que fournisseur",
+  "loginAsAdmin":"Connectez-vous en tant qu'administrateur",
   "header": {
     "logIn": "s'identifier",
     "logOut": "Se déconnecter",

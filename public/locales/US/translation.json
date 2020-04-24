@@ -1,6 +1,8 @@
 {
   "please fill username": "please fill username",
   "please fill password": "please fill password",
+  "loginAsVendor":"Login As Vendor",
+  "loginAsAdmin":"Login As Admin",
   "header": {
     "logIn": "Login",
     "logOut": "Logout",

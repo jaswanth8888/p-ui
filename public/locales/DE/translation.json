@@ -1,6 +1,8 @@
 {
   "please fill username": "Bitte geben Sie den Benutzernamen ein",
   "please fill password": "Bitte Passwort eingeben",
+  "loginAsVendor":"Als Anbieter anmelden",
+  "loginAsAdmin":"Als Admin anmelden",
   "header": {
     "logIn": "Anmeldung",
     "logOut": "Ausloggen",

@@ -461,7 +461,7 @@ function FullNavbar(props) {
                     className="{classes.link}"
                     id="reg-vendor"
                   >
-                    Login As Vendor
+                    {t("loginAsVendor")}
                   </Button>
                 </Link>
                 <Link className="button-link" to="/admin/login">
@@ -470,7 +470,7 @@ function FullNavbar(props) {
                     className="{classes.link}"
                     id="admin-login"
                   >
-                    Login As Admin
+                    {t("loginAsAdmin")}
                   </Button>
                 </Link>
               </>
