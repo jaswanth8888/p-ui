@@ -450,28 +450,12 @@ function FullNavbar(props) {
           }}
         >
           <Toolbar>
-            {loggedInUser.token === "" && (
-              <>
-                <Link className="button-link" to="/vendor">
-                  <Button
-                    color="default"
-                    className="{classes.link}"
-                    id="reg-vendor"
-                  >
-                    Login As Vendor
-                  </Button>
-                </Link>
-                <Link className="button-link" to="/admin/login">
-                  <Button
-                    color="default"
-                    className="{classes.link}"
-                    id="admin-login"
-                  >
-                    Login As Admin
-                  </Button>
-                </Link>
-              </>
-            )}
+            <StyledTab
+              label={t("header.home")}
+              component={Link}
+              id="app-header"
+              to="/dashboard"
+            />
             {sessionStorage.getItem("token") ? (
               <>
                 <IconButton
@@ -485,12 +469,6 @@ function FullNavbar(props) {
                 >
                   <MenuIcon />
                 </IconButton>
-                <StyledTab
-                  label={t("header.home")}
-                  component={Link}
-                  id="app-header"
-                  to="/dashboard"
-                />
                 <div className="right-nav-btn">
                   <ReactFlagsSelect
                     countries={["US", "FR", "DE"]}
@@ -525,8 +503,29 @@ function FullNavbar(props) {
                 </div>
               </>
             ) : (
-              <>
-                <StyledTab label={t("header.home")} component={Link} />
+              <div className="right-nav-btn">
+                {loggedInUser.token === "" && (
+                  <>
+                    <Link className="button-link" to="/vendor">
+                      <Button
+                        color="default"
+                        className="{classes.link}"
+                        id="reg-vendor"
+                      >
+                        Login As Vendor
+                      </Button>
+                    </Link>
+                    <Link className="button-link" to="/admin/login">
+                      <Button
+                        color="default"
+                        className="{classes.link}"
+                        id="admin-login"
+                      >
+                        Login As Admin
+                      </Button>
+                    </Link>
+                  </>
+                )}
                 <ReactFlagsSelect
                   countries={["US", "FR", "DE"]}
                   customLabels={{
@@ -534,7 +533,6 @@ function FullNavbar(props) {
                     FR: " ",
                     DE: " ",
                   }}
-                  className="right-nav-btn"
                   id="flag-select"
                   placeholder="Select Language"
                   defaultCountry={sessionStorage.getItem("countryCode")}
@@ -543,7 +541,7 @@ function FullNavbar(props) {
                     sessionStorage.setItem("countryCode", countryCode)
                   }}
                 />
-              </>
+              </div>
             )}
           </Toolbar>
         </AppBar>

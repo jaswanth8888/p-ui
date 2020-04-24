@@ -104,17 +104,15 @@ class CreateAdmin extends Component {
           </div>
           <div className="form-half">
             <form className="{classes.form} expanded-form" noValidate>
-              <div>
-                <div className="help-block">
-                  <Typography
-                    color="primary"
-                    component="h1"
-                    variant="h4"
-                    className="help-block-h4"
-                  >
-                    Create admin
-                  </Typography>
-                </div>
+              <div className="help-block">
+                <Typography
+                  color="primary"
+                  component="h1"
+                  variant="h4"
+                  className="help-block-h4"
+                >
+                  Create admin
+                </Typography>
               </div>
               <TextField
                 variant="outlined"

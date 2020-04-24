@@ -103,14 +103,14 @@ class AdminLogin extends Component {
             <div className="joint-form" id="login-joint-form">
               <div className="login-full">
                 {userCredentials.password.length <= 0 ? (
-                  <div className="help-block">
+                  <div className="login-help-block">
                     <Lock className="login-icon" />
                     <Typography className="card-header" variant="h4">
                       Admin Login
                     </Typography>
                   </div>
                 ) : (
-                  <div className="help-block">
+                  <div className="login-help-block">
                     <LockOpenIcon className="login-icon" />
                     <Typography className="card-header" variant="h4">
                       Admin Login
