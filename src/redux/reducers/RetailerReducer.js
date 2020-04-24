@@ -159,7 +159,12 @@ export default (state = initialState, action = {}) => {
     case STORE_SAVE_VALUE:
       return { ...state, store: action.store }
     case PRODUCTTOSTORE_POST_REQUEST:
-      return { ...state, msg: action.msg, msgSeverity: action.msgSeverity }
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        products: action.products,
+      }
     case PRODUCTLIST_GET_REQUEST:
       return { ...state, productList: action.productList }
     case PRODUCT_SAVE_VALUE:

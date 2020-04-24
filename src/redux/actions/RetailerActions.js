@@ -389,6 +389,7 @@ export const postProductToStore = (zone, cluster, store, products) => async (
         type: PRODUCTTOSTORE_POST_REQUEST,
         msg: "Product Added to Store Succesfully",
         msgSeverity: "success",
+        products: [],
       })
     })
     .catch(() => {
@@ -396,6 +397,7 @@ export const postProductToStore = (zone, cluster, store, products) => async (
         type: PRODUCTTOSTORE_POST_REQUEST,
         msg: "Sorry Products already exists in Store",
         msgSeverity: "warning",
+        products: [],
       })
     })
 }

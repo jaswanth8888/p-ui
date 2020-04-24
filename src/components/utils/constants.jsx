@@ -73,7 +73,7 @@ export const viewZonePromotions = [
   "Promotion Level",
   "Promotion Cancelled Date",
 ]
-export const autoHideDuration = 4000
+export const autoHideDuration = 2000
 export const product = ["Product Image", "Product Description"]
 export const zonePromotionsConst = "Promotions in zone level"
 export const groupName = "Please provide a group name"
