@@ -601,6 +601,12 @@ a {
   }
 }
 
+#admin-login-name {
+  color: white !important;
+  font-size: larger;
+  
+}
+
 #reg-vendor,
 #admin-login,
 .flag-select__option--placeholder {

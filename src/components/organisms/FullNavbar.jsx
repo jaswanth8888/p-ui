@@ -508,7 +508,9 @@ function FullNavbar(props) {
                     }}
                   />
                   &emsp;
-                  <text id="admin-login">{loggedInUser.userName}</text>
+                  <text id="admin-login-name">
+                    Welcome {loggedInUser.userName}
+                  </text>
                   <Link to="/" id="logout-btn">
                     <StyledTab
                       label={t("header.logOut")}
