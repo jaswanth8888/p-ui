@@ -92,6 +92,7 @@ class AddProducts extends Component {
     postProductToStoreAlt(zone, cluster, store, productList)
     this.setState({ category: "" })
     this.setState({ productList: [] })
+    this.setState({ quantityCheck: false })
   }
 
   render() {
