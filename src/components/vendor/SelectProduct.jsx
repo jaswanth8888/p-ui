@@ -24,8 +24,8 @@ class SelectProduct extends Component {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
-    const { getProductList: getProductListAlt } = this.props
-    getProductListAlt()
+    const { getProductList: getProductListAlt, loggedInUser } = this.props
+    getProductListAlt(loggedInUser.userName)
   }
 
   handleChangeProduct = (e, value) => {
@@ -125,9 +125,11 @@ SelectProduct.propTypes = {
   getProductDetails: PropTypes.func.isRequired,
   saveProductValue: PropTypes.func.isRequired,
   getProductList: PropTypes.func.isRequired,
+  loggedInUser: PropTypes.shape.isRequired,
 }
 const stateAsProps = (store) => ({
   products: store.VendorReducer.productList,
+  loggedInUser: store.RetailerReducer.loggedInUser,
 })
 const actionAsProps = {
   getProductList,

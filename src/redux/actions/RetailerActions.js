@@ -391,13 +391,16 @@ export const postProductToStore = (zone, cluster, store, products) => async (
         products: [],
       })
     })
-    .catch(() => {
-      dispatch({
-        type: PRODUCTTOSTORE_POST_REQUEST,
-        msg: "Sorry Products already exists in Store",
-        msgSeverity: "warning",
-        products: [],
-      })
+    .catch((err) => {
+      const { response } = err
+      if (response.status === 400) {
+        dispatch({
+          type: PRODUCTTOSTORE_POST_REQUEST,
+          msg: "Quantity Insufficient",
+          msgSeverity: "warning",
+          products: [],
+        })
+      }
     })
 }
 

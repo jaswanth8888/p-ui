@@ -129,9 +129,9 @@ export const vendorlogout = () => (dispatch) => {
 export const messageSetNull = () => (dispatch) => {
   dispatch({ type: MESSAGE_SET_NULL })
 }
-export const getProductList = () => async (dispatch) => {
+export const getProductList = (userName) => async (dispatch) => {
   await axios
-    .get(`${RETAILER_BASE_URL}/product-management/products/names`, {
+    .get(`${RETAILER_BASE_URL}/product-management/product-list/${userName}`, {
       headers: { Authorization: VTOKEN() },
     })
     .then((res) => {
