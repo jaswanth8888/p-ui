@@ -128,7 +128,10 @@ function FullNavbar(props) {
               <ListItemIcon>
                 <DateRangeIcon />
               </ListItemIcon>
-              <ListItemText className="list-item-text" primary="Dashboard" />
+              <ListItemText
+                className="list-item-text"
+                primary={t("welcome.dashboard")}
+              />
             </ListItem>
           </Tooltip>
         </Link>
@@ -141,7 +144,7 @@ function FullNavbar(props) {
                 </ListItemIcon>
                 <ListItemText
                   className="list-item-text"
-                  primary={t("Create Admin")}
+                  primary={t("welcome.createAdmin")}
                 />
               </ListItem>
             </Tooltip>
@@ -265,7 +268,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Price on Date"
+                primary={t("welcome.priceOnDate")}
               />
             </ListItem>
           </Tooltip>
@@ -279,7 +282,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Cancel Percentage Promotion"
+                primary={t("welcome.cancelPromotionPercentage")}
               />
             </ListItem>
           </Tooltip>
@@ -292,7 +295,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Withdraw Percentage Promotion Zone"
+                primary={t("welcome.withdrawPercentagePromotionZone")}
               />
             </ListItem>
           </Tooltip>
@@ -308,7 +311,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Withdraw Percentage Promotion Cluster"
+                primary={t("welcome.withdrawPercentagePromotionCluster")}
               />
             </ListItem>
           </Tooltip>
@@ -321,7 +324,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Cancel Not Effective Price Change"
+                primary={t("welcome.cancelNotEffectivePriceChange")}
               />
             </ListItem>
           </Tooltip>
@@ -334,7 +337,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Cancel Effective Price Change"
+                primary={t("welcome.cancelEffectivePriceChange")}
               />
             </ListItem>
           </Tooltip>
@@ -350,7 +353,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Sell/ Cancel Product at Fixed Price"
+                primary={t("welcome.sellCancelProductFixedPrice")}
               />
             </ListItem>
           </Tooltip>
@@ -364,7 +367,7 @@ function FullNavbar(props) {
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="Query Promotions on Date Range"
+                primary={t("welcome.queryPromotionsOnDateRange")}
               />
             </ListItem>
           </Tooltip>

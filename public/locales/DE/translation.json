@@ -14,11 +14,13 @@
     "invalidCredentials": "Benutzername / Kennwort ungültig"
   },
   "welcome": {
-    "createZone": "ZONE ERSTELLEN",
-    "createCluster": "CLUSTER ERSTELLEN",
-    "createStore": "STORE ERSTELLEN",
-    "viewZones": "ZONEN ANZEIGEN",
-    "viewClusters": "CLUSTER ANZEIGEN",
+    "dashboard": "Instrumententafel",
+    "createAdmin": "Admin erstellen",
+    "createZone": "Zone erstellen",
+    "createCluster": "Cluster erstellen",
+    "createStore": "Store erstellen",
+    "viewZones": "Zonen anzeigen",
+    "viewClusters": "Cluster anzeigen",
     "addGroup": "Gruppe hinzufügen",
     "addProducttoStore": "Produkt zum Store hinzufügen",
     "queryOnDateRange": "Abfrage zum Datumsbereich",
@@ -27,7 +29,14 @@
     "cancelNotEffectivePriceChange": "Nicht effektive Preisänderung abbrechen",
     "applyPromotionInZoneLevel": "Bewerben Sie sich in Zonenebene",
     "applyPromotionInClusterLevel": "Bewerben Sie sich auf Cluster-Ebene",
-    "editpriceandquantity": "Artikelprijs en hoeveelheid bewerken"
+    "editpriceandquantity": "Artikelprijs en hoeveelheid bewerken",
+    "priceOnDate": "Preis am Datum",
+    "cancelPromotionPercentage": "Prozentuale Promotion abbrechen",
+    "withdrawPercentagePromotionZone": "Prozentuale Promotion-Zone zurückziehen",
+    "withdrawPercentagePromotionCluster": "Percentage Promotion Cluster zurückziehen",
+    "cancelEffectivePriceChange": "Effektive Preisänderung abbrechen",
+    "sellCancelProductFixedPrice": "Produkt zum Festpreis verkaufen / stornieren",
+    "queryPromotionsOnDateRange": "Abfragen von Promotions im Datumsbereich"
   },
   "zoneForm": {
     "lengthTooShort": "Die Zone muss größer als 5 Buchstaben sein",
