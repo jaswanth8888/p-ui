@@ -1,20 +1,16 @@
-import { TextField, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import FormControl from "@material-ui/core/FormControl"
+import { TextField, Typography, Button, FormControl } from "@material-ui/core"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import Autocomplete from "@material-ui/lab/Autocomplete"
-import React, { Component, Fragment } from "react"
-import Snackbar from "@material-ui/core/Snackbar"
-import MuiAlert from "@material-ui/lab/Alert"
+import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import PropTypes from "prop-types"
 import {
   getProductList,
   saveProductValue,
   getProductDetails,
 } from "../../redux/actions/RetailerActions"
-import Message from "../utils/Message"
 
 class PriceOnDate extends Component {
   constructor(props) {
@@ -22,51 +18,50 @@ class PriceOnDate extends Component {
 
     this.state = {
       productName: "",
-      status: 0,
+      // status: 0
     }
-    this.handleChange = this.handleChangeProduct.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChangeProduct = this.handleChangeProduct.bind(this)
+    //  this.productNameNotSelected = this.productNameNotSelected.bind(this)
   }
 
-  componentDidMount() {
-    this.props.getProductList()
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
+    const { getProductList: getProductListAlt } = this.props
+    getProductListAlt()
   }
 
   handleChangeProduct = (e, value) => {
-    console.log(value)
     const productName = value
-    // this.setState({ productName });
-    // console.log(this.state.productName)
-    this.props.saveProductValue(productName)
-  }
-
-  handleSubmit(e) {
-    e.preventDefault()
-    this.setState({ isSubmitted: true })
+    const {
+      saveProductValue: saveProductValueAlt,
+      getProductDetails: getProductDetailsAlt,
+    } = this.props
+    this.setState({ productName })
+    saveProductValueAlt(productName)
+    getProductDetailsAlt(value)
   }
 
   render() {
+    const { productName } = this.state
+    const { products } = this.props
+
     return (
       <div className="box-container">
         <div className="joint-form">
-          <div className="validation-half" style={{ background: "#673ab7" }}>
+          <div className="validation-half">
             <div className="validations">
-              <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {this.state.productName.length <= 0 && (
-                <div style={{ display: "flex" }}>
-                  <ClearIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+              <h3 className="center-h3">Requirements</h3>
+              {productName === "" && (
+                <div className="typo-div">
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Please select a product name
                   </Typography>
                 </div>
               )}
-              {this.state.productName.length > 0 && (
-                <div style={{ display: "flex", color: "#ffc107" }}>
-                  <CheckIcon
-                    style={{ paddingRight: "5px", marginTop: "-2px" }}
-                  />
+              {productName !== "" && (
+                <div className="approved-text">
+                  <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
                     Please select a product name
                   </Typography>
@@ -76,75 +71,62 @@ class PriceOnDate extends Component {
           </div>
           <div className="form-half">
             <form className="{classes.form}" noValidate>
-              <div>
-                <div className="help-block">
-                  <Typography
-                    color="primary"
-                    component="h1"
-                    variant="h4"
-                    className="help-block-h4"
-                  >
-                    Select a Product
-                  </Typography>
-                </div>
+              <div className="help-block">
+                <Typography
+                  color="primary"
+                  component="h1"
+                  variant="h4"
+                  className="help-block-h4"
+                >
+                  Select a Product
+                </Typography>
               </div>
-              {/* {console.log(this.props.product)} */}
-
               <FormControl variant="outlined" fullWidth>
                 <Autocomplete
                   id="product-list"
                   fullWidth
-                  options={this.props.products}
-                  // value={this.state.productName}
+                  options={products}
                   getOptionLabel={(option) => option}
                   renderInput={(params) => (
                     <TextField
+                      // eslint-disable-next-line react/jsx-props-no-spreading
                       {...params}
                       label="Product Name"
                       variant="outlined"
                     />
                   )}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeProduct}
                   name="productName"
                 />
               </FormControl>
-
-              <Link to="/addpromotion" className="button-link">
+              {productName === "" && <Link to="/selectproduct" />}
+              <Link className="button-link" to="/assignpricetoproduct">
                 <Button
                   type="button"
                   fullWidth
                   variant="contained"
                   color="primary"
                   className="{classes.submit} submit-pad"
+                  id="selprods-submit"
                 >
-                  Assign Price to product
+                  Assign Price to Product
                 </Button>
               </Link>
             </form>
           </div>
         </div>
-        <Message />
-        <>
-          {this.state.status === -1 ? (
-            <div>
-              <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert severity="error" elevation={6} variant="filled">
-                  Product selection failed. Please match the requirements
-                </MuiAlert>
-              </Snackbar>
-            </div>
-          ) : (
-            <div />
-          )}
-        </>
       </div>
     )
   }
 }
-
+PriceOnDate.propTypes = {
+  products: PropTypes.arrayOf.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
+  saveProductValue: PropTypes.func.isRequired,
+  getProductList: PropTypes.func.isRequired,
+}
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
-  product: store.RetailerReducer.product,
 })
 const actionAsProps = {
   getProductList,

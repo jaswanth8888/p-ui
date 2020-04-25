@@ -1,15 +1,21 @@
-import { InputLabel, TextField, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import FormControl from "@material-ui/core/FormControl"
-import Select from "@material-ui/core/Select"
-import Snackbar from "@material-ui/core/Snackbar"
+import {
+  InputLabel,
+  TextField,
+  Typography,
+  Button,
+  FormControl,
+  Select,
+  Snackbar,
+} from "@material-ui/core"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import MuiAlert from "@material-ui/lab/Alert"
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import { getZones, postCluster } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
+import { createCluster, clusterCondition } from "../utils/constants"
 
 class ClusterForm extends Component {
   constructor(props) {
@@ -18,19 +24,21 @@ class ClusterForm extends Component {
       zone: "",
       clusterName: "",
       taxRate: "",
-      isSubmitted: false,
       status: 0,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillMount() {
-    this.props.history.push("/cluster")
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
+    const { history } = this.props
+    history.push("/cluster")
   }
 
   componentDidMount() {
-    this.props.getAllZones()
+    const { getZones: getZonesAlt } = this.props
+    getZonesAlt()
   }
 
   handleChange(e) {
@@ -40,13 +48,14 @@ class ClusterForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    const { clusterName, taxRate, zone } = this.state
+    const { postCluster: postClusterAlt } = this.props
     const cluster = {
-      clusterName: this.state.clusterName,
-      taxRate: this.state.taxRate,
+      clusterName,
+      taxRate,
     }
-    this.setState({ isSubmitted: true })
-    if (this.state.clusterName.length > 6) {
-      this.props.postCluster(cluster, this.state.zone)
+    if (clusterName.length > 5) {
+      postClusterAlt(cluster, zone)
       this.setState({ status: 1 })
     } else {
       this.setState({ status: -1 })
@@ -54,25 +63,27 @@ class ClusterForm extends Component {
   }
 
   render() {
+    const { clusterName, zone, status, taxRate } = this.state
+    const { zones } = this.props
     return (
       <div className="box-container">
         <div className="joint-form">
-          <div className="validation-half" style={{ background: "#673ab7" }}>
+          <div className="validation-half">
             <div className="validations">
               <h3 className="center-h3">Requirements</h3>
-              {this.state.clusterName.length <= 5 && (
+              {clusterName.length <= 5 && (
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Cluster has to be greater than 5 letters
+                    {clusterCondition}
                   </Typography>
                 </div>
               )}
-              {this.state.clusterName.length > 5 && (
+              {clusterName.length > 5 && (
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Cluster has to be greater than 5 letters
+                    {clusterCondition}
                   </Typography>
                 </div>
               )}
@@ -80,17 +91,15 @@ class ClusterForm extends Component {
           </div>
           <div className="form-half">
             <form className="{classes.form}" noValidate>
-              <div>
-                <div className="help-block">
-                  <Typography
-                    color="primary"
-                    component="h1"
-                    variant="h4"
-                    className="help-block-h4"
-                  >
-                    Create a cluster
-                  </Typography>
-                </div>
+              <div className="help-block">
+                <Typography
+                  color="primary"
+                  component="h1"
+                  variant="h4"
+                  className="help-block-h4"
+                >
+                  {createCluster}
+                </Typography>
               </div>
               <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-age-native-simple">
@@ -99,7 +108,7 @@ class ClusterForm extends Component {
                 <Select
                   fullWidth
                   native
-                  value={this.state.zone}
+                  value={zone}
                   onChange={this.handleChange}
                   label="Zone"
                   inputProps={{
@@ -108,12 +117,8 @@ class ClusterForm extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.zones.map((zone, index) => {
-                    return (
-                      <option value={zone} key={index}>
-                        {zone}
-                      </option>
-                    )
+                  {zones.map((zoneVal) => {
+                    return <option value={zoneVal}>{zoneVal}</option>
                   })}
                 </Select>
               </FormControl>
@@ -127,7 +132,7 @@ class ClusterForm extends Component {
                 name="clusterName"
                 autoComplete="clusterName"
                 onChange={this.handleChange}
-                value={this.state.clusterName}
+                value={clusterName}
                 style={{
                   marginTop: "24px",
                 }}
@@ -145,7 +150,7 @@ class ClusterForm extends Component {
                 name="taxRate"
                 autoComplete="taxRate"
                 onChange={this.handleChange}
-                value={this.state.taxRate}
+                value={taxRate}
                 autoFocus
               />
               <Button
@@ -155,6 +160,7 @@ class ClusterForm extends Component {
                 color="primary"
                 className="{classes.submit} submit-pad"
                 onClick={this.handleSubmit}
+                id="cluster-form-submit"
               >
                 Save
               </Button>
@@ -164,7 +170,7 @@ class ClusterForm extends Component {
         <Message />
 
         <>
-          {this.state.status === -1 ? (
+          {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
@@ -172,19 +178,24 @@ class ClusterForm extends Component {
                 </MuiAlert>
               </Snackbar>
             </div>
-          ) : (
-            <div />
-          )}
+          ) : null}
         </>
       </div>
     )
   }
 }
+
+ClusterForm.propTypes = {
+  zones: PropTypes.arrayOf.isRequired,
+  getZones: PropTypes.func.isRequired,
+  postCluster: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
+}
 const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
 })
 const actionAsProps = {
-  getAllZones: getZones,
+  getZones,
   postCluster,
 }
 export default connect(stateAsProps, actionAsProps)(ClusterForm)

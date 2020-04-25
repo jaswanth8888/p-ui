@@ -24,17 +24,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Transition = React.forwardRef(function Transition(props, ref) {
+  // eslint-disable-next-line react/jsx-props-no-spreading
   return <Slide direction="up" ref={ref} {...props} />
 })
 
 export default function Dialogs() {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
-
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-
   const handleClose = () => {
     setOpen(false)
   }

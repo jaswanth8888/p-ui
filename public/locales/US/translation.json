@@ -1,9 +1,12 @@
 {
   "please fill username": "please fill username",
   "please fill password": "please fill password",
+  "loginAsVendor":"Login As Vendor",
+  "loginAsAdmin":"Login As Admin",
+  "welcomeMain": "Welcome",
   "header": {
     "logIn": "Login",
-    "logOut": "Log out",
+    "logOut": "Logout",
     "title": "Retail Application",
     "home": "Prices and Promotions"
   },
@@ -14,9 +17,9 @@
     "invalidCredentials": "Invalid username/Password"
   },
   "welcome": {
-
-    "queryOnDateRange":"Query On Date Range",
-    "priceOnDate":"Price On Date",
+    "dashboard": "Dashboard",
+    "createAdmin": "Create Admin",
+    "queryOnDateRange": "Query On Date Range",
     "createZone": "Create Zone",
     "createCluster": "Create Cluster",
     "createStore": "Create Store",
@@ -25,7 +28,21 @@
     "addGroup": "Create Group",
     "addProducttoStore": "Add Product to Store",
     "assignProductToClusterZone": "Assign Price to Zone/Cluster",
-    "cancelNotEffectivePriceChange": "Cancel Not Effective Price Change"
+    "applyPromotionInZoneLevel": "Apply Promotion in Zone Level",
+    "applyPromotionInClusterLevel": "Apply Promotion in Cluster Level",
+    "editpriceandquantity": "Edit Item Price and Quantity",
+    "priceOnDate": "Price On Date",
+    "cancelPromotionPercentage": "Cancel Percentage Promotion",
+    "withdrawPercentagePromotionZone": "Withdraw Percentage Promotion Zone",
+    "withdrawPercentagePromotionCluster": "Withdraw Percentage Promotion Cluster",
+    "cancelNotEffectivePriceChange": "Cancel Not Effective Price Change",
+    "cancelEffectivePriceChange": "Cancel Effective Price Change",
+    "sellCancelProductFixedPrice": "Sell/ Cancel Product At Fixed Price",
+    "queryPromotionsOnDateRange": "Query Promotions On Date Range"
+  },
+  "vendorWelcome": {
+    "addProduct":"Add a Product",
+    "updatePriceOfProduct": "Update Price of a Product"
   },
   "zoneForm": {
     "lengthTooShort": "Zone has to be greater than 5 letters",

@@ -1,13 +1,13 @@
-import { TextField, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import Snackbar from "@material-ui/core/Snackbar"
+import { TextField, Typography, Button, Snackbar } from "@material-ui/core"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import MuiAlert from "@material-ui/lab/Alert"
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import { connect } from "react-redux"
-import { postGroup } from "../../redux/actions/RetailerActions.js"
+import PropTypes from "prop-types"
+import { postGroup } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
+import { groupName, addGroup, addGroupFail } from "../utils/constants"
 
 class AddGroup extends Component {
   constructor(props) {
@@ -23,8 +23,15 @@ class AddGroup extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillMount() {
-    this.props.history.push("/group")
+  isValidGroupName = () => {
+    const { group } = this.state
+    if (group.groupName.length > 0) {
+      this.setState({ status: 1 })
+    } else {
+      this.setState({ status: -1 })
+      return false
+    }
+    return true
   }
 
   handleChange(e) {
@@ -34,43 +41,36 @@ class AddGroup extends Component {
     this.setState({ group })
   }
 
-  is_validGroupName = () => {
-    if (this.state.group.groupName.length > 0) {
-      this.setState({ status: 1 })
-    } else {
-      this.setState({ status: -1 })
-      return false
-    }
-    return true
-  }
-
   handleSubmit(e) {
     e.preventDefault()
-    if (this.is_validGroupName()) {
-      this.props.postGroup({ ...this.state.group }) // thunk action
+    if (this.isValidGroupName()) {
+      const { group } = this.state
+      const { postGroup: postGroupAlt } = this.props
+      postGroupAlt(group) // thunk action
     }
   }
 
   render() {
+    const { group, status } = this.state
     return (
       <div className="box-container">
         <div className="joint-form">
           <div className="validation-half">
             <div className="validations">
-              <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {this.state.group.groupName.length <= 0 && (
+              <h3>Requirements</h3>
+              {group.groupName.length <= 0 && (
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Please provide a group name
+                    {groupName}
                   </Typography>
                 </div>
               )}
-              {this.state.group.groupName.length > 0 && (
+              {group.groupName.length > 0 && (
                 <div className="approved-div">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Please provide a group name
+                    {groupName}
                   </Typography>
                 </div>
               )}
@@ -78,17 +78,15 @@ class AddGroup extends Component {
           </div>
           <div className="form-half">
             <form className="{classes.form} expanded-form" noValidate>
-              <div>
-                <div className="help-block">
-                  <Typography
-                    color="primary"
-                    component="h1"
-                    variant="h4"
-                    className="help-block-h4"
-                  >
-                    Create a Group
-                  </Typography>
-                </div>
+              <div className="help-block">
+                <Typography
+                  color="primary"
+                  component="h1"
+                  variant="h4"
+                  className="help-block-h4"
+                >
+                  {addGroup}
+                </Typography>
               </div>
               <TextField
                 variant="outlined"
@@ -119,22 +117,24 @@ class AddGroup extends Component {
         </div>
 
         <>
-          {this.state.status === -1 ? (
+          {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
-                  Group creation failed. Please match the requirements
+                  {addGroupFail}
                 </MuiAlert>
               </Snackbar>
             </div>
-          ) : (
-            <div />
-          )}
+          ) : null}
         </>
         <Message />
       </div>
     )
   }
+}
+
+AddGroup.propTypes = {
+  postGroup: PropTypes.func.isRequired,
 }
 
 const actionAsProps = {

@@ -1,13 +1,17 @@
-import { TextField, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import Snackbar from "@material-ui/core/Snackbar"
+import { TextField, Typography, Button, Snackbar } from "@material-ui/core"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import MuiAlert from "@material-ui/lab/Alert"
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import { postZone } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
+import {
+  createZone,
+  zoneNameCheck,
+  zoneCreationFailed,
+} from "../utils/constants"
 
 class ZoneForm extends Component {
   constructor(props) {
@@ -16,7 +20,6 @@ class ZoneForm extends Component {
     this.state = {
       zoneName: "",
       liquorPricePerUnit: "",
-      isSubmit: false,
       status: 0,
     }
 
@@ -24,8 +27,10 @@ class ZoneForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillMount() {
-    this.props.history.push("/zone")
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
+    const { history } = this.props
+    history.push("/zone")
   }
 
   handleChange(e) {
@@ -34,40 +39,43 @@ class ZoneForm extends Component {
   }
 
   handleSubmit(e) {
+    const { zoneName, liquorPricePerUnit } = this.state
+    const { postZone: postZoneAlt } = this.props
     e.preventDefault()
     const zone = {
-      zoneName: this.state.zoneName,
-      liquorPricePerUnit: this.state.liquorPricePerUnit,
+      zoneName,
+      liquorPricePerUnit,
     }
 
-    if (this.state.zoneName.length > 5) {
-      this.props.postZone(zone)
-      this.setState({ isSubmit: true, status: 1 })
+    if (zoneName.length > 5) {
+      postZoneAlt(zone)
+      this.setState({ status: 1 })
     } else {
-      this.setState({ isSubmit: false, status: -1 })
+      this.setState({ status: -1 })
     }
   }
 
   render() {
+    const { zoneName, status } = this.state
     return (
       <div className="box-container">
         <div className="joint-form">
-          <div className="validation-half" style={{ background: "#673ab7" }}>
+          <div className="validation-half">
             <div className="validations">
-              <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {this.state.zoneName.length <= 5 && (
+              <h3>Requirements</h3>
+              {zoneName.length <= 5 && (
                 <div className="typo-div">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Zone has to be greater than 5 letters
+                    {zoneNameCheck}
                   </Typography>
                 </div>
               )}
-              {this.state.zoneName.length > 5 && (
+              {zoneName.length > 5 && (
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Zone has to be greater than 5 letters
+                    {zoneNameCheck}
                   </Typography>
                 </div>
               )}
@@ -75,17 +83,15 @@ class ZoneForm extends Component {
           </div>
           <div className="form-half">
             <form className="{classes.form}" noValidate>
-              <div>
-                <div className="help-block">
-                  <Typography
-                    color="primary"
-                    component="h1"
-                    variant="h4"
-                    className="help-block-h4"
-                  >
-                    Create a Zone
-                  </Typography>
-                </div>
+              <div className="help-block">
+                <Typography
+                  color="primary"
+                  component="h1"
+                  variant="h4"
+                  className="help-block-h4"
+                >
+                  {createZone}
+                </Typography>
               </div>
               <TextField
                 variant="outlined"
@@ -121,6 +127,7 @@ class ZoneForm extends Component {
                 color="primary"
                 className="{classes.submit} submit-pad"
                 onClick={this.handleSubmit}
+                id="zone-form-submit"
               >
                 Save
               </Button>
@@ -128,24 +135,25 @@ class ZoneForm extends Component {
           </div>
         </div>
         <>
-          {this.state.status === -1 ? (
+          {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
-                  Zone creation failed. Please match the requirements
+                  {zoneCreationFailed}
                 </MuiAlert>
               </Snackbar>
             </div>
-          ) : (
-            <div />
-          )}
+          ) : null}
         </>
         <Message />
       </div>
     )
   }
 }
-
+ZoneForm.propTypes = {
+  postZone: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
+}
 const actionAsProps = {
   postZone,
 }

@@ -3,18 +3,18 @@ import {
   MuiThemeProvider,
   responsiveFontSizes,
 } from "@material-ui/core/styles"
-import Button from "@material-ui/core/Button"
 import React, { Suspense } from "react"
 import ReactDOM from "react-dom"
 
-import deepPurple from "@material-ui/core/colors/deepPurple"
+import indigo from "@material-ui/core/colors/indigo"
 import amber from "@material-ui/core/colors/amber"
 import App from "./App"
 import "./i18n"
+import "./css/index.css"
 
 let theme = createMuiTheme({
   palette: {
-    primary: deepPurple,
+    primary: indigo,
     secondary: amber,
   },
   // typography: {

@@ -1,6 +1,9 @@
 {
   "please fill username": "Bitte geben Sie den Benutzernamen ein",
   "please fill password": "Bitte Passwort eingeben",
+  "loginAsVendor":"Als Anbieter anmelden",
+  "loginAsAdmin":"Als Admin anmelden",
+  "welcomeMain": "Herzlich willkommen",
   "header": {
     "logIn": "Anmeldung",
     "logOut": "Ausloggen",
@@ -14,23 +17,33 @@
     "invalidCredentials": "Benutzername / Kennwort ungültig"
   },
   "welcome": {
-    "createZone": "ZONE ERSTELLEN",
-    "createCluster": "CLUSTER ERSTELLEN",
-    "createStore": "STORE ERSTELLEN",
-    "viewZones": "ZONEN ANZEIGEN",
-    "viewClusters": "CLUSTER ANZEIGEN",
+    "dashboard": "Instrumententafel",
+    "createAdmin": "Admin erstellen",
+    "createZone": "Zone erstellen",
+    "createCluster": "Cluster erstellen",
+    "createStore": "Store erstellen",
+    "viewZones": "Zonen anzeigen",
+    "viewClusters": "Cluster anzeigen",
     "addGroup": "Gruppe hinzufügen",
     "addProducttoStore": "Produkt zum Store hinzufügen",
-<<<<<<< HEAD
-    "queryOnDateRange":"Abfrage zum Datumsbereich"
-=======
-<<<<<<< HEAD
-    "PriceOnDate":"Preis am Datum"
-=======
+    "queryOnDateRange": "Abfrage zum Datumsbereich",
+    "PriceOnDate": "Preis am Datum",
     "assignProductToClusterZone": "Produkt dem Cluster / der Zone zuweisen",
-    "cancelNotEffectivePriceChange": "Nicht effektive Preisänderung abbrechen"
->>>>>>> feature/sprint3-dev
->>>>>>> feature/promotion-story
+    "cancelNotEffectivePriceChange": "Nicht effektive Preisänderung abbrechen",
+    "applyPromotionInZoneLevel": "Bewerben Sie sich in Zonenebene",
+    "applyPromotionInClusterLevel": "Bewerben Sie sich auf Cluster-Ebene",
+    "editpriceandquantity": "Artikelprijs en hoeveelheid bewerken",
+    "priceOnDate": "Preis am Datum",
+    "cancelPromotionPercentage": "Prozentuale Promotion abbrechen",
+    "withdrawPercentagePromotionZone": "Prozentuale Promotion-Zone zurückziehen",
+    "withdrawPercentagePromotionCluster": "Percentage Promotion Cluster zurückziehen",
+    "cancelEffectivePriceChange": "Effektive Preisänderung abbrechen",
+    "sellCancelProductFixedPrice": "Produkt zum Festpreis verkaufen / stornieren",
+    "queryPromotionsOnDateRange": "Abfragen von Promotions im Datumsbereich"
+  },
+  "vendorWelcome": {
+    "addProduct":"Produkt hinzufügen",
+    "updatePriceOfProduct": "Preis eines Produkts aktualisieren"
   },
   "zoneForm": {
     "lengthTooShort": "Die Zone muss größer als 5 Buchstaben sein",

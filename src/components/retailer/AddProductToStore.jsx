@@ -1,11 +1,18 @@
-import { InputLabel, Select, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import FormControl from "@material-ui/core/FormControl"
-import Snackbar from "@material-ui/core/Snackbar"
+import {
+  InputLabel,
+  Select,
+  Typography,
+  Button,
+  FormControl,
+  Snackbar,
+} from "@material-ui/core"
 import MuiAlert from "@material-ui/lab/Alert"
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import CheckIcon from "@material-ui/icons/Check"
+import ClearIcon from "@material-ui/icons/Clear"
 import {
   getClusters,
   getStores,
@@ -14,6 +21,11 @@ import {
   saveStoreValue,
   saveZoneValue,
 } from "../../redux/actions/RetailerActions"
+import {
+  zoneCreated,
+  zoneCreationFailed,
+  addProductToStore,
+} from "../utils/constants"
 
 class AddProductToStore extends Component {
   constructor(props) {
@@ -22,19 +34,51 @@ class AddProductToStore extends Component {
     this.state = {
       zone: "",
       cluster: "",
-      isSubmitted: false,
       store: "",
+      status: 0,
     }
 
     this.handleChange = this.handleChange.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeZone = this.handleChangeZone.bind(this)
     this.handleChangeCluster = this.handleChangeCluster.bind(this)
     this.handleChangeStore = this.handleChangeStore.bind(this)
   }
 
   componentDidMount() {
-    this.props.getAllZones()
+    const { getAllZones: getAllZonesAlt } = this.props
+    getAllZonesAlt()
+  }
+
+  handleSubmitHistory = () => {
+    const { history } = this.props
+    history.push("/store")
+  }
+
+  handleChangeStore(e) {
+    this.setState({ store: e.target.value })
+    const { saveStoreValue: saveStoreValueAlt } = this.props
+    saveStoreValueAlt(e.target.value)
+  }
+
+  handleChangeCluster(e) {
+    this.setState({ cluster: e.target.value })
+    const {
+      getAllStores: getAllStoresAlt,
+      saveClusterValue: saveClusterValueAlt,
+      zone,
+    } = this.props
+    getAllStoresAlt(zone, e.target.value)
+    saveClusterValueAlt(e.target.value)
+  }
+
+  handleChangeZone(e) {
+    this.setState({ zone: e.target.value })
+    const {
+      getAllClusters: getAllClustersAlt,
+      saveZoneValue: saveZoneValueAlt,
+    } = this.props
+    getAllClustersAlt(e.target.value)
+    saveZoneValueAlt(e.target.value)
   }
 
   handleChange(e) {
@@ -42,48 +86,63 @@ class AddProductToStore extends Component {
     this.setState({ [name]: value })
   }
 
-  handleChangeZone(e) {
-    this.setState({ zone: e.target.value })
-    this.props.getAllClusters(e.target.value)
-    this.props.saveZoneValue(e.target.value)
-  }
-
-  handleChangeCluster(e) {
-    this.setState({ cluster: e.target.value })
-    this.props.getAllStores(this.props.zone, e.target.value)
-    this.props.saveClusterValue(e.target.value)
-  }
-
-  handleChangeStore(e) {
-    this.setState({ store: e.target.value })
-    // this.props.setState({store:this.state.store})
-    this.props.saveStoreValue(e.target.value)
-  }
-
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   this.setState({isSubmitted:true})
-  // }
-
   render() {
-    //   if(this.state.isSubmitted && this.state.cluster && this.state.zone && this.state.store){
-    //   return <Redirect to='/welcome'/>
-    // }
+    const { zone, cluster, store, status } = this.state
+    const { zones, clusters, stores } = this.props
     return (
       <div className="box-container">
         <div className="joint-form">
-          <div className="validation-half" style={{ background: "#673ab7" }}>
+          <div className="validation-half">
             <div className="validations">
-              <h3 style={{ textAlign: "center" }}>Requirements</h3>
-              {/* {this.state.zoneName.length <= 5 && <div style={{ display: "flex" }}><ClearIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
-                <Typography variant="subtitle2" gutterBottom>
-                  Zone has to be greater than 5 letters
-                </Typography></div>}
-              {this.state.zoneName.length > 5 &&
-                <div style={{ display: "flex", color: "#ffc107" }}><CheckIcon style={{ paddingRight: "5px", marginTop: "-2px" }} />
+              <h3>Requirements</h3>
+              {store === "" && (
+                <div className="unapproved-text">
+                  <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
-                    Zone has to be greater than 5 letters
-                </Typography></div>} */}
+                    Select Zone
+                  </Typography>
+                </div>
+              )}
+              {store !== "" && (
+                <div className="approved-text">
+                  <CheckIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select Zone
+                  </Typography>
+                </div>
+              )}
+              {cluster === "" && (
+                <div className="unapproved-text">
+                  <ClearIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select Cluster
+                  </Typography>
+                </div>
+              )}
+              {cluster !== "" && (
+                <div className="approved-text">
+                  <CheckIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select Cluster
+                  </Typography>
+                </div>
+              )}
+              {store === "" && (
+                <div className="unapproved-text">
+                  <ClearIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select Store
+                  </Typography>
+                </div>
+              )}
+              {store !== "" && (
+                <div className="approved-text">
+                  <CheckIcon className="icon-style" />
+                  <Typography variant="subtitle2" gutterBottom>
+                    Select Store
+                  </Typography>
+                </div>
+              )}
             </div>
           </div>
           <div className="form-half">
@@ -97,7 +156,7 @@ class AddProductToStore extends Component {
                     className="help-block-h4"
                     id="special-add-prods-help"
                   >
-                    Add a Product to the Store
+                    {addProductToStore}
                   </Typography>
                 </div>
               </div>
@@ -112,7 +171,7 @@ class AddProductToStore extends Component {
                 <Select
                   fullWidth
                   native
-                  value={this.state.zone}
+                  value={zone}
                   onChange={this.handleChangeZone}
                   label="Zone"
                   inputProps={{
@@ -121,12 +180,8 @@ class AddProductToStore extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.zones.map((zone, index) => {
-                    return (
-                      <option value={zone} key={index}>
-                        {zone}
-                      </option>
-                    )
+                  {zones.map((zoneVal) => {
+                    return <option value={zoneVal}>{zoneVal}</option>
                   })}
                 </Select>
               </FormControl>
@@ -141,7 +196,7 @@ class AddProductToStore extends Component {
                 <Select
                   fullWidth
                   native
-                  value={this.state.cluster}
+                  value={cluster}
                   onChange={this.handleChangeCluster}
                   label="Cluster"
                   inputProps={{
@@ -150,12 +205,8 @@ class AddProductToStore extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.clusters.map((cluster, index) => {
-                    return (
-                      <option value={cluster} key={index}>
-                        {cluster}
-                      </option>
-                    )
+                  {clusters.map((clusterVal) => {
+                    return <option value={clusterVal}>{clusterVal}</option>
                   })}
                 </Select>
               </FormControl>
@@ -170,7 +221,7 @@ class AddProductToStore extends Component {
                 <Select
                   fullWidth
                   native
-                  value={this.state.store}
+                  value={store}
                   onChange={this.handleChangeStore}
                   label="Store"
                   inputProps={{
@@ -179,51 +230,45 @@ class AddProductToStore extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {this.props.stores.map((store, index) => {
-                    return (
-                      <option value={store} key={index}>
-                        {store}
-                      </option>
-                    )
+                  {stores.map((storeVal) => {
+                    return <option value={storeVal}>{storeVal}</option>
                   })}
                 </Select>
               </FormControl>
-              {this.state.cluster !== "" && this.props.stores.length <= 0 && (
-                <Link to="/addproducttostore">
-                  <Button
-                    type="button"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className="{classes.submit} submit-pad"
-                    // onClick={this.handleSubmit}
-                  >
-                    Add Store
-                  </Button>
-                </Link>
+              {cluster !== "" && stores.length <= 0 && (
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit} submit-pad"
+                  onClick={this.handleSubmitHistory}
+                >
+                  Add Store
+                </Button>
               )}
-              {this.state.store !== "" &&
-              this.state.zone !== "" &&
-              this.state.cluster !== "" ? (
-                <Link to="/addproducts">
+              {store !== "" && zone !== "" && cluster !== "" ? (
+                <Link to="/addproducts" className="special-href">
                   <Button
                     type="button"
                     fullWidth
                     variant="contained"
                     color="primary"
                     className="{classes.submit} submit-pad"
+                    id="add-prods-store-submit"
                   >
                     Add Products
                   </Button>
                 </Link>
               ) : (
-                <Link to="/addproducts" id="special-href">
+                <Link to="/addproducts" className="special-href">
                   <Button
                     type="button"
                     fullWidth
                     variant="contained"
                     color="primary"
                     className="{classes.submit} submit-pad empty-submit"
+                    id="add-prods-store-submit"
                     // onClick={this.handleSubmit}
                   >
                     Add Products
@@ -234,35 +279,46 @@ class AddProductToStore extends Component {
           </div>
         </div>
         <>
-          {this.state.status === 1 ? (
+          {status === 1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert elevation={6} variant="filled">
-                  Zone created successfully!
+                  {zoneCreated}
                 </MuiAlert>
               </Snackbar>
             </div>
-          ) : (
-            <div />
-          )}
+          ) : null}
         </>
         <>
-          {this.state.status === -1 ? (
+          {status === -1 ? (
             <div>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
-                  Zone creation failed. Please match the requirements
+                  {zoneCreationFailed}
                 </MuiAlert>
               </Snackbar>
             </div>
-          ) : (
-            <div />
-          )}
+          ) : null}
         </>
       </div>
     )
   }
 }
+
+AddProductToStore.propTypes = {
+  zones: PropTypes.shape.isRequired,
+  clusters: PropTypes.shape.isRequired,
+  zone: PropTypes.string.isRequired,
+  stores: PropTypes.shape.isRequired,
+  getAllStores: PropTypes.func.isRequired,
+  getAllClusters: PropTypes.func.isRequired,
+  getAllZones: PropTypes.func.isRequired,
+  saveZoneValue: PropTypes.func.isRequired,
+  saveClusterValue: PropTypes.func.isRequired,
+  saveStoreValue: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
+}
+
 const stateAsProps = (store) => ({
   zones: store.RetailerReducer.zones,
   clusters: store.RetailerReducer.clusters,

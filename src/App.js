@@ -1,38 +1,10 @@
 import React from "react"
 import { Provider } from "react-redux"
-import { applyMiddleware, createStore } from "redux"
-import { composeWithDevTools } from "redux-devtools-extension"
-import thunk from "redux-thunk"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import FullNavbar from "./components/organisms/FullNavbar"
-import rootReducer from "./redux/reducers/rootReducer"
-import VendorLogin from "./components/vendor/VendorLogin"
 // eslint-disable-next-line import/no-named-as-default
-import Registration from "./components/vendor/Registration"
-import Home from "./components/vendor/Home"
-import Addproduct from "./components/vendor/AddProduct"
 import PrivateRoute from "./components/utils/privateRoute"
-
-let state = window.sessionStorage.reduxstate
-if (state) {
-  state = JSON.parse(state)
-}
-let store = null
-if (state) {
-  store = createStore
-  store = createStore(
-    rootReducer,
-    state,
-    composeWithDevTools(applyMiddleware(thunk))
-  )
-} else {
-  store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
-}
-// the callback to subscribe is executed everytime the state changes
-// in the store
-store.subscribe(() => {
-  window.sessionStorage.reduxstate = JSON.stringify(store.getState())
-})
+import store from "./redux/store"
 
 const App = () => {
   const retailerRoutes = [
@@ -46,7 +18,6 @@ const App = () => {
     "/products/assign",
     "/view/products/daterange",
     "/selectproductname",
-    "/addproductstostore",
     "/addproducts",
     "/selectproduct",
     "/assigntocluster",
@@ -59,6 +30,44 @@ const App = () => {
     "/showproducts",
     "/selectproductname",
     "/addpromotion",
+    "/cancel/promotion",
+    "/cancel/productdetails",
+    "/withdraw/zonepromotion",
+    "/withdraw/zoneproduct",
+    "/withdraw/clusterpromotion",
+    "/withdraw/clusterproduct",
+    "/applypromotion/zone",
+    "/definepromotion/zone",
+    "/view/promotions/zone",
+    "/applypromotion/cluster",
+    "/definepromotion/cluster",
+    "/view/promotions/cluster",
+    "/priceondate",
+    "/assignpricetoproduct",
+    "/editprice",
+    "/product/pricechange/canceleffective",
+    "/product/pricechange/cancelnoteffective",
+    "/vendor/addproduct",
+    "/vendor/updateprice",
+    "/vendor/editproduct",
+    "/admin/login",
+    "/sellcancel/fixedprice/product",
+    "/sellcancel/fixedprice",
+    "/cancel/productdetails",
+    "/withdraw/zoneproduct",
+    "/cancel/promotion",
+    "/withdraw/zonepromotion",
+    "/withdraw/zoneproduct",
+    "/withdraw/clusterpromotion",
+    "/withdraw/clusterproduct",
+    "/applypromotion/zone",
+    "/definepromotion/zone",
+    "/view/promotions/zone",
+    "/applypromotion/cluster",
+    "/definepromotion/cluster",
+    "/view/promotions/cluster",
+    "/admin",
+    "/dashboard",
   ]
   return (
     <Provider store={store}>
@@ -69,10 +78,9 @@ const App = () => {
             {retailerRoutes.map((route) => {
               return <PrivateRoute component={FullNavbar} path={route} />
             })}
-            <Route exact path="/vendor" component={VendorLogin} />
-            <Route exact path="/vendor/reg" component={Registration} />
-            <Route exact path="/vendor/home" component={Home} />
-            <Route exact path="/vendor/addproduct" component={Addproduct} />
+            <Route exact path="/vendor" component={FullNavbar} />
+            <Route exact path="/vendor/reg" component={FullNavbar} />
+            <Route exact path="/admin/login" component={FullNavbar} />
           </Switch>
         </Router>
       </div>

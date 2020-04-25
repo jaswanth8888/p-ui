@@ -1,21 +1,20 @@
-// new AddProduct
-import { InputLabel, TextField, Typography } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
-import Snackbar from "@material-ui/core/Snackbar"
+import {
+  InputLabel,
+  TextField,
+  Typography,
+  Button,
+  FormControl,
+  InputAdornment,
+  MenuItem,
+} from "@material-ui/core"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
-import MuiAlert from "@material-ui/lab/Alert"
-import React, { Component, Fragment } from "react"
+import PropTypes from "prop-types"
+import React, { Component } from "react"
 import { connect } from "react-redux"
-import { Redirect } from "react-router-dom"
-import thunk from "redux-thunk"
-import MenuItem from "@material-ui/core/MenuItem"
-import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
-import InputAdornment from "@material-ui/core/InputAdornment"
-import OutlinedInput from "@material-ui/core/OutlinedInput"
-import { makeStyles } from "@material-ui/core/styles"
-import TextareaAutosize from "@material-ui/core/TextareaAutosize"
+import Message from "./Message"
+
 import { postProduct } from "../../redux/actions/VendorActions"
 
 class AddProduct extends Component {
@@ -29,15 +28,15 @@ class AddProduct extends Component {
         productBasePrice: "",
         initialQuantity: "",
         uom: "",
-        // n:"",
-        // nutritionalFacts:[]
+        productDescription: "",
+        productGroup: "",
+        abv: "",
+        volume: "",
+        productImagePath: "",
       },
-      isSubmitted: false,
-      isPosted: false,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleSet = this.handleSet.bind(this)
   }
 
   handleChange(e) {
@@ -47,114 +46,169 @@ class AddProduct extends Component {
     this.setState({ product })
   }
 
-  handleSubmit(e) {
-    // window.location.href='./home'
-    /*  let value=[]
-        if(this.state.product.n!=null){
-          value=Array(this.state.product.n.split("/n"))
-        }
-        let product= this.state.product;
-
-        product["nutritionalFacts"] =value
-        this.setState({product}) */
-
-    this.setState({ isSubmitted: true })
-    if (
-      this.state.product.productName &&
-      this.state.product.productBasePrice > 0 &&
-      this.state.product.initialQuantity > 1 &&
-      this.state.product.initialQuantity < 100
-    ) {
-      this.props.postProduct(this.state.product)
-      this.setState({ isPosted: true })
+  handleSubmit() {
+    const { loggedInUser } = this.props
+    const { product } = this.state
+    product.companyName = loggedInUser.userName
+    const {
+      productName,
+      productBasePrice,
+      initialQuantity,
+      productCategory,
+    } = product
+    const test = this.props
+    if (productName && productBasePrice > 0 && initialQuantity > 1) {
+      if (
+        (productCategory === "ALCOHOL_PROD" && initialQuantity < 101) ||
+        (productCategory === "BABY_PROD" && initialQuantity < 501)
+      ) {
+        test.postProduct(product)
+      }
     }
-    this.handleSet()
-  }
-
-  handleSet() {
-    const product = {
-      productName: "",
-      // productCategory:"",
-      productBasePrice: "",
-      initialQuantity: "",
-      companyName: "",
-      //  uom:"",
-      n: "",
-    }
-    this.setState({ isSubmitted: true })
-    // this.setState({product})
   }
 
   render() {
     if (sessionStorage.getItem("token") != null) {
-      if (this.state.isPosted) {
-        return <Redirect to="/vendor/home" />
-      }
+      const { product } = this.state
+      const {
+        productName,
+        productBasePrice,
+        initialQuantity,
+        productCategory,
+        productDescription,
+        productImagePath,
+        abv,
+        volume,
+        uom,
+      } = product
       return (
         <div className="box-container">
           <div className="joint-form">
-            <div className="validation-half" style={{ background: "#673ab7" }}>
+            <div className="validation-half">
               <div className="validations">
-                <h3 style={{ textAlign: "center" }}>Requirements</h3>
-                {this.state.isSubmitted && !this.state.product.productName && (
-                  <div style={{ display: "flex" }}>
-                    <ClearIcon
-                      style={{ paddingRight: "5px", marginTop: "-2px" }}
-                    />
+                <h3>Requirements</h3>
+                {product.productName.length <= 0 && (
+                  <div className="typo-div">
+                    <ClearIcon className="icon-style" />
                     <Typography variant="subtitle2" gutterBottom>
-                      name can't be empty
+                      Name cannot be empty
                     </Typography>
                   </div>
                 )}
-                {this.state.isSubmitted &&
-                  this.state.product.productBasePrice <= 0 && (
-                    <div style={{ display: "flex", color: "#ffc107" }}>
-                      <CheckIcon
-                        style={{ paddingRight: "5px", marginTop: "-2px" }}
-                      />
+                {product.productName.length > 0 && (
+                  <div className="approved-text">
+                    <CheckIcon className="icon-style" />
+                    <Typography variant="subtitle2" gutterBottom>
+                      Name cannot be empty
+                    </Typography>
+                  </div>
+                )}
+                {product.productBasePrice < 1 && (
+                  <div className="typo-div">
+                    <ClearIcon className="icon-style" />
+                    <Typography variant="subtitle2" gutterBottom>
+                      Base price must be greater than 0
+                    </Typography>
+                  </div>
+                )}
+                {product.productBasePrice > 0 && (
+                  <div className="approved-text">
+                    <CheckIcon className="icon-style" />
+                    <Typography variant="subtitle2" gutterBottom>
+                      Base price must be greater than 0
+                    </Typography>
+                  </div>
+                )}
+                {product.initialQuantity < 1 && (
+                  <div className="typo-div">
+                    <ClearIcon className="icon-style" />
+                    <Typography variant="subtitle2" gutterBottom>
+                      Minimum quantity should be 1
+                    </Typography>
+                  </div>
+                )}
+                {product.initialQuantity > 0 && (
+                  <div className="approved-text">
+                    <CheckIcon className="icon-style" />
+                    <Typography variant="subtitle2" gutterBottom>
+                      Minimum quantity should be 1
+                    </Typography>
+                  </div>
+                )}
+                {product.productCategory === "ALCOHOL_PROD" &&
+                  product.initialQuantity < 101 && (
+                    <div className="approved-text">
+                      <CheckIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
-                        base price must be greater than 0
+                        Maximum quantity of ALCOHOL should be 100
                       </Typography>
                     </div>
                   )}
-                {this.state.isSubmitted &&
-                  this.state.product.initialQuantity < 1 && (
-                    <div style={{ display: "flex", color: "#ffc107" }}>
-                      <CheckIcon
-                        style={{ paddingRight: "5px", marginTop: "-2px" }}
-                      />
+                {product.productCategory === "ALCOHOL_PROD" &&
+                  product.initialQuantity > 100 && (
+                    <div className="typo-div">
+                      <ClearIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
-                        >minimum quantity should be 1
+                        Maximum quantity of ALCOHOL should be 100
                       </Typography>
                     </div>
                   )}
-                {this.state.isSubmitted &&
-                  this.state.product.productCategory === "ALCOHOL_PROD" &&
-                  this.state.product.initialQuantity > 100 && (
-                    <div style={{ display: "flex", color: "#ffc107" }}>
-                      <CheckIcon
-                        style={{ paddingRight: "5px", marginTop: "-2px" }}
-                      />
+                {product.productCategory === "ALCOHOL_PROD" && product.abv > 0 && (
+                  <div className="approved-text">
+                    <CheckIcon className="icon-style" />
+                    <Typography variant="subtitle2" gutterBottom>
+                      ABV Should be greater than 0
+                    </Typography>
+                  </div>
+                )}
+                {product.productCategory === "ALCOHOL_PROD" &&
+                  product.abv <= 0 && (
+                    <div className="typo-div">
+                      <ClearIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
-                        maximum quantity of ALCOHOL should be 100
+                        ABV should be greater than 0
                       </Typography>
                     </div>
                   )}
-                {this.state.isSubmitted &&
-                  this.state.product.productCategory === "BABY_PROD" &&
-                  this.state.product.initialQuantity > 500 && (
-                    <div style={{ display: "flex", color: "#ffc107" }}>
-                      <CheckIcon
-                        style={{ paddingRight: "5px", marginTop: "-2px" }}
-                      />
+                {product.productCategory === "ALCOHOL_PROD" &&
+                  product.volume > 0 && (
+                    <div className="approved-text">
+                      <CheckIcon className="icon-style" />
                       <Typography variant="subtitle2" gutterBottom>
-                        maximum quantity of BabyProducts should be 500
+                        Volume should be greater than 0
+                      </Typography>
+                    </div>
+                  )}
+                {product.productCategory === "ALCOHOL_PROD" &&
+                  product.volume <= 0 && (
+                    <div className="typo-div">
+                      <ClearIcon className="icon-style" />
+                      <Typography variant="subtitle2" gutterBottom>
+                        Volume should be greater than 0
+                      </Typography>
+                    </div>
+                  )}
+                {product.productCategory === "BABY_PROD" &&
+                  product.initialQuantity < 501 && (
+                    <div className="approved-text">
+                      <CheckIcon className="icon-style" />
+                      <Typography variant="subtitle2" gutterBottom>
+                        Maximum quantity of BabyProducts should be 500
+                      </Typography>
+                    </div>
+                  )}
+                {product.productCategory === "BABY_PROD" &&
+                  product.initialQuantity > 500 && (
+                    <div className="typo-div">
+                      <ClearIcon className="icon-style" />
+                      <Typography variant="subtitle2" gutterBottom>
+                        Maximum quantity of BabyProducts should be 500
                       </Typography>
                     </div>
                   )}
               </div>
             </div>
-            <div className="form-half">
+            <div className="form-half" id="add-prods-form">
               <form className="{classes.form}" noValidate>
                 <div>
                   <div className="help-block">
@@ -162,9 +216,7 @@ class AddProduct extends Component {
                       color="primary"
                       component="h1"
                       variant="h4"
-                      style={{
-                        fontFamily: "font-family: 'Open Sans', sans-serif;",
-                      }}
+                      className="help-block-h4"
                     >
                       AddProduct
                     </Typography>
@@ -180,39 +232,32 @@ class AddProduct extends Component {
                   name="productName"
                   autoComplete="productName"
                   onChange={this.handleChange}
-                  value={this.state.product.productName}
+                  value={productName}
                   autoFocus
                 />
-                <TextField
+                <FormControl
                   variant="outlined"
-                  margin="normal"
-                  required
                   fullWidth
-                  id="companyName"
-                  label="companyName"
-                  name="companyName"
-                  autoComplete="companyName"
-                  onChange={this.handleChange}
-                  value={this.state.product.companyName}
-                  autoFocus
-                />
-                <InputLabel htmlFor="outlined-age-native-simple">
-                  Product Category
-                </InputLabel>
-                <Select
-                  labelId="productCategory"
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="productCategory"
-                  label="productCategory"
-                  onChange={this.handleChange}
+                  className="space-margin-top"
                 >
-                  <MenuItem value="ALCOHOL_PROD">ALCOHOL_PROD</MenuItem>
-                  <MenuItem value="BABY_PROD">BABY_PROD</MenuItem>
-                </Select>
+                  <InputLabel htmlFor="outlined-age-native-simple">
+                    Product Category
+                  </InputLabel>
+                  <Select
+                    labelId="productCategory"
+                    fullWidth
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    name="productCategory"
+                    label="productCategory"
+                    onChange={this.handleChange}
+                    id="select-product"
+                  >
+                    <MenuItem value="ALCOHOL_PROD">ALCOHOL_PROD</MenuItem>
+                    <MenuItem value="BABY_PROD">BABY_PROD</MenuItem>
+                  </Select>
+                </FormControl>
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -224,7 +269,7 @@ class AddProduct extends Component {
                   name="initialQuantity"
                   autoComplete="initialQuantity"
                   onChange={this.handleChange}
-                  value={this.state.product.initialQuantity}
+                  value={initialQuantity}
                   autoFocus
                 />
                 <TextField
@@ -234,75 +279,151 @@ class AddProduct extends Component {
                   fullWidth
                   type="number"
                   id="productBasePrice"
-                  label="productBasePrice"
+                  label="Product base price"
                   name="productBasePrice"
                   autoComplete="productBasePrice"
                   onChange={this.handleChange}
-                  value={this.state.product.productBasePrice}
+                  value={productBasePrice}
+                  startAdornment={
+                    <InputAdornment position="start">$</InputAdornment>
+                  }
                   autoFocus
                 />
-                <InputLabel htmlFor="outlined-age-native-simple">
-                  Units Of Measuremment
-                </InputLabel>
-                {this.state.product.productCategory == "ALCOHOL_PROD" && (
-                  <Select
-                    labelId="uom"
-                    fullWidth
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="uom"
-                    label="uom"
-                    onChange={this.handleChange}
-                  >
-                    <MenuItem value="Lts">LTS</MenuItem>
-                    <MenuItem value="GALLONs">GALLONS</MenuItem>
-                    <MenuItem value="ML">ML </MenuItem>
-                  </Select>
-                )}
-                {this.state.product.productCategory == "BABY_PROD" && (
-                  <Select
-                    labelId="uom"
-                    fullWidth
-                    name="uom"
-                    label="uom"
-                    onChange={this.handleChange}
-                  >
-                    <MenuItem value="KGs">KGs</MenuItem>
-                    <MenuItem value="Pounds">Pounds</MenuItem>
-                  </Select>
-                )}
-                {this.state.product.productCategory == "BABY_PROD" && (
+
+                {productCategory === "ALCOHOL_PROD" && (
                   <div>
-                    {/*     <TextareaAutosize
-                    name="n" 
-                  placeholder="Nutritional Facts"             
-                    onChange={this.handleChange}
-                    value={this.state.product.n}
-                  /> */}
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      type="number"
+                      id="abv"
+                      label="abv"
+                      name="abv"
+                      autoComplete="abv"
+                      onChange={this.handleChange}
+                      value={abv}
+                      autoFocus
+                    />
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      type="number"
+                      id="volume"
+                      label="volume"
+                      name="volume"
+                      autoComplete="volume"
+                      onChange={this.handleChange}
+                      value={volume}
+                      autoFocus
+                    />
+                    <InputLabel htmlFor="outlined-age-native-simple">
+                      Units Of Measuremment
+                    </InputLabel>
+                    <Select
+                      labelId="uom"
+                      fullWidth
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      name="uom"
+                      label="uom"
+                      value={uom}
+                      id="alc-prod"
+                      onChange={this.handleChange}
+                    >
+                      <MenuItem value="Lts">LTS</MenuItem>
+                      <MenuItem value="GALLONs">GALLONS</MenuItem>
+                      <MenuItem value="ML">ML </MenuItem>
+                    </Select>
                   </div>
                 )}
+                {productCategory === "BABY_PROD" && (
+                  <div>
+                    <InputLabel htmlFor="outlined-age-native-simple">
+                      Units Of Measuremment
+                    </InputLabel>
+
+                    <Select
+                      labelId="uom"
+                      fullWidth
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      name="uom"
+                      label="uom"
+                      onChange={this.handleChange}
+                      value={uom}
+                      id="baby-prod"
+                    >
+                      <MenuItem value="KGs">KGs</MenuItem>
+                      <MenuItem value="Pounds">Pounds</MenuItem>
+                    </Select>
+                  </div>
+                )}
+
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="productImagePath"
+                  label="Product image path"
+                  name="productImagePath"
+                  autoComplete="productImagePath"
+                  onChange={this.handleChange}
+                  value={productImagePath}
+                  autoFocus
+                />
+
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Product description"
+                  name="productDescription"
+                  autoComplete="productDescription"
+                  onChange={this.handleChange}
+                  value={productDescription}
+                  aria-label="minimum height"
+                  rowsMin={3}
+                  placeholder="product discription"
+                />
+
                 <Button
                   type="button"
                   fullWidth
                   variant="contained"
                   color="primary"
                   className="{classes.submit}"
-                  style={{ marginTop: "30px" }}
                   onClick={this.handleSubmit}
+                  id="submit-prods"
                 >
                   Save
                 </Button>
               </form>
+              <Message />
             </div>
           </div>
         </div>
       )
     }
+    return true
   }
 }
+
+AddProduct.propTypes = {
+  postProduct: PropTypes.func.isRequired,
+  loggedInUser: PropTypes.shape.isRequired,
+}
+const stateAsProps = (store) => ({
+  loggedInUser: store.RetailerReducer.loggedInUser,
+})
 const actionAsProps = {
   postProduct,
 }
-export default connect(null, actionAsProps)(AddProduct)
+export default connect(stateAsProps, actionAsProps)(AddProduct)

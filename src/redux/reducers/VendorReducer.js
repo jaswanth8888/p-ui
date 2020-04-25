@@ -1,13 +1,14 @@
 import {
-  VTOKEN,
   VENDOR_LOGIN_USER,
   VENDOR_LOGIN_FAILURE,
   VENDOR_LOGOUT,
-  WELCOME_USER,
-  VENDORFAILURE,
-  RETAILER_BASE_URL,
   MESSAGE_SET_NULL,
   CREATE_PRODUCT,
+  IS_PROMOTION_APPLLIED,
+  PRODUCT_UPDATE,
+  PRODUCT_GET_REQUEST,
+  PRODUCTLIST_GET_REQUEST,
+  PRODUCT_SAVE_VALUE,
 } from "../actions/types"
 import { registerconstants } from "../actions/registrationtypes"
 
@@ -15,30 +16,40 @@ const initialState = {
   loggedInUser: null,
   msg: "",
   msgSeverity: "",
-  login_status: {
+  loginStatus: {
     success: false,
   },
-  register_status: { registered: false },
+  registerStatus: { registered: false },
   product: [],
+  productName: "",
+  isPromotion: false,
+  updatedProduct: {},
+  productDetails: {},
+  productList: [],
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case registerconstants.REGISTER_SUCCESS:
-      return { ...state, register_status: action.register_status }
+      return {
+        ...state,
+        registerStatus: action.registerStatus,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
     case registerconstants.REGISTER_FAILURE:
       return {
         ...state,
-        register_status: action.register_status,
+        registerStatus: action.registerStatus,
         msg: action.msg,
         msgSeverity: action.msgSeverity,
       }
     case VENDOR_LOGIN_USER:
       // return { ...state, loggedInUser: action.userInfo };
-      return { ...state, login_status: action.login_status }
+      return { ...state, loginStatus: action.loginStatus }
     case VENDOR_LOGOUT:
       return { ...initialState }
     case CREATE_PRODUCT:
-      return { ...state, msg: action.msg }
+      return { ...state, msg: action.msg, msgSeverity: action.msgSeverity }
     case MESSAGE_SET_NULL:
       return { ...state, msg: "", msgSeverity: "" }
     case VENDOR_LOGIN_FAILURE:
@@ -46,8 +57,23 @@ export default (state = initialState, action = {}) => {
         ...state,
         msg: action.msg,
         msgSeverity: action.msgSeverity,
-        login_status: action.login_status,
+        loginStatus: action.loginStatus,
       }
+    case PRODUCT_GET_REQUEST:
+      return { ...state, productDetails: action.productDetails }
+    case IS_PROMOTION_APPLLIED:
+      return { ...state, isPromotion: action.isPromotion }
+    case PRODUCT_UPDATE:
+      return {
+        ...state,
+        updatedProduct: action.updatedProduct,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
+    case PRODUCTLIST_GET_REQUEST:
+      return { ...state, productList: action.productList }
+    case PRODUCT_SAVE_VALUE:
+      return { ...state, productName: action.productName }
     default:
       return { ...state }
   }

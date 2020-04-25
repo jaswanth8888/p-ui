@@ -27,12 +27,38 @@ import {
   ZONECLUSTER_GET_REQUEST,
   ASSIGN_TO_CLUSTER,
   ASSIGN_TO_ZONE,
-  PRODUCT_GET_BYRANGE,
   RESET_STATUS_CODE,
+  LEVEL_SAVE_VALUE,
+  PROMOTIONS_GET_BYRANGE,
+  GET_PROMOTIONS_CLUSTER,
+  GET_PROMOTIONS_ZONE,
+  STARTDATE_SAVE_VALUE,
+  ENDDATE_SAVE_VALUE,
+  IS_PROMOTION_APPLLIED,
+  PRODUCT_UPDATE,
+  PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST,
+  PRODUCT_CANCEL_EFFECTIVEPRICECHANGE,
+  POST_EFFECTIVE_PRICE,
+  CREATE_ADMIN,
+  USER_TYPE,
+  PRODUCTLIST_NONALCOHOLIC_GET_REQUEST,
+  SELLPRODUCT_FIXEDPRICE_PUTREQUEST,
+  CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
+  CLEAR_PRODUCT_LIST,
+  MESSAGE_SET,
+  GET_DASHBOARD_DATA,
+  CHECK_ASSIGNED_ZONE,
+  CHECK_ASSIGNED_CLUSTER,
+  CLEAR_ASSIGNED_PRICE,
 } from "../actions/types"
 
 const initialState = {
-  loggedInUser: null,
+  loggedInUser: {
+    token: "",
+    userType: "",
+    userName: "",
+  },
   zones: [],
   clusters: [],
   stores: [],
@@ -43,7 +69,7 @@ const initialState = {
   products: [],
   msg: "",
   msgSeverity: "",
-  login_status: {
+  loginStatus: {
     success: false,
   },
   isvendor: false,
@@ -52,15 +78,43 @@ const initialState = {
   productList: [],
   productName: "",
   updatedPrice: "",
-  productDetails: {},
+  productDetails: { effectivePriceObj: {} },
   promotionDetails: {},
   zoneclusternames: [],
   statusCode: "",
+  promotions: [],
+  clusterPromotions: [],
+  zonePromotions: [],
+  startDate: "",
+  endDate: "",
+  levelOption: "",
+  isPromotion: false,
+  updatedProduct: {},
+  priceChangeProductsList: [],
+  nonAlcoholicProductList: [],
+  dashboardData: {
+    noOfBabyProductsPerZone: [],
+    NoOfZones: 0,
+    NoOfProducts: 0,
+    totalNoOfActivePromotions: [],
+    NoOfVendors: 0,
+    NoOfClusters: 0,
+    noOfAlcoholProductsPerZone: [],
+    totalNoOfAlcoholProducts: 0,
+    totalNoOfBabyProducts: 0,
+    ZoneNames: [],
+  },
+  assignedPrice: "",
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
+    case USER_TYPE:
+      return { ...state, loggedInUser: action.loggedInUser }
     case LOGIN_USER:
-      return { ...state, login_status: action.login_status }
+      return {
+        ...state,
+        loginStatus: action.loginStatus,
+      }
     case LOGOUT:
       return { ...initialState }
     case WELCOME_USER:
@@ -74,11 +128,16 @@ export default (state = initialState, action = {}) => {
     case STORE_POST_REQUEST:
       return { ...state, msg: action.msg }
     case FAILURE:
-      return { ...state, login_status: action.login_status }
+      return { ...state, loginStatus: action.loginStatus }
     case MESSAGE_SET_NULL:
       return { ...state, msg: "", msgSeverity: "" }
     case LOGIN_FAILURE:
-      return { ...state, login_status: action.login_status }
+      return {
+        ...state,
+        loginStatus: action.loginStatus,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
     case CREATE_ZONE:
       return { ...state, msg: action.msg, msgSeverity: action.msgSeverity }
     case CREATE_CLUSTER:
@@ -93,8 +152,6 @@ export default (state = initialState, action = {}) => {
       return { ...state, categories: action.categories }
     case PRODUCTS_GET_REQUEST:
       return { ...state, products: action.products }
-    case PRODUCT_GET_BYRANGE:
-      return { ...state, products: action.products }
     case ZONE_SAVE_VALUE:
       return { ...state, zone: action.zone }
     case CLUSTER_SAVE_VALUE:
@@ -102,13 +159,27 @@ export default (state = initialState, action = {}) => {
     case STORE_SAVE_VALUE:
       return { ...state, store: action.store }
     case PRODUCTTOSTORE_POST_REQUEST:
-      return { ...state, msg: action.msg }
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        products: action.products,
+      }
     case PRODUCTLIST_GET_REQUEST:
       return { ...state, productList: action.productList }
     case PRODUCT_SAVE_VALUE:
       return { ...state, productName: action.productName }
     case PRODUCT_GET_REQUEST:
       return { ...state, productDetails: action.productDetails }
+    case IS_PROMOTION_APPLLIED:
+      return { ...state, isPromotion: action.isPromotion }
+    case PRODUCT_UPDATE:
+      return {
+        ...state,
+        updatedProduct: action.updatedProduct,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+      }
     case PROMOTION_POST_REQUEST:
       return {
         ...state,
@@ -134,6 +205,87 @@ export default (state = initialState, action = {}) => {
       }
     case RESET_STATUS_CODE:
       return { ...state, statusCode: "" }
+    case LEVEL_SAVE_VALUE:
+      return { ...state, levelOption: action.levelOption }
+    case PROMOTIONS_GET_BYRANGE:
+      return { ...state, promotions: action.promotions }
+    case GET_PROMOTIONS_CLUSTER:
+      return { ...state, clusterPromotions: action.clusterPromotions }
+    case GET_PROMOTIONS_ZONE:
+      return { ...state, zonePromotions: action.zonePromotions }
+    case STARTDATE_SAVE_VALUE:
+      return { ...state, startDate: action.startDate }
+    case ENDDATE_SAVE_VALUE:
+      return { ...state, endDate: action.endDate }
+
+    case PRODUCTDETAILS_NOTEFFECTIVEPRICECHANGE_GET_REQUEST:
+      return {
+        ...state,
+        priceChangeProductsList: action.priceChangeProductsList,
+      }
+    case PRODUCTDETAILS_EFFECTIVEPRICECHANGE_GET_REQUEST:
+      return {
+        ...state,
+        priceChangeProductsList: action.priceChangeProductsList,
+      }
+    case PRODUCT_CANCEL_EFFECTIVEPRICECHANGE:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
+    case POST_EFFECTIVE_PRICE:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
+    case CREATE_ADMIN:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
+    case PRODUCTLIST_NONALCOHOLIC_GET_REQUEST:
+      return {
+        ...state,
+        nonAlcoholicProductList: action.nonAlcoholicProductList,
+      }
+    case SELLPRODUCT_FIXEDPRICE_PUTREQUEST:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
+    case CANCELPRODUCT_FIXEDPRICE_PUTREQUEST:
+      return {
+        ...state,
+        msg: action.msg,
+        msgSeverity: action.msgSeverity,
+        statusCode: action.statusCode,
+      }
+    case CLEAR_PRODUCT_LIST:
+      return { ...state, products: initialState.products }
+    case MESSAGE_SET:
+      return { ...state, msgSeverity: action.msgSeverity, msg: action.msg }
+    case GET_DASHBOARD_DATA:
+      return { ...state, dashboardData: action.dashboardData }
+    case CHECK_ASSIGNED_ZONE:
+      return {
+        ...state,
+        assignedPrice: action.assignedPrice,
+      }
+    case CHECK_ASSIGNED_CLUSTER:
+      return {
+        ...state,
+        assignedPrice: action.assignedPrice,
+      }
+    case CLEAR_ASSIGNED_PRICE:
+      return { ...state, assignedPrice: initialState.assignedPrice }
     default:
       return { ...state }
   }

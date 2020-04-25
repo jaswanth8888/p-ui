@@ -1,16 +1,23 @@
 import axios from "axios"
 import { registerconstants } from "./registrationtypes"
 import {
-  VTOKEN,
   VENDOR_LOGIN_USER,
   VENDOR_LOGIN_FAILURE,
   VENDOR_LOGOUT,
-  WELCOME_USER,
-  VENDORFAILURE,
   RETAILER_BASE_URL,
   MESSAGE_SET_NULL,
   CREATE_PRODUCT,
+  PRODUCT_GET_REQUEST,
+  PRODUCT_UPDATE,
+  FAILURE,
+  PRODUCTLIST_GET_REQUEST,
+  PRODUCT_SAVE_VALUE,
+  USER_TYPE,
 } from "./types"
+
+const VTOKEN = () => {
+  return `BearerV ${sessionStorage.getItem("token")}`
+}
 
 export const registration = (registrationdetails) => async (dispatch) => {
   await axios
@@ -19,17 +26,34 @@ export const registration = (registrationdetails) => async (dispatch) => {
       registrationdetails
     )
     .then((res) => {
-      console.log("successful registration")
-      dispatch({
-        type: registerconstants.REGISTER_SUCCESS,
-        register_status: { registered: true, msg: "" },
-      })
+      const body = { dest: registrationdetails.email, body: res.data }
+      axios
+        .post(
+          "https://us-central1-price-promotion-system.cloudfunctions.net/sendMail",
+          body
+        )
+        .then(() => {
+          dispatch({
+            type: registerconstants.REGISTER_SUCCESS,
+            registerStatus: { registered: true },
+            msg:
+              "Account registered,please verify your mail by clicking on the link sent to you",
+            msgSeverity: "success",
+          })
+        })
+        .catch(() => {
+          dispatch({
+            type: registerconstants.REGISTER_FAILURE,
+            registerStatus: { registered: false, error: true },
+            msg: "something went wrong while sending mail",
+            msgSeverity: "error",
+          })
+        })
     })
     .catch((res) => {
-      console.log("failed Registration")
       dispatch({
         type: registerconstants.REGISTER_FAILURE,
-        register_status: { registered: false, error: true },
+        registerStatus: { registered: false, error: true },
         msg: res.response.data.message,
         msgSeverity: "error",
       })
@@ -38,31 +62,59 @@ export const registration = (registrationdetails) => async (dispatch) => {
 export const postProduct = (productDetails) => async (dispatch) => {
   await axios
     .post(`${RETAILER_BASE_URL}/product-management/product`, productDetails, {
-      headers: { Authorization: VTOKEN },
+      headers: { Authorization: VTOKEN() },
     })
-    .then((res) => {
-      alert("added sucessfuly")
-      dispatch({ type: CREATE_PRODUCT, msg: "Product Added Succesfully" })
+    .then(() => {
+      dispatch({
+        type: CREATE_PRODUCT,
+        msg: "Product Added Succesfully",
+        msgSeverity: "success",
+      })
     })
     .catch((err) => {
-      dispatch({ type: CREATE_PRODUCT, msg: "Sorry try again" })
+      const { response } = err
+      if (
+        response.status === 400 &&
+        response.data.message === "Product with name already exists"
+      ) {
+        dispatch({
+          type: CREATE_PRODUCT,
+          msg: "Product with name already exists, try again",
+          msgSeverity: "error",
+        })
+      } else {
+        dispatch({
+          type: CREATE_PRODUCT,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning",
+        })
+      }
     })
 }
-export const vendorlogin = (loginDetails) => async (dispatch) => {
+export const vendorLogin = (loginDetails) => async (dispatch) => {
   await axios
     .post(`${RETAILER_BASE_URL}/vendor/authenticate`, loginDetails)
     .then((res) => {
       sessionStorage.setItem("token", res.data.jwt)
+      sessionStorage.setItem("userType", "vendor")
+      dispatch({
+        type: USER_TYPE,
+        loggedInUser: {
+          token: res.data.jwt,
+          userType: "vendor",
+          userName: res.data.userName,
+        },
+      })
       dispatch({
         type: VENDOR_LOGIN_USER,
-        login_status: { success: true, msg: "", data: res.data },
+        loginStatus: { success: true, msg: "", data: res.data },
         userInfo: loginDetails,
       })
     })
     .catch((res) => {
       dispatch({
         type: VENDOR_LOGIN_FAILURE,
-        login_status: { success: false },
+        loginStatus: { success: false },
         msg:
           res.response.data.message === "Access Denied"
             ? "Invalid Username/Password"
@@ -76,4 +128,49 @@ export const vendorlogout = () => (dispatch) => {
 }
 export const messageSetNull = () => (dispatch) => {
   dispatch({ type: MESSAGE_SET_NULL })
+}
+export const getProductList = (userName) => async (dispatch) => {
+  await axios
+    .get(`${RETAILER_BASE_URL}/product-management/product-list/${userName}`, {
+      headers: { Authorization: VTOKEN() },
+    })
+    .then((res) => {
+      dispatch({ type: PRODUCTLIST_GET_REQUEST, productList: res.data })
+    })
+}
+export const getProductDetails = (productName) => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/${productName}/product/vendor`,
+      {
+        headers: { Authorization: VTOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: PRODUCT_GET_REQUEST, productDetails: res.data })
+    })
+}
+
+export const updateProduct = (updatedProduct, productName) => async (
+  dispatch
+) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/${productName}/product`,
+      updatedProduct,
+      { headers: { Authorization: VTOKEN() } }
+    )
+    .then(() => {
+      dispatch({ type: PRODUCT_UPDATE, msg: "Updated Sucessfully" })
+    })
+    .catch(() => {
+      dispatch({
+        type: FAILURE,
+        msg: "try again",
+        msgSeverity: "error",
+      })
+    })
+}
+export const saveProductValue = (productValue) => (dispatch) => {
+  dispatch({ type: PRODUCT_SAVE_VALUE, productName: productValue })
 }

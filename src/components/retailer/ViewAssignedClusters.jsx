@@ -1,16 +1,22 @@
-import { Table, Typography } from "@material-ui/core"
-import Paper from "@material-ui/core/Paper"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
+import {
+  Table,
+  Typography,
+  Paper,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import {
   getProductDetails,
   resetStatusCode,
 } from "../../redux/actions/RetailerActions"
 import ProductDetails from "../utils/ProductDetails"
+import { viewAssignedClusters } from "../utils/constants"
+import Message from "../utils/Message"
 
 class ViewAssignedClusters extends Component {
   constructor(props) {
@@ -18,8 +24,15 @@ class ViewAssignedClusters extends Component {
     this.state = {}
   }
 
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
+    const { getProductDetails: getProductDetailsAlt, productName } = this.props
+    getProductDetailsAlt(productName)
+  }
+
   render() {
-    const zoneData = this.props.productDetails.assignProduct // Swap with the actual prop while integrating: this.props.productDetails.assignProduct
+    const { productDetails, resetStatusCode: resetStatusCodeAlt } = this.props
+    const zoneData = productDetails.assignProduct // Swap with the actual prop while integrating: this.props.productDetails.assignProduct
 
     const tableRowElm = (zone) => {
       if (zone.cluster !== null && Array.isArray(zone.cluster)) {
@@ -29,12 +42,8 @@ class ViewAssignedClusters extends Component {
               {zone.price > 0 ? (
                 <Typography variant="subtitle1" gutterBottom>
                   {cluster.clusterName}
-                  <br />
-                  <Typography
-                    variant="subtitle1"
-                    style={{ color: "grey" }}
-                    gutterBottom
-                  >
+
+                  <Typography variant="subtitle1" gutterBottom>
                     {zone.zoneName}
                   </Typography>
                 </Typography>
@@ -65,30 +74,43 @@ class ViewAssignedClusters extends Component {
           </TableRow>
         ))
       }
+      return null
     }
 
     return (
-      <div className="box-container-start">
-        {this.props.resetStatusCode()}
-        <div className="">
+      <div className="box-container">
+        {resetStatusCodeAlt()}
+        <div className="joint-form-large">
           <ProductDetails />
+          <div className="product-form-body">
+            <Typography className="card-header" variant="h4">
+              Assign to Cluster
+            </Typography>
+            <TableContainer component={Paper}>
+              <Table aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    {viewAssignedClusters.map((tcell) => (
+                      <TableCell>{tcell}</TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>
+              </Table>
+            </TableContainer>
+          </div>
         </div>
-        <TableContainer component={Paper}>
-          <Table aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Cluster Name</TableCell>
-                <TableCell>Quantity Assigned</TableCell>
-                <TableCell>Profit Percentage</TableCell>
-                <TableCell>Price</TableCell>
-              </TableRow>
-            </TableHead>
-            <tbody>{zoneData.map((zone) => tableRowElm(zone))}</tbody>
-          </Table>
-        </TableContainer>
+        <Message />
       </div>
     )
   }
+}
+
+ViewAssignedClusters.propTypes = {
+  resetStatusCode: PropTypes.func.isRequired,
+  productDetails: PropTypes.shape.isRequired,
+  productName: PropTypes.string.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({
