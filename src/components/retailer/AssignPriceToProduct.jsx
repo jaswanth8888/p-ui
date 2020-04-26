@@ -118,30 +118,15 @@ class AssignPriceToProduct extends Component {
                       required
                       fullWidth
                       id="ProfitPercentage"
-                      label="ProfitPercentage"
+                      label="Percentage"
                       name="ProfitPercentage"
                       type="number"
                       onChange={this.handleChange3}
                       autoFocus
                     />
-                    <null>
-                      {dayval < day && (
-                        <div>
-                          <Snackbar open="true" autoHideDuration={2000}>
-                            <MuiAlert
-                              severity="error"
-                              elevation={6}
-                              variant="filled"
-                            >
-                              Enter Valid Start Date
-                            </MuiAlert>
-                          </Snackbar>
-                        </div>
-                      )}
-                    </null>
                     {startDate.length > 0 &&
                       endDate.length > 0 &&
-                      effectivePercentage > 0 &&
+                      effectivePercentage !== "" &&
                       startDate < endDate &&
                       dayval >= day && (
                         <Button
@@ -224,7 +209,7 @@ class AssignPriceToProduct extends Component {
                     </null>
                     {startDate.length > 0 &&
                       endDate.length > 0 &&
-                      effectivePercentage > 0 &&
+                      effectivePercentage !== "" &&
                       startDate < endDate &&
                       dayval >= day && (
                         <Button
