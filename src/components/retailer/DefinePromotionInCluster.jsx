@@ -1,9 +1,7 @@
-import { TextField, Typography, Button, IconButton } from "@material-ui/core"
+import { TextField, Typography, Button } from "@material-ui/core"
 import React, { Component } from "react"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
-import Alert from "@material-ui/lab/Alert"
-import CloseIcon from "@material-ui/icons/Close"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { postPromotion } from "../../redux/actions/RetailerActions"
@@ -83,7 +81,7 @@ class DefinePromotionInCluster extends Component {
 
   render() {
     const { promotionDetails } = this.state
-    const { productDetails, zone, cluster, assignedPrice } = this.props
+    const { zone, cluster, assignedPrice } = this.props
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
@@ -157,26 +155,6 @@ class DefinePromotionInCluster extends Component {
 
           <div className="form-center">
             <div className="flex-grid">
-              {productDetails.assignProduct.length > 0 && (
-                <div>
-                  <Alert
-                    severity="info"
-                    action={
-                      <IconButton
-                        aria-label="close"
-                        color="inherit"
-                        size="small"
-                      >
-                        <CloseIcon fontSize="inherit" />
-                      </IconButton>
-                    }
-                  >
-                    Product: {productDetails.productName} already has promotion
-                    applied
-                  </Alert>
-                </div>
-              )}
-
               <Typography className="card-header" variant="h4">
                 Apply Percentage Promotion
               </Typography>
@@ -257,7 +235,6 @@ class DefinePromotionInCluster extends Component {
 
 DefinePromotionInCluster.propTypes = {
   productName: PropTypes.string.isRequired,
-  productDetails: PropTypes.shape.isRequired,
   zone: PropTypes.string.isRequired,
   cluster: PropTypes.string.isRequired,
   postPromotion: PropTypes.func.isRequired,

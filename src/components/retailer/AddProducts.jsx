@@ -144,13 +144,6 @@ class AddProducts extends Component {
                 <Table size="small" aria-label="a dense table">
                   <TableHead>
                     <TableRow>
-                      {/* <TableCell>CheckBox</TableCell> */}
-                      {/* <TableCell>Select</TableCell>
-                    <TableCell>Product Name</TableCell>
-                    <TableCell>Price</TableCell>
-                    <TableCell>Vendor Name</TableCell>
-                    <TableCell>Quantity Available</TableCell>
-                    <TableCell>Quantity Required</TableCell> */}
                       {addProduct.map((tcell) => (
                         <TableCell>{tcell}</TableCell>
                       ))}

@@ -95,7 +95,7 @@ class AddProductToStore extends Component {
           <div className="validation-half">
             <div className="validations">
               <h3>Requirements</h3>
-              {store === "" && (
+              {zone === "" && (
                 <div className="unapproved-text">
                   <ClearIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -103,7 +103,7 @@ class AddProductToStore extends Component {
                   </Typography>
                 </div>
               )}
-              {store !== "" && (
+              {zone !== "" && (
                 <div className="approved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>

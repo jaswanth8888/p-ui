@@ -5,7 +5,7 @@ export const withdrawClusterPromotion = [
   "Promotion To Date",
   "Withdraw",
 ]
-export const viewZones = ["Zone Name", "Number of Zones"]
+export const viewZones = ["Zone Name", "Number of Clusters"]
 export const viewClusters = ["Clusters Name", "Number of Stores"]
 export const viewPromotions = ["Product", "Product Details", "Promotions"]
 export const viewClusterPromotion = [
