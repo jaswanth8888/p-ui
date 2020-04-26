@@ -128,7 +128,7 @@ export default (state = initialState, action = {}) => {
     case STORE_POST_REQUEST:
       return { ...state, msg: action.msg }
     case FAILURE:
-      return { ...state, loginStatus: action.loginStatus }
+      return { ...state }
     case MESSAGE_SET_NULL:
       return { ...state, msg: "", msgSeverity: "" }
     case LOGIN_FAILURE:
