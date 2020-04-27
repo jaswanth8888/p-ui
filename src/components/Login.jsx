@@ -1,4 +1,9 @@
-import { Button, InputAdornment, TextField } from "@material-ui/core"
+import {
+  Button,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@material-ui/core"
 import Lock from "@material-ui/icons/Lock"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import PersonIcon from "@material-ui/icons/Person"
@@ -110,6 +115,10 @@ class Login extends Component {
                     <LockOpenIcon className="login-icon" />
                   </div>
                 )}
+
+                <Typography className="card-header" variant="h4">
+                  Retailer Login
+                </Typography>
                 <form className="{classes.form}" noValidate>
                   <TextField
                     variant="outlined"

@@ -1,9 +1,15 @@
 // vendor login
-import { Button, InputAdornment, TextField } from "@material-ui/core"
+import {
+  Button,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@material-ui/core"
 import Lock from "@material-ui/icons/Lock"
 import PersonIcon from "@material-ui/icons/Person"
 import PropTypes from "prop-types"
 import React, { Component } from "react"
+import LockOpenIcon from "@material-ui/icons/LockOpen"
 import { connect } from "react-redux"
 import { vendorLogin } from "../../redux/actions/VendorActions"
 import Message from "./Message"
@@ -87,7 +93,7 @@ class VendorLogin extends Component {
 
   render() {
     const { loginStatus, history } = this.props
-    const { error } = this.state
+    const { error, userCredentials } = this.state
     return (
       <>
         {sessionStorage.getItem("userType") === "vendor" &&
@@ -97,15 +103,18 @@ class VendorLogin extends Component {
           <div className="box-container-login">
             <div className="joint-form" id="login-joint-form-vendor">
               <div className="login-full">
-                {/* {userCredentials.password.length <= 0 ? (
-                  <div className="help-block">
+                {userCredentials.password.length <= 0 ? (
+                  <div className="login-help-block">
                     <Lock className="login-icon" />
                   </div>
                 ) : (
-                  <div className="help-block">
+                  <div className="login-help-block">
                     <LockOpenIcon className="login-icon" />
                   </div>
-                )} */}
+                )}
+                <Typography className="card-header" variant="h4">
+                  Retailer Login
+                </Typography>
                 <form className="{classes.form}" noValidate>
                   <TextField
                     variant="outlined"
