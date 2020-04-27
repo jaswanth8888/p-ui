@@ -78,7 +78,7 @@ class Dashboard extends Component {
         hideOverlappingLabels: true,
         trim: true,
       },
-      labels: ["Baby Products", "Alcohol Products"],
+      labels: ["Alcohol Products", "Baby Products"],
       tooltip: {
         enabled: true,
         enabledOnSeries: undefined,
