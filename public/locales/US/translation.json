@@ -1,8 +1,8 @@
 {
   "please fill username": "please fill username",
   "please fill password": "please fill password",
-  "loginAsVendor":"Login As Vendor",
-  "loginAsAdmin":"Login As Admin",
+  "loginAsVendor": "Login As Vendor",
+  "loginAsAdmin": "Login As Admin",
   "welcomeMain": "Welcome",
   "header": {
     "logIn": "Login",
@@ -11,6 +11,8 @@
     "home": "Prices and Promotions"
   },
   "login": {
+    "retailerLogin": "Retailer Login",
+    "adminLogin": "Admin Login",
     "signIn": "Sign In",
     "userName": "User Name",
     "password": "Password",
@@ -41,7 +43,7 @@
     "queryPromotionsOnDateRange": "Query Promotions On Date Range"
   },
   "vendorWelcome": {
-    "addProduct":"Add a Product",
+    "addProduct": "Add a Product",
     "updatePriceOfProduct": "Update Price of a Product"
   },
   "zoneForm": {

@@ -117,7 +117,7 @@ class Login extends Component {
                 )}
 
                 <Typography className="card-header" variant="h4">
-                  Retailer Login
+                  {t("login.retailerLogin")}
                 </Typography>
                 <form className="{classes.form}" noValidate>
                   <TextField

@@ -105,18 +105,15 @@ class AdminLogin extends Component {
                 {userCredentials.password.length <= 0 ? (
                   <div className="login-help-block">
                     <Lock className="login-icon" />
-                    <Typography className="card-header" variant="h4">
-                      Admin Login
-                    </Typography>
                   </div>
                 ) : (
                   <div className="login-help-block">
                     <LockOpenIcon className="login-icon" />
-                    <Typography className="card-header" variant="h4">
-                      Admin Login
-                    </Typography>
                   </div>
                 )}
+                <Typography className="card-header" variant="h4">
+                  {t("login.adminLogin")}
+                </Typography>
                 <form className="{classes.form}" noValidate id="login-form">
                   <TextField
                     variant="outlined"

@@ -113,7 +113,7 @@ class VendorLogin extends Component {
                   </div>
                 )}
                 <Typography className="card-header" variant="h4">
-                  Retailer Login
+                  Vendor Login
                 </Typography>
                 <form className="{classes.form}" noValidate>
                   <TextField

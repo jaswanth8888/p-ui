@@ -1,8 +1,8 @@
 {
   "please fill username": "Bitte geben Sie den Benutzernamen ein",
   "please fill password": "Bitte Passwort eingeben",
-  "loginAsVendor":"Als Anbieter anmelden",
-  "loginAsAdmin":"Als Admin anmelden",
+  "loginAsVendor": "Als Anbieter anmelden",
+  "loginAsAdmin": "Als Admin anmelden",
   "welcomeMain": "Herzlich willkommen",
   "header": {
     "logIn": "Anmeldung",
@@ -11,6 +11,8 @@
     "home": "Accueil"
   },
   "login": {
+    "retailerLogin": "Einzelhändler Anmeldung",
+    "adminLogin": "Administrator Anmeldung",
     "signIn": "Einloggen",
     "userName": "Nutzername",
     "password": "Passwort",
@@ -42,7 +44,7 @@
     "queryPromotionsOnDateRange": "Abfragen von Promotions im Datumsbereich"
   },
   "vendorWelcome": {
-    "addProduct":"Produkt hinzufügen",
+    "addProduct": "Produkt hinzufügen",
     "updatePriceOfProduct": "Preis eines Produkts aktualisieren"
   },
   "zoneForm": {

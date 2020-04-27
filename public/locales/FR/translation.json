@@ -1,8 +1,8 @@
 {
   "please fill username": "veuillez remplir le nom d'utilisateur",
   "please fill password": "veuillez remplir le mot de passe",
-  "loginAsVendor":"Connectez-vous en tant que fournisseur",
-  "loginAsAdmin":"Connectez-vous en tant qu'administrateur",
+  "loginAsVendor": "Connectez-vous en tant que fournisseur",
+  "loginAsAdmin": "Connectez-vous en tant qu'administrateur",
   "welcomeMain": "Bienvenue",
   "header": {
     "logIn": "s'identifier",
@@ -11,6 +11,8 @@
     "home": "Accueil"
   },
   "login": {
+    "retailerLogin": "Connexion revendeur",
+    "adminLogin": "Connexion administrateur",
     "signIn": "Se connecter",
     "userName": "Nom d'utilisateur",
     "password": "Mot de passe",
@@ -42,7 +44,7 @@
     "queryPromotionsOnDateRange": "Promotions de requête sur la plage de dates"
   },
   "vendorWelcome": {
-    "addProduct":"Ajouter un produit",
+    "addProduct": "Ajouter un produit",
     "updatePriceOfProduct": "Mettre à jour le prix d'un produit"
   },
   "zoneForm": {
