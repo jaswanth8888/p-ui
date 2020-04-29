@@ -32,7 +32,6 @@ class AddProduct extends Component {
         productGroup: "",
         abv: "",
         volume: "",
-        productImagePath: "",
       },
       selectedImages: [],
     }
@@ -65,8 +64,11 @@ class AddProduct extends Component {
         (productCategory === "BABY_PROD" && initialQuantity < 501)
       ) {
         const data = new FormData()
-        data.append("product", product)
+        data.append("product", JSON.stringify(product))
         data.append("files", selectedImages)
+        for (var value of data.values()) {
+          console.log(value); 
+       }
         //console.log(data)
         test.postProduct(data)
       }
