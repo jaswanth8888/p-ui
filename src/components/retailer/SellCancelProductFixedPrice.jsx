@@ -11,6 +11,8 @@ import {
   TableRow,
   Button,
 } from "@material-ui/core"
+import Carousel from "react-material-ui-carousel"
+
 import {
   getProductDetails,
   sellProductFixedPrice,
@@ -63,13 +65,42 @@ class SellCancelProductFixedPrice extends Component {
               <Typography className="card-header" variant="h4">
                 {sellCancelProductFixedPrice}
               </Typography>
-              <img src={productDetails.productImagePath} alt="none" />
+              {/* <img src={productDetails.productImagePath} alt="none" /> */}
               <Typography className="card-header" variant="h5">
                 Product Name: {productDetails.productName}
               </Typography>
               <div className="product-table-data">
                 <TableContainer component={Paper} className="product-table">
                   <Table size="small" aria-label="a dense table">
+                  <TableHead>
+                      <TableRow className="product-details-row">
+                        <TableCell className="table-text" colSpan={2}>
+                          Product Image
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableRow>
+                      <TableCell colSpan={2}>
+                        <Carousel interval="3000" animation="fade">
+                          {productDetails.productImagePath
+                            .slice(0)
+                            .reverse()
+                            .map((image) => (
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={image}
+                              >
+                                <img
+                                  className="thumbnail"
+                                  src={image}
+                                  alt="none"
+                                />
+                              </a>
+                            ))}
+                        </Carousel>
+                      </TableCell>
+                    </TableRow>
                     <TableHead>
                       <TableRow className="product-details-row">
                         <TableCell className="table-text">Vendor</TableCell>
