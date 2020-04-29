@@ -47,9 +47,9 @@ export const login = (loginDetails) => async (dispatch) => {
     })
 }
 
-export const getPromotionAlert = () => async (dispatch) => {
+export const getPromotionAlert = (date) => async (dispatch) => {
   await axios
-    .get(`http://www.mocky.io/v2/5ea8e43a2d000097883a414d`, {
+    .post(`http://www.mocky.io/v2/5ea8e43a2d000097883a414d`, date, {
       headers: { Authorization: TOKEN() },
     })
     .then((res) => {

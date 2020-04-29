@@ -19,21 +19,30 @@ import {
 class DefinePromotionInZone extends Component {
   constructor(props) {
     super(props)
-    const { zone, getPromotionAlert } = this.props
+    const {
+      zone,
+      loggedInUser,
+      getPromotionAlert: getPromotionAlertAlt,
+    } = this.props
 
     this.state = {
       promotionDetails: {
-        appliedDate: new Date().toISOString().slice(0, 10),
+        appliedDate: new Date().toISOString(),
         startDate: "",
         endDate: "",
         promotionPercentage: "",
         zoneName: zone,
-        addedBy: "",
+        // eslint-disable-next-line prefer-template
+        addedBy: loggedInUser.userName + "/" + loggedInUser.userType,
       },
       levelOption: "zone",
     }
 
-    getPromotionAlert()
+    var date = new Date()
+    date.setHours(date.getHours() + 5)
+    date.setMinutes(date.getMinutes() + 30)
+
+    getPromotionAlertAlt(date)
     this.handleChangePercentage = this.handleChangePercentage.bind(this)
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
@@ -167,23 +176,23 @@ class DefinePromotionInZone extends Component {
               <div className="pt-10">
                 <div className="pt-10">
                   {loggedInUser.userType === "admin" &&
-                  promotionAlert.promotionHasBeenAppliedLast72hours === 1 ? (
-                    <Alert severity="info">
-                      A promotion was defined in the last 72 hours. Further
-                      addition requires retailer approval
-                    </Alert>
-                  ) : (
-                    ""
-                  )}
+                    promotionAlert.promotionHasBeenAppliedLast72hours === 1 ? (
+                      <Alert severity="info">
+                        A promotion was defined in the last 72 hours. Further
+                        addition requires retailer approval
+                      </Alert>
+                    ) : (
+                      ""
+                    )}
                 </div>
 
                 <div className="pt-10">
                   {loggedInUser.userType === "admin" &&
-                  promotionAlert.promotionAlreadyApplied === 1 ? (
-                    <Alert severity="info"> Promotion already defined</Alert>
-                  ) : (
-                    ""
-                  )}
+                    promotionAlert.promotionAlreadyApplied === 1 ? (
+                      <Alert severity="info"> Promotion already defined</Alert>
+                    ) : (
+                      ""
+                    )}
                 </div>
               </div>
               <Typography className="card-header" variant="h6">
@@ -273,6 +282,7 @@ DefinePromotionInZone.propTypes = {
   assignedPrice: PropTypes.string.isRequired,
   loggedInUser: PropTypes.shape.isRequired,
   promotionAlert: PropTypes.shape.isRequired,
+  getPromotionAlert: PropTypes.func.isRequired,
 }
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
