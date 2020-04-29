@@ -1,22 +1,25 @@
-import { TextField, Typography, Button } from "@material-ui/core"
-import React, { Component } from "react"
-import CheckIcon from "@material-ui/icons/Check"
-import ClearIcon from "@material-ui/icons/Clear"
-import { connect } from "react-redux"
-import PropTypes from "prop-types"
-import { postPromotion } from "../../redux/actions/RetailerActions"
-import ProductDetailsTable from "../utils/ProductDetailsTable"
+import { TextField, Typography, Button } from "@material-ui/core";
+import React, { Component } from "react";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { postPromotion } from "../../redux/actions/RetailerActions";
+import { getPromotionAlert } from "../../redux/actions/AdminActions";
+import ProductDetailsTable from "../utils/ProductDetailsTable";
 import {
   startdate,
   enddate,
   datecheck,
   promotioncheck,
-} from "../utils/constants"
+} from "../utils/constants";
+import Alert from "@material-ui/lab/Alert";
+import { spacing } from "@material-ui/system";
 
 class DefinePromotionInZone extends Component {
   constructor(props) {
-    super(props)
-    const { zone } = this.props
+    super(props);
+    const { zone, getPromotionAlert } = this.props;
 
     this.state = {
       promotionDetails: {
@@ -27,60 +30,65 @@ class DefinePromotionInZone extends Component {
         zoneName: zone,
       },
       levelOption: "zone",
-    }
+    };
 
-    this.handleChangePercentage = this.handleChangePercentage.bind(this)
-    this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
-    this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    getPromotionAlert();
+    this.handleChangePercentage = this.handleChangePercentage.bind(this);
+    this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
+    this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit = (e) => {
-    e.preventDefault()
-    const { postPromotion: postPromotionAlt, productName, history } = this.props
-    const { promotionDetails, levelOption } = this.state
-    postPromotionAlt(promotionDetails, productName, levelOption)
-    history.push("/view/promotions/zone")
-  }
+    e.preventDefault();
+    const {
+      postPromotion: postPromotionAlt,
+      productName,
+      history,
+    } = this.props;
+    const { promotionDetails, levelOption } = this.state;
+    postPromotionAlt(promotionDetails, productName, levelOption);
+    history.push("/view/promotions/zone");
+  };
 
   handleChangePercentage(e) {
-    const percentage = e.target.value
-    const { promotionDetails } = this.state
+    const percentage = e.target.value;
+    const { promotionDetails } = this.state;
     this.setState({
       promotionDetails: {
         ...promotionDetails,
         promotionPercentage: percentage,
       },
-    })
+    });
   }
 
   handleChangeStartDate(e) {
-    const start = e.target.value
-    const { promotionDetails } = this.state
-    promotionDetails.startDate = start
+    const start = e.target.value;
+    const { promotionDetails } = this.state;
+    promotionDetails.startDate = start;
     this.setState({
       promotionDetails: {
         ...promotionDetails,
         startDate: start,
       },
-    })
+    });
   }
 
   handleChangeEndDate(e) {
-    const end = e.target.value
-    const { promotionDetails } = this.state
-    promotionDetails.endDate = end
+    const end = e.target.value;
+    const { promotionDetails } = this.state;
+    promotionDetails.endDate = end;
     this.setState({
       promotionDetails: {
         ...promotionDetails,
         endDate: end,
       },
-    })
+    });
   }
 
   render() {
-    const { promotionDetails } = this.state
-    const { zone, assignedPrice } = this.props
+    const { promotionDetails } = this.state;
+    const { zone, assignedPrice, loggedInUser, promotionAlert } = this.props;
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
@@ -159,10 +167,31 @@ class DefinePromotionInZone extends Component {
               </Typography>
               <ProductDetailsTable />
 
+              <div>
+                <div>
+                  {loggedInUser.userType === "admin" &&
+                  promotionAlert.promotionHasBeenAppliedLast72hours === 1 ? (
+                    <Alert severity="info">
+                      "A promotion was defined in the last 72 hours. Further
+                      addition requires retailer approval"
+                    </Alert>
+                  ) : (
+                    ""
+                  )}
+                </div>
+
+                <div style={{ padding: "10" }}>
+                  {loggedInUser.userType === "admin" &&
+                  promotionAlert.promotionAlreadyApplied === 1 ? (
+                    <Alert severity="info"> "Promotion already defined"</Alert>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
               <Typography className="card-header" variant="h6">
                 Selected Zone : {zone}
               </Typography>
-
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -187,7 +216,6 @@ class DefinePromotionInZone extends Component {
               <Typography className="card-header" variant="h6">
                 Actual Price : {assignedPrice}
               </Typography>
-
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -236,7 +264,7 @@ class DefinePromotionInZone extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -246,15 +274,18 @@ DefinePromotionInZone.propTypes = {
   postPromotion: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
   assignedPrice: PropTypes.string.isRequired,
-}
+};
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
   zone: store.RetailerReducer.zone,
   assignedPrice: store.RetailerReducer.assignedPrice,
-})
+  loggedInUser: store.RetailerReducer.loggedInUser,
+  promotionAlert: store.AdminReducer.promotionAlert,
+});
 
 const actionAsProps = {
   postPromotion,
-}
-export default connect(stateAsProps, actionAsProps)(DefinePromotionInZone)
+  getPromotionAlert,
+};
+export default connect(stateAsProps, actionAsProps)(DefinePromotionInZone);
