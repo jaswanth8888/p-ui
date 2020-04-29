@@ -167,23 +167,23 @@ class DefinePromotionInZone extends Component {
               <div className="pt-10">
                 <div className="pt-10">
                   {loggedInUser.userType === "admin" &&
-                  promotionAlert.promotionHasBeenAppliedLast72hours === 1 ? (
-                    <Alert severity="info">
-                      "A promotion was defined in the last 72 hours. Further
-                      addition requires retailer approval"
-                    </Alert>
-                  ) : (
-                    ""
-                  )}
+                    promotionAlert.promotionHasBeenAppliedLast72hours === 1 ? (
+                      <Alert severity="info">
+                        A promotion was defined in the last 72 hours. Further
+                        addition requires retailer approval
+                      </Alert>
+                    ) : (
+                      ""
+                    )}
                 </div>
 
                 <div className="pt-10">
                   {loggedInUser.userType === "admin" &&
-                  promotionAlert.promotionAlreadyApplied === 1 ? (
-                    <Alert severity="info"> "Promotion already defined"</Alert>
-                  ) : (
-                    ""
-                  )}
+                    promotionAlert.promotionAlreadyApplied === 1 ? (
+                      <Alert severity="info"> Promotion already defined</Alert>
+                    ) : (
+                      ""
+                    )}
                 </div>
               </div>
               <Typography className="card-header" variant="h6">
@@ -271,6 +271,8 @@ DefinePromotionInZone.propTypes = {
   postPromotion: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
   assignedPrice: PropTypes.string.isRequired,
+  loggedInUser: PropTypes.shape.isRequired,
+  promotionAlert: PropTypes.shape.isRequired,
 }
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
