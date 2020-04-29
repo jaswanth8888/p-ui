@@ -1,5 +1,5 @@
-import axios from "axios";
-import i18n from "i18next";
+import axios from "axios"
+import i18n from "i18next"
 import {
   ADMIN_LOGIN,
   RETAILER_BASE_URL,
@@ -7,23 +7,23 @@ import {
   MESSAGE_SET,
   PROMOTION_ALERT,
   FAILURE,
-} from "./types";
+} from "./types"
 
 const TOKEN = () => {
   if (sessionStorage.getItem("userType") === "Retailer") {
-    return `BearerR ${sessionStorage.getItem("token")}`;
+    return `BearerR ${sessionStorage.getItem("token")}`
   }
 
-  return `BearerA ${sessionStorage.getItem("token")}`;
-};
+  return `BearerA ${sessionStorage.getItem("token")}`
+}
 
 // eslint-disable-next-line import/prefer-default-export
 export const login = (loginDetails) => async (dispatch) => {
   await axios
     .post(`${RETAILER_BASE_URL}/admin/authenticate`, loginDetails)
     .then((res) => {
-      sessionStorage.setItem("token", res.data.jwt);
-      sessionStorage.setItem("userType", "admin");
+      sessionStorage.setItem("token", res.data.jwt)
+      sessionStorage.setItem("userType", "admin")
       dispatch({
         type: USER_TYPE,
         loggedInUser: {
@@ -31,21 +31,21 @@ export const login = (loginDetails) => async (dispatch) => {
           userType: "admin",
           userName: res.data.userName,
         },
-      });
+      })
       dispatch({
         type: ADMIN_LOGIN,
         loginStatus: { success: true, errorMsg: "", data: res.data },
         userInfo: loginDetails,
-      });
+      })
     })
     .catch(() => {
       dispatch({
         type: MESSAGE_SET,
         msg: i18n.t("login.invalidCredentials"),
         msgSeverity: "error",
-      });
-    });
-};
+      })
+    })
+}
 
 export const getPromotionAlert = () => async (dispatch) => {
   await axios
@@ -53,9 +53,9 @@ export const getPromotionAlert = () => async (dispatch) => {
       headers: { Authorization: TOKEN() },
     })
     .then((res) => {
-      dispatch({ type: PROMOTION_ALERT, promotionAlert: res.data });
+      dispatch({ type: PROMOTION_ALERT, promotionAlert: res.data })
     })
     .catch(() => {
-      dispatch({ type: FAILURE });
-    });
-};
+      dispatch({ type: FAILURE })
+    })
+}
