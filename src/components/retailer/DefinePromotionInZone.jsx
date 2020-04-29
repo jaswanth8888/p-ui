@@ -28,6 +28,7 @@ class DefinePromotionInZone extends Component {
         endDate: "",
         promotionPercentage: "",
         zoneName: zone,
+        addedBy: "",
       },
       levelOption: "zone",
     };
