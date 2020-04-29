@@ -34,21 +34,21 @@ class AddProduct extends Component {
         volume: "",
         productImagePath: "",
       },
+      selectedImages: [],
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.onFileChange = this.onFileChange.bind(this)
   }
 
-  handleChange(e) {
-    const { name, value } = e.target
-    const { product } = this.state
-    product[name] = value
-    this.setState({ product })
+  onFileChange = (event) => {
+    //console.log(event.target.files)
+    this.setState({ selectedImages: event.target.files })
   }
 
   handleSubmit() {
     const { loggedInUser } = this.props
-    const { product } = this.state
+    const { product, selectedImages } = this.state
     product.companyName = loggedInUser.userName
     const {
       productName,
@@ -57,14 +57,27 @@ class AddProduct extends Component {
       productCategory,
     } = product
     const test = this.props
+    console.log(product)
+    console.log(selectedImages)
     if (productName && productBasePrice > 0 && initialQuantity > 1) {
       if (
         (productCategory === "ALCOHOL_PROD" && initialQuantity < 101) ||
         (productCategory === "BABY_PROD" && initialQuantity < 501)
       ) {
-        test.postProduct(product)
+        const data = new FormData()
+        data.append("product", product)
+        data.append("files", selectedImages)
+        //console.log(data)
+        test.postProduct(data)
       }
     }
+  }
+
+  handleChange(e) {
+    const { name, value } = e.target
+    const { product } = this.state
+    product[name] = value
+    this.setState({ product })
   }
 
   render() {
@@ -76,7 +89,6 @@ class AddProduct extends Component {
         initialQuantity,
         productCategory,
         productDescription,
-        productImagePath,
         abv,
         volume,
         uom,
@@ -365,7 +377,7 @@ class AddProduct extends Component {
                   </div>
                 )}
 
-                <TextField
+                {/* <TextField
                   variant="outlined"
                   margin="normal"
                   required
@@ -377,6 +389,18 @@ class AddProduct extends Component {
                   onChange={this.handleChange}
                   value={productImagePath}
                   autoFocus
+                /> */}
+
+                <input
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  type="file"
+                  name="productImage"
+                  id="productImage"
+                  multiple
+                  onChange={this.onFileChange}
                 />
 
                 <TextField

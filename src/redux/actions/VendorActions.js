@@ -60,8 +60,11 @@ export const registration = (registrationdetails) => async (dispatch) => {
     })
 }
 export const postProduct = (productDetails) => async (dispatch) => {
+  console.log(productDetails)
   await axios
-    .post(`${RETAILER_BASE_URL}/product-management/product`, productDetails, {
+    // .post(`${RETAILER_BASE_URL}/product-management/product`, productDetails, {
+    //   headers: { Authorization: VTOKEN() },
+    .post(`http://10.102.141.211:9500/product`, productDetails, {
       headers: { Authorization: VTOKEN() },
     })
     .then(() => {
@@ -80,6 +83,15 @@ export const postProduct = (productDetails) => async (dispatch) => {
         dispatch({
           type: CREATE_PRODUCT,
           msg: "Product with name already exists, try again",
+          msgSeverity: "error",
+        })
+      } else if (
+        response.status === 400 &&
+        response.data.message === "No image uploaded"
+      ) {
+        dispatch({
+          type: CREATE_PRODUCT,
+          msg: "Please upload images for the product",
           msgSeverity: "error",
         })
       } else {
