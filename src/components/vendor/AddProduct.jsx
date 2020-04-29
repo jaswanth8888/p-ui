@@ -41,7 +41,7 @@ class AddProduct extends Component {
   }
 
   onFileChange = (event) => {
-    //console.log(event.target.files)
+    // console.log(event.target.files)
     this.setState({ selectedImages: event.target.files })
   }
 
@@ -56,7 +56,7 @@ class AddProduct extends Component {
       productCategory,
     } = product
     const test = this.props
-    console.log(product)
+    // console.log(product)
     console.log(selectedImages)
     if (productName && productBasePrice > 0 && initialQuantity > 1) {
       if (
@@ -65,11 +65,13 @@ class AddProduct extends Component {
       ) {
         const data = new FormData()
         data.append("product", JSON.stringify(product))
-        data.append("files", selectedImages)
-        for (var value of data.values()) {
-          console.log(value); 
-       }
-        //console.log(data)
+        Array.from(selectedImages).forEach((file) => {
+          data.append("files", file)
+        })
+        // for (const value of data.values()) {
+        //   console.log(value)
+        // }
+        // console.log(data)
         test.postProduct(data)
       }
     }

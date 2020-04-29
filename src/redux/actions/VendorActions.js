@@ -60,8 +60,8 @@ export const registration = (registrationdetails) => async (dispatch) => {
     })
 }
 export const postProduct = (productDetails) => async (dispatch) => {
-  console.log(productDetails['files'])
-  console.log(productDetails.values())
+  // console.log(productDetails['files'])
+  // console.log(productDetails.values())
   await axios
     // .post(`${RETAILER_BASE_URL}/product-management/product`, productDetails, {
     //   headers: { Authorization: VTOKEN() },
