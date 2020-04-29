@@ -60,13 +60,12 @@ export const registration = (registrationdetails) => async (dispatch) => {
     })
 }
 export const postProduct = (productDetails) => async (dispatch) => {
-  // console.log(productDetails['files'])
-  // console.log(productDetails.values())
   await axios
-    // .post(`${RETAILER_BASE_URL}/product-management/product`, productDetails, {
-    //   headers: { Authorization: VTOKEN() },
-    .post(`http://10.102.141.211:9500/product`, productDetails, {
-      headers: { "Content-Type": "multipart/form-data" },
+    .post(`${RETAILER_BASE_URL}/product-management/product`, productDetails, {
+      headers: {
+        Authorization: VTOKEN(),
+        "Content-Type": "multipart/form-data",
+      },
     })
     .then(() => {
       dispatch({
