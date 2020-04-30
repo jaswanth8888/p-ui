@@ -9,6 +9,7 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core"
+import Carousel from "react-material-ui-carousel"
 import PropTypes from "prop-types"
 import { productDetailsTable, product } from "./constants"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
@@ -38,8 +39,6 @@ class ProductDetailsTable extends Component {
           <Table aria-label="a dense table">
             <TableHead>
               <TableRow>
-                {/* <TableCell>Product Image</TableCell>
-                <TableCell>Product Description</TableCell> */}
                 {product.map((tcell) => (
                   <TableCell>{tcell}</TableCell>
                 ))}
@@ -48,17 +47,20 @@ class ProductDetailsTable extends Component {
             <tbody>
               <TableRow>
                 <TableCell>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={productDetails.productImagePath}
-                  >
-                    <img
-                      className="thumbnail"
-                      src={productDetails.productImagePath}
-                      alt="none"
-                    />
-                  </a>
+                  <Carousel interval="3000" animation="fade">
+                    {productDetails.productImagePath
+                      .slice(0)
+                      .reverse()
+                      .map((image) => (
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={image}
+                        >
+                          <img className="thumbnail" src={image} alt="none" />
+                        </a>
+                      ))}
+                  </Carousel>
                 </TableCell>
                 <TableCell>{productDetails.productDescription}</TableCell>
               </TableRow>

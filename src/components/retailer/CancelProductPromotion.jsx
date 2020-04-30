@@ -76,7 +76,9 @@ class CancelProductPromotion extends Component {
               </TableCell>
               <TableCell>
                 <Typography variant="subtitle1" gutterBottom>
-                  {productDetails.effectivePriceObj.effectivePrice}
+                  {productDetails.effectivePriceObj !== null
+                    ? productDetails.effectivePriceObj.effectivePrice
+                    : productDetails.productBasePrice}
                 </Typography>
               </TableCell>
               <TableCell>
@@ -153,7 +155,7 @@ class CancelProductPromotion extends Component {
                       fullWidth
                       variant="contained"
                       color="primary"
-                      className="{classes.submit}"
+                      className="form-button {classes.submit}"
                       onClick={(e) => {
                         // eslint-disable-next-line no-alert
                         if (window.confirm("Are you sure you wish to cancel?"))

@@ -99,19 +99,21 @@ class SelectProduct extends Component {
                   name="productName"
                 />
               </FormControl>
-              {productName === "" && <Link to="/selectproduct" />}
-              <Link className="button-link" to="/vendor/editproduct">
-                <Button
-                  id="edit-price-btn"
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                >
-                  Edit Item Price
-                </Button>
-              </Link>
+
+              {productName !== "" && (
+                <Link className="button-link" to="/vendor/editproduct">
+                  <Button
+                    id="edit-price-btn"
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit} submit-pad"
+                  >
+                    Edit Item Price
+                  </Button>
+                </Link>
+              )}
             </form>
           </div>
         </div>

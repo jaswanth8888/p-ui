@@ -119,7 +119,7 @@ class WithdrawZonePromotion extends Component {
                                     halfWidth
                                     variant="contained"
                                     color="primary"
-                                    className="{classes.submit}"
+                                    className="form-button {classes.submit}"
                                     onClick={(e) => {
                                       if (
                                         // eslint-disable-next-line no-alert
