@@ -325,7 +325,7 @@ class AddProduct extends Component {
                 />
 
                 {productCategory === "ALCOHOL_PROD" && (
-                  <div>
+                  <>
                     <TextField
                       variant="outlined"
                       margin="normal"
@@ -354,50 +354,77 @@ class AddProduct extends Component {
                       value={volume}
                       autoFocus
                     />
-                    <InputLabel htmlFor="outlined-age-native-simple">
-                      Units Of Measuremment
-                    </InputLabel>
-                    <Select
-                      labelId="uom"
-                      fullWidth
+                    <FormControl
                       variant="outlined"
-                      margin="normal"
-                      required
-                      name="uom"
-                      label="uom"
-                      value={uom}
-                      id="alc-prod"
-                      onChange={this.handleChange}
+                      fullWidth
+                      className="space-margin-top"
                     >
-                      <MenuItem value="Lts">LTS</MenuItem>
-                      <MenuItem value="GALLONs">GALLONS</MenuItem>
-                      <MenuItem value="ML">ML </MenuItem>
-                    </Select>
-                  </div>
+                      <InputLabel htmlFor="outlined-age-native-simple">
+                        Units Of Measuremment
+                      </InputLabel>
+                      <Select
+                        labelId="uom"
+                        fullWidth
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        name="uom"
+                        label="uom"
+                        value={uom}
+                        id="alc-prod"
+                        onChange={this.handleChange}
+                      >
+                        <MenuItem value="Lts">LTS</MenuItem>
+                        <MenuItem value="GALLONs">GALLONS</MenuItem>
+                        <MenuItem value="ML">ML </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </>
                 )}
                 {productCategory === "BABY_PROD" && (
-                  <div>
-                    <InputLabel htmlFor="outlined-age-native-simple">
-                      Units Of Measuremment
-                    </InputLabel>
-
-                    <Select
-                      labelId="uom"
-                      fullWidth
+                  <>
+                    <FormControl
                       variant="outlined"
-                      margin="normal"
-                      required
-                      name="uom"
-                      label="uom"
-                      onChange={this.handleChange}
-                      value={uom}
-                      id="baby-prod"
+                      fullWidth
+                      className="space-margin-top"
                     >
-                      <MenuItem value="KGs">KGs</MenuItem>
-                      <MenuItem value="Pounds">Pounds</MenuItem>
-                    </Select>
-                  </div>
+                      <InputLabel htmlFor="outlined-age-native-simple">
+                        Units Of Measuremment
+                      </InputLabel>
+
+                      <Select
+                        labelId="uom"
+                        fullWidth
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        name="uom"
+                        label="uom"
+                        onChange={this.handleChange}
+                        value={uom}
+                        id="baby-prod"
+                      >
+                        <MenuItem value="KGs">KGs</MenuItem>
+                        <MenuItem value="Pounds">Pounds</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </>
                 )}
+
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Product description"
+                  name="productDescription"
+                  autoComplete="productDescription"
+                  onChange={this.handleChange}
+                  value={productDescription}
+                  aria-label="minimum height"
+                  rowsMin={3}
+                  placeholder="product discription"
+                />
                 <div className="upload-btn-wrapper">
                   <Button
                     type="button"
@@ -422,22 +449,6 @@ class AddProduct extends Component {
                   />
                 </div>
                 <div className="imagePreview" id="imagePreview" />
-
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  label="Product description"
-                  name="productDescription"
-                  autoComplete="productDescription"
-                  onChange={this.handleChange}
-                  value={productDescription}
-                  aria-label="minimum height"
-                  rowsMin={3}
-                  placeholder="product discription"
-                />
-
                 <Button
                   type="button"
                   fullWidth
