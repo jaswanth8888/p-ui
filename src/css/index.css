@@ -669,6 +669,7 @@ a {
   position: relative;
   overflow: hidden;
   display: inline-block;
+  padding: 15px 0px 15px;
 }
 
 .upload-btn-wrapper input[type=file] {

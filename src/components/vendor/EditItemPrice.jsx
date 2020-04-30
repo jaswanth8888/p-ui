@@ -209,7 +209,7 @@ class EditItemPrice extends Component {
                 type="button"
                 variant="contained"
                 color="primary"
-                className="{classes.submit}"
+                className="form-button {classes.submit}"
                 onClick={this.handleSubmit}
                 style={{ marginTop: "10px" }}
               >
