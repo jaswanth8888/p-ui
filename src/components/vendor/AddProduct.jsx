@@ -369,7 +369,7 @@ class AddProduct extends Component {
                         margin="normal"
                         required
                         name="uom"
-                        label="uom"
+                        label="unitsOfMeasurement"
                         value={uom}
                         id="alc-prod"
                         onChange={this.handleChange}
