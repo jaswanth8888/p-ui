@@ -421,7 +421,6 @@ class AddProduct extends Component {
                     onChange={this.onFileChange}
                   />
                 </div>
-                
                 <div className="imagePreview" id="imagePreview" />
 
                 <TextField
