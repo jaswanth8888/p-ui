@@ -13,11 +13,7 @@ export const FAILURE = "FAILURE"
 
 // export const RETAILER_BASE_URL = "http://10.102.130.31:8765"  //Prerana system
 // export const RETAILER_BASE_URL = "http://10.150.16.126:8765" // centOS
-<<<<<<< HEAD
 // "http://pps-blr-microservices-balancer-98019398.us-east-1.elb.amazonaws.com" // cloud */
-=======
-//   "http://pps-blr-microservices-balancer-98019398.us-east-1.elb.amazonaws.com" // cloud */
->>>>>>> a965c681dbc3ffce04781f3b29aa08345d68fe17
 // export const RETAILER_BASE_URL = "http://10.150.222.113:8765";  //saahil
 // export const RETAILER_BASE_URL = "http://10.102.137.146:8765";
 // export const RETAILER_BASE_URL = "http://10.102.143.225:8765";
