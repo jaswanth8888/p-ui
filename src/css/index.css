@@ -645,3 +645,12 @@ a {
 #top-pad {
   margin-top: 20px;
 }
+
+#imagePreview {
+  display: flex;
+  flex-wrap: nowrap;
+   overflow-x: auto;
+   -webkit-overflow-scrolling: touch;
+   -ms-overflow-style: -ms-autohiding-scrollbar;
+   width:200px;
+}

@@ -42,7 +42,26 @@ class AddProduct extends Component {
 
   onFileChange = (event) => {
     // console.log(event.target.files)
+    this.readURL(event)
     this.setState({ selectedImages: event.target.files })
+  }
+
+  readURL = (input) => {
+    document.getElementById("imagePreview").innerHTML = ""
+    const { files } = input.target
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+      if (!file.type.match("image")) continue
+      const reader = new FileReader()
+      reader.addEventListener("load", function (event) {
+        const picFile = event.target
+        let images = document.getElementById("imagePreview").innerHTML
+        console.log(picFile.result)
+        images += `<div><img class='thumbnail' src=${picFile.result} /><div>`
+        document.getElementById("imagePreview").innerHTML = images
+      })
+      reader.readAsDataURL(file)
+    }
   }
 
   handleSubmit() {
@@ -406,6 +425,7 @@ class AddProduct extends Component {
                   multiple
                   onChange={this.onFileChange}
                 />
+                <div className="imagePreview" id="imagePreview" />
 
                 <TextField
                   variant="outlined"
