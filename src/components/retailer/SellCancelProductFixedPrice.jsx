@@ -72,7 +72,7 @@ class SellCancelProductFixedPrice extends Component {
               <div className="product-table-data">
                 <TableContainer component={Paper} className="product-table">
                   <Table size="small" aria-label="a dense table">
-                  <TableHead>
+                    <TableHead>
                       <TableRow className="product-details-row">
                         <TableCell className="table-text" colSpan={2}>
                           Product Image
@@ -160,44 +160,46 @@ class SellCancelProductFixedPrice extends Component {
                   </Table>
                 </TableContainer>
               </div>
-              <Button
-                fullWidth
-                type="button"
-                variant="contained"
-                color="primary"
-                className="{classes.submit} submit-pad"
-                onClick={() => {
-                  if (
-                    // eslint-disable-next-line no-alert
-                    window.confirm(
-                      "Are you sure you wish to sell it at fixed price?"
+              <>
+                <Button
+                  fullWidth
+                  type="button"
+                  variant="contained"
+                  color="primary"
+                  className="form-button {classes.submit} submit-pad"
+                  onClick={() => {
+                    if (
+                      // eslint-disable-next-line no-alert
+                      window.confirm(
+                        "Are you sure you wish to sell it at fixed price?"
+                      )
                     )
-                  )
-                    this.handleSubmitSell(productDetails.productName)
-                }}
-                id="sell-price-change-btn"
-              >
-                Sell Only At Fixed Price
-              </Button>
-              <Button
-                fullWidth
-                type="button"
-                variant="contained"
-                color="primary"
-                className="{classes.submit} submit-pad"
-                onClick={() => {
-                  if (
-                    // eslint-disable-next-line no-alert
-                    window.confirm(
-                      "Are you sure you wish to cancel selling at fixed price?"
+                      this.handleSubmitSell(productDetails.productName)
+                  }}
+                  id="sell-price-change-btn"
+                >
+                  Sell Only At Fixed Price
+                </Button>
+                <Button
+                  fullWidth
+                  type="button"
+                  variant="contained"
+                  color="primary"
+                  className="form-button {classes.submit} submit-pad"
+                  onClick={() => {
+                    if (
+                      // eslint-disable-next-line no-alert
+                      window.confirm(
+                        "Are you sure you wish to cancel selling at fixed price?"
+                      )
                     )
-                  )
-                    this.handleSubmitCancel(productDetails.productName)
-                }}
-                id="cancel-price-change-btn"
-              >
-                Cancel Selling At Fixed Price
-              </Button>
+                      this.handleSubmitCancel(productDetails.productName)
+                  }}
+                  id="cancel-price-change-btn"
+                >
+                  Cancel Selling At Fixed Price
+                </Button>
+              </>
               <Message />
             </div>
           </div>
