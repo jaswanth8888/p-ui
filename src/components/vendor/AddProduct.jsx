@@ -7,6 +7,7 @@ import {
   InputAdornment,
   MenuItem,
 } from "@material-ui/core"
+import CloudUploadIcon from "@material-ui/icons/CloudUpload"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import PropTypes from "prop-types"
@@ -49,18 +50,18 @@ class AddProduct extends Component {
   readURL = (input) => {
     document.getElementById("imagePreview").innerHTML = ""
     const { files } = input.target
-    for (let i = 0; i < files.length; i++) {
+    for (let i = 0; i < files.length; i += 1) {
       const file = files[i]
-      if (!file.type.match("image")) continue
-      const reader = new FileReader()
-      reader.addEventListener("load", function (event) {
-        const picFile = event.target
-        let images = document.getElementById("imagePreview").innerHTML
-        console.log(picFile.result)
-        images += `<div><img class='thumbnail' src=${picFile.result} /><div>`
-        document.getElementById("imagePreview").innerHTML = images
-      })
-      reader.readAsDataURL(file)
+      if (file.type.match("image")) {
+        const reader = new FileReader()
+        reader.addEventListener("load", (event) => {
+          const picFile = event.target
+          let images = document.getElementById("imagePreview").innerHTML
+          images += `<div><img class='thumbnail' src=${picFile.result} /><div>`
+          document.getElementById("imagePreview").innerHTML = images
+        })
+        reader.readAsDataURL(file)
+      }
     }
   }
 
@@ -75,8 +76,6 @@ class AddProduct extends Component {
       productCategory,
     } = product
     const test = this.props
-    // console.log(product)
-    console.log(selectedImages)
     if (productName && productBasePrice > 0 && initialQuantity > 1) {
       if (
         (productCategory === "ALCOHOL_PROD" && initialQuantity < 101) ||
@@ -399,32 +398,30 @@ class AddProduct extends Component {
                     </Select>
                   </div>
                 )}
-
-                {/* <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="productImagePath"
-                  label="Product image path"
-                  name="productImagePath"
-                  autoComplete="productImagePath"
-                  onChange={this.handleChange}
-                  value={productImagePath}
-                  autoFocus
-                /> */}
-
-                <input
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  type="file"
-                  name="productImage"
-                  id="productImage"
-                  multiple
-                  onChange={this.onFileChange}
-                />
+                <div className="upload-btn-wrapper">
+                  <Button
+                    type="button"
+                    className="btn"
+                    fullWidth
+                    variant="outlined"
+                    color="primary"
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    Choose Product Images
+                  </Button>
+                  <input
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    type="file"
+                    name="productImage"
+                    id="productImage"
+                    multiple
+                    onChange={this.onFileChange}
+                  />
+                </div>
+                <br />
                 <div className="imagePreview" id="imagePreview" />
 
                 <TextField
