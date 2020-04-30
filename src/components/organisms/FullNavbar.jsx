@@ -62,7 +62,6 @@ import Registration from "../vendor/Registration"
 import CreateAdmin from "../retailer/CreateAdmin"
 import AdminLogin from "../admin/AdminLogin"
 import SellCancelProductFixedPriceRouter from "../retailer/SellCancelProductFixedPriceRouter"
-import ApprovePromotions from "../retailer/ApprovePromotionsRouter"
 import ApprovePromotionsRouter from "../retailer/ApprovePromotionsRouter"
 
 const drawerWidth = 250

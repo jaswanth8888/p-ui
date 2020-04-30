@@ -1,4 +1,4 @@
-import { ADMIN_LOGIN, ADMIN_LOGOUT, PROMOTION_ALERT } from "../actions/types";
+import { ADMIN_LOGIN, ADMIN_LOGOUT, PROMOTION_ALERT } from "../actions/types"
 
 const initialState = {
   msg: "",
@@ -7,17 +7,17 @@ const initialState = {
     success: false,
   },
   promotionAlert: {},
-};
+}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case ADMIN_LOGIN:
-      return { ...state, loginStatus: action.loginStatus };
+      return { ...state, loginStatus: action.loginStatus }
     case ADMIN_LOGOUT:
-      return { ...initialState };
+      return { ...initialState }
     case PROMOTION_ALERT:
-      return { ...state, promotionAlert: action.promotionAlert };
+      return { ...state, promotionAlert: action.promotionAlert }
     default:
-      return { ...state };
+      return { ...state }
   }
-};
+}

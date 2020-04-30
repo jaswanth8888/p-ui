@@ -159,6 +159,7 @@ class ApprovePromotions extends Component {
                 </Table>
               </TableContainer>
             </div>
+            <Message />
           </div>
         </div>
       </div>
@@ -168,8 +169,6 @@ class ApprovePromotions extends Component {
 
 ApprovePromotions.propTypes = {
   productName: PropTypes.string.isRequired,
-  zone: PropTypes.string.isRequired,
-  getPromotionsInzone: PropTypes.shape.isRequired,
   getPendingPromotions: PropTypes.func.isRequired,
   pendingPromotions: PropTypes.shape.isRequired,
   approvePromotions: PropTypes.func.isRequired,

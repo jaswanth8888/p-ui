@@ -54,7 +54,7 @@ class DefinePromotionInZone extends Component {
     date.setMinutes(date.getMinutes() + 30)
     const { checkDate } = this.state
 
-    this.setState({ checkDate: { ...checkDate, appliedDate: date } })
+    checkDate.appliedDate = date
 
     console.log(`checkDate${checkDate.appliedDate}`)
 
@@ -201,7 +201,9 @@ class DefinePromotionInZone extends Component {
                 <div className="pt-10">
                   {loggedInUser.userType === "admin" &&
                   promotionAlert.promotionAlreadyApplied === 1 ? (
-                    <Alert severity="info">This product has a promotion which is in effect</Alert>
+                    <Alert severity="info">
+                      This product has a promotion which is in effect
+                    </Alert>
                   ) : (
                     ""
                   )}
