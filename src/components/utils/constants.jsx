@@ -124,6 +124,16 @@ export const withdrawZonePromotion = [
   "Promotion To Date",
   "Withdraw",
 ]
+export const approvePromotionTable = [
+  "Product Price",
+  "Promotion Applied Date",
+  "Promotion From Date",
+  "Promotion To Date",
+  "Promotion Applied To Zone/Cluster",
+  "Accept/Reject",
+]
+export const approvePromotion = "Approve Promotions"
+export const approvePromotionZoneCluster = "Promotions in Zone and Cluster"
 export const zoneNameCheck = "Zone has to be greater than 5 letters"
 export const createZone = "Create a Zone"
 export const cancelNotEffectivePriceChange = "Cancel Not Effective Price Change"

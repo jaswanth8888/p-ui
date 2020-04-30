@@ -47,11 +47,17 @@ export const login = (loginDetails) => async (dispatch) => {
     })
 }
 
-export const getPromotionAlert = (date) => async (dispatch) => {
+export const getPromotionAlert = (productName, zoneName, appliedDate) => async (
+  dispatch
+) => {
   await axios
-    .post(`http://www.mocky.io/v2/5ea8e43a2d000097883a414d`, date, {
-      headers: { Authorization: TOKEN() },
-    })
+    .post(
+      `${RETAILER_BASE_URL}/product-management/product/status/${productName}/${zoneName}`,
+      appliedDate,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
     .then((res) => {
       dispatch({ type: PROMOTION_ALERT, promotionAlert: res.data })
     })

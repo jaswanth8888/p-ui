@@ -60,6 +60,8 @@ import {
   CHECK_ASSIGNED_CLUSTER,
   CLEAR_ASSIGNED_PRICE,
   MESSAGE_SET,
+  PENDING_PROMOTIONS,
+  APPROVE_PROMOTION,
 } from "./types"
 
 const TOKEN = () => {
@@ -1206,4 +1208,54 @@ export const checkAssignedCluster = (
 
 export const clearAssignedPrice = (assignedPriceAlt) => (dispatch) => {
   dispatch({ type: CLEAR_ASSIGNED_PRICE, assignedPrice: assignedPriceAlt })
+}
+
+export const getPendingPromotions = (productName) => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/product/promotion/${productName}`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: PENDING_PROMOTIONS, pendingPromotions: res.data })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
+}
+
+export const approvePromotions = (promotionId, productName, status) => async (
+  dispatch
+) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/product/promotion/${productName}/${promotionId}/${status}`,{},
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then(() => {
+      if (status === "APPROVED") {
+        dispatch({
+          type: APPROVE_PROMOTION,
+          msg: "Accepted Successfully",
+          msgSeverity: "success",
+        })
+      } else if (status === "REJECTED") {
+        dispatch({
+          type: APPROVE_PROMOTION,
+          msg: "Rejected Successfully",
+          msgSeverity: "success",
+        })
+      }
+    })
+    .catch(() => {
+      dispatch({
+        type: APPROVE_PROMOTION,
+        msg: "Something went wrong, please try again.",
+        msgSeverity: "warning",
+      })
+    })
 }

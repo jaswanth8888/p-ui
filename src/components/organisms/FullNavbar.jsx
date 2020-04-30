@@ -1,69 +1,71 @@
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
-import Tab from "@material-ui/core/Tab";
-import Toolbar from "@material-ui/core/Toolbar";
-import Tooltip from "@material-ui/core/Tooltip";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import DateRangeIcon from "@material-ui/icons/DateRange";
-import EventBusyIcon from "@material-ui/icons/EventBusy";
-import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
-import GroupIcon from "@material-ui/icons/Group";
-import LocationCityIcon from "@material-ui/icons/LocationCity";
-import MenuIcon from "@material-ui/icons/Menu";
-import PublicIcon from "@material-ui/icons/Public";
-import StoreIcon from "@material-ui/icons/Store";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import LocalOfferIcon from "@material-ui/icons/LocalOffer";
-import clsx from "clsx";
-import React from "react";
-import ReactFlagsSelect from "react-flags-select";
-import "react-flags-select/css/react-flags-select.css";
-import "react-flags-select/scss/react-flags-select.scss";
-import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import PropTypes from "prop-types";
-import { logout } from "../../redux/actions/RetailerActions";
-import Login from "../Login";
-import AddGroup from "../retailer/AddGroup";
-import CancelPromotionRouter from "../retailer/CancelPromotionRouter";
-import Dashboard from "../utils/Dashboard";
-import ClusterForm from "../retailer/ClusterForm";
-import ClusterPromotionRouter from "../retailer/ClusterPromotionRouter";
-import ProductRouter from "../retailer/ProductRouter";
-import QueryOnDateRouter from "../retailer/QueryOnDateRouter";
-import StoreForm from "../retailer/StoreForm";
-import ViewClusters from "../retailer/ViewClusters";
-import ViewZones from "../retailer/ViewZones";
-import WithdrawPromotionClusterRouter from "../retailer/WithdrawPromotionClusterRouter";
-import WithdrawPromotionZoneRouter from "../retailer/WithdrawPromotionZoneRouter";
-import ZoneClusterRouter from "../retailer/ZoneClusterRouter";
-import ZoneForm from "../retailer/ZoneForm";
-import ZonePromotionRouter from "../retailer/ZonePromotionRouter";
-import PriceOnDate from "../retailer/PriceOnDate";
-import AssignPriceToProduct from "../retailer/AssignPriceToProduct";
-import CancelNotEffectivePriceChange from "../retailer/CancelNotEffectivePriceChange";
-import CancelEffectivePriceChange from "../retailer/CancelEffectivePriceChange";
-import AddProduct from "../vendor/AddProduct";
-import EditItemPrice from "../vendor/EditItemPrice";
-import SelectProduct from "../vendor/SelectProduct";
-import VendorLogin from "../vendor/VendorLogin";
-import Registration from "../vendor/Registration";
-import CreateAdmin from "../retailer/CreateAdmin";
-import AdminLogin from "../admin/AdminLogin";
-import SellCancelProductFixedPriceRouter from "../retailer/SellCancelProductFixedPriceRouter";
+import AppBar from "@material-ui/core/AppBar"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import Divider from "@material-ui/core/Divider"
+import Drawer from "@material-ui/core/Drawer"
+import Hidden from "@material-ui/core/Hidden"
+import Button from "@material-ui/core/Button"
+import IconButton from "@material-ui/core/IconButton"
+import List from "@material-ui/core/List"
+import ListItem from "@material-ui/core/ListItem"
+import ListItemIcon from "@material-ui/core/ListItemIcon"
+import ListItemText from "@material-ui/core/ListItemText"
+import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles"
+import Tab from "@material-ui/core/Tab"
+import Toolbar from "@material-ui/core/Toolbar"
+import Tooltip from "@material-ui/core/Tooltip"
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
+import DateRangeIcon from "@material-ui/icons/DateRange"
+import EventBusyIcon from "@material-ui/icons/EventBusy"
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted"
+import GroupIcon from "@material-ui/icons/Group"
+import LocationCityIcon from "@material-ui/icons/LocationCity"
+import MenuIcon from "@material-ui/icons/Menu"
+import PublicIcon from "@material-ui/icons/Public"
+import StoreIcon from "@material-ui/icons/Store"
+import PersonAddIcon from "@material-ui/icons/PersonAdd"
+import LocalOfferIcon from "@material-ui/icons/LocalOffer"
+import clsx from "clsx"
+import React from "react"
+import ReactFlagsSelect from "react-flags-select"
+import "react-flags-select/css/react-flags-select.css"
+import "react-flags-select/scss/react-flags-select.scss"
+import { useTranslation } from "react-i18next"
+import { connect } from "react-redux"
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom"
+import PropTypes from "prop-types"
+import { logout } from "../../redux/actions/RetailerActions"
+import Login from "../Login"
+import AddGroup from "../retailer/AddGroup"
+import CancelPromotionRouter from "../retailer/CancelPromotionRouter"
+import Dashboard from "../utils/Dashboard"
+import ClusterForm from "../retailer/ClusterForm"
+import ClusterPromotionRouter from "../retailer/ClusterPromotionRouter"
+import ProductRouter from "../retailer/ProductRouter"
+import QueryOnDateRouter from "../retailer/QueryOnDateRouter"
+import StoreForm from "../retailer/StoreForm"
+import ViewClusters from "../retailer/ViewClusters"
+import ViewZones from "../retailer/ViewZones"
+import WithdrawPromotionClusterRouter from "../retailer/WithdrawPromotionClusterRouter"
+import WithdrawPromotionZoneRouter from "../retailer/WithdrawPromotionZoneRouter"
+import ZoneClusterRouter from "../retailer/ZoneClusterRouter"
+import ZoneForm from "../retailer/ZoneForm"
+import ZonePromotionRouter from "../retailer/ZonePromotionRouter"
+import PriceOnDate from "../retailer/PriceOnDate"
+import AssignPriceToProduct from "../retailer/AssignPriceToProduct"
+import CancelNotEffectivePriceChange from "../retailer/CancelNotEffectivePriceChange"
+import CancelEffectivePriceChange from "../retailer/CancelEffectivePriceChange"
+import AddProduct from "../vendor/AddProduct"
+import EditItemPrice from "../vendor/EditItemPrice"
+import SelectProduct from "../vendor/SelectProduct"
+import VendorLogin from "../vendor/VendorLogin"
+import Registration from "../vendor/Registration"
+import CreateAdmin from "../retailer/CreateAdmin"
+import AdminLogin from "../admin/AdminLogin"
+import SellCancelProductFixedPriceRouter from "../retailer/SellCancelProductFixedPriceRouter"
+import ApprovePromotions from "../retailer/ApprovePromotionsRouter"
+import ApprovePromotionsRouter from "../retailer/ApprovePromotionsRouter"
 
-const drawerWidth = 250;
+const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -95,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
-}));
+}))
 
 const StyledTab = withStyles({
   root: {
@@ -103,19 +105,19 @@ const StyledTab = withStyles({
     fontFamily: "Oswald, sans-serif",
     fontSize: "18px",
   },
-})(Tab);
+})(Tab)
 
 function FullNavbar(props) {
-  const classes = useStyles();
-  const { t, i18n } = useTranslation();
-  const theme = useTheme();
-  const [open] = React.useState(false);
-  const { container, loggedInUser } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const classes = useStyles()
+  const { t, i18n } = useTranslation()
+  const theme = useTheme()
+  const [open] = React.useState(false)
+  const { container, loggedInUser } = props
+  const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+    setMobileOpen(!mobileOpen)
+  }
 
   const Retailerdrawer = (
     <div>
@@ -152,7 +154,7 @@ function FullNavbar(props) {
         )}
 
         {loggedInUser.userType === "Retailer" && (
-          <Link to="/admin">
+          <Link to="/approvepromotion">
             <Tooltip title="Create Admin" placement="right">
               <ListItem button id="create-admin-btn">
                 <ListItemIcon>
@@ -417,7 +419,7 @@ function FullNavbar(props) {
         </Link>
       </List>
     </div>
-  );
+  )
 
   const Vendordrawer = (
     <div>
@@ -452,7 +454,7 @@ function FullNavbar(props) {
         </Link>
       </List>
     </div>
-  );
+  )
 
   return (
     <div className={classes.root}>
@@ -500,8 +502,8 @@ function FullNavbar(props) {
                     placeholder="Select Language"
                     defaultCountry={sessionStorage.getItem("countryCode")}
                     onSelect={(countryCode) => {
-                      i18n.changeLanguage(countryCode);
-                      sessionStorage.setItem("countryCode", countryCode);
+                      i18n.changeLanguage(countryCode)
+                      sessionStorage.setItem("countryCode", countryCode)
                     }}
                   />
                   &emsp;
@@ -512,10 +514,10 @@ function FullNavbar(props) {
                     <StyledTab
                       label={t("header.logOut")}
                       onClick={() => {
-                        sessionStorage.removeItem("token");
-                        sessionStorage.removeItem("userType");
+                        sessionStorage.removeItem("token")
+                        sessionStorage.removeItem("userType")
                         // sessionStorage.removeItem()
-                        props.logout();
+                        props.logout()
                       }}
                     />
                   </Link>
@@ -556,8 +558,8 @@ function FullNavbar(props) {
                   placeholder="Select Language"
                   defaultCountry={sessionStorage.getItem("countryCode")}
                   onSelect={(countryCode) => {
-                    i18n.changeLanguage(countryCode);
-                    sessionStorage.setItem("countryCode", countryCode);
+                    i18n.changeLanguage(countryCode)
+                    sessionStorage.setItem("countryCode", countryCode)
                   }}
                 />
               </div>
@@ -630,6 +632,7 @@ function FullNavbar(props) {
             path={["/sellcancel/fixedprice", "/sellcancel/fixedprice/product"]}
             component={SellCancelProductFixedPriceRouter}
           />
+
           <Route
             exact
             path={["/cancel/promotion", "/cancel/productdetails"]}
@@ -699,22 +702,27 @@ function FullNavbar(props) {
           <Route exact path="/vendor/editproduct" component={EditItemPrice} />
           <Route exact path="/admin" component={CreateAdmin} />
           <Route exact path="/admin/login" component={AdminLogin} />
+          <Route
+            exact
+            path="/approvepromotion"
+            component={ApprovePromotionsRouter}
+          />
         </Switch>
       </Router>
     </div>
-  );
+  )
 }
 FullNavbar.propTypes = {
   logout: PropTypes.func.isRequired,
   container: PropTypes.shape.isRequired,
   loggedInUser: PropTypes.shape.isRequired,
-};
+}
 
 const stateAsProps = (store) => ({
   loggedInUser: store.RetailerReducer.loggedInUser,
   loginStatus: store.RetailerReducer.loginStatus,
-});
+})
 const actionsAsProps = {
   logout,
-};
-export default connect(stateAsProps, actionsAsProps)(FullNavbar);
+}
+export default connect(stateAsProps, actionsAsProps)(FullNavbar)

@@ -19,11 +19,7 @@ import {
 class DefinePromotionInZone extends Component {
   constructor(props) {
     super(props)
-    const {
-      zone,
-      loggedInUser,
-      getPromotionAlert: getPromotionAlertAlt,
-    } = this.props
+    const { zone, loggedInUser } = this.props
 
     this.state = {
       promotionDetails: {
@@ -36,17 +32,33 @@ class DefinePromotionInZone extends Component {
         addedBy: loggedInUser.userName + "/" + loggedInUser.userType,
       },
       levelOption: "zone",
+      checkDate: { appliedDate: new Date() },
     }
 
-    var date = new Date()
-    date.setHours(date.getHours() + 5)
-    date.setMinutes(date.getMinutes() + 30)
-
-    getPromotionAlertAlt(date)
     this.handleChangePercentage = this.handleChangePercentage.bind(this)
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
+    const {
+      productName,
+      zone,
+      getPromotionAlert: getPromotionAlertAlt,
+    } = this.props
+
+    const date = new Date()
+    date.setHours(date.getHours() + 5)
+    date.setMinutes(date.getMinutes() + 30)
+    const { checkDate } = this.state
+
+    this.setState({ checkDate: { ...checkDate, appliedDate: date } })
+
+    console.log(`checkDate${checkDate.appliedDate}`)
+
+    getPromotionAlertAlt(productName, zone, checkDate)
   }
 
   handleSubmit = (e) => {
@@ -176,23 +188,23 @@ class DefinePromotionInZone extends Component {
               <div className="pt-10">
                 <div className="pt-10">
                   {loggedInUser.userType === "admin" &&
-                    promotionAlert.promotionHasBeenAppliedLast72hours === 1 ? (
-                      <Alert severity="info">
-                        A promotion was defined in the last 72 hours. Further
-                        addition requires retailer approval
-                      </Alert>
-                    ) : (
-                      ""
-                    )}
+                  promotionAlert.promotionHasBeenAppliedLast72hours === 1 ? (
+                    <Alert severity="info">
+                      A promotion was defined in the last 72 hours. Further
+                      addition requires retailer approval
+                    </Alert>
+                  ) : (
+                    ""
+                  )}
                 </div>
 
                 <div className="pt-10">
                   {loggedInUser.userType === "admin" &&
-                    promotionAlert.promotionAlreadyApplied === 1 ? (
-                      <Alert severity="info"> Promotion already defined</Alert>
-                    ) : (
-                      ""
-                    )}
+                  promotionAlert.promotionAlreadyApplied === 1 ? (
+                    <Alert severity="info">This product has a promotion which is in effect</Alert>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <Typography className="card-header" variant="h6">

@@ -51,6 +51,8 @@ import {
   CHECK_ASSIGNED_ZONE,
   CHECK_ASSIGNED_CLUSTER,
   CLEAR_ASSIGNED_PRICE,
+  PENDING_PROMOTIONS,
+  APPROVE_PROMOTION,
 } from "../actions/types"
 
 const initialState = {
@@ -105,6 +107,7 @@ const initialState = {
     ZoneNames: [],
   },
   assignedPrice: "",
+  pendingPromotions: [],
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -286,6 +289,13 @@ export default (state = initialState, action = {}) => {
       }
     case CLEAR_ASSIGNED_PRICE:
       return { ...state, assignedPrice: initialState.assignedPrice }
+    case PENDING_PROMOTIONS:
+      return {
+        ...state,
+        pendingPromotions: action.pendingPromotions.pendingPromotion,
+      }
+    case APPROVE_PROMOTION:
+      return { ...state, msg: action.msg, msgSeverity: action.msgSeverity }
     default:
       return { ...state }
   }
