@@ -185,7 +185,7 @@ class DefinePromotionInZone extends Component {
                 <div className="pt-10">
                   {loggedInUser.userType === "admin" &&
                   promotionAlert.promotionHasBeenAppliedLast72hours === 1 ? (
-                    <Alert severity="info">
+                    <Alert severity="info" id="alert-1">
                       A promotion was defined in the last 72 hours. Further
                       addition requires retailer approval
                     </Alert>
@@ -197,7 +197,7 @@ class DefinePromotionInZone extends Component {
                 <div className="pt-10">
                   {loggedInUser.userType === "admin" &&
                   promotionAlert.promotionAlreadyApplied === 1 ? (
-                    <Alert severity="info">
+                    <Alert severity="info" id="alert-2">
                       This product has a promotion which is in effect
                     </Alert>
                   ) : (

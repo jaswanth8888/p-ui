@@ -77,6 +77,7 @@ class ApprovePromotionsForm extends Component {
                   component="h1"
                   variant="h4"
                   className="help-block-h4"
+                  id="product-name"
                 >
                   Select a Product
                 </Typography>
