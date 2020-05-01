@@ -86,10 +86,6 @@ class AddProduct extends Component {
         Array.from(selectedImages).forEach((file) => {
           data.append("files", file)
         })
-        // for (const value of data.values()) {
-        //   console.log(value)
-        // }
-        // console.log(data)
         test.postProduct(data)
       }
     }

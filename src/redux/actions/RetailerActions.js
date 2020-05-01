@@ -529,6 +529,16 @@ export const assignToCluster = (
       const { response } = err
       if (
         response.status === 400 &&
+        response.data.message === "Product is already associated with cluster"
+      ) {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: "Product is already associated with cluster",
+          msgSeverity: "error",
+          statusCode: response.status,
+        })
+      } else if (
+        response.status === 400 &&
         response.data.message === "Quantity Insufficient"
       ) {
         dispatch({ type: MESSAGE_SET_NULL })
@@ -593,7 +603,7 @@ export const assignToZone = (zoneDetails, zoneName, productName) => async (
       ) {
         dispatch({
           type: ASSIGN_TO_ZONE,
-          msg: "Product is already associated with zone, please try again",
+          msg: "Product is already associated with zone",
           msgSeverity: "error",
           statusCode: response.status,
         })
@@ -718,7 +728,7 @@ export const getEffectivePrice = (parameter, productName) => async (
     .catch((err) => {
       const { response } = err
       if (
-        response.status === 500 &&
+        response.status === 400 &&
         response.data.message ===
           "Effective price is already defined for this product"
       ) {
