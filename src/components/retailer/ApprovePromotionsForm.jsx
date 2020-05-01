@@ -101,18 +101,20 @@ class ApprovePromotionsForm extends Component {
                 />
               </FormControl>
               {productName === "" && <Link to="/approvepromotion" />}
-              <Link className="button-link" to="/approvepromotionpage">
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                  id="selprods-submit"
-                >
-                  Approve Promotions
-                </Button>
-              </Link>
+              {productName !== "" && (
+                <Link className="button-link" to="/approvepromotionpage">
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit} submit-pad"
+                    id="approve-btn"
+                  >
+                    Approve Promotions
+                  </Button>
+                </Link>
+              )}
             </form>
           </div>
         </div>

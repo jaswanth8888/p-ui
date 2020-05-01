@@ -7,6 +7,7 @@ import {
   InputAdornment,
   MenuItem,
 } from "@material-ui/core"
+import CloudUploadIcon from "@material-ui/icons/CloudUpload"
 import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import PropTypes from "prop-types"
@@ -32,23 +33,41 @@ class AddProduct extends Component {
         productGroup: "",
         abv: "",
         volume: "",
-        productImagePath: "",
       },
+      selectedImages: [],
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.onFileChange = this.onFileChange.bind(this)
   }
 
-  handleChange(e) {
-    const { name, value } = e.target
-    const { product } = this.state
-    product[name] = value
-    this.setState({ product })
+  onFileChange = (event) => {
+    // console.log(event.target.files)
+    this.readURL(event)
+    this.setState({ selectedImages: event.target.files })
+  }
+
+  readURL = (input) => {
+    document.getElementById("imagePreview").innerHTML = ""
+    const { files } = input.target
+    for (let i = 0; i < files.length; i += 1) {
+      const file = files[i]
+      if (file.type.match("image")) {
+        const reader = new FileReader()
+        reader.addEventListener("load", (event) => {
+          const picFile = event.target
+          let images = document.getElementById("imagePreview").innerHTML
+          images += `<div><img class='thumbnail' src=${picFile.result} /><div>`
+          document.getElementById("imagePreview").innerHTML = images
+        })
+        reader.readAsDataURL(file)
+      }
+    }
   }
 
   handleSubmit() {
     const { loggedInUser } = this.props
-    const { product } = this.state
+    const { product, selectedImages } = this.state
     product.companyName = loggedInUser.userName
     const {
       productName,
@@ -62,9 +81,21 @@ class AddProduct extends Component {
         (productCategory === "ALCOHOL_PROD" && initialQuantity < 101) ||
         (productCategory === "BABY_PROD" && initialQuantity < 501)
       ) {
-        test.postProduct(product)
+        const data = new FormData()
+        data.append("product", JSON.stringify(product))
+        Array.from(selectedImages).forEach((file) => {
+          data.append("files", file)
+        })
+        test.postProduct(data)
       }
     }
+  }
+
+  handleChange(e) {
+    const { name, value } = e.target
+    const { product } = this.state
+    product[name] = value
+    this.setState({ product })
   }
 
   render() {
@@ -76,7 +107,6 @@ class AddProduct extends Component {
         initialQuantity,
         productCategory,
         productDescription,
-        productImagePath,
         abv,
         volume,
         uom,
@@ -291,7 +321,7 @@ class AddProduct extends Component {
                 />
 
                 {productCategory === "ALCOHOL_PROD" && (
-                  <div>
+                  <>
                     <TextField
                       variant="outlined"
                       margin="normal"
@@ -320,64 +350,62 @@ class AddProduct extends Component {
                       value={volume}
                       autoFocus
                     />
-                    <InputLabel htmlFor="outlined-age-native-simple">
-                      Units Of Measuremment
-                    </InputLabel>
-                    <Select
-                      labelId="uom"
-                      fullWidth
+                    <FormControl
                       variant="outlined"
-                      margin="normal"
-                      required
-                      name="uom"
-                      label="uom"
-                      value={uom}
-                      id="alc-prod"
-                      onChange={this.handleChange}
+                      fullWidth
+                      className="space-margin-top"
                     >
-                      <MenuItem value="Lts">LTS</MenuItem>
-                      <MenuItem value="GALLONs">GALLONS</MenuItem>
-                      <MenuItem value="ML">ML </MenuItem>
-                    </Select>
-                  </div>
+                      <InputLabel htmlFor="outlined-age-native-simple">
+                        Units Of Measuremment
+                      </InputLabel>
+                      <Select
+                        labelId="uom"
+                        fullWidth
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        name="uom"
+                        label="unitsOfMeasurement"
+                        value={uom}
+                        id="alc-prod"
+                        onChange={this.handleChange}
+                      >
+                        <MenuItem value="Lts">LTS</MenuItem>
+                        <MenuItem value="GALLONs">GALLONS</MenuItem>
+                        <MenuItem value="ML">ML </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </>
                 )}
                 {productCategory === "BABY_PROD" && (
-                  <div>
-                    <InputLabel htmlFor="outlined-age-native-simple">
-                      Units Of Measuremment
-                    </InputLabel>
-
-                    <Select
-                      labelId="uom"
-                      fullWidth
+                  <>
+                    <FormControl
                       variant="outlined"
-                      margin="normal"
-                      required
-                      name="uom"
-                      label="uom"
-                      onChange={this.handleChange}
-                      value={uom}
-                      id="baby-prod"
+                      fullWidth
+                      className="space-margin-top"
                     >
-                      <MenuItem value="KGs">KGs</MenuItem>
-                      <MenuItem value="Pounds">Pounds</MenuItem>
-                    </Select>
-                  </div>
-                )}
+                      <InputLabel htmlFor="outlined-age-native-simple">
+                        Units Of Measuremment
+                      </InputLabel>
 
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="productImagePath"
-                  label="Product image path"
-                  name="productImagePath"
-                  autoComplete="productImagePath"
-                  onChange={this.handleChange}
-                  value={productImagePath}
-                  autoFocus
-                />
+                      <Select
+                        labelId="uom"
+                        fullWidth
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        name="uom"
+                        label="uom"
+                        onChange={this.handleChange}
+                        value={uom}
+                        id="baby-prod"
+                      >
+                        <MenuItem value="KGs">KGs</MenuItem>
+                        <MenuItem value="Pounds">Pounds</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </>
+                )}
 
                 <TextField
                   variant="outlined"
@@ -393,7 +421,30 @@ class AddProduct extends Component {
                   rowsMin={3}
                   placeholder="product discription"
                 />
-
+                <div className="upload-btn-wrapper">
+                  <Button
+                    type="button"
+                    className="btn"
+                    fullWidth
+                    variant="outlined"
+                    color="primary"
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    Choose Product Images
+                  </Button>
+                  <input
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    type="file"
+                    name="productImage"
+                    id="productImage"
+                    multiple
+                    onChange={this.onFileChange}
+                  />
+                </div>
+                <div className="imagePreview" id="imagePreview" />
                 <Button
                   type="button"
                   fullWidth

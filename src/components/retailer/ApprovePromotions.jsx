@@ -6,8 +6,10 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Button,
+  IconButton,
 } from "@material-ui/core"
+import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined"
+import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
@@ -103,36 +105,31 @@ class ApprovePromotions extends Component {
                         <TableCell>
                           <Typography variant="subtitle1" gutterBottom>
                             <div>
-                              <Button
-                                type="button"
-                                halfWidth
-                                variant="contained"
-                                color="error"
-                                style={{ backgroundColor: "#8bc34a" }}
-                                className="{classes.submit}"
-                                onClick={(e) => {
-                                  if (
-                                    // eslint-disable-next-line no-alert
-                                    window.confirm(
-                                      "Are you sure you wish to accept the promotion?"
+                              <IconButton>
+                                <CheckCircleOutlinedIcon
+                                  className="accept-icon"
+                                  fontSize="large"
+                                  id="accept-btn"
+                                  onClick={(e) => {
+                                    if (
+                                      // eslint-disable-next-line no-alert
+                                      window.confirm(
+                                        "Are you sure you wish to accept the promotion?"
+                                      )
                                     )
-                                  )
-                                    this.handleSubmit(
-                                      e,
-                                      promotion.promotionId,
-                                      "APPROVED"
-                                    )
-                                }}
-                              >
-                                Accept
-                              </Button>
-                              <div className="pt-10">
-                                <Button
-                                  type="button"
-                                  halfWidth
-                                  variant="contained"
-                                  style={{ backgroundColor: "#ef5350" }}
-                                  className="pt-10 {classes.submit}"
+                                      this.handleSubmit(
+                                        e,
+                                        promotion.promotionId,
+                                        "APPROVED"
+                                      )
+                                  }}
+                                />
+                              </IconButton>
+                              <IconButton>
+                                <CancelOutlinedIcon
+                                  fontSize="large"
+                                  className="reject-icon"
+                                  id="reject-btn"
                                   onClick={(e) => {
                                     if (
                                       // eslint-disable-next-line no-alert
@@ -146,10 +143,8 @@ class ApprovePromotions extends Component {
                                         "REJECTED"
                                       )
                                   }}
-                                >
-                                  Reject
-                                </Button>
-                              </div>
+                                />
+                              </IconButton>
                             </div>
                           </Typography>
                         </TableCell>

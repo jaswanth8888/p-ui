@@ -9,6 +9,7 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core"
+import Carousel from "react-material-ui-carousel"
 import PropTypes from "prop-types"
 
 import { getProductDetails } from "../../redux/actions/RetailerActions"
@@ -35,7 +36,14 @@ class ProductDetails extends Component {
           </Typography>
         </div>
         <div className="product-image">
-          <img src={productDetails.productImagePath} alt="none" />
+          <Carousel interval="3000" animation="fade">
+            {productDetails.productImagePath
+              .slice(0)
+              .reverse()
+              .map((image) => (
+                <img src={image} alt="none" />
+              ))}
+          </Carousel>
         </div>
         <div className="product-table-data">
           <TableContainer component={Paper} className="product-table">

@@ -154,8 +154,8 @@ function FullNavbar(props) {
 
         {loggedInUser.userType === "Retailer" && (
           <Link to="/approvepromotion">
-            <Tooltip title="Create Admin" placement="right">
-              <ListItem button id="create-admin-btn">
+            <Tooltip title="Approve Promotion" placement="right">
+              <ListItem button id="approve-promotion-btn">
                 <ListItemIcon>
                   <GroupIcon />
                 </ListItemIcon>

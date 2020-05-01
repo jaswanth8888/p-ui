@@ -531,6 +531,16 @@ export const assignToCluster = (
       const { response } = err
       if (
         response.status === 400 &&
+        response.data.message === "Product is already associated with cluster"
+      ) {
+        dispatch({
+          type: ASSIGN_TO_ZONE,
+          msg: "Product is already associated with cluster",
+          msgSeverity: "error",
+          statusCode: response.status,
+        })
+      } else if (
+        response.status === 400 &&
         response.data.message === "Quantity Insufficient"
       ) {
         dispatch({ type: MESSAGE_SET_NULL })
@@ -595,7 +605,7 @@ export const assignToZone = (zoneDetails, zoneName, productName) => async (
       ) {
         dispatch({
           type: ASSIGN_TO_ZONE,
-          msg: "Product is already associated with zone, please try again",
+          msg: "Product is already associated with zone",
           msgSeverity: "error",
           statusCode: response.status,
         })
@@ -720,7 +730,7 @@ export const getEffectivePrice = (parameter, productName) => async (
     .catch((err) => {
       const { response } = err
       if (
-        response.status === 500 &&
+        response.status === 400 &&
         response.data.message ===
           "Effective price is already defined for this product"
       ) {
@@ -1231,7 +1241,8 @@ export const approvePromotions = (promotionId, productName, status) => async (
 ) => {
   await axios
     .put(
-      `${RETAILER_BASE_URL}/product-management/product/promotion/${productName}/${promotionId}/${status}`,{},
+      `${RETAILER_BASE_URL}/product-management/product/promotion/${productName}/${promotionId}/${status}`,
+      {},
       {
         headers: { Authorization: TOKEN() },
       }
@@ -1247,7 +1258,7 @@ export const approvePromotions = (promotionId, productName, status) => async (
         dispatch({
           type: APPROVE_PROMOTION,
           msg: "Rejected Successfully",
-          msgSeverity: "success",
+          msgSeverity: "warning",
         })
       }
     })

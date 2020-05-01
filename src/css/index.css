@@ -525,6 +525,15 @@ a {
   margin-bottom: 20px;
 }
 
+.form-button {
+  background-color: #3f51b5 !important;
+  color: white !important;
+  box-sizing: border-box !important;
+  border-radius: 4px !important;
+  letter-spacing: 0.02857em !important;
+  padding: 6px 16px !important;
+}
+
 /* .login-help-block, */
 @media only screen and (max-width: 600px) {
   body {
@@ -648,4 +657,38 @@ a {
 
 .pt-10 {
   padding-top: 10px !important;
+}
+#imagePreview {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  width: 200px;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  padding: 15px 0px 15px;
+  width: 100%;
+}
+
+.upload-btn-wrapper input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  padding: 15px 0px 15px;
+}
+
+.accept-icon {
+  color: green;
+}
+.reject-icon {
+  color: red;
 }

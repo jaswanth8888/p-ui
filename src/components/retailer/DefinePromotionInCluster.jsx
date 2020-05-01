@@ -198,7 +198,7 @@ class DefinePromotionInCluster extends Component {
                     1 ? (
                     <Alert severity="info" id="alert-1">
                       A promotion was defined in the last 72 hours. Further
-                      addition requires retailer approval.....
+                      addition requires retailer approval
                     </Alert>
                   ) : (
                     ""

@@ -62,7 +62,10 @@ export const registration = (registrationdetails) => async (dispatch) => {
 export const postProduct = (productDetails) => async (dispatch) => {
   await axios
     .post(`${RETAILER_BASE_URL}/product-management/product`, productDetails, {
-      headers: { Authorization: VTOKEN() },
+      headers: {
+        Authorization: VTOKEN(),
+        "Content-Type": "multipart/form-data",
+      },
     })
     .then(() => {
       dispatch({
@@ -80,6 +83,15 @@ export const postProduct = (productDetails) => async (dispatch) => {
         dispatch({
           type: CREATE_PRODUCT,
           msg: "Product with name already exists, try again",
+          msgSeverity: "error",
+        })
+      } else if (
+        response.status === 400 &&
+        response.data.message === "No image uploaded"
+      ) {
+        dispatch({
+          type: CREATE_PRODUCT,
+          msg: "Please upload images for the product",
           msgSeverity: "error",
         })
       } else {

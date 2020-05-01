@@ -161,7 +161,7 @@ class AssignToCluster extends Component {
                     type="button"
                     variant="contained"
                     color="primary"
-                    className="{classes.submit} submit-pad"
+                    className="form-button {classes.submit} submit-pad"
                     onClick={this.handleSubmit}
                     id="assign-cluster-submit"
                   >

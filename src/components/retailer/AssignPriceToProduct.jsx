@@ -127,14 +127,14 @@ class AssignPriceToProduct extends Component {
                     {startDate.length > 0 &&
                       endDate.length > 0 &&
                       effectivePercentage !== "" &&
-                      startDate < endDate &&
-                      dayval >= day && (
+                      startDate < endDate && (
+                        // dayval >= day &&
                         <Button
                           fullWidth
                           type="button"
                           variant="contained"
                           color="primary"
-                          className="{classes.submit} submit-pad"
+                          className="form-button {classes.submit} submit-pad"
                           onClick={this.handleSubmit}
                           id="assign-cluster-submit"
                         >
@@ -210,14 +210,14 @@ class AssignPriceToProduct extends Component {
                     {startDate.length > 0 &&
                       endDate.length > 0 &&
                       effectivePercentage !== "" &&
-                      startDate < endDate &&
-                      dayval >= day && (
+                      startDate < endDate && (
+                        // dayval >= day &&
                         <Button
                           fullWidth
                           type="button"
                           variant="contained"
                           color="primary"
-                          className="{classes.submit} submit-pad"
+                          className="form-button {classes.submit} submit-pad"
                           onClick={this.handleSubmit}
                           id="assign-cluster-submit"
                         >
