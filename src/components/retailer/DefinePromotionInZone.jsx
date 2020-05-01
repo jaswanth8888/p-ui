@@ -53,11 +53,7 @@ class DefinePromotionInZone extends Component {
     date.setHours(date.getHours() + 5)
     date.setMinutes(date.getMinutes() + 30)
     const { checkDate } = this.state
-
     checkDate.appliedDate = date
-
-    console.log(`checkDate${checkDate.appliedDate}`)
-
     getPromotionAlertAlt(productName, zone, checkDate)
   }
 

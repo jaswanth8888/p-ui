@@ -103,6 +103,7 @@ export const ADMIN_LOGIN_FAILURE = "ADMIN_LOGIN_FAILURE"
 export const ADMIN_LOGOUT = "ADMIN_LOGOUT"
 export const MESSAGE_SET = "MESSAGE_SET"
 export const PROMOTION_ALERT = "PROMOTION_ALERT"
+export const PROMOTION_CLUSTER_ALERT = "PROMOTION_CLUSTER_ALERT"
 export const ATOKEN = `BearerA ${sessionStorage.getItem("token")}`
 
 // Dashboard constant

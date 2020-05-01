@@ -7,6 +7,7 @@ import {
   MESSAGE_SET,
   PROMOTION_ALERT,
   FAILURE,
+  PROMOTION_CLUSTER_ALERT,
 } from "./types"
 
 const TOKEN = () => {
@@ -60,6 +61,31 @@ export const getPromotionAlert = (productName, zoneName, appliedDate) => async (
     )
     .then((res) => {
       dispatch({ type: PROMOTION_ALERT, promotionAlert: res.data })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
+}
+
+export const getPromotionClusterAlert = (
+  productName,
+  zoneName,
+  clusterName,
+  appliedDate
+) => async (dispatch) => {
+  await axios
+    .post(
+      `${RETAILER_BASE_URL}/product-management/product/status/${productName}/${zoneName}/${clusterName}`,
+      appliedDate,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: PROMOTION_CLUSTER_ALERT,
+        promotionClusterAlert: res.data,
+      })
     })
     .catch(() => {
       dispatch({ type: FAILURE })

@@ -1,4 +1,9 @@
-import { ADMIN_LOGIN, ADMIN_LOGOUT, PROMOTION_ALERT } from "../actions/types"
+import {
+  ADMIN_LOGIN,
+  ADMIN_LOGOUT,
+  PROMOTION_ALERT,
+  PROMOTION_CLUSTER_ALERT,
+} from "../actions/types"
 
 const initialState = {
   msg: "",
@@ -7,6 +12,7 @@ const initialState = {
     success: false,
   },
   promotionAlert: {},
+  promotionClusterAlert: {},
 }
 
 export default (state = initialState, action = {}) => {
@@ -17,6 +23,8 @@ export default (state = initialState, action = {}) => {
       return { ...initialState }
     case PROMOTION_ALERT:
       return { ...state, promotionAlert: action.promotionAlert }
+    case PROMOTION_CLUSTER_ALERT:
+      return { ...state, promotionClusterAlert: action.promotionClusterAlert }
     default:
       return { ...state }
   }
