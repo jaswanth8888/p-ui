@@ -611,6 +611,11 @@ function FullNavbar(props) {
             path={["/products/store", "/addproducts"]}
             component={ProductRouter}
           />
+          <Route
+            exact
+            path="/approvepromotion"
+            component={ApprovePromotionsRouter}
+          />
           <Route exact path="/zone" component={ZoneForm} />
           <Route exact path="/cluster" component={ClusterForm} />
           <Route exact path="/store" component={StoreForm} />
@@ -701,11 +706,6 @@ function FullNavbar(props) {
           <Route exact path="/vendor/editproduct" component={EditItemPrice} />
           <Route exact path="/admin" component={CreateAdmin} />
           <Route exact path="/admin/login" component={AdminLogin} />
-          <Route
-            exact
-            path="/approvepromotion"
-            component={ApprovePromotionsRouter}
-          />
         </Switch>
       </Router>
     </div>
