@@ -114,7 +114,6 @@ class ApprovePromotions extends Component {
                                   <CheckCircleOutlinedIcon
                                     className="accept-icon"
                                     fontSize="large"
-                                    id="accept-btn"
                                     onClick={(e) => {
                                       if (
                                         // eslint-disable-next-line no-alert
@@ -139,7 +138,6 @@ class ApprovePromotions extends Component {
                                   <CancelOutlinedIcon
                                     fontSize="large"
                                     className="reject-icon"
-                                    id="reject-btn"
                                     onClick={(e) => {
                                       if (
                                         // eslint-disable-next-line no-alert
