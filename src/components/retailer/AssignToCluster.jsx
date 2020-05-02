@@ -88,7 +88,7 @@ class AssignToCluster extends Component {
           <div className="box-container">
             <div className="joint-form-large">
               <ProductDetails />
-              <div className="product-form-body">
+              <div className="product-form-body-padding">
                 <Typography className="card-header" variant="h4">
                   Assign to Cluster
                 </Typography>

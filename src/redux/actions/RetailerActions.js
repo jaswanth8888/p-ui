@@ -62,6 +62,8 @@ import {
   MESSAGE_SET,
   PENDING_PROMOTIONS,
   APPROVE_PROMOTION,
+  GET_PRODUCT_ZONELIST,
+  GET_PRODUCT_CLUSTERLIST,
 } from "./types"
 
 const TOKEN = () => {
@@ -1268,5 +1270,33 @@ export const approvePromotions = (promotionId, productName, status) => async (
         msg: "Something went wrong, please try again.",
         msgSeverity: "warning",
       })
+    })
+}
+
+export const getZonesForProduct = (productName) => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/${productName}/product/zones/names`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: GET_PRODUCT_ZONELIST, productZoneList: res.data })
+    })
+}
+
+export const getClustersForProduct = (productName, zone) => async (
+  dispatch
+) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/${productName}/${zone}/product/clusters/names`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: GET_PRODUCT_CLUSTERLIST, productClusterList: res.data })
     })
 }

@@ -29,7 +29,7 @@ class ProductDetails extends Component {
   render() {
     const { productDetails } = this.props
     return (
-      <div className="flex-grid">
+      <div className="flex-grid-padding">
         <div className="product-name">
           <Typography className="card-header" variant="h4">
             {productDetails.productName}

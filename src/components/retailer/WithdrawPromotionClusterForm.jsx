@@ -20,6 +20,8 @@ import {
   saveZoneValue,
   getClusters,
   saveClusterValue,
+  getZonesForProduct,
+  getClustersForProduct,
 } from "../../redux/actions/RetailerActions"
 import {
   selectProduct,
@@ -46,22 +48,20 @@ class WithdrawPromotionClusterForm extends Component {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
-    const {
-      getZones: getZonesAlt,
-      getProductList: getProductListAlt,
-    } = this.props
+    const { getProductList: getProductListAlt } = this.props
     getProductListAlt()
-    getZonesAlt()
   }
 
   handleChangeProduct = (e, value) => {
     const {
+      getZonesForProduct: getZonesForProductAlt,
       saveProductValue: saveProductValueAlt,
       getProductDetails: getProductDetailsAlt,
     } = this.props
     const productName = value
     this.setState({ productName })
     saveProductValueAlt(productName)
+    getZonesForProductAlt(productName)
     getProductDetailsAlt(productName)
   }
 
@@ -70,9 +70,10 @@ class WithdrawPromotionClusterForm extends Component {
     this.setState({ zone: value })
     const {
       saveZoneValue: saveZoneValueAlt,
-      getClusters: getClustersAlt,
+      getClustersForProduct: getClustersForProductAlt,
     } = this.props
-    getClustersAlt(e.target.value)
+    const { productName } = this.state
+    getClustersForProductAlt(productName, value)
     saveZoneValueAlt(value)
   }
 
@@ -90,7 +91,7 @@ class WithdrawPromotionClusterForm extends Component {
 
   render() {
     const { productName, zone, cluster } = this.state
-    const { zones, clusters, products } = this.props
+    const { productClusterList, productZoneList, products } = this.props
     return (
       <div className="box-container">
         <div className="joint-form">
@@ -196,7 +197,7 @@ class WithdrawPromotionClusterForm extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {zones.map((zoneValue) => {
+                  {productZoneList.map((zoneValue) => {
                     return <option value={zoneValue}>{zoneValue}</option>
                   })}
                 </Select>
@@ -218,7 +219,7 @@ class WithdrawPromotionClusterForm extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {clusters.map((clusterValue) => {
+                  {productClusterList.map((clusterValue) => {
                     return <option value={clusterValue}>{clusterValue}</option>
                   })}
                 </Select>
@@ -246,22 +247,22 @@ class WithdrawPromotionClusterForm extends Component {
 
 WithdrawPromotionClusterForm.propTypes = {
   products: PropTypes.arrayOf.isRequired,
-  zones: PropTypes.arrayOf.isRequired,
-  clusters: PropTypes.arrayOf.isRequired,
   getProductDetails: PropTypes.func.isRequired,
   saveProductValue: PropTypes.func.isRequired,
   getProductList: PropTypes.func.isRequired,
-  getZones: PropTypes.func.isRequired,
-  getClusters: PropTypes.func.isRequired,
   saveZoneValue: PropTypes.func.isRequired,
   saveClusterValue: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
+  productZoneList: PropTypes.arrayOf.isRequired,
+  getZonesForProduct: PropTypes.func.isRequired,
+  productClusterList: PropTypes.arrayOf.isRequired,
+  getClustersForProduct: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
-  zones: store.RetailerReducer.zones,
-  clusters: store.RetailerReducer.clusters,
+  productZoneList: store.RetailerReducer.productZoneList,
+  productClusterList: store.RetailerReducer.productClusterList,
 })
 const actionAsProps = {
   getProductList,
@@ -271,6 +272,8 @@ const actionAsProps = {
   getClusters,
   saveZoneValue,
   saveClusterValue,
+  getZonesForProduct,
+  getClustersForProduct,
 }
 export default connect(
   stateAsProps,

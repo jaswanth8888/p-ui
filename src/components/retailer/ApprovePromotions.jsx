@@ -7,6 +7,7 @@ import {
   TableHead,
   TableRow,
   IconButton,
+  Tooltip,
 } from "@material-ui/core"
 import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined"
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined"
@@ -105,46 +106,56 @@ class ApprovePromotions extends Component {
                         <TableCell>
                           <Typography variant="subtitle1" gutterBottom>
                             <div>
-                              <IconButton>
-                                <CheckCircleOutlinedIcon
-                                  className="accept-icon"
-                                  fontSize="large"
-                                  id="accept-btn"
-                                  onClick={(e) => {
-                                    if (
-                                      // eslint-disable-next-line no-alert
-                                      window.confirm(
-                                        "Are you sure you wish to accept the promotion?"
+                              <Tooltip
+                                title="Accept Promotion"
+                                placement="left"
+                              >
+                                <IconButton>
+                                  <CheckCircleOutlinedIcon
+                                    className="accept-icon"
+                                    fontSize="large"
+                                    id="accept-btn"
+                                    onClick={(e) => {
+                                      if (
+                                        // eslint-disable-next-line no-alert
+                                        window.confirm(
+                                          "Are you sure you wish to accept the promotion?"
+                                        )
                                       )
-                                    )
-                                      this.handleSubmit(
-                                        e,
-                                        promotion.promotionId,
-                                        "APPROVED"
+                                        this.handleSubmit(
+                                          e,
+                                          promotion.promotionId,
+                                          "APPROVED"
+                                        )
+                                    }}
+                                  />
+                                </IconButton>
+                              </Tooltip>
+                              <Tooltip
+                                title="Reject Promotion"
+                                placement="left"
+                              >
+                                <IconButton>
+                                  <CancelOutlinedIcon
+                                    fontSize="large"
+                                    className="reject-icon"
+                                    id="reject-btn"
+                                    onClick={(e) => {
+                                      if (
+                                        // eslint-disable-next-line no-alert
+                                        window.confirm(
+                                          "Are you sure you wish to reject the promotion?"
+                                        )
                                       )
-                                  }}
-                                />
-                              </IconButton>
-                              <IconButton>
-                                <CancelOutlinedIcon
-                                  fontSize="large"
-                                  className="reject-icon"
-                                  id="reject-btn"
-                                  onClick={(e) => {
-                                    if (
-                                      // eslint-disable-next-line no-alert
-                                      window.confirm(
-                                        "Are you sure you wish to reject the promotion?"
-                                      )
-                                    )
-                                      this.handleSubmit(
-                                        e,
-                                        promotion.promotionId,
-                                        "REJECTED"
-                                      )
-                                  }}
-                                />
-                              </IconButton>
+                                        this.handleSubmit(
+                                          e,
+                                          promotion.promotionId,
+                                          "REJECTED"
+                                        )
+                                    }}
+                                  />
+                                </IconButton>
+                              </Tooltip>
                             </div>
                           </Typography>
                         </TableCell>

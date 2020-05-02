@@ -56,10 +56,10 @@ class DefinePromotionInCluster extends Component {
     const { checkDate } = this.state
     checkDate.appliedDate = date
     getPromotionClusterAlertAlt(productName, zone, cluster, checkDate)
-    const { promotionClusterAlert } = this.props
-    console.log(
-      `promotionHasBeenAppliedLast72hours${promotionClusterAlert.promotionHasBeenAppliedLast72hours}`
-    )
+    // const { promotionClusterAlert } = this.props
+    // console.log(
+    //   `promotionHasBeenAppliedLast72hours${promotionClusterAlert.promotionHasBeenAppliedLast72hours}`
+    // )
   }
 
   handleSubmit = (e) => {

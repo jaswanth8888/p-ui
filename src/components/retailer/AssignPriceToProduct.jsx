@@ -79,7 +79,7 @@ class AssignPriceToProduct extends Component {
             {saveStatus ? (
               <>
                 <ProductDetails />
-                <div className="product-form-body">
+                <div className="product-form-body-padding">
                   <Typography className="card-header" variant="h4">
                     Assign Price To Product
                   </Typography>
