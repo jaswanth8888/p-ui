@@ -42,7 +42,6 @@ class AddProduct extends Component {
   }
 
   onFileChange = (event) => {
-    // console.log(event.target.files)
     this.readURL(event)
     this.setState({ selectedImages: event.target.files })
   }
@@ -67,7 +66,8 @@ class AddProduct extends Component {
 
   handleSubmit() {
     const { loggedInUser } = this.props
-    const { product, selectedImages } = this.state
+    const { selectedImages } = this.state
+    let { product } = this.state
     product.companyName = loggedInUser.userName
     const {
       productName,
@@ -76,6 +76,11 @@ class AddProduct extends Component {
       productCategory,
     } = product
     const test = this.props
+    if(productCategory === "ALCOHOL_PROD"){
+      product.uom = "Lts"
+    }
+    
+    
     if (productName && productBasePrice > 0 && initialQuantity > 1) {
       if (
         (productCategory === "ALCOHOL_PROD" && initialQuantity < 101) ||
@@ -343,14 +348,14 @@ class AddProduct extends Component {
                       fullWidth
                       type="number"
                       id="volume"
-                      label="volume"
+                      label="volume(in litres)"
                       name="volume"
                       autoComplete="volume"
                       onChange={this.handleChange}
                       value={volume}
                       autoFocus
                     />
-                    <FormControl
+                    {/* <FormControl
                       variant="outlined"
                       fullWidth
                       className="space-margin-top"
@@ -374,7 +379,7 @@ class AddProduct extends Component {
                         <MenuItem value="GALLONs">GALLONS</MenuItem>
                         <MenuItem value="ML">ML </MenuItem>
                       </Select>
-                    </FormControl>
+                    </FormControl> */}
                   </>
                 )}
                 {productCategory === "BABY_PROD" && (
@@ -395,7 +400,7 @@ class AddProduct extends Component {
                         margin="normal"
                         required
                         name="uom"
-                        label="uom"
+                        label="Units of measurement "
                         onChange={this.handleChange}
                         value={uom}
                         id="baby-prod"
