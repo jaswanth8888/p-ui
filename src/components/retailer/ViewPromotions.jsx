@@ -102,8 +102,9 @@ class ViewPromotions extends Component {
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
                               {sessionStorage.getItem("currency") === "USD"
-                                ? "$ " + product.vendorPrice
-                                : convertCurrency("USD",
+                                ? `$ ${product.vendorPrice}`
+                                : convertCurrency(
+                                    "USD",
                                     sessionStorage.getItem("currency"),
                                     product.vendorPrice
                                   )}
@@ -148,8 +149,9 @@ class ViewPromotions extends Component {
                                             {sessionStorage.getItem(
                                               "currency"
                                             ) === "USD"
-                                              ? promotion.promotionSellingPrice
-                                              : convertCurrency("USD",
+                                              ? `$ ${promotion.promotionSellingPrice}`
+                                              : convertCurrency(
+                                                  "USD",
                                                   sessionStorage.getItem(
                                                     "currency"
                                                   ),

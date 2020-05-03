@@ -133,16 +133,16 @@ class ApplyPromotionInZone extends Component {
               </div>
               <div className="form-half">
                 <form className="{classes.form}" noValidate>
-                    <div className="help-block">
-                      <Typography
-                        color="primary"
-                        component="h1"
-                        variant="h4"
-                        className="help-block-h4"
-                      >
-                        {selectProductandZone}
-                      </Typography>
-                    </div>
+                  <div className="help-block">
+                    <Typography
+                      color="primary"
+                      component="h1"
+                      variant="h4"
+                      className="help-block-h4"
+                    >
+                      {selectProductandZone}
+                    </Typography>
+                  </div>
                   <FormControl variant="outlined" fullWidth>
                     <Autocomplete
                       id="product-list"

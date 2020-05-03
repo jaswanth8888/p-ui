@@ -101,18 +101,18 @@ class PriceOnDate extends Component {
               </FormControl>
               {productName === "" && <Link to="/selectproduct" />}
               {productName !== "" && (
-              <Link className="button-link" to="/assignpricetoproduct">
-                <Button
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className="{classes.submit} submit-pad"
-                  id="selprods-submit"
-                >
-                  Assign Price to Product
-                </Button>
-              </Link>
+                <Link className="button-link" to="/assignpricetoproduct">
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className="{classes.submit} submit-pad"
+                    id="selprods-submit"
+                  >
+                    Assign Price to Product
+                  </Button>
+                </Link>
               )}
             </form>
           </div>

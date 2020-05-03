@@ -205,8 +205,9 @@ class AddProducts extends Component {
                             {product.remainingQuantity > 0 ? (
                               <Typography variant="subtitle1" gutterBottom>
                                 {sessionStorage.getItem("currency") === "USD"
-                                  ? "$ " + product.productBasePrice
-                                  : convertCurrency("USD",
+                                  ? `$ ${product.productBasePrice}`
+                                  : convertCurrency(
+                                      "USD",
                                       sessionStorage.getItem("currency"),
                                       product.productBasePrice
                                     )}
@@ -218,8 +219,9 @@ class AddProducts extends Component {
                                 gutterBottom
                               >
                                 {sessionStorage.getItem("currency") === "USD"
-                                  ? "$ " + product.productBasePrice
-                                  : convertCurrency("USD",
+                                  ? `$ ${product.productBasePrice}`
+                                  : convertCurrency(
+                                      "USD",
                                       sessionStorage.getItem("currency"),
                                       product.productBasePrice
                                     )}

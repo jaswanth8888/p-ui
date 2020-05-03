@@ -175,8 +175,9 @@ class EditItemPrice extends Component {
                   autoFocus
                   value={
                     sessionStorage.getItem("currency") === "USD"
-                      ? "$ " + updatedProduct.newBasePrice
-                      : convertCurrency("USD",
+                      ? `$ ${updatedProduct.newBasePrice}`
+                      : convertCurrency(
+                          "USD",
                           sessionStorage.getItem("currency"),
                           updatedProduct.newBasePrice
                         )

@@ -98,9 +98,7 @@ class WithdrawZonePromotion extends Component {
                               <Typography variant="subtitle1" gutterBottom>
                                 {productDetails.effectivePriceObj !== null
                                   ? sessionStorage.getItem("currency") === "USD"
-                                    ? "$ " +
-                                      productDetails.effectivePriceObj
-                                        .effectivePrice
+                                    ? `$ ${productDetails.effectivePriceObj.effectivePrice}`
                                     : convertCurrency(
                                         "USD",
                                         sessionStorage.getItem("currency"),
@@ -108,7 +106,7 @@ class WithdrawZonePromotion extends Component {
                                           .effectivePrice
                                       )
                                   : sessionStorage.getItem("currency") === "USD"
-                                  ? "$ " + productDetails.productBasePrice
+                                  ? `$ ${productDetails.productBasePrice}`
                                   : convertCurrency(
                                       "USD",
                                       sessionStorage.getItem("currency"),

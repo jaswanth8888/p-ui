@@ -70,8 +70,9 @@ class ViewZonePromotions extends Component {
                         <TableCell>
                           <Typography variant="subtitle1" gutterBottom>
                             {sessionStorage.getItem("currency") === "USD"
-                              ? "$ " + promotion.promotionSellingPrice
-                              : convertCurrency("USD",
+                              ? `$ ${promotion.promotionSellingPrice}`
+                              : convertCurrency(
+                                  "USD",
                                   sessionStorage.getItem("currency"),
                                   promotion.promotionSellingPrice
                                 )}

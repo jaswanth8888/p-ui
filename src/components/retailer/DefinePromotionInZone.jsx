@@ -231,12 +231,14 @@ class DefinePromotionInZone extends Component {
                 autoFocus
               />
               <Typography className="card-header" variant="h6">
-                Actual Price : {sessionStorage.getItem("currency") === "USD"
-                    ? "$ " + assignedPrice
-                    : convertCurrency("USD",
-                        sessionStorage.getItem("currency"),
-                        assignedPrice
-                      )}
+                Actual Price :{" "}
+                {sessionStorage.getItem("currency") === "USD"
+                  ? `$ ${assignedPrice}`
+                  : convertCurrency(
+                      "USD",
+                      sessionStorage.getItem("currency"),
+                      assignedPrice
+                    )}
               </Typography>
               <TextField
                 variant="outlined"

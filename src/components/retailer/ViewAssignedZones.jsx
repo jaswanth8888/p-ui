@@ -74,8 +74,9 @@ class ViewAssignedZones extends Component {
                         <TableCell>
                           <Typography variant="subtitle1" gutterBottom>
                             {sessionStorage.getItem("currency") === "USD"
-                              ? "$ " + zone.price
-                              : convertCurrency("USD",
+                              ? `$ ${zone.price}`
+                              : convertCurrency(
+                                  "USD",
                                   sessionStorage.getItem("currency"),
                                   zone.price
                                 )}

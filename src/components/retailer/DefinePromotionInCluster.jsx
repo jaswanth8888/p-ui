@@ -14,6 +14,7 @@ import {
   datecheck,
   promotioncheck,
 } from "../utils/constants"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class DefinePromotionInCluster extends Component {
   constructor(props) {
@@ -236,7 +237,14 @@ class DefinePromotionInCluster extends Component {
                 autoFocus
               />
               <Typography className="card-header" variant="h6">
-                Actual Price : {assignedPrice}
+                Actual Price :{" "}
+                {sessionStorage.getItem("currency") === "USD"
+                  ? `$ ${assignedPrice}`
+                  : convertCurrency(
+                      "USD",
+                      sessionStorage.getItem("currency"),
+                      assignedPrice
+                    )}
               </Typography>
 
               <TextField

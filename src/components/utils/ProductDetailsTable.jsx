@@ -13,7 +13,7 @@ import Carousel from "react-material-ui-carousel"
 import PropTypes from "prop-types"
 import { productDetailsTable, product } from "./constants"
 import { getProductDetails } from "../../redux/actions/RetailerActions"
-import convertCurrency from "../utils/ConvertCurrency"
+import convertCurrency from "./ConvertCurrency"
 
 class ProductDetailsTable extends Component {
   constructor(props) {
@@ -80,18 +80,19 @@ class ProductDetailsTable extends Component {
             <tbody>
               <TableRow>
                 <TableCell>{productDetails.companyName}</TableCell>
-                <TableCell>{
-                    sessionStorage.getItem("currency") === "USD"
-                      ? "$ " + productDetails.productBasePrice
-                      : convertCurrency("USD",
-                          sessionStorage.getItem("currency"),
-                          productDetails.productBasePrice
-                        )
-                  }</TableCell>
+                <TableCell>
+                  {sessionStorage.getItem("currency") === "USD"
+                    ? `$ ${productDetails.productBasePrice}`
+                    : convertCurrency(
+                        "USD",
+                        sessionStorage.getItem("currency"),
+                        productDetails.productBasePrice
+                      )}
+                </TableCell>
                 <TableCell>
                   {productDetails.effectivePriceObj !== null
                     ? sessionStorage.getItem("currency") === "USD"
-                      ? "$ " + productDetails.effectivePriceObj.effectivePrice
+                      ? `$ ${productDetails.effectivePriceObj.effectivePrice}`
                       : convertCurrency(
                           "USD",
                           sessionStorage.getItem("currency"),

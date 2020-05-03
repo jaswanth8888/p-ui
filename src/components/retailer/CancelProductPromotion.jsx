@@ -77,11 +77,20 @@ class CancelProductPromotion extends Component {
               </TableCell>
               <TableCell>
                 <Typography variant="subtitle1" gutterBottom>
-                  {sessionStorage.getItem("currency") === "USD"
-                    ? "$ " + productDetails.effectivePriceObj.effectivePrice
-                    : convertCurrency("USD",
+                  {productDetails.effectivePriceObj !== null
+                    ? sessionStorage.getItem("currency") === "USD"
+                      ? `$ ${productDetails.effectivePriceObj.effectivePrice}`
+                      : convertCurrency(
+                          "USD",
+                          sessionStorage.getItem("currency"),
+                          productDetails.effectivePriceObj.effectivePrice
+                        )
+                    : sessionStorage.getItem("currency") === "USD"
+                    ? `$ ${productDetails.productBasePrice}`
+                    : convertCurrency(
+                        "USD",
                         sessionStorage.getItem("currency"),
-                        productDetails.effectivePriceObj.effectivePrice
+                        productDetails.productBasePrice
                       )}
                 </Typography>
               </TableCell>
@@ -134,10 +143,6 @@ class CancelProductPromotion extends Component {
                     <Table aria-label="a dense table">
                       <TableHead>
                         <TableRow>
-                          {/* <TableCell>Promotion Percentage</TableCell>
-                          <TableCell>Actual Price</TableCell>
-                          <TableCell>Promotion From Date</TableCell>
-                          <TableCell>Promotion To Date</TableCell> */}
                           {cancelProductPromotion.map((tcell) => (
                             <TableCell>{tcell}</TableCell>
                           ))}
