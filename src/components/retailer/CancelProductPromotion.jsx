@@ -79,8 +79,7 @@ class CancelProductPromotion extends Component {
                 <Typography variant="subtitle1" gutterBottom>
                   {sessionStorage.getItem("currency") === "USD"
                     ? "$ " + productDetails.effectivePriceObj.effectivePrice
-                    : convertCurrency(
-                        "USD",
+                    : convertCurrency("USD",
                         sessionStorage.getItem("currency"),
                         productDetails.effectivePriceObj.effectivePrice
                       )}

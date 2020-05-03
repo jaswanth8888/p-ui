@@ -320,8 +320,7 @@ class AddProduct extends Component {
                   value={
                     sessionStorage.getItem("currency") === "USD"
                       ? "$ " + productBasePrice
-                      : convertCurrency(
-                          "USD",
+                      : convertCurrency("USD",
                           sessionStorage.getItem("currency"),
                           productBasePrice
                         )

@@ -60,8 +60,7 @@ class ProductDetails extends Component {
                   {productDetails.productBasePrice !== null
                     ? sessionStorage.getItem("currency") === "USD"
                       ? "$ " + productDetails.productBasePrice
-                      : convertCurrency(
-                          "USD",
+                      : convertCurrency("USD",
                           sessionStorage.getItem("currency"),
                           productDetails.productBasePrice
                         )
@@ -92,8 +91,7 @@ class ProductDetails extends Component {
                     {productDetails.effectivePriceObj !== null
                       ? sessionStorage.getItem("currency") === "USD"
                         ? "$ " + productDetails.effectivePriceObj.effectivePrice
-                        : convertCurrency(
-                            "USD",
+                        : convertCurrency("USD",
                             sessionStorage.getItem("currency"),
                             productDetails.effectivePriceObj.effectivePrice
                           )

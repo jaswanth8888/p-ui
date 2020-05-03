@@ -176,8 +176,7 @@ class EditItemPrice extends Component {
                   value={
                     sessionStorage.getItem("currency") === "USD"
                       ? "$ " + updatedProduct.newBasePrice
-                      : convertCurrency(
-                          "USD",
+                      : convertCurrency("USD",
                           sessionStorage.getItem("currency"),
                           updatedProduct.newBasePrice
                         )
