@@ -21,6 +21,7 @@ import {
   clusterPromotion,
   withdrawPromotionClusterConst,
 } from "../utils/constants"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class WithdrawClusterPromotion extends Component {
   constructor(props) {
@@ -102,9 +103,18 @@ class WithdrawClusterPromotion extends Component {
                             <TableCell>
                               <Typography variant="subtitle1" gutterBottom>
                                 {productDetails.effectivePriceObj !== null
-                                  ? productDetails.effectivePriceObj
-                                      .effectivePrice
-                                  : productDetails.productBasePrice}
+                                  ? sessionStorage.getItem("currency") === "USD"
+                                  ? "$ " + productDetails.effectivePriceObj.effectivePrice
+                                  : convertCurrency("USD",
+                                      sessionStorage.getItem("currency"),
+                                      productDetails.effectivePriceObj.effectivePrice
+                                    )
+                                  : sessionStorage.getItem("currency") === "USD"
+                                  ? "$ " + productDetails.productBasePrice
+                                  : convertCurrency("USD",
+                                      sessionStorage.getItem("currency"),
+                                      productDetails.productBasePrice
+                                    )}
                               </Typography>
                             </TableCell>
                             <TableCell>
