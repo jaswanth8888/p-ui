@@ -29,7 +29,6 @@ import Message from "../utils/Message"
 class ApprovePromotions extends Component {
   constructor(props) {
     super(props)
-
     this.state = {}
   }
 
@@ -44,9 +43,7 @@ class ApprovePromotions extends Component {
 
   handleSubmit = (e, promoId, result) => {
     const { productName, approvePromotions: approvePromotionsAlt } = this.props
-
     approvePromotionsAlt(promoId, productName, result)
-
     document
       .getElementById("withdraw-tbody")
       .removeChild(document.getElementById(`row${promoId}`))
