@@ -78,7 +78,7 @@ class AssignPriceToProduct extends Component {
           {saveStatus ? (
             <>
               <ProductDetails />
-              <div className="product-form-body">
+              <div className="product-form-body-padding">
                 <Typography className="card-header" variant="h4">
                   Assign Price To Product
                 </Typography>
@@ -126,14 +126,14 @@ class AssignPriceToProduct extends Component {
                   {startDate.length > 0 &&
                     endDate.length > 0 &&
                     effectivePercentage !== "" &&
-                    startDate < endDate &&
-                    dayval >= day && (
+                    startDate < endDate && (
+                      // dayval >= day &&
                       <Button
                         fullWidth
                         type="button"
                         variant="contained"
                         color="primary"
-                        className="{classes.submit} submit-pad"
+                        className="form-button {classes.submit} submit-pad"
                         onClick={this.handleSubmit}
                         id="assign-cluster-submit"
                       >
@@ -193,28 +193,30 @@ class AssignPriceToProduct extends Component {
                   />
                   <null>
                     {dayval < day && (
-                      <Snackbar open="true" autoHideDuration={2000}>
-                        <MuiAlert
-                          severity="error"
-                          elevation={6}
-                          variant="filled"
-                        >
-                          Enter Valid Start Date
-                        </MuiAlert>
-                      </Snackbar>
+                      <div>
+                        <Snackbar open="true" autoHideDuration={2000}>
+                          <MuiAlert
+                            severity="error"
+                            elevation={6}
+                            variant="filled"
+                          >
+                            Enter Valid Start Date
+                          </MuiAlert>
+                        </Snackbar>
+                      </div>
                     )}
                   </null>
                   {startDate.length > 0 &&
                     endDate.length > 0 &&
                     effectivePercentage !== "" &&
-                    startDate < endDate &&
-                    dayval >= day && (
+                    startDate < endDate && (
+                      // dayval >= day &&
                       <Button
                         fullWidth
                         type="button"
                         variant="contained"
                         color="primary"
-                        className="{classes.submit} submit-pad"
+                        className="form-button {classes.submit} submit-pad"
                         onClick={this.handleSubmit}
                         id="assign-cluster-submit"
                       >

@@ -68,6 +68,7 @@ const App = () => {
     "/view/promotions/cluster",
     "/admin",
     "/dashboard",
+    "/approvepromotion",
   ]
   return (
     <Provider store={store}>

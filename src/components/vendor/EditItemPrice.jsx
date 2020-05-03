@@ -13,6 +13,7 @@ import {
   Button,
   IconButton,
 } from "@material-ui/core"
+import Carousel from "react-material-ui-carousel"
 import Alert from "@material-ui/lab/Alert"
 import CloseIcon from "@material-ui/icons/Close"
 import {
@@ -113,17 +114,24 @@ class EditItemPrice extends Component {
                   <tbody>
                     <TableRow>
                       <TableCell>
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href={productDetails.productImage}
-                        >
-                          <img
-                            className="thumbnail"
-                            src={productDetails.productImage}
-                            alt="none"
-                          />
-                        </a>
+                        <Carousel interval="3000" animation="fade">
+                          {productDetails.productImage
+                            .slice(0)
+                            .reverse()
+                            .map((image) => (
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={image}
+                              >
+                                <img
+                                  className="thumbnail"
+                                  src={image}
+                                  alt="none"
+                                />
+                              </a>
+                            ))}
+                        </Carousel>
                       </TableCell>
                       <TableCell>{productDetails.productDescription}</TableCell>
                     </TableRow>
@@ -204,7 +212,7 @@ class EditItemPrice extends Component {
                 type="button"
                 variant="contained"
                 color="primary"
-                className="{classes.submit}"
+                className="form-button {classes.submit}"
                 onClick={this.handleSubmit}
                 style={{ marginTop: "10px" }}
               >

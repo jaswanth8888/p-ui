@@ -4,7 +4,10 @@ import CheckIcon from "@material-ui/icons/Check"
 import ClearIcon from "@material-ui/icons/Clear"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
+import Alert from "@material-ui/lab/Alert"
+// import { spacing } from "@material-ui/system"
 import { postPromotion } from "../../redux/actions/RetailerActions"
+import { getPromotionAlert } from "../../redux/actions/AdminActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 import {
   startdate,
@@ -17,23 +20,42 @@ import convertCurrency from "../utils/ConvertCurrency"
 class DefinePromotionInZone extends Component {
   constructor(props) {
     super(props)
-    const { zone } = this.props
+    const { zone, loggedInUser } = this.props
 
     this.state = {
       promotionDetails: {
-        appliedDate: new Date().toISOString().slice(0, 10),
+        appliedDate: new Date().toISOString(),
         startDate: "",
         endDate: "",
         promotionPercentage: "",
         zoneName: zone,
+        // eslint-disable-next-line prefer-template
+        addedBy: loggedInUser.userName + "/" + loggedInUser.userType,
       },
       levelOption: "zone",
+      checkDate: { appliedDate: new Date() },
     }
 
     this.handleChangePercentage = this.handleChangePercentage.bind(this)
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
+    const {
+      productName,
+      zone,
+      getPromotionAlert: getPromotionAlertAlt,
+    } = this.props
+
+    const date = new Date()
+    date.setHours(date.getHours() + 5)
+    date.setMinutes(date.getMinutes() + 30)
+    const { checkDate } = this.state
+    checkDate.appliedDate = date
+    getPromotionAlertAlt(productName, zone, checkDate)
   }
 
   handleSubmit = (e) => {
@@ -81,7 +103,7 @@ class DefinePromotionInZone extends Component {
 
   render() {
     const { promotionDetails } = this.state
-    const { zone, assignedPrice } = this.props
+    const { zone, assignedPrice, loggedInUser, promotionAlert } = this.props
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
@@ -160,10 +182,33 @@ class DefinePromotionInZone extends Component {
               </Typography>
               <ProductDetailsTable />
 
+              <div className="pt-10">
+                <div className="pt-10">
+                  {loggedInUser.userType === "admin" &&
+                  promotionAlert.promotionHasBeenAppliedLast72hours === 1 ? (
+                    <Alert severity="info" id="alert-1">
+                      A promotion was defined in the last 72 hours. Further
+                      addition requires retailer approval
+                    </Alert>
+                  ) : (
+                    ""
+                  )}
+                </div>
+
+                <div className="pt-10">
+                  {loggedInUser.userType === "admin" &&
+                  promotionAlert.promotionAlreadyApplied === 1 ? (
+                    <Alert severity="info" id="alert-2">
+                      This product has a promotion which is in effect
+                    </Alert>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
               <Typography className="card-header" variant="h6">
                 Selected Zone : {zone}
               </Typography>
-
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -193,7 +238,6 @@ class DefinePromotionInZone extends Component {
                         assignedPrice
                       )}
               </Typography>
-
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -252,15 +296,21 @@ DefinePromotionInZone.propTypes = {
   postPromotion: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
   assignedPrice: PropTypes.string.isRequired,
+  loggedInUser: PropTypes.shape.isRequired,
+  promotionAlert: PropTypes.shape.isRequired,
+  getPromotionAlert: PropTypes.func.isRequired,
 }
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
   zone: store.RetailerReducer.zone,
   assignedPrice: store.RetailerReducer.assignedPrice,
+  loggedInUser: store.RetailerReducer.loggedInUser,
+  promotionAlert: store.AdminReducer.promotionAlert,
 })
 
 const actionAsProps = {
   postPromotion,
+  getPromotionAlert,
 }
 export default connect(stateAsProps, actionAsProps)(DefinePromotionInZone)

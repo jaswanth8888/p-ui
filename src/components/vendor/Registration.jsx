@@ -285,7 +285,7 @@ class Registration extends Component {
                 onChange={this.handleChange}
               >
                 <MenuItem value="Alcohol">Alcohol</MenuItem>
-                <MenuItem value="BabyFood">BabyFood </MenuItem>
+                <MenuItem value="BabyFood">BabyProducts </MenuItem>
               </Select>
 
               <div>

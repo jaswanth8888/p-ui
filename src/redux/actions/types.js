@@ -82,6 +82,10 @@ export const PROFITPERCENT_SAVE_VALUE = "PROFITPERCENT_SAVE_VALUE"
 export const IS_PROMOTION_APPLLIED = "IS_PROMOTION_APPLLIED"
 export const PRODUCT_UPDATE = "PRODUCT_UPDATE"
 export const POST_EFFECTIVE_PRICE = "POST_EFFECTIVE_PRICE"
+export const PENDING_PROMOTIONS = "PENDING_PROMOTIONS"
+export const APPROVE_PROMOTION = "APPROVE_PROMOTION"
+export const GET_PRODUCT_ZONELIST = "GET_PRODUCT_ZONELIST"
+export const GET_PRODUCT_CLUSTERLIST = "GET_PRODUCT_CLUSTERLIST"
 export const TOKEN = `BearerR ${sessionStorage.getItem("token")}`
 
 // vendor constants
@@ -100,6 +104,8 @@ export const ADMIN_LOGIN = "ADMIN_LOGIN"
 export const ADMIN_LOGIN_FAILURE = "ADMIN_LOGIN_FAILURE"
 export const ADMIN_LOGOUT = "ADMIN_LOGOUT"
 export const MESSAGE_SET = "MESSAGE_SET"
+export const PROMOTION_ALERT = "PROMOTION_ALERT"
+export const PROMOTION_CLUSTER_ALERT = "PROMOTION_CLUSTER_ALERT"
 export const ATOKEN = `BearerA ${sessionStorage.getItem("token")}`
 
 // Dashboard constant

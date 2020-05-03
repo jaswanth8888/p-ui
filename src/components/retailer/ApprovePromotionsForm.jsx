@@ -8,24 +8,26 @@ import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 import {
   getProductList,
-  getProductDetails,
   saveProductValue,
-} from "../../redux/actions/VendorActions"
+  getProductDetails,
+} from "../../redux/actions/RetailerActions"
 
-class SelectProduct extends Component {
+class ApprovePromotionsForm extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       productName: "",
+      // status: 0
     }
     this.handleChangeProduct = this.handleChangeProduct.bind(this)
+    //  this.productNameNotSelected = this.productNameNotSelected.bind(this)
   }
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
-    const { getProductList: getProductListAlt, loggedInUser } = this.props
-    getProductListAlt(loggedInUser.userName)
+    const { getProductList: getProductListAlt } = this.props
+    getProductListAlt()
   }
 
   handleChangeProduct = (e, value) => {
@@ -75,6 +77,7 @@ class SelectProduct extends Component {
                   component="h1"
                   variant="h4"
                   className="help-block-h4"
+                  id="product-name"
                 >
                   Select a Product
                 </Typography>
@@ -97,18 +100,18 @@ class SelectProduct extends Component {
                   name="productName"
                 />
               </FormControl>
-
+              {productName === "" && <Link to="/approvepromotion" />}
               {productName !== "" && (
-                <Link className="button-link" to="/vendor/editproduct">
+                <Link className="button-link" to="/approvepromotionpage">
                   <Button
-                    id="edit-price-btn"
                     type="button"
                     fullWidth
                     variant="contained"
                     color="primary"
                     className="{classes.submit} submit-pad"
+                    id="approve-btn"
                   >
-                    Edit Item Price
+                    Approve Promotions
                   </Button>
                 </Link>
               )}
@@ -119,21 +122,18 @@ class SelectProduct extends Component {
     )
   }
 }
-
-SelectProduct.propTypes = {
+ApprovePromotionsForm.propTypes = {
   products: PropTypes.arrayOf.isRequired,
   getProductDetails: PropTypes.func.isRequired,
   saveProductValue: PropTypes.func.isRequired,
   getProductList: PropTypes.func.isRequired,
-  loggedInUser: PropTypes.shape.isRequired,
 }
 const stateAsProps = (store) => ({
-  products: store.VendorReducer.productList,
-  loggedInUser: store.RetailerReducer.loggedInUser,
+  products: store.RetailerReducer.productList,
 })
 const actionAsProps = {
   getProductList,
   saveProductValue,
   getProductDetails,
 }
-export default connect(stateAsProps, actionAsProps)(SelectProduct)
+export default connect(stateAsProps, actionAsProps)(ApprovePromotionsForm)

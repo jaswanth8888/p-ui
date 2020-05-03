@@ -61,6 +61,7 @@ import Registration from "../vendor/Registration"
 import CreateAdmin from "../retailer/CreateAdmin"
 import AdminLogin from "../admin/AdminLogin"
 import SellCancelProductFixedPriceRouter from "../retailer/SellCancelProductFixedPriceRouter"
+import ApprovePromotionsRouter from "../retailer/ApprovePromotionsRouter"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -144,6 +145,22 @@ function FullNavbar(props) {
                 <ListItemText
                   className="list-item-text"
                   primary={t("welcome.createAdmin")}
+                />
+              </ListItem>
+            </Tooltip>
+          </Link>
+        )}
+
+        {loggedInUser.userType === "Retailer" && (
+          <Link to="/approvepromotion">
+            <Tooltip title="Approve Promotion" placement="right">
+              <ListItem button id="approve-promotion-btn">
+                <ListItemIcon>
+                  <GroupIcon />
+                </ListItemIcon>
+                <ListItemText
+                  className="list-item-text"
+                  primary="Approve Promotions"
                 />
               </ListItem>
             </Tooltip>
@@ -606,6 +623,11 @@ function FullNavbar(props) {
             path={["/products/store", "/addproducts"]}
             component={ProductRouter}
           />
+          <Route
+            exact
+            path="/approvepromotion"
+            component={ApprovePromotionsRouter}
+          />
           <Route exact path="/zone" component={ZoneForm} />
           <Route exact path="/cluster" component={ClusterForm} />
           <Route exact path="/store" component={StoreForm} />
@@ -626,6 +648,7 @@ function FullNavbar(props) {
             path={["/sellcancel/fixedprice", "/sellcancel/fixedprice/product"]}
             component={SellCancelProductFixedPriceRouter}
           />
+
           <Route
             exact
             path={["/cancel/promotion", "/cancel/productdetails"]}

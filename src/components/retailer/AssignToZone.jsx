@@ -71,7 +71,7 @@ class AssignToZone extends Component {
           <div className="box-container">
             <div className="joint-form-large">
               <ProductDetails />
-              <div className="product-form-body">
+              <div className="product-form-body-padding">
                 <Typography className="card-header" variant="h4">
                   Assign to Zone
                 </Typography>
@@ -130,7 +130,7 @@ class AssignToZone extends Component {
                     type="button"
                     variant="contained"
                     color="primary"
-                    className="{classes.submit} submit-pad"
+                    className="form-button {classes.submit} submit-pad"
                     onClick={this.handleSubmit}
                     id="assign-zone-submit"
                   >

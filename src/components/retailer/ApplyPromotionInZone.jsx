@@ -11,16 +11,15 @@ import ClearIcon from "@material-ui/icons/Clear"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-// import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 import {
   getProductList,
   saveProductValue,
   getProductDetails,
-  getZones,
   saveZoneValue,
   checkAssignedZone,
   clearAssignedPrice,
+  getZonesForProduct,
 } from "../../redux/actions/RetailerActions"
 import {
   selectProduct,
@@ -47,24 +46,24 @@ class ApplyPromotionInZone extends Component {
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
     const {
-      getZones: getZonesAlt,
       getProductList: getProductListAlt,
       clearAssignedPrice: clearAssignedPriceAlt,
     } = this.props
     const { assignedPriceState } = this.state
     getProductListAlt()
-    getZonesAlt()
     clearAssignedPriceAlt(assignedPriceState)
   }
 
   handleChangeProduct = (e, value) => {
     const {
+      getZonesForProduct: getZonesForProductAlt,
       saveProductValue: saveProductValueAlt,
       getProductDetails: getProductDetailsAlt,
     } = this.props
     const productName = value
     this.setState({ productName })
     saveProductValueAlt(productName)
+    getZonesForProductAlt(productName)
     getProductDetailsAlt(value)
   }
 
@@ -85,7 +84,7 @@ class ApplyPromotionInZone extends Component {
   }
 
   render() {
-    const { zones, products, assignedPrice, history } = this.props
+    const { productZoneList, products, assignedPrice, history } = this.props
     const { productName, zone } = this.state
     return (
       <>
@@ -178,7 +177,7 @@ class ApplyPromotionInZone extends Component {
                       }}
                     >
                       <option aria-label="None" value="" />
-                      {zones.map((zoneValue) => {
+                      {productZoneList.map((zoneValue) => {
                         return <option value={zoneValue}>{zoneValue}</option>
                       })}
                     </Select>
@@ -214,7 +213,6 @@ ApplyPromotionInZone.propTypes = {
   getProductDetails: PropTypes.func.isRequired,
   saveProductValue: PropTypes.func.isRequired,
   getProductList: PropTypes.func.isRequired,
-  getZones: PropTypes.func.isRequired,
   saveZoneValue: PropTypes.func.isRequired,
   zone: PropTypes.string.isRequired,
   productName: PropTypes.string.isRequired,
@@ -222,22 +220,24 @@ ApplyPromotionInZone.propTypes = {
   assignedPrice: PropTypes.string.isRequired,
   clearAssignedPrice: PropTypes.func.isRequired,
   checkAssignedZone: PropTypes.func.isRequired,
+  productZoneList: PropTypes.arrayOf.isRequired,
+  getZonesForProduct: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
-  zones: store.RetailerReducer.zones,
   zone: store.RetailerReducer.zone,
   productName: store.RetailerReducer.productName,
   assignedPrice: store.RetailerReducer.assignedPrice,
+  productZoneList: store.RetailerReducer.productZoneList,
 })
 const actionAsProps = {
   getProductList,
   saveProductValue,
   getProductDetails,
-  getZones,
   saveZoneValue,
   checkAssignedZone,
   clearAssignedPrice,
+  getZonesForProduct,
 }
 export default connect(stateAsProps, actionAsProps)(ApplyPromotionInZone)

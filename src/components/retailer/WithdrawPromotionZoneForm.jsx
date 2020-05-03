@@ -13,11 +13,11 @@ import { connect } from "react-redux"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import PropTypes from "prop-types"
 import {
-  getZones,
   getProductList,
   saveProductValue,
   saveZoneValue,
   getProductDetails,
+  getZonesForProduct,
 } from "../../redux/actions/RetailerActions"
 import {
   withdrawPromotionZoneConst,
@@ -39,22 +39,20 @@ class WithdrawPromotionZoneForm extends Component {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
-    const {
-      getZones: getZonesAlt,
-      getProductList: getProductListAlt,
-    } = this.props
+    const { getProductList: getProductListAlt } = this.props
     getProductListAlt()
-    getZonesAlt()
   }
 
   handleChangeProduct = (e, value) => {
     const {
+      getZonesForProduct: getZonesForProductAlt,
       saveProductValue: saveProductValueAlt,
       getProductDetails: getProductDetailsAlt,
     } = this.props
     const productName = value
     this.setState({ productName })
     saveProductValueAlt(productName)
+    getZonesForProductAlt(productName)
     getProductDetailsAlt(value)
   }
 
@@ -72,7 +70,7 @@ class WithdrawPromotionZoneForm extends Component {
 
   render() {
     const { zone, productName } = this.state
-    const { products, zones } = this.props
+    const { products, productZoneList } = this.props
     return (
       <div className="box-container">
         <div className="joint-form">
@@ -159,7 +157,7 @@ class WithdrawPromotionZoneForm extends Component {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  {zones.map((zoneValue) => {
+                  {productZoneList.map((zoneValue) => {
                     return <option value={zoneValue}>{zoneValue}</option>
                   })}
                 </Select>
@@ -187,24 +185,24 @@ class WithdrawPromotionZoneForm extends Component {
 
 WithdrawPromotionZoneForm.propTypes = {
   products: PropTypes.arrayOf.isRequired,
-  zones: PropTypes.arrayOf.isRequired,
   getProductDetails: PropTypes.func.isRequired,
   saveProductValue: PropTypes.func.isRequired,
   getProductList: PropTypes.func.isRequired,
-  getZones: PropTypes.func.isRequired,
   saveZoneValue: PropTypes.func.isRequired,
+  productZoneList: PropTypes.arrayOf.isRequired,
+  getZonesForProduct: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({
-  zones: store.RetailerReducer.zones,
+  productZoneList: store.RetailerReducer.productZoneList,
   products: store.RetailerReducer.productList,
 })
 const actionAsProps = {
-  getZones,
   getProductList,
   saveProductValue,
   getProductDetails,
   saveZoneValue,
+  getZonesForProduct,
 }
 export default connect(stateAsProps, actionAsProps)(WithdrawPromotionZoneForm)

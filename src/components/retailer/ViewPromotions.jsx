@@ -8,6 +8,7 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core"
+import Carousel from "react-material-ui-carousel"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
@@ -76,17 +77,24 @@ class ViewPromotions extends Component {
                             <Typography variant="subtitle1" gutterBottom>
                               {product.productName}
                             </Typography>
-                            <a
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              href={product.image}
-                            >
-                              <img
-                                className="thumbnail"
-                                src={product.image}
-                                alt="none"
-                              />
-                            </a>
+                            <Carousel interval="3000" animation="fade">
+                              {product.image
+                                .slice(0)
+                                .reverse()
+                                .map((img) => (
+                                  <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href={img}
+                                  >
+                                    <img
+                                      className="thumbnail"
+                                      src={img}
+                                      alt="none"
+                                    />
+                                  </a>
+                                ))}
+                            </Carousel>
                           </TableCell>
                           <TableCell>
                             <Typography variant="subtitle1" gutterBottom>
@@ -100,9 +108,6 @@ class ViewPromotions extends Component {
                                     product.vendorPrice
                                   )}
                             </Typography>
-                            {/* <Typography variant="subtitle1" gutterBottom>
-                            Effective Price : {product.effectivePrice}
-                          </Typography> */}
                             <Typography variant="subtitle1" gutterBottom>
                               Initial Quantity : {product.initialQty}
                             </Typography>

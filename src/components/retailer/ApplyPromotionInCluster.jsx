@@ -13,15 +13,15 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import {
-  getClusters,
   getProductDetails,
   getProductList,
-  getZones,
   saveClusterValue,
   saveProductValue,
   saveZoneValue,
   clearAssignedPrice,
   checkAssignedCluster,
+  getZonesForProduct,
+  getClustersForProduct,
 } from "../../redux/actions/RetailerActions"
 import Message from "../utils/Message"
 
@@ -45,24 +45,24 @@ class ApplyPromotionInCluster extends Component {
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
     const {
-      getZones: getZonesAlt,
       getProductList: getProductListAlt,
       clearAssignedPrice: clearAssignedPriceAlt,
     } = this.props
     const { assignedPriceState } = this.state
     getProductListAlt()
-    getZonesAlt()
     clearAssignedPriceAlt(assignedPriceState)
   }
 
   handleChangeProduct = (e, value) => {
     const {
+      getZonesForProduct: getZonesForProductAlt,
       saveProductValue: saveProductValueAlt,
       getProductDetails: getProductDetailsAlt,
     } = this.props
     const productName = value
     this.setState({ productName })
     saveProductValueAlt(productName)
+    getZonesForProductAlt(productName)
     getProductDetailsAlt(productName)
   }
 
@@ -71,9 +71,10 @@ class ApplyPromotionInCluster extends Component {
     this.setState({ zone: value })
     const {
       saveZoneValue: saveZoneValueAlt,
-      getClusters: getClustersAlt,
+      getClustersForProduct: getClustersForProductAlt,
     } = this.props
-    getClustersAlt(e.target.value)
+    const { productName } = this.state
+    getClustersForProductAlt(productName, value)
     saveZoneValueAlt(value)
   }
 
@@ -96,7 +97,13 @@ class ApplyPromotionInCluster extends Component {
 
   render() {
     const { productName, zone, cluster } = this.state
-    const { zones, clusters, products, assignedPrice, history } = this.props
+    const {
+      productZoneList,
+      productClusterList,
+      products,
+      assignedPrice,
+      history,
+    } = this.props
 
     return (
       <>
@@ -205,7 +212,7 @@ class ApplyPromotionInCluster extends Component {
                       }}
                     >
                       <option aria-label="None" value="" />
-                      {zones.map((zoneVal) => {
+                      {productZoneList.map((zoneVal) => {
                         return <option value={zoneVal}>{zoneVal}</option>
                       })}
                     </Select>
@@ -227,7 +234,7 @@ class ApplyPromotionInCluster extends Component {
                       }}
                     >
                       <option aria-label="None" value="" />
-                      {clusters.map((clusterVal) => {
+                      {productClusterList.map((clusterVal) => {
                         return <option value={clusterVal}>{clusterVal}</option>
                       })}
                     </Select>
@@ -259,13 +266,9 @@ class ApplyPromotionInCluster extends Component {
 
 ApplyPromotionInCluster.propTypes = {
   products: PropTypes.arrayOf.isRequired,
-  zones: PropTypes.arrayOf.isRequired,
-  clusters: PropTypes.arrayOf.isRequired,
   getProductDetails: PropTypes.func.isRequired,
   saveProductValue: PropTypes.func.isRequired,
   getProductList: PropTypes.func.isRequired,
-  getZones: PropTypes.func.isRequired,
-  getClusters: PropTypes.func.isRequired,
   saveZoneValue: PropTypes.func.isRequired,
   saveClusterValue: PropTypes.func.isRequired,
   zone: PropTypes.string.isRequired,
@@ -275,26 +278,30 @@ ApplyPromotionInCluster.propTypes = {
   assignedPrice: PropTypes.string.isRequired,
   clearAssignedPrice: PropTypes.func.isRequired,
   checkAssignedCluster: PropTypes.func.isRequired,
+  productZoneList: PropTypes.arrayOf.isRequired,
+  getZonesForProduct: PropTypes.func.isRequired,
+  productClusterList: PropTypes.arrayOf.isRequired,
+  getClustersForProduct: PropTypes.func.isRequired,
 }
 
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,
-  zones: store.RetailerReducer.zones,
-  clusters: store.RetailerReducer.clusters,
   zone: store.RetailerReducer.zone,
   productName: store.RetailerReducer.productName,
   cluster: store.RetailerReducer.cluster,
   assignedPrice: store.RetailerReducer.assignedPrice,
+  productZoneList: store.RetailerReducer.productZoneList,
+  productClusterList: store.RetailerReducer.productClusterList,
 })
 const actionAsProps = {
   getProductList,
   saveProductValue,
   getProductDetails,
-  getZones,
-  getClusters,
   saveZoneValue,
   saveClusterValue,
   clearAssignedPrice,
   checkAssignedCluster,
+  getZonesForProduct,
+  getClustersForProduct,
 }
 export default connect(stateAsProps, actionAsProps)(ApplyPromotionInCluster)

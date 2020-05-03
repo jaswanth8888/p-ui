@@ -100,6 +100,7 @@ class PriceOnDate extends Component {
                 />
               </FormControl>
               {productName === "" && <Link to="/selectproduct" />}
+              {productName !== "" && (
               <Link className="button-link" to="/assignpricetoproduct">
                 <Button
                   type="button"
@@ -112,6 +113,7 @@ class PriceOnDate extends Component {
                   Assign Price to Product
                 </Button>
               </Link>
+              )}
             </form>
           </div>
         </div>
