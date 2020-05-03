@@ -21,6 +21,7 @@ import {
   zoneLevelPromotions,
   withdrawPromotionZoneConst,
 } from "../utils/constants"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class WithdrawZonePromotion extends Component {
   constructor(props) {
@@ -96,9 +97,23 @@ class WithdrawZonePromotion extends Component {
                             <TableCell>
                               <Typography variant="subtitle1" gutterBottom>
                                 {productDetails.effectivePriceObj !== null
-                                  ? productDetails.effectivePriceObj
-                                      .effectivePrice
-                                  : productDetails.productBasePrice}
+                                  ? sessionStorage.getItem("currency") === "USD"
+                                    ? "$ " +
+                                      productDetails.effectivePriceObj
+                                        .effectivePrice
+                                    : convertCurrency(
+                                        "USD",
+                                        sessionStorage.getItem("currency"),
+                                        productDetails.effectivePriceObj
+                                          .effectivePrice
+                                      )
+                                  : sessionStorage.getItem("currency") === "USD"
+                                  ? "$ " + productDetails.productBasePrice
+                                  : convertCurrency(
+                                      "USD",
+                                      sessionStorage.getItem("currency"),
+                                      productDetails.productBasePrice
+                                    )}
                               </Typography>
                             </TableCell>
                             <TableCell>
