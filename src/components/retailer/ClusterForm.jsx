@@ -171,13 +171,11 @@ class ClusterForm extends Component {
 
         <>
           {status === -1 ? (
-            <div>
-              <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert severity="error" elevation={6} variant="filled">
-                  Cluster creation failed. Please match the requirements
-                </MuiAlert>
-              </Snackbar>
-            </div>
+            <Snackbar open="true" autoHideDuration={2000}>
+              <MuiAlert severity="error" elevation={6} variant="filled">
+                Cluster creation failed. Please match the requirements
+              </MuiAlert>
+            </Snackbar>
           ) : null}
         </>
       </div>

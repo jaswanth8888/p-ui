@@ -18,6 +18,7 @@ import {
 } from "../../redux/actions/RetailerActions"
 import { sellCancelProductFixedPrice } from "../utils/constants"
 import Message from "../utils/Message"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class SellCancelProductFixedPrice extends Component {
   constructor(props) {
@@ -83,7 +84,12 @@ class SellCancelProductFixedPrice extends Component {
                         {productDetails.companyName}
                       </TableCell>
                       <TableCell className="table-text">
-                        {productDetails.productBasePrice}
+                        {sessionStorage.getItem("currency") === "USD"
+                          ? "$ " + productDetails.productBasePrice
+                          : convertCurrency("USD",
+                              sessionStorage.getItem("currency"),
+                              productDetails.productBasePrice
+                            )}
                       </TableCell>
                     </TableRow>
                     <TableHead>
@@ -115,8 +121,18 @@ class SellCancelProductFixedPrice extends Component {
                     <TableRow>
                       <TableCell className="table-text">
                         {productDetails.effectivePriceObj !== null
-                          ? productDetails.effectivePriceObj.effectivePrice
-                          : productDetails.productBasePrice}
+                          ?  (sessionStorage.getItem("currency") === "USD"
+                          ? "$ " + productDetails.effectivePriceObj.effectivePrice
+                          : convertCurrency("USD",
+                              sessionStorage.getItem("currency"),
+                              productDetails.effectivePriceObj.effectivePrice
+                            ))
+                          : (sessionStorage.getItem("currency") === "USD"
+                          ? "$ " + productDetails.productBasePrice
+                          : convertCurrency("USD",
+                              sessionStorage.getItem("currency"),
+                              productDetails.productBasePrice
+                            ))}
                       </TableCell>
                       <TableCell>
                         <div className="product-desc">
@@ -192,4 +208,7 @@ const actionAsProps = {
   sellProductFixedPrice,
   cancelProductFixedPrice,
 }
-export default connect(stateAsProps, actionAsProps)(SellCancelProductFixedPrice)
+export default connect(
+  stateAsProps,
+  actionAsProps
+)(SellCancelProductFixedPrice)

@@ -73,164 +73,160 @@ class AssignPriceToProduct extends Component {
     } = this.state
     const dayval = startDate.slice(8, endDate.length)
     return (
-      <div>
-        <div className="box-container">
-          <div className="joint-form-large">
-            {saveStatus ? (
-              <>
-                <ProductDetails />
-                <div className="product-form-body">
-                  <Typography className="card-header" variant="h4">
-                    Assign Price To Product
-                  </Typography>
-                  <form className="{classes.form}" noValidate>
-                    <TextField
-                      id="startDate-query"
-                      label="From Date"
-                      name="fromDate"
-                      fullWidth
-                      type="date"
-                      variant="outlined"
-                      margin="normal"
-                      autoComplete="fromDate"
-                      required
-                      onChange={this.handleChange1}
-                      autoFocus
-                      InputLabelProps={{ shrink: true, required: true }}
-                    />
-                    <TextField
-                      id="endDate-query"
-                      label="To Date"
-                      name="toDate"
-                      fullWidth
-                      type="date"
-                      variant="outlined"
-                      margin="normal"
-                      autoComplete="toDate"
-                      required
-                      onChange={this.handleChange2}
-                      autoFocus
-                      InputLabelProps={{ shrink: true, required: true }}
-                    />
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="ProfitPercentage"
-                      label="Percentage"
-                      name="ProfitPercentage"
-                      type="number"
-                      onChange={this.handleChange3}
-                      autoFocus
-                    />
-                    {startDate.length > 0 &&
-                      endDate.length > 0 &&
-                      effectivePercentage !== "" &&
-                      startDate < endDate &&
-                      dayval >= day && (
-                        <Button
-                          fullWidth
-                          type="button"
-                          variant="contained"
-                          color="primary"
-                          className="{classes.submit} submit-pad"
-                          onClick={this.handleSubmit}
-                          id="assign-cluster-submit"
+      <div className="box-container">
+        <div className="joint-form-large">
+          {saveStatus ? (
+            <>
+              <ProductDetails />
+              <div className="product-form-body">
+                <Typography className="card-header" variant="h4">
+                  Assign Price To Product
+                </Typography>
+                <form className="{classes.form}" noValidate>
+                  <TextField
+                    id="startDate-query"
+                    label="From Date"
+                    name="fromDate"
+                    fullWidth
+                    type="date"
+                    variant="outlined"
+                    margin="normal"
+                    autoComplete="fromDate"
+                    required
+                    onChange={this.handleChange1}
+                    autoFocus
+                    InputLabelProps={{ shrink: true, required: true }}
+                  />
+                  <TextField
+                    id="endDate-query"
+                    label="To Date"
+                    name="toDate"
+                    fullWidth
+                    type="date"
+                    variant="outlined"
+                    margin="normal"
+                    autoComplete="toDate"
+                    required
+                    onChange={this.handleChange2}
+                    autoFocus
+                    InputLabelProps={{ shrink: true, required: true }}
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="ProfitPercentage"
+                    label="Percentage"
+                    name="ProfitPercentage"
+                    type="number"
+                    onChange={this.handleChange3}
+                    autoFocus
+                  />
+                  {startDate.length > 0 &&
+                    endDate.length > 0 &&
+                    effectivePercentage !== "" &&
+                    startDate < endDate &&
+                    dayval >= day && (
+                      <Button
+                        fullWidth
+                        type="button"
+                        variant="contained"
+                        color="primary"
+                        className="{classes.submit} submit-pad"
+                        onClick={this.handleSubmit}
+                        id="assign-cluster-submit"
+                      >
+                        Save
+                      </Button>
+                    )}
+                </form>
+              </div>
+            </>
+          ) : (
+            <>
+              <ProductDetails />
+              <div className="product-form-body">
+                <Typography className="card-header" variant="h4">
+                  Assign Price To Product
+                </Typography>
+                <form className="{classes.form}" noValidate>
+                  <TextField
+                    id="startDate-query"
+                    label="From Date"
+                    name="fromDate"
+                    fullWidth
+                    type="date"
+                    variant="outlined"
+                    margin="normal"
+                    autoComplete="fromDate"
+                    required
+                    onChange={this.handleChange1}
+                    autoFocus
+                    InputLabelProps={{ shrink: true, required: true }}
+                  />
+                  <TextField
+                    id="startDate-query"
+                    label="To Date"
+                    name="toDate"
+                    fullWidth
+                    type="date"
+                    variant="outlined"
+                    margin="normal"
+                    autoComplete="toDate"
+                    required
+                    onChange={this.handleChange2}
+                    autoFocus
+                    InputLabelProps={{ shrink: true, required: true }}
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="ProfitPercentage"
+                    label="ProfitPercentage"
+                    name="ProfitPercentage"
+                    type="number"
+                    onChange={this.handleChange3}
+                    autoFocus
+                  />
+                  <null>
+                    {dayval < day && (
+                      <Snackbar open="true" autoHideDuration={2000}>
+                        <MuiAlert
+                          severity="error"
+                          elevation={6}
+                          variant="filled"
                         >
-                          Save
-                        </Button>
-                      )}
-                  </form>
-                </div>
-              </>
-            ) : (
-              <>
-                <ProductDetails />
-                <div className="product-form-body">
-                  <Typography className="card-header" variant="h4">
-                    Assign Price To Product
-                  </Typography>
-                  <form className="{classes.form}" noValidate>
-                    <TextField
-                      id="startDate-query"
-                      label="From Date"
-                      name="fromDate"
-                      fullWidth
-                      type="date"
-                      variant="outlined"
-                      margin="normal"
-                      autoComplete="fromDate"
-                      required
-                      onChange={this.handleChange1}
-                      autoFocus
-                      InputLabelProps={{ shrink: true, required: true }}
-                    />
-                    <TextField
-                      id="startDate-query"
-                      label="To Date"
-                      name="toDate"
-                      fullWidth
-                      type="date"
-                      variant="outlined"
-                      margin="normal"
-                      autoComplete="toDate"
-                      required
-                      onChange={this.handleChange2}
-                      autoFocus
-                      InputLabelProps={{ shrink: true, required: true }}
-                    />
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="ProfitPercentage"
-                      label="ProfitPercentage"
-                      name="ProfitPercentage"
-                      type="number"
-                      onChange={this.handleChange3}
-                      autoFocus
-                    />
-                    <null>
-                      {dayval < day && (
-                        <div>
-                          <Snackbar open="true" autoHideDuration={2000}>
-                            <MuiAlert
-                              severity="error"
-                              elevation={6}
-                              variant="filled"
-                            >
-                              Enter Valid Start Date
-                            </MuiAlert>
-                          </Snackbar>
-                        </div>
-                      )}
-                    </null>
-                    {startDate.length > 0 &&
-                      endDate.length > 0 &&
-                      effectivePercentage !== "" &&
-                      startDate < endDate &&
-                      dayval >= day && (
-                        <Button
-                          fullWidth
-                          type="button"
-                          variant="contained"
-                          color="primary"
-                          className="{classes.submit} submit-pad"
-                          onClick={this.handleSubmit}
-                          id="assign-cluster-submit"
-                        >
-                          Save
-                        </Button>
-                      )}
-                  </form>
-                </div>
-              </>
-            )}
-          </div>
-          <Message />
+                          Enter Valid Start Date
+                        </MuiAlert>
+                      </Snackbar>
+                    )}
+                  </null>
+                  {startDate.length > 0 &&
+                    endDate.length > 0 &&
+                    effectivePercentage !== "" &&
+                    startDate < endDate &&
+                    dayval >= day && (
+                      <Button
+                        fullWidth
+                        type="button"
+                        variant="contained"
+                        color="primary"
+                        className="{classes.submit} submit-pad"
+                        onClick={this.handleSubmit}
+                        id="assign-cluster-submit"
+                      >
+                        Save
+                      </Button>
+                    )}
+                </form>
+              </div>
+            </>
+          )}
         </div>
+        <Message />
       </div>
     )
   }

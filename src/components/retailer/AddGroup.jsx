@@ -118,13 +118,13 @@ class AddGroup extends Component {
 
         <>
           {status === -1 ? (
-            <div>
+            <>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
                   {addGroupFail}
                 </MuiAlert>
               </Snackbar>
-            </div>
+            </>
           ) : null}
         </>
         <Message />

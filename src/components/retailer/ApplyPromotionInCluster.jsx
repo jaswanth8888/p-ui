@@ -161,7 +161,6 @@ class ApplyPromotionInCluster extends Component {
               </div>
               <div className="form-half">
                 <form className="{classes.form}" noValidate>
-                  <div>
                     <div className="help-block">
                       <Typography
                         color="primary"
@@ -172,7 +171,6 @@ class ApplyPromotionInCluster extends Component {
                         Select product name and cluster
                       </Typography>
                     </div>
-                  </div>
                   <FormControl variant="outlined" fullWidth>
                     <Autocomplete
                       id="product-list"

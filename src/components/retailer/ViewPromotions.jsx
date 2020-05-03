@@ -17,6 +17,7 @@ import {
   promotionDetails,
   queryPromotionsForProducts,
 } from "../utils/constants"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class ViewPromotions extends Component {
   constructor(props) {
@@ -92,7 +93,12 @@ class ViewPromotions extends Component {
                               Vendor Name : {product.vendorName}
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
-                              Base Price : {product.vendorPrice}
+                              {sessionStorage.getItem("currency") === "USD"
+                                ? "$ " + product.vendorPrice
+                                : convertCurrency("USD",
+                                    sessionStorage.getItem("currency"),
+                                    product.vendorPrice
+                                  )}
                             </Typography>
                             {/* <Typography variant="subtitle1" gutterBottom>
                             Effective Price : {product.effectivePrice}
@@ -134,7 +140,16 @@ class ViewPromotions extends Component {
                                             variant="subtitle1"
                                             gutterBottom
                                           >
-                                            {promotion.promotionSellingPrice}
+                                            {sessionStorage.getItem(
+                                              "currency"
+                                            ) === "USD"
+                                              ? promotion.promotionSellingPrice
+                                              : convertCurrency("USD",
+                                                  sessionStorage.getItem(
+                                                    "currency"
+                                                  ),
+                                                  promotion.promotionSellingPrice
+                                                )}
                                           </Typography>
                                         </TableCell>
                                         <TableCell>

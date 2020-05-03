@@ -12,6 +12,7 @@ import {
 import PropTypes from "prop-types"
 
 import { getProductDetails } from "../../redux/actions/RetailerActions"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -48,7 +49,15 @@ class ProductDetails extends Component {
               </TableHead>
               <TableRow>
                 <TableCell className="table-text">
-                  {productDetails.productBasePrice}
+                  {productDetails.productBasePrice !== null
+                    ? sessionStorage.getItem("currency") === "USD"
+                      ? "$ " + productDetails.productBasePrice
+                      : convertCurrency(
+                          "USD",
+                          sessionStorage.getItem("currency"),
+                          productDetails.productBasePrice
+                        )
+                    : "NO EFFECTIVE PRICE"}
                 </TableCell>
                 <TableCell className="table-text">
                   {productDetails.companyName}
@@ -73,7 +82,13 @@ class ProductDetails extends Component {
                   <TableCell className="table-text">Effective Price</TableCell>
                   <TableCell className="table-text">
                     {productDetails.effectivePriceObj !== null
-                      ? productDetails.effectivePriceObj.effectivePrice
+                      ? sessionStorage.getItem("currency") === "USD"
+                        ? "$ " + productDetails.effectivePriceObj.effectivePrice
+                        : convertCurrency(
+                            "USD",
+                            sessionStorage.getItem("currency"),
+                            productDetails.effectivePriceObj.effectivePrice
+                          )
                       : "NO EFFECTIVE PRICE"}
                   </TableCell>
                 </TableRow>

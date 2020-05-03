@@ -26,6 +26,7 @@ import {
 } from "../../redux/actions/RetailerActions"
 import { addProduct, addProductToStore } from "../utils/constants"
 import Message from "../utils/Message"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class AddProducts extends Component {
   constructor(props) {
@@ -203,7 +204,12 @@ class AddProducts extends Component {
                           <TableCell>
                             {product.remainingQuantity > 0 ? (
                               <Typography variant="subtitle1" gutterBottom>
-                                {product.productBasePrice}
+                                {sessionStorage.getItem("currency") === "USD"
+                                  ? "$ " + product.productBasePrice
+                                  : convertCurrency("USD",
+                                      sessionStorage.getItem("currency"),
+                                      product.productBasePrice
+                                    )}
                               </Typography>
                             ) : (
                               <Typography
@@ -211,7 +217,12 @@ class AddProducts extends Component {
                                 className="disabled"
                                 gutterBottom
                               >
-                                {product.productBasePrice}
+                                {sessionStorage.getItem("currency") === "USD"
+                                  ? "$ " + product.productBasePrice
+                                  : convertCurrency("USD",
+                                      sessionStorage.getItem("currency"),
+                                      product.productBasePrice
+                                    )}
                               </Typography>
                             )}
                           </TableCell>

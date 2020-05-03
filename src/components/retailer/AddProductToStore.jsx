@@ -147,7 +147,7 @@ class AddProductToStore extends Component {
           </div>
           <div className="form-half">
             <form className="{classes.form}" noValidate>
-              <div>
+              <>
                 <div className="help-block">
                   <Typography
                     color="primary"
@@ -159,7 +159,7 @@ class AddProductToStore extends Component {
                     {addProductToStore}
                   </Typography>
                 </div>
-              </div>
+              </>
               <FormControl
                 variant="outlined"
                 fullWidth
@@ -280,24 +280,24 @@ class AddProductToStore extends Component {
         </div>
         <>
           {status === 1 ? (
-            <div>
+            <>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert elevation={6} variant="filled">
                   {zoneCreated}
                 </MuiAlert>
               </Snackbar>
-            </div>
+            </>
           ) : null}
         </>
         <>
           {status === -1 ? (
-            <div>
+            <>
               <Snackbar open="true" autoHideDuration={2000}>
                 <MuiAlert severity="error" elevation={6} variant="filled">
                   {zoneCreationFailed}
                 </MuiAlert>
               </Snackbar>
-            </div>
+            </>
           ) : null}
         </>
       </div>

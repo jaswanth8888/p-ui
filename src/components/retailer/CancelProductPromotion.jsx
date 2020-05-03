@@ -25,6 +25,7 @@ import {
   promotions,
   cancelPromotionConst,
 } from "../utils/constants"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class CancelProductPromotion extends Component {
   constructor(props) {
@@ -76,7 +77,13 @@ class CancelProductPromotion extends Component {
               </TableCell>
               <TableCell>
                 <Typography variant="subtitle1" gutterBottom>
-                  {productDetails.effectivePriceObj.effectivePrice}
+                  {sessionStorage.getItem("currency") === "USD"
+                    ? "$ " + productDetails.effectivePriceObj.effectivePrice
+                    : convertCurrency(
+                        "USD",
+                        sessionStorage.getItem("currency"),
+                        productDetails.effectivePriceObj.effectivePrice
+                      )}
                 </Typography>
               </TableCell>
               <TableCell>
@@ -100,23 +107,17 @@ class CancelProductPromotion extends Component {
           <div className="form-center">
             <div className="flex-grid">
               {productDetails.assignProduct.length <= 0 && (
-                <div>
-                  <Alert
-                    severity="info"
-                    action={
-                      <IconButton
-                        aria-label="close"
-                        color="inherit"
-                        size="small"
-                      >
-                        <CloseIcon fontSize="inherit" />
-                      </IconButton>
-                    }
-                  >
-                    Sorry No Promotions are applied on this Product:{" "}
-                    {productDetails.productName}
-                  </Alert>
-                </div>
+                <Alert
+                  severity="info"
+                  action={
+                    <IconButton aria-label="close" color="inherit" size="small">
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >
+                  Sorry No Promotions are applied on this Product:{" "}
+                  {productDetails.productName}
+                </Alert>
               )}
 
               <Typography className="card-header" variant="h4">

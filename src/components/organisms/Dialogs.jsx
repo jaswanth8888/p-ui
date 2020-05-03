@@ -36,7 +36,7 @@ export default function Dialogs() {
   }
 
   return (
-    <div>
+    <>
       <Dialog
         fullScreen
         open={open}
@@ -74,6 +74,6 @@ export default function Dialogs() {
           </ListItem>
         </List>
       </Dialog>
-    </div>
+    </>
   )
 }

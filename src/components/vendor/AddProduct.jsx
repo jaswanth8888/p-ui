@@ -16,6 +16,7 @@ import Select from "@material-ui/core/Select"
 import Message from "./Message"
 
 import { postProduct } from "../../redux/actions/VendorActions"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class AddProduct extends Component {
   constructor(props) {
@@ -210,17 +211,15 @@ class AddProduct extends Component {
             </div>
             <div className="form-half" id="add-prods-form">
               <form className="{classes.form}" noValidate>
-                <div>
-                  <div className="help-block">
-                    <Typography
-                      color="primary"
-                      component="h1"
-                      variant="h4"
-                      className="help-block-h4"
-                    >
-                      AddProduct
-                    </Typography>
-                  </div>
+                <div className="help-block">
+                  <Typography
+                    color="primary"
+                    component="h1"
+                    variant="h4"
+                    className="help-block-h4"
+                  >
+                    AddProduct
+                  </Typography>
                 </div>
                 <TextField
                   variant="outlined"
@@ -283,7 +282,15 @@ class AddProduct extends Component {
                   name="productBasePrice"
                   autoComplete="productBasePrice"
                   onChange={this.handleChange}
-                  value={productBasePrice}
+                  value={
+                    sessionStorage.getItem("currency") === "USD"
+                      ? "$ " + productBasePrice
+                      : convertCurrency(
+                          "USD",
+                          sessionStorage.getItem("currency"),
+                          productBasePrice
+                        )
+                  }
                   startAdornment={
                     <InputAdornment position="start">$</InputAdornment>
                   }
@@ -291,7 +298,7 @@ class AddProduct extends Component {
                 />
 
                 {productCategory === "ALCOHOL_PROD" && (
-                  <div>
+                  <>
                     <TextField
                       variant="outlined"
                       margin="normal"
@@ -339,10 +346,10 @@ class AddProduct extends Component {
                       <MenuItem value="GALLONs">GALLONS</MenuItem>
                       <MenuItem value="ML">ML </MenuItem>
                     </Select>
-                  </div>
+                  </>
                 )}
                 {productCategory === "BABY_PROD" && (
-                  <div>
+                  <>
                     <InputLabel htmlFor="outlined-age-native-simple">
                       Units Of Measuremment
                     </InputLabel>
@@ -362,7 +369,7 @@ class AddProduct extends Component {
                       <MenuItem value="KGs">KGs</MenuItem>
                       <MenuItem value="Pounds">Pounds</MenuItem>
                     </Select>
-                  </div>
+                  </>
                 )}
 
                 <TextField

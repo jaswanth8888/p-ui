@@ -49,7 +49,7 @@ class PriceChangeProductDetailsTable extends Component {
     const { page, rowsPerPage } = this.state
 
     return (
-      <div>
+      <>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -104,7 +104,7 @@ class PriceChangeProductDetailsTable extends Component {
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
         />
         <Message />
-      </div>
+      </>
     )
   }
 }

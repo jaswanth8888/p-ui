@@ -3,7 +3,6 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import Divider from "@material-ui/core/Divider"
 import Drawer from "@material-ui/core/Drawer"
 import Hidden from "@material-ui/core/Hidden"
-import Button from "@material-ui/core/Button"
 import IconButton from "@material-ui/core/IconButton"
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
@@ -486,12 +485,19 @@ function FullNavbar(props) {
                     onSelect={(countryCode) => {
                       i18n.changeLanguage(countryCode)
                       sessionStorage.setItem("countryCode", countryCode)
+                      if (countryCode === "FR" || countryCode === "DE") {
+                        sessionStorage.setItem("currency", "EUR")
+                      }
+                      else{
+                        sessionStorage.setItem("currency", "USD")
+                      }
                     }}
                   />
                   &emsp;
-                  <text id="admin-login-name">
-                    {t("welcomeMain")} {loggedInUser.userName}
-                  </text>
+                  <StyledTab
+                    id="admin-login-name"
+                    label={t("welcomeMain") + " " + loggedInUser.userName}
+                  />
                   <Link to="/" id="logout-btn">
                     <StyledTab
                       label={t("header.logOut")}
@@ -510,22 +516,20 @@ function FullNavbar(props) {
                 {loggedInUser.token === "" && (
                   <>
                     <Link className="button-link" to="/vendor">
-                      <Button
+                      <StyledTab
                         color="default"
                         className="{classes.link}"
                         id="reg-vendor"
-                      >
-                        {t("loginAsVendor")}
-                      </Button>
+                        label={t("loginAsVendor")}
+                      />
                     </Link>
                     <Link className="button-link" to="/admin/login">
-                      <Button
+                      <StyledTab
                         color="default"
                         className="{classes.link}"
                         id="admin-login"
-                      >
-                        {t("loginAsAdmin")}
-                      </Button>
+                        label={t("loginAsAdmin")}
+                      />
                     </Link>
                   </>
                 )}
@@ -540,8 +544,16 @@ function FullNavbar(props) {
                   placeholder="Select Language"
                   defaultCountry={sessionStorage.getItem("countryCode")}
                   onSelect={(countryCode) => {
-                    i18n.changeLanguage(countryCode)
-                    sessionStorage.setItem("countryCode", countryCode)
+                    i18n.changeLanguage(countryCode, () => {
+                      sessionStorage.setItem("countryCode", countryCode)
+                      if (countryCode === "FR" || countryCode === "DE") {
+                        console.log("here")
+                        sessionStorage.setItem("currency", "EUR")
+                      }
+                      else{
+                        sessionStorage.setItem("currency", "USD")
+                      }
+                    })
                   }}
                 />
               </div>

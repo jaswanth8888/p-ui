@@ -34,6 +34,7 @@ class Login extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    sessionStorage.setItem("currency","USD")
   }
 
   isValidUsername = () => {

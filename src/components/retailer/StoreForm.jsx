@@ -115,17 +115,15 @@ class StoreForm extends Component {
             )}
           </div>
           <div id="store-form-container">
-            <div>
-              <div className="help-block">
-                <Typography
-                  color="primary"
-                  component="h1"
-                  variant="h4"
-                  className="special-store-help"
-                >
-                  {createstore}
-                </Typography>
-              </div>
+            <div className="help-block">
+              <Typography
+                color="primary"
+                component="h1"
+                variant="h4"
+                className="special-store-help"
+              >
+                {createstore}
+              </Typography>
             </div>
             <div className="advanced-form-container">
               <div className="form-first-half">
@@ -248,24 +246,20 @@ class StoreForm extends Component {
         </div>
         <>
           {status === 1 ? (
-            <div>
-              <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert elevation={6} variant="filled">
-                  Store created successfully!
-                </MuiAlert>
-              </Snackbar>
-            </div>
+            <Snackbar open="true" autoHideDuration={2000}>
+              <MuiAlert elevation={6} variant="filled">
+                Store created successfully!
+              </MuiAlert>
+            </Snackbar>
           ) : null}
         </>
         <>
           {status === -1 ? (
-            <div>
-              <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert severity="error" elevation={6} variant="filled">
-                  Store creation failed. Please match the requirements
-                </MuiAlert>
-              </Snackbar>
-            </div>
+            <Snackbar open="true" autoHideDuration={2000}>
+              <MuiAlert severity="error" elevation={6} variant="filled">
+                Store creation failed. Please match the requirements
+              </MuiAlert>
+            </Snackbar>
           ) : null}
         </>
       </div>

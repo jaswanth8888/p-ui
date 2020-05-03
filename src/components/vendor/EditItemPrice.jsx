@@ -20,6 +20,7 @@ import {
   updateProduct,
 } from "../../redux/actions/VendorActions"
 import Message from "../utils/Message"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class EditItemPrice extends Component {
   constructor(props) {
@@ -140,22 +141,16 @@ class EditItemPrice extends Component {
                 </Typography>
               </Typography>
               {productDetails.isPromotionRunning && (
-                <div>
-                  <Alert
-                    severity="info"
-                    action={
-                      <IconButton
-                        aria-label="close"
-                        color="inherit"
-                        size="small"
-                      >
-                        <CloseIcon fontSize="inherit" />
-                      </IconButton>
-                    }
-                  >
-                    Sorry you cannot change the price
-                  </Alert>
-                </div>
+                <Alert
+                  severity="info"
+                  action={
+                    <IconButton aria-label="close" color="inherit" size="small">
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >
+                  Sorry you cannot change the price
+                </Alert>
               )}
               {!productDetails.isPromotionRunning && (
                 <TextField
@@ -170,7 +165,15 @@ class EditItemPrice extends Component {
                   name="newBasePrice"
                   autoComplete="newBasePrice"
                   autoFocus
-                  value={updatedProduct.newBasePrice}
+                  value={
+                    sessionStorage.getItem("currency") === "USD"
+                      ? "$ " + updatedProduct.newBasePrice
+                      : convertCurrency(
+                          "USD",
+                          sessionStorage.getItem("currency"),
+                          updatedProduct.newBasePrice
+                        )
+                  }
                   onChange={this.handlePriceChange}
                 />
               )}

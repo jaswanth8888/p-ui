@@ -17,6 +17,7 @@ import {
 import ProductDetails from "../utils/ProductDetails"
 import { viewAssignedZones } from "../utils/constants"
 import Message from "../utils/Message"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class ViewAssignedZones extends Component {
   constructor(props) {
@@ -72,7 +73,12 @@ class ViewAssignedZones extends Component {
                         </TableCell>
                         <TableCell>
                           <Typography variant="subtitle1" gutterBottom>
-                            {zone.price}
+                            {sessionStorage.getItem("currency") === "USD"
+                              ? "$ " + zone.price
+                              : convertCurrency("USD",
+                                  sessionStorage.getItem("currency"),
+                                  zone.price
+                                )}
                           </Typography>
                         </TableCell>
                       </TableRow>

@@ -14,6 +14,7 @@ import { getPromotionsIncluster } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 import { viewClusterPromotion } from "../utils/constants"
 import Message from "../utils/Message"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class ViewClusterPromotions extends Component {
   constructor(props) {
@@ -69,7 +70,12 @@ class ViewClusterPromotions extends Component {
                         </TableCell>
                         <TableCell>
                           <Typography variant="subtitle1" gutterBottom>
-                            {promotion.promotionSellingPrice}
+                            {sessionStorage.getItem("currency") === "USD"
+                              ? promotion.promotionSellingPrice
+                              : convertCurrency("USD",
+                                  sessionStorage.getItem("currency"),
+                                  promotion.promotionSellingPrice
+                                )}
                           </Typography>
                         </TableCell>
                         <TableCell>

@@ -136,13 +136,11 @@ class ZoneForm extends Component {
         </div>
         <>
           {status === -1 ? (
-            <div>
-              <Snackbar open="true" autoHideDuration={2000}>
-                <MuiAlert severity="error" elevation={6} variant="filled">
-                  {zoneCreationFailed}
-                </MuiAlert>
-              </Snackbar>
-            </div>
+            <Snackbar open="true" autoHideDuration={2000}>
+              <MuiAlert severity="error" elevation={6} variant="filled">
+                {zoneCreationFailed}
+              </MuiAlert>
+            </Snackbar>
           ) : null}
         </>
         <Message />

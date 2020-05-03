@@ -17,6 +17,7 @@ import {
 import ProductDetails from "../utils/ProductDetails"
 import { viewAssignedClusters } from "../utils/constants"
 import Message from "../utils/Message"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class ViewAssignedClusters extends Component {
   constructor(props) {
@@ -68,7 +69,12 @@ class ViewAssignedClusters extends Component {
             </TableCell>
             <TableCell>
               <Typography variant="subtitle1" gutterBottom>
-                {cluster.price}
+                {sessionStorage.getItem("currency") === "USD"
+                  ? "$ " + cluster.price
+                  : convertCurrency("USD",
+                      sessionStorage.getItem("currency"),
+                      cluster.price
+                    )}
               </Typography>
             </TableCell>
           </TableRow>
