@@ -160,7 +160,7 @@ function FullNavbar(props) {
                 </ListItemIcon>
                 <ListItemText
                   className="list-item-text"
-                  primary="Approve Promotions"
+                  primary={t("welcome.approvePromotions")}
                 />
               </ListItem>
             </Tooltip>
