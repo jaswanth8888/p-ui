@@ -113,7 +113,7 @@ class ZoneForm extends Component {
                 type="number"
                 step="0.01"
                 id="liquorPricePerUnit"
-                label="Price Per Unit"
+                label="Price Per Unit (in USD)"
                 name="liquorPricePerUnit"
                 autoComplete="pricePerUnit"
                 onChange={this.handleChange}
