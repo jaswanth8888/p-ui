@@ -7,10 +7,7 @@ var currencyData = fetch("https://api.exchangeratesapi.io/latest")
 export default function convertCurrency(from, to, amt) {
   if (from !== "EUR")
     return (
-      (parseFloat(amt) / parseFloat(currencyData.rates[from])).toFixed(3) + " €"
+      new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 3 }).format((parseFloat(amt) / parseFloat(currencyData.rates[from])))
     );
-  else
-    return (
-      (parseFloat(amt) / parseFloat(currencyData.rates[from])).toFixed(3) + " €"
-    );
+  
 }
