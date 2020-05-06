@@ -83,6 +83,7 @@ class AssignToZone extends Component {
                     <Select
                       fullWidth
                       native
+                      autoFocus
                       onChange={this.handleChangeZoneName}
                       label="Enter zone"
                       inputProps={{
@@ -108,7 +109,6 @@ class AssignToZone extends Component {
                     type="number"
                     onChange={this.handleChangeQuantity}
                     value={zoneDetails.quantityAssigned}
-                    autoFocus
                   />
 
                   <TextField
@@ -122,7 +122,6 @@ class AssignToZone extends Component {
                     type="number"
                     onChange={this.handleChangeProfitPecentage}
                     value={zoneDetails.profitPercentage}
-                    autoFocus
                   />
 
                   <Button

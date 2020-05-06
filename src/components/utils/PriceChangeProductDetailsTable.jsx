@@ -74,7 +74,7 @@ class PriceChangeProductDetailsTable extends Component {
                         type="button"
                         variant="contained"
                         color="primary"
-                        className="{classes.submit} submit-pad"
+                        className="{classes.submit}"
                         onClick={() => {
                           if (
                             // eslint-disable-next-line no-alert
