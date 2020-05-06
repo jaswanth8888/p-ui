@@ -182,7 +182,7 @@ class Dashboard extends Component {
         <div className="joint-products-form" id="iframe-container">
           <iframe
             title="Kibana Dashboard"
-            src="https://compute.price-and-promotions.com:5601/goto/16eb54fa4f860d8732ed3821ff31ac62?embed=true"
+            src="http://compute.price-and-promotions.com:5601/goto/16eb54fa4f860d8732ed3821ff31ac62?embed=true"
             height="630"
             width="960"
           />
