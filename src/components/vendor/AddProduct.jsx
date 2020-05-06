@@ -450,9 +450,7 @@ class AddProduct extends Component {
                         Image size should be less than 1 MB
                       </div>
                       {errorImages.map((imageName) => (
-                        <div className="error-line">
-                          The size of &ldquo;{imageName}&rdquo; is &gt; 1 MB
-                        </div>
+                        <div className="error-line">{imageName}</div>
                       ))}
                     </Typography>
                   </div>
