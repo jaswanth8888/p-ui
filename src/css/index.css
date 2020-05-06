@@ -636,6 +636,11 @@ a {
   .help-block-h4 {
     margin-bottom: 20px !important;
   }
+
+  .image-error {
+    width: auto !important;
+    padding: 0px !important;
+  }
 }
 
 #admin-login-name {
@@ -654,7 +659,9 @@ a {
 }
 
 #span-warning {
-  color: red !important;
+  color: red;
+  max-width: 100%;
+  font-size:14px;
 }
 
 #login-joint-form-vendor {
@@ -689,7 +696,20 @@ a {
   -ms-overflow-style: -ms-autohiding-scrollbar;
   width: 200px;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
+}
+
+.image-error {
+  width: 370px;
+  padding:10px 0px 15px 0px;
+  text-align: left !important;
+  position: relative;
+  color: red;
+  align-self: stretch;
+}
+
+.error-line {
+  padding: 3px 0px 3px 0px;
 }
 
 .upload-btn-wrapper {
