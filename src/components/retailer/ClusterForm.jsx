@@ -115,6 +115,7 @@ class ClusterForm extends Component {
                     name: "zone",
                     id: "zone",
                   }}
+                  autoFocus
                 >
                   <option aria-label="None" value="" />
                   {zones.map((zoneVal) => {
