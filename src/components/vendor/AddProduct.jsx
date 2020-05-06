@@ -101,6 +101,7 @@ class AddProduct extends Component {
     const { product } = this.state
     product[name] = value
     this.setState({ product })
+    console.log(convertCurrency("USD", "EUR", 10))
   }
 
   render() {
@@ -317,13 +318,13 @@ class AddProduct extends Component {
                   autoComplete="productBasePrice"
                   onChange={this.handleChange}
                   value={
-                    sessionStorage.getItem("currency") === "USD"
-                      ? `$ ${productBasePrice}`
-                      : convertCurrency(
+                    sessionStorage.getItem("currency") !== "USD"
+                      ? convertCurrency(
                           "USD",
                           sessionStorage.getItem("currency"),
                           productBasePrice
                         )
+                      : productBasePrice
                   }
                   startAdornment={
                     <InputAdornment position="start">$</InputAdornment>

@@ -69,6 +69,8 @@ const App = () => {
     "/admin",
     "/dashboard",
     "/approvepromotion",
+    "/vendor/increaseqtyzone",
+    "/vendor/increaseqtycluster",
   ]
   return (
     <Provider store={store}>
