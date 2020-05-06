@@ -171,7 +171,7 @@ function FullNavbar(props) {
         )}
         <Link to="/updateqty/zone">
           <Tooltip title="Update the price of a Product" placement="right">
-            <ListItem buttonid="update-price-product-btn">
+            <ListItem button id="update-price-product-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
@@ -184,7 +184,7 @@ function FullNavbar(props) {
         </Link>
         <Link to="/updateqty/cluster">
           <Tooltip title="Update the price of a Product" placement="right">
-            <ListItem buttonid="update-price-product-btn">
+            <ListItem button id="update-price-product-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>

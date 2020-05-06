@@ -56,6 +56,7 @@ import {
   GET_PRODUCT_ZONELIST,
   GET_PRODUCT_CLUSTERLIST,
   GET_ZONE_QUANTITY,
+  UPDATE_ZONE_QUANTITY,
 } from "../actions/types"
 
 const initialState = {
@@ -308,6 +309,9 @@ export default (state = initialState, action = {}) => {
       return { ...state, productClusterList: action.productClusterList }
     case GET_ZONE_QUANTITY:
       return { ...state, quantityAssignedAtZone: action.quantityAssignedAtZone }
+    case UPDATE_ZONE_QUANTITY:
+      return { ...state, msg: action.msg, msgSeverity: action.msgSeverity }
+    
     default:
       return { ...state }
   }

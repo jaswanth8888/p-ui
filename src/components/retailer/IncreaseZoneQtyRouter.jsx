@@ -6,6 +6,8 @@ import DefinePromotionInZone from "./DefinePromotionInZone"
 import ViewZonePromotions from "./ViewZonePromotions"
 import IncreaseQtyZone from "./IncreaseQtyZone"
 import IncreaseQtyZoneForm from "./IncreaseQtyZoneForm"
+import ViewAssignedZones from "./ViewAssignedZones"
+
 
 const IncreaseZoneQtyRouter = () => {
   return (
@@ -24,8 +26,8 @@ const IncreaseZoneQtyRouter = () => {
         />
         <PrivateRoute
           exact
-          path="/view/promotions/zone"
-          component={ViewZonePromotions}
+          path="/view/assigned/zones"
+          component={ViewAssignedZones}
         />
       </Switch>
     </Router>
