@@ -36,6 +36,7 @@ class AddProduct extends Component {
         volume: "",
       },
       selectedImages: [],
+      errorImages: [],
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -43,13 +44,22 @@ class AddProduct extends Component {
   }
 
   onFileChange = (event) => {
-    this.readURL(event)
-    this.setState({ selectedImages: event.target.files })
+    const { files } = event.target
+    const errorFiles = []
+    const perfectFiles = []
+    Array.from(files).forEach((file) => {
+      if (file.size / 1024 / 1024 > 1) {
+        errorFiles.push(file.name)
+      } else {
+        perfectFiles.push(file)
+      }
+    })
+    this.readURL(perfectFiles)
+    this.setState({ selectedImages: perfectFiles, errorImages: errorFiles })
   }
 
-  readURL = (input) => {
+  readURL = (files) => {
     document.getElementById("imagePreview").innerHTML = ""
-    const { files } = input.target
     for (let i = 0; i < files.length; i += 1) {
       const file = files[i]
       if (file.type.match("image")) {
@@ -105,7 +115,7 @@ class AddProduct extends Component {
 
   render() {
     if (sessionStorage.getItem("token") != null) {
-      const { product } = this.state
+      const { product, errorImages } = this.state
       const {
         productName,
         productBasePrice,
@@ -457,6 +467,13 @@ class AddProduct extends Component {
                   />
                 </div>
                 <div className="imagePreview" id="imagePreview" />
+                {errorImages.map((imageName) => {
+                  return (
+                    <Typography className="card" id="span-warning">
+                      Image {imageName} size is &gt; 1 MB
+                    </Typography>
+                  )
+                })}
                 <Button
                   type="button"
                   fullWidth
