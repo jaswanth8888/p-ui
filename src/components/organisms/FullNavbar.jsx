@@ -64,6 +64,7 @@ import SellCancelProductFixedPriceRouter from "../retailer/SellCancelProductFixe
 import ApprovePromotionsRouter from "../retailer/ApprovePromotionsRouter"
 import IncreaseQtyZone from "../retailer/IncreaseQtyZone"
 import IncreaseQtyCluster from "../retailer/IncreaseQtyCluster"
+import IncreaseZoneQtyRouter from "../retailer/IncreaseZoneQtyRouter"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -740,7 +741,11 @@ function FullNavbar(props) {
           <Route exact path="/vendor/reg" component={Registration} />
           <Route exact path="/vendor/addproduct" component={AddProduct} />
           <Route exact path="/vendor/updateprice" component={SelectProduct} />
-          <Route exact path="/updateqty/zone" component={IncreaseQtyZone} />
+          <Route
+            exact
+            path="/updateqty/zone"
+            component={IncreaseZoneQtyRouter}
+          />
           <Route
             exact
             path="/updateqty/cluster"

@@ -64,6 +64,7 @@ import {
   APPROVE_PROMOTION,
   GET_PRODUCT_ZONELIST,
   GET_PRODUCT_CLUSTERLIST,
+  GET_ZONE_QUANTITY,
 } from "./types"
 
 const TOKEN = () => {
@@ -1298,5 +1299,15 @@ export const getClustersForProduct = (productName, zone) => async (
     )
     .then((res) => {
       dispatch({ type: GET_PRODUCT_CLUSTERLIST, productClusterList: res.data })
+    })
+}
+
+export const getZoneQuantity = (productName, zone) => async (dispatch) => {
+  await axios
+    .get(`http://www.mocky.io/v2/5eb27cc23200000e007b81ec`, {
+      headers: { Authorization: TOKEN() },
+    })
+    .then((res) => {
+      dispatch({ type: GET_ZONE_QUANTITY, quantityAssignedAtZone: res.data })
     })
 }

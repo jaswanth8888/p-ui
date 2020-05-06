@@ -55,6 +55,7 @@ import {
   APPROVE_PROMOTION,
   GET_PRODUCT_ZONELIST,
   GET_PRODUCT_CLUSTERLIST,
+  GET_ZONE_QUANTITY,
 } from "../actions/types"
 
 const initialState = {
@@ -112,6 +113,7 @@ const initialState = {
   pendingPromotions: [],
   productZoneList: [],
   productClusterList: [],
+  quantityAssignedAtZone: 0,
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -304,6 +306,8 @@ export default (state = initialState, action = {}) => {
       return { ...state, productZoneList: action.productZoneList }
     case GET_PRODUCT_CLUSTERLIST:
       return { ...state, productClusterList: action.productClusterList }
+    case GET_ZONE_QUANTITY:
+      return { ...state, quantityAssignedAtZone: action.quantityAssignedAtZone }
     default:
       return { ...state }
   }

@@ -86,6 +86,7 @@ export const PENDING_PROMOTIONS = "PENDING_PROMOTIONS"
 export const APPROVE_PROMOTION = "APPROVE_PROMOTION"
 export const GET_PRODUCT_ZONELIST = "GET_PRODUCT_ZONELIST"
 export const GET_PRODUCT_CLUSTERLIST = "GET_PRODUCT_CLUSTERLIST"
+export const GET_ZONE_QUANTITY = "GET_ZONE_QUANTITY"
 export const TOKEN = `BearerR ${sessionStorage.getItem("token")}`
 
 // vendor constants

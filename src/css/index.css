@@ -458,7 +458,10 @@ a {
   margin: 10px 0px !important;
   color: #3f51b5 !important;
 }
-
+.card-subheader {
+  margin: 5px 0px !important;
+  color: #3f51b5 !important;
+}
 .productform {
   display: flex;
   justify-content: center;
