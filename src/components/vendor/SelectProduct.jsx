@@ -81,6 +81,8 @@ class SelectProduct extends Component {
               </div>
               <FormControl variant="outlined" fullWidth>
                 <Autocomplete
+                  autoFocus
+                  openOnFocus="true"
                   id="product-list"
                   fullWidth
                   options={products}

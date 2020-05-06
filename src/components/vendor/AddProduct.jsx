@@ -313,7 +313,6 @@ class AddProduct extends Component {
                   autoComplete="initialQuantity"
                   onChange={this.handleChange}
                   value={initialQuantity}
-                  autoFocus
                 />
                 <TextField
                   variant="outlined"
@@ -339,7 +338,6 @@ class AddProduct extends Component {
                   startAdornment={
                     <InputAdornment position="start">$</InputAdornment>
                   }
-                  autoFocus
                 />
 
                 {productCategory === "ALCOHOL_PROD" && (
@@ -356,7 +354,6 @@ class AddProduct extends Component {
                       autoComplete="abv"
                       onChange={this.handleChange}
                       value={abv}
-                      autoFocus
                     />
                     <TextField
                       variant="outlined"
@@ -372,31 +369,6 @@ class AddProduct extends Component {
                       value={volume}
                       autoFocus
                     />
-                    {/* <FormControl
-                      variant="outlined"
-                      fullWidth
-                      className="space-margin-top"
-                    >
-                      <InputLabel htmlFor="outlined-age-native-simple">
-                        Units Of Measuremment
-                      </InputLabel>
-                      <Select
-                        labelId="uom"
-                        fullWidth
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        name="uom"
-                        label="unitsOfMeasurement"
-                        value={uom}
-                        id="alc-prod"
-                        onChange={this.handleChange}
-                      >
-                        <MenuItem value="Lts">LTS</MenuItem>
-                        <MenuItem value="GALLONs">GALLONS</MenuItem>
-                        <MenuItem value="ML">ML </MenuItem>
-                      </Select>
-                    </FormControl> */}
                   </>
                 )}
                 {productCategory === "BABY_PROD" && (
@@ -467,13 +439,24 @@ class AddProduct extends Component {
                   />
                 </div>
                 <div className="imagePreview" id="imagePreview" />
-                {errorImages.map((imageName) => {
-                  return (
-                    <Typography className="card" id="span-warning">
-                      Image {imageName} size is &gt; 1 MB
+                {errorImages.length > 0 && (
+                  <div className="image-error">
+                    <Typography
+                      id="span-warning"
+                      variant="h6"
+                      className="help-block-h4"
+                    >
+                      <div className="error-line">
+                        Image size should be less than 1 MB
+                      </div>
+                      {errorImages.map((imageName) => (
+                        <div className="error-line">
+                          The size of &ldquo;{imageName}&rdquo; is &gt; 1 MB
+                        </div>
+                      ))}
                     </Typography>
-                  )
-                })}
+                  </div>
+                )}
                 <Button
                   type="button"
                   fullWidth

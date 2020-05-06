@@ -183,7 +183,6 @@ class StoreForm extends Component {
                     autoComplete="storeName"
                     onChange={this.handleChange}
                     value={storeName}
-                    autoFocus
                   />
                 </form>
               </div>

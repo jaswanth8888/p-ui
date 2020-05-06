@@ -136,7 +136,6 @@ class ClusterForm extends Component {
                 style={{
                   marginTop: "24px",
                 }}
-                autoFocus
               />
               <TextField
                 variant="outlined"
@@ -151,7 +150,6 @@ class ClusterForm extends Component {
                 autoComplete="taxRate"
                 onChange={this.handleChange}
                 value={taxRate}
-                autoFocus
               />
               <Button
                 type="button"
