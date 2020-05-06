@@ -203,7 +203,6 @@ class EditItemPrice extends Component {
                 InputLabelProps={{ shrink: true, required: true }}
                 name="newQuantity"
                 autoComplete="newQuantity"
-                autoFocus
                 value={updatedProduct.newQuantity}
                 onChange={this.handleQuantityChange}
               />

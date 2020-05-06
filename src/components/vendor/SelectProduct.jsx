@@ -81,8 +81,6 @@ class SelectProduct extends Component {
               </div>
               <FormControl variant="outlined" fullWidth>
                 <Autocomplete
-                  autoFocus
-                  openOnFocus="true"
                   id="product-list"
                   fullWidth
                   options={products}
@@ -93,6 +91,7 @@ class SelectProduct extends Component {
                       {...params}
                       label="Product Name"
                       variant="outlined"
+                      autoFocus
                     />
                   )}
                   onChange={this.handleChangeProduct}
