@@ -101,7 +101,6 @@ class AddProduct extends Component {
     const { product } = this.state
     product[name] = value
     this.setState({ product })
-    console.log(convertCurrency("USD", "EUR", 10))
   }
 
   render() {

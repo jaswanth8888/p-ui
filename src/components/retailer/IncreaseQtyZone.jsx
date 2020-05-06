@@ -89,7 +89,7 @@ class IncreaseQtyZone extends Component {
     return (
       <>
         {assignedPrice !== "" ? (
-          history.push("/definepromotion/zone")
+          history.push("/updateqty/zoneform")
         ) : (
           <div className="box-container">
             <div className="joint-form">

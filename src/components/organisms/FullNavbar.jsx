@@ -168,8 +168,7 @@ function FullNavbar(props) {
             </Tooltip>
           </Link>
         )}
-
-        <Link to="/vendor/increaseqtyzone">
+        <Link to="/updateqty/zone">
           <Tooltip title="Update the price of a Product" placement="right">
             <ListItem buttonid="update-price-product-btn">
               <ListItemIcon>
@@ -182,7 +181,7 @@ function FullNavbar(props) {
             </ListItem>
           </Tooltip>
         </Link>
-        <Link to="/vendor/increaseqtycluster">
+        <Link to="/updateqty/cluster">
           <Tooltip title="Update the price of a Product" placement="right">
             <ListItem buttonid="update-price-product-btn">
               <ListItemIcon>
@@ -741,14 +740,10 @@ function FullNavbar(props) {
           <Route exact path="/vendor/reg" component={Registration} />
           <Route exact path="/vendor/addproduct" component={AddProduct} />
           <Route exact path="/vendor/updateprice" component={SelectProduct} />
+          <Route exact path="/updateqty/zone" component={IncreaseQtyZone} />
           <Route
             exact
-            path="/vendor/increaseqtyzone"
-            component={IncreaseQtyZone}
-          />
-          <Route
-            exact
-            path="/vendor/increaseqtycluster"
+            path="/updateqty/cluster"
             component={IncreaseQtyCluster}
           />
           <Route exact path="/vendor/editproduct" component={EditItemPrice} />
