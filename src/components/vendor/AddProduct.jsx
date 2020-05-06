@@ -17,7 +17,7 @@ import Select from "@material-ui/core/Select"
 import Message from "./Message"
 
 import { postProduct } from "../../redux/actions/VendorActions"
-import convertCurrency from "../utils/ConvertCurrency"
+// import convertCurrency from "../utils/ConvertCurrency"
 
 class AddProduct extends Component {
   constructor(props) {
@@ -317,15 +317,16 @@ class AddProduct extends Component {
                   name="productBasePrice"
                   autoComplete="productBasePrice"
                   onChange={this.handleChange}
-                  value={
-                    sessionStorage.getItem("currency") !== "USD"
-                      ? convertCurrency(
-                          "USD",
-                          sessionStorage.getItem("currency"),
-                          productBasePrice
-                        )
-                      : productBasePrice
-                  }
+                  // value={
+                  //   sessionStorage.getItem("currency") !== "USD"
+                  //     ? convertCurrency(
+                  //         "USD",
+                  //         sessionStorage.getItem("currency"),
+                  //         productBasePrice
+                  //       )
+                  //     : productBasePrice
+                  // }
+                  value={productBasePrice}
                   startAdornment={
                     <InputAdornment position="start">$</InputAdornment>
                   }

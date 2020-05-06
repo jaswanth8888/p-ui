@@ -173,15 +173,16 @@ class EditItemPrice extends Component {
                   name="newBasePrice"
                   autoComplete="newBasePrice"
                   autoFocus
-                  value={
-                    sessionStorage.getItem("currency") === "USD"
-                      ? `$ ${updatedProduct.newBasePrice}`
-                      : convertCurrency(
-                          "USD",
-                          sessionStorage.getItem("currency"),
-                          updatedProduct.newBasePrice
-                        )
-                  }
+                  // value={
+                  //   sessionStorage.getItem("currency") === "USD"
+                  //     ? `$ ${updatedProduct.newBasePrice}`
+                  //     : convertCurrency(
+                  //         "USD",
+                  //         sessionStorage.getItem("currency"),
+                  //         updatedProduct.newBasePrice
+                  //       )
+                  // }
+                  value={updateProduct.newBasePrice}
                   onChange={this.handlePriceChange}
                 />
               )}
