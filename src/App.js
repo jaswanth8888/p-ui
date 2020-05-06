@@ -71,6 +71,7 @@ const App = () => {
     "/approvepromotion",
     "/vendor/increaseqtyzone",
     "/vendor/increaseqtycluster",
+    "/viewproducts",
   ]
   return (
     <Provider store={store}>

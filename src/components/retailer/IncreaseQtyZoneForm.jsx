@@ -8,16 +8,14 @@ import {
   postPromotion,
   getZoneQuantity,
 } from "../../redux/actions/RetailerActions"
-import { getPromotionAlert } from "../../redux/actions/AdminActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
-import { promotioncheck } from "../utils/constants"
 import convertCurrency from "../utils/ConvertCurrency"
 
 class IncreaseQtyZoneForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      zoneQuantity: 0
+      zoneQuantity: 0,
     }
 
     this.handleChangeQuantity = this.handleChangeQuantity.bind(this)
@@ -81,7 +79,7 @@ class IncreaseQtyZoneForm extends Component {
                       )}
                 </Typography>
                 <Typography variant="h6">
-                  Quantity Assigned : { quantityAssignedAtZone}
+                  Quantity Assigned : {quantityAssignedAtZone}
                 </Typography>
               </div>
               <TextField

@@ -13,6 +13,7 @@ import {
   PRODUCTLIST_GET_REQUEST,
   PRODUCT_SAVE_VALUE,
   USER_TYPE,
+  GET_ALL_PRODUCTS,
 } from "./types"
 
 const VTOKEN = () => {
@@ -185,4 +186,17 @@ export const updateProduct = (updatedProduct, productName) => async (
 }
 export const saveProductValue = (productValue) => (dispatch) => {
   dispatch({ type: PRODUCT_SAVE_VALUE, productName: productValue })
+}
+
+export const getAllProducts = () => async (dispatch) => {
+  await axios
+    .get(`http://www.mocky.io/v2/5eb2cd0a32000006547b854d`, {
+      headers: { Authorization: VTOKEN() },
+    })
+    .then((res) => {
+      dispatch({ type: GET_ALL_PRODUCTS, getProducts: res.data })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
 }
