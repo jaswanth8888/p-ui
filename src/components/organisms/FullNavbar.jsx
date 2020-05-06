@@ -62,6 +62,8 @@ import CreateAdmin from "../retailer/CreateAdmin"
 import AdminLogin from "../admin/AdminLogin"
 import SellCancelProductFixedPriceRouter from "../retailer/SellCancelProductFixedPriceRouter"
 import ApprovePromotionsRouter from "../retailer/ApprovePromotionsRouter"
+import IncreaseQtyZone from "../retailer/IncreaseQtyZone"
+import IncreaseQtyCluster from "../retailer/IncreaseQtyCluster"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -166,6 +168,33 @@ function FullNavbar(props) {
             </Tooltip>
           </Link>
         )}
+
+        <Link to="/vendor/increaseqtyzone">
+          <Tooltip title="Update the price of a Product" placement="right">
+            <ListItem buttonid="update-price-product-btn">
+              <ListItemIcon>
+                <AddShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Increase qty at Zone Level"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
+        <Link to="/vendor/increaseqtycluster">
+          <Tooltip title="Update the price of a Product" placement="right">
+            <ListItem buttonid="update-price-product-btn">
+              <ListItemIcon>
+                <AddShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="Increase qty at Cluster Level"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
 
         <Link to="/applypromotion/zone">
           <Tooltip title="Apply Promotion in Zone Level" placement="right">
@@ -712,6 +741,16 @@ function FullNavbar(props) {
           <Route exact path="/vendor/reg" component={Registration} />
           <Route exact path="/vendor/addproduct" component={AddProduct} />
           <Route exact path="/vendor/updateprice" component={SelectProduct} />
+          <Route
+            exact
+            path="/vendor/increaseqtyzone"
+            component={IncreaseQtyZone}
+          />
+          <Route
+            exact
+            path="/vendor/increaseqtycluster"
+            component={IncreaseQtyCluster}
+          />
           <Route exact path="/vendor/editproduct" component={EditItemPrice} />
           <Route exact path="/admin" component={CreateAdmin} />
           <Route exact path="/admin/login" component={AdminLogin} />
