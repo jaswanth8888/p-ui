@@ -551,8 +551,14 @@ a {
   letter-spacing: 0.02857em !important;
   padding: 6px 16px !important;
 }
+.image-error {
+  width: 370px;
+  padding:10px 0px 15px 0px;
+  text-align: left !important;
+  position: relative;
+  color: red;
+}
 
-/* .login-help-block, */
 @media only screen and (max-width: 600px) {
   body {
     font-size: 12px !important;
@@ -660,7 +666,7 @@ a {
 
 #span-warning {
   color: red;
-  max-width: 100%;
+  /* max-width: 100%; */
   font-size:14px;
 }
 
@@ -697,15 +703,6 @@ a {
   width: 200px;
   justify-content: space-between;
   margin-bottom: 5px;
-}
-
-.image-error {
-  width: 370px;
-  padding:10px 0px 15px 0px;
-  text-align: left !important;
-  position: relative;
-  color: red;
-  align-self: stretch;
 }
 
 .error-line {

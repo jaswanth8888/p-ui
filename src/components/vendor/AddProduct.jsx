@@ -14,6 +14,7 @@ import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import Select from "@material-ui/core/Select"
+import Alert from "@material-ui/lab/Alert"
 import Message from "./Message"
 
 import { postProduct } from "../../redux/actions/VendorActions"
@@ -441,7 +442,7 @@ class AddProduct extends Component {
                 <div className="imagePreview" id="imagePreview" />
                 {errorImages.length > 0 && (
                   <div className="image-error">
-                    <Typography
+                    {/* <Typography
                       id="span-warning"
                       variant="h6"
                       className="help-block-h4"
@@ -452,9 +453,22 @@ class AddProduct extends Component {
                       {errorImages.map((imageName) => (
                         <div className="error-line">{imageName}</div>
                       ))}
-                    </Typography>
+                    </Typography> */}
+                    <Alert severity="warning">
+                      <div className="error-line">
+                        Maximum image upload size is 1 MB.
+                      </div>
+                      Images{" "}
+                      {errorImages.map((imageName) => (
+                        <React.Fragment className="error-line">
+                          &ldquo;{imageName}&rdquo;{" "}
+                        </React.Fragment>
+                      ))}
+                      exceed this limit.
+                    </Alert>
                   </div>
                 )}
+
                 <Button
                   type="button"
                   fullWidth
