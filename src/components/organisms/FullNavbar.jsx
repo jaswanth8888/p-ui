@@ -1,6 +1,6 @@
 import AppBar from "@material-ui/core/AppBar"
 import CssBaseline from "@material-ui/core/CssBaseline"
-import Divider from "@material-ui/core/Divider"
+// import Divider from "@material-ui/core/Divider"
 import Drawer from "@material-ui/core/Drawer"
 import Hidden from "@material-ui/core/Hidden"
 import IconButton from "@material-ui/core/IconButton"
@@ -14,6 +14,7 @@ import Toolbar from "@material-ui/core/Toolbar"
 import Tooltip from "@material-ui/core/Tooltip"
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
 import DateRangeIcon from "@material-ui/icons/DateRange"
+import InsertChartIcon from "@material-ui/icons/InsertChart"
 import EventBusyIcon from "@material-ui/icons/EventBusy"
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted"
 import GroupIcon from "@material-ui/icons/Group"
@@ -101,6 +102,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
 }))
 
 const StyledTab = withStyles({
@@ -118,26 +122,42 @@ function FullNavbar(props) {
   const [open] = React.useState(false)
   const { container, loggedInUser } = props
   const [mobileOpen, setMobileOpen] = React.useState(false)
-  const [incopen, setOpen] = React.useState(true)
+  const [qtyOpen, qtySetOpen] = React.useState(false)
+  const [adminOpen, adminSetOpen] = React.useState(false)
+  const [priceOpen, priceSetOpen] = React.useState(false)
+  const [promotionOpen, promotionSetOpen] = React.useState(false)
+  const [locationOpen, locationSetOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
 
-  const handleClick = () => {
-    setOpen(!incopen)
+  const handleClickQty = () => {
+    qtySetOpen(!qtyOpen)
+  }
+  const handleClickAdmin = () => {
+    adminSetOpen(!adminOpen)
+  }
+  const handleClickPrice = () => {
+    priceSetOpen(!priceOpen)
+  }
+  const handleClickPromotion = () => {
+    promotionSetOpen(!promotionOpen)
+  }
+  const handleClickLocation = () => {
+    locationSetOpen(!locationOpen)
   }
 
   const Retailerdrawer = (
     <div>
       <div className={classes.toolbar} />
-      <Divider />
+      {/* Dashboard */}
       <List>
         <Link to="/dashboard">
           <Tooltip title="Dashboard" placement="right">
             <ListItem button id="dashboard-btn">
               <ListItemIcon>
-                <DateRangeIcon />
+                <InsertChartIcon />
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
@@ -146,121 +166,13 @@ function FullNavbar(props) {
             </ListItem>
           </Tooltip>
         </Link>
-        {loggedInUser.userType === "Retailer" && (
-          <Link to="/admin">
-            <Tooltip title="Create Admin" placement="right">
-              <ListItem button id="create-admin-btn">
-                <ListItemIcon>
-                  <PersonAddIcon />
-                </ListItemIcon>
-                <ListItemText
-                  className="list-item-text"
-                  primary={t("welcome.createAdmin")}
-                />
-              </ListItem>
-            </Tooltip>
-          </Link>
-        )}
 
-        {loggedInUser.userType === "Retailer" && (
-          <Link to="/approvepromotion">
-            <Tooltip title="Approve Promotion" placement="right">
-              <ListItem button id="approve-promotion-btn">
-                <ListItemIcon>
-                  <GroupIcon />
-                </ListItemIcon>
-                <ListItemText
-                  className="list-item-text"
-                  primary={t("welcome.approvePromotions")}
-                />
-              </ListItem>
-            </Tooltip>
-          </Link>
-        )}
-        <ListItem button onClick={handleClick}>
-          <ListItemIcon>
-            <AddShoppingCartIcon />
-          </ListItemIcon>
-          <ListItemText primary="Increase Quantity" />
-          {incopen ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={incopen} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <Link to="/updateqty/zone">
-              <Tooltip title="Update the price of a Product" placement="right">
-                <ListItem button id="update-price-product-btn">
-                  <ListItemIcon>
-                    <AddShoppingCartIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    className="list-item-text"
-                    primary="Increase qty at Zone Level"
-                  />
-                </ListItem>
-              </Tooltip>
-            </Link>
-            <Link to="/updateqty/cluster">
-              <Tooltip title="Update the price of a Product" placement="right">
-                <ListItem button id="update-price-product-btn">
-                  <ListItemIcon>
-                    <AddShoppingCartIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    className="list-item-text"
-                    primary="Increase qty at Cluster Level"
-                  />
-                </ListItem>
-              </Tooltip>
-            </Link>
-          </List>
-        </Collapse>
-        <Link to="/applypromotion/zone">
-          <Tooltip title="Apply Promotion in Zone Level" placement="right">
-            <ListItem button id="apply-promotion-zone-btn">
-              <ListItemIcon>
-                <AddShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.applyPromotionInZoneLevel")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-
-        <Link to="/applypromotion/cluster">
-          <Tooltip title="Apply Promotion in Cluster Level" placement="right">
-            <ListItem button id="apply-promotion-cluster-btn">
-              <ListItemIcon>
-                <AddShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.applyPromotionInClusterLevel")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-
-        <Link to="/selectproduct">
-          <Tooltip title="Assign Price to Zone/Cluster" placement="right">
-            <ListItem button id="assign-price-zone-cluster-btn">
-              <ListItemIcon>
-                <AddShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.assignProductToClusterZone")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-
+        {/* Add product to store */}
         <Link to="/products/store">
           <Tooltip title="Add Products to Store" placement="right">
             <ListItem button id="add-product-store-btn">
               <ListItemIcon>
-                <AddShoppingCartIcon />
+                <StoreIcon />
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
@@ -269,7 +181,8 @@ function FullNavbar(props) {
             </ListItem>
           </Tooltip>
         </Link>
-        <Divider />
+
+        {/* Create group */}
         <Link to="/group">
           <Tooltip title="Create a Group" placement="right">
             <ListItem button id="create-group-btn">
@@ -283,185 +196,450 @@ function FullNavbar(props) {
             </ListItem>
           </Tooltip>
         </Link>
-        <Link to="/zone">
-          <Tooltip title="Create a Zone" placement="right">
-            <ListItem button id="create-zone-btn">
-              <ListItemIcon>
-                <PublicIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.createZone")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Link to="/cluster">
-          <Tooltip title="Create a Cluster" placement="right">
-            <ListItem button id="create-cluster-btn">
-              <ListItemIcon>
-                <LocationCityIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.createCluster")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Link to="/store">
-          <Tooltip title="Create a Store" placement="right">
-            <ListItem button id="create-store-btn">
-              <ListItemIcon>
-                <StoreIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.createStore")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Divider />
-        <Link to="/priceondate">
-          <Tooltip title="Price on date" placement="right">
-            <ListItem button id="price-on-date-btn">
-              <ListItemIcon>
-                <LocalOfferIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.priceOnDate")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Divider />
-        <Link to="/cancel/promotion">
-          <Tooltip title="Cancel Percentage Promotion" placement="right">
-            <ListItem button id="cancel-promotion-btn">
-              <ListItemIcon>
-                <EventBusyIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.cancelPromotionPercentage")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Link to="/withdraw/zonepromotion">
-          <Tooltip title="Withdraw Percentage Promotion Zone" placement="right">
-            <ListItem button id="withdraw-zone-promotion-btn">
-              <ListItemIcon>
-                <EventBusyIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.withdrawPercentagePromotionZone")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Link to="/withdraw/clusterpromotion">
-          <Tooltip
-            title="Withdraw Percentage Promotion Cluster"
-            placement="right"
+
+        {/* Admin Actions */}
+        {loggedInUser.userType === "Retailer" && (
+          <>
+            <Tooltip title="Admin Actions" placement="right">
+              <ListItem button id="admin-dropdown" onClick={handleClickAdmin}>
+                <ListItemIcon>
+                  <AddShoppingCartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Admin Actions" />
+                {adminOpen ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+            </Tooltip>
+            <Collapse in={adminOpen} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <Link to="/admin">
+                  <Tooltip title="Create Admin" placement="right">
+                    <ListItem
+                      button
+                      id="create-admin-btn"
+                      className={classes.nested}
+                    >
+                      <ListItemIcon>
+                        <PersonAddIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={t("welcome.createAdmin")}
+                      />
+                    </ListItem>
+                  </Tooltip>
+                </Link>
+
+                <Link to="/approvepromotion">
+                  <Tooltip title="Approve Promotion" placement="right">
+                    <ListItem
+                      button
+                      id="approve-promotion-btn"
+                      className={classes.nested}
+                    >
+                      <ListItemIcon>
+                        <GroupIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        className="list-item-text"
+                        primary={t("welcome.approvePromotions")}
+                      />
+                    </ListItem>
+                  </Tooltip>
+                </Link>
+              </List>
+            </Collapse>
+          </>
+        )}
+
+        {/* Prices */}
+        <Tooltip title="Prices Menu" placement="right">
+          <ListItem button id="price-dropdown" onClick={handleClickPrice}>
+            <ListItemIcon>
+              <AddShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Prices" />
+            {priceOpen ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+        </Tooltip>
+        <Collapse in={priceOpen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <Link to="/priceondate">
+              <Tooltip title="Price on date" placement="right">
+                <ListItem
+                  button
+                  id="price-on-date-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <LocalOfferIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.priceOnDate")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+
+            <Link to="/selectproduct">
+              <Tooltip title="Assign Price to Zone/Cluster" placement="right">
+                <ListItem
+                  button
+                  id="assign-price-zone-cluster-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <AddShoppingCartIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.assignProductToClusterZone")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+
+            <Link to="/sellcancel/fixedprice">
+              <Tooltip
+                title="Sell/ Cancel Product at Fixed Price"
+                placement="right"
+              >
+                <ListItem
+                  button
+                  id="sell-cancel-fixed-price-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <EventBusyIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.sellCancelProductFixedPrice")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+
+            <Link to="/product/pricechange/canceleffective">
+              <Tooltip title="Cancel Effective Price Change" placement="right">
+                <ListItem
+                  button
+                  id="cancel-effective-price-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <EventBusyIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.cancelEffectivePriceChange")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+
+            <Link to="/product/pricechange/cancelnoteffective">
+              <Tooltip
+                title="Cancel Not Effective Price Change"
+                placement="right"
+              >
+                <ListItem
+                  button
+                  id="cancel-not-effective-price-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <EventBusyIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.cancelNotEffectivePriceChange")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+          </List>
+        </Collapse>
+
+        {/* Promotions */}
+        <Tooltip title="Promotions Menu" placement="right">
+          <ListItem
+            button
+            id="promotion-dropdown"
+            onClick={handleClickPromotion}
           >
-            <ListItem button id="withdraw-cluster-promotion-btn">
-              <ListItemIcon>
-                <EventBusyIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.withdrawPercentagePromotionCluster")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Link to="/product/pricechange/cancelnoteffective">
-          <Tooltip title="Cancel Not Effective Price Change" placement="right">
-            <ListItem button id="cancel-not-effective-price-btn">
-              <ListItemIcon>
-                <EventBusyIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.cancelNotEffectivePriceChange")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Link to="/product/pricechange/canceleffective">
-          <Tooltip title="Cancel Effective Price Change" placement="right">
-            <ListItem button id="cancel-effective-price-btn">
-              <ListItemIcon>
-                <EventBusyIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.cancelEffectivePriceChange")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Link to="/sellcancel/fixedprice">
-          <Tooltip
-            title="Sell/ Cancel Product at Fixed Price"
-            placement="right"
-          >
-            <ListItem button id="sell-cancel-fixed-price-btn">
-              <ListItemIcon>
-                <EventBusyIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.sellCancelProductFixedPrice")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Divider />
-        <Link to="/queryondaterange">
-          <Tooltip title="Query on Date Range" placement="right">
-            <ListItem button id="query-on-date-btn">
-              <ListItemIcon>
-                <DateRangeIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.queryPromotionsOnDateRange")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Divider />
-        <Link to="/view/zones">
-          <Tooltip title="View Zones" placement="right">
-            <ListItem button id="view-zones-btn">
-              <ListItemIcon>
-                <FormatListBulletedIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.viewZones")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Link to="/view/clusters">
-          <Tooltip title="View Clusters" placement="right">
-            <ListItem button id="view-clusters-btn">
-              <ListItemIcon>
-                <FormatListBulletedIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary={t("welcome.viewClusters")}
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
+            <ListItemIcon>
+              <AddShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Promotions" />
+            {promotionOpen ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+        </Tooltip>
+        <Collapse in={promotionOpen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <Link to="/applypromotion/zone">
+              <Tooltip title="Apply Promotion in Zone Level" placement="right">
+                <ListItem
+                  button
+                  id="apply-promotion-zone-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <AddShoppingCartIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.applyPromotionInZoneLevel")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+
+            <Link to="/applypromotion/cluster">
+              <Tooltip
+                title="Apply Promotion in Cluster Level"
+                placement="right"
+              >
+                <ListItem
+                  button
+                  id="apply-promotion-cluster-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <AddShoppingCartIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.applyPromotionInClusterLevel")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+
+            <Link to="/queryondaterange">
+              <Tooltip title="Query on Date Range" placement="right">
+                <ListItem
+                  button
+                  id="query-on-date-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <DateRangeIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.queryPromotionsOnDateRange")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+
+            <Link to="/withdraw/zonepromotion">
+              <Tooltip
+                title="Withdraw Percentage Promotion Zone"
+                placement="right"
+              >
+                <ListItem
+                  button
+                  id="withdraw-zone-promotion-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <EventBusyIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.withdrawPercentagePromotionZone")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+            <Link to="/withdraw/clusterpromotion">
+              <Tooltip
+                title="Withdraw Percentage Promotion Cluster"
+                placement="right"
+              >
+                <ListItem
+                  button
+                  id="withdraw-cluster-promotion-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <EventBusyIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.withdrawPercentagePromotionCluster")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+
+            <Link to="/cancel/promotion">
+              <Tooltip title="Cancel Percentage Promotion" placement="right">
+                <ListItem
+                  button
+                  id="cancel-promotion-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <EventBusyIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.cancelPromotionPercentage")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+          </List>
+        </Collapse>
+
+        {/* Location */}
+        <Tooltip title="Location Menu" placement="right">
+          <ListItem button id="location-dropdown" onClick={handleClickLocation}>
+            <ListItemIcon>
+              <AddShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Location" />
+            {locationOpen ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+        </Tooltip>
+        <Collapse in={locationOpen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <Link to="/zone">
+              <Tooltip title="Create a Zone" placement="right">
+                <ListItem
+                  button
+                  id="create-zone-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <PublicIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.createZone")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+            <Link to="/cluster">
+              <Tooltip title="Create a Cluster" placement="right">
+                <ListItem
+                  button
+                  id="create-cluster-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <LocationCityIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.createCluster")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+            <Link to="/store">
+              <Tooltip title="Create a Store" placement="right">
+                <ListItem
+                  button
+                  id="create-store-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <StoreIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.createStore")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+
+            <Link to="/view/zones">
+              <Tooltip title="View Zones" placement="right">
+                <ListItem button id="view-zones-btn" className={classes.nested}>
+                  <ListItemIcon>
+                    <FormatListBulletedIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.viewZones")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+            <Link to="/view/clusters">
+              <Tooltip title="View Clusters" placement="right">
+                <ListItem
+                  button
+                  id="view-clusters-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <FormatListBulletedIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary={t("welcome.viewClusters")}
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+          </List>
+        </Collapse>
+
+        {/* Quantity */}
+        <Tooltip title="Quantity Menu" placement="right">
+          <ListItem button id="qty-dropdown" onClick={handleClickQty}>
+            <ListItemIcon>
+              <AddShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Quantity" />
+            {qtyOpen ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+        </Tooltip>
+        <Collapse in={qtyOpen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <Link to="/updateqty/zone">
+              <Tooltip title="Update the price of a Product" placement="right">
+                <ListItem
+                  button
+                  id="update-price-product-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <AddShoppingCartIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary="Increase qty at Zone Level"
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+            <Link to="/updateqty/cluster">
+              <Tooltip title="Update the price of a Product" placement="right">
+                <ListItem
+                  button
+                  id="update-price-product-btn"
+                  className={classes.nested}
+                >
+                  <ListItemIcon>
+                    <AddShoppingCartIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary="Increase qty at Cluster Level"
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+          </List>
+        </Collapse>
       </List>
     </div>
   )
@@ -469,7 +647,6 @@ function FullNavbar(props) {
   const Vendordrawer = (
     <div>
       <div className={classes.toolbar} />
-      <Divider />
       <List>
         <Link to="/vendor/addproduct">
           <Tooltip title="Add a Product" placement="right">
