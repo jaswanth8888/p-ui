@@ -7,7 +7,7 @@ import PropTypes from "prop-types"
 // import { spacing } from "@material-ui/system"
 import {
   getZoneQuantity,
-  updateZoneQuantity,
+  updateQuantity,
 } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 import { zonequantity } from "../utils/constants"
@@ -42,13 +42,13 @@ class IncreaseQtyZoneForm extends Component {
     const {
       productName,
       zone,
-      updateZoneQuantity: updateZoneQuantityAlt,
+      updateQuantity: updateQuantityAlt,
       history,
     } = this.props
     const { zoneQuantity, levelOption, increaseQtyZone } = this.state
     increaseQtyZone.zoneName = zone
     increaseQtyZone.quantityAssigned = zoneQuantity
-    updateZoneQuantityAlt(increaseQtyZone, productName, levelOption)
+    updateQuantityAlt(increaseQtyZone, productName, levelOption)
     history.push("/view/assigned/zones")
   }
 
@@ -166,7 +166,7 @@ IncreaseQtyZoneForm.propTypes = {
   getZoneQuantity: PropTypes.func.isRequired,
   quantityAssignedAtZone: PropTypes.shape.isRequired,
   productDetails: PropTypes.shape.isRequired,
-  updateZoneQuantity: PropTypes.func.isRequired,
+  updateQuantity: PropTypes.func.isRequired,
 }
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
@@ -180,6 +180,6 @@ const stateAsProps = (store) => ({
 
 const actionAsProps = {
   getZoneQuantity,
-  updateZoneQuantity,
+  updateQuantity,
 }
 export default connect(stateAsProps, actionAsProps)(IncreaseQtyZoneForm)

@@ -65,8 +65,7 @@ import {
   GET_PRODUCT_ZONELIST,
   GET_PRODUCT_CLUSTERLIST,
   GET_ZONE_QUANTITY,
-  UPDATE_ZONE_QUANTITY,
-  UPDATE_CLUSTER_QUANTITY,
+  UPDATE_QUANTITY,
   GET_CLUSTER_QUANTITY,
 } from "./types"
 
@@ -1336,58 +1335,27 @@ export const getClusterQuantity = (productName, zone, cluster) => async (
     })
 }
 
-export const updateZoneQuantity = (
-  increaseQtyZone,
-  productName,
-  levelOption
-) => async (dispatch) => {
+export const updateQuantity = (increaseQty, productName, levelOption) => async (
+  dispatch
+) => {
   await axios
     .put(
       `${RETAILER_BASE_URL}/product-management/products/update/${levelOption}/${productName}`,
-      increaseQtyZone,
+      increaseQty,
       {
         headers: { Authorization: TOKEN() },
       }
     )
     .then(() => {
       dispatch({
-        type: UPDATE_ZONE_QUANTITY,
+        type: UPDATE_QUANTITY,
         msg: "Updated Quantity Succesfully",
         msgSeverity: "success",
       })
     })
     .catch(() => {
       dispatch({
-        type: UPDATE_ZONE_QUANTITY,
-        msg: "Something went wrong, please try again.",
-        msgSeverity: "warning",
-      })
-    })
-}
-
-export const updateClusterQuantity = (
-  increaseQtyCluster,
-  productName,
-  levelOption
-) => async (dispatch) => {
-  await axios
-    .put(
-      `${RETAILER_BASE_URL}/product-management/products/update/${levelOption}/${productName}`,
-      increaseQtyCluster,
-      {
-        headers: { Authorization: TOKEN() },
-      }
-    )
-    .then(() => {
-      dispatch({
-        type: UPDATE_CLUSTER_QUANTITY,
-        msg: "Updated Quantity Succesfully",
-        msgSeverity: "success",
-      })
-    })
-    .catch(() => {
-      dispatch({
-        type: UPDATE_CLUSTER_QUANTITY,
+        type: UPDATE_QUANTITY,
         msg: "Something went wrong, please try again.",
         msgSeverity: "warning",
       })

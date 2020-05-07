@@ -8,7 +8,7 @@ import PropTypes from "prop-types"
 import {
   getZoneQuantity,
   getClusterQuantity,
-  updateClusterQuantity,
+  updateQuantity,
 } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 import { zonequantity } from "../utils/constants"
@@ -51,14 +51,14 @@ class IncreaseQtyClusterForm extends Component {
       productName,
       zone,
       cluster,
-      updateClusterQuantity: updateClusterQuantityAlt,
+      updateQuantity: updateQuantityAlt,
       history,
     } = this.props
     const { increaseQtyCluster, levelOption, clusterQuantity } = this.state
     increaseQtyCluster.zoneName = zone
     increaseQtyCluster.clusterName = cluster
     increaseQtyCluster.quantityAssigned = clusterQuantity
-    updateClusterQuantityAlt(increaseQtyCluster, productName, levelOption)
+    updateQuantityAlt(increaseQtyCluster, productName, levelOption)
     history.push("/view/assigned/clusters")
   }
 
@@ -73,7 +73,6 @@ class IncreaseQtyClusterForm extends Component {
     const {
       cluster,
       assignedPrice,
-      quantityAssignedAtZone,
       quantityAssignedAtCluster,
       productDetails,
     } = this.props
@@ -179,10 +178,9 @@ IncreaseQtyClusterForm.propTypes = {
   assignedPrice: PropTypes.string.isRequired,
   getZoneQuantity: PropTypes.func.isRequired,
   getClusterQuantity: PropTypes.func.isRequired,
-  quantityAssignedAtZone: PropTypes.shape.isRequired,
   quantityAssignedAtCluster: PropTypes.shape.isRequired,
   productDetails: PropTypes.shape.isRequired,
-  updateClusterQuantity: PropTypes.func.isRequired,
+  updateQuantity: PropTypes.func.isRequired,
 }
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
@@ -199,6 +197,6 @@ const stateAsProps = (store) => ({
 const actionAsProps = {
   getZoneQuantity,
   getClusterQuantity,
-  updateClusterQuantity,
+  updateQuantity,
 }
 export default connect(stateAsProps, actionAsProps)(IncreaseQtyClusterForm)
