@@ -9,7 +9,7 @@ import {
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { getZones, assignToZone, getZoneQuantity } from "../../redux/actions/RetailerActions"
+import { getZones, assignToZone } from "../../redux/actions/RetailerActions"
 import ProductDetails from "../utils/ProductDetails"
 import Message from "../utils/Message"
 
@@ -83,6 +83,7 @@ class AssignToZone extends Component {
                     <Select
                       fullWidth
                       native
+                      autoFocus
                       onChange={this.handleChangeZoneName}
                       label="Enter zone"
                       inputProps={{
@@ -108,7 +109,6 @@ class AssignToZone extends Component {
                     type="number"
                     onChange={this.handleChangeQuantity}
                     value={zoneDetails.quantityAssigned}
-                    autoFocus
                   />
 
                   <TextField
@@ -122,7 +122,6 @@ class AssignToZone extends Component {
                     type="number"
                     onChange={this.handleChangeProfitPecentage}
                     value={zoneDetails.profitPercentage}
-                    autoFocus
                   />
 
                   <Button

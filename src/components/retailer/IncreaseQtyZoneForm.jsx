@@ -145,7 +145,7 @@ class IncreaseQtyZoneForm extends Component {
                     className="{classes.submit}"
                     onClick={this.handleSubmit}
                     style={{ marginTop: "10px" }}
-                    id="apply-zone-percentage"
+                    id="add-zone-quantity"
                   >
                     Add Quantity to Zone
                   </Button>

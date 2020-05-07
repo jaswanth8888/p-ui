@@ -98,7 +98,7 @@ class ViewProducts extends Component {
                                 : convertCurrency(
                                     "USD",
                                     sessionStorage.getItem("currency"),
-                                  product.productBasePrice
+                                    product.productBasePrice
                                   )}
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
@@ -137,6 +137,7 @@ class ViewProducts extends Component {
 ViewProducts.propTypes = {
   getAllProducts: PropTypes.func.isRequired,
   getProducts: PropTypes.shape.isRequired,
+  loggedInUser: PropTypes.shape.isRequired,
 }
 
 const stateAsProps = (store) => ({

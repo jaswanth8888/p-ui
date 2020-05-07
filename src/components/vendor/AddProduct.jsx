@@ -14,7 +14,9 @@ import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import Select from "@material-ui/core/Select"
+import Alert from "@material-ui/lab/Alert"
 import Message from "./Message"
+import currencyConvert from "../utils/CurrencyConvert"
 
 import { postProduct } from "../../redux/actions/VendorActions"
 // import convertCurrency from "../utils/ConvertCurrency"
@@ -36,6 +38,8 @@ class AddProduct extends Component {
         volume: "",
       },
       selectedImages: [],
+      errorImages: [],
+      currency: "",
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -43,13 +47,22 @@ class AddProduct extends Component {
   }
 
   onFileChange = (event) => {
-    this.readURL(event)
-    this.setState({ selectedImages: event.target.files })
+    const { files } = event.target
+    const errorFiles = []
+    const perfectFiles = []
+    Array.from(files).forEach((file) => {
+      if (file.size / 1024 / 1024 > 1) {
+        errorFiles.push(file.name)
+      } else {
+        perfectFiles.push(file)
+      }
+    })
+    this.readURL(perfectFiles)
+    this.setState({ selectedImages: perfectFiles, errorImages: errorFiles })
   }
 
-  readURL = (input) => {
+  readURL = (files) => {
     document.getElementById("imagePreview").innerHTML = ""
-    const { files } = input.target
     for (let i = 0; i < files.length; i += 1) {
       const file = files[i]
       if (file.type.match("image")) {
@@ -65,10 +78,14 @@ class AddProduct extends Component {
     }
   }
 
+  setCurrency = (e) => {
+    this.setState({ currency: e.target.value })
+  }
+
   handleSubmit() {
     const { loggedInUser } = this.props
     const { selectedImages } = this.state
-    const { product } = this.state
+    const { product, currency } = this.state
     product.companyName = loggedInUser.userName
     const {
       productName,
@@ -77,6 +94,8 @@ class AddProduct extends Component {
       productCategory,
     } = product
     const test = this.props
+    product.productBasePrice = currencyConvert(currency, productBasePrice)
+
     if (productCategory === "ALCOHOL_PROD") {
       product.uom = "Lts"
     }
@@ -91,6 +110,7 @@ class AddProduct extends Component {
         Array.from(selectedImages).forEach((file) => {
           data.append("files", file)
         })
+        console.log(product)
         test.postProduct(data)
       }
     }
@@ -105,7 +125,7 @@ class AddProduct extends Component {
 
   render() {
     if (sessionStorage.getItem("token") != null) {
-      const { product } = this.state
+      const { product, errorImages } = this.state
       const {
         productName,
         productBasePrice,
@@ -303,34 +323,58 @@ class AddProduct extends Component {
                   autoComplete="initialQuantity"
                   onChange={this.handleChange}
                   value={initialQuantity}
-                  autoFocus
                 />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  type="number"
-                  id="productBasePrice"
-                  label="Product base price (in USD)"
-                  name="productBasePrice"
-                  autoComplete="productBasePrice"
-                  onChange={this.handleChange}
-                  // value={
-                  //   sessionStorage.getItem("currency") !== "USD"
-                  //     ? convertCurrency(
-                  //         "USD",
-                  //         sessionStorage.getItem("currency"),
-                  //         productBasePrice
-                  //       )
-                  //     : productBasePrice
-                  // }
-                  value={productBasePrice}
-                  startAdornment={
-                    <InputAdornment position="start">$</InputAdornment>
-                  }
-                  autoFocus
-                />
+                <div className="currency-container">
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    type="number"
+                    id="productBasePrice"
+                    label="Product base price"
+                    name="productBasePrice"
+                    autoComplete="productBasePrice"
+                    onChange={this.handleChange}
+                    // value={
+                    //   sessionStorage.getItem("currency") !== "USD"
+                    //     ? convertCurrency(
+                    //         "USD",
+                    //         sessionStorage.getItem("currency"),
+                    //         productBasePrice
+                    //       )
+                    //     : productBasePrice
+                    // }
+                    value={productBasePrice}
+                    startAdornment={
+                      <InputAdornment position="start">$</InputAdornment>
+                    }
+                  />
+                  <div className="vert-space" />
+                  <FormControl
+                    variant="outlined"
+                    fullWidth
+                    id="currency-select"
+                  >
+                    <InputLabel htmlFor="outlined-age-native-simple">
+                      Currency Unit
+                    </InputLabel>
+                    <Select
+                      labelId="productCategory"
+                      fullWidth
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      name="productCategory"
+                      label="Currency"
+                      id="currency-unit"
+                      onChange={this.setCurrency}
+                    >
+                      <MenuItem value="USD">$</MenuItem>
+                      <MenuItem value="EUR">€</MenuItem>
+                      <MenuItem value="INR">₹</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
 
                 {productCategory === "ALCOHOL_PROD" && (
                   <>
@@ -346,7 +390,6 @@ class AddProduct extends Component {
                       autoComplete="abv"
                       onChange={this.handleChange}
                       value={abv}
-                      autoFocus
                     />
                     <TextField
                       variant="outlined"
@@ -362,31 +405,6 @@ class AddProduct extends Component {
                       value={volume}
                       autoFocus
                     />
-                    {/* <FormControl
-                      variant="outlined"
-                      fullWidth
-                      className="space-margin-top"
-                    >
-                      <InputLabel htmlFor="outlined-age-native-simple">
-                        Units Of Measuremment
-                      </InputLabel>
-                      <Select
-                        labelId="uom"
-                        fullWidth
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        name="uom"
-                        label="unitsOfMeasurement"
-                        value={uom}
-                        id="alc-prod"
-                        onChange={this.handleChange}
-                      >
-                        <MenuItem value="Lts">LTS</MenuItem>
-                        <MenuItem value="GALLONs">GALLONS</MenuItem>
-                        <MenuItem value="ML">ML </MenuItem>
-                      </Select>
-                    </FormControl> */}
                   </>
                 )}
                 {productCategory === "BABY_PROD" && (
@@ -457,6 +475,35 @@ class AddProduct extends Component {
                   />
                 </div>
                 <div className="imagePreview" id="imagePreview" />
+                {errorImages.length > 0 && (
+                  <div className="image-error">
+                    {/* <Typography
+                      id="span-warning"
+                      variant="h6"
+                      className="help-block-h4"
+                    >
+                      <div className="error-line">
+                        Image size should be less than 1 MB
+                      </div>
+                      {errorImages.map((imageName) => (
+                        <div className="error-line">{imageName}</div>
+                      ))}
+                    </Typography> */}
+                    <Alert severity="warning">
+                      <div className="error-line">
+                        Maximum image upload size is 1 MB.
+                      </div>
+                      Images{" "}
+                      {errorImages.map((imageName) => (
+                        <React.Fragment className="error-line">
+                          &ldquo;{imageName}&rdquo;{" "}
+                        </React.Fragment>
+                      ))}
+                      exceed this limit.
+                    </Alert>
+                  </div>
+                )}
+
                 <Button
                   type="button"
                   fullWidth

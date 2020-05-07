@@ -139,7 +139,6 @@ class AssignToCluster extends Component {
                     type="number"
                     onChange={this.handleChangeQuantity}
                     value={clusterDetails.quantityAssigned}
-                    autoFocus
                   />
 
                   <TextField
@@ -153,7 +152,6 @@ class AssignToCluster extends Component {
                     type="number"
                     onChange={this.handleChangeProfitPecentage}
                     value={clusterDetails.profitPercentage}
-                    autoFocus
                   />
 
                   <Button

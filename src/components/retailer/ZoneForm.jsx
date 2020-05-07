@@ -117,7 +117,6 @@ class ZoneForm extends Component {
                 name="liquorPricePerUnit"
                 autoComplete="pricePerUnit"
                 onChange={this.handleChange}
-                autoFocus
               />
 
               <Button

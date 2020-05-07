@@ -8,20 +8,19 @@ import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
-import EventNoteIcon from '@material-ui/icons/EventNote'
+import EventNoteIcon from "@material-ui/icons/EventNote"
 import ViewListRoundedIcon from "@material-ui/icons/ViewListRounded"
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles"
 import Tab from "@material-ui/core/Tab"
 import Toolbar from "@material-ui/core/Toolbar"
 import Tooltip from "@material-ui/core/Tooltip"
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
-import DateRangeIcon from "@material-ui/icons/DateRange"
 import InsertChartIcon from "@material-ui/icons/InsertChart"
 import CategoryIcon from "@material-ui/icons/Category"
 import EventBusyIcon from "@material-ui/icons/EventBusy"
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted"
 import GroupIcon from "@material-ui/icons/Group"
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import LocationCityIcon from "@material-ui/icons/LocationCity"
 import MenuIcon from "@material-ui/icons/Menu"
 import PublicIcon from "@material-ui/icons/Public"
@@ -679,14 +678,14 @@ function FullNavbar(props) {
           </Tooltip>
         </Link>
         <Link to="/viewproducts">
-          <Tooltip title="Update the price of a Product" placement="right">
-            <ListItem buttonid="update-price-product-btn">
+          <Tooltip title="View Products" placement="right">
+            <ListItem buttonid="view-products-btn">
               <ListItemIcon>
                 <AddShoppingCartIcon />
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
-                primary="View Products"
+                primary={t("vendorWelcome.viewProducts")}
               />
             </ListItem>
           </Tooltip>
@@ -769,50 +768,50 @@ function FullNavbar(props) {
                 </div>
               </>
             ) : (
-                <div className="right-nav-btn">
-                  {loggedInUser.token === "" && (
-                    <>
-                      <Link className="button-link" to="/vendor">
-                        <StyledTab
-                          color="default"
-                          className="{classes.link}"
-                          id="reg-vendor"
-                          label={t("loginAsVendor")}
-                        />
-                      </Link>
-                      <Link className="button-link" to="/admin/login">
-                        <StyledTab
-                          color="default"
-                          className="{classes.link}"
-                          id="admin-login"
-                          label={t("loginAsAdmin")}
-                        />
-                      </Link>
-                    </>
-                  )}
-                  <ReactFlagsSelect
-                    countries={["US", "FR", "DE"]}
-                    customLabels={{
-                      US: " ",
-                      FR: " ",
-                      DE: " ",
-                    }}
-                    id="flag-select"
-                    placeholder="Select Language"
-                    defaultCountry={sessionStorage.getItem("countryCode")}
-                    onSelect={(countryCode) => {
-                      i18n.changeLanguage(countryCode, () => {
-                        sessionStorage.setItem("countryCode", countryCode)
-                        if (countryCode === "FR" || countryCode === "DE") {
-                          sessionStorage.setItem("currency", "EUR")
-                        } else {
-                          sessionStorage.setItem("currency", "USD")
-                        }
-                      })
-                    }}
-                  />
-                </div>
-              )}
+              <div className="right-nav-btn">
+                {loggedInUser.token === "" && (
+                  <>
+                    <Link className="button-link" to="/vendor">
+                      <StyledTab
+                        color="default"
+                        className="{classes.link}"
+                        id="reg-vendor"
+                        label={t("loginAsVendor")}
+                      />
+                    </Link>
+                    <Link className="button-link" to="/admin/login">
+                      <StyledTab
+                        color="default"
+                        className="{classes.link}"
+                        id="admin-login"
+                        label={t("loginAsAdmin")}
+                      />
+                    </Link>
+                  </>
+                )}
+                <ReactFlagsSelect
+                  countries={["US", "FR", "DE"]}
+                  customLabels={{
+                    US: " ",
+                    FR: " ",
+                    DE: " ",
+                  }}
+                  id="flag-select"
+                  placeholder="Select Language"
+                  defaultCountry={sessionStorage.getItem("countryCode")}
+                  onSelect={(countryCode) => {
+                    i18n.changeLanguage(countryCode, () => {
+                      sessionStorage.setItem("countryCode", countryCode)
+                      if (countryCode === "FR" || countryCode === "DE") {
+                        sessionStorage.setItem("currency", "EUR")
+                      } else {
+                        sessionStorage.setItem("currency", "USD")
+                      }
+                    })
+                  }}
+                />
+              </div>
+            )}
           </Toolbar>
         </AppBar>
         {loggedInUser.token !== "" && (

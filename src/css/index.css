@@ -554,8 +554,14 @@ a {
   letter-spacing: 0.02857em !important;
   padding: 6px 16px !important;
 }
+.image-error {
+  width: 370px;
+  padding:10px 0px 15px 0px;
+  text-align: left !important;
+  position: relative;
+  color: red;
+}
 
-/* .login-help-block, */
 @media only screen and (max-width: 600px) {
   body {
     font-size: 12px !important;
@@ -639,6 +645,11 @@ a {
   .help-block-h4 {
     margin-bottom: 20px !important;
   }
+
+  .image-error {
+    width: auto !important;
+    padding: 0px !important;
+  }
 }
 
 #admin-login-name {
@@ -657,7 +668,9 @@ a {
 }
 
 #span-warning {
-  color: red !important;
+  color: red;
+  /* max-width: 100%; */
+  font-size:14px;
 }
 
 #login-joint-form-vendor {
@@ -692,7 +705,11 @@ a {
   -ms-overflow-style: -ms-autohiding-scrollbar;
   width: 200px;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
+}
+
+.error-line {
+  padding: 3px 0px 3px 0px;
 }
 
 .upload-btn-wrapper {
@@ -717,4 +734,20 @@ a {
 }
 .reject-icon {
   color: red;
+}
+
+.currency-container{
+  display: flex !important;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.vert-space{
+  height:20px;
+  width:20px;
+}
+
+#currency-select{
+  margin-top:16px;
+  width:50%;
 }

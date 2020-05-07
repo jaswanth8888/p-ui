@@ -142,6 +142,7 @@ class StoreForm extends Component {
                         name: "zone",
                         id: "zone",
                       }}
+                      autoFocus
                     >
                       <option aria-label="None" value="" />
                       {zones.map((zoneVal) => {
@@ -183,7 +184,6 @@ class StoreForm extends Component {
                     autoComplete="storeName"
                     onChange={this.handleChange}
                     value={storeName}
-                    autoFocus
                   />
                 </form>
               </div>

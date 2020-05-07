@@ -134,10 +134,10 @@ class IncreaseQtyClusterForm extends Component {
                 fullWidth="false"
                 type="number"
                 step="0.01"
-                id="zonequantity"
+                id="clusterquantity"
                 label="Add Quantity"
-                name="zonequantity"
-                autoComplete="zonequantity"
+                name="clusterquantity"
+                autoComplete="clusterquantity"
                 onChange={this.handleChangeQuantity}
                 InputProps={{
                   inputProps: {
@@ -157,7 +157,7 @@ class IncreaseQtyClusterForm extends Component {
                     className="{classes.submit}"
                     onClick={this.handleSubmit}
                     style={{ marginTop: "10px" }}
-                    id="apply-zone-percentage"
+                    id="add-cluster-quantity"
                   >
                     Add Quantity to Cluster
                   </Button>
