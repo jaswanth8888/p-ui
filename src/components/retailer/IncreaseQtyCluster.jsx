@@ -249,7 +249,7 @@ class IncreaseQtyCluster extends Component {
                       color="primary"
                       className="{classes.submit} submit-pad"
                       onClick={this.handleSubmit}
-                      id="apply-promotion-cluster-submit"
+                      id="increase-cluster-qty"
                     >
                       Go
                     </Button>
