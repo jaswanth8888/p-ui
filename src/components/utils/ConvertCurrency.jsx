@@ -1,4 +1,4 @@
-var currencyData = fetch("https://api.exchangeratesapi.io/latest")
+let currencyData = fetch("https://api.exchangeratesapi.io/latest")
   .then((response) => response.json())
   .then((data) => {
     currencyData = data;
@@ -6,8 +6,9 @@ var currencyData = fetch("https://api.exchangeratesapi.io/latest")
 
 export default function convertCurrency(from, to, amt) {
   if (from !== "EUR")
-    return (
-      new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 3 }).format((parseFloat(amt) / parseFloat(currencyData.rates[from])))
-    );
-  
+    return new Intl.NumberFormat("de-DE", {
+      style: "currency",
+      currency: "EUR",
+      maximumSignificantDigits: 3,
+    }).format(parseFloat(amt) / parseFloat(currencyData.rates[from]))
 }

@@ -70,8 +70,9 @@ class ViewAssignedClusters extends Component {
             <TableCell>
               <Typography variant="subtitle1" gutterBottom>
                 {sessionStorage.getItem("currency") === "USD"
-                  ? "$ " + cluster.price
-                  : convertCurrency("USD",
+                  ? `$ ${cluster.price}`
+                  : convertCurrency(
+                      "USD",
                       sessionStorage.getItem("currency"),
                       cluster.price
                     )}

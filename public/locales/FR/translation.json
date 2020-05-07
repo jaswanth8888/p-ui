@@ -41,7 +41,8 @@
     "withdrawPercentagePromotionCluster": "Cluster de promotion du pourcentage de retrait",
     "cancelEffectivePriceChange": "Annuler la modification de prix effective",
     "sellCancelProductFixedPrice": "Vendre / annuler un produit à prix fixe",
-    "queryPromotionsOnDateRange": "Promotions de requête sur la plage de dates"
+    "queryPromotionsOnDateRange": "Promotions de requête sur la plage de dates",
+    "approvePromotions":"Approuver les promotions"
   },
   "vendorWelcome": {
     "addProduct": "Ajouter un produit",

@@ -21,7 +21,6 @@ import {
   updateProduct,
 } from "../../redux/actions/VendorActions"
 import Message from "../utils/Message"
-import convertCurrency from "../utils/ConvertCurrency"
 
 class EditItemPrice extends Component {
   constructor(props) {
@@ -173,14 +172,16 @@ class EditItemPrice extends Component {
                   name="newBasePrice"
                   autoComplete="newBasePrice"
                   autoFocus
-                  value={
-                    sessionStorage.getItem("currency") === "USD"
-                      ? "$ " + updatedProduct.newBasePrice
-                      : convertCurrency("USD",
-                          sessionStorage.getItem("currency"),
-                          updatedProduct.newBasePrice
-                        )
-                  }
+                  // value={
+                  //   sessionStorage.getItem("currency") === "USD"
+                  //     ? `$ ${updatedProduct.newBasePrice}`
+                  //     : convertCurrency(
+                  //         "USD",
+                  //         sessionStorage.getItem("currency"),
+                  //         updatedProduct.newBasePrice
+                  //       )
+                  // }
+                  value={updateProduct.newBasePrice}
                   onChange={this.handlePriceChange}
                 />
               )}

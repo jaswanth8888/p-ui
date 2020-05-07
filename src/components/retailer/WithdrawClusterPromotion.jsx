@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import {
   Typography,
   Paper,
@@ -104,14 +105,17 @@ class WithdrawClusterPromotion extends Component {
                               <Typography variant="subtitle1" gutterBottom>
                                 {productDetails.effectivePriceObj !== null
                                   ? sessionStorage.getItem("currency") === "USD"
-                                  ? "$ " + productDetails.effectivePriceObj.effectivePrice
-                                  : convertCurrency("USD",
-                                      sessionStorage.getItem("currency"),
-                                      productDetails.effectivePriceObj.effectivePrice
-                                    )
+                                    ? `$ ${productDetails.effectivePriceObj.effectivePrice}`
+                                    : convertCurrency(
+                                        "USD",
+                                        sessionStorage.getItem("currency"),
+                                        productDetails.effectivePriceObj
+                                          .effectivePrice
+                                      )
                                   : sessionStorage.getItem("currency") === "USD"
-                                  ? "$ " + productDetails.productBasePrice
-                                  : convertCurrency("USD",
+                                  ? `$ ${productDetails.productBasePrice}`
+                                  : convertCurrency(
+                                      "USD",
                                       sessionStorage.getItem("currency"),
                                       productDetails.productBasePrice
                                     )}

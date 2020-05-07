@@ -160,7 +160,7 @@ function FullNavbar(props) {
                 </ListItemIcon>
                 <ListItemText
                   className="list-item-text"
-                  primary="Approve Promotions"
+                  primary={t("welcome.approvePromotions")}
                 />
               </ListItem>
             </Tooltip>
@@ -504,8 +504,7 @@ function FullNavbar(props) {
                       sessionStorage.setItem("countryCode", countryCode)
                       if (countryCode === "FR" || countryCode === "DE") {
                         sessionStorage.setItem("currency", "EUR")
-                      }
-                      else{
+                      } else {
                         sessionStorage.setItem("currency", "USD")
                       }
                     }}
@@ -513,7 +512,7 @@ function FullNavbar(props) {
                   &emsp;
                   <StyledTab
                     id="admin-login-name"
-                    label={t("welcomeMain") + " " + loggedInUser.userName}
+                    label={`${t("welcomeMain")} ${loggedInUser.userName}`}
                   />
                   <Link to="/" id="logout-btn">
                     <StyledTab
@@ -564,10 +563,8 @@ function FullNavbar(props) {
                     i18n.changeLanguage(countryCode, () => {
                       sessionStorage.setItem("countryCode", countryCode)
                       if (countryCode === "FR" || countryCode === "DE") {
-                        console.log("here")
                         sessionStorage.setItem("currency", "EUR")
-                      }
-                      else{
+                      } else {
                         sessionStorage.setItem("currency", "USD")
                       }
                     })

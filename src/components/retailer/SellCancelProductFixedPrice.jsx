@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
@@ -116,8 +117,9 @@ class SellCancelProductFixedPrice extends Component {
                       </TableCell>
                       <TableCell className="table-text">
                         {sessionStorage.getItem("currency") === "USD"
-                          ? "$ " + productDetails.productBasePrice
-                          : convertCurrency("USD",
+                          ? `$ ${productDetails.productBasePrice}`
+                          : convertCurrency(
+                              "USD",
                               sessionStorage.getItem("currency"),
                               productDetails.productBasePrice
                             )}
@@ -152,18 +154,20 @@ class SellCancelProductFixedPrice extends Component {
                     <TableRow>
                       <TableCell className="table-text">
                         {productDetails.effectivePriceObj !== null
-                          ?  (sessionStorage.getItem("currency") === "USD"
-                          ? "$ " + productDetails.effectivePriceObj.effectivePrice
-                          : convertCurrency("USD",
-                              sessionStorage.getItem("currency"),
-                              productDetails.effectivePriceObj.effectivePrice
-                            ))
-                          : (sessionStorage.getItem("currency") === "USD"
-                          ? "$ " + productDetails.productBasePrice
-                          : convertCurrency("USD",
+                          ? sessionStorage.getItem("currency") === "USD"
+                            ? `$ ${productDetails.effectivePriceObj.effectivePrice}`
+                            : convertCurrency(
+                                "USD",
+                                sessionStorage.getItem("currency"),
+                                productDetails.effectivePriceObj.effectivePrice
+                              )
+                          : sessionStorage.getItem("currency") === "USD"
+                          ? `$ ${productDetails.productBasePrice}`
+                          : convertCurrency(
+                              "USD",
                               sessionStorage.getItem("currency"),
                               productDetails.productBasePrice
-                            ))}
+                            )}
                       </TableCell>
                       <TableCell>
                         <div className="product-desc">
@@ -241,7 +245,4 @@ const actionAsProps = {
   sellProductFixedPrice,
   cancelProductFixedPrice,
 }
-export default connect(
-  stateAsProps,
-  actionAsProps
-)(SellCancelProductFixedPrice)
+export default connect(stateAsProps, actionAsProps)(SellCancelProductFixedPrice)

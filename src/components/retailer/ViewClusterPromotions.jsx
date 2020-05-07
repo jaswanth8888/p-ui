@@ -72,7 +72,8 @@ class ViewClusterPromotions extends Component {
                           <Typography variant="subtitle1" gutterBottom>
                             {sessionStorage.getItem("currency") === "USD"
                               ? promotion.promotionSellingPrice
-                              : convertCurrency("USD",
+                              : convertCurrency(
+                                  "USD",
                                   sessionStorage.getItem("currency"),
                                   promotion.promotionSellingPrice
                                 )}

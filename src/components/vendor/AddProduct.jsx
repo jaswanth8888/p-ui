@@ -17,7 +17,7 @@ import Select from "@material-ui/core/Select"
 import Message from "./Message"
 
 import { postProduct } from "../../redux/actions/VendorActions"
-import convertCurrency from "../utils/ConvertCurrency"
+// import convertCurrency from "../utils/ConvertCurrency"
 
 class AddProduct extends Component {
   constructor(props) {
@@ -68,7 +68,7 @@ class AddProduct extends Component {
   handleSubmit() {
     const { loggedInUser } = this.props
     const { selectedImages } = this.state
-    let { product } = this.state
+    const { product } = this.state
     product.companyName = loggedInUser.userName
     const {
       productName,
@@ -77,11 +77,10 @@ class AddProduct extends Component {
       productCategory,
     } = product
     const test = this.props
-    if(productCategory === "ALCOHOL_PROD"){
+    if (productCategory === "ALCOHOL_PROD") {
       product.uom = "Lts"
     }
-    
-    
+
     if (productName && productBasePrice > 0 && initialQuantity > 1) {
       if (
         (productCategory === "ALCOHOL_PROD" && initialQuantity < 101) ||
@@ -313,18 +312,20 @@ class AddProduct extends Component {
                   fullWidth
                   type="number"
                   id="productBasePrice"
-                  label="Product base price"
+                  label="Product base price (in USD)"
                   name="productBasePrice"
                   autoComplete="productBasePrice"
                   onChange={this.handleChange}
-                  value={
-                    sessionStorage.getItem("currency") === "USD"
-                      ? "$ " + productBasePrice
-                      : convertCurrency("USD",
-                          sessionStorage.getItem("currency"),
-                          productBasePrice
-                        )
-                  }
+                  // value={
+                  //   sessionStorage.getItem("currency") !== "USD"
+                  //     ? convertCurrency(
+                  //         "USD",
+                  //         sessionStorage.getItem("currency"),
+                  //         productBasePrice
+                  //       )
+                  //     : productBasePrice
+                  // }
+                  value={productBasePrice}
                   startAdornment={
                     <InputAdornment position="start">$</InputAdornment>
                   }
@@ -396,7 +397,7 @@ class AddProduct extends Component {
                       className="space-margin-top"
                     >
                       <InputLabel htmlFor="outlined-age-native-simple">
-                        Units Of Measuremment
+                        Units Of Measurement
                       </InputLabel>
 
                       <Select
@@ -406,7 +407,7 @@ class AddProduct extends Component {
                         margin="normal"
                         required
                         name="uom"
-                        label="Units of measurement "
+                        label="Units of Measurement "
                         onChange={this.handleChange}
                         value={uom}
                         id="baby-prod"
