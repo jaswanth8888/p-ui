@@ -190,6 +190,7 @@ class ApplyPromotionInCluster extends Component {
                           {...params}
                           label="Product Name"
                           variant="outlined"
+                          autoFocus
                         />
                       )}
                       onChange={this.handleChangeProduct}

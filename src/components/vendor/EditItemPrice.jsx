@@ -21,7 +21,6 @@ import {
   updateProduct,
 } from "../../redux/actions/VendorActions"
 import Message from "../utils/Message"
-// import convertCurrency from "../utils/ConvertCurrency"
 
 class EditItemPrice extends Component {
   constructor(props) {
@@ -203,7 +202,6 @@ class EditItemPrice extends Component {
                 InputLabelProps={{ shrink: true, required: true }}
                 name="newQuantity"
                 autoComplete="newQuantity"
-                autoFocus
                 value={updatedProduct.newQuantity}
                 onChange={this.handleQuantityChange}
               />

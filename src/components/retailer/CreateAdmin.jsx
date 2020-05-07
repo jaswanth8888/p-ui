@@ -136,7 +136,6 @@ class CreateAdmin extends Component {
                 label="password"
                 name="password"
                 onChange={this.handleChangePassword}
-                autoFocus
               />
 
               <Button

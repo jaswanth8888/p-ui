@@ -115,6 +115,7 @@ class ClusterForm extends Component {
                     name: "zone",
                     id: "zone",
                   }}
+                  autoFocus
                 >
                   <option aria-label="None" value="" />
                   {zones.map((zoneVal) => {
@@ -136,7 +137,6 @@ class ClusterForm extends Component {
                 style={{
                   marginTop: "24px",
                 }}
-                autoFocus
               />
               <TextField
                 variant="outlined"
@@ -151,7 +151,6 @@ class ClusterForm extends Component {
                 autoComplete="taxRate"
                 onChange={this.handleChange}
                 value={taxRate}
-                autoFocus
               />
               <Button
                 type="button"

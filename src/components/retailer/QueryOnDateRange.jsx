@@ -167,7 +167,6 @@ class QueryOnDateRange extends Component {
                 autoComplete="endDate"
                 required
                 onChange={this.handleChange}
-                autoFocus
                 InputLabelProps={{ shrink: true, required: true }}
               />
 

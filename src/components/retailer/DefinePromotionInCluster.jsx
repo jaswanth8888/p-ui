@@ -259,7 +259,6 @@ class DefinePromotionInCluster extends Component {
                 name="startDate"
                 autoComplete="startDate"
                 onChange={this.handleChangeStartDate}
-                autoFocus
               />
               <TextField
                 variant="outlined"
@@ -274,7 +273,6 @@ class DefinePromotionInCluster extends Component {
                 name="endDate"
                 autoComplete="endDate"
                 onChange={this.handleChangeEndDate}
-                autoFocus
               />
               {promotionDetails.endDate > promotionDetails.startDate &&
                 promotionDetails.promotionPercentage < 0 && (
