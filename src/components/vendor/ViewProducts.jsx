@@ -82,7 +82,7 @@ class ViewProducts extends Component {
                                     href={img}
                                   >
                                     <img
-                                      className="thumbnail"
+                                      className="thumbnail-small"
                                       src={img}
                                       alt="none"
                                     />
@@ -117,16 +117,18 @@ class ViewProducts extends Component {
                 </tbody>
               </Table>
             </TableContainer>
-            <TablePagination
-              style={customColumnStyle2}
-              rowsPerPageOptions={[3, 5, 10]}
-              component="div"
-              count={getProducts.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onChangePage={this.handleChangePage}
-              onChangeRowsPerPage={this.handleChangeRowsPerPage}
-            />
+            <div className=".pt-10">
+              <TablePagination
+                rowsPerPageOptions={[3, 5, 10]}
+                style={customColumnStyle2}
+                component="div"
+                count={getProducts.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={this.handleChangePage}
+                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+              />
+            </div>
           </div>
         </div>
       </div>

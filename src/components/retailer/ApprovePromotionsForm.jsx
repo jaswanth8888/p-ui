@@ -4,7 +4,6 @@ import ClearIcon from "@material-ui/icons/Clear"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 import {
   getProductList,
@@ -39,6 +38,11 @@ class ApprovePromotionsForm extends Component {
     this.setState({ productName })
     saveProductValueAlt(productName)
     getProductDetailsAlt(value)
+  }
+
+  handleSubmit = () => {
+    const { history } = this.props
+    history.push("/approvepromotionpage")
   }
 
   render() {
@@ -101,20 +105,18 @@ class ApprovePromotionsForm extends Component {
                   name="productName"
                 />
               </FormControl>
-              {productName === "" && <Link to="/approvepromotion" />}
               {productName !== "" && (
-                <Link className="button-link" to="/approvepromotionpage">
-                  <Button
-                    type="button"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className="{classes.submit} submit-pad"
-                    id="approve-btn"
-                  >
-                    Approve Promotions
-                  </Button>
-                </Link>
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className="{classes.submit} submit-pad"
+                  id="approve-btn"
+                  onClick={this.handleSubmit}
+                >
+                  Approve Promotions
+                </Button>
               )}
             </form>
           </div>
@@ -128,6 +130,7 @@ ApprovePromotionsForm.propTypes = {
   getProductDetails: PropTypes.func.isRequired,
   saveProductValue: PropTypes.func.isRequired,
   getProductList: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
 }
 const stateAsProps = (store) => ({
   products: store.RetailerReducer.productList,

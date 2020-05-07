@@ -192,7 +192,7 @@ class IncreaseQtyZone extends Component {
                       color="primary"
                       className="{classes.submit} submit-pad"
                       onClick={this.handleSubmit}
-                      id="apply-promotion-zone-submit"
+                      id="increase-zone-qty"
                     >
                       Go
                     </Button>
