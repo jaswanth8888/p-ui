@@ -32,6 +32,9 @@ import { useTranslation } from "react-i18next"
 import { connect } from "react-redux"
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom"
 import PropTypes from "prop-types"
+import ExpandLess from "@material-ui/icons/ExpandLess"
+import ExpandMore from "@material-ui/icons/ExpandMore"
+import Collapse from "@material-ui/core/Collapse"
 import { logout } from "../../redux/actions/RetailerActions"
 import Login from "../Login"
 import AddGroup from "../retailer/AddGroup"
@@ -115,9 +118,14 @@ function FullNavbar(props) {
   const [open] = React.useState(false)
   const { container, loggedInUser } = props
   const [mobileOpen, setMobileOpen] = React.useState(false)
+  const [incopen, setOpen] = React.useState(true)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
+  }
+
+  const handleClick = () => {
+    setOpen(!incopen)
   }
 
   const Retailerdrawer = (
@@ -169,33 +177,43 @@ function FullNavbar(props) {
             </Tooltip>
           </Link>
         )}
-        <Link to="/updateqty/zone">
-          <Tooltip title="Update the price of a Product" placement="right">
-            <ListItem button id="update-price-product-btn">
-              <ListItemIcon>
-                <AddShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary="Increase qty at Zone Level"
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-        <Link to="/updateqty/cluster">
-          <Tooltip title="Update the price of a Product" placement="right">
-            <ListItem button id="update-price-product-btn">
-              <ListItemIcon>
-                <AddShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText
-                className="list-item-text"
-                primary="Increase qty at Cluster Level"
-              />
-            </ListItem>
-          </Tooltip>
-        </Link>
-
+        <ListItem button onClick={handleClick}>
+          <ListItemIcon>
+            <AddShoppingCartIcon />
+          </ListItemIcon>
+          <ListItemText primary="Increase Quantity" />
+          {incopen ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={incopen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <Link to="/updateqty/zone">
+              <Tooltip title="Update the price of a Product" placement="right">
+                <ListItem button id="update-price-product-btn">
+                  <ListItemIcon>
+                    <AddShoppingCartIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary="Increase qty at Zone Level"
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+            <Link to="/updateqty/cluster">
+              <Tooltip title="Update the price of a Product" placement="right">
+                <ListItem button id="update-price-product-btn">
+                  <ListItemIcon>
+                    <AddShoppingCartIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    className="list-item-text"
+                    primary="Increase qty at Cluster Level"
+                  />
+                </ListItem>
+              </Tooltip>
+            </Link>
+          </List>
+        </Collapse>
         <Link to="/applypromotion/zone">
           <Tooltip title="Apply Promotion in Zone Level" placement="right">
             <ListItem button id="apply-promotion-zone-btn">
