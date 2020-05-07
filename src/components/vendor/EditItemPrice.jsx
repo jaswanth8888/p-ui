@@ -21,7 +21,6 @@ import {
   updateProduct,
 } from "../../redux/actions/VendorActions"
 import Message from "../utils/Message"
-// import convertCurrency from "../utils/ConvertCurrency"
 
 class EditItemPrice extends Component {
   constructor(props) {

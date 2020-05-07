@@ -732,3 +732,19 @@ a {
 .reject-icon {
   color: red;
 }
+
+.currency-container{
+  display: flex !important;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.vert-space{
+  height:20px;
+  width:20px;
+}
+
+#currency-select{
+  margin-top:16px;
+  width:50%;
+}

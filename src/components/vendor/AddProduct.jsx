@@ -16,6 +16,7 @@ import { connect } from "react-redux"
 import Select from "@material-ui/core/Select"
 import Alert from "@material-ui/lab/Alert"
 import Message from "./Message"
+import currencyConvert from "../utils/CurrencyConvert"
 
 import { postProduct } from "../../redux/actions/VendorActions"
 // import convertCurrency from "../utils/ConvertCurrency"
@@ -38,6 +39,7 @@ class AddProduct extends Component {
       },
       selectedImages: [],
       errorImages: [],
+      currency: "",
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -76,10 +78,14 @@ class AddProduct extends Component {
     }
   }
 
+  setCurrency = (e) => {
+    this.setState({ currency: e.target.value })
+  }
+
   handleSubmit() {
     const { loggedInUser } = this.props
     const { selectedImages } = this.state
-    const { product } = this.state
+    const { product, currency } = this.state
     product.companyName = loggedInUser.userName
     const {
       productName,
@@ -88,6 +94,8 @@ class AddProduct extends Component {
       productCategory,
     } = product
     const test = this.props
+    product.productBasePrice = currencyConvert(currency, productBasePrice)
+
     if (productCategory === "ALCOHOL_PROD") {
       product.uom = "Lts"
     }
@@ -102,6 +110,7 @@ class AddProduct extends Component {
         Array.from(selectedImages).forEach((file) => {
           data.append("files", file)
         })
+        console.log(product)
         test.postProduct(data)
       }
     }
@@ -315,31 +324,57 @@ class AddProduct extends Component {
                   onChange={this.handleChange}
                   value={initialQuantity}
                 />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  type="number"
-                  id="productBasePrice"
-                  label="Product base price (in USD)"
-                  name="productBasePrice"
-                  autoComplete="productBasePrice"
-                  onChange={this.handleChange}
-                  // value={
-                  //   sessionStorage.getItem("currency") !== "USD"
-                  //     ? convertCurrency(
-                  //         "USD",
-                  //         sessionStorage.getItem("currency"),
-                  //         productBasePrice
-                  //       )
-                  //     : productBasePrice
-                  // }
-                  value={productBasePrice}
-                  startAdornment={
-                    <InputAdornment position="start">$</InputAdornment>
-                  }
-                />
+                <div className="currency-container">
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    type="number"
+                    id="productBasePrice"
+                    label="Product base price"
+                    name="productBasePrice"
+                    autoComplete="productBasePrice"
+                    onChange={this.handleChange}
+                    // value={
+                    //   sessionStorage.getItem("currency") !== "USD"
+                    //     ? convertCurrency(
+                    //         "USD",
+                    //         sessionStorage.getItem("currency"),
+                    //         productBasePrice
+                    //       )
+                    //     : productBasePrice
+                    // }
+                    value={productBasePrice}
+                    startAdornment={
+                      <InputAdornment position="start">$</InputAdornment>
+                    }
+                  />
+                  <div className="vert-space" />
+                  <FormControl
+                    variant="outlined"
+                    fullWidth
+                    id="currency-select"
+                  >
+                    <InputLabel htmlFor="outlined-age-native-simple">
+                      Currency Unit
+                    </InputLabel>
+                    <Select
+                      labelId="productCategory"
+                      fullWidth
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      name="productCategory"
+                      label="Currency"
+                      id="currency-unit"
+                      onChange={this.setCurrency}
+                    >
+                      <MenuItem value="USD">$</MenuItem>
+                      <MenuItem value="EUR">€</MenuItem>
+                      <MenuItem value="INR">₹</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
 
                 {productCategory === "ALCOHOL_PROD" && (
                   <>
