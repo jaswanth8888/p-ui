@@ -108,7 +108,6 @@ class AssignPriceToProduct extends Component {
                     autoComplete="toDate"
                     required
                     onChange={this.handleChange2}
-                    autoFocus
                     InputLabelProps={{ shrink: true, required: true }}
                   />
                   <TextField
@@ -121,7 +120,6 @@ class AssignPriceToProduct extends Component {
                     name="ProfitPercentage"
                     type="number"
                     onChange={this.handleChange3}
-                    autoFocus
                   />
                   {startDate.length > 0 &&
                     endDate.length > 0 &&
