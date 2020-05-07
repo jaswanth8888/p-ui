@@ -121,9 +121,9 @@ class IncreaseQtyClusterForm extends Component {
                       assignedPrice
                     )}
               </Typography>
-              <Typography className="card-header" variant="h6">
+              {/* <Typography className="card-header" variant="h6">
                 Remaining Quantity At Zone : {quantityAssignedAtZone}
-              </Typography>
+              </Typography> */}
               <Typography className="card-header" variant="h6">
                 Quantity Assigned : {quantityAssignedAtCluster}
               </Typography>
