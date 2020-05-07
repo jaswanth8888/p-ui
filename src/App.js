@@ -8,6 +8,8 @@ import store from "./redux/store"
 
 const App = () => {
   const retailerRoutes = [
+    "/updateqty/zone",
+    "/updateqty/zoneform",
     "/group",
     "/products/store",
     "/zone",
@@ -69,10 +71,10 @@ const App = () => {
     "/admin",
     "/dashboard",
     "/approvepromotion",
+    "/approvepromotionpage",
     "/vendor/increaseqtyzone",
     "/vendor/increaseqtycluster",
     "/viewproducts",
-    "/updateqty/zoneform",
     "/updateqty/clusterform",
   ]
   return (

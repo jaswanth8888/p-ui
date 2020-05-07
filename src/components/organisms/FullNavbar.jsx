@@ -862,7 +862,7 @@ function FullNavbar(props) {
           />
           <Route
             exact
-            path="/approvepromotion"
+            path={["/approvepromotion", "/approvepromotionpage"]}
             component={ApprovePromotionsRouter}
           />
           <Route exact path="/zone" component={ZoneForm} />
@@ -955,12 +955,12 @@ function FullNavbar(props) {
           <Route exact path="/viewproducts" component={ViewProducts} />
           <Route
             exact
-            path="/updateqty/zone"
+            path={["/updateqty/zone", "/updateqty/zoneform"]}
             component={IncreaseZoneQtyRouter}
           />
           <Route
             exact
-            path="/updateqty/cluster"
+            path={["/updateqty/cluster", "/updateqty/clusterform"]}
             component={IncreaseClusterQtyRouter}
           />
           <Route exact path="/vendor/editproduct" component={EditItemPrice} />
