@@ -7,20 +7,13 @@ import {
   TablePagination,
   TableHead,
   TableRow,
-  IconButton,
 } from "@material-ui/core"
 import Carousel from "react-material-ui-carousel"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined"
 import { getAllProducts } from "../../redux/actions/VendorActions"
-import {
-  viewPromotions,
-  promotionDetails,
-  viewProducts,
-  queryPromotionsForProducts,
-} from "../utils/constants"
+import { viewProducts } from "../utils/constants"
 import convertCurrency from "../utils/ConvertCurrency"
 
 class ViewProducts extends Component {
@@ -47,7 +40,7 @@ class ViewProducts extends Component {
   }
 
   render() {
-    const { getProducts, levelOption } = this.props
+    const { getProducts } = this.props
     const { page, rowsPerPage } = this.state
     return (
       <div className="box-container">
@@ -99,7 +92,8 @@ class ViewProducts extends Component {
                               Product Name : {product.initialQty}
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
-                              Base Price:{sessionStorage.getItem("currency") === "USD"
+                              Base Price:
+                              {sessionStorage.getItem("currency") === "USD"
                                 ? `$ ${product.vendorPrice}`
                                 : convertCurrency(
                                     "USD",
@@ -146,7 +140,6 @@ class ViewProducts extends Component {
 ViewProducts.propTypes = {
   getAllProducts: PropTypes.func.isRequired,
   getProducts: PropTypes.shape.isRequired,
-  levelOption: PropTypes.string.isRequired,
 }
 
 const stateAsProps = (store) => ({

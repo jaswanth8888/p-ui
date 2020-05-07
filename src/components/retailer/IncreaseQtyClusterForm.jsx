@@ -13,7 +13,7 @@ import ProductDetailsTable from "../utils/ProductDetailsTable"
 import { zonequantity } from "../utils/constants"
 import convertCurrency from "../utils/ConvertCurrency"
 
-class IncreaseQtyZoneForm extends Component {
+class IncreaseQtyClusterForm extends Component {
   constructor(props) {
     super(props)
 
@@ -46,7 +46,7 @@ class IncreaseQtyZoneForm extends Component {
     } = this.props
     const { zoneQuantity } = this.state
     // updateZoneQuantityAlt(productName, zone, zoneQuantity)
-    history.push("/view/assigned/zones")
+    history.push("/view/assigned/clusters")
   }
 
   handleChangeQuantity(e) {
@@ -58,7 +58,7 @@ class IncreaseQtyZoneForm extends Component {
   render() {
     const { zoneQuantity } = this.state
     const {
-      zone,
+      cluster,
       assignedPrice,
       quantityAssignedAtZone,
       productDetails,
@@ -77,7 +77,6 @@ class IncreaseQtyZoneForm extends Component {
                 </Typography>
               </div>
             )}
-
             {zoneQuantity > 0 &&
               zoneQuantity < productDetails.remainingQuantity && (
                 <div className="unapproved-text">
@@ -92,11 +91,11 @@ class IncreaseQtyZoneForm extends Component {
           <div className="form-center">
             <div className="flex-grid">
               <Typography className="card-header" variant="h4">
-                Increase Quantity in Zone
+                Increase Quantity in Cluster
               </Typography>
               <ProductDetailsTable />
               <Typography className="card-header" variant="h6">
-                Selected Zone : {zone}
+                Selected Cluster : {cluster}
               </Typography>
               <Typography className="card-header" variant="h6">
                 Actual Price :{" "}
@@ -144,7 +143,7 @@ class IncreaseQtyZoneForm extends Component {
                     style={{ marginTop: "10px" }}
                     id="apply-zone-percentage"
                   >
-                    Add Quantity to Zone
+                    Add Quantity to Cluster
                   </Button>
                 )}
             </div>
@@ -155,9 +154,10 @@ class IncreaseQtyZoneForm extends Component {
   }
 }
 
-IncreaseQtyZoneForm.propTypes = {
+IncreaseQtyClusterForm.propTypes = {
   productName: PropTypes.string.isRequired,
   zone: PropTypes.string.isRequired,
+  cluster: PropTypes.string.isRequired,
   history: PropTypes.shape.isRequired,
   assignedPrice: PropTypes.string.isRequired,
   getZoneQuantity: PropTypes.func.isRequired,
@@ -169,6 +169,7 @@ const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
   zone: store.RetailerReducer.zone,
+  cluster: store.RetailerReducer.cluster,
   assignedPrice: store.RetailerReducer.assignedPrice,
   loggedInUser: store.RetailerReducer.loggedInUser,
   promotionAlert: store.AdminReducer.promotionAlert,
@@ -179,4 +180,4 @@ const actionAsProps = {
   getZoneQuantity,
   updateZoneQuantity,
 }
-export default connect(stateAsProps, actionAsProps)(IncreaseQtyZoneForm)
+export default connect(stateAsProps, actionAsProps)(IncreaseQtyClusterForm)

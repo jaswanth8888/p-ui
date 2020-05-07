@@ -9,7 +9,7 @@ import {
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { getZones, assignToZone } from "../../redux/actions/RetailerActions"
+import { getZones, assignToZone, getZoneQuantity } from "../../redux/actions/RetailerActions"
 import ProductDetails from "../utils/ProductDetails"
 import Message from "../utils/Message"
 

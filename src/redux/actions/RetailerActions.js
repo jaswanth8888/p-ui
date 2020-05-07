@@ -65,6 +65,7 @@ import {
   GET_PRODUCT_ZONELIST,
   GET_PRODUCT_CLUSTERLIST,
   GET_ZONE_QUANTITY,
+  UPDATE_ZONE_QUANTITY,
 } from "./types"
 
 const TOKEN = () => {
@@ -1309,5 +1310,32 @@ export const getZoneQuantity = (productName, zone) => async (dispatch) => {
     })
     .then((res) => {
       dispatch({ type: GET_ZONE_QUANTITY, quantityAssignedAtZone: res.data })
+    })
+}
+
+export const updateZoneQuantity = (productName, zone, zoneQuantity) => async (
+  dispatch
+) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/product/promotion/${productName}/${zone}/${zoneQuantity}`,
+      {},
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then(() => {
+      dispatch({
+        type: UPDATE_ZONE_QUANTITY,
+        msg: "Updated Quantity Succesfully",
+        msgSeverity: "success",
+      })
+    })
+    .catch(() => {
+      dispatch({
+        type: UPDATE_ZONE_QUANTITY,
+        msg: "Something went wrong, please try again.",
+        msgSeverity: "warning",
+      })
     })
 }

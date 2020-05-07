@@ -72,6 +72,8 @@ const App = () => {
     "/vendor/increaseqtyzone",
     "/vendor/increaseqtycluster",
     "/viewproducts",
+    "/updateqty/zoneform",
+    "/updateqty/clusterform",
   ]
   return (
     <Provider store={store}>
