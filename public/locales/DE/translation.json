@@ -42,8 +42,14 @@
     "cancelEffectivePriceChange": "Effektive Preisänderung abbrechen",
     "sellCancelProductFixedPrice": "Produkt zum Festpreis verkaufen / stornieren",
     "queryPromotionsOnDateRange": "Abfragen von Promotions im Datumsbereich",
-    "approvePromotions":"Genehmigen Sie Werbeaktionen"
-    
+    "approvePromotions":"Genehmigen Sie Werbeaktionen",
+    "increaseQuantityAtZone":"Menge in Zone erhöhen",
+    "increaseQuantityAtCluster":"Erhöhen Sie die Menge im Cluster",
+    "adminActions":"Verwaltungsaktionen",
+    "prices":"Preise",
+    "promotions":"Promotions",
+    "location":"Standort",
+    "quantity":"Menge"
   },
   "vendorWelcome": {
     "addProduct": "Produkt hinzufügen",

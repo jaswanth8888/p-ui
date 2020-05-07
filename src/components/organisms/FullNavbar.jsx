@@ -8,6 +8,8 @@ import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
+import EventNoteIcon from '@material-ui/icons/EventNote'
+import ViewListRoundedIcon from "@material-ui/icons/ViewListRounded"
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles"
 import Tab from "@material-ui/core/Tab"
 import Toolbar from "@material-ui/core/Toolbar"
@@ -15,9 +17,11 @@ import Tooltip from "@material-ui/core/Tooltip"
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
 import DateRangeIcon from "@material-ui/icons/DateRange"
 import InsertChartIcon from "@material-ui/icons/InsertChart"
+import CategoryIcon from "@material-ui/icons/Category"
 import EventBusyIcon from "@material-ui/icons/EventBusy"
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted"
 import GroupIcon from "@material-ui/icons/Group"
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import LocationCityIcon from "@material-ui/icons/LocationCity"
 import MenuIcon from "@material-ui/icons/Menu"
 import PublicIcon from "@material-ui/icons/Public"
@@ -187,7 +191,7 @@ function FullNavbar(props) {
           <Tooltip title="Create a Group" placement="right">
             <ListItem button id="create-group-btn">
               <ListItemIcon>
-                <GroupIcon />
+                <CategoryIcon />
               </ListItemIcon>
               <ListItemText
                 className="list-item-text"
@@ -203,9 +207,9 @@ function FullNavbar(props) {
             <Tooltip title="Admin Actions" placement="right">
               <ListItem button id="admin-dropdown" onClick={handleClickAdmin}>
                 <ListItemIcon>
-                  <AddShoppingCartIcon />
+                  <ViewListRoundedIcon />
                 </ListItemIcon>
-                <ListItemText primary="Admin Actions" />
+                <ListItemText primary={t("welcome.adminActions")} />
                 {adminOpen ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
             </Tooltip>
@@ -255,9 +259,9 @@ function FullNavbar(props) {
         <Tooltip title="Prices Menu" placement="right">
           <ListItem button id="price-dropdown" onClick={handleClickPrice}>
             <ListItemIcon>
-              <AddShoppingCartIcon />
+              <ViewListRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="Prices" />
+            <ListItemText primary={t("welcome.prices")} />
             {priceOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
         </Tooltip>
@@ -289,7 +293,7 @@ function FullNavbar(props) {
                   className={classes.nested}
                 >
                   <ListItemIcon>
-                    <AddShoppingCartIcon />
+                    <ShoppingCartIcon />
                   </ListItemIcon>
                   <ListItemText
                     className="list-item-text"
@@ -369,9 +373,9 @@ function FullNavbar(props) {
             onClick={handleClickPromotion}
           >
             <ListItemIcon>
-              <AddShoppingCartIcon />
+              <ViewListRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="Promotions" />
+            <ListItemText primary={t("welcome.promotions")} />
             {promotionOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
         </Tooltip>
@@ -385,7 +389,7 @@ function FullNavbar(props) {
                   className={classes.nested}
                 >
                   <ListItemIcon>
-                    <AddShoppingCartIcon />
+                    <ShoppingCartIcon />
                   </ListItemIcon>
                   <ListItemText
                     className="list-item-text"
@@ -406,7 +410,7 @@ function FullNavbar(props) {
                   className={classes.nested}
                 >
                   <ListItemIcon>
-                    <AddShoppingCartIcon />
+                    <ShoppingCartIcon />
                   </ListItemIcon>
                   <ListItemText
                     className="list-item-text"
@@ -424,7 +428,7 @@ function FullNavbar(props) {
                   className={classes.nested}
                 >
                   <ListItemIcon>
-                    <DateRangeIcon />
+                    <EventNoteIcon />
                   </ListItemIcon>
                   <ListItemText
                     className="list-item-text"
@@ -499,9 +503,9 @@ function FullNavbar(props) {
         <Tooltip title="Location Menu" placement="right">
           <ListItem button id="location-dropdown" onClick={handleClickLocation}>
             <ListItemIcon>
-              <AddShoppingCartIcon />
+              <ViewListRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="Location" />
+            <ListItemText primary={t("welcome.location")} />
             {locationOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
         </Tooltip>
@@ -596,9 +600,9 @@ function FullNavbar(props) {
         <Tooltip title="Quantity Menu" placement="right">
           <ListItem button id="qty-dropdown" onClick={handleClickQty}>
             <ListItemIcon>
-              <AddShoppingCartIcon />
+              <ViewListRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="Quantity" />
+            <ListItemText primary={t("welcome.quantity")} />
             {qtyOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
         </Tooltip>
@@ -616,7 +620,7 @@ function FullNavbar(props) {
                   </ListItemIcon>
                   <ListItemText
                     className="list-item-text"
-                    primary="Increase qty at Zone Level"
+                    primary={t("welcome.increaseQuantityAtZone")}
                   />
                 </ListItem>
               </Tooltip>
@@ -633,7 +637,7 @@ function FullNavbar(props) {
                   </ListItemIcon>
                   <ListItemText
                     className="list-item-text"
-                    primary="Increase qty at Cluster Level"
+                    primary={t("welcome.increaseQuantityAtCluster")}
                   />
                 </ListItem>
               </Tooltip>
