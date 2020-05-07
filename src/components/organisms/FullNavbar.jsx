@@ -611,7 +611,7 @@ function FullNavbar(props) {
               <Tooltip title="Update the price of a Product" placement="right">
                 <ListItem
                   button
-                  id="update-price-product-btn"
+                  id="add-qty-zone-btn"
                   className={classes.nested}
                 >
                   <ListItemIcon>
@@ -628,7 +628,7 @@ function FullNavbar(props) {
               <Tooltip title="Update the price of a Product" placement="right">
                 <ListItem
                   button
-                  id="update-price-product-btn"
+                  id="add-qty-cluster-btn"
                   className={classes.nested}
                 >
                   <ListItemIcon>
