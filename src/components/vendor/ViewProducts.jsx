@@ -79,7 +79,7 @@ class ViewProducts extends Component {
                                     href={img}
                                   >
                                     <img
-                                      className="thumbnail"
+                                      className="thumbnail-small"
                                       src={img}
                                       alt="none"
                                     />
@@ -88,9 +88,6 @@ class ViewProducts extends Component {
                             </Carousel>
                           </TableCell>
                           <TableCell>
-                            <Typography variant="subtitle1" gutterBottom>
-                              Product Name : {product.initialQty}
-                            </Typography>
                             <Typography variant="subtitle1" gutterBottom>
                               Base Price:
                               {sessionStorage.getItem("currency") === "USD"
@@ -111,7 +108,6 @@ class ViewProducts extends Component {
                               Product Category : {product.productCategory}
                             </Typography>
                           </TableCell>
-                          <TableCell />
                         </TableRow>
                       )
                     })}

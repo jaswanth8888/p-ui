@@ -8,6 +8,7 @@ import { TextField, Typography, Button, FormControl } from "@material-ui/core"
 import {
   getNonAlcoholicProductList,
   saveProductValue,
+  getProductDetails,
 } from "../../redux/actions/RetailerActions"
 
 class SellCancelProductFixedPriceForm extends Component {
@@ -31,9 +32,13 @@ class SellCancelProductFixedPriceForm extends Component {
 
   handleChangeProduct = (e, value) => {
     const productName = value
+    const {
+      saveProductValue: saveProductValueAlt,
+      getProductDetails: getProductDetailsAlt,
+    } = this.props
     this.setState({ productName })
-    const { saveProductValue: saveProductValueAlt } = this.props
     saveProductValueAlt(productName)
+    getProductDetailsAlt(value)
   }
 
   handleSubmit() {
@@ -122,6 +127,7 @@ class SellCancelProductFixedPriceForm extends Component {
 
 SellCancelProductFixedPriceForm.propTypes = {
   products: PropTypes.arrayOf.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
   getNonAlcoholicProductList: PropTypes.func.isRequired,
   saveProductValue: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
@@ -132,6 +138,7 @@ const stateAsProps = (store) => ({
 const actionAsProps = {
   getNonAlcoholicProductList,
   saveProductValue,
+  getProductDetails,
 }
 export default connect(
   stateAsProps,
