@@ -42,15 +42,18 @@ class ViewProducts extends Component {
   render() {
     const { getProducts } = this.props
     const { page, rowsPerPage } = this.state
+    // const customColumnStyle = { maxWidth: "300px", backgroundColor: "white", paddingLeft: "10px", paddingRight: "10px" }
+    const customColumnStyle2 = { maxWidth: "980px", backgroundColor: "white" }
+
     return (
       <div className="box-container">
         <div className="center-body">
           <div className="flex-grid">
-            <Typography color="primary" component="h1" variant="h4">
+            <Typography color="primary" component="h1" variant="h5">
               View All Products
             </Typography>
-            <TableContainer component={Paper}>
-              <Table aria-label="a dense table">
+            <TableContainer style={customColumnStyle2}>  
+              <Table aria-label="a dense table" >
                 <TableHead>
                   <TableRow>
                     {viewProducts.map((tcell) => (
@@ -89,9 +92,6 @@ class ViewProducts extends Component {
                           </TableCell>
                           <TableCell>
                             <Typography variant="subtitle1" gutterBottom>
-                              Product Name : {product.initialQty}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
                               Base Price:
                               {sessionStorage.getItem("currency") === "USD"
                                 ? `$ ${product.productBasePrice}`
@@ -111,7 +111,6 @@ class ViewProducts extends Component {
                               Product Category : {product.productCategory}
                             </Typography>
                           </TableCell>
-                          <TableCell />
                         </TableRow>
                       )
                     })}
@@ -119,6 +118,7 @@ class ViewProducts extends Component {
               </Table>
             </TableContainer>
             <TablePagination
+              style={customColumnStyle2}
               rowsPerPageOptions={[3, 5, 10]}
               component="div"
               count={getProducts.length}

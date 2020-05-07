@@ -5,6 +5,5 @@ let currencyData = fetch("https://api.exchangeratesapi.io/latest")
   })
 
 export default function currencyConvert(from, amt) {
-    console.log(parseFloat(amt),currencyData.rates[from],currencyData.rates["USD"])
-  return (parseFloat(amt) / currencyData.rates[from]) * currencyData.rates["USD"]
+  return (parseFloat(amt) / currencyData.rates[from]) * currencyData.rates.USD
 }

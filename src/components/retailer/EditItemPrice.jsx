@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import PropTypes from "prop-types"
 import {
   Typography,
   Paper,
@@ -12,31 +12,31 @@ import {
   TableRow,
   Button,
   IconButton,
-} from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
-import CloseIcon from "@material-ui/icons/Close";
+} from "@material-ui/core"
+import Alert from "@material-ui/lab/Alert"
+import CloseIcon from "@material-ui/icons/Close"
 import {
   getProductDetails,
   isPromotionApplied,
   updateProduct,
-} from "../../redux/actions/RetailerActions";
-import Message from "../utils/Message";
-import convertCurrency from "../utils/ConvertCurrency";
+} from "../../redux/actions/RetailerActions"
+import Message from "../utils/Message"
+import convertCurrency from "../utils/ConvertCurrency"
 
 class EditItemPrice extends Component {
   constructor(props) {
-    super(props);
-    const { productDetails } = this.props;
+    super(props)
+    const { productDetails } = this.props
     this.state = {
       updatedProduct: {
         productName: productDetails.productName,
         newQuantity: 0,
         newBasePrice: productDetails.productBasePrice,
       },
-    };
-    this.handleQuantityChange = this.handleQuantityChange.bind(this);
-    this.handlePriceChange = this.handlePriceChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    this.handleQuantityChange = this.handleQuantityChange.bind(this)
+    this.handlePriceChange = this.handlePriceChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -44,46 +44,46 @@ class EditItemPrice extends Component {
       productName,
       getProductDetails: getProductDetailsAlt,
       isPromotionApplied: promotionapplied,
-    } = this.props;
-    getProductDetailsAlt(productName);
-    promotionapplied(productName);
+    } = this.props
+    getProductDetailsAlt(productName)
+    promotionapplied(productName)
   }
 
   handleQuantityChange(e) {
-    const { value } = e.target;
-    const { updatedProduct } = this.state;
-    updatedProduct.newQuantity = value;
+    const { value } = e.target
+    const { updatedProduct } = this.state
+    updatedProduct.newQuantity = value
     this.setState({
       updatedProduct: {
         ...updatedProduct,
         newQuantity: value,
       },
-    });
+    })
   }
 
   handlePriceChange(e) {
-    const { value } = e.target;
-    const { updatedProduct } = this.state;
-    updatedProduct.newBasePrice = value;
+    const { value } = e.target
+    const { updatedProduct } = this.state
+    updatedProduct.newBasePrice = value
     this.setState({
       updatedProduct: {
         ...updatedProduct,
         newBasePrice: value,
       },
-    });
+    })
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    const { updatedProduct } = this.state;
-    const { updateProduct: updateProductAlt } = this.props;
-    updateProductAlt(updatedProduct, updatedProduct.productName);
+    e.preventDefault()
+    const { updatedProduct } = this.state
+    const { updateProduct: updateProductAlt } = this.props
+    updateProductAlt(updatedProduct, updatedProduct.productName)
   }
 
   render() {
-    const { productDetails } = this.props;
-    const { isPromotion } = this.props;
-    const { updatedProduct } = this.state;
+    const { productDetails } = this.props
+    const { isPromotion } = this.props
+    const { updatedProduct } = this.state
     return (
       <div className="box-container">
         <div className="joint-form-large-table">
@@ -210,7 +210,7 @@ class EditItemPrice extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -221,16 +221,16 @@ EditItemPrice.propTypes = {
   productName: PropTypes.string.isRequired,
   productDetails: PropTypes.shape.isRequired,
   isPromotion: PropTypes.bool.isRequired,
-};
+}
 
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
   productName: store.RetailerReducer.productName,
   isPromotion: store.RetailerReducer.isPromotion,
-});
+})
 const actionsAsProps = {
   getProductDetails,
   isPromotionApplied,
   updateProduct,
-};
-export default connect(stateAsProps, actionsAsProps)(EditItemPrice);
+}
+export default connect(stateAsProps, actionsAsProps)(EditItemPrice)

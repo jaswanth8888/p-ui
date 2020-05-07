@@ -110,7 +110,6 @@ class AddProduct extends Component {
         Array.from(selectedImages).forEach((file) => {
           data.append("files", file)
         })
-        console.log(product)
         test.postProduct(data)
       }
     }
