@@ -588,50 +588,50 @@ function FullNavbar(props) {
                 </div>
               </>
             ) : (
-              <div className="right-nav-btn">
-                {loggedInUser.token === "" && (
-                  <>
-                    <Link className="button-link" to="/vendor">
-                      <StyledTab
-                        color="default"
-                        className="{classes.link}"
-                        id="reg-vendor"
-                        label={t("loginAsVendor")}
-                      />
-                    </Link>
-                    <Link className="button-link" to="/admin/login">
-                      <StyledTab
-                        color="default"
-                        className="{classes.link}"
-                        id="admin-login"
-                        label={t("loginAsAdmin")}
-                      />
-                    </Link>
-                  </>
-                )}
-                <ReactFlagsSelect
-                  countries={["US", "FR", "DE"]}
-                  customLabels={{
-                    US: " ",
-                    FR: " ",
-                    DE: " ",
-                  }}
-                  id="flag-select"
-                  placeholder="Select Language"
-                  defaultCountry={sessionStorage.getItem("countryCode")}
-                  onSelect={(countryCode) => {
-                    i18n.changeLanguage(countryCode, () => {
-                      sessionStorage.setItem("countryCode", countryCode)
-                      if (countryCode === "FR" || countryCode === "DE") {
-                        sessionStorage.setItem("currency", "EUR")
-                      } else {
-                        sessionStorage.setItem("currency", "USD")
-                      }
-                    })
-                  }}
-                />
-              </div>
-            )}
+                <div className="right-nav-btn">
+                  {loggedInUser.token === "" && (
+                    <>
+                      <Link className="button-link" to="/vendor">
+                        <StyledTab
+                          color="default"
+                          className="{classes.link}"
+                          id="reg-vendor"
+                          label={t("loginAsVendor")}
+                        />
+                      </Link>
+                      <Link className="button-link" to="/admin/login">
+                        <StyledTab
+                          color="default"
+                          className="{classes.link}"
+                          id="admin-login"
+                          label={t("loginAsAdmin")}
+                        />
+                      </Link>
+                    </>
+                  )}
+                  <ReactFlagsSelect
+                    countries={["US", "FR", "DE"]}
+                    customLabels={{
+                      US: " ",
+                      FR: " ",
+                      DE: " ",
+                    }}
+                    id="flag-select"
+                    placeholder="Select Language"
+                    defaultCountry={sessionStorage.getItem("countryCode")}
+                    onSelect={(countryCode) => {
+                      i18n.changeLanguage(countryCode, () => {
+                        sessionStorage.setItem("countryCode", countryCode)
+                        if (countryCode === "FR" || countryCode === "DE") {
+                          sessionStorage.setItem("currency", "EUR")
+                        } else {
+                          sessionStorage.setItem("currency", "USD")
+                        }
+                      })
+                    }}
+                  />
+                </div>
+              )}
           </Toolbar>
         </AppBar>
         {loggedInUser.token !== "" && (

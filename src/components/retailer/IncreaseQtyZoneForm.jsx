@@ -19,7 +19,8 @@ class IncreaseQtyZoneForm extends Component {
 
     this.state = {
       zoneQuantity: "",
-      // levelOption: "zone",
+      levelOption: "zone",
+      increaseQtyZone: { zoneName: "", quantityAssigned: "" },
     }
 
     this.handleChangeQuantity = this.handleChangeQuantity.bind(this)
@@ -44,8 +45,10 @@ class IncreaseQtyZoneForm extends Component {
       updateZoneQuantity: updateZoneQuantityAlt,
       history,
     } = this.props
-    const { zoneQuantity } = this.state
-    // updateZoneQuantityAlt(productName, zone, zoneQuantity)
+    const { zoneQuantity, levelOption, increaseQtyZone } = this.state
+    increaseQtyZone.zoneName = zone
+    increaseQtyZone.quantityAssigned = zoneQuantity
+    updateZoneQuantityAlt(increaseQtyZone, productName, levelOption)
     history.push("/view/assigned/zones")
   }
 
@@ -109,7 +112,7 @@ class IncreaseQtyZoneForm extends Component {
                     )}
               </Typography>
               <Typography className="card-header" variant="h6">
-                Quantity Assigned : {quantityAssignedAtZone.quantityAssigned}
+                Quantity Assigned : {quantityAssignedAtZone}
               </Typography>
               <TextField
                 variant="outlined"

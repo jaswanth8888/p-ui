@@ -188,11 +188,14 @@ export const saveProductValue = (productValue) => (dispatch) => {
   dispatch({ type: PRODUCT_SAVE_VALUE, productName: productValue })
 }
 
-export const getAllProducts = () => async (dispatch) => {
+export const getAllProducts = (vendorName) => async (dispatch) => {
   await axios
-    .get(`http://www.mocky.io/v2/5eb2cd0a32000006547b854d`, {
-      headers: { Authorization: VTOKEN() },
-    })
+    .get(
+      `${RETAILER_BASE_URL}/product-management/products/vendor/${vendorName}`,
+      {
+        headers: { Authorization: VTOKEN() },
+      }
+    )
     .then((res) => {
       dispatch({ type: GET_ALL_PRODUCTS, getProducts: res.data })
     })

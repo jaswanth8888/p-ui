@@ -27,8 +27,8 @@ class ViewProducts extends Component {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
-    const { getAllProducts: getAllProductsAlt } = this.props
-    getAllProductsAlt()
+    const { getAllProducts: getAllProductsAlt, loggedInUser } = this.props
+    getAllProductsAlt(loggedInUser.userName)
   }
 
   handleChangePage = (event, newPage) => {
@@ -69,7 +69,7 @@ class ViewProducts extends Component {
                               {product.productName}
                             </Typography>
                             <Carousel interval="3000" animation="fade">
-                              {product.image
+                              {product.productImage
                                 .slice(0)
                                 .reverse()
                                 .map((img) => (
@@ -94,24 +94,21 @@ class ViewProducts extends Component {
                             <Typography variant="subtitle1" gutterBottom>
                               Base Price:
                               {sessionStorage.getItem("currency") === "USD"
-                                ? `$ ${product.vendorPrice}`
+                                ? `$ ${product.productBasePrice}`
                                 : convertCurrency(
                                     "USD",
                                     sessionStorage.getItem("currency"),
-                                    product.vendorPrice
+                                  product.productBasePrice
                                   )}
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
-                              Initial Quantity : {product.initialQty}
+                              Remaining Quantity : {product.remainingQuantity}
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
-                              Product UOM : {product.vendorName}
+                              Product UOM : {product.productUOM}
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
-                              Product Description : {product.remainingQty}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
-                              Product Category : {product.category}
+                              Product Category : {product.productCategory}
                             </Typography>
                           </TableCell>
                           <TableCell />
@@ -147,6 +144,7 @@ const stateAsProps = (store) => ({
   levelOption: store.RetailerReducer.levelOption,
   startDate: store.RetailerReducer.startDate,
   endDate: store.RetailerReducer.endDate,
+  loggedInUser: store.RetailerReducer.loggedInUser,
 })
 
 const actionAsProps = {

@@ -57,6 +57,8 @@ import {
   GET_PRODUCT_CLUSTERLIST,
   GET_ZONE_QUANTITY,
   UPDATE_ZONE_QUANTITY,
+  GET_CLUSTER_QUANTITY,
+  UPDATE_CLUSTER_QUANTITY,
 } from "../actions/types"
 
 const initialState = {
@@ -115,6 +117,7 @@ const initialState = {
   productZoneList: [],
   productClusterList: [],
   quantityAssignedAtZone: 0,
+  quantityAssignedAtCluster: 0,
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -309,9 +312,16 @@ export default (state = initialState, action = {}) => {
       return { ...state, productClusterList: action.productClusterList }
     case GET_ZONE_QUANTITY:
       return { ...state, quantityAssignedAtZone: action.quantityAssignedAtZone }
+    case GET_CLUSTER_QUANTITY:
+      return {
+        ...state,
+        quantityAssignedAtCluster: action.quantityAssignedAtCluster,
+      }
     case UPDATE_ZONE_QUANTITY:
       return { ...state, msg: action.msg, msgSeverity: action.msgSeverity }
-    
+    case UPDATE_CLUSTER_QUANTITY:
+      return { ...state, msg: action.msg, msgSeverity: action.msgSeverity }
+
     default:
       return { ...state }
   }

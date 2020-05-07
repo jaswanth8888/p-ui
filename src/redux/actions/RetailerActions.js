@@ -66,6 +66,8 @@ import {
   GET_PRODUCT_CLUSTERLIST,
   GET_ZONE_QUANTITY,
   UPDATE_ZONE_QUANTITY,
+  UPDATE_CLUSTER_QUANTITY,
+  GET_CLUSTER_QUANTITY,
 } from "./types"
 
 const TOKEN = () => {
@@ -1305,21 +1307,44 @@ export const getClustersForProduct = (productName, zone) => async (
 
 export const getZoneQuantity = (productName, zone) => async (dispatch) => {
   await axios
-    .get(`http://www.mocky.io/v2/5eb27cc23200000e007b81ec`, {
-      headers: { Authorization: TOKEN() },
-    })
+    .get(
+      `${RETAILER_BASE_URL}/product-management/products/${productName}/${zone}/quantity`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
     .then((res) => {
       dispatch({ type: GET_ZONE_QUANTITY, quantityAssignedAtZone: res.data })
     })
 }
 
-export const updateZoneQuantity = (productName, zone, zoneQuantity) => async (
+export const getClusterQuantity = (productName, zone, cluster) => async (
   dispatch
 ) => {
   await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/products/${productName}/${zone}/${cluster}/quantity`,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: GET_CLUSTER_QUANTITY,
+        quantityAssignedAtCluster: res.data,
+      })
+    })
+}
+
+export const updateZoneQuantity = (
+  increaseQtyZone,
+  productName,
+  levelOption
+) => async (dispatch) => {
+  await axios
     .put(
-      `${RETAILER_BASE_URL}/product-management/product/promotion/${productName}/${zone}/${zoneQuantity}`,
-      {},
+      `${RETAILER_BASE_URL}/product-management/products/update/${levelOption}/${productName}`,
+      increaseQtyZone,
       {
         headers: { Authorization: TOKEN() },
       }
@@ -1334,6 +1359,35 @@ export const updateZoneQuantity = (productName, zone, zoneQuantity) => async (
     .catch(() => {
       dispatch({
         type: UPDATE_ZONE_QUANTITY,
+        msg: "Something went wrong, please try again.",
+        msgSeverity: "warning",
+      })
+    })
+}
+
+export const updateClusterQuantity = (
+  increaseQtyCluster,
+  productName,
+  levelOption
+) => async (dispatch) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/products/update/${levelOption}/${productName}`,
+      increaseQtyCluster,
+      {
+        headers: { Authorization: TOKEN() },
+      }
+    )
+    .then(() => {
+      dispatch({
+        type: UPDATE_CLUSTER_QUANTITY,
+        msg: "Updated Quantity Succesfully",
+        msgSeverity: "success",
+      })
+    })
+    .catch(() => {
+      dispatch({
+        type: UPDATE_CLUSTER_QUANTITY,
         msg: "Something went wrong, please try again.",
         msgSeverity: "warning",
       })

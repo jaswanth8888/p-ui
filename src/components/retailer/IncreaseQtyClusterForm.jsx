@@ -7,7 +7,8 @@ import PropTypes from "prop-types"
 // import { spacing } from "@material-ui/system"
 import {
   getZoneQuantity,
-  updateZoneQuantity,
+  getClusterQuantity,
+  updateClusterQuantity,
 } from "../../redux/actions/RetailerActions"
 import ProductDetailsTable from "../utils/ProductDetailsTable"
 import { zonequantity } from "../utils/constants"
@@ -18,8 +19,13 @@ class IncreaseQtyClusterForm extends Component {
     super(props)
 
     this.state = {
-      zoneQuantity: "",
-      // levelOption: "zone",
+      clusterQuantity: "",
+      levelOption: "cluster",
+      increaseQtyCluster: {
+        zoneName: "",
+        clusterName: "",
+        quantityAssigned: "",
+      },
     }
 
     this.handleChangeQuantity = this.handleChangeQuantity.bind(this)
@@ -31,8 +37,11 @@ class IncreaseQtyClusterForm extends Component {
     const {
       productName,
       zone,
+      cluster,
       getZoneQuantity: getZoneQuantityAlt,
+      getClusterQuantity: getClusterQuantityAlt,
     } = this.props
+    getClusterQuantityAlt(productName, zone, cluster)
     getZoneQuantityAlt(productName, zone)
   }
 
@@ -41,26 +50,31 @@ class IncreaseQtyClusterForm extends Component {
     const {
       productName,
       zone,
-      updateZoneQuantity: updateZoneQuantityAlt,
+      cluster,
+      updateClusterQuantity: updateClusterQuantityAlt,
       history,
     } = this.props
-    const { zoneQuantity } = this.state
-    // updateZoneQuantityAlt(productName, zone, zoneQuantity)
+    const { increaseQtyCluster, levelOption, clusterQuantity } = this.state
+    increaseQtyCluster.zoneName = zone
+    increaseQtyCluster.clusterName = cluster
+    increaseQtyCluster.quantityAssigned = clusterQuantity
+    updateClusterQuantityAlt(increaseQtyCluster, productName, levelOption)
     history.push("/view/assigned/clusters")
   }
 
   handleChangeQuantity(e) {
     this.setState({
-      zoneQuantity: e.target.value,
+      clusterQuantity: e.target.value,
     })
   }
 
   render() {
-    const { zoneQuantity } = this.state
+    const { clusterQuantity } = this.state
     const {
       cluster,
       assignedPrice,
       quantityAssignedAtZone,
+      quantityAssignedAtCluster,
       productDetails,
     } = this.props
     return (
@@ -68,8 +82,8 @@ class IncreaseQtyClusterForm extends Component {
         <div className="joint-form-large-table">
           <div className="store-requirement">
             <h3 className="center-h3">Requirements</h3>
-            {(zoneQuantity >= productDetails.remainingQuantity ||
-              zoneQuantity <= 0) && (
+            {(clusterQuantity >= productDetails.remainingQuantity ||
+              clusterQuantity <= 0) && (
               <div className="approved-text">
                 <ClearIcon className="icon-style" />
                 <Typography variant="subtitle2" gutterBottom>
@@ -77,8 +91,8 @@ class IncreaseQtyClusterForm extends Component {
                 </Typography>
               </div>
             )}
-            {zoneQuantity > 0 &&
-              zoneQuantity < productDetails.remainingQuantity && (
+            {clusterQuantity > 0 &&
+              clusterQuantity < productDetails.remainingQuantity && (
                 <div className="unapproved-text">
                   <CheckIcon className="icon-style" />
                   <Typography variant="subtitle2" gutterBottom>
@@ -108,7 +122,10 @@ class IncreaseQtyClusterForm extends Component {
                     )}
               </Typography>
               <Typography className="card-header" variant="h6">
-                Quantity Assigned : {quantityAssignedAtZone.quantityAssigned}
+                Remaining Quantity At Zone : {quantityAssignedAtZone}
+              </Typography>
+              <Typography className="card-header" variant="h6">
+                Quantity Assigned : {quantityAssignedAtCluster}
               </Typography>
               <TextField
                 variant="outlined"
@@ -131,8 +148,8 @@ class IncreaseQtyClusterForm extends Component {
                 }}
                 autoFocus
               />
-              {zoneQuantity < productDetails.remainingQuantity &&
-                zoneQuantity > 0 && (
+              {clusterQuantity < productDetails.remainingQuantity &&
+                clusterQuantity > 0 && (
                   <Button
                     halfWidth
                     type="button"
@@ -161,9 +178,11 @@ IncreaseQtyClusterForm.propTypes = {
   history: PropTypes.shape.isRequired,
   assignedPrice: PropTypes.string.isRequired,
   getZoneQuantity: PropTypes.func.isRequired,
+  getClusterQuantity: PropTypes.func.isRequired,
   quantityAssignedAtZone: PropTypes.shape.isRequired,
+  quantityAssignedAtCluster: PropTypes.shape.isRequired,
   productDetails: PropTypes.shape.isRequired,
-  updateZoneQuantity: PropTypes.func.isRequired,
+  updateClusterQuantity: PropTypes.func.isRequired,
 }
 const stateAsProps = (store) => ({
   productDetails: store.RetailerReducer.productDetails,
@@ -174,10 +193,12 @@ const stateAsProps = (store) => ({
   loggedInUser: store.RetailerReducer.loggedInUser,
   promotionAlert: store.AdminReducer.promotionAlert,
   quantityAssignedAtZone: store.RetailerReducer.quantityAssignedAtZone,
+  quantityAssignedAtCluster: store.RetailerReducer.quantityAssignedAtCluster,
 })
 
 const actionAsProps = {
   getZoneQuantity,
-  updateZoneQuantity,
+  getClusterQuantity,
+  updateClusterQuantity,
 }
 export default connect(stateAsProps, actionAsProps)(IncreaseQtyClusterForm)
