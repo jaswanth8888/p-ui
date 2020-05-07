@@ -108,7 +108,7 @@ class IncreaseQtyCluster extends Component {
     return (
       <>
         {assignedPrice !== "" ? (
-          history.push("/definepromotion/cluster")
+          history.push("/updateqty/clusterform")
         ) : (
           <div className="box-container">
             <div className="joint-form">

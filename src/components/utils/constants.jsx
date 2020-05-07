@@ -8,6 +8,7 @@ export const withdrawClusterPromotion = [
 export const viewZones = ["Zone Name", "Number of Clusters"]
 export const viewClusters = ["Clusters Name", "Number of Stores"]
 export const viewPromotions = ["Product", "Product Details", "Promotions"]
+export const viewProducts = ["Product", "Product Details"]
 export const viewClusterPromotion = [
   "Promotion Applied Date",
   "Promotion Percentage",

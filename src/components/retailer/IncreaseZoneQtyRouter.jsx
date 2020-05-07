@@ -1,13 +1,9 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom"
 import PrivateRoute from "../utils/privateRoute"
-import ApplyPromotionInZone from "./ApplyPromotionInZone"
-import DefinePromotionInZone from "./DefinePromotionInZone"
-import ViewZonePromotions from "./ViewZonePromotions"
 import IncreaseQtyZone from "./IncreaseQtyZone"
 import IncreaseQtyZoneForm from "./IncreaseQtyZoneForm"
 import ViewAssignedZones from "./ViewAssignedZones"
-
 
 const IncreaseZoneQtyRouter = () => {
   return (

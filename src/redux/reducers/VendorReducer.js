@@ -9,6 +9,7 @@ import {
   PRODUCT_GET_REQUEST,
   PRODUCTLIST_GET_REQUEST,
   PRODUCT_SAVE_VALUE,
+  GET_ALL_PRODUCTS,
 } from "../actions/types"
 import { registerconstants } from "../actions/registrationtypes"
 
@@ -26,6 +27,7 @@ const initialState = {
   updatedProduct: {},
   productDetails: {},
   productList: [],
+  getProducts: [],
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -74,6 +76,8 @@ export default (state = initialState, action = {}) => {
       return { ...state, productList: action.productList }
     case PRODUCT_SAVE_VALUE:
       return { ...state, productName: action.productName }
+    case GET_ALL_PRODUCTS:
+      return { ...state, getProducts: action.getProducts }
     default:
       return { ...state }
   }

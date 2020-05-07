@@ -65,9 +65,9 @@ import CreateAdmin from "../retailer/CreateAdmin"
 import AdminLogin from "../admin/AdminLogin"
 import SellCancelProductFixedPriceRouter from "../retailer/SellCancelProductFixedPriceRouter"
 import ApprovePromotionsRouter from "../retailer/ApprovePromotionsRouter"
-import IncreaseQtyZone from "../retailer/IncreaseQtyZone"
-import IncreaseQtyCluster from "../retailer/IncreaseQtyCluster"
 import IncreaseZoneQtyRouter from "../retailer/IncreaseZoneQtyRouter"
+import ViewProducts from "../vendor/ViewProducts"
+import IncreaseClusterQtyRouter from "../retailer/IncreaseClusterQtyRouter"
 
 const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
@@ -497,6 +497,19 @@ function FullNavbar(props) {
             </ListItem>
           </Tooltip>
         </Link>
+        <Link to="/viewproducts">
+          <Tooltip title="Update the price of a Product" placement="right">
+            <ListItem buttonid="update-price-product-btn">
+              <ListItemIcon>
+                <AddShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText
+                className="list-item-text"
+                primary="View Products"
+              />
+            </ListItem>
+          </Tooltip>
+        </Link>
       </List>
     </div>
   )
@@ -759,6 +772,7 @@ function FullNavbar(props) {
           <Route exact path="/vendor/reg" component={Registration} />
           <Route exact path="/vendor/addproduct" component={AddProduct} />
           <Route exact path="/vendor/updateprice" component={SelectProduct} />
+          <Route exact path="/viewproducts" component={ViewProducts} />
           <Route
             exact
             path="/updateqty/zone"
@@ -767,7 +781,7 @@ function FullNavbar(props) {
           <Route
             exact
             path="/updateqty/cluster"
-            component={IncreaseQtyCluster}
+            component={IncreaseClusterQtyRouter}
           />
           <Route exact path="/vendor/editproduct" component={EditItemPrice} />
           <Route exact path="/admin" component={CreateAdmin} />
