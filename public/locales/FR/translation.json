@@ -54,7 +54,8 @@
   },
   "vendorWelcome": {
     "addProduct": "Ajouter un produit",
-    "updatePriceOfProduct": "Mettre à jour le prix d'un produit"
+    "updatePriceOfProduct": "Mettre à jour le prix d'un produit",
+    "viewProducts":"Voir les produits"
   },
   "zoneForm": {
     "lengthTooShort": "La zone doit être supérieure à 5 lettres",

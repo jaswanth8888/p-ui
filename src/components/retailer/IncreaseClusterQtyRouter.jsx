@@ -5,7 +5,6 @@ import IncreaseQtyClusterForm from "./IncreaseQtyClusterForm"
 import IncreaseQtyCluster from "./IncreaseQtyCluster"
 import ViewAssignedClusters from "./ViewAssignedClusters"
 
-
 const IncreaseClusterQtyRouter = () => {
   return (
     <Router>

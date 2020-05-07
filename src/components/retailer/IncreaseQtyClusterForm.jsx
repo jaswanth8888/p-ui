@@ -73,7 +73,6 @@ class IncreaseQtyClusterForm extends Component {
     const {
       cluster,
       assignedPrice,
-      quantityAssignedAtZone,
       quantityAssignedAtCluster,
       productDetails,
     } = this.props
@@ -135,10 +134,10 @@ class IncreaseQtyClusterForm extends Component {
                 fullWidth="false"
                 type="number"
                 step="0.01"
-                id="zonequantity"
+                id="clusterquantity"
                 label="Add Quantity"
-                name="zonequantity"
-                autoComplete="zonequantity"
+                name="clusterquantity"
+                autoComplete="clusterquantity"
                 onChange={this.handleChangeQuantity}
                 InputProps={{
                   inputProps: {
@@ -158,7 +157,7 @@ class IncreaseQtyClusterForm extends Component {
                     className="{classes.submit}"
                     onClick={this.handleSubmit}
                     style={{ marginTop: "10px" }}
-                    id="apply-zone-percentage"
+                    id="add-cluster-quantity"
                   >
                     Add Quantity to Cluster
                   </Button>
@@ -179,7 +178,6 @@ IncreaseQtyClusterForm.propTypes = {
   assignedPrice: PropTypes.string.isRequired,
   getZoneQuantity: PropTypes.func.isRequired,
   getClusterQuantity: PropTypes.func.isRequired,
-  quantityAssignedAtZone: PropTypes.shape.isRequired,
   quantityAssignedAtCluster: PropTypes.shape.isRequired,
   productDetails: PropTypes.shape.isRequired,
   updateClusterQuantity: PropTypes.func.isRequired,
