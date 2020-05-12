@@ -6,7 +6,7 @@ import ClearIcon from "@material-ui/icons/Clear"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import { TextField, Typography, Button, FormControl } from "@material-ui/core"
 import {
-  getNonAlcoholicProductList,
+  getProductList,
   saveProductValue,
   getProductDetails,
 } from "../../redux/actions/RetailerActions"
@@ -24,10 +24,8 @@ class SellCancelProductFixedPriceForm extends Component {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
-    const {
-      getNonAlcoholicProductList: getNonAlcoholicProductListAlt,
-    } = this.props
-    getNonAlcoholicProductListAlt()
+    const { getProductList: getProductListAlt } = this.props
+    getProductListAlt()
   }
 
   handleChangeProduct = (e, value) => {
@@ -82,7 +80,7 @@ class SellCancelProductFixedPriceForm extends Component {
                   variant="h4"
                   className="help-block-h4"
                 >
-                  Select from Baby Products
+                  Select a Product
                 </Typography>
               </div>
               <FormControl variant="outlined" fullWidth>
@@ -128,15 +126,15 @@ class SellCancelProductFixedPriceForm extends Component {
 SellCancelProductFixedPriceForm.propTypes = {
   products: PropTypes.arrayOf.isRequired,
   getProductDetails: PropTypes.func.isRequired,
-  getNonAlcoholicProductList: PropTypes.func.isRequired,
+  getProductList: PropTypes.func.isRequired,
   saveProductValue: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
 }
 const stateAsProps = (store) => ({
-  products: store.RetailerReducer.nonAlcoholicProductList,
+  products: store.RetailerReducer.productList,
 })
 const actionAsProps = {
-  getNonAlcoholicProductList,
+  getProductList,
   saveProductValue,
   getProductDetails,
 }
