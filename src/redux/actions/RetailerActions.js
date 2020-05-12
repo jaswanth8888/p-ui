@@ -67,6 +67,10 @@ import {
   GET_ZONE_QUANTITY,
   UPDATE_QUANTITY,
   GET_CLUSTER_QUANTITY,
+  UNASSIGNED_CLUSTERS,
+  ASSIGN_ZONE_CLUSTER,
+  CLEAR_PRODUCT_CLUSTER_LIST,
+  CLEAR_CLUSTER_LIST,
 } from "./types"
 
 const TOKEN = () => {
@@ -380,6 +384,10 @@ export const saveClusterValue = (clusterValue) => (dispatch) => {
 
 export const saveStoreValue = (storeValue) => (dispatch) => {
   dispatch({ type: STORE_SAVE_VALUE, store: storeValue })
+}
+
+export const saveUnassignedCluster = (unassignedCluster) => (dispatch) => {
+  dispatch({ type: UNASSIGNED_CLUSTERS, unassignedCluster })
 }
 
 export const postProductToStore = (zone, cluster, store, products) => async (
@@ -1084,6 +1092,17 @@ export const clearProductList = (productList) => (dispatch) => {
   dispatch({ type: CLEAR_PRODUCT_LIST, products: productList })
 }
 
+export const clearProductClusterList = (productClusterList) => (dispatch) => {
+  dispatch({
+    type: CLEAR_PRODUCT_CLUSTER_LIST,
+    productClusterList,
+  })
+}
+
+export const clearClusterList = (clusters) => (dispatch) => {
+  dispatch({ type: CLEAR_CLUSTER_LIST, clusters })
+}
+
 export const getDashboardData = () => async (dispatch) => {
   await axios
     .get(`${RETAILER_BASE_URL}/product-management/dashboard`, {
@@ -1359,5 +1378,90 @@ export const updateQuantity = (increaseQty, productName, levelOption) => async (
         msg: "Something went wrong, please try again.",
         msgSeverity: "warning",
       })
+    })
+}
+
+export const postZoneCluster = (finalDetails, productName) => async (
+  dispatch
+) => {
+  await axios
+    .put(
+      `${RETAILER_BASE_URL}/product-management/assign/${productName}`,
+      finalDetails,
+      { headers: { Authorization: TOKEN() } }
+    )
+    .then(() => {
+      dispatch({
+        type: ASSIGN_ZONE_CLUSTER,
+        msg: "Price Assigned Succesfully",
+        msgSeverity: "success",
+      })
+    })
+    .catch((err) => {
+      const { response } = err
+      if (
+        response.status === 400 &&
+        response.data.message === "Product is already associated with zone"
+      ) {
+        dispatch({
+          type: ASSIGN_ZONE_CLUSTER,
+          msg: "Product is already associated with zone",
+          msgSeverity: "error",
+          statusCode: response.status,
+        })
+      } else if (
+        response.status === 400 &&
+        response.data.message === "Quantity Insufficient"
+      ) {
+        dispatch({
+          type: ASSIGN_ZONE_CLUSTER,
+          msg: "Quantity assigned is high, please enter a lower quantity",
+          msgSeverity: "error",
+          statusCode: response.status,
+        })
+      } else if (
+        response.status === 400 &&
+        response.data.message === "Quantity Insufficient"
+      ) {
+        dispatch({
+          type: ASSIGN_ZONE_CLUSTER,
+          msg: "Product is already associated with ZONE",
+          msgSeverity: "error",
+          statusCode: response.status,
+        })
+      } else if (
+        response.status === 400 &&
+        response.data.message === "Product price is below minimum selling price"
+      ) {
+        dispatch({
+          type: ASSIGN_ZONE_CLUSTER,
+          msg:
+            "Profit percentage is very low, please enter a higher percentage",
+          msgSeverity: "error",
+          statusCode: response.status,
+        })
+      } else if (response.status === 400) {
+        dispatch({
+          type: ASSIGN_ZONE_CLUSTER,
+          msg: response.data.message,
+          msgSeverity: "warning",
+          statusCode: response.status,
+        })
+      } else if (response.status === 403) {
+        dispatch({
+          type: ASSIGN_ZONE_CLUSTER,
+          msg: "Something went wrong ,please logout and try again",
+          msgSeverity: "warning",
+          statusCode: response.status,
+        })
+      } else {
+        dispatch({ type: MESSAGE_SET_NULL })
+        dispatch({
+          type: ASSIGN_ZONE_CLUSTER,
+          msg: "Something went wrong ,please  try again",
+          msgSeverity: "warning",
+          statusCode: response.status,
+        })
+      }
     })
 }

@@ -58,6 +58,10 @@ import {
   GET_ZONE_QUANTITY,
   GET_CLUSTER_QUANTITY,
   UPDATE_QUANTITY,
+  UNASSIGNED_CLUSTERS,
+  ASSIGN_ZONE_CLUSTER,
+  CLEAR_PRODUCT_CLUSTER_LIST,
+  CLEAR_CLUSTER_LIST,
 } from "../actions/types"
 
 const initialState = {
@@ -117,6 +121,7 @@ const initialState = {
   productClusterList: [],
   quantityAssignedAtZone: 0,
   quantityAssignedAtCluster: 0,
+  unassignedCluster: [],
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -139,6 +144,8 @@ export default (state = initialState, action = {}) => {
       return { ...state, stores: action.stores }
     case STORE_POST_REQUEST:
       return { ...state, msg: action.msg }
+    case ASSIGN_ZONE_CLUSTER:
+      return { ...state, msg: action.msg, msgSeverity: action.msgSeverity }
     case FAILURE:
       return { ...state }
     case MESSAGE_SET_NULL:
@@ -282,6 +289,10 @@ export default (state = initialState, action = {}) => {
       }
     case CLEAR_PRODUCT_LIST:
       return { ...state, products: initialState.products }
+    case CLEAR_PRODUCT_CLUSTER_LIST:
+      return { ...state, productClusterList: initialState.productClusterList }
+    case CLEAR_CLUSTER_LIST:
+      return { ...state, clusters: initialState.clusters }
     case MESSAGE_SET:
       return { ...state, msgSeverity: action.msgSeverity, msg: action.msg }
     case GET_DASHBOARD_DATA:
@@ -318,6 +329,8 @@ export default (state = initialState, action = {}) => {
       }
     case UPDATE_QUANTITY:
       return { ...state, msg: action.msg, msgSeverity: action.msgSeverity }
+    case UNASSIGNED_CLUSTERS:
+      return { ...state, unassignedCluster: action.unassignedCluster }
     default:
       return { ...state }
   }

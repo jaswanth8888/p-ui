@@ -1,7 +1,6 @@
 import {
   Table,
   Typography,
-  Paper,
   TableCell,
   TableContainer,
   TablePagination,
@@ -45,6 +44,12 @@ class ViewProducts extends Component {
     // const customColumnStyle = { maxWidth: "300px", backgroundColor: "white", paddingLeft: "10px", paddingRight: "10px" }
     const customColumnStyle2 = { maxWidth: "980px", backgroundColor: "white" }
 
+    // console.log(getProducts)
+    // console.log(getProducts.reverse())
+    // this.setState({ getAllProductsRev: getProducts.reverse()})
+
+    const getprodRev = getProducts.reverse()
+
     return (
       <div className="box-container">
         <div className="center-body">
@@ -52,8 +57,8 @@ class ViewProducts extends Component {
             <Typography color="primary" component="h1" variant="h5">
               View All Products
             </Typography>
-            <TableContainer style={customColumnStyle2}>  
-              <Table aria-label="a dense table" >
+            <TableContainer style={customColumnStyle2}>
+              <Table aria-label="a dense table">
                 <TableHead>
                   <TableRow>
                     {viewProducts.map((tcell) => (
@@ -62,7 +67,7 @@ class ViewProducts extends Component {
                   </TableRow>
                 </TableHead>
                 <tbody>
-                  {getProducts
+                  {getprodRev
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((product) => {
                       return (

@@ -89,6 +89,12 @@ export const addProduct = [
   "Quantity Available",
   "Quantity Required",
 ]
+export const addMultipleClusters = [
+  "Select",
+  "Cluster Name",
+  "Quantity",
+  "Cluster Profit Percentage",
+]
 export const zoneCreated = "Zone created successfully!"
 export const zoneCreationFailed =
   "Zone creation failed. Please match the requirements"

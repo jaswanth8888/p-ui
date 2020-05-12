@@ -85,6 +85,7 @@ class AddProducts extends Component {
     newArray[e.target.id] = e.target.value
     this.setState({ numberBoxInputValue: newArray })
     if (e.target.value != null) this.setState({ quantityCheck: true })
+    if (e.target.value == null) this.setState({ quantityCheck: false })
   }
 
   handleChangeCategory(e) {
