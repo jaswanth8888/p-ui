@@ -11,7 +11,10 @@ import Carousel from "react-material-ui-carousel"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { getAllProducts } from "../../redux/actions/VendorActions"
+import {
+  getAllProducts,
+  getProductCount,
+} from "../../redux/actions/VendorActions"
 import { viewProducts } from "../utils/constants"
 import convertCurrency from "../utils/ConvertCurrency"
 
@@ -26,20 +29,32 @@ class ViewProducts extends Component {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
-    const { getAllProducts: getAllProductsAlt, loggedInUser } = this.props
-    getAllProductsAlt(loggedInUser.userName)
+    const {
+      getAllProducts: getAllProductsAlt,
+      loggedInUser,
+      getProductCount: getProductCountAlt,
+    } = this.props
+    const { page, rowsPerPage } = this.state
+    getAllProductsAlt(loggedInUser.userName, page + 1, rowsPerPage)
+    getProductCountAlt(loggedInUser.userName)
   }
 
   handleChangePage = (event, newPage) => {
-    this.setState({ page: +newPage })
+    const { rowsPerPage } = this.state
+    const { getAllProducts: getAllProductsAlt, loggedInUser } = this.props
+    getAllProductsAlt(loggedInUser.userName, newPage + 1, rowsPerPage)
+    this.setState({ page: newPage })
   }
 
   handleChangeRowsPerPage = (event) => {
     this.setState({ rowsPerPage: +event.target.value })
+    const { getAllProducts: getAllProductsAlt, loggedInUser } = this.props
+    getAllProductsAlt(loggedInUser.userName, 1, event.target.value)
+    this.setState({ page: 0 })
   }
 
   render() {
-    const { getProducts } = this.props
+    const { getProducts, countOfProducts } = this.props
     const { page, rowsPerPage } = this.state
     // const customColumnStyle = { maxWidth: "300px", backgroundColor: "white", paddingLeft: "10px", paddingRight: "10px" }
     const customColumnStyle2 = { maxWidth: "980px", backgroundColor: "white" }
@@ -47,8 +62,6 @@ class ViewProducts extends Component {
     // console.log(getProducts)
     // console.log(getProducts.reverse())
     // this.setState({ getAllProductsRev: getProducts.reverse()})
-
-    const getprodRev = getProducts.reverse()
 
     return (
       <div className="box-container">
@@ -67,58 +80,56 @@ class ViewProducts extends Component {
                   </TableRow>
                 </TableHead>
                 <tbody>
-                  {getprodRev
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((product) => {
-                      return (
-                        <TableRow>
-                          <TableCell>
-                            <Typography variant="subtitle1" gutterBottom>
-                              {product.productName}
-                            </Typography>
-                            <Carousel interval="3000" animation="fade">
-                              {product.productImage
-                                .slice(0)
-                                .reverse()
-                                .map((img) => (
-                                  <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    href={img}
-                                  >
-                                    <img
-                                      className="thumbnail-small"
-                                      src={img}
-                                      alt="none"
-                                    />
-                                  </a>
-                                ))}
-                            </Carousel>
-                          </TableCell>
-                          <TableCell>
-                            <Typography variant="subtitle1" gutterBottom>
-                              Base Price:
-                              {sessionStorage.getItem("currency") === "USD"
-                                ? `$ ${product.productBasePrice}`
-                                : convertCurrency(
-                                    "USD",
-                                    sessionStorage.getItem("currency"),
-                                    product.productBasePrice
-                                  )}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
-                              Remaining Quantity : {product.remainingQuantity}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
-                              Product UOM : {product.productUOM}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
-                              Product Category : {product.productCategory}
-                            </Typography>
-                          </TableCell>
-                        </TableRow>
-                      )
-                    })}
+                  {getProducts.map((product) => {
+                    return (
+                      <TableRow>
+                        <TableCell>
+                          <Typography variant="subtitle1" gutterBottom>
+                            {product.productName}
+                          </Typography>
+                          <Carousel interval="3000" animation="fade">
+                            {product.productImage
+                              .slice(0)
+                              .reverse()
+                              .map((img) => (
+                                <a
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  href={img}
+                                >
+                                  <img
+                                    className="thumbnail-small"
+                                    src={img}
+                                    alt="none"
+                                  />
+                                </a>
+                              ))}
+                          </Carousel>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="subtitle1" gutterBottom>
+                            Base Price:
+                            {sessionStorage.getItem("currency") === "USD"
+                              ? `$ ${product.productBasePrice}`
+                              : convertCurrency(
+                                  "USD",
+                                  sessionStorage.getItem("currency"),
+                                  product.productBasePrice
+                                )}
+                          </Typography>
+                          <Typography variant="subtitle1" gutterBottom>
+                            Remaining Quantity : {product.remainingQuantity}
+                          </Typography>
+                          <Typography variant="subtitle1" gutterBottom>
+                            Product UOM : {product.productUOM}
+                          </Typography>
+                          <Typography variant="subtitle1" gutterBottom>
+                            Product Category : {product.productCategory}
+                          </Typography>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
                 </tbody>
               </Table>
             </TableContainer>
@@ -127,7 +138,7 @@ class ViewProducts extends Component {
                 rowsPerPageOptions={[3, 5, 10]}
                 style={customColumnStyle2}
                 component="div"
-                count={getProducts.length}
+                count={countOfProducts}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={this.handleChangePage}
@@ -145,6 +156,8 @@ ViewProducts.propTypes = {
   getAllProducts: PropTypes.func.isRequired,
   getProducts: PropTypes.shape.isRequired,
   loggedInUser: PropTypes.shape.isRequired,
+  getProductCount: PropTypes.func.isRequired,
+  countOfProducts: PropTypes.number.isRequired,
 }
 
 const stateAsProps = (store) => ({
@@ -153,10 +166,12 @@ const stateAsProps = (store) => ({
   startDate: store.RetailerReducer.startDate,
   endDate: store.RetailerReducer.endDate,
   loggedInUser: store.RetailerReducer.loggedInUser,
+  countOfProducts: store.VendorReducer.countOfProducts,
 })
 
 const actionAsProps = {
   getAllProducts,
+  getProductCount,
 }
 
 export default connect(stateAsProps, actionAsProps)(ViewProducts)

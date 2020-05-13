@@ -152,7 +152,7 @@ class AssignToZone extends Component {
       clusters,
       productClusterList,
     } = this.props
-    const { zoneDetails } = this.state
+    const { zoneDetails, zoneName } = this.state
     const customColumnStyle = { paddingLeft: "26px" }
     return (
       <>
@@ -342,17 +342,21 @@ class AssignToZone extends Component {
                     </Table>
                   </TableContainer>
 
-                  <Button
-                    fullWidth
-                    type="button"
-                    variant="contained"
-                    color="primary"
-                    className="form-button {classes.submit} submit-pad"
-                    onClick={this.handleSubmit}
-                    id="assign-zone-submit"
-                  >
-                    Save
-                  </Button>
+                  {zoneDetails.quantityAssigned > 0 &&
+                    zoneDetails.profitPercentage &&
+                    zoneName !== "" && (
+                      <Button
+                        fullWidth
+                        type="button"
+                        variant="contained"
+                        color="primary"
+                        className="form-button {classes.submit} submit-pad"
+                        onClick={this.handleSubmit}
+                        id="assign-zone-submit"
+                      >
+                        Save
+                      </Button>
+                    )}
                 </form>
               </div>
             </div>

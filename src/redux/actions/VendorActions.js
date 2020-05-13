@@ -14,6 +14,7 @@ import {
   PRODUCT_SAVE_VALUE,
   USER_TYPE,
   GET_ALL_PRODUCTS,
+  GET_PRODUCT_COUNT,
 } from "./types"
 
 const VTOKEN = () => {
@@ -188,16 +189,34 @@ export const saveProductValue = (productValue) => (dispatch) => {
   dispatch({ type: PRODUCT_SAVE_VALUE, productName: productValue })
 }
 
-export const getAllProducts = (vendorName) => async (dispatch) => {
+export const getAllProducts = (vendorName, pageNo, rowsPerPage) => async (
+  dispatch
+) => {
   await axios
     .get(
-      `${RETAILER_BASE_URL}/product-management/products/vendor/${vendorName}`,
+      `${RETAILER_BASE_URL}/product-management/products/vendor/${vendorName}?pageNo=${pageNo}&rowsPerPage=${rowsPerPage}`,
       {
         headers: { Authorization: VTOKEN() },
       }
     )
     .then((res) => {
       dispatch({ type: GET_ALL_PRODUCTS, getProducts: res.data })
+    })
+    .catch(() => {
+      dispatch({ type: FAILURE })
+    })
+}
+
+export const getProductCount = (vendorName) => async (dispatch) => {
+  await axios
+    .get(
+      `${RETAILER_BASE_URL}/product-management/products/vendor/${vendorName}/count`,
+      {
+        headers: { Authorization: VTOKEN() },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: GET_PRODUCT_COUNT, countOfProducts: res.data })
     })
     .catch(() => {
       dispatch({ type: FAILURE })

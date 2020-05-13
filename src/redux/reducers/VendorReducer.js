@@ -10,6 +10,7 @@ import {
   PRODUCTLIST_GET_REQUEST,
   PRODUCT_SAVE_VALUE,
   GET_ALL_PRODUCTS,
+  GET_PRODUCT_COUNT,
 } from "../actions/types"
 import { registerconstants } from "../actions/registrationtypes"
 
@@ -28,6 +29,7 @@ const initialState = {
   productDetails: {},
   productList: [],
   getProducts: [],
+  countOfProducts: 0,
 }
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -78,6 +80,8 @@ export default (state = initialState, action = {}) => {
       return { ...state, productName: action.productName }
     case GET_ALL_PRODUCTS:
       return { ...state, getProducts: action.getProducts }
+    case GET_PRODUCT_COUNT:
+      return { ...state, countOfProducts: action.countOfProducts }
     default:
       return { ...state }
   }
