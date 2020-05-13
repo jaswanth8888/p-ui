@@ -31,7 +31,7 @@ node{
         }
         stage ('Running React container') {
                 sh '''
-                docker run  --name=react-ui --net=prices_and_promotions -d -p 3000:3000 react/ui
+                docker run  --name=react-ui --net=prices_and_promotions -d -p 3000:5000 react/ui
                 '''
         }
 }
