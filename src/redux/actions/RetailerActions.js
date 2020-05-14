@@ -1055,7 +1055,8 @@ export const cancelProductFixedPrice = (productName) => async (dispatch) => {
     .then(() => {
       dispatch({
         type: CANCELPRODUCT_FIXEDPRICE_PUTREQUEST,
-        msg: "Fixed Price Cancelled, Promotions Can Be Applied",
+        msg:
+          "Fixed Price Cancelled, Promotions and Effective Price Can Be Applied",
         msgSeverity: "success",
       })
     })
