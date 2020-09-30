@@ -30,10 +30,7 @@ export const registration = (registrationdetails) => async (dispatch) => {
     .then((res) => {
       const body = { dest: registrationdetails.email, body: res.data }
       axios
-        .post(
-          "https://us-central1-price-promotion-system.cloudfunctions.net/sendMail",
-          body
-        )
+        .post("#######mail api", body)
         .then(() => {
           dispatch({
             type: registerconstants.REGISTER_SUCCESS,
